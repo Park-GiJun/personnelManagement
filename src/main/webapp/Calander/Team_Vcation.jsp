@@ -38,7 +38,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 <html>
 <head>
 <meta charset="UTF-8">
-<title>개인 일정</title>
+<title>부서 휴가</title>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <style type="text/css">

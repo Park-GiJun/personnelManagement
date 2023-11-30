@@ -38,7 +38,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 <html>
 <head>
 <meta charset="UTF-8">
-<title>개인 일정</title>
+<title>MainPage</title>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <style type="text/css">
@@ -49,42 +49,6 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 
 /* 각 종류 버튼 스타일 */
 .my_btn {
-  background-color: #1C427E;
-  color: white;
-  border: none;
-  
-  width: 150px;
-  height: 70px;
-  
-  font-size: 20px;
-  border-radius: 30px;
-}
-
-.my_btn2 {
-  background-color: #1C427E;
-  color: white;
-  border: none;
-  
-  width: 150px;
-  height: 70px;
-  
-  font-size: 20px;
-  border-radius: 30px;
-}
-
-.my_btn3 {
-  background-color: #1C427E;
-  color: white;
-  border: none;
-  
-  width: 150px;
-  height: 70px;
-  
-  font-size: 20px;
-  border-radius: 30px;
-}
-
-.my_btn4 {
   background-color: #1C427E;
   color: white;
   border: none;
@@ -158,7 +122,7 @@ a:active, a:hover {
    border-radius: 25px;
    font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
    font-size: 20px;
-   margin-left: 1000px;
+   margin-left: 550px;
    
 }
 
@@ -173,6 +137,9 @@ a:active, a:hover {
    margin-left: 5px;
    
 }
+
+
+
 
 .calendar table {
    width: 100%;
@@ -256,16 +223,16 @@ body {
       <!-- 다른 페이지에서 불러오는 내용 -->
       <!-- <h2 class="myHeader">텍스트 입력</h2>  -->
       <button class='my_btn' onclick="location.href='Person_Cal.jsp';">개인 일정</button>
-      <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서 휴가</button>
-      <button class='my_btn3' onclick="location.href='Team_Cal.jsp';">부서 일정</button>
-      <button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사 일정</button>
+      <button class='my_btn' onclick="location.href='Person_Cal.jsp';">부서 휴가</button>
+      <button class='my_btn' onclick="location.href='Person_Cal.jsp';">부서 일정</button>
+      <button class='my_btn' onclick="location.href='Person_Cal.jsp';">회사 일정</button>
    </div>
    
    <div class="plus">
-      <button class='my_btns' onclick="location.href='List.jsp';"><</button>
+      <button class='my_btns' onclick="location.href='Calander.jsp';">></button>
    </div>
 
-   <div class="calendar" style="width: 500px; height: 300px;">
+   <div class="calendar" style="width: 1400px; height: 300px;">
       <div class="title" >
          <form name="frm" method="post" >
             <select name="year" class="selectField" onchange="change()"  >
@@ -344,6 +311,7 @@ body {
       </div>
 
    </div>
+
    
 
 
