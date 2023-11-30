@@ -23,25 +23,27 @@ public class ShareListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		System.out.println("sharelsit.do");
+
 		// DAO 생성
 		ShareFormDAO dao = new ShareFormDAO();
 
-		// 매개변수 저장용 맵 생성
-		Map<String, Object> map = new HashMap<>();
+		// 맵 생성
+		Map<String, Object> map = new HashMap<String, Object>();
 
-		String searchField = request.getParameter("searchField");
+		String searchCategory = request.getParameter("searchCategory");
 		String searchWord = request.getParameter("searchWord");
 
+		// 검색 단어가 비어있지 않을 경우
 		if (searchWord != null) {
-			// 비어있는 값이 아니라면 map에 저장
-			map.put("searchField", searchField);
+			map.put("searchCategory", searchCategory);
 			map.put("searchWord", searchWord);
 		}
 
-		// 개시물 개수
-		int totalCount = dao.shareListCount(map);
-
 		/* 페이지 처리 start */
+		int totalCount = dao.shareListCount(map); // 게시물 개수
+
 		ServletContext application = getServletContext();
 		int pageSize = Integer.parseInt(application.getInitParameter("POSTS_PER_PAGE"));
 		int blockSize = Integer.parseInt(application.getInitParameter("PAGES_PER_BLOCK"));
@@ -58,15 +60,15 @@ public class ShareListController extends HttpServlet {
 		int end = pageNum * pageSize;
 		map.put("start", start);
 		map.put("end", end);
-
 		/* 페이지 처리 end */
 
 		List<ShareFormDTO> shareboardlists = dao.selectListPage(map);
 
+		// 게시물 목록 받기
 		dao.close();
 
-		// 뷰페이지에 전달
-		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/sharelist.do");
+		// 페이징 이미지 전달
+		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/list.do");
 
 		// 바로가기 영역 HTML 문자열
 		map.put("pagingImg", pagingImg);
@@ -74,17 +76,11 @@ public class ShareListController extends HttpServlet {
 		map.put("pageSize", pageSize);
 		map.put("pageNum", pageNum);
 
-		// request 영역에 저장 후 shareform을 포워드
+		// 포워딩
 		request.setAttribute("shareboardlists", shareboardlists);
 		request.setAttribute("map", map);
 		request.getRequestDispatcher("/ShareForm/ShareForm.jsp").forward(request, response);
-	}
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

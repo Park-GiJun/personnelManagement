@@ -46,39 +46,36 @@ body {
 			<tr>
 				<th width="10%">번호</th>
 				<th width="*">제목</th>
-				<th width="8%">첨부</th>
+				<th width="10%">첨부파일</th>
 			</tr>
 			<c:choose>
 				<c:when test="${ empty shareboardlists }">
-					<!-- 게시물이 없을때 -->
+					<!-- 게시물이 없다면 -->
 					<tr>
 						<td
 							colspan="3"
 							align="center"
-						>등록된 게시글이 없습니다.</td>
+						>게시물이 없습니다.</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
-					<!-- 게시글이 있을 때 -->
+					<!-- 게시물이 있을때 -->
 					<c:forEach
 						items="${ shareboardlists }"
 						var="row"
 						varStatus="loop"
 					>
 						<tr align="center">
-							<td>
-								<!-- 번호 -->
-								${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index) }
+							<!-- 번호 -->
+							<td>${ map.totalCount -(((map.pageNum-1) * map.pageSize) + loop.index) }
 							</td>
-							<td align="left">
-								<!-- 제목(링크) -->
-								<a href="../mvcboard/view.do?idx=${ row.idx }">${ row.title }</a>
+							<td align="center">
+								<!-- 제목 -->
+								<a>${ row.title }</a>
 							</td>
 							<td>
-								<c:if test="${ not empty row.ofile }">
-									<a
-										href="../mvcboard/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }"
-									>[Down]</a>
+								<c:if test="${ not empty row.shareofile }">
+									<a>[Down]</a>
 								</c:if>
 							</td>
 						</tr>
@@ -86,47 +83,44 @@ body {
 				</c:otherwise>
 			</c:choose>
 		</table>
-		<!-- 하단 메뉴(바로가기 글쓰기) -->
-		<table
-			border="1"
-			width="90%"
+		<!-- 하단 메뉴 -->
+		<form
+			method="get"
+			action="../Controller/sharelist.do"
 		>
-			<form
-				name="shareform"
-				method="get"
-				action="../Controller/sharelist.do"
+			<table
+				border="1"
+				width="90%"
 			>
 				<tr>
-					<td
-						align="left"
-						width="20%"
-					>
-						<select name="searchField">
+					<th
+						align="center"
+						colspan="2"
+					><select name="searchCategory">
 							<option value="title">제목</option>
-							<option value="content">내용</option>
-						</select>
-						<input
+					</select> <input
 							type="text"
 							name="searchWord"
-						/>
-						<input
+						/> <input
 							type="submit"
 							value="검색하기"
-						/>
-					</td>
-					<td align="center">${ map.get("pagingImg") }</td>
-					<td
-						align="center"
-						width="10%"
+						/></th>
+
+				</tr>
+				<tr align="center">
+					<th>${ map.paginImg }</th>
+					<th
+						width="100"
+						rowspan="2"
 					>
 						<button
 							type="button"
 							onclick="location.href='../Controller/write.do';"
-						>글쓰기</button>
-					</td>
+						>글작성</button>
+					</th>
 				</tr>
-			</form>
-		</table>
+			</table>
+		</form>
 	</div>
 </body>
 </html>

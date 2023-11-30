@@ -14,6 +14,7 @@ public class ShareFormDAO extends DBConnPool {
 
 	// 검색 조건에 맞는 게시물의 개수를 반환합니다.
 	public int shareListCount(Map<String, Object> map) {
+		System.out.println("shareListCount");
 		int totalcount = 0;
 
 		// 쿼리문 준비
@@ -21,7 +22,7 @@ public class ShareFormDAO extends DBConnPool {
 
 		// 검색 조건이 있다면 where절로 추가
 		if (map.get("searchWord") != null) {
-			query += " WHERE " + map.get("searchWord") + " LIKE '%" + map.get("searchWord") + "%'";
+			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
 		}
 
 		try {
@@ -33,11 +34,13 @@ public class ShareFormDAO extends DBConnPool {
 			System.out.println("게시물 카운트 중 예외 발생");
 			e.printStackTrace();
 		}
+		System.out.println(totalcount);
 		return totalcount;
 	}
 
 	// 검색 조건에 맞는 게시물 목록을 반환합니다.
 	public List<ShareFormDTO> selectListPage(Map<String, Object> map) {
+		System.out.println("selectListpage");
 		List<ShareFormDTO> boards = new Vector<ShareFormDTO>();
 
 		System.out.println("SelectListPage 실행");
@@ -60,7 +63,6 @@ public class ShareFormDAO extends DBConnPool {
 
 				dto.setIdx(rs.getString("idx"));
 				dto.setTitle(rs.getString("title"));
-				dto.setSharecontent("sharecontent");
 				dto.setShareofile(rs.getString("shareofile"));
 				dto.setSharesfile(rs.getString("sharesfile"));
 
