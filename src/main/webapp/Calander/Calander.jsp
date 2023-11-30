@@ -143,9 +143,9 @@ a:active, a:hover {
    margin: 70px auto;
 }
 .calendar .title{
-   position: fixed;
+   position: absolute;
    top: 120px;
-   left: 20px;
+   left: 240px;
    width: 100%;
    z-index: 1; 
 }
@@ -158,7 +158,7 @@ a:active, a:hover {
    border-radius: 25px;
    font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
    font-size: 20px;
-   margin-left: 1000px;
+   margin-left: 950px;
    
 }
 
