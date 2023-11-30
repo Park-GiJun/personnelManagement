@@ -45,9 +45,13 @@ public class ShareFormDAO extends DBConnPool {
 
 		System.out.println("SelectListPage 실행");
 		// 쿼리문
-		String query = " " + "SELECT * FROM ( " + " SELECT Tb.* ROWNUM AS rNum FROM ( " + " SELECT * FROM shareform ";
-		// 조건 추가
-		query += " ORDER BY idx DESC " + " ) Tb " + " ) " + " WHERE rNum BETWEEN ? AND ?";
+		String query = "SELECT * FROM (SELECT Tb.*, ROWNUM AS rNum FROM (SELECT * FROM shareform";
+		if (map.get("searchWord") != null) {
+			// 조건 추가
+			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
+		}
+
+		query += " ORDER BY idx DESC) Tb) WHERE rNum BETWEEN ? AND ?";
 
 		System.out.println("ShareFormController :" + query);
 
