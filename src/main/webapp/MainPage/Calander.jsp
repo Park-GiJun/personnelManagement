@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MainPage</title>
 </head>
 <body>
-<h2>안녕하세요!</h2>
-
+<jsp:include page="Left.jsp"></jsp:include>
 </body>
 </html>
