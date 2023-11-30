@@ -8,9 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Left</title>
-</head>
-<body>
-	<style>
+<style>
 * {
 	box-sizing: border-box;
 }
@@ -224,19 +222,33 @@ body {
 	opacity: 1;
 	text-align: center;
 }
+
+.left_section {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
 	<div class="left_table">
 		<div class="left_calender_background">
-			<div class="left_calender_img">
-				<span class="left_calender_text">캘린더</span>
-			</div>
+			<a
+				class="left_section"
+				href="../Calender/Calender.jsp"
+			>
+				<div class="left_calender_img">
+					<span class="left_calender_text">캘린더</span>
+				</div>
+			</a>
 		</div>
 		<div class="left_shareform_background">
-			<div class="left_shareform_img">
-				<span class="left_shareform_text">공유양식</span>
-			</div>
+			<a
+				class="left_section"
+				href="../ShareForm/ShareForm.jsp"
+			>
+				<div class="left_shareform_img">
+					<span class="left_shareform_text">공유양식</span>
+				</div>
+			</a>
 		</div>
 		<div class="left_freeboard_background">
 			<div class="left_freeboard_img">

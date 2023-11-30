@@ -1,5 +1,9 @@
 package Personal;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
 import DBcontrol.DBConnPool;
 
 public class PersonalDAO extends DBConnPool {
@@ -31,7 +35,7 @@ public class PersonalDAO extends DBConnPool {
 			if (rs.next()) {
 				// 결과로 얻은 정보를 저장
 				dto.setName(rs.getString("name"));
-				dto.setEmpNum(rs.getString("emp_num")); 
+				dto.setEmpNum(rs.getString("emp_num"));
 				dto.setEmail(rs.getString("email"));
 				dto.setPassword(rs.getString("password"));
 				dto.setDepartment(rs.getString("department"));
@@ -49,5 +53,4 @@ public class PersonalDAO extends DBConnPool {
 		}
 		return dto;
 	}
-
 }

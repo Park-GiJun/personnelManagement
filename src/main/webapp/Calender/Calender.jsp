@@ -18,7 +18,7 @@
 }
 
 body {
-	font-size: 16px;
+	font-size: 10px;
 }
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
