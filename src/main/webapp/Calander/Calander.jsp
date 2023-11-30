@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page
+	language="java"
+	contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +34,10 @@ body {
 }
 </style>
 <body>
-<jsp:include page="../MainPage/Left.jsp"></jsp:include>
+	<jsp:include page="../MainPage/Left.jsp"></jsp:include>
+	<div class="content">
+		<!-- 다른 페이지에서 불러오는 내용 -->
+		<h2 class="myHeader">텍스트 입력</h2>
+	</div>
 </body>
 </html>
