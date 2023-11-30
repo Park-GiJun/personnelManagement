@@ -17,7 +17,7 @@ body {
 	overflow: hidden;
 }
 
-.left_calander_background {
+.left_calender_background {
 	width: 400px;
 	height: 80px;
 	background: rgb(0, 64, 128);
@@ -28,7 +28,7 @@ body {
 	overflow: hidden;
 }
 
-.left_calander_img {
+.left_calender_img {
 	width: 400px;
 	height: 80px;
 	background: url("../images/v1_307.png");
@@ -43,7 +43,7 @@ body {
 	overflow: hidden;
 }
 
-.left_calander_text {
+.left_calender_text {
 	width: 336px;
 	color: rgb(255, 255, 255);
 	position: absolute;

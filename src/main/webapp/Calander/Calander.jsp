@@ -7,6 +7,6 @@
 <title>MainPage</title>
 </head>
 <body>
-<jsp:include page="Left.jsp"></jsp:include>
+<jsp:include page="../MainPage/Left.jsp"></jsp:include>
 </body>
 </html>

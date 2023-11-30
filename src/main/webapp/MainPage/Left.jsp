@@ -22,9 +22,9 @@
 </head>
 <body>
 	<div class="left_table">
-		<div class="left_calander_background">
-			<div class="left_calander_img">
-				<span class="left_calander_text">캘린더</span>
+		<div class="left_calender_background">
+			<div class="left_calender_img">
+				<span class="left_calender_text">캘린더</span>
 			</div>
 		</div>
 		<div class="left_shareform_background">
