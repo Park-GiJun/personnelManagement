@@ -10,15 +10,221 @@
 <title>Left</title>
 </head>
 <body>
+	<style>
+* {
+	box-sizing: border-box;
+}
 
-	<link
-		href="https://fonts.googleapis.com/css?family=Inter&display=swap"
-		rel="stylesheet"
-	/>
-	<link
-		href="./css/Left.css"
-		rel="stylesheet"
-	/>
+body {
+	font-size: 40px;
+}
+
+.left_table {
+	width: 400px;
+	height: 100%;
+	background: rgb(0, 64, 128);
+	opacity: 1;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
+}
+
+.left_calender_background {
+	width: 400px;
+	height: 80px;
+	background: rgb(0, 64, 128);
+	opacity: 1;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
+}
+
+.left_calender_img {
+	width: 400px;
+	height: 80px;
+	background: url("../images/v1_307.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	padding: 16px 32px;
+	opacity: 1;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
+}
+
+.left_calender_text {
+	width: 336px;
+	color: rgb(255, 255, 255);
+	position: absolute;
+	top: 16px;
+	left: 32px;
+	font-family: Inter;
+	font-weight: Regular;
+	font-size: 40px;
+	opacity: 1;
+	text-align: center;
+}
+
+.left_shareform_background {
+	width: 400px;
+	height: 80px;
+	background: rgb(0, 64, 128);
+	opacity: 1;
+	position: absolute;
+	top: 90px;
+	left: 0px;
+	overflow: hidden;
+}
+
+.left_shareform_img {
+	width: 400px;
+	height: 80px;
+	background: url("../images/v1_310.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	padding: 16px 32px;
+	opacity: 1;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
+}
+
+.left_shareform_text {
+	width: 336px;
+	color: rgb(255, 255, 255);
+	position: absolute;
+	top: 16px;
+	left: 32px;
+	font-family: Inter;
+	font-weight: Regular;
+	font-size: 40px;
+	opacity: 1;
+	text-align: center;
+}
+
+.left_freeboard_background {
+	width: 400px;
+	height: 80px;
+	background: rgb(0, 64, 128);
+	opacity: 1;
+	position: absolute;
+	top: 180px;
+	left: 0px;
+	overflow: hidden;
+}
+
+.left_freeboard_img {
+	width: 400px;
+	height: 80px;
+	background: url("../images/v1_313.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	padding: 16px 32px;
+	opacity: 1;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
+}
+
+.left_freeboard_text {
+	width: 336px;
+	color: rgb(255, 255, 255);
+	position: absolute;
+	top: 16px;
+	left: 32px;
+	font-family: Inter;
+	font-weight: Regular;
+	font-size: 40px;
+	opacity: 1;
+	text-align: center;
+}
+
+.left_holiday_background {
+	width: 400px;
+	height: 80px;
+	background: rgb(0, 64, 128);
+	opacity: 1;
+	position: absolute;
+	top: 270px;
+	left: 0px;
+	overflow: hidden;
+}
+
+.left_holiday_img {
+	width: 400px;
+	height: 80px;
+	background: url("../images/v1_316.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	padding: 16px 32px;
+	opacity: 1;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
+}
+
+.left_holiday_text {
+	width: 336px;
+	color: rgb(255, 255, 255);
+	position: absolute;
+	top: 16px;
+	left: 32px;
+	font-family: Inter;
+	font-weight: Regular;
+	font-size: 40px;
+	opacity: 1;
+	text-align: center;
+}
+
+.left_info_background {
+	width: 400px;
+	height: 80px;
+	background: rgb(0, 64, 128);
+	opacity: 1;
+	position: absolute;
+	top: 360px;
+	left: 0px;
+	overflow: hidden;
+}
+
+.left_info_img {
+	width: 400px;
+	height: 80px;
+	background: url("../images/v1_319.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	padding: 16px 32px;
+	opacity: 1;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
+}
+
+.left_info_text {
+	width: 336px;
+	color: rgb(255, 255, 255);
+	position: absolute;
+	top: 16px;
+	left: 32px;
+	font-family: Inter;
+	font-weight: Regular;
+	font-size: 40px;
+	opacity: 1;
+	text-align: center;
+}
+</style>
 </head>
 <body>
 	<div class="left_table">
