@@ -47,7 +47,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
     box-sizing: border-box;
 }
 
-/* 각 종류 버튼 스타일 */
+/* 개인 일정 버튼 */
 .my_btn {
   background-color: #1C427E;
   color: white;
@@ -60,6 +60,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   border-radius: 30px;
 }
 
+/* 부서 휴가 버튼 */
 .my_btn2 {
   background-color: #1C427E;
   color: white;
@@ -72,6 +73,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   border-radius: 30px;
 }
 
+/* 부서 일정 버튼 */
 .my_btn3 {
   background-color: #1C427E;
   color: white;
@@ -84,6 +86,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   border-radius: 30px;
 }
 
+/* 회사 일정 버튼 */
 .my_btn4 {
   background-color: #1C427E;
   color: white;
@@ -96,6 +99,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   border-radius: 30px;
 }
 
+/* 개인 일정, 부서 휴가, 부서 일정, 회사 일정 버튼 크기, 위치 조정 */
 .middle-button {
     text-align: center;
     padding: 30px 30px;
@@ -119,6 +123,8 @@ background-color: #1C427E;
 
 }
 
+
+/* 여기까지 버튼 설정 조정 */
 
 
 

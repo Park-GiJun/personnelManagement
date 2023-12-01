@@ -47,7 +47,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
     box-sizing: border-box;
 }
 
-/* 각 종류 버튼 스타일 */
+/* 개인 일정 버튼 */
 .my_btn {
   background-color: #1C427E;
   color: white;
@@ -60,6 +60,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   border-radius: 30px;
 }
 
+/* 부서 휴가 버튼 */
 .my_btn2 {
   background-color: #1C427E;
   color: white;
@@ -72,6 +73,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   border-radius: 30px;
 }
 
+/* 부서 일정 버튼 */
 .my_btn3 {
   background-color: #1C427E;
   color: white;
@@ -84,6 +86,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   border-radius: 30px;
 }
 
+/* 회사 일정 버튼 */
 .my_btn4 {
   background-color: #1C427E;
   color: white;
@@ -96,6 +99,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   border-radius: 30px;
 }
 
+/* 개인 일정, 부서 휴가, 부서 일정, 회사 일정 버튼 위치 */
 .middle-button {
     text-align: center;
     padding: 30px 30px;
@@ -119,6 +123,7 @@ background-color: #1C427E;
 
 }
 
+/*   ↑ 여기까지 버튼 위치, 크기 조절   */
 
 
 
@@ -150,28 +155,26 @@ a:active, a:hover {
    z-index: 1; 
 }
 
-/* 년도, 월 선택 리스트 스타일 */
-.selectField {
 
+
+/* 년도 선택 리스트 */
+.selectField {
    border: 1px solid #999;
    padding: 15px 50px;
    border-radius: 25px;
    font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
    font-size: 20px;
    margin-left: 950px;
-   
 }
 
+/* 월 선택 리스트 */
 .selectField2 {
-	
-	
    border: 1px solid #999;
    padding: 15px 50px;
    border-radius: 25px;
    font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
    font-size: 20px;
    margin-left: 5px;
-   
 }
 
 .calendar table {
@@ -180,13 +183,17 @@ a:active, a:hover {
    border-spacing: 0;
 }
 
+/* 요일 칸 배경 색 지정 */
 .calendar table thead tr:first-child{
    background: #1c427e;
 }
 
+
+/* 요일, 날짜 칸 크기 조절 */
 .calendar table td{
-   padding: 60px;
-   text-align: center;
+   padding: 40px 80px;
+   text-align: left;
+  
    border: 1px solid #ccc;
 }
 
@@ -196,15 +203,19 @@ a:active, a:hover {
 .calendar table td:nth-child(7n){
    color: blue;
 }
+
+/* 전 월의 일 색상 */
 .calendar table td.gray {
    color: #ccc;
 }
+
+/* 오늘 날짜 */
 .calendar table td.today{
    font-weight:700;
    background: #FFF75A;
 }
 
-//아래 오늘 날짜로 버튼
+/* 오늘 날짜로 이동 버튼 */
 .calendar .footer{
    height: 25px;
    line-height: 25px;
@@ -265,7 +276,7 @@ body {
       <button class='my_btns' onclick="location.href='List.jsp';"><</button>
    </div>
 
-   <div class="calendar" style="width: 500px; height: 300px;">
+   <div class="calendar" style="width: 800px; height: 300px;">
       <div class="title" >
          <form name="frm" method="post" >
             <select name="year" class="selectField" onchange="change()"  >
