@@ -12,6 +12,13 @@
 <head>
 <meta charset="UTF-8">
 <title>ShareForm</title>
+<script>
+	// 페이지가 로드될 때 실행되는 함수
+	window.onload = function() {
+		// 검색 버튼을 가져와서 클릭 이벤트를 발생시킴
+		document.getElementById('listSearch').click();
+	};
+</script>
 </head>
 <style>
 /* 공통 스타일 */
@@ -103,9 +110,10 @@ body {
 							name="searchWord"
 						/> <input
 							type="submit"
+							name="listSearch"
 							value="검색하기"
+							id="listSearch"
 						/></th>
-
 				</tr>
 				<tr align="center">
 					<th>${ map.paginImg }</th>
