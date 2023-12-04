@@ -333,7 +333,6 @@
 			<table id="datepicker-table">
 			</table>
 			<div class="info_check_buttons">
-			
 			</div>
 		</div>
 		<div class="info_commute"></div>
