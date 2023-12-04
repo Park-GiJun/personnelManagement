@@ -20,7 +20,7 @@ public class InfoLoadController extends HttpServlet {
 		
 		System.out.println("infoLoad.do");
 
-		String userId = (String) request.getSession().getAttribute("login_id");
+		String userId = (String) request.getSession().getAttribute("loginid");
 
 		PersonalDAO dao = new PersonalDAO();
 		PersonalDTO userinfolist = dao.getInfo(userId); 

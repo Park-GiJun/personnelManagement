@@ -327,13 +327,13 @@
 		<div class="info_profile">
 			<div class="info_profile_photo">
 				<div class="info_profile_texts">
-					<a> 이름 : ${ dto.name } </a>
+					<a> 이름 : ${ userinfolist.name } </a>
 					<br />
-					<a> 사번 : ${ dto.user_num } </a>
+					<a> 사번 : ${ userinfolist.empNum } </a>
 					<br />
-					<a> 전화번호 : ${ dto.phonw.number }</a>
+					<a> 전화번호 : ${ userinfolist.phone }</a>
 					<br />
-					<a> 이메일 : ${ dto.email }</a>
+					<a> 이메일 : ${ userinfolist.email }</a>
 				</div>
 			</div>
 		</div>

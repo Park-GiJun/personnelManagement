@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
 
 		if (inploginNum.equals(loginNum) && inploginPwd.equals(loginPassword)) {
 			// 로그인 성공
-			request.getSession().setAttribute("login_id", loginNum);
+			request.getSession().setAttribute("loginid", loginNum);
 			response.sendRedirect("../Calender/Calender.jsp");
 			
 		} else {

@@ -9,7 +9,7 @@ public class PersonalDTO {
 	private String password;
 	private String team;
 	private String emp_grade;
-	private int phone;
+	private String phone;
 	private Date work_start_date;
 
 	public String getName() {
@@ -60,11 +60,11 @@ public class PersonalDTO {
 		this.emp_grade = emp_grade;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
