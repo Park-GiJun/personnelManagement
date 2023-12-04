@@ -177,28 +177,27 @@
 }
 
 .info_profile {
-	width: 600px;
-	height: 200px;
+	width: 50%;
+	height: 20%;
 	position: relative;
 	top: 80px;
-	left: 50px;
-	top: 80px;
+	left: 2%;
+	top: 2%;
 }
 
 .info_profile_photo {
 	background-color: gray;
 	width: 200px;
-	height: 200px;
+	height: 100%;
 	display: inline-block;
 }
 
 .info_profile_texts {
-	width: 400px;
+	width: 100%;
 	font-size: 15px;
 	display: inline-block;
 	vertical-align: middle;
-	margin-left: 220px;
-	font-size: 15px;
+	margin-left: 120%;
 }
 
 .info_profile_texts a {
@@ -263,15 +262,16 @@
 }
 
 .datepicker-container {
-	position: relative;
-	bottom: 630px;
-	left: 50px;
+	position: fixed;
+	top: 10%;
+	left: 65%;
 	margin: auto;
 	background-color: #fff;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	padding: 20px;
+	padding: 2%;
 	border-radius: 5px;
-	max-width: 500px;
+	max-width: 60%;
+	z-index: 1; /* 다른 요소 위에 표시되도록 z-index 추가 */
 }
 
 .datepicker-container table {
@@ -357,20 +357,25 @@
 			>
 				<tr>
 					<th>기본급</th>
-					<th>100</th>
+					<th>${ incentivelist.pay }</th>
+				</tr>
+				<tr>
+					<th>총 인센티브</th>
+					<th>${ incentivelist.addtional_pay }</th>
+				</tr>
+				<tr>
+					<th>추가급</th>
+					<th>${ incentivevaluelist.holiday_pay }</th>
 				</tr>
 				<tr>
 					<th>성과급</th>
-					<th>200</th>
+					<th>${ incentivevaluelist.incentive }</th>
 				</tr>
 				<tr>
-					<th>추가근무수당</th>
-					<th>50</th>
+					<th>추가 근무 수당</th>
+					<th>${ incentivevaluelist.extra_work_pay }</th>
 				</tr>
-				<tr>
-					<th>추가금</th>
-					<th>3000</th>
-				</tr>
+
 			</table>
 		</div>
 		<div class="datepicker-container">
