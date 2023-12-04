@@ -5,6 +5,7 @@
 %>
 <%@ page import="attend.AttendanceDTO"%>
 <%@ page import="java.util.*"%>
+
 <%
 List<AttendanceDTO> attendDateList = (List<AttendanceDTO>) request.getAttribute("attendDateList");
 if (attendDateList == null) {
@@ -196,102 +197,6 @@ if (attendDateList == null) {
 </script>
 </head>
 <style>
-/* 공통 스타일 */
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-
-/* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
-.content {
-	position: relative;
-	left: 10%;
-	padding: 20px;
-	max-height: 100%;
-}
-
-.info_profile {
-	width: 50%;
-	height: 20%;
-	position: relative;
-	top: 80px;
-	left: 2%;
-	top: 2%;
-}
-
-.info_profile_photo {
-	background-color: gray;
-	width: 200px;
-	height: 100%;
-	display: inline-block;
-}
-
-.info_profile_texts {
-	width: 100%;
-	font-size: 15px;
-	display: inline-block;
-	vertical-align: middle;
-	margin-left: 120%;
-}
-
-.info_profile_texts a {
-	display: block;
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.info_income {
-	background-color: gray;
-	margin-top: 20px;
-	padding: 20;;
-	width: 600px;
-	height: 500px;
-	/* 높이를 자동으로 조정하도록 수정 */
-	position: relative;
-	top: 80px;
-	left: 50px;
-
-	/* 여백 추가 */
-}
-
-.info_income_text {
-	width: 500px;
-	height: 60px;
-	color: white;
-	margin: 0 auto;
-	/* 가운데 정렬을 위해 추가 */
-}
-
-.print_income {
-	margin-left: 200px;
-	font-size: 20px;
-}
-
-.income_table {
-	margin-top: 28px;
-	height: 75%;
-	width: 100%;
-	/* 부모에 맞추기 위해 100%로 조정 */
-	border-collapse: collapse;
-	width: 100%;
-	width: 100%;
-	/* 테이블 간격 제거 */
-}
-
-.income_table th, .income_table td {
-	border: 1px solid white;
-	/* 테두리 스타일 조정 */
-	padding: 8px;
-	/* 셀 안 여백 추가 */
-	text-align: center;
-	/* 텍스트 가운데 정렬 */
-}
-
-.info_income_textbox {
-	margin-right: -120px;
-}
-
 .current-month-year {
 	font-size: 12px;
 }
@@ -356,124 +261,66 @@ if (attendDateList == null) {
 </style>
 
 <body>
-	<jsp:include page="../MainPage/Left.jsp" />
-
-	<div class="content">
-		<div class="info_profile">
-			<div class="info_profile_photo">
-				<div class="info_profile_texts">
-					<a> 이름 : ${ userinfolist.name } </a>
-					<br />
-					<a> 사번 : ${ userinfolist.empNum } </a>
-					<br />
-					<a> 전화번호 : ${ userinfolist.phone }</a>
-					<br />
-					<a> 이메일 : ${ userinfolist.email }</a>
-				</div>
-			</div>
-		</div>
-		<div class="info_income">
-			<div
-				class="info_income_text"
-				align="center"
+	<div class="datepicker-container">
+		<form
+			id="monthForm"
+			action="../Controller/LoadDate.do"
+			method="post"
+		>
+			<input
+				type="hidden"
+				name="currentYear"
+				id="currentYear"
+				value=""
 			>
-				<div class="info_income_textbox">
-					급여정보
-					<button
-						name="print_income"
-						class="print_income"
-					>출력하기</button>
-				</div>
-
-			</div>
-			<table
-				class="income_table"
-				border="1"
+			<input
+				type="hidden"
+				name="currentMonth"
+				id="currentMonth"
+				value=""
 			>
-				<tr>
-					<th>기본급</th>
-					<th>${ incentivelist.pay }</th>
-				</tr>
-				<tr>
-					<th>총 인센티브</th>
-					<th>${ incentivelist.addtional_pay }</th>
-				</tr>
-				<tr>
-					<th>추가급</th>
-					<th>${ incentivevaluelist.holiday_pay }</th>
-				</tr>
-				<tr>
-					<th>성과급</th>
-					<th>${ incentivevaluelist.incentive }</th>
-				</tr>
-				<tr>
-					<th>추가 근무 수당</th>
-					<th>${ incentivevaluelist.extra_work_pay }</th>
-				</tr>
-
-			</table>
-		</div>
-		<div class="datepicker-container">
+		</form>
+		<div class="navigation-btn">
+			<!-- 이전달로 이동하는 버튼 -->
 			<form
-				id="monthForm"
 				action="../Controller/LoadDate.do"
 				method="post"
 			>
-				<input
-					type="hidden"
-					name="currentYear"
-					id="currentYear"
-					value=""
-				>
-				<input
-					type="hidden"
-					name="currentMonth"
-					id="currentMonth"
-					value=""
-				>
+				<button
+					id="prev-month-btn"
+					onclick="changeMonth(-1)"
+				>이전달</button>
 			</form>
-			<div class="navigation-btn">
-				<!-- 이전달로 이동하는 버튼 -->
-				<form
-					action="../Controller/LoadDate.do"
-					method="post"
-				>
-					<button
-						id="prev-month-btn"
-						onclick="changeMonth(-1)"
-					>이전달</button>
-				</form>
 
-				<!-- 현재 월과 년도를 표시하는 곳 -->
-				<a id="current-month-year"></a>
+			<!-- 현재 월과 년도를 표시하는 곳 -->
+			<a id="current-month-year"></a>
 
-				<!-- 다음달로 이동하는 버튼 -->
-				<form
-					action="../Controller/LoadDate.do"
-					method="post"
-				>
-					<button
-						id="next-month-btn"
-						onclick="changeMonth(1)"
-					>다음달</button>
-				</form>
-			</div>
-			<table id="datepicker-table">
-			</table>
-			<div class="info_check_buttons"></div>
-			<div class="check_btn">
+			<!-- 다음달로 이동하는 버튼 -->
+			<form
+				action="../Controller/LoadDate.do"
+				method="post"
+			>
 				<button
-					type="button"
-					id='commute-button'
-				>출근</button>
-				<button
-					type="button"
-					id='leave-button'
-				>퇴근</button>
-			</div>
+					id="next-month-btn"
+					onclick="changeMonth(1)"
+				>다음달</button>
+			</form>
 		</div>
-		<div class="info_commute"></div>
+		<table id="datepicker-table">
+		</table>
+		<div class="info_check_buttons"></div>
+		<div class="check_btn">
+			<button
+				type="button"
+				id='commute-button'
+			>출근</button>
+			<button
+				type="button"
+				id='leave-button'
+			>퇴근</button>
+		</div>
 	</div>
+	<div class="info_commute"></div>
 
 
 </body>
