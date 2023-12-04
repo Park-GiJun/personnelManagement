@@ -260,9 +260,14 @@
             </div>
         </div>
         <div class="left_holiday_background">
-            <div class="left_holiday_img">
-                <span class="left_holiday_text">휴가관리</span>
-            </div>
+        <a
+                class="left_Calender_section"
+                href="../HoliDay/HoliDay.jsp"
+            >
+            	<div class="left_holiday_img">
+                	<span class="left_holiday_text">휴가관리</span>
+            	</div>
+           	</a>
         </div>
         <div class="left_info_background">
             <div class="left_info_img">

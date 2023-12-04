@@ -17,7 +17,7 @@ public class PersonalDAO extends DBConnPool {
 		PersonalDTO dto = new PersonalDTO();
 
 		// 쿼리문 작성
-		String query = "SELECT * FROM emp WHERE emp_num=? AND password=?";
+		String query = "SELECT * FROM user_id WHERE user_num=? AND pass=?";
 
 		System.out.println(login_Id + " " + login_Pwd);
 		System.out.println("로그인 쿼리실행");
