@@ -18,7 +18,7 @@ public class ShareFormDAO extends DBConnPool {
 		int totalcount = 0;
 
 		// 쿼리문 준비
-		String query = "SELECT COUNT(*) FROM shareform";
+		String query = "SELECT COUNT(*) FROM board";
 
 		// 검색 조건이 있다면 where절로 추가
 		if (map.get("searchWord") != null) {
@@ -45,30 +45,29 @@ public class ShareFormDAO extends DBConnPool {
 
 		System.out.println("SelectListPage 실행");
 		// 쿼리문
-		String query = "SELECT * FROM (SELECT Tb.*, ROWNUM AS rNum FROM (SELECT * FROM shareform";
+		String query = "SELECT * FROM (SELECT Tb.*, ROWNUM AS rNum FROM (SELECT * FROM board";
 		if (map.get("searchWord") != null) {
 			// 조건 추가
 			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
 		}
 
-		query += " ORDER BY idx DESC) Tb) WHERE rNum BETWEEN ? AND ?";
-
-		System.out.println("ShareFormController :" + query);
+		query += " ORDER BY board_num DESC) Tb) WHERE rNum BETWEEN ? AND ?";
 
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, map.get("start").toString());
 			psmt.setString(2, map.get("end").toString());
+			System.out.println("ShareFormController :" + query);
 			rs = psmt.executeQuery();
 
 			// 반환된 게시물 목록을 컬렉션에 추가
 			while (rs.next()) {
 				ShareFormDTO dto = new ShareFormDTO();
 
-				dto.setIdx(rs.getString("idx"));
+				dto.setIdx(rs.getString("board_num"));
 				dto.setTitle(rs.getString("title"));
-				dto.setShareofile(rs.getString("shareofile"));
-				dto.setSharesfile(rs.getString("sharesfile"));
+				dto.setShareofile(rs.getString("ofile"));
+				dto.setSharesfile(rs.getString("sfile"));
 
 				boards.add(dto);
 

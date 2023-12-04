@@ -13,7 +13,6 @@
 	box-sizing: border-box;
 }
 
-
 .left_table {
 	width: 400px;
 	height: 100%;
@@ -260,20 +259,13 @@
 			</div>
 		</div>
 		<div class="left_info_background">
-			<div class="left_info_img">
-				<span class="left_info_text">내정보</span>
-			</div>
+			<a href="../Controller/infoLoad.do">
+				<div class="left_info_img">
+					<span class="left_info_text">내정보</span>
+				</div>
+			</a>
+
 		</div>
 	</div>
-
-	<script>
-		// 페이지가 로드될 때 실행되는 함수
-		window.onload = function() {
-			// 공유양식(ShareForm) 페이지인 경우 검색 버튼을 한 번만 클릭
-			if (window.location.href.indexOf("ShareForm.jsp") !== -1) {
-				document.getElementById('leftShareFormBackground').click();
-			}
-		};
-	</script>
 </body>
 </html>

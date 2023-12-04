@@ -240,6 +240,7 @@ body {
 .content {
    margin-left: 400px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
    padding: 20px;
+   max-height: 100%;
 }
 
 /* 유니크한 클래스로 스타일 지정 */

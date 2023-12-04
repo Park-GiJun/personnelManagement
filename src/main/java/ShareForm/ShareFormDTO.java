@@ -3,7 +3,6 @@ package ShareForm;
 public class ShareFormDTO {
 	private String idx;
 	private String title;
-	private String sharecontent;
 	private String shareofile;
 	private String sharesfile;
 
@@ -38,13 +37,4 @@ public class ShareFormDTO {
 	public void setSharesfile(String sharesfile) {
 		this.sharesfile = sharesfile;
 	}
-
-	public String getSharecontent() {
-		return sharecontent;
-	}
-
-	public void setSharecontent(String sharecontent) {
-		this.sharecontent = sharecontent;
-	}
-
 }

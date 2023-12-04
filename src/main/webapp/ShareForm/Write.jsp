@@ -29,7 +29,7 @@ body {
 	margin-left: 400px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;
-	min-height: 400px; /* Set a minimum height for the content area */
+	max-height: 100%;
 }
 </style>
 <jsp:include page="../MainPage/Left.jsp" />

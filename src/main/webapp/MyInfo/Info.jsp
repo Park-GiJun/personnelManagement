@@ -23,10 +23,61 @@
 
 	console.log(currentYear + " " + currentMonth);
 
-	document.addEventListener('DOMContentLoaded', function() {
-		generateCalendar();
-		updateMonthYearText();
-	});
+	document
+			.addEventListener(
+					'DOMContentLoaded',
+					function() {
+						var currentDate = new Date(); // 오늘 날짜로 초기화
+						console.log("DOMContentLoaded");
+
+						// 출근 버튼 클릭 이벤트
+						document
+								.getElementById('commute-button')
+								.addEventListener(
+										'click',
+										function() {
+											console.log("출근버튼");
+											var formattedDate = formatDate(currentDate);
+											var currentTime = getCurrentTime();
+											console
+													.log('[' + currentTime
+															+ ']');
+
+											// 현재 날짜의 셀을 찾아서 출근 시간 입력
+											var todayCell = findCellByDate(currentDate
+													.getDate());
+											if (todayCell) {
+												todayCell
+														.querySelector('.arriveText').textContent = currentTime;
+											}
+										});
+
+						// 퇴근 버튼 클릭 이벤트
+						document
+								.getElementById('leave-button')
+								.addEventListener(
+										'click',
+										function() {
+											console.log("퇴근버튼");
+											var formattedDate = formatDate(currentDate);
+											var currentTime = getCurrentTime();
+											console
+													.log('[' + currentTime
+															+ ']');
+
+											// 현재 날짜의 셀을 찾아서 퇴근 시간 입력
+											var todayCell = findCellByDate(currentDate
+													.getDate());
+											if (todayCell) {
+												todayCell
+														.querySelector('.leaveText').textContent = currentTime;
+											}
+										});
+
+						generateCalendar();
+						updateMonthYearText();
+
+					});
 
 	function generateCalendar() {
 		var datepickerTable = document.getElementById('datepicker-table');
@@ -52,31 +103,16 @@
 					cell.appendChild(dateText);
 
 					var arriveText = document.createElement('div');
-					arriveText.textContent = '출근시각 : ';
-					arriveText.className = 'date-text';
+					arriveText.textContent = '출근시각';
+					arriveText.className = 'arriveText';
+					arriveText.setAttribute('id', 'arriveText' + day);
 					cell.appendChild(arriveText);
 
 					var leaveText = document.createElement('div');
-					leaveText.textContent = '퇴근시각 : ';
-					leaveText.className = 'date-text';
+					leaveText.textContent = '퇴근시각';
+					leaveText.className = 'leaveText';
+					leaveText.setAttribute('id', 'leaveText' + day);
 					cell.appendChild(leaveText);
-
-					cell.addEventListener('click', function(day) {
-						return function() {
-							var selectedDate = new Date(currentYear,
-									currentMonth, day);
-							var formattedDate = formatDate(selectedDate);
-
-							// 현재 시간을 가져오는 함수 (시간을 조절할 수 있음)
-							var currentTime = getCurrentTime();
-							console.log('[' + currentTime + ']');
-
-							this.childNodes[1].textContent = `출근시각 : `
-									+ currentTime;
-
-						};
-					}(day));
-
 					day++;
 				}
 			}
@@ -112,6 +148,16 @@
 		return year + '-' + (month < 10 ? '0' : '') + month + '-'
 				+ (day < 10 ? '0' : '') + day;
 	}
+	function findCellByDate(day) {
+		// 특정 날짜의 셀을 찾아서 반환
+		var cells = document.querySelectorAll('.date-text');
+		for (var i = 0; i < cells.length; i++) {
+			if (cells[i].textContent == day) {
+				return cells[i].parentNode; // 부모 셀 반환
+			}
+		}
+		return null; // 찾지 못한 경우
+	}
 </script>
 </head>
 <style>
@@ -127,6 +173,7 @@
 	position: relative;
 	left: 400px;
 	padding: 20px;
+	max-height: 100%;
 }
 
 .info_profile {
@@ -263,6 +310,14 @@
 .current-month-year {
 	font-size: 12px;
 }
+
+.arriveText {
+	font-size: 15px;
+}
+
+.leaveText {
+	font-size: 15px;
+}
 </style>
 
 <body>
@@ -272,13 +327,13 @@
 		<div class="info_profile">
 			<div class="info_profile_photo">
 				<div class="info_profile_texts">
-					<a> 이름 : 박기준 </a>
+					<a> 이름 : ${ dto.name } </a>
 					<br />
-					<a> 사번 : 12345 </a>
+					<a> 사번 : ${ dto.user_num } </a>
 					<br />
-					<a> 전화번호 : 010-2842-0351</a>
+					<a> 전화번호 : ${ dto.phonw.number }</a>
 					<br />
-					<a> 이메일 : tpgj98@naver.com</a>
+					<a> 이메일 : ${ dto.email }</a>
 				</div>
 			</div>
 		</div>
@@ -332,7 +387,16 @@
 			</div>
 			<table id="datepicker-table">
 			</table>
-			<div class="info_check_buttons">
+			<div class="info_check_buttons"></div>
+			<div class="check_btn">
+				<button
+					type="button"
+					id='commute-button'
+				>출근</button>
+				<button
+					type="button"
+					id='leave-button'
+				>퇴근</button>
 			</div>
 		</div>
 		<div class="info_commute"></div>

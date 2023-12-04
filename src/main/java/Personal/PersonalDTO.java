@@ -1,4 +1,5 @@
 package Personal;
+
 import java.sql.Date;
 
 public class PersonalDTO {
@@ -6,10 +7,10 @@ public class PersonalDTO {
 	private String empNum;
 	private String email;
 	private String password;
-	private String department;
-	private String grade;
+	private String team;
+	private String emp_grade;
 	private int phone;
-	private Date companydate;
+	private Date work_start_date;
 
 	public String getName() {
 		return name;
@@ -43,20 +44,20 @@ public class PersonalDTO {
 		this.password = password;
 	}
 
-	public String getDepartment() {
-		return department;
+	public String getTeam() {
+		return team;
 	}
 
-	public void setDepartment(String department) {
-		this.department = department;
+	public void setTeam(String team) {
+		this.team = team;
 	}
 
-	public String getGrade() {
-		return grade;
+	public String getEmp_grade() {
+		return emp_grade;
 	}
 
-	public void setGrade(String grade) {
-		this.grade = grade;
+	public void setEmp_grade(String emp_grade) {
+		this.emp_grade = emp_grade;
 	}
 
 	public int getPhone() {
@@ -67,12 +68,12 @@ public class PersonalDTO {
 		this.phone = phone;
 	}
 
-	public java.util.Date getCompanydate() {
-		return companydate;
+	public Date getWork_start_date() {
+		return work_start_date;
 	}
 
-	public void setCompanydate(Date date) {
-		this.companydate = date;
+	public void setWork_start_date(Date work_start_date) {
+		this.work_start_date = work_start_date;
 	}
 
 }
