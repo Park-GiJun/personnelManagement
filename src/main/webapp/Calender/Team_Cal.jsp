@@ -47,7 +47,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
     box-sizing: border-box;
 }
 
-/* 각 종류 버튼 스타일 */
+/* 개인 일정 버튼 */
 .my_btn {
   background-color: #1C427E;
   color: white;
@@ -60,6 +60,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   border-radius: 30px;
 }
 
+/* 부서 휴가 버튼 */
 .my_btn2 {
   background-color: #1C427E;
   color: white;
@@ -72,6 +73,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   border-radius: 30px;
 }
 
+/* 부서 일정 버튼 */
 .my_btn3 {
   background-color: #1C427E;
   color: white;
@@ -84,6 +86,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   border-radius: 30px;
 }
 
+/* 회사 일정 버튼 */
 .my_btn4 {
   background-color: #1C427E;
   color: white;
@@ -96,6 +99,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   border-radius: 30px;
 }
 
+/* 개인 일정, 부서 휴가, 부서 일정, 회사 일정 버튼 위치 */
 .middle-button {
     text-align: center;
     padding: 30px 30px;
@@ -119,6 +123,7 @@ background-color: #1C427E;
 
 }
 
+/*   ↑ 여기까지 버튼 위치, 크기 조절   */
 
 
 
@@ -143,35 +148,33 @@ a:active, a:hover {
    margin: 70px auto;
 }
 .calendar .title{
-   position: fixed;
+   position: absolute;
    top: 120px;
-   left: 20px;
+   left: 240px;
    width: 100%;
    z-index: 1; 
 }
 
-/* 년도, 월 선택 리스트 스타일 */
-.selectField {
 
+
+/* 년도 선택 리스트 */
+.selectField {
    border: 1px solid #999;
    padding: 15px 50px;
    border-radius: 25px;
    font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
    font-size: 20px;
-   margin-left: 1000px;
-   
+   margin-left: 950px;
 }
 
+/* 월 선택 리스트 */
 .selectField2 {
-	
-	
    border: 1px solid #999;
    padding: 15px 50px;
    border-radius: 25px;
    font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
    font-size: 20px;
    margin-left: 5px;
-   
 }
 
 .calendar table {
@@ -180,45 +183,70 @@ a:active, a:hover {
    border-spacing: 0;
 }
 
+/* 요일 칸 배경 색 지정 */
 .calendar table thead tr:first-child{
    background: #1c427e;
+    color: white;
 }
 
+
+/* 요일, 날짜 칸 크기 조절 */
 .calendar table td{
-   padding: 60px;
-   text-align: center;
+   padding: 40px 80px;
+   text-align: left;
    border: 1px solid #ccc;
 }
 
+
+/* 월, 화, 수, 목, 금 글자 색상 설정 */
+.calendar table td:nth-child(1)
+.calendar table td:nth-child(2)
+.calendar table td:nth-child(3)
+.calendar table td:nth-child(4)
+.calendar table td:nth-child(5) {
+   color: white; 
+}
+
+/* 일요일 색상 지정 */
 .calendar table td:nth-child(7n+1){
    color: red;
 }
+
+/* 토요일 색상 지정 */
 .calendar table td:nth-child(7n){
    color: blue;
 }
+
+/* 전 월의 일 색상 */
 .calendar table td.gray {
    color: #ccc;
 }
+
+/* 오늘 날짜 스타일 */
 .calendar table td.today{
    font-weight:700;
    background: #FFF75A;
+    color: #000;
 }
 
-//아래 오늘 날짜로 버튼
-.calendar .footer{
-   height: 25px;
-   line-height: 25px;
-   text-align: right;
-   font-size: 12px;
-}
+
 </style>
 
 <script type="text/javascript">
 function change() {
    var f = document.frm;
-   f.action="calendar2.jsp";
+ 
    f.submit();
 }
+
+function updateCalendar() {
+	   var year = document.getElementById("yearSelect").value;
+	   var month = document.getElementById("monthSelect").value;
+
+	   var url = "calendar.jsp?year=" + year + "&month=" + month;
+	   window.location.href = url;
+	}
+
 </script>
 
 
@@ -265,10 +293,10 @@ body {
       <button class='my_btns' onclick="location.href='List.jsp';"><</button>
    </div>
 
-   <div class="calendar" style="width: 500px; height: 300px;">
+   <div class="calendar" style="width: 800px; height: 300px;">
       <div class="title" >
          <form name="frm" method="post" >
-            <select name="year" class="selectField" onchange="change()"  >
+            <select id="yearSelect" name="year" class="selectField" onchange="change()"  >
                <%
                for (int i = year - 50; i <= year + 50; i++) {
                %>
@@ -277,7 +305,7 @@ body {
                <%
                }
                %>
-            </select> <select name="month" class="selectField2" onchange="change()">
+            </select> <select id="monthSelect" name="month" class="selectField2" onchange="change()">
                <%
                for (int i = 1; i <= 12; i++) {
                %>
@@ -293,12 +321,12 @@ body {
       <table>
          <thead>
             <tr>
-               <td>일</td>
+               <td>일</td> 
                <td>월</td>
                <td>화</td>
                <td>수</td>
                <td>목</td>
-               <td>금</td>
+               <td>금</td> 
                <td>토</td>
             </tr>
          </thead>
@@ -328,7 +356,7 @@ body {
                }
             }
 
-            // 마지막 주 마지막 일자 다음 처리
+            // 마지막 주 마지막 일자 다음 처리..
             int n = 1;
             for (int i = (week - 1) % 7; i < 6; i++) {
                // out.print("<td>&nbsp;</td>");
@@ -339,9 +367,9 @@ body {
          </tbody>
       </table>
 
-      <div class="footer">
-         <a href="calendar2.jsp">오늘날짜로</a>
-      </div>
+		
+     
+     
 
    </div>
    
