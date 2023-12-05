@@ -35,7 +35,7 @@ public class LoginController extends HttpServlet {
 			// 로그인 성공
 			request.getSession().setAttribute("loginid", loginNum);
 			response.sendRedirect("../Calender/Calender.jsp");
-			
+
 		} else {
 			// 로그인 실패
 			response.sendRedirect("Login.jsp"); // 로그인 실패 시 다시 로그인 페이지로 리다이렉트

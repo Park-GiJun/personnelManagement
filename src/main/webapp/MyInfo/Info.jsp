@@ -110,40 +110,34 @@ if (attendDateList == null) {
 	                dateText.textContent = day;
 	                dateText.className = 'date-text';
 	                cell.appendChild(dateText);
-
 	                var arriveText = document.createElement('div');
 	                var leaveText = document.createElement('div');
-
 	                // Iterate over the attendDateList in JavaScript
 	                <%for (int i = 0; i < attendDateList.size(); i++) {%>
 	                    var date<%=i%> = '<%=attendDateList.get(i).getDay_of_work()%>';
 	                    var arrive<%=i%> = '<%=attendDateList.get(i).getStart_time()%>';
 	                    var leave<%=i%> = '<%=attendDateList.get(i).getEnd_time()%>';
-
-					if (day === parseInt(date
-<%=i%>
-	)) {
-						arriveText.textContent = arrive
-<%=i%>
-	;
-						leaveText.textContent = leave
-<%=i%>
-	;
+					if (day === parseInt(date<%=i%>)) {
+						arriveText.textContent = arrive<%=i%>;
+						arriveText.className = 'arriveText';
+						arriveText.setAttribute('id', 'arriveText' + day);
+						cell.appendChild(arriveText);
+						leaveText.textContent = leave<%=i%>;
+						leaveText.className = 'leaveText';
+						leaveText.setAttribute('id', 'leaveText' + day);
+						cell.appendChild(leaveText);
 						break; // 해당 날짜의 데이터를 찾았으므로 반복문 종료
 					} else {
 						arriveText.textContent = '출근시각';
+						arriveText.className = 'arriveText';
+						arriveText.setAttribute('id', 'arriveText' + day);
+						cell.appendChild(arriveText);
 						leaveText.textContent = '퇴근시각';
+						leaveText.className = 'leaveText';
+						leaveText.setAttribute('id', 'leaveText' + day);
+						cell.appendChild(leaveText);
 					}
-<%}%>
-	arriveText.className = 'arriveText';
-					arriveText.setAttribute('id', 'arriveText' + day);
-					cell.appendChild(arriveText);
-
-					leaveText.className = 'leaveText';
-					leaveText.setAttribute('id', 'leaveText' + day);
-					cell.appendChild(leaveText);
-
-					day++;
+<%}%>				day++;
 				}
 			}
 		}
