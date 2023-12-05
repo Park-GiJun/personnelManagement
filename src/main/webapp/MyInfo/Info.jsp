@@ -12,10 +12,13 @@
 <%@ page import="java.util.HashMap"%>
 
 <%
-
 String attendDateJson = (String) request.getAttribute("attendDateMap");
 
 %>
+
+<script>
+console.log(attendDateJson);
+</script>
 
 <!DOCTYPE html>
 <html>
@@ -24,8 +27,8 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 <meta charset="UTF-8">
 <title>MyInfo</title>
 <script>
-	var attendDateMap = JSON.parse('<%= attendDateJson %>');
-	
+	var attendDateMap = JSON.parse('<%=attendDateJson%>');
+
 	console.log(attendDateMap["2023-12-01"]["start_time"]);
 
 	function getCurrentTime() {
