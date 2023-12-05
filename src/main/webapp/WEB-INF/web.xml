@@ -18,23 +18,19 @@
 	</context-param>
 	<context-param>
 		<param-name>OracleURL</param-name>
-		<param-value>JDBC:oracle:thin:@localhost:1521:XE</param-value>
-		
+		<param-value>jdbc:oracle:thin:@localhost:1521:orcl</param-value>
 	</context-param>
 	<context-param>
 		<param-name>OracleId</param-name>
-		<param-value>C##TEST1234</param-value>
+		<param-value>c##management</param-value>
 	</context-param>
 	<context-param>
 		<param-name>OraclePwd</param-name>
-		<param-value>TEST1234</param-value>
+		<param-value>1234</param-value>
 	</context-param>
-	<context-param>
-		<param-name>POSTS_PER_PAGE</param-name>
-		<param-value>10</param-value>
-	</context-param>
-	<context-param>
-		<param-name>PAGES_PER_BLOCK</param-name>
-		<param-value>5</param-value>
-	</context-param>
+
+	<!-- 서블렛 -->
+
+
+
 </web-app>

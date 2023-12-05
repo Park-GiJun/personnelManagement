@@ -49,7 +49,6 @@ public class LoginController extends HttpServlet {
 		{
 			// 로그인 성공
 			request.getSession().setAttribute("loginid", loginNum);
-			// Store formatted date in session
 			request.getSession().setAttribute("currentDate", formattedDate);
 			request.getSession().setAttribute("inpteam", inpTeam);
 			response.sendRedirect("../Calender/Calender.jsp");

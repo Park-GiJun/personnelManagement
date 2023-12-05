@@ -13,12 +13,7 @@
 
 <%
 String attendDateJson = (String) request.getAttribute("attendDateMap");
-
 %>
-
-<script>
-console.log(attendDateJson);
-</script>
 
 <!DOCTYPE html>
 <html>
@@ -129,6 +124,7 @@ console.log(attendDateJson);
 					// Iterate over the attendDateMap in JavaScript
 					var currentDate = formatDate(new Date(currentYear,
 							currentMonth, day));
+					console.log("currentDate : " + currentDate);
 					var currentDateMap = attendDateMap[currentDate];
 
 					if (currentDateMap) {
