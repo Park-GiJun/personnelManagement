@@ -62,6 +62,7 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 												todayCell
 														.querySelector('.arriveText').textContent = currentTime;
 											}
+											
 										});
 
 						// 퇴근 버튼 클릭 이벤트
