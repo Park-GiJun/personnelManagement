@@ -50,9 +50,6 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
     box-sizing: border-box;
 }
 
-
-
-
 /* 개인 일정 버튼 */
 .my_btn {
   background-color: #1C427E;
@@ -144,11 +141,11 @@ button.my_btn4:hover {
 .middle-button {
     text-align: center;
     padding: 30px 30px;
-    margin-left: 270px;
+    margin-left: 50px;
     font-family: 'Kanit', sans-serif;
 }
 
-.my_btns {
+.next_btn {
 background-color: #1C427E;
   color: white;
   border: none;
@@ -161,9 +158,20 @@ background-color: #1C427E;
   
   position: absolute;
   top: 31px;
-  left: 1000px;
+  left: 1850px;
+  
+  font-family: 'Kanit', sans-serif;
 
+   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */	
 }
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+button.next_btn:hover {
+  color: white;
+  background: orange;
+}
+
+
 
 /*   ↑ 여기까지 버튼 위치, 크기 조절   */
 
@@ -175,7 +183,7 @@ background-color: #1C427E;
 	
 	position: absolute;
   	top: -40px;
-  	left: 540px;
+  	left: 430px;
   	
   	font-size: 100x;
   	border-radius: 30px;
@@ -222,7 +230,7 @@ a:active, a:hover {
    border-radius: 25px;
   font-family: 'Kanit', sans-serif;
    font-size: 20px;
-   margin-left: 550px;
+   margin-left: 440px;
    top: 10px;
 }
 
@@ -292,10 +300,16 @@ a:active, a:hover {
    background: none;
    font-size: 20px;
    
+   font-family: 'Kanit', sans-serif;
    
-  
+   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+   
 }
 
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+.calendar table button:hover {
+   color: green;
+}
 
 
 
@@ -309,12 +323,26 @@ a:active, a:hover {
 /* 일요일 날짜 스타일 */
 .calendar table td:nth-child(7n+1) button {
    color: red;
+   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+.calendar table td:nth-child(7n+1) button:hover {
+   color: green;
+}
+
 
 /* 토요일 날짜 스타일 */
 .calendar table td:nth-child(7n) button {
    color: blue;
+   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+.calendar table td:nth-child(7n) button:hover {
+   color: green;
+}
+
 
 /* 전월의 날짜 색상 지정 */
 .calendar table td.gray button {
@@ -387,10 +415,11 @@ body {
       <button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사 일정</button>
    </div>
    
-     <p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
-  
+	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
+	
+	<button class='next_btn' onclick="location.href='Scl.jsp';"><</button>
 
-   <div class="calendar" style="width: 800px; height: 300px;">
+   <div class="calendar" style="width: 1050px; height: 300px;">
       <div class="title" >
          <form name="frm" method="post" >
             <select id="yearSelect" name="year" class="selectField" onchange="change()"  >
