@@ -29,6 +29,7 @@ public class LoginController extends HttpServlet {
 		PersonalDTO dto = dao.loginQuery(loginNum, loginPassword);
 
 		String inploginNum = String.valueOf(dto.getEmpNum());
+		String inpTeam = String.valueOf(dto.getTeam());
 		String inploginPwd = dto.getPassword();
 
 		System.out.println("inp : " + inploginNum + " " + inploginPwd + " db : " + loginNum + " " + loginPassword);
@@ -48,10 +49,14 @@ public class LoginController extends HttpServlet {
 		{
 			// 로그인 성공
 			request.getSession().setAttribute("loginid", loginNum);
+<<<<<<< HEAD
 
 			// Store formatted date in session
 			request.getSession().setAttribute("currentDate", formattedDate);
 
+=======
+			request.getSession().setAttribute("inpteam", inpTeam);
+>>>>>>> refs/remotes/origin/류동규
 			response.sendRedirect("../Calender/Calender.jsp");
 
 		} else {

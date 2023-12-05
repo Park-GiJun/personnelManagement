@@ -1,17 +1,12 @@
-<%@page import="HoliDay.HoliDayDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Vacation</title>
-
-<link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <style type="text/css">
 * {
 	margin: 0;
@@ -30,17 +25,6 @@
 	border-radius: 30px;
 }
 
-/* 휴가 조회 버튼 스타일 */
-.HoliDay_Check_btn {
-	background-color: #1C427E;
-	color: white;
-	border: none;
-	width: 20%;
-	height: 200%;
-	font-size: 200%;
-	border-radius: 30px;
-}
-
 /* 휴가 신청 위치 수정 */
 .middle-button-container {
 	position: relative;
@@ -48,18 +32,12 @@
 	margin-left: 80%;
 }
 
-/* 휴가 조회 버튼 위치 수정 */
-.top-button-container {
-	position: relative;
-	margin-top: 0%;
-	margin-left: 0%;
-}
-
 /* 사용가능한 휴가 text 위치 수정 */
 .middle-text-container {
 	position: relative;
 	margin-top: -3%;
-	margin-left: 20%;
+	margin-left: 0%;
+	margin-right: 0%;
 	font-size: 200%;
 }
 
@@ -98,34 +76,28 @@ body {
 }
 </style>
 <body>
-	<%
-	HoliDayDTO holidaydto = new HoliDayDTO();
-	%>
 	<!--  왼쪽 페이지 목록  -->
 	<jsp:include page="../MainPage/Left.jsp" />
 	<div class="content">
 		<!-- 다른 페이지에서 불러오는 내용 -->
-		
-		<form name="Holiday_Check_fornm" method="post" action="../Controller/Holiday_CheckController.do">
-  			<div class="top-button-container">
-      	 		<button type="submit" class='HoliDay_Check_btn'>남은 휴가 조회</button>
-    		<div class="middle-text-container">사용가능 휴가 : <%= holidaydto.getAnnual() %></div>
-   			</div>
-		</form>
+
 
 		<form name="vacation_form" method="post"
-			action="../Controller/holiday.do">
+			action="../Controller/HolidayApplicationController.do">
 
 			<!-- 휴가 신청 버튼 -->
+			<div class="middle-text-container">
+				<a>사용가능 휴가 : ${userholidaycount.annual }일</a>
+			</div>
 			<div class="middle-button-container">
 				<button type="submit" class='my_btn'>휴가 신청</button>
 			</div>
-			
+
 			<!-- 휴가 신청 양식 -->
 			<div class="middle-vaction_request-container">
 				<table border="1" width="100%">
 					<tr>
-						<th colspan="2">휴가 일정</th>
+						<th colspan="2">휴가 일정 (ex : YYYY-MM-DD)</th>
 					</tr>
 					<tr align="center">
 						<td>휴가 시작</td>
@@ -144,13 +116,26 @@ body {
 			<div class="middle-vaction_list-container">
 				<table border="1" width="100%">
 					<tr>
-						<th>휴가 일정</th>
-						<th>승인 여부</th>
+						<th width="80%">휴가 일정</th>
+						<th width="20%">승인 여부</th>
 					</tr>
-					<tr align="center">
-						<td>2023-12-01 ~ 2023-12-05</td>
-						<td>승인대기</td>
-					</tr>
+<c:choose>
+    <c:when test="${empty holidayList}"> <!-- 게시물이 없을 때 -->
+        <tr>
+            <td colspan="2" align="center">
+                신청된 휴가가 없습니다.
+            </td>
+        </tr>
+    </c:when>
+    <c:otherwise> <!-- 게시물이 있을 때 -->
+        <c:forEach items="${holidayList}" var="row" varStatus="loop">
+            <tr align="center">
+                <td>${row.start_vacation} ~ ${row.end_vacation}</td>
+                <td>${row.approval}</td>
+            </tr>
+        </c:forEach>
+    </c:otherwise>
+</c:choose>
 				</table>
 			</div>
 

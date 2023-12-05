@@ -96,14 +96,16 @@
 				class="left_ShareForm_section"
 				href="../Controller/sharelist.do"
 			>
-				<span class="left_shareform_text">공유양식</span>
-			</a>
-		</div>
-		<div class="left_freeboard_background">
-			<span class="left_freeboard_text">게시판</span>
-		</div>
-		<div class="left_holiday_background">
-			<span class="left_holiday_text">휴가관리</span>
+				<div class="left_shareform_img">
+					<span class="left_shareform_text">공유양식</span>
+				</div>
+
+				<span class="left_holiday_text">휴가관리</span>
+				<a href="../Controller/HoliDayCount.do">
+					<div class="left_holiday_img">
+						<span class="left_holiday_text">휴가관리</span>
+					</div>
+				</a>
 		</div>
 		<div class="left_info_background">
 			<a href="../Controller/infoLoad.do">
