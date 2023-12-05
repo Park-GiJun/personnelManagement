@@ -1,20 +1,20 @@
 package attend;
 
-import java.util.List;
-import java.util.Vector;
+import java.util.HashMap;
+import java.util.Map;
 
 import DBcontrol.DBConnPool;
 
 public class AttendanceDAO extends DBConnPool {
 
-	public List<AttendanceDTO> loadDateAttendance(String emp_num, String currentDate) {
+	public Map<String, Map<String, String>> loadDateAttendance(String emp_num, String currentDate) {
 		System.out.println("Load Date Attendance");
 
-		List<AttendanceDTO> list = new Vector<>();
+		Map<String, Map<String, String>> attendDateMap = new HashMap<>();
 
-		String query = "SELECT emp_num, TO_CHAR(day_of_work, 'DD') AS day, "
+		String query = "SELECT emp_num, TO_CHAR(day_of_work, 'YYYY-MM-DD') AS day, "
 				+ "TO_CHAR(start_time, 'hh24:mi') AS start_time, TO_CHAR(finish_time, 'hh24:mi') AS finish_time "
-				+ "FROM attendance WHERE emp_num = ? AND TO_CHAR(day_of_work, 'YYYY-MM') = ?";
+				+ "FROM attendance WHERE emp_num = ? AND TO_CHAR(day_of_work, 'YYYY-MM') = ? ORDER BY day";
 
 		try {
 			psmt = con.prepareStatement(query);
@@ -36,7 +36,11 @@ public class AttendanceDAO extends DBConnPool {
 
 				System.out.println(dto.getEmpNum() + " " + dto.getDay_of_work() + " " + dto.getEnd_time() + " "
 						+ dto.getStart_time());
-				list.add(dto);
+				Map<String, String> timeMap = new HashMap<>();
+				timeMap.put("start_time", dto.getStart_time());
+				timeMap.put("finish_time", dto.getEnd_time());
+
+				attendDateMap.put(dto.getDay_of_work(), timeMap);
 			}
 
 		} catch (Exception e) {
@@ -46,6 +50,6 @@ public class AttendanceDAO extends DBConnPool {
 			close();
 		}
 
-		return list;
+		return attendDateMap;
 	}
 }

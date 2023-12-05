@@ -31,9 +31,8 @@ public class LoadDate extends HttpServlet {
 		System.out.println("LoadDateController currentMonth : " + currentMonth);
 
 		AttendanceDAO attenddao = new AttendanceDAO();
-		List<AttendanceDTO> attendDateList = attenddao.loadDateAttendance(userId, currentYear + "-" + currentMonth);
 
-		request.setAttribute("attendDateList", attendDateList);
+
 		request.getRequestDispatcher("/MyInfo/Info.jsp").forward(request, response);
 	}
 }

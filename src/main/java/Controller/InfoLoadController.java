@@ -3,13 +3,15 @@ package Controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import Income.IncentiveDAO;
 import Income.IncentiveDTO;
@@ -18,7 +20,6 @@ import Income.Incentive_ValueDTO;
 import Personal.PersonalDAO;
 import Personal.PersonalDTO;
 import attend.AttendanceDAO;
-import attend.AttendanceDTO;
 
 @WebServlet("/Controller/infoLoad.do")
 public class InfoLoadController extends HttpServlet {
@@ -53,9 +54,12 @@ public class InfoLoadController extends HttpServlet {
 		System.out.println("Current Year and Month: " + formattedDate);
 
 		AttendanceDAO attenddao = new AttendanceDAO();
-		List<AttendanceDTO> attendDateList = attenddao.loadDateAttendance(userId, currentDate);
+		Map<String, Map<String, String>> attendDateMap = attenddao.loadDateAttendance(userId, currentDate);
+		
+		String attendDateJson = new Gson().toJson(attendDateMap);
+		
 
-		request.setAttribute("attendDateList", attendDateList);
+		request.setAttribute("attendDateMap", attendDateJson);
 		request.setAttribute("userinfolist", userinfolist);
 		request.setAttribute("incentivevaluelist", incentivevaluelist);
 		request.setAttribute("incentivelist", incentivelist);
