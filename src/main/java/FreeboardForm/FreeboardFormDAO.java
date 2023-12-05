@@ -37,18 +37,21 @@ public class FreeboardFormDAO extends DBConnPool{
 	
 	public List<FreeboardFormDTO> selectListPage(Map<String, Object> map) {
 		System.out.println("selectListpage");
-		List<FreeboardFormDTO> anno_board = new Vector<FreeboardFormDTO>();
+		List<FreeboardFormDTO> anno_boards = new Vector<FreeboardFormDTO>();
 
 		System.out.println("SelectListPage 실행");
 		// 쿼리문
-		String query = "SELECT * FROM (SELECT Tb.*, ROWNUM AS rNum FROM (SELECT * FROM FreeboardFormDTO";
+		String query = "SELECT * FROM (SELECT Tb.*, ROWNUM AS rNum FROM (SELECT * FROM anno_board";
 		if (map.get("searchWord") != null) {
 			// 조건 추가
 			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
 		}
 
 		query += " ORDER BY anno_board_num DESC) Tb) WHERE rNum BETWEEN ? AND ?";
-
+		System.out.println("FreeboardFormController : 51 lines --------------------------");
+		System.out.println(query);
+		
+		
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, map.get("start").toString());
@@ -65,15 +68,16 @@ public class FreeboardFormDAO extends DBConnPool{
 				dto.settitle(rs.getString("title"));
 				dto.setcontent(rs.getString("content"));
 				dto.setpost_date(rs.getDate("post_date"));
-				dto.setvisitcount ( rs.getInt("setvisitcount"));
-				anno_board.add(dto);
+				dto.setvisitcount(rs.getInt("visitcount"));
+				anno_boards.add(dto);
+				System.out.println(dto.getanno_board_num()+dto.getboard_pass()+dto.gettitle());
 
 			}
 		} catch (Exception e) {
 			System.out.println("게시물 조회중 예외 발생");
 			e.printStackTrace();
 		}
-		return anno_board;
+		return anno_boards;
 	}
 	
 	

@@ -58,7 +58,8 @@ public class FreeboardListController extends HttpServlet {
 		int end = pageNum * pageSize;
 		map.put("start", start);
 		map.put("end", end);
-
+		/* 페이지 처리 end */
+		
 		List<FreeboardFormDTO> FreeboardFormLists = dao.selectListPage(map);
 
 		// 게시물 목록 받기

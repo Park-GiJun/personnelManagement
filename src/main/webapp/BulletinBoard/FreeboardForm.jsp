@@ -40,7 +40,7 @@ body {
 				<th width="10%">작성일</th>
 			</tr>
 			<c:choose>
-				<c:when test="${ empty FreeboardFormList }">
+				<c:when test="${ empty FreeboardFormLists }">
 					<!-- 게시물이 없다면 -->
 					<tr>
 						<td colspan="3" align="center">게시물이 없습니다.</td>
@@ -48,7 +48,7 @@ body {
 				</c:when>
 				<c:otherwise>
 					<!-- 게시물이 있을때 -->
-					<c:forEach items="${ FreedboardList }" var="row" varStatus="loop">
+					<c:forEach items="${ FreeboardFormLists }" var="row" varStatus="loop">
 						<tr align="center">
 							<!-- 번호 -->
 							<td>${ map.totalCount -(((map.pageNum-1) * map.pageSize) + loop.index) }
@@ -56,9 +56,9 @@ body {
 							<td align="center">
 								<!-- 제목 --> <a>${ row.title }</a>
 							</td>
-							<td><c:if test="${ not empty row.Freedboardotime}">
-									<a>[작성일연결해주기]</a>
-								</c:if></td>
+							<td align="center">
+							<a>${row.post_date}</a>
+							</td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
@@ -75,7 +75,7 @@ body {
 						type="submit" name="listSearch" value="검색하기" id="listSearch" /></th>
 				</tr>
 				<tr align="center">
-					<th>${ map.paginImg }</th>
+					<th>${ map.paginImg}</th>
 					<th width="100" rowspan="2">
 						<button type="button"
 							onclick="location.href='../Controller/write.do';">글작성</button>
