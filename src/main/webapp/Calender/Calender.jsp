@@ -256,6 +256,11 @@ a:active, a:hover {
 }
 
 
+tbody {
+	background: red;
+}
+
+
 /* 월, 화, 수, 목, 금 글자 색상 설정 */
 .calendar table td:nth-child(1)
 .calendar table td:nth-child(2)
@@ -268,6 +273,7 @@ a:active, a:hover {
 
 /* 일요일 색상 지정 */
 .calendar table td:nth-child(7n+1){
+   
    color: red;
 }
 
@@ -284,7 +290,7 @@ a:active, a:hover {
 /* 오늘 날짜 스타일 */
 .calendar table td.today{
    font-weight:700;
-   background: #FFF75A;
+   background: orange;
     color: #000;
 }
 
@@ -348,7 +354,7 @@ body {
       <button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사 일정</button>
    </div>
    
-    <p class="em" style="font-size: 200px">12</p> 
+     <p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
   
 
    <div class="calendar" style="width: 800px; height: 300px;">
@@ -376,6 +382,7 @@ body {
          </form>
       </div>
 
+	
       <table> <!-- 테이블 표 만드는 곳(달력 만드는 곳) -->
          <thead>
             <tr>
@@ -399,7 +406,7 @@ body {
             // 1일 앞 부분
             for (int i = 1; i < week; i++) {
                //out.print("<td>&nbsp;</td>");
-               out.print("<td class='gray'>" + (preDate++) + "</td>");
+               out.print("<td class='gray'><button disabled>" + (preDate++) + "</button></td>");
             }
 
             // 1일부터 말일까지 출력
@@ -408,7 +415,7 @@ body {
             for (int i = 1; i <= lastDay; i++) {
                cls = year == ty && month == tm && i == td ? "today" : "";
 
-               out.print("<td class='" + cls + "'>" + i + "</td>");
+               out.print("<td class='" + cls + "'><button onclick=\"alert('Clicked on " + i + "');\">" + i + "</button></td>");
                if (lastDay != i && (++week) % 7 == 1) {
                   out.print("</tr><tr>");
                }
@@ -418,7 +425,7 @@ body {
             int n = 1;
             for (int i = (week - 1) % 7; i < 6; i++) {
                // out.print("<td>&nbsp;</td>");
-               out.print("<td class='gray'>" + (n++) + "</td>");
+               out.print("<td class='gray'><button disabled>" + (n++) + "</button></td>");
             }
             out.print("</tr>");
             %>
