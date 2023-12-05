@@ -55,10 +55,6 @@ public class InfoLoadController extends HttpServlet {
 
 		AttendanceDAO attenddao = new AttendanceDAO();
 		Map<String, Map<String, String>> attendDateMap = attenddao.loadDateAttendance(userId, currentDate);
-		
-		
-		System.out.println("===================================================================" );
-		
 
 		request.setAttribute("attendDateMap", new Gson().toJson(attendDateMap));
 		request.setAttribute("userinfolist", userinfolist);

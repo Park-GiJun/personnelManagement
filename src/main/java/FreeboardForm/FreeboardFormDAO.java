@@ -41,7 +41,7 @@ public class FreeboardFormDAO extends DBConnPool{
 
 		System.out.println("SelectListPage 실행");
 		// 쿼리문
-		String query = "SELECT * FROM (SELECT Tb.*, ROWNUM AS rNum FROM (SELECT * FROM FreeboardFormDTO";
+		String query = "SELECT * FROM (SELECT Tb.*, ROWNUM AS rNum FROM (SELECT * FROM anno_board";
 		if (map.get("searchWord") != null) {
 			// 조건 추가
 			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
@@ -65,7 +65,7 @@ public class FreeboardFormDAO extends DBConnPool{
 				dto.settitle(rs.getString("title"));
 				dto.setcontent(rs.getString("content"));
 				dto.setpost_date(rs.getDate("post_date"));
-				dto.setvisitcount ( rs.getInt("setvisitcount"));
+				dto.setvisitcount ( rs.getInt("visitcount"));
 				anno_board.add(dto);
 
 			}

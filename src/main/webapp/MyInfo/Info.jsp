@@ -24,8 +24,6 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 <script>
 	var attendDateMap = JSON.parse('<%=attendDateJson%>');
 
-	console.log(attendDateMap["2023-12-01"]["start_time"]);
-
 	function getCurrentTime() {
 		var now = new Date();
 		var hours = now.getHours();
@@ -36,8 +34,6 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 	var currentDate = new Date();
 	var currentYear = currentDate.getFullYear();
 	var currentMonth = currentDate.getMonth();
-
-	console.log(currentYear + "/" + currentMonth);
 
 	document
 			.addEventListener(
