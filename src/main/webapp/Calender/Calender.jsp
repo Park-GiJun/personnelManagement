@@ -52,6 +52,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 
 
 
+
 /* 개인 일정 버튼 */
 .my_btn {
   background-color: #1C427E;
@@ -256,9 +257,6 @@ a:active, a:hover {
 }
 
 
-tbody {
-	background: red;
-}
 
 
 /* 월, 화, 수, 목, 금 글자 색상 설정 */
@@ -287,12 +285,47 @@ tbody {
    color: #ccc;
 }
 
+/* 날짜 버튼 스타일 지정 */
+.calendar table button {
+   border: none;
+   padding: 0;
+   background: none;
+   font-size: 20px;
+   
+   
+  
+}
+
+
+
+
 /* 오늘 날짜 스타일 */
 .calendar table td.today{
    font-weight:700;
    background: orange;
     color: #000;
 }
+
+/* 일요일 날짜 스타일 */
+.calendar table td:nth-child(7n+1) button {
+   color: red;
+}
+
+/* 토요일 날짜 스타일 */
+.calendar table td:nth-child(7n) button {
+   color: blue;
+}
+
+/* 전월의 날짜 색상 지정 */
+.calendar table td.gray button {
+   color: #ccc;
+}
+
+/* 다음달의 날짜 색상 지정 */
+.calendar table td.gray2 button {
+   color: #ccc;
+}
+
 
 
 </style>
@@ -415,7 +448,7 @@ body {
             for (int i = 1; i <= lastDay; i++) {
                cls = year == ty && month == tm && i == td ? "today" : "";
 
-               out.print("<td class='" + cls + "'><button onclick=\"alert('Clicked on " + i + "');\">" + i + "</button></td>");
+               out.print("<td class='" + cls + "'><button onclick=\"alert('클릭한 날짜 : " + i + "일');\">" + i + "</button></td>");
                if (lastDay != i && (++week) % 7 == 1) {
                   out.print("</tr><tr>");
                }
@@ -431,6 +464,9 @@ body {
             %>
          </tbody>
       </table>
+    
+     
+     
 
 		
      
