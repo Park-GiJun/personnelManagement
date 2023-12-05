@@ -291,6 +291,8 @@ a:active, a:hover {
    padding: 0;
    background: none;
    font-size: 20px;
+   
+   
   
 }
 
