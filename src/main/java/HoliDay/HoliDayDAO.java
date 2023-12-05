@@ -58,11 +58,11 @@ public class HoliDayDAO extends DBConnPool {
 		long difference = (endDate.getTime() - startDate.getTime());
 
 		// 차이값을 일 단위로 변환
-		int daysDifference = (int) (difference / (24 * 60 * 60 * 1000));
+		long daysDifference = (difference / (24 * 60 * 60 * 1000));
 
-		System.out.println("두 날짜 간의 일 수 차이: " + daysDifference + "일");
+		System.out.println("두 날짜 간의 일 수 차이: " + (daysDifference + 1) + "일");
 		//기존 날짜 와 신청한 날짜의 계산식
-		String holiday_date = Integer.toString(holidaycount - daysDifference);
+		String holiday_date = Long.toString(holidaycount - (daysDifference + 1));
 
 		// 쿼리 작성
 		String querys = "UPDATE holiday SET annual = ? WHERE emp_num = ?";
@@ -138,10 +138,11 @@ public class HoliDayDAO extends DBConnPool {
 
 		int totalCount = 0;
 
-		String query = "SELECT COUNT(*) FROM holiday_check";
-
+		String query = "SELECT COUNT(*) FROM holiday_check where emp_num=?";
+		HoliDayDTO dto = new HoliDayDTO();
 		try {
-			stmt = con.createStatement();
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getemp_num());
 			rs = stmt.executeQuery(query);
 			rs.next();
 			totalCount = rs.getInt(1);
