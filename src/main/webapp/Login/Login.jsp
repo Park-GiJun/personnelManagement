@@ -12,7 +12,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
+<style>
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	margin: 0;
+}
 
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+input {
+	margin-bottom: 10px;
+}
+</style>
 </head>
 <body>
 	<%
@@ -36,25 +54,23 @@
 		<input
 			type="text"
 			name="login_Id"
-			style="width: 400px; height: 80px; left: 0px; top: 0px; position: absolute;"
+			style="width: 400px; height: 80px;"
 		/>
 
 		<input
 			type="password"
 			name="login_Pwd"
-			style="width: 400px; height: 80px; left: 0px; top: 100px; position: absolute;"
+			style="width: 400px; height: 80px;"
 		/>
 
 		<input
 			type="submit"
 			value="로그인"
-			style="width: 180px; height: 180px; left: 452px; top: 0px; position: absolute;"
+			style="width: 180px; height: 80px;"
 		/>
 	</form>
 	<%
 	}
 	%>
-
-
 </body>
 </html>

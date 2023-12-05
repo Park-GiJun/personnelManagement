@@ -30,6 +30,7 @@ body {
 	margin-left: 400px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;
+	max-height: 100%;
 }
 </style>
 <body>
@@ -103,9 +104,10 @@ body {
 							name="searchWord"
 						/> <input
 							type="submit"
+							name="listSearch"
 							value="검색하기"
+							id="listSearch"
 						/></th>
-
 				</tr>
 				<tr align="center">
 					<th>${ map.paginImg }</th>
@@ -115,7 +117,7 @@ body {
 					>
 						<button
 							type="button"
-							onclick="location.href='../Controller/write.do';"
+							onclick="location.href='../Controller/ShareWrite.do';"
 						>글작성</button>
 					</th>
 				</tr>

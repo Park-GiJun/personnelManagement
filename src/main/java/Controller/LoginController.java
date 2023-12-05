@@ -33,11 +33,12 @@ public class LoginController extends HttpServlet {
 
 		if (inploginNum.equals(loginNum) && inploginPwd.equals(loginPassword)) {
 			// 로그인 성공
-			request.getSession().setAttribute("login_id", loginNum);
+			request.getSession().setAttribute("loginid", loginNum);
 			response.sendRedirect("../Calender/Calender.jsp");
+			
 		} else {
 			// 로그인 실패
-			response.sendRedirect("Login_View.jsp"); // 로그인 실패 시 다시 로그인 페이지로 리다이렉트
+			response.sendRedirect("Login.jsp"); // 로그인 실패 시 다시 로그인 페이지로 리다이렉트
 		}
 	}
 }

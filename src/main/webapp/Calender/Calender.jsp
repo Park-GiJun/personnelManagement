@@ -186,7 +186,6 @@ a:active, a:hover {
 /* 요일 칸 배경 색 지정 */
 .calendar table thead tr:first-child{
    background: #1c427e;
-    color: white;
 }
 
 
@@ -194,25 +193,13 @@ a:active, a:hover {
 .calendar table td{
    padding: 40px 80px;
    text-align: left;
+  
    border: 1px solid #ccc;
 }
 
-
-/* 월, 화, 수, 목, 금 글자 색상 설정 */
-.calendar table td:nth-child(1)
-.calendar table td:nth-child(2)
-.calendar table td:nth-child(3)
-.calendar table td:nth-child(4)
-.calendar table td:nth-child(5) {
-   color: white; 
-}
-
-/* 일요일 색상 지정 */
 .calendar table td:nth-child(7n+1){
    color: red;
 }
-
-/* 토요일 색상 지정 */
 .calendar table td:nth-child(7n){
    color: blue;
 }
@@ -222,31 +209,27 @@ a:active, a:hover {
    color: #ccc;
 }
 
-/* 오늘 날짜 스타일 */
+/* 오늘 날짜 */
 .calendar table td.today{
    font-weight:700;
    background: #FFF75A;
-    color: #000;
 }
 
-
+/* 오늘 날짜로 이동 버튼 */
+.calendar .footer{
+   height: 25px;
+   line-height: 25px;
+   text-align: right;
+   font-size: 12px;
+}
 </style>
 
 <script type="text/javascript">
 function change() {
    var f = document.frm;
- 
+   f.action="calendar2.jsp";
    f.submit();
 }
-
-function updateCalendar() {
-	   var year = document.getElementById("yearSelect").value;
-	   var month = document.getElementById("monthSelect").value;
-
-	   var url = "calendar.jsp?year=" + year + "&month=" + month;
-	   window.location.href = url;
-	}
-
 </script>
 
 
@@ -296,7 +279,7 @@ body {
    <div class="calendar" style="width: 800px; height: 300px;">
       <div class="title" >
          <form name="frm" method="post" >
-            <select id="yearSelect" name="year" class="selectField" onchange="change()"  >
+            <select name="year" class="selectField" onchange="change()"  >
                <%
                for (int i = year - 50; i <= year + 50; i++) {
                %>
@@ -305,7 +288,7 @@ body {
                <%
                }
                %>
-            </select> <select id="monthSelect" name="month" class="selectField2" onchange="change()">
+            </select> <select name="month" class="selectField2" onchange="change()">
                <%
                for (int i = 1; i <= 12; i++) {
                %>
@@ -321,12 +304,12 @@ body {
       <table>
          <thead>
             <tr>
-               <td>일</td> 
+               <td>일</td>
                <td>월</td>
                <td>화</td>
                <td>수</td>
                <td>목</td>
-               <td>금</td> 
+               <td>금</td>
                <td>토</td>
             </tr>
          </thead>
@@ -367,9 +350,9 @@ body {
          </tbody>
       </table>
 
-		
-     
-     
+      <div class="footer">
+         <a href="calendar2.jsp">오늘날짜로</a>
+      </div>
 
    </div>
    
