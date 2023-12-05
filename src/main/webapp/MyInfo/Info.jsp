@@ -8,12 +8,13 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.time.LocalDate"%>
 <%@ page import="java.time.format.DateTimeFormatter"%>
+<%@ page import="java.util.Map"%>
+<%@ page import="java.util.HashMap"%>
 
 <%
-List<AttendanceDTO> attendDateList = (List<AttendanceDTO>) request.getAttribute("attendDateList");
-if (attendDateList == null) {
-	attendDateList = new ArrayList<>(); // Initialize with an empty list
-}
+
+String attendDateJson = (String) request.getAttribute("attendDateMap");
+
 %>
 
 <!DOCTYPE html>
@@ -23,6 +24,10 @@ if (attendDateList == null) {
 <meta charset="UTF-8">
 <title>MyInfo</title>
 <script>
+	var attendDateMap = JSON.parse('<%= attendDateJson %>');
+	
+	console.log(attendDateMap["2023-12-01"]["start_time"]);
+
 	function getCurrentTime() {
 		var now = new Date();
 		var hours = now.getHours();
@@ -91,56 +96,58 @@ if (attendDateList == null) {
 						updateMonthYearText();
 
 					});
-
 	function generateCalendar() {
-	    var datepickerTable = document.getElementById('datepicker-table');
-	    datepickerTable.innerHTML = '';
+		var datepickerTable = document.getElementById('datepicker-table');
+		datepickerTable.innerHTML = '';
 
-	    var firstDay = new Date(currentYear, currentMonth, 1);
-	    var lastDay = new Date(currentYear, currentMonth + 1, 0);
-	    var daysInMonth = lastDay.getDate();
+		var firstDay = new Date(currentYear, currentMonth, 1);
+		var lastDay = new Date(currentYear, currentMonth + 1, 0);
+		var daysInMonth = lastDay.getDate();
 
-	    var day = 1;
-	    for (var i = 0; i < 6; i++) {
-	        var row = datepickerTable.insertRow();
+		var day = 1;
+		for (var i = 0; i < 6; i++) {
+			var row = datepickerTable.insertRow();
 
-	        for (var j = 0; j < 7; j++) {
-	            var cell = row.insertCell();
+			for (var j = 0; j < 7; j++) {
+				var cell = row.insertCell();
 
-	            if ((i === 0 && j < firstDay.getDay()) || day > daysInMonth) {
-	                cell.textContent = '';
-	            } else {
-	                var dateText = document.createElement('div');
-	                dateText.textContent = day;
-	                dateText.className = 'date-text';
-	                cell.appendChild(dateText);
-	                var arriveText = document.createElement('div');
-	                var leaveText = document.createElement('div');
-	                // Iterate over the attendDateList in JavaScript
-	             <%for (int i = 0; i < attendDateList.size(); i++) {%>
-   						var date<%=i%> = '<%=attendDateList.get(i).getDay_of_work()%>';
-    					var arrive<%=i%> = '<%=attendDateList.get(i).getStart_time()%>';
-   						var leave<%=i%> = '<%=attendDateList.get(i).getEnd_time()%>';
-					if (day === parseInt(date<%=i%>)) {
-						arriveText.textContent = arrive<%=i%>;
+				if ((i === 0 && j < firstDay.getDay()) || day > daysInMonth) {
+					cell.textContent = '';
+				} else {
+					var dateText = document.createElement('div');
+					dateText.textContent = day;
+					dateText.className = 'date-text';
+					cell.appendChild(dateText);
+
+					// Create new arriveText and leaveText for each cell
+					var arriveText = document.createElement('div');
+					var leaveText = document.createElement('div');
+
+					// Iterate over the attendDateMap in JavaScript
+					var currentDate = formatDate(new Date(currentYear,
+							currentMonth, day));
+					var currentDateMap = attendDateMap[currentDate];
+
+					if (currentDateMap) {
+						arriveText.textContent = currentDateMap["start_time"];
 						arriveText.className = 'arriveText';
 						arriveText.setAttribute('id', 'arriveText' + day);
-						cell.appendChild(arriveText);
-						leaveText.textContent = leave<%=i%>;
+
+						leaveText.textContent = currentDateMap["finish_time"];
 						leaveText.className = 'leaveText';
 						leaveText.setAttribute('id', 'leaveText' + day);
-						cell.appendChild(leaveText);
-						break; // 해당 날짜의 데이터를 찾았으므로 반복문 종료
 					} else {
 						arriveText.textContent = '출근시각';
 						arriveText.className = 'arriveText';
 						arriveText.setAttribute('id', 'arriveText' + day);
-						cell.appendChild(arriveText);
+
 						leaveText.textContent = '퇴근시각';
 						leaveText.className = 'leaveText';
 						leaveText.setAttribute('id', 'leaveText' + day);
-						cell.appendChild(leaveText);
-					}<%}%>
+					}
+
+					cell.appendChild(arriveText);
+					cell.appendChild(leaveText);
 					day++;
 				}
 			}
