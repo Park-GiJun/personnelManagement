@@ -114,10 +114,8 @@ if (attendDateList == null) {
 	                dateText.textContent = day;
 	                dateText.className = 'date-text';
 	                cell.appendChild(dateText);
-
 	                var arriveText = document.createElement('div');
 	                var leaveText = document.createElement('div');
-
 	                // Iterate over the attendDateList in JavaScript
 	             <%for (int i = 0; i < attendDateList.size(); i++) {%>
    						var date<%=i%> = '<%=attendDateList.get(i).getDay_of_work()%>';

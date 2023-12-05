@@ -1,6 +1,8 @@
 package Controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -29,7 +31,7 @@ public class InfoLoadController extends HttpServlet {
 
 		String userId = (String) request.getSession().getAttribute("loginid");
 		String currentDate = (String) request.getSession().getAttribute("currentDate");
-		
+
 		System.out.println("infoLoadController currentDate : " + currentDate);
 
 		PersonalDAO personaldao = new PersonalDAO();
@@ -40,6 +42,15 @@ public class InfoLoadController extends HttpServlet {
 
 		IncentiveDAO incentivedao = new IncentiveDAO();
 		IncentiveDTO incentivelist = incentivedao.load_Incentive(userId);
+
+		LocalDate currentDay = LocalDate.now();
+
+		// Format the current date to store in the session or use in your application
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+		String formattedDate = currentDay.format(formatter);
+
+		// Now you can use the 'formattedDate' in your code
+		System.out.println("Current Year and Month: " + formattedDate);
 
 		AttendanceDAO attenddao = new AttendanceDAO();
 		List<AttendanceDTO> attendDateList = attenddao.loadDateAttendance(userId, currentDate);
