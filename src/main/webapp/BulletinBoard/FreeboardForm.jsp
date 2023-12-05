@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,85 +33,52 @@ body {
 		<!-- 다른 페이지에서 불러오는 내용 -->
 
 		<!-- 목록테이블 -->
-		<table
-			border="1"
-			width="90%"
-		>
+		<table border="1" width="90%">
 			<tr>
 				<th width="10%">번호</th>
 				<th width="*">제목</th>
 				<th width="10%">작성일</th>
 			</tr>
 			<c:choose>
-				<c:when test="${ empty Freedboardlists }">
+				<c:when test="${ empty FreeboardFormList }">
 					<!-- 게시물이 없다면 -->
 					<tr>
-						<td
-							colspan="3"
-							align="center"
-						>게시물이 없습니다.</td>
+						<td colspan="3" align="center">게시물이 없습니다.</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
 					<!-- 게시물이 있을때 -->
-					<c:forEach
-						items="${ Freedboardlists }"
-						var="row"
-						varStatus="loop"
-					>
+					<c:forEach items="${ FreedboardList }" var="row" varStatus="loop">
 						<tr align="center">
 							<!-- 번호 -->
 							<td>${ map.totalCount -(((map.pageNum-1) * map.pageSize) + loop.index) }
 							</td>
 							<td align="center">
-								<!-- 제목 -->
-								<a>${ row.title }</a>
+								<!-- 제목 --> <a>${ row.title }</a>
 							</td>
-							<td>
-								<c:if test="${ not empty row.Freedboardofile }">
-									<a>[]작성일연결해주기]</a>
-								</c:if>
-							</td>
+							<td><c:if test="${ not empty row.Freedboardotime}">
+									<a>[작성일연결해주기]</a>
+								</c:if></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</table>
 		<!-- 하단 메뉴 -->
-		<form
-			method="get"
-			action="../Controller/Freedboardlist.do"
-		>
-			<table
-				border="1"
-				width="90%"
-			>
+		<form method="get" action="../Controller/FreeboardList.do">
+			<table border="1" width="90%">
 				<tr>
-					<th
-						align="center"
-						colspan="2"
-					><select name="searchCategory">
+					<th align="center" colspan="2"><select
+						name="searchCategory">
 							<option value="title">제목</option>
-					</select> <input
-							type="text"
-							name="searchWord"
-						/> <input
-							type="submit"
-							name="listSearch"
-							value="검색하기"
-							id="listSearch"
-						/></th>
+					</select> <input type="text" name="searchWord" /> <input
+						type="submit" name="listSearch" value="검색하기" id="listSearch" /></th>
 				</tr>
 				<tr align="center">
 					<th>${ map.paginImg }</th>
-					<th
-						width="100"
-						rowspan="2"
-					>
-						<button
-							type="button"
-							onclick="location.href='../Controller/write.do';"
-						>글작성</button>
+					<th width="100" rowspan="2">
+						<button type="button"
+							onclick="location.href='../Controller/write.do';">글작성</button>
 					</th>
 				</tr>
 			</table>
