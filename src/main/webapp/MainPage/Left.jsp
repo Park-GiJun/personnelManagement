@@ -1,8 +1,5 @@
-<%@ page
-	language="java"
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -224,26 +221,17 @@
 </style>
 </head>
 <body>
-<<<<<<< HEAD
+	<<<<<<< HEAD
 	<div class="left_table">
 		<div class="left_calender_background">
-			<a
-				class="left_Calender_section"
-				href="../Calender/Calender.jsp"
-			>
+			<a class="left_Calender_section" href="../Calender/Calender.jsp">
 				<div class="left_calender_img">
 					<span class="left_calender_text">캘린더</span>
 				</div>
 			</a>
 		</div>
-		<div
-			class="left_shareform_background"
-			id="leftShareFormBackground"
-		>
-			<a
-				class="left_ShareForm_section"
-				href="../Controller/sharelist.do"
-			>
+		<div class="left_shareform_background" id="leftShareFormBackground">
+			<a class="left_ShareForm_section" href="../Controller/sharelist.do">
 				<div class="left_shareform_img">
 					<span class="left_shareform_text">공유양식</span>
 				</div>
@@ -255,9 +243,11 @@
 			</div>
 		</div>
 		<div class="left_holiday_background">
-			<div class="left_holiday_img">
-				<span class="left_holiday_text">휴가관리</span>
-			</div>
+			<a href="../Controller/HoliDayCount.do">
+				<div class="left_holiday_img">
+					<span class="left_holiday_text">휴가관리</span>
+				</div>
+			</a>
 		</div>
 		<div class="left_info_background">
 			<a href="../Controller/infoLoad.do">
@@ -265,50 +255,6 @@
 					<span class="left_info_text">내정보</span>
 				</div>
 			</a>
-=======
-    <div class="left_table">
-        <div class="left_calender_background">
-            <a
-                class="left_Calender_section"
-                href="../Calender/Calender.jsp"
-            >
-                <div class="left_calender_img">
-                    <span class="left_calender_text">캘린더</span>
-                </div>
-            </a>
-        </div>
-        <div class="left_shareform_background" id="leftShareFormBackground">
-            <a
-                class="left_ShareForm_section"
-                href="../ShareForm/ShareForm.jsp"
-            >
-                <div class="left_shareform_img">
-                    <span class="left_shareform_text">공유양식</span>
-                </div>
-            </a>
-        </div>
-        <div class="left_freeboard_background">
-            <div class="left_freeboard_img">
-                <span class="left_freeboard_text">게시판</span>
-            </div>
-        </div>
-        <div class="left_holiday_background">
-        <a
-                class="left_Calender_section"
-                href="../HoliDay/HoliDay.jsp"
-            >
-            	<div class="left_holiday_img">
-                	<span class="left_holiday_text">휴가관리</span>
-            	</div>
-           	</a>
-        </div>
-        <div class="left_info_background">
-            <div class="left_info_img">
-                <span class="left_info_text">내정보</span>
-            </div>
-        </div>
-    </div>
->>>>>>> refs/remotes/origin/류동규
 
 		</div>
 	</div>

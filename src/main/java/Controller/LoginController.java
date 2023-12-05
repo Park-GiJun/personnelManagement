@@ -27,6 +27,7 @@ public class LoginController extends HttpServlet {
 		PersonalDTO dto = dao.loginQuery(loginNum, loginPassword);
 
 		String inploginNum = String.valueOf(dto.getEmpNum());
+		String inpTeam = String.valueOf(dto.getTeam());
 		String inploginPwd = dto.getPassword();
 
 		System.out.println("inp : " + inploginNum + " " + inploginPwd + " db : " + loginNum + " " + loginPassword);
@@ -34,6 +35,7 @@ public class LoginController extends HttpServlet {
 		if (inploginNum.equals(loginNum) && inploginPwd.equals(loginPassword)) {
 			// 로그인 성공
 			request.getSession().setAttribute("loginid", loginNum);
+			request.getSession().setAttribute("inpteam", inpTeam);
 			response.sendRedirect("../Calender/Calender.jsp");
 			
 		} else {
