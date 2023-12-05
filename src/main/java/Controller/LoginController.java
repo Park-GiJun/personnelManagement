@@ -1,6 +1,8 @@
 package Controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,11 +33,27 @@ public class LoginController extends HttpServlet {
 
 		System.out.println("inp : " + inploginNum + " " + inploginPwd + " db : " + loginNum + " " + loginPassword);
 
-		if (inploginNum.equals(loginNum) && inploginPwd.equals(loginPassword)) {
+		// Get the current date
+		LocalDate currentDate = LocalDate.now();
+
+		// Format the current date to store in the session or use in your application
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+		String formattedDate = currentDate.format(formatter);
+
+		// Now you can use the 'formattedDate' in your code
+		System.out.println("Current Year and Month: " + formattedDate);
+
+		if (inploginNum.equals(loginNum) && inploginPwd.equals(loginPassword))
+
+		{
 			// 로그인 성공
 			request.getSession().setAttribute("loginid", loginNum);
+
+			// Store formatted date in session
+			request.getSession().setAttribute("currentDate", formattedDate);
+
 			response.sendRedirect("../Calender/Calender.jsp");
-			
+
 		} else {
 			// 로그인 실패
 			response.sendRedirect("Login.jsp"); // 로그인 실패 시 다시 로그인 페이지로 리다이렉트

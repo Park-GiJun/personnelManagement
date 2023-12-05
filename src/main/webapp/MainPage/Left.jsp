@@ -77,8 +77,6 @@
 	cursor: pointer;
 }
 </style>
-
-
 </head>
 <body>
 	<div class="left_table">

@@ -3,12 +3,16 @@
 	contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 %>
+<%@ page import="java.util.List"%>
 <%@ page import="attend.AttendanceDTO"%>
-<%@ page import="java.util.*"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.time.LocalDate"%>
+<%@ page import="java.time.format.DateTimeFormatter"%>
+
 <%
 List<AttendanceDTO> attendDateList = (List<AttendanceDTO>) request.getAttribute("attendDateList");
 if (attendDateList == null) {
-	attendDateList = new ArrayList<>(); // 빈 리스트로 초기화
+	attendDateList = new ArrayList<>(); // Initialize with an empty list
 }
 %>
 
@@ -30,7 +34,7 @@ if (attendDateList == null) {
 	var currentYear = currentDate.getFullYear();
 	var currentMonth = currentDate.getMonth();
 
-	console.log(currentYear + " " + currentMonth);
+	console.log(currentYear + "/" + currentMonth);
 
 	document
 			.addEventListener(
@@ -115,34 +119,30 @@ if (attendDateList == null) {
 	                var leaveText = document.createElement('div');
 
 	                // Iterate over the attendDateList in JavaScript
-	                <%for (int i = 0; i < attendDateList.size(); i++) {%>
-	                    var date<%=i%> = '<%=attendDateList.get(i).getDay_of_work()%>';
-	                    var arrive<%=i%> = '<%=attendDateList.get(i).getStart_time()%>';
-	                    var leave<%=i%> = '<%=attendDateList.get(i).getEnd_time()%>';
-
-					if (day === parseInt(date
-<%=i%>
-	)) {
-						arriveText.textContent = arrive
-<%=i%>
-	;
-						leaveText.textContent = leave
-<%=i%>
-	;
+	             <%for (int i = 0; i < attendDateList.size(); i++) {%>
+   						var date<%=i%> = '<%=attendDateList.get(i).getDay_of_work()%>';
+    					var arrive<%=i%> = '<%=attendDateList.get(i).getStart_time()%>';
+   						var leave<%=i%> = '<%=attendDateList.get(i).getEnd_time()%>';
+					if (day === parseInt(date<%=i%>)) {
+						arriveText.textContent = arrive<%=i%>;
+						arriveText.className = 'arriveText';
+						arriveText.setAttribute('id', 'arriveText' + day);
+						cell.appendChild(arriveText);
+						leaveText.textContent = leave<%=i%>;
+						leaveText.className = 'leaveText';
+						leaveText.setAttribute('id', 'leaveText' + day);
+						cell.appendChild(leaveText);
 						break; // 해당 날짜의 데이터를 찾았으므로 반복문 종료
 					} else {
 						arriveText.textContent = '출근시각';
+						arriveText.className = 'arriveText';
+						arriveText.setAttribute('id', 'arriveText' + day);
+						cell.appendChild(arriveText);
 						leaveText.textContent = '퇴근시각';
-					}
-<%}%>
-	arriveText.className = 'arriveText';
-					arriveText.setAttribute('id', 'arriveText' + day);
-					cell.appendChild(arriveText);
-
-					leaveText.className = 'leaveText';
-					leaveText.setAttribute('id', 'leaveText' + day);
-					cell.appendChild(leaveText);
-
+						leaveText.className = 'leaveText';
+						leaveText.setAttribute('id', 'leaveText' + day);
+						cell.appendChild(leaveText);
+					}<%}%>
 					day++;
 				}
 			}
