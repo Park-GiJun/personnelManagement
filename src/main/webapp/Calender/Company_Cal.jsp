@@ -42,10 +42,15 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <style type="text/css">
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@700;900&display=swap');
+
 *{
    margin: 0; padding: 0;
     box-sizing: border-box;
 }
+
+
 
 /* 개인 일정 버튼 */
 .my_btn {
@@ -58,6 +63,14 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   
   font-size: 20px;
   border-radius: 30px;
+  
+  cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+}
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+button.my_btn:hover {
+  color: white;
+  background: orange;
 }
 
 /* 부서 휴가 버튼 */
@@ -71,7 +84,16 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   
   font-size: 20px;
   border-radius: 30px;
+  
+  cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+button.my_btn2:hover {
+  color: white;
+  background: orange;
+}
+
 
 /* 부서 일정 버튼 */
 .my_btn3 {
@@ -84,7 +106,16 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   
   font-size: 20px;
   border-radius: 30px;
+  
+  cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+button.my_btn3:hover {
+  color: white;
+  background: orange;
+}
+
 
 /* 회사 일정 버튼 */
 .my_btn4 {
@@ -97,13 +128,23 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   
   font-size: 20px;
   border-radius: 30px;
+  
+  cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+button.my_btn4:hover {
+  color: white;
+  background: orange;
+}
+
 
 /* 개인 일정, 부서 휴가, 부서 일정, 회사 일정 버튼 위치 */
 .middle-button {
     text-align: center;
     padding: 30px 30px;
-    margin-left: 500px;
+    margin-left: 270px;
+    font-family: 'Kanit', sans-serif;
 }
 
 .my_btns {
@@ -119,7 +160,7 @@ background-color: #1C427E;
   
   position: absolute;
   top: 31px;
-  left: 2400px;
+  left: 1000px;
 
 }
 
@@ -127,9 +168,25 @@ background-color: #1C427E;
 
 
 
+
+.em {
+	color: #1C427E;
+	
+	position: absolute;
+  	top: -40px;
+  	left: 540px;
+  	
+  	font-size: 100x;
+  	border-radius: 30px;
+}
+
+day {
+	 font-size: 100px;
+}
+
 body {
    font-size: px;
-   font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
+  font-family: 'Kanit', sans-serif;
     /*color: white;*/
 }
 
@@ -162,9 +219,10 @@ a:active, a:hover {
    border: 1px solid #999;
    padding: 15px 50px;
    border-radius: 25px;
-   font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
+  font-family: 'Kanit', sans-serif;
    font-size: 20px;
-   margin-left: 950px;
+   margin-left: 550px;
+   top: 10px;
 }
 
 /* 월 선택 리스트 */
@@ -172,7 +230,7 @@ a:active, a:hover {
    border: 1px solid #999;
    padding: 15px 50px;
    border-radius: 25px;
-   font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
+   font-family: 'Kanit', sans-serif;
    font-size: 20px;
    margin-left: 5px;
 }
@@ -205,6 +263,7 @@ a:active, a:hover {
 .calendar table td:nth-child(4)
 .calendar table td:nth-child(5) {
    color: white; 
+   
 }
 
 /* 일요일 색상 지정 */
@@ -283,15 +342,14 @@ body {
    <div class="middle-button">
       <!-- 다른 페이지에서 불러오는 내용 -->
       <!-- <h2 class="myHeader">텍스트 입력</h2>  -->
-      <button class='my_btn' onclick="location.href='Person_Cal.jsp';">개인 일정</button>
+      <button class='my_btn' onclick="location.href='Person_Cal.jsp';" >개인 일정</button>
       <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서 휴가</button>
       <button class='my_btn3' onclick="location.href='Team_Cal.jsp';">부서 일정</button>
       <button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사 일정</button>
    </div>
    
-   <div class="plus">
-      <button class='my_btns' onclick="location.href='List.jsp';"><</button>
-   </div>
+    <p class="em" style="font-size: 200px">12</p> 
+  
 
    <div class="calendar" style="width: 800px; height: 300px;">
       <div class="title" >
@@ -318,7 +376,7 @@ body {
          </form>
       </div>
 
-      <table>
+      <table> <!-- 테이블 표 만드는 곳(달력 만드는 곳) -->
          <thead>
             <tr>
                <td>일</td> 
