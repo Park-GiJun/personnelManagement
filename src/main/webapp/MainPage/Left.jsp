@@ -99,14 +99,17 @@
 				<span class="left_shareform_text">공유양식</span>
 			</a>
 		</div>
+		
 		<div class="left_freeboard_background">
-			<a
-				class="left_ShareForm_section"
+		<a
+				class="left_FreeboardForm_section"
 				href="../Controller/FreeboardList.do"
 			>
-				<span class="left_freeboard_text">게시판</span>
+			<span class="left_freeboard_text">게시판</span>
 			</a>
 		</div>
+		
+		
 		<div class="left_holiday_background">
 			<span class="left_holiday_text">휴가관리</span>
 		</div>

@@ -60,12 +60,12 @@ body {
 					</tr>
 				</c:when>
 				<c:otherwise>
-					<!-- 게시물이 있을때 -->
 					<c:forEach
 						items="${ FreeboardFormLists }"
 						var="row"
 						varStatus="loop"
 					>
+
 						<tr align="center">
 							<!-- 번호 -->
 							<td>${ map2.totalCount -(((map2.pageNum-1) * map2.pageSize) + loop.index) }
@@ -75,7 +75,7 @@ body {
 								<a>${ row.title }</a>
 							</td>
 							<td align="center">
-							<a>${ row.post_date }</a>
+								<a>${ row.post_date }</a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -108,6 +108,7 @@ body {
 						/></th>
 				</tr>
 				<tr align="center">
+
 					<th>${ map2.paginImg }</th>
 					<th
 						width="100"
