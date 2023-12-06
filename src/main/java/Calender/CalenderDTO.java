@@ -2,37 +2,37 @@ package Calender;
 
 public class CalenderDTO {
 
-	private String content;
-	private String day;
-	private String number;
+	private String Person_content;
+	private String Person_day;
+	private String Person_num;
 	
-	// 내용
-	public String getcontent() {
-		return content;
+	// (개인 일정) 내용
+	public String getPerson_content() {
+		return Person_content;
 	}
 	
-	public void setcontent(String content) {
-		this.content = content;
-	}
-	
-	
-	// 날짜
-	public String getday() {
-		return day;
-	}
-	
-	public void setday(String day) {
-		this.day = day;
+	public void setPerson_content(String Person_content) {
+		this.Person_content = Person_content;
 	}
 	
 	
-	// 일정 리스트 (전체 일정)
-	public String getnumber() {
-		return number;
+	// (개인 일정) 날짜
+	public String getPerson_day() {
+		return Person_day;
 	}
 	
-	public void setnumber(String number) {
-		this.number = number;
+	public void setPerson_day(String Person_day) {
+		this.Person_day = Person_day;
+	}
+	
+	
+	// (개인 일정) 사번
+	public String getPerson_num() {
+		return Person_num;
+	}
+	
+	public void setPerson_num(String Person_num) {
+		this.Person_num = Person_num;
 	}
 	
 }
