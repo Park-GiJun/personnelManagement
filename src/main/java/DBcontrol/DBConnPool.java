@@ -1,9 +1,15 @@
 package DBcontrol;
 
-import java.sql.*;
-import javax.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
-import javax.naming.*;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.servlet.ServletContext;
+import javax.sql.DataSource;
 
 public class DBConnPool {
 	public Connection con;
@@ -44,5 +50,24 @@ public class DBConnPool {
 			e.printStackTrace();
 		}
 	}
+	
+    public DBConnPool(ServletContext application) {
+        try {
+            // JDBC 드라이버 로드
+            String driver = application.getInitParameter("OracleDriver"); 
+            Class.forName(driver); 
+
+            // DB에 연결
+            String url = application.getInitParameter("OracleURL"); 
+            String id = application.getInitParameter("OracleId");
+            String pwd = application.getInitParameter("OraclePwd");
+            con = DriverManager.getConnection(url, id, pwd);
+
+            System.out.println("DB 연결 성공"); 
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -7,19 +7,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import attend.AttendanceDAO;
 
-@WebServlet("/Controller/AttendController")
+@WebServlet("/Controller/Attend.do")
 public class AttendController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+			
+		AttendanceDAO dao = new AttendanceDAO();
+		String emp_num = (String) request.getSession().getAttribute("loginid");
+		
+		String action = request.getParameter("action");
+		String date = request.getParameter("checkdate");
+		String currentTime = request.getParameter("time");
+		
+		System.out.println("Attend.do // emp_num : " + emp_num + " action : " + action + " date : " + date + " currentTime : " + currentTime);
+		
+		
+		if(action.equals("arrive")) {
+			dao.updateArriveTime(emp_num, date, currentTime);
+		} else {
+			dao.updateLeaveTime(emp_num, date, currentTime);
+		}
+		
 	}
 
 }

@@ -11,10 +11,6 @@
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.HashMap"%>
 
-<%
-String attendDateJson = (String) request.getAttribute("attendDateMap");
-%>
-
 <!DOCTYPE html>
 <html>
 
@@ -22,9 +18,11 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 <meta charset="UTF-8">
 <title>MyInfo</title>
 <script>
-	var attendDateMap = JSON.parse('<%=attendDateJson%>');
 
-	function getCurrentTime() {
+var jsonString = '<%=request.getAttribute("attendDateMap")%>';
+var InitAttendData =  JSON.parse(jsonString);
+
+function getCurrentTime() {
 		var now = new Date();
 		var hours = now.getHours();
 		var minutes = now.getMinutes();
@@ -62,6 +60,9 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 												todayCell
 														.querySelector('.arriveText').textContent = currentTime;
 											}
+											
+											sendAttendanceRequest('arrive', formattedDate, currentTime);
+											
 										});
 
 						// 퇴근 버튼 클릭 이벤트
@@ -84,15 +85,20 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 												todayCell
 														.querySelector('.leaveText').textContent = currentTime;
 											}
+											
+											sendAttendanceRequest('leave', formattedDate, currentTime);
 										});
 
-						generateCalendar();
+						generateCalendar(InitAttendData);
 						updateMonthYearText();
 
 					});
-	function generateCalendar() {
+	function generateCalendar(attendDateMap) {
 		var datepickerTable = document.getElementById('datepicker-table');
 		datepickerTable.innerHTML = '';
+
+		
+
 
 		var firstDay = new Date(currentYear, currentMonth, 1);
 		var lastDay = new Date(currentYear, currentMonth + 1, 0);
@@ -120,7 +126,6 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 					// Iterate over the attendDateMap in JavaScript
 					var currentDate = formatDate(new Date(currentYear,
 							currentMonth, day));
-					console.log("currentDate : " + currentDate);
 					var currentDateMap = attendDateMap[currentDate];
 
 					if (currentDateMap) {
@@ -160,7 +165,17 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 			currentYear++;
 		}
 
-		generateCalendar();
+		var updatedYearMonth = formatUpdateDate(currentYear, currentMonth);
+		console.log("updatedYearMonth : " + updatedYearMonth);
+
+		sessionStorage.setItem('updateCurrentDate', updatedYearMonth);
+
+		var updateCurrentDate = sessionStorage.getItem('updateCurrentDate');
+		console.log("업데이트 현재 날짜 가져오기 : " + updateCurrentDate);
+
+		// updateCalendar 함수 호출
+		updateCalendar(updateCurrentDate);
+
 		updateMonthYearText();
 	}
 
@@ -170,9 +185,9 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 		currentMonthYearText.textContent = currentYear + '년 '
 				+ (currentMonth + 1) + '월';
 
-		sessionStorage.setItem('currentDate', currentYear + "-"
+		sessionStorage.setItem('CurrentDate', currentYear + "-"
 				+ (currentMonth + 1));
-		console.log(sessionStorage.getItem('currentDate'));
+		console.log(sessionStorage.getItem('CurrentDate'));
 
 	}
 
@@ -183,6 +198,13 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 		return year + '-' + (month < 10 ? '0' : '') + month + '-'
 				+ (day < 10 ? '0' : '') + day;
 	}
+
+	function formatUpdateDate(Year, Month) {
+		var year = Year;
+		var month = Month + 1;
+		return year + '-' + (month < 10 ? '0' : '') + month;
+	}
+
 	function findCellByDate(day) {
 		// 특정 날짜의 셀을 찾아서 반환
 		var cells = document.querySelectorAll('.date-text');
@@ -193,6 +215,38 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 		}
 		return null; // 찾지 못한 경우
 	}
+
+	// 서버로 출근 또는 퇴근 요청을 보내는 함수
+	function sendAttendanceRequest(action, date, time) {
+		fetch('../Controller/Attend.do', {
+			method : 'POST',
+			headers : {
+				'Content-Type' : 'application/x-www-form-urlencoded',
+			},
+			body : 'action=' + action + '&checkdate=' + date + '&time=' + time,
+		});
+	}
+
+	// 서버로부터 날짜 데이터를 가져와서 달력을 업데이트하는 함수
+	function updateCalendar(updateCurrentDate) {
+    fetch('../Controller/LoadDate.do', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'updateCurrentDate=' + updateCurrentDate,
+    })
+    .then(response => response.json())  // 응답을 JSON 형태로 파싱
+    .then(attendDateMap => {
+    	 console.log(attendDateMap);
+    	generateCalendar(attendDateMap);
+       
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+}
+
 </script>
 </head>
 <style>
@@ -434,29 +488,17 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 			</form>
 			<div class="navigation-btn">
 				<!-- 이전달로 이동하는 버튼 -->
-				<form
-					action="../Controller/LoadDate.do"
-					method="post"
-				>
-					<button
-						id="prev-month-btn"
-						onclick="changeMonth(-1)"
-					>이전달</button>
-				</form>
-
+				<button
+					id="prev-month-btn"
+					onclick="changeMonth(-1)"
+				>이전달</button>
 				<!-- 현재 월과 년도를 표시하는 곳 -->
 				<a id="current-month-year"></a>
-
 				<!-- 다음달로 이동하는 버튼 -->
-				<form
-					action="../Controller/LoadDate.do"
-					method="post"
-				>
-					<button
-						id="next-month-btn"
-						onclick="changeMonth(1)"
-					>다음달</button>
-				</form>
+				<button
+					id="next-month-btn"
+					onclick="changeMonth(1)"
+				>다음달</button>
 			</div>
 			<table id="datepicker-table">
 			</table>
