@@ -1,8 +1,5 @@
-<%@ page
-	language="java"
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="attend.AttendanceDTO"%>
 <%@ page import="java.util.*"%>
 
@@ -262,62 +259,30 @@ if (attendDateList == null) {
 
 <body>
 	<div class="datepicker-container">
-		<form
-			id="monthForm"
-			action="../Controller/LoadDate.do"
-			method="post"
-		>
-			<input
-				type="hidden"
-				name="currentYear"
-				id="currentYear"
-				value=""
-			>
-			<input
-				type="hidden"
-				name="currentMonth"
-				id="currentMonth"
-				value=""
-			>
+		<form id="monthForm" action="../Controller/LoadDate.do" method="post">
+			<input type="hidden" name="currentYear" id="currentYear" value="">
+			<input type="hidden" name="currentMonth" id="currentMonth" value="">
 		</form>
 		<div class="navigation-btn">
 			<!-- 이전달로 이동하는 버튼 -->
-			<form
-				action="../Controller/LoadDate.do"
-				method="post"
-			>
-				<button
-					id="prev-month-btn"
-					onclick="changeMonth(-1)"
-				>이전달</button>
+			<form action="../Controller/LoadDate.do" method="post">
+				<button id="prev-month-btn" onclick="changeMonth(-1)">이전달</button>
 			</form>
 
 			<!-- 현재 월과 년도를 표시하는 곳 -->
 			<a id="current-month-year"></a>
 
 			<!-- 다음달로 이동하는 버튼 -->
-			<form
-				action="../Controller/LoadDate.do"
-				method="post"
-			>
-				<button
-					id="next-month-btn"
-					onclick="changeMonth(1)"
-				>다음달</button>
+			<form action="../Controller/LoadDate.do" method="post">
+				<button id="next-month-btn" onclick="changeMonth(1)">다음달</button>
 			</form>
 		</div>
 		<table id="datepicker-table">
 		</table>
 		<div class="info_check_buttons"></div>
 		<div class="check_btn">
-			<button
-				type="button"
-				id='commute-button'
-			>출근</button>
-			<button
-				type="button"
-				id='leave-button'
-			>퇴근</button>
+			<button type="button" id='commute-button'>출근</button>
+			<button type="button" id='leave-button'>퇴근</button>
 		</div>
 	</div>
 	<div class="info_commute"></div>

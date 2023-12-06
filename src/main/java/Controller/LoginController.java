@@ -30,6 +30,7 @@ public class LoginController extends HttpServlet {
 
 		String inploginNum = String.valueOf(dto.getEmpNum());
 		String inpTeam = String.valueOf(dto.getTeam());
+		String inpemp_grade = String.valueOf(dto.getEmp_grade());
 		String inploginPwd = dto.getPassword();
 
 		System.out.println("inp : " + inploginNum + " " + inploginPwd + " db : " + loginNum + " " + loginPassword);
@@ -49,8 +50,10 @@ public class LoginController extends HttpServlet {
 		{
 			// 로그인 성공
 			request.getSession().setAttribute("loginid", loginNum);
+			request.setAttribute("dto", dto);
 
 			// Store formatted date in session 세션의 값저장
+			request.getSession().setAttribute("inpemp_grade", inpemp_grade);
 			request.getSession().setAttribute("currentDate", formattedDate);
 			request.getSession().setAttribute("inpteam", inpTeam);
 			response.sendRedirect("../Calender/Calender.jsp");

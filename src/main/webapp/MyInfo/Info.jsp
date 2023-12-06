@@ -1,8 +1,5 @@
-<%@ page
-	language="java"
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="attend.AttendanceDTO"%>
 <%@ page import="java.util.ArrayList"%>
@@ -12,9 +9,7 @@
 <%@ page import="java.util.HashMap"%>
 
 <%
-
 String attendDateJson = (String) request.getAttribute("attendDateMap");
-
 %>
 
 <!DOCTYPE html>
@@ -24,9 +19,8 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 <meta charset="UTF-8">
 <title>MyInfo</title>
 <script>
-	var attendDateMap = JSON.parse('<%= attendDateJson %>');
-	
-	console.log(attendDateMap["2023-12-01"]["start_time"]);
+	var attendDateMap = JSON.parse('<%=attendDateJson%>
+	');
 
 	function getCurrentTime() {
 		var now = new Date();
@@ -38,8 +32,6 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 	var currentDate = new Date();
 	var currentYear = currentDate.getFullYear();
 	var currentMonth = currentDate.getMonth();
-
-	console.log(currentYear + "/" + currentMonth);
 
 	document
 			.addEventListener(
@@ -126,6 +118,7 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 					// Iterate over the attendDateMap in JavaScript
 					var currentDate = formatDate(new Date(currentYear,
 							currentMonth, day));
+					console.log("currentDate : " + currentDate);
 					var currentDateMap = attendDateMap[currentDate];
 
 					if (currentDateMap) {
@@ -367,34 +360,21 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 		<div class="info_profile">
 			<div class="info_profile_photo">
 				<div class="info_profile_texts">
-					<a> 이름 : ${ userinfolist.name } </a>
-					<br />
-					<a> 사번 : ${ userinfolist.empNum } </a>
-					<br />
-					<a> 전화번호 : ${ userinfolist.phone }</a>
-					<br />
-					<a> 이메일 : ${ userinfolist.email }</a>
+					<a> 이름 : ${ userinfolist.name } </a> <br /> <a> 사번 : ${ userinfolist.empNum }
+					</a> <br /> <a> 전화번호 : ${ userinfolist.phone }</a> <br /> <a> 이메일
+						: ${ userinfolist.email }</a>
 				</div>
 			</div>
 		</div>
 		<div class="info_income">
-			<div
-				class="info_income_text"
-				align="center"
-			>
+			<div class="info_income_text" align="center">
 				<div class="info_income_textbox">
 					급여정보
-					<button
-						name="print_income"
-						class="print_income"
-					>출력하기</button>
+					<button name="print_income" class="print_income">출력하기</button>
 				</div>
 
 			</div>
-			<table
-				class="income_table"
-				border="1"
-			>
+			<table class="income_table" border="1">
 				<tr>
 					<th>기본급</th>
 					<th>${ incentivelist.pay }</th>
@@ -419,62 +399,30 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 			</table>
 		</div>
 		<div class="datepicker-container">
-			<form
-				id="monthForm"
-				action="../Controller/LoadDate.do"
-				method="post"
-			>
-				<input
-					type="hidden"
-					name="currentYear"
-					id="currentYear"
-					value=""
-				>
-				<input
-					type="hidden"
-					name="currentMonth"
-					id="currentMonth"
-					value=""
-				>
+			<form id="monthForm" action="../Controller/LoadDate.do" method="post">
+				<input type="hidden" name="currentYear" id="currentYear" value="">
+				<input type="hidden" name="currentMonth" id="currentMonth" value="">
 			</form>
 			<div class="navigation-btn">
 				<!-- 이전달로 이동하는 버튼 -->
-				<form
-					action="../Controller/LoadDate.do"
-					method="post"
-				>
-					<button
-						id="prev-month-btn"
-						onclick="changeMonth(-1)"
-					>이전달</button>
+				<form action="../Controller/LoadDate.do" method="post">
+					<button id="prev-month-btn" onclick="changeMonth(-1)">이전달</button>
 				</form>
 
 				<!-- 현재 월과 년도를 표시하는 곳 -->
 				<a id="current-month-year"></a>
 
 				<!-- 다음달로 이동하는 버튼 -->
-				<form
-					action="../Controller/LoadDate.do"
-					method="post"
-				>
-					<button
-						id="next-month-btn"
-						onclick="changeMonth(1)"
-					>다음달</button>
+				<form action="../Controller/LoadDate.do" method="post">
+					<button id="next-month-btn" onclick="changeMonth(1)">다음달</button>
 				</form>
 			</div>
 			<table id="datepicker-table">
 			</table>
 			<div class="info_check_buttons"></div>
 			<div class="check_btn">
-				<button
-					type="button"
-					id='commute-button'
-				>출근</button>
-				<button
-					type="button"
-					id='leave-button'
-				>퇴근</button>
+				<button type="button" id='commute-button'>출근</button>
+				<button type="button" id='leave-button'>퇴근</button>
 			</div>
 		</div>
 		<div class="info_commute"></div>

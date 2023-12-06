@@ -1,10 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page
+	language="java"
+	contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+%>
+<%@ taglib
+	prefix="c"
+	uri="http://java.sun.com/jsp/jstl/core"
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FreedboardForm</title>
+<title>ShareForm</title>
 </head>
 <style>
 /* 공통 스타일 */
@@ -23,6 +30,7 @@ body {
 	margin-left: 400px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;
+	max-height: 100%;
 }
 </style>
 <body>
@@ -39,10 +47,10 @@ body {
 			<tr>
 				<th width="10%">번호</th>
 				<th width="*">제목</th>
-				<th width="10%">작성일</th>
+				<th width="10%">첨부파일</th>
 			</tr>
 			<c:choose>
-				<c:when test="${ empty Freedboardlists }">
+				<c:when test="${ empty FreeboardFormLists }">
 					<!-- 게시물이 없다면 -->
 					<tr>
 						<td
@@ -52,24 +60,22 @@ body {
 					</tr>
 				</c:when>
 				<c:otherwise>
-					<!-- 게시물이 있을때 -->
 					<c:forEach
-						items="${ Freedboardlists }"
+						items="${ FreeboardFormLists }"
 						var="row"
 						varStatus="loop"
 					>
+
 						<tr align="center">
 							<!-- 번호 -->
-							<td>${ map.totalCount -(((map.pageNum-1) * map.pageSize) + loop.index) }
+							<td>${ map2.totalCount -(((map2.pageNum-1) * map2.pageSize) + loop.index) }
 							</td>
 							<td align="center">
 								<!-- 제목 -->
 								<a>${ row.title }</a>
 							</td>
-							<td>
-								<c:if test="${ not empty row.Freedboardofile }">
-									<a>[]작성일연결해주기]</a>
-								</c:if>
+							<td align="center">
+								<a>${ row.post_date }</a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -79,7 +85,7 @@ body {
 		<!-- 하단 메뉴 -->
 		<form
 			method="get"
-			action="../Controller/Freedboardlist.do"
+			action="../Controller/sharelist.do"
 		>
 			<table
 				border="1"
@@ -102,14 +108,15 @@ body {
 						/></th>
 				</tr>
 				<tr align="center">
-					<th>${ map.paginImg }</th>
+
+					<th>${ map2.paginImg }</th>
 					<th
 						width="100"
 						rowspan="2"
 					>
 						<button
 							type="button"
-							onclick="location.href='../Controller/write.do';"
+							onclick="location.href='../Controller/ShareWrite.do';"
 						>글작성</button>
 					</th>
 				</tr>
