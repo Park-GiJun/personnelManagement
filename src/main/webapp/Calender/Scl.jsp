@@ -15,6 +15,7 @@ int td = cal.get(Calendar.DATE);
 
 int year = cal.get(Calendar.YEAR);
 int month = cal.get(Calendar.MONTH) + 1;
+int day = cal.get(Calendar.DATE);
 
 // 파라미터 받기
 String sy = request.getParameter("year");
@@ -50,14 +51,53 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
     box-sizing: border-box;
 }
 
+.re_day {
+	text-align: center;
+	font-size: 35px;
+	position: absolute;
+	color : #fff;
+    top: 15px;
+    left: 40px;
+	
+}
+
+.content1 {
+	font-size: 20px;
+	position: absolute;
+	color : #fff;
+    top: 100px;
+    left: 20px;
+	
+}
+
+.content2 {
+	font-size: 20px;
+	position: absolute;
+	color : #fff;
+    top: 130px;
+    left: 20px;
+	
+}
+
+.content3 {
+	font-size: 20px;
+	position: absolute;
+	color : #fff;
+    top: 160px;
+    left: 20px;
+	
+}
+
 
 .reverse{
   top:30px;
   animation-direction:reverse;
   
+   overflow: auto;
+
    position:absolute;
   left:1600px;
-  width:350px;
+  width:330px;
   height:950px;
   background:#1C427E;
   color:#fff;
@@ -406,13 +446,24 @@ function change() {
    f.submit();
 }
 
-function updateCalendar() {
-	   var year = document.getElementById("yearSelect").value;
-	   var month = document.getElementById("monthSelect").value;
+function showDateAndAlert(day) {
+    // 클릭한 날짜를 JavaScript 변수에 저장
+    var clickedDay = day;
+    // 클릭한 날짜를 해당 <h2> 요소에 표시
+    document.querySelector('.re_day').innerText = "<%= year %>년 <%= month %>월 " + clickedDay + "일";
 
-	   var url = "calendar.jsp?year=" + year + "&month=" + month;
-	   window.location.href = url;
-	}
+    // 클릭한 날짜를 alert 창에도 표시
+    alert('클릭한 날짜: ' + clickedDay + '일');
+
+    // 여기에서 필요한 작업 수행 가능
+    // 예를 들어, 다른 요소에도 표시하려면
+    document.querySelector('.content1').innerText = "1. 일정1";
+    document.querySelector('.content2').innerText = "2. 일정2";
+    document.querySelector('.content3').innerText = "3. 일정3";
+    
+    // 원하는 작업 수행 가능
+    // 예를 들어, 다른 페이지로 이동하려면 window.location.href = '다른페이지.jsp';
+}
 
 </script>
 
@@ -460,7 +511,14 @@ body {
 	
 	<button class='next_btn' onclick="location.href='Calender.jsp';">></button>
 	
-	<div class="reverse"></div>
+	<div class="reverse">
+		 <h2 class='re_day'><%= year %>년 <%= month %>월 <%= day %>일</h2>
+		 
+		 <p class='content1'>1. 일정1</p>
+		 <p class='content2'>2. 일정2</p>
+		 <p class='content3'>ㅇ러매냘어ㅣㅏㅁ어린리ㅏ어리;ㅇ러밍;럼ㅇ리ㅑㅓ애랴머리ㅏㅇ너ㅣ라어리;ㄴㅇ러ㅣㄴㅁㅇ러ㅣㅇㄴㅁ러ㅣㅇ;럼닝럼;ㅣ런ㄹ;ㅑㅓㅇ리나얼ㄴ랴ㅐㅇ머램얼ㅇ니렁ㄴ하ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ</p>
+		 
+	</div>
   
   	
 
@@ -515,14 +573,15 @@ body {
                //out.print("<td>&nbsp;</td>");
                out.print("<td class='gray'><button disabled>" + (preDate++) + "</button></td>");
             }
-
+			
+            int click_day = 0;
             // 1일부터 말일까지 출력
             int lastDay = cal.getActualMaximum(Calendar.DATE);
             String cls;
             for (int i = 1; i <= lastDay; i++) {
                cls = year == ty && month == tm && i == td ? "today" : "";
 
-               out.print("<td class='" + cls + "'><button onclick=\"alert('클릭한 날짜 : " + i + "일');\">" + i + "</button></td>");
+               out.print("<td class='" + cls + "'><button onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button></td>");
                if (lastDay != i && (++week) % 7 == 1) {
                   out.print("</tr><tr>");
                }

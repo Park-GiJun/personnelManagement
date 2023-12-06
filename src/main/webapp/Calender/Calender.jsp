@@ -58,7 +58,8 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   left:985px;
   width:185px;
   height:20px;
-  background:#1C427E;
+  background-color :#1C427E;
+  border: none;
   color:#fff;
   
   font-size: 13px;
@@ -71,7 +72,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 .scl:hover {
-  color: black;
+  color:#fff;
   background:green;
 }
 
@@ -455,9 +456,9 @@ body {
 	
 	<button class='next_btn' onclick="location.href='Scl.jsp';"><</button>
 	
-	<div class="scl">
-		<font class="myFont">텍스트 위치 조정</font>
-	</div>  <!-- 1개당 1개의 일정 제목 표시 -->
+	<button class="scl" onclick="location.href='Scl.jsp';">
+		<font class="myFont">여기에 개인 일정 내용 담기</font>
+	</button>  <!-- 1개당 1개의 일정 제목 표시 -->
 
    <div class="calendar" style="width: 1050px; height: 300px;">
       <div class="title" >
@@ -519,7 +520,7 @@ body {
                cls = year == ty && month == tm && i == td ? "today" : "";
                										
                // 각 날짜가 button 타입으로 이루어져 있고, 클릭하면 해당 페이지로 이동함.
-               out.print("<td class='" + cls + "'><button onclick=\"window.location.href='Cal_Write.jsp';\">" + i + "</button></td>");
+               out.print("<td class='" + cls + "'><button onclick=\"window.location.href='Scl.jsp';\" showDate(" + i + ")\">" + i + "</button></td>");
                if (lastDay != i && (++week) % 7 == 1) {
                   out.print("</tr><tr>");
                }
