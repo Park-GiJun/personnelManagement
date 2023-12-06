@@ -38,7 +38,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 <html>
 <head>
 <meta charset="UTF-8">
-<title>부서 일정</title>
+<title>부서 일정 리스트</title>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <style type="text/css">
@@ -49,6 +49,39 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
    margin: 0; padding: 0;
     box-sizing: border-box;
 }
+
+
+.reverse{
+  top:30px;
+  animation-direction:reverse;
+  
+   position:absolute;
+  left:1600px;
+  width:350px;
+  height:950px;
+  background:#1C427E;
+  color:#fff;
+  /* animation-name:direction; */
+  animation-duration:2s;
+  animation-iteration-count:3;
+  animation-timing-function:ease-in;
+}
+
+@-webkit-keyframes direction {
+  from{
+    left:40px;
+  }
+  to{
+    left:300px;
+  }
+}
+
+
+
+
+
+
+
 
 /* 개인 일정 버튼 */
 .my_btn {
@@ -141,7 +174,7 @@ button.my_btn4:hover {
 .middle-button {
     text-align: center;
     padding: 30px 30px;
-    margin-left: 50px;
+    margin-left: -170px;
     font-family: 'Kanit', sans-serif;
 }
 
@@ -157,8 +190,8 @@ background-color: #1C427E;
   border-radius: 30px;
   
   position: absolute;
-  top: 31px;
-  left: 1850px;
+  top: 30px;
+  left: 1530px;
   
   font-family: 'Kanit', sans-serif;
 
@@ -183,7 +216,7 @@ button.next_btn:hover {
 	
 	position: absolute;
   	top: -40px;
-  	left: 430px;
+  	left: 300px;
   	
   	font-size: 100x;
   	border-radius: 30px;
@@ -210,9 +243,12 @@ a:active, a:hover {
 }
 
 .calendar {
-   width: 700px;
+   width: 1500px;
    margin: 70px auto;
+   margin-left: 250px;
 }
+
+
 .calendar .title{
    position: absolute;
    top: 120px;
@@ -230,8 +266,9 @@ a:active, a:hover {
    border-radius: 25px;
   font-family: 'Kanit', sans-serif;
    font-size: 20px;
-   margin-left: 440px;
+   margin-left: 330px;
    top: 10px;
+   
 }
 
 /* 월 선택 리스트 */
@@ -417,9 +454,13 @@ body {
    
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
 	
-	<button class='next_btn' onclick="location.href='Scl4.jsp';"><</button>
+	<button class='next_btn' onclick="location.href='Calender.jsp';">></button>
+	
+	<div class="reverse"></div>
+  
+  	
 
-   <div class="calendar" style="width: 1050px; height: 300px;">
+   <div class="calendar" style="width: 1300px; height: 300px;">
       <div class="title" >
          <form name="frm" method="post" >
             <select id="yearSelect" name="year" class="selectField" onchange="change()"  >
@@ -493,13 +534,6 @@ body {
             %>
          </tbody>
       </table>
-    
-     
-     
-
-		
-     
-     
 
    </div>
    

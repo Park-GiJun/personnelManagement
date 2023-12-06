@@ -50,6 +50,24 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
     box-sizing: border-box;
 }
 
+.scl{
+  top:510px;
+  animation-direction:scl;
+  
+  position:absolute;
+  left:985px;
+  width:185px;
+  height:20px;
+  background:#1C427E;
+  color:#fff;
+  /* animation-name:direction; */
+  animation-duration:2s;
+  animation-iteration-count:3;
+  animation-timing-function:ease-in;
+}
+
+
+
 /* 개인 일정 버튼 */
 .my_btn {
   background-color: #1C427E;
@@ -262,6 +280,7 @@ a:active, a:hover {
    padding: 40px 80px;
    text-align: left;
    border: 1px solid #ccc;
+   
 }
 
 
@@ -300,6 +319,11 @@ a:active, a:hover {
    background: none;
    font-size: 20px;
    
+   text-align: left;  /* 텍스트를 왼쪽 정렬로 설정 */
+   position: relative;  /* 상대적인 위치 설정 */
+   top: -40px;  /* 상단 여백 조정 */
+   left: -70px;  /* 왼쪽 여백 조정 */
+   
    font-family: 'Kanit', sans-serif;
    
    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
@@ -318,6 +342,7 @@ a:active, a:hover {
    font-weight:700;
    background: orange;
     color: #000;
+   
 }
 
 /* 일요일 날짜 스타일 */
@@ -336,11 +361,13 @@ a:active, a:hover {
 .calendar table td:nth-child(7n) button {
    color: blue;
    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+   
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 .calendar table td:nth-child(7n) button:hover {
    color: green;
+   
 }
 
 
@@ -352,6 +379,7 @@ a:active, a:hover {
 /* 다음달의 날짜 색상 지정 */
 .calendar table td.gray2 button {
    color: #ccc;
+   
 }
 
 
@@ -418,6 +446,8 @@ body {
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
 	
 	<button class='next_btn' onclick="location.href='Scl.jsp';"><</button>
+	
+	<div class="scl"></div>
 
    <div class="calendar" style="width: 1050px; height: 300px;">
       <div class="title" >
@@ -471,6 +501,7 @@ body {
                out.print("<td class='gray'><button disabled>" + (preDate++) + "</button></td>");
             }
 
+            
             // 1일부터 말일까지 출력
             int lastDay = cal.getActualMaximum(Calendar.DATE);
             String cls;
@@ -491,6 +522,7 @@ body {
             }
             out.print("</tr>");
             %>
+           
          </tbody>
       </table>
     

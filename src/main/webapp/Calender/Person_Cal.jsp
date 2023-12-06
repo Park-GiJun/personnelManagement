@@ -417,7 +417,7 @@ body {
    
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
 	
-	<button class='next_btn' onclick="location.href='Scl.jsp';"><</button>
+	<button class='next_btn' onclick="location.href='Scl2.jsp';"><</button>
 
    <div class="calendar" style="width: 1050px; height: 300px;">
       <div class="title" >
