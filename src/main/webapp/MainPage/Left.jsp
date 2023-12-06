@@ -93,17 +93,15 @@
 		</div>
 
 		<div class="left_freeboard_background">
-			<a class="left_FreeboardForm_section"
-				href="../Controller/FreeboardList.do"> <span
-				class="left_freeboard_text">게시판</span>
+			<a class="left_FreeboardForm_section" href="../Controller/FreeboardList.do">
+				<span class="left_freeboard_text">게시판</span>
 			</a>
 		</div>
 
 
 		<div class="left_holiday_background">
-			<a class="left_ShareForm_section"
-				href="../Controller/HoliDayCount.do"> <span
-				class="left_holiday_text">휴가관리</span>
+			<a class="left_ShareForm_section" href="../Controller/HoliDayCount.do"> 
+				<span class="left_holiday_text">휴가관리</span>
 			</a>
 		</div>
 		<div class="left_info_background">
@@ -117,7 +115,7 @@
 			if (inpemp_grade != null && inpemp_grade.equals("사장")) {
 			%>
 			<div class="left_new_Id_background">
-				<a class="left_ShareForm_section" href="../NewRegist/NewRegist.jsp">
+				<a class="left_ShareForm_section" href="../Controller/NewRegistLoad.do">
 					<span class="left_new_Id_text">사원관리</span>
 				</a>
 			</div>

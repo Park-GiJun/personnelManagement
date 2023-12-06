@@ -31,22 +31,21 @@
 	margin-left: 0%;
 }
 
-
 .middle-NewRegist-container {
-        display: flex;
-        justify-content: space-between;
-    }
+	display: flex;
+	justify-content: space-between;
+}
 
 .table-container {
-        width: 100%;
-    }
+	width: 100%;
+}
 
 /* 사원 추가 위치 수정 */
 .middle-NewRegist-container {
 	position: relative;
 	margin-top: 7.5%;
 	margin-left: 0%;
-	margin-right:0%;
+	margin-right: 0%;
 	font-size: 150%;
 }
 
@@ -78,61 +77,81 @@ body {
 </style>
 </head>
 <body>
-    <!-- 왼쪽 페이지 목록 -->
-    <jsp:include page="../MainPage/Left.jsp" />
-    <div class="content">
-        <form name="vacation_form" method="post" action="../Controller/NewRegist.do" accept-charset="UTF-8">
-        
-            <!-- 신입사원 등록 양식 -->
-            <div class="middle-NewRegist-container">
-                <div class="table-container">
-                    <table border="1" width="98%">
-                        <tr>
-                            <th colspan='4'>신입사원 정보 등록</th>
-                        </tr>
-                        <tr align="center">
-                            <th width="25">이름</th>
-                            <th width="25">사번(아이디)</th>
-                            <th width="25">직급</th>
-                            <th width="25">부서</th>
-                        </tr>
-                        <tr>
-                            <td align="center">
-                                <input type="text" name="name" style="width: 90%; box-sizing: border-box; text-align: center;">
-                            </td>
-                            <td align="center">
-                                <input type="text" name="emp_num" style="width: 90%; box-sizing: border-box; text-align: center;">
-                            </td>
-                            <td align="center">
-                                <input type="text" name="emp_grade" style="width: 90%; box-sizing: border-box; text-align: center;">
-                            </td>
-                            <td align="center">
-                                <input type="text" name="team" style="width: 90%; box-sizing: border-box; text-align: center;">
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    <div class="middle-button-container">
+	<!-- 왼쪽 페이지 목록 -->
+	<jsp:include page="../MainPage/Left.jsp" />
+	<div class="content">
+		<form name="vacation_form" method="post"
+			action="../Controller/NewRegist.do" accept-charset="UTF-8">
+
+			<!-- 신입사원 등록 양식 -->
+			<div class="middle-NewRegist-container">
+				<div class="table-container">
+					<table border="1" width="98%">
+						<tr>
+							<th colspan='4'>신입사원 정보 등록</th>
+						</tr>
+						<tr align="center">
+							<th width="25">이름</th>
+							<th width="25">사번(아이디)</th>
+							<th width="25">직급</th>
+							<th width="25">부서</th>
+						</tr>
+						<tr>
+							<td align="center"><input type="text" name="name"
+								style="width: 90%; box-sizing: border-box; text-align: center;">
+							</td>
+							<td align="center"><input type="text" name="emp_num"
+								style="width: 90%; box-sizing: border-box; text-align: center;">
+							</td>
+							<td align="center"><input type="text" name="emp_grade"
+								style="width: 90%; box-sizing: border-box; text-align: center;">
+							</td>
+							<td align="center"><input type="text" name="team"
+								style="width: 90%; box-sizing: border-box; text-align: center;">
+							</td>
+						</tr>
+					</table>
+
+					<div class="middle-button-container">
 						<button type="submit" class='my_btn'>정보등록</button>
 					</div>
-			
-                </div>
-                
-                <div class="table-container">
-                    <table border="1" width="98%">
-                        <tr>
-                            <th colspan='4'>사원 리스트</th>
-                        </tr>
-                        <tr align="center">
-                            <th width="25">이름</th>
-                            <th width="25">사번</th>
-                            <th width="25">직급</th>
-                            <th width="25">부서</th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </form>
-    </div>
+
+				</div>
+
+				<div class="table-container">
+					<table border="1" width="98%">
+						<tr>
+							<th colspan='4'>사원 리스트</th>
+						</tr>
+						<tr align="center">
+							<th width="25">이름</th>
+							<th width="25">사번</th>
+							<th width="25">직급</th>
+							<th width="25">부서</th>
+						</tr>
+						<c:choose>
+							<c:when test="${empty selectList}">
+								<!-- 게시물이 없을 때 -->
+								<tr>
+									<td colspan="4" align="center">회사가 망했나?</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<!-- 게시물이 있을 때 -->
+								<c:forEach items="${selectList}" var="row" varStatus="loop">
+									<tr align="center">
+										<td>${row.name}</td>
+										<td>${row.emp_num}</td>
+										<td>${row.emp_grade}</td>
+										<td>${row.team}</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</table>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

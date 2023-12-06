@@ -16,42 +16,14 @@ import NewRegist.NewRegistDAO;
 import NewRegist.NewRegistDTO;
 import utils.BoardPage;
 
-@WebServlet("/Controller/NewRegist.do")
-public class NewRegistController extends HttpServlet {
+@WebServlet("/Controller/NewRegistLoad.do")
+public class NewRegistLoadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-
-		String grade = "";
-		String name = req.getParameter("name");
-		String emp_num = req.getParameter("emp_num");
-		String emp_grade = req.getParameter("emp_grade");
-		String team = req.getParameter("team");
-		
-		if (emp_grade.equals("부장")) {
-			grade = "2";
-		} else if (emp_grade.equals("차장")) {
-			grade = "3";
-		} else if (emp_grade.equals("과장")) {
-			grade = "4";
-		} else if (emp_grade.equals("대리")) {
-			grade = "5";
-		} else if (emp_grade.equals("사원")) {
-			grade = "6";
-		} else if (emp_grade.equals("인턴")) {
-			grade = "7";
-		}
-
-		System.out.println("[" + grade + "]");
-		System.out.println("[" + name + "]");
-		System.out.println("[" + emp_num + "]");
-		System.out.println("[" + emp_grade + "]");
-		System.out.println("[" + team + "]");
-
 		NewRegistDAO dao = new NewRegistDAO();
-		dao.NewRegist(name, emp_num, emp_grade, team, grade);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		String searchField = req.getParameter("searchField");
