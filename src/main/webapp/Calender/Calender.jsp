@@ -51,7 +51,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 }
 
 .scl{
-  top:510px;
+  top:480px;
   animation-direction:scl;
   
   position:absolute;
@@ -239,7 +239,7 @@ a:active, a:hover {
 
 .calendar {
    width: 700px;
-   margin: 70px auto;
+   margin: 40px auto;
 }
 .calendar .title{
    position: absolute;
@@ -409,6 +409,25 @@ function updateCalendar() {
 	   var url = "calendar.jsp?year=" + year + "&month=" + month;
 	   window.location.href = url;
 	}
+	
+function showDateAndAlert(day) {
+    // 클릭한 날짜를 JavaScript 변수에 저장
+    var clickedDay = day;
+    // 클릭한 날짜를 해당 <h2> 요소에 표시
+    document.querySelector('.re_day').innerText = "<%= year %>년 <%= month %>월 " + clickedDay + "일";
+
+    // 클릭한 날짜를 alert 창에도 표시
+    alert('클릭한 날짜: ' + clickedDay + '일');
+
+    // 여기에서 필요한 작업 수행 가능
+    // 예를 들어, 다른 요소에도 표시하려면
+    document.querySelector('.content1').innerText = "1. 일정1";
+    document.querySelector('.content2').innerText = "2. 일정2";
+    document.querySelector('.content3').innerText = "3. 일정3";
+    
+    // 원하는 작업 수행 가능
+    // 예를 들어, 다른 페이지로 이동하려면 window.location.href = '다른페이지.jsp';
+}	
 
 </script>
 
