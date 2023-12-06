@@ -61,15 +61,24 @@ body {
 					alert("제목을 입력해주세요.");
 					return false;
 				}
+				   // 작성 완료 메시지
+		        alert("작성 완료되었습니다");
+
+		        // 페이지 이동
+		        window.location.href = 'FreeboardForm.jsp';
+		        
+		        // 폼 제출 방지
+		        return false;
 			}
 		</script>
 		<form name="FreeboardFrame" method="post"
-			enctype="multipart/form-data" action="../Controller/Freeboard.do"
+			enctype="multipart/form-data" action="../FreeboardWrite.do"
 			onsubmit="return validateForm(this)">
 			<table align="center" border="1" height="80%" width="90%">
 				<tr>
 					<td><input type="text" value="제목을 입력해 주세요."
-						name="Freeboardtitle" style="width: 90%;" />
+						name="Freeboardtitle" style="width: 90%;" onfocus="clearDefaultText(this)"
+							onblur="restoreDefaultText(this)"/>
 					</td>
 				</tr>
 				<tr>
@@ -85,8 +94,9 @@ body {
 				<tr>
 					<td colspan="3" style="text-align: right;">
 						<button type="button"
-							onclick="location.href='../Controller/list.do';">목록</button>
-						<button type="submit">작성완료</button>
+							onclick="location.href='FreeboardForm.jsp';">목록</button>
+						<button type="submit"
+						>작성완료</button>
 					</td>
 				</tr>
 			</table>

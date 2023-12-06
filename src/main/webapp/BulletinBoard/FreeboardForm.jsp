@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ShareForm</title>
+<title>FreeboardForm</title>
 </head>
 <style>
 /* 공통 스타일 */
@@ -47,7 +47,7 @@ body {
 			<tr>
 				<th width="10%">번호</th>
 				<th width="*">제목</th>
-				<th width="10%">첨부파일</th>
+				<th width="10%">작성일</th>
 			</tr>
 			<c:choose>
 				<c:when test="${ empty FreeboardFormLists }">
@@ -85,7 +85,7 @@ body {
 		<!-- 하단 메뉴 -->
 		<form
 			method="get"
-			action="../Controller/sharelist.do"
+			action="../Controller/FreeboardFormList.do"
 		>
 			<table
 				border="1"
@@ -116,7 +116,7 @@ body {
 					>
 						<button
 							type="button"
-							onclick="location.href='../Controller/ShareWrite.do';"
+							onclick="location.href='Freeboard.jsp';"
 						>글작성</button>
 					</th>
 				</tr>
