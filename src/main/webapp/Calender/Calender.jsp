@@ -312,11 +312,12 @@ a:active, a:hover {
    color: #ccc;
 }
 
+
 /* 날짜 버튼 스타일 지정 */
 .calendar table button {
    border: none;
-   padding: 0;
-   background: none;
+   /* padding: 0px; */
+   background: yellow;
    font-size: 20px;
    
    position: relative;  /* 상대적인 위치 설정 */
@@ -326,6 +327,7 @@ a:active, a:hover {
    font-family: 'Kanit', sans-serif;
    
    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+
    
 }
 
@@ -524,17 +526,7 @@ body {
            
          </tbody>
       </table>
-    
-     
-     
-
-		
-     
-     
 
    </div>
-   
-
-
 </body>
 </html>
