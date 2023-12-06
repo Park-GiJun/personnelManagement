@@ -7,16 +7,16 @@ import java.util.Vector;
 
 import DBcontrol.DBConnPool;
 
-public class FreeboardFormDAO extends DBConnPool{
+public class FreeboardFormDAO extends DBConnPool {
 
 	public FreeboardFormDAO() {
 		super();
 	}
 
-	public int FreeboardListCont(Map<String, Object>map) {
+	public int FreeboardListCont(Map<String, Object> map) {
 		System.out.println("FreeboardListCont");
-		int totalcount =0;
-		
+		int totalcount = 0;
+
 		String query = "SELECT COUNT(*) FROM anno_board";
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
@@ -34,7 +34,7 @@ public class FreeboardFormDAO extends DBConnPool{
 		System.out.println(totalcount);
 		return totalcount;
 	}
-	
+
 	public List<FreeboardFormDTO> selectListPage(Map<String, Object> map) {
 		System.out.println("selectListpage");
 		List<FreeboardFormDTO> anno_boards = new Vector<FreeboardFormDTO>();
@@ -50,8 +50,7 @@ public class FreeboardFormDAO extends DBConnPool{
 		query += " ORDER BY anno_board_num DESC) Tb) WHERE rNum BETWEEN ? AND ?";
 		System.out.println("FreeboardFormController : 51 lines --------------------------");
 		System.out.println(query);
-		
-		
+
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, map.get("start").toString());
@@ -68,14 +67,9 @@ public class FreeboardFormDAO extends DBConnPool{
 				dto.settitle(rs.getString("title"));
 				dto.setcontent(rs.getString("content"));
 				dto.setpost_date(rs.getDate("post_date"));
-<<<<<<< HEAD
-				dto.setvisitcount ( rs.getInt("visitcount"));
-				anno_board.add(dto);
-=======
 				dto.setvisitcount(rs.getInt("visitcount"));
 				anno_boards.add(dto);
-				System.out.println(dto.getanno_board_num()+dto.getboard_pass()+dto.gettitle());
->>>>>>> refs/remotes/origin/김소형
+				System.out.println(dto.getanno_board_num() + dto.getboard_pass() + dto.gettitle());
 
 			}
 		} catch (Exception e) {
@@ -84,6 +78,5 @@ public class FreeboardFormDAO extends DBConnPool{
 		}
 		return anno_boards;
 	}
-	
-	
+
 }

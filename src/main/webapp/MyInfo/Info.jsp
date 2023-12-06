@@ -63,6 +63,8 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 														.querySelector('.arriveText').textContent = currentTime;
 											}
 											
+											sendAttendanceRequest('arrive', formattedDate, currentTime);
+											
 										});
 
 						// 퇴근 버튼 클릭 이벤트
@@ -85,6 +87,8 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 												todayCell
 														.querySelector('.leaveText').textContent = currentTime;
 											}
+											
+											sendAttendanceRequest('leave', formattedDate, currentTime);
 										});
 
 						generateCalendar();
@@ -193,6 +197,32 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 			}
 		}
 		return null; // 찾지 못한 경우
+	}
+	
+	// 서버로 출근 또는 퇴근 요청을 보내는 함수
+	function sendAttendanceRequest(action, date, time) {
+	    fetch('../Controller/Attend.do', {
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/x-www-form-urlencoded',
+	        },
+	        body: 'action=' + action + '&checkdate=' + date + '&time=' + time,
+	    })
+	    .then(response => {
+	        // 서버 응답 처리
+	        if (!response.ok) {
+	            throw new Error('Network response was not ok');
+	        }
+	        return response.json();
+	    })
+	    .then(data => {
+	        // 서버 응답 데이터 처리
+	        console.log(data);
+	    })
+	    .catch(error => {
+	        // 오류 처리
+	        console.error('There was a problem with the fetch operation:', error);
+	    });
 	}
 </script>
 </head>

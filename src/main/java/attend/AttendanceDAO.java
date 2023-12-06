@@ -1,5 +1,7 @@
 package attend;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,4 +54,71 @@ public class AttendanceDAO extends DBConnPool {
 
 		return attendDateMap;
 	}
+
+	public void updateArriveTime(String emp_num, String date, String time) {
+
+		System.out.println("Update Arrive Time");
+
+		String[] timeComponents = time.split(":");
+		String formattedTime = String.format("%02d:%02d", Integer.parseInt(timeComponents[0]),
+				Integer.parseInt(timeComponents[1]));
+
+		String dateTimeString = date + " " + formattedTime;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDateTime localDateTime = LocalDateTime.parse(dateTimeString, formatter);
+
+		java.sql.Timestamp timestamp = java.sql.Timestamp.valueOf(localDateTime);
+
+		String query = "INSERT INTO attendance (emp_num, day_of_work, start_time) VALUES (?, ?, ?)";
+
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, emp_num);
+			psmt.setTimestamp(2, timestamp);
+			psmt.setTimestamp(3, timestamp);
+
+			rs = psmt.executeQuery();
+
+		} catch (Exception e) {
+			System.out.println("출, 퇴근시간 입력중 오류");
+			e.printStackTrace();
+		}
+
+		System.out.println("update Arrive Time");
+
+	}
+
+	public void updateLeaveTime(String emp_num, String date, String time) {
+
+		System.out.println("Update Leave Time");
+
+		String[] timeComponents = time.split(":");
+		String formattedTime = String.format("%02d:%02d", Integer.parseInt(timeComponents[0]),
+				Integer.parseInt(timeComponents[1]));
+
+		String dateTimeString = date + " " + formattedTime;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDateTime localDateTime = LocalDateTime.parse(dateTimeString, formatter);
+
+		java.sql.Timestamp timestamp = java.sql.Timestamp.valueOf(localDateTime);
+
+		String query = "UPDATE attendance SET finish_time = ? WHERE emp_num = ? AND TO_CHAR(day_of_work, 'YYYY-MM-DD') = ?";
+
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setTimestamp(1, timestamp);
+			psmt.setString(2, emp_num);
+			psmt.setString(3, date);
+
+			rs = psmt.executeQuery();
+
+		} catch (Exception e) {
+			System.out.println("출, 퇴근시간 입력중 오류");
+			e.printStackTrace();
+		}
+
+		System.out.println("Update Leave Time");
+
+	}
+
 }
