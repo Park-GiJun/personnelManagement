@@ -116,7 +116,7 @@ body {
 					>
 						<button
 							type="button"
-							onclick="location.href='Freeboard.jsp';"
+							onclick="location.href='../BulletinBoard/Freeboard.jsp';"
 						>글작성</button>
 					</th>
 				</tr>

@@ -59,14 +59,15 @@ public class FreeboardListController extends HttpServlet {
 		map.put("start", start);
 		map.put("end", end);
 		/* 페이지 처리 end */
-		
+
 		List<FreeboardFormDTO> FreeboardFormLists = dao.selectListPage(map);
 
 		// 게시물 목록 받기
 		dao.close();
 
 		// 페이징 이미지 전달
-		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/FreeboardLists.do");
+		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum,
+				"../Controller/FreeboardLists.do");
 
 		// 바로가기 영역 HTML 문자열
 		map.put("pagingImg", pagingImg);
@@ -79,6 +80,7 @@ public class FreeboardListController extends HttpServlet {
 		request.setAttribute("map2", map);
 		request.getRequestDispatcher("/BulletinBoard/FreeboardForm.jsp").forward(request, response);
 
+		request.getRequestDispatcher("/BulletinBoard/Freeboard.jsp").forward(request, response);
 	}
 
 }

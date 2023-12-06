@@ -1,21 +1,24 @@
 package FreeboardForm;
 
+import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
 import javax.servlet.ServletContext;
+import javax.sql.DataSource;
 
 import DBcontrol.DBConnPool;
 
+public class FreeboardFormDAO extends DBConnPool {
 
-public class FreeboardFormDAO extends DBConnPool{
 	public FreeboardFormDAO() {
 		super();
 	}
 
-
-	public int FreeboardListCont(Map<String, Object>map) {
+	public int FreeboardListCont(Map<String, Object> map) {
 		System.out.println("FreeboardListCont");
 		int totalcount = 0;
 
@@ -79,24 +82,30 @@ public class FreeboardFormDAO extends DBConnPool{
 		}
 		return anno_boards;
 	}
-	public int freeinsertWrite(FreeboardFormDTO dto) {
+
+	public int freeinsertWrite(String title, String content, String pass) {
 		int result = 0;
 		try {
-			String query = 
-					"INSERT INTO anno_board	( " + "anno_board_num, board_pass, title, content, post_date, visitcount )"
-			+" VALUES ( "+"anno_board_num,.NEXTVAL,?,?,?,0)";
-			
+			System.out.println("freeinsertWrite");
+			String query = "INSERT INTO anno_board (anno_board_num, board_pass, title, content, visitcount ) VALUES (anno_board_num.NEXTVAL,?, ?, ?, 0)";
+
 			psmt = con.prepareStatement(query);
-			psmt.setString(1,  dto.gettitle());
-			psmt.setString(1,  dto.getcontent());
-			psmt.setInt(1,  dto.getboard_pass());
+			psmt.setString(1, title);
+			psmt.setString(2, content);
+			psmt.setString(3, pass);
 			result = psmt.executeUpdate();
-			
-		}
-		catch(Exception e) {
+
+			System.out.println(title);
+			System.out.println(content);
+			System.out.println(pass);
+			con.setAutoCommit(true); // auto-commit을 true로 설정
+			result = psmt.executeUpdate();
+			con.commit(); // 트랜잭션 커밋
+		} catch (Exception e) {
 			System.out.println("게시물 입력중 예외 발생");
 			e.printStackTrace();
 		}
 		return result;
 	}
+
 }
