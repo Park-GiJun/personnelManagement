@@ -458,30 +458,17 @@ function getCurrentTime() {
 			</form>
 			<div class="navigation-btn">
 				<!-- 이전달로 이동하는 버튼 -->
-<<<<<<< HEAD
 				<button
 					id="prev-month-btn"
 					onclick="changeMonth(-1)"
 				>이전달</button>
-=======
-				<form action="../Controller/LoadDate.do" method="post">
-					<button id="prev-month-btn" onclick="changeMonth(-1)">이전달</button>
-				</form>
-
->>>>>>> refs/remotes/origin/류동규
 				<!-- 현재 월과 년도를 표시하는 곳 -->
 				<a id="current-month-year"></a>
 				<!-- 다음달로 이동하는 버튼 -->
-<<<<<<< HEAD
 				<button
 					id="next-month-btn"
 					onclick="changeMonth(1)"
 				>다음달</button>
-=======
-				<form action="../Controller/LoadDate.do" method="post">
-					<button id="next-month-btn" onclick="changeMonth(1)">다음달</button>
-				</form>
->>>>>>> refs/remotes/origin/류동규
 			</div>
 			<table id="datepicker-table">
 			</table>
