@@ -337,6 +337,10 @@ a:active, a:hover {
    background: none;
    font-size: 20px;
    
+   position: relative;  /* 상대적인 위치 설정 */
+   top: -40px;  /* 상단 여백 조정 */
+   left: -70px;  /* 왼쪽 여백 조정 */
+   
    font-family: 'Kanit', sans-serif;
    
    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */

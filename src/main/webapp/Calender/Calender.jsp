@@ -319,7 +319,6 @@ a:active, a:hover {
    background: none;
    font-size: 20px;
    
-   text-align: left;  /* 텍스트를 왼쪽 정렬로 설정 */
    position: relative;  /* 상대적인 위치 설정 */
    top: -40px;  /* 상단 여백 조정 */
    left: -70px;  /* 왼쪽 여백 조정 */
