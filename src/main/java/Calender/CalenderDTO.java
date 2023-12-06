@@ -2,20 +2,9 @@ package Calender;
 
 public class CalenderDTO {
 
-	private String title;
 	private String content;
 	private String day;
-	private String Schedules;
-	
-	// 제목
-	public String gettitle() {
-		return title;
-	}
-	
-	public void settitle(String title) {
-		this.title = title;
-	}
-	
+	private String number;
 	
 	// 내용
 	public String getcontent() {
@@ -38,12 +27,12 @@ public class CalenderDTO {
 	
 	
 	// 일정 리스트 (전체 일정)
-	public String getScheduleList() {
-		return Schedules;
+	public String getnumber() {
+		return number;
 	}
 	
-	public void setScheduleList(String Schedules) {
-		this.Schedules = Schedules;
+	public void setnumber(String number) {
+		this.number = number;
 	}
 	
 }

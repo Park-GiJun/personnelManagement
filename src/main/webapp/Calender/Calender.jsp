@@ -312,12 +312,11 @@ a:active, a:hover {
    color: #ccc;
 }
 
-
 /* 날짜 버튼 스타일 지정 */
 .calendar table button {
    border: none;
-   /* padding: 0px; */
-   background: yellow;
+   padding: 0;
+   background: none;
    font-size: 20px;
    
    position: relative;  /* 상대적인 위치 설정 */
@@ -327,7 +326,6 @@ a:active, a:hover {
    font-family: 'Kanit', sans-serif;
    
    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
-
    
 }
 
@@ -448,7 +446,7 @@ body {
 	
 	<button class='next_btn' onclick="location.href='Scl.jsp';"><</button>
 	
-	<div class="scl"></div>
+	<div class="scl"></div>  <!-- 1개당 1개의 일정 제목 표시 -->
 
    <div class="calendar" style="width: 1050px; height: 300px;">
       <div class="title" >
@@ -508,8 +506,9 @@ body {
             String cls;
             for (int i = 1; i <= lastDay; i++) {
                cls = year == ty && month == tm && i == td ? "today" : "";
-
-               out.print("<td class='" + cls + "'><button onclick=\"alert('클릭한 날짜 : " + i + "일');\">" + i + "</button></td>");
+               										
+               // 각 날짜가 button 타입으로 이루어져 있고, 클릭하면 해당 페이지로 이동함.
+               out.print("<td class='" + cls + "'><button onclick=\"window.location.href='Cal_Write.jsp';\">" + i + "</button></td>");
                if (lastDay != i && (++week) % 7 == 1) {
                   out.print("</tr><tr>");
                }
