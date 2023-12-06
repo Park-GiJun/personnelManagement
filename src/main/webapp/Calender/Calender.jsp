@@ -50,6 +50,21 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
     box-sizing: border-box;
 }
 
+.scl{
+  top:510px;
+  animation-direction:scl;
+  
+  position:absolute;
+  left:985px;
+  width:185px;
+  height:20px;
+  background:#1C427E;
+  color:#fff;
+  /* animation-name:direction; */
+  animation-duration:2s;
+  animation-iteration-count:3;
+  animation-timing-function:ease-in;
+}
 
 
 
@@ -144,11 +159,11 @@ button.my_btn4:hover {
 .middle-button {
     text-align: center;
     padding: 30px 30px;
-    margin-left: 270px;
+    margin-left: 50px;
     font-family: 'Kanit', sans-serif;
 }
 
-.my_btns {
+.next_btn {
 background-color: #1C427E;
   color: white;
   border: none;
@@ -161,9 +176,20 @@ background-color: #1C427E;
   
   position: absolute;
   top: 31px;
-  left: 1000px;
+  left: 1850px;
+  
+  font-family: 'Kanit', sans-serif;
 
+   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */	
 }
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+button.next_btn:hover {
+  color: white;
+  background: orange;
+}
+
+
 
 /*   ↑ 여기까지 버튼 위치, 크기 조절   */
 
@@ -175,7 +201,7 @@ background-color: #1C427E;
 	
 	position: absolute;
   	top: -40px;
-  	left: 540px;
+  	left: 430px;
   	
   	font-size: 100x;
   	border-radius: 30px;
@@ -222,7 +248,7 @@ a:active, a:hover {
    border-radius: 25px;
   font-family: 'Kanit', sans-serif;
    font-size: 20px;
-   margin-left: 550px;
+   margin-left: 440px;
    top: 10px;
 }
 
@@ -254,6 +280,7 @@ a:active, a:hover {
    padding: 40px 80px;
    text-align: left;
    border: 1px solid #ccc;
+   
 }
 
 
@@ -292,10 +319,20 @@ a:active, a:hover {
    background: none;
    font-size: 20px;
    
+   position: relative;  /* 상대적인 위치 설정 */
+   top: -40px;  /* 상단 여백 조정 */
+   left: -70px;  /* 왼쪽 여백 조정 */
    
-  
+   font-family: 'Kanit', sans-serif;
+   
+   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+   
 }
 
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+.calendar table button:hover {
+   color: green;
+}
 
 
 
@@ -304,17 +341,34 @@ a:active, a:hover {
    font-weight:700;
    background: orange;
     color: #000;
+   
 }
 
 /* 일요일 날짜 스타일 */
 .calendar table td:nth-child(7n+1) button {
    color: red;
+   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+.calendar table td:nth-child(7n+1) button:hover {
+   color: green;
+}
+
 
 /* 토요일 날짜 스타일 */
 .calendar table td:nth-child(7n) button {
    color: blue;
+   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+   
 }
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+.calendar table td:nth-child(7n) button:hover {
+   color: green;
+   
+}
+
 
 /* 전월의 날짜 색상 지정 */
 .calendar table td.gray button {
@@ -324,6 +378,7 @@ a:active, a:hover {
 /* 다음달의 날짜 색상 지정 */
 .calendar table td.gray2 button {
    color: #ccc;
+   
 }
 
 
@@ -387,10 +442,13 @@ body {
       <button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사 일정</button>
    </div>
    
-     <p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
-  
+	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
+	
+	<button class='next_btn' onclick="location.href='Scl.jsp';"><</button>
+	
+	<div class="scl"></div>
 
-   <div class="calendar" style="width: 800px; height: 300px;">
+   <div class="calendar" style="width: 1050px; height: 300px;">
       <div class="title" >
          <form name="frm" method="post" >
             <select id="yearSelect" name="year" class="selectField" onchange="change()"  >
@@ -442,6 +500,7 @@ body {
                out.print("<td class='gray'><button disabled>" + (preDate++) + "</button></td>");
             }
 
+            
             // 1일부터 말일까지 출력
             int lastDay = cal.getActualMaximum(Calendar.DATE);
             String cls;
@@ -462,6 +521,7 @@ body {
             }
             out.print("</tr>");
             %>
+           
          </tbody>
       </table>
     
