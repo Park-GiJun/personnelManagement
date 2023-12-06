@@ -69,9 +69,9 @@ public class FreeboardFormDAO extends DBConnPool{
 				dto.settitle(rs.getString("title"));
 				dto.setcontent(rs.getString("content"));
 				dto.setpost_date(rs.getDate("post_date"));
-				dto.setvisitcount ( rs.getInt("visitcount"));
-				System.out.println(dto.getanno_board_num() + dto.getboard_pass() + dto.gettitle());
-
+				dto.setvisitcount(rs.getInt("visitcount"));
+				anno_boards.add(dto);
+				System.out.println(dto.getanno_board_num()+dto.getboard_pass()+dto.gettitle());
 			}
 		} catch (Exception e) {
 			System.out.println("게시물 조회중 예외 발생");

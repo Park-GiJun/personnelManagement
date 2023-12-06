@@ -1,8 +1,5 @@
-<%@ page
-	language="java"
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +24,7 @@
 /* 공통 스타일 */
 .left_calender_background, .left_shareform_background,
 	.left_freeboard_background, .left_holiday_background,
-	.left_info_background {
+	.left_info_background, .left_new_Id_background {
 	width: 100%;
 	height: 12%;
 	background: rgb(0, 64, 128);
@@ -38,7 +35,7 @@
 
 /* 텍스트 스타일 */
 .left_calender_text, .left_shareform_text, .left_freeboard_text,
-	.left_holiday_text, .left_info_text {
+	.left_holiday_text, .left_info_text, .left_new_Id_text {
 	width: 100%;
 	color: rgb(255, 255, 255);
 	position: absolute;
@@ -72,6 +69,10 @@
 	top: 52%;
 }
 
+.left_new_Id_background {
+	top: 88%;
+}
+
 /* 섹션에 커서 포인터 스타일 적용 */
 .left_Calender_section, .left_ShareForm_section {
 	cursor: pointer;
@@ -81,42 +82,48 @@
 <body>
 	<div class="left_table">
 		<div class="left_calender_background">
-			<a
-				class="left_Calender_section"
-				href="../Calender/Calender.jsp"
-			>
+			<a class="left_Calender_section" href="../Calender/Calender.jsp">
 				<span class="left_calender_text">캘린더</span>
 			</a>
 		</div>
-		<div
-			class="left_shareform_background"
-			id="leftShareFormBackground"
-		>
-			<a
-				class="left_ShareForm_section"
-				href="../Controller/sharelist.do"
-			>
+		<div class="left_shareform_background" id="leftShareFormBackground">
+			<a class="left_ShareForm_section" href="../Controller/sharelist.do">
 				<span class="left_shareform_text">공유양식</span>
 			</a>
 		</div>
-		
+
 		<div class="left_freeboard_background">
-		<a
-				class="left_FreeboardForm_section"
-				href="../Controller/FreeboardList.do"
-			>
-			<span class="left_freeboard_text">게시판</span>
+			<a class="left_FreeboardForm_section"
+				href="../Controller/FreeboardList.do"> <span
+				class="left_freeboard_text">게시판</span>
 			</a>
 		</div>
-		
-		
+
+
 		<div class="left_holiday_background">
-			<span class="left_holiday_text">휴가관리</span>
+			<a class="left_ShareForm_section"
+				href="../Controller/HoliDayCount.do"> <span
+				class="left_holiday_text">휴가관리</span>
+			</a>
 		</div>
 		<div class="left_info_background">
-			<a href="../Controller/infoLoad.do">
+			<a class="left_ShareForm_section" href="../Controller/infoLoad.do">
 				<span class="left_info_text">내정보</span>
 			</a>
+		</div>
+		<div>
+			<%
+			String inpemp_grade = (String) session.getAttribute("inpemp_grade");
+			if (inpemp_grade != null && inpemp_grade.equals("사장")) {
+			%>
+			<div class="left_new_Id_background">
+				<a class="left_ShareForm_section" href="../NewRegist/NewRegist.jsp">
+					<span class="left_new_Id_text">사원관리</span>
+				</a>
+			</div>
+			<%
+			}
+			%>
 		</div>
 	</div>
 </body>

@@ -35,7 +35,7 @@
 /* 사용가능한 휴가 text 위치 수정 */
 .middle-text-container {
 	position: relative;
-	margin-top: -3%;
+	margin-top: 0%;
 	margin-left: 0%;
 	margin-right: 0%;
 	font-size: 200%;
@@ -70,7 +70,7 @@ body {
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
-	margin-left: 400px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
+	margin-left: 10%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;
 }
@@ -100,14 +100,11 @@ body {
 						<th colspan="2">휴가 일정 (ex : YYYY-MM-DD)</th>
 					</tr>
 					<tr align="center">
-						<td>휴가 시작</td>
-						<td>휴가 복귀</td>
-					</tr>
-					<tr align="center">
-						<td><input type="text" name="start_vacation"
-							style="width: 75%; box-sizing: border-box;"></td>
-						<td><input type="text" name="end_vacation"
-							style="width: 75%; box-sizing: border-box;"></td>
+						<td colspan='2' align="center" style="text-align: center;">
+    						<input type="text" name="start_vacation" style="width: 40%; box-sizing: border-box; text-align: center;"> 
+   							 ~ 
+   							<input type="text" name="end_vacation" style="width: 40%; box-sizing: border-box; text-align: center;">
+						</td>
 					</tr>
 				</table>
 			</div>

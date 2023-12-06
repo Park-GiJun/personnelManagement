@@ -1,8 +1,5 @@
-<%@ page
-	language="java"
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="attend.AttendanceDTO"%>
 <%@ page import="java.util.ArrayList"%>
@@ -416,34 +413,21 @@ function getCurrentTime() {
 		<div class="info_profile">
 			<div class="info_profile_photo">
 				<div class="info_profile_texts">
-					<a> 이름 : ${ userinfolist.name } </a>
-					<br />
-					<a> 사번 : ${ userinfolist.empNum } </a>
-					<br />
-					<a> 전화번호 : ${ userinfolist.phone }</a>
-					<br />
-					<a> 이메일 : ${ userinfolist.email }</a>
+					<a> 이름 : ${ userinfolist.name } </a> <br /> <a> 사번 : ${ userinfolist.empNum }
+					</a> <br /> <a> 전화번호 : ${ userinfolist.phone }</a> <br /> <a> 이메일
+						: ${ userinfolist.email }</a>
 				</div>
 			</div>
 		</div>
 		<div class="info_income">
-			<div
-				class="info_income_text"
-				align="center"
-			>
+			<div class="info_income_text" align="center">
 				<div class="info_income_textbox">
 					급여정보
-					<button
-						name="print_income"
-						class="print_income"
-					>출력하기</button>
+					<button name="print_income" class="print_income">출력하기</button>
 				</div>
 
 			</div>
-			<table
-				class="income_table"
-				border="1"
-			>
+			<table class="income_table" border="1">
 				<tr>
 					<th>기본급</th>
 					<th>${ incentivelist.pay }</th>
@@ -468,50 +452,43 @@ function getCurrentTime() {
 			</table>
 		</div>
 		<div class="datepicker-container">
-			<form
-				id="monthForm"
-				action="../Controller/LoadDate.do"
-				method="post"
-			>
-				<input
-					type="hidden"
-					name="currentYear"
-					id="currentYear"
-					value=""
-				>
-				<input
-					type="hidden"
-					name="currentMonth"
-					id="currentMonth"
-					value=""
-				>
+			<form id="monthForm" action="../Controller/LoadDate.do" method="post">
+				<input type="hidden" name="currentYear" id="currentYear" value="">
+				<input type="hidden" name="currentMonth" id="currentMonth" value="">
 			</form>
 			<div class="navigation-btn">
 				<!-- 이전달로 이동하는 버튼 -->
+<<<<<<< HEAD
 				<button
 					id="prev-month-btn"
 					onclick="changeMonth(-1)"
 				>이전달</button>
+=======
+				<form action="../Controller/LoadDate.do" method="post">
+					<button id="prev-month-btn" onclick="changeMonth(-1)">이전달</button>
+				</form>
+
+>>>>>>> refs/remotes/origin/류동규
 				<!-- 현재 월과 년도를 표시하는 곳 -->
 				<a id="current-month-year"></a>
 				<!-- 다음달로 이동하는 버튼 -->
+<<<<<<< HEAD
 				<button
 					id="next-month-btn"
 					onclick="changeMonth(1)"
 				>다음달</button>
+=======
+				<form action="../Controller/LoadDate.do" method="post">
+					<button id="next-month-btn" onclick="changeMonth(1)">다음달</button>
+				</form>
+>>>>>>> refs/remotes/origin/류동규
 			</div>
 			<table id="datepicker-table">
 			</table>
 			<div class="info_check_buttons"></div>
 			<div class="check_btn">
-				<button
-					type="button"
-					id='commute-button'
-				>출근</button>
-				<button
-					type="button"
-					id='leave-button'
-				>퇴근</button>
+				<button type="button" id='commute-button'>출근</button>
+				<button type="button" id='leave-button'>퇴근</button>
 			</div>
 		</div>
 		<div class="info_commute"></div>
