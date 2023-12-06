@@ -458,7 +458,7 @@ body {
    
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
 	
-	<button class='next_btn' onclick="location.href='Calender.jsp';">></button>
+	<button class='next_btn' onclick="location.href='Company_Cal.jsp';">></button>
 	
 	<div class="reverse"></div>
   
