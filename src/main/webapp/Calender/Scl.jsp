@@ -539,44 +539,44 @@ function showDateAndAlert(day) {
 }
 
 //일정 추가하기 버튼 눌렀을 때 설정
+// 일정 추가를 위한 고유한 식별자
+var eventCounter = 1;
+
 function confirmPlus() {
-    while (true) {
-        // 사용자로부터 입력을 받기 위한 prompt 대화상자 사용
-        var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
+    // 사용자로부터 입력을 받기 위한 prompt 대화상자 사용
+    var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
 
-        // 사용자가 "확인"을 클릭하고 값을 입력한 경우
-        if (userInput !== null && userInput !== "") {
-            // 사용자가 "확인"을 클릭하고 값을 입력한 경우, userInput 변수에 입력된 값이 포함됩니다.
-            console.log("사용자가 이벤트를 추가하려고 합니다:", userInput);
+    // 사용자가 "확인"을 클릭하고 값을 입력한 경우
+    if (userInput !== null && userInput !== "") {
+        // 사용자가 "확인"을 클릭하고 값을 입력한 경우, userInput 변수에 입력된 값이 포함됩니다.
+        console.log("사용자가 이벤트를 추가하려고 합니다:", userInput);
 
-            // 일정 추가 여부를 물어보고 결과에 따라 메시지 표시
-            var result = window.confirm("일정을 추가하시겠습니까?");
-            if (result) {
-                // 사용자가 입력을 취소하지 않은 경우 새로운 <p> 엘리먼트 생성
-                var newParagraph = document.createElement('p');
-                newParagraph.textContent = userInput;
-                
-                var existingParagraphs = document.querySelectorAll('.reverse p');
-                var lastParagraph = existingParagraphs[existingParagraphs.length - 1];
-                
-                if (lastParagraph) {
-                    lastParagraph.insertAdjacentElement('afterend', newParagraph);
-                }
-                
-                window.alert("일정이 추가되었습니다");
-                break;
-            } else {
-                window.alert("취소되었습니다");
-                break;
-            }
-        } else if (userInput === "") {
-            // 사용자가 "확인"을 클릭하고 값을 입력하지 않은 경우
-            alert("일정을 입력해주세요.");
+        // 일정 추가 여부를 물어보고 결과에 따라 메시지 표시
+        var result = window.confirm("일정을 추가하시겠습니까?");
+        if (result) {
+            // 사용자가 입력을 취소하지 않은 경우 새로운 <p> 엘리먼트 생성
+            var newParagraph = document.createElement('p');
+            newParagraph.textContent = userInput;
+
+            // 고유한 ID 추가
+            newParagraph.id = 'event' + eventCounter;
+
+            // 고유한 식별자를 증가시킴
+            eventCounter++;
+
+            // <div class="reverse2" id="contentContainer">에 <p> 추가
+            document.getElementById('contentContainer').appendChild(newParagraph);
+
+            window.alert("일정이 추가되었습니다");
         } else {
-            // 사용자가 "취소"를 클릭하거나 대화상자를 아무 값도 입력하지 않고 닫은 경우
-            console.log("사용자가 대화상자를 취소했거나 닫았습니다.");
-            break;
+            window.alert("취소되었습니다");
         }
+    } else if (userInput === "") {
+        // 사용자가 "확인"을 클릭하고 값을 입력하지 않은 경우
+        alert("일정을 입력해주세요.");
+    } else {
+        // 사용자가 "취소"를 클릭하거나 대화상자를 아무 값도 입력하지 않고 닫은 경우
+        console.log("사용자가 대화상자를 취소했거나 닫았습니다.");
     }
 }
 
@@ -599,21 +599,7 @@ function confirmDelete() {
 }
 
 
-function addContent(contentText) {
-    // 새로운 <p> 엘리먼트 생성
-    var newParagraph = document.createElement('p');
-    newParagraph.textContent = contentText;
 
-    // 이미 존재하는 <p> 엘리먼트들을 가져옴
-    var existingParagraphs = document.querySelectorAll('.reverse1 p');
-
-    // 새로운 <p> 엘리먼트의 위치를 계산하여 추가
-    var newTopPosition = (existingParagraphs.length) * 40; // 40px 간격으로 조절, 원하는 값으로 수정 가능
-    newParagraph.style.top = newTopPosition + 'px';
-
-    // 새로운 <p> 엘리먼트를 컨테이너에 추가
-    document.getElementById('contentContainer').appendChild(newParagraph);
-}
 
 
 
@@ -681,7 +667,7 @@ body {
 		 <button class='del_btn' onclick="confirmDelete();">삭제하기</button>
 		 
 		 <div class="reverse2" id="contentContainer" >
-		 	<p class='content1' onclick="location.href='Calender.jsp';">  </p>
+		 	
 		 </div>	 
 	</div>
   
