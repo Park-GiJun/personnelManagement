@@ -24,6 +24,13 @@
 	border-radius: 30px;
 }
 
+/* 부서 버튼 위치 수정 */
+.middle-Team_btn-container {
+	position: relative;
+	margin-top: 10%;
+	margin-left: 50%;
+}
+
 /* 정보등록 위치 수정 */
 .middle-button-container {
 	position: relative;
@@ -43,7 +50,7 @@
 /* 사원 추가 위치 수정 */
 .middle-NewRegist-container {
 	position: relative;
-	margin-top: 7.5%;
+	margin-top: 1%;
 	margin-left: 0%;
 	margin-right: 0%;
 	font-size: 150%;
@@ -80,6 +87,31 @@ body {
 	<!-- 왼쪽 페이지 목록 -->
 	<jsp:include page="../MainPage/Left.jsp" />
 	<div class="content">
+
+		<form name="team_form" method="post"
+			action="../Controller/NewRegistTeamSearch.do" accept-charset="UTF-8">
+			<div class="middle-Team_btn-container">
+				<label>
+				<input type="radio" name="department" value="전체" onclick="submitForm()">전체
+				</label>
+				<label>
+				<input type="radio" name="department" value="개발" onclick="submitForm()">개발
+				</label>
+				<label>
+				<input type="radio" name="department" value="인사" onclick="submitForm()">인사
+				</label>
+				<label>
+				<input type="radio" name="department" value="디자인" onclick="submitForm()">디자인
+				</label>
+			</div>
+		</form>
+
+		<script>
+			function submitForm() {
+				document.forms["team_form"].submit();
+			}
+		</script>
+
 		<form name="vacation_form" method="post"
 			action="../Controller/NewRegist.do" accept-charset="UTF-8">
 
@@ -103,9 +135,11 @@ body {
 							<td align="center"><input type="text" name="emp_num"
 								style="width: 90%; box-sizing: border-box; text-align: center;">
 							</td>
+
 							<td align="center"><input type="text" name="emp_grade"
 								style="width: 90%; box-sizing: border-box; text-align: center;">
 							</td>
+
 							<td align="center"><input type="text" name="team"
 								style="width: 90%; box-sizing: border-box; text-align: center;">
 							</td>

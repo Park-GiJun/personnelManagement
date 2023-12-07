@@ -24,7 +24,7 @@
 /* 공통 스타일 */
 .left_calender_background, .left_shareform_background,
 	.left_freeboard_background, .left_holiday_background,
-	.left_info_background, .left_new_Id_background {
+	.left_info_background, .left_new_Id_background, .left_Holiday__Approvalbackground {
 	width: 100%;
 	height: 12%;
 	background: rgb(0, 64, 128);
@@ -35,7 +35,7 @@
 
 /* 텍스트 스타일 */
 .left_calender_text, .left_shareform_text, .left_freeboard_text,
-	.left_holiday_text, .left_info_text, .left_new_Id_text {
+	.left_holiday_text, .left_info_text, .left_new_Id_text, .left_Holiday__Approvalbackground {
 	width: 100%;
 	color: rgb(255, 255, 255);
 	position: absolute;
@@ -67,6 +67,10 @@
 
 .left_info_background {
 	top: 52%;
+}
+
+.left_Holiday__Approvalbackground{
+	top: 82%;
 }
 
 .left_new_Id_background {
@@ -101,7 +105,7 @@
 
 		<div class="left_holiday_background">
 			<a class="left_ShareForm_section" href="../Controller/HoliDayCount.do"> 
-				<span class="left_holiday_text">휴가관리</span>
+				<span class="left_holiday_text">휴가신청</span>
 			</a>
 		</div>
 		<div class="left_info_background">
@@ -117,6 +121,12 @@
 			<div class="left_new_Id_background">
 				<a class="left_ShareForm_section" href="../Controller/NewRegistLoad.do">
 					<span class="left_new_Id_text">사원관리</span>
+				</a>
+			</div>
+			
+			<div class="left_Holiday__Approvalbackground">
+				<a class="left_ShareForm_section" href="../Controller/NewRegistLoad.do">
+					<span class="left_new_Id_text">휴가 관리</span>
 				</a>
 			</div>
 			<%

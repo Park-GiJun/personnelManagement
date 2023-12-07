@@ -28,6 +28,9 @@ public class NewRegistController extends HttpServlet {
 		String emp_num = req.getParameter("emp_num");
 		String emp_grade = req.getParameter("emp_grade");
 		String team = req.getParameter("team");
+		// 부서별 검색
+		String department = req.getParameter("department");
+		System.out.println(department);
 		
 		if (emp_grade.equals("부장")) {
 			grade = "2";
@@ -50,7 +53,10 @@ public class NewRegistController extends HttpServlet {
 		System.out.println("[" + team + "]");
 
 		NewRegistDAO dao = new NewRegistDAO();
+		//사원 등록
 		dao.NewRegist(name, emp_num, emp_grade, team, grade);
+		//휴가테이블 사원정보 입력
+		dao.NewRegistHoliday(emp_num);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 
