@@ -535,6 +535,17 @@ function confirmPlus() {
             // 일정 추가 여부를 물어보고 결과에 따라 메시지 표시
             var result = window.confirm("일정을 추가하시겠습니까?");
             if (result) {
+                // 사용자가 입력을 취소하지 않은 경우 새로운 <p> 엘리먼트 생성
+                var newParagraph = document.createElement('p');
+                newParagraph.textContent = userInput;
+                
+                var existingParagraphs = document.querySelectorAll('.reverse p');
+                var lastParagraph = existingParagraphs[existingParagraphs.length - 1];
+                
+                if (lastParagraph) {
+                    lastParagraph.insertAdjacentElement('afterend', newParagraph);
+                }
+                
                 window.alert("일정이 추가되었습니다");
                 break;
             } else {
@@ -557,7 +568,13 @@ function confirmDelete() {
     // 일정 삭제 여부를 물어보고 결과에 따라 메시지 표시
     var result = window.confirm("일정을 삭제하시겠습니까?");
     if (result) {
+    	var paragraphs = document.querySelectorAll('.reverse p');
+        var lastParagraph = paragraphs[paragraphs.length - 1];
         window.alert("삭제되었습니다");
+        
+        if (lastParagraph) {
+            lastParagraph.remove();
+        }
     } else {
         // 사용자가 "취소"를 클릭한 경우
         // 추가적인 작업을 수행하거나 아무 작업도 하지 않음
@@ -619,7 +636,7 @@ body {
 		 
 		 <p class='content1'>1. 일정1</p>
 		 <p class='content2'>2. 일정2</p>
-		 <p class='content3'>ㅇ러매냘어ㅣㅏㅁ어린리ㅏ어리;ㅇ러밍;럼ㅇ리ㅑㅓ애랴머리ㅏㅇ너ㅣ라어리;ㄴㅇ러ㅣㄴㅁㅇ러ㅣㅇㄴㅁ러ㅣㅇ;럼닝럼;ㅣ런ㄹ;ㅑㅓㅇ리나얼ㄴ랴ㅐㅇ머램얼ㅇ니렁ㄴ하ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ</p>
+		 <p class='content3'>ㅇ러매냘어ㅣㅏㅁ어린리ㅏ어리;ㅇ러</p>
 		 
 	</div>
   
