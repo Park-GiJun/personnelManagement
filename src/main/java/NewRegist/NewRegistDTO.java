@@ -5,7 +5,35 @@ public class NewRegistDTO {
 	private String Emp_num;
 	private String Emp_grade;
 	private String Team;
+	private String Email;
+	private String Pass;
+	private String Phone;
+	private String Work_start_day;
 	
+	public String getEmail() {
+		return Email;
+	}
+	public void setEmail(String email) {
+		Email = email;
+	}
+	public String getPass() {
+		return Pass;
+	}
+	public void setPass(String pass) {
+		Pass = pass;
+	}
+	public String getPhone() {
+		return Phone;
+	}
+	public void setPhone(String phone) {
+		Phone = phone;
+	}
+	public String getWork_start_day() {
+		return Work_start_day;
+	}
+	public void setWork_start_day(String work_start_day) {
+		Work_start_day = work_start_day;
+	}
 	public String getName() {
 		return Name;
 	}
