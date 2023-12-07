@@ -117,6 +117,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 	font-size: 20px;
 	position: absolute;
 	color : #fff;	
+	top : 1px
 	
 	cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
@@ -598,16 +599,34 @@ function confirmDelete() {
 }
 
 
-// DOM 요소를 선택
-var contentContainer = document.getElementById('contentContainer');
+function addContent(contentText) {
+    // 새로운 <p> 엘리먼트 생성
+    var newParagraph = document.createElement('p');
+    newParagraph.textContent = contentText;
+
+    // 이미 존재하는 <p> 엘리먼트들을 가져옴
+    var existingParagraphs = document.querySelectorAll('.reverse1 p');
+
+    // 새로운 <p> 엘리먼트의 위치를 계산하여 추가
+    var newTopPosition = (existingParagraphs.length) * 40; // 40px 간격으로 조절, 원하는 값으로 수정 가능
+    newParagraph.style.top = newTopPosition + 'px';
+
+    // 새로운 <p> 엘리먼트를 컨테이너에 추가
+    document.getElementById('contentContainer').appendChild(newParagraph);
+}
+
+
+
+//DOM 요소를 선택
+//var contentContainer = document.getElementById('contentContainer');
 
 // <p> 요소들을 선택
-var paragraphs = contentContainer.querySelectorAll('p');
+//var paragraphs = contentContainer.querySelectorAll('p');
 
 // <p> 요소들을 순회하면서 순서대로 출력
-paragraphs.forEach(function (paragraph, index) {
-    console.log(paragraph.textContent); // 순서대로 출력
-});
+//paragraphs.forEach(function (paragraph, index) {
+   // console.log(paragraph.textContent); // 순서대로 출력
+//});
 
 </script>
 
@@ -662,8 +681,7 @@ body {
 		 <button class='del_btn' onclick="confirmDelete();">삭제하기</button>
 		 
 		 <div class="reverse2" id="contentContainer" >
-		 	<p class='content1' onclick="location.href='Calender.jsp';">실험용</p>
-		 	
+		 	<p class='content1' onclick="location.href='Calender.jsp';">  </p>
 		 </div>	 
 	</div>
   
