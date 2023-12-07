@@ -58,14 +58,66 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 	color : #fff;
     top: 15px;
     left: 40px;
-	
 }
+
+
+
+/* 개인 일정 추가하기 버튼 설정 */
+.plus_btn {
+	text-align: center;
+	font-size: 15px;
+	position: absolute;
+	background-color: #fff;
+    top: 80px;
+    left: 70px;
+    
+    border: none;
+    color: #1C427E;
+    
+    width: 80px;
+  	height: 40px;
+    
+    border-radius: 30px;
+    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+}
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+.plus_btn:hover {
+  color: white;
+  background: orange;
+}
+
+/* 개인 일정 삭제하기 버튼 설정 */
+.del_btn {
+	text-align: center;
+	font-size: 15px;
+	position: absolute;
+	background-color: #fff;
+    top: 80px;
+    left: 160px;
+    
+    border: none;
+    color: #1C427E;
+    
+    width: 80px;
+  	height: 40px;
+    
+    border-radius: 30px;
+    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+}
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+.del_btn:hover {
+  color: white;
+  background: orange;
+}
+
 
 .content1 {
 	font-size: 20px;
 	position: absolute;
 	color : #fff;
-    top: 100px;
+    top: 150px;
     left: 20px;
 	
 }
@@ -74,7 +126,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 	font-size: 20px;
 	position: absolute;
 	color : #fff;
-    top: 130px;
+    top: 180px;
     left: 20px;
 	
 }
@@ -83,7 +135,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 	font-size: 20px;
 	position: absolute;
 	color : #fff;
-    top: 160px;
+    top: 210px;
     left: 20px;
 	
 }
@@ -105,6 +157,10 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   animation-duration:2s;
   animation-iteration-count:3;
   animation-timing-function:ease-in;
+}
+
+.reverse::-webkit-scrollbar {
+    display: none; /* 스크롤 기능은 계속 적용되지만 안 보이게 설정 */
 }
 
 @-webkit-keyframes direction {
@@ -256,7 +312,7 @@ button.next_btn:hover {
 	
 	position: absolute;
   	top: -40px;
-  	left: 300px;
+  	left: 250px;
   	
   	font-size: 100x;
   	border-radius: 30px;
@@ -465,6 +521,53 @@ function showDateAndAlert(day) {
     // 예를 들어, 다른 페이지로 이동하려면 window.location.href = '다른페이지.jsp';
 }
 
+// 일정 추가하기 버튼 눌렀을 때 설정
+function confirmPlus() {
+	
+	while (true) {
+		
+		// 사용자로부터 입력을 받기 위한 prompt 대화상자 사용
+		var userInput = prompt("일정을 추가하시겠습니까?", "");
+
+		// 사용자가 "확인"을 클릭하고 값을 입력한 경우
+		if (userInput !== null && userInput !== "") {
+		    // 사용자가 "확인"을 클릭하고 값을 입력한 경우, userInput 변수에 입력된 값이 포함됩니다.
+		    console.log("사용자가 이벤트를 추가하려고 합니다:", userInput);
+		    
+		    var result = confirm("일정을 추가하시겠습니까?");
+		    if (result) {
+		    	var result = confirm("추가되었습니다");
+		    	break;
+		    } else {
+		    	var result = confirm("취소되었습니다");
+		    	break;
+		    }
+
+		    // userInput 값을 사용하여 필요한 작업을 수행합니다.
+		} else if (userInput === "") {
+		    // 사용자가 "확인"을 클릭하고 값을 입력하지 않은 경우
+		    alert("일정을 입력해주세요.");
+		} else {
+		    // 사용자가 "취소"를 클릭하거나 대화상자를 아무 값도 입력하지 않고 닫은 경우
+		    console.log("사용자가 대화상자를 취소했거나 닫았습니다.");
+		    break;
+		}
+		
+	}
+    
+}
+
+// 일정 삭제하기 버튼 눌렀을 때 설정
+function confirmDelete() {
+    var result = confirm("일정을 삭제하시겠습니까?");
+    if (result) {
+    	var result = confirm("삭제되었습니다");
+    } else {
+        
+    }
+}
+
+
 </script>
 
 
@@ -513,6 +616,9 @@ body {
 	
 	<div class="reverse">
 		 <h2 class='re_day'><%= year %>년 <%= month %>월 <%= day %>일</h2>
+		 
+		 <button class='plus_btn' onclick="confirmPlus();">추가하기</button>
+		 <button class='del_btn' onclick="confirmDelete();">삭제하기</button>
 		 
 		 <p class='content1'>1. 일정1</p>
 		 <p class='content2'>2. 일정2</p>
