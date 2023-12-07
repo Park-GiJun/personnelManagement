@@ -55,7 +55,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 	text-align: center;
 	font-size: 35px;
 	position: absolute;
-	color : #fff;
+	color : orange;
     top: 15px;
     left: 40px;
 }
@@ -116,28 +116,21 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 .content1 {
 	font-size: 20px;
 	position: absolute;
-	color : #fff;
-    top: 150px;
-    left: 20px;
+	color : #fff;	
 	
+	cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
 .content2 {
 	font-size: 20px;
 	position: absolute;
-	color : #fff;
-    top: 180px;
-    left: 20px;
-	
+	color : #fff;	
 }
 
 .content3 {
 	font-size: 20px;
 	position: absolute;
 	color : #fff;
-    top: 210px;
-    left: 20px;
-	
 }
 
 
@@ -172,6 +165,29 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   }
 }
 
+
+
+.reverse2{
+  top:140px;
+  
+  
+   overflow: auto;
+
+   position:absolute;
+  left:10px;
+  width:310px;
+  height:900px;
+  background: #1C427E;
+  color:#fff;
+  /* animation-name:direction; */
+  animation-duration:2s;
+  animation-iteration-count:3;
+  animation-timing-function:ease-in;
+}
+
+.reverse2::-webkit-scrollbar {
+    display: none; /* 스크롤 기능은 계속 적용되지만 안 보이게 설정 */
+}
 
 
 
@@ -582,6 +598,17 @@ function confirmDelete() {
 }
 
 
+// DOM 요소를 선택
+var contentContainer = document.getElementById('contentContainer');
+
+// <p> 요소들을 선택
+var paragraphs = contentContainer.querySelectorAll('p');
+
+// <p> 요소들을 순회하면서 순서대로 출력
+paragraphs.forEach(function (paragraph, index) {
+    console.log(paragraph.textContent); // 순서대로 출력
+});
+
 </script>
 
 
@@ -634,10 +661,10 @@ body {
 		 <button class='plus_btn' onclick="confirmPlus();">추가하기</button>
 		 <button class='del_btn' onclick="confirmDelete();">삭제하기</button>
 		 
-		 <p class='content1'>1. 일정1</p>
-		 <p class='content2'>2. 일정2</p>
-		 <p class='content3'>ㅇ러매냘어ㅣㅏㅁ어린리ㅏ어리;ㅇ러</p>
-		 
+		 <div class="reverse2" id="contentContainer" >
+		 	<p class='content1' onclick="location.href='Calender.jsp';">실험용</p>
+		 	
+		 </div>	 
 	</div>
   
   	
