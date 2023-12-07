@@ -118,7 +118,7 @@ body {
 
 				<tr>
 					<td colspan="3" style="text-align: right;">비밀번호 <input
-						type="text" name="Freeboardpassword" />
+						type="password" name="Freeboardpassword" />
 						<button type="submit">등록</button>
 					</td>
 				</tr>
