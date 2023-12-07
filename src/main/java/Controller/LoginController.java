@@ -34,6 +34,7 @@ public class LoginController extends HttpServlet {
 		int inpGrade = dto.getGrade();
 
 		System.out.println("inp : " + inploginNum + " " + inploginPwd + " db : " + loginNum + " " + loginPassword);
+		
 
 		// Get the current date
 		LocalDate currentDate = LocalDate.now();

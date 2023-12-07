@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import CountSalary.CountSalaryDAO;
 import Income.IncentiveDAO;
 import Income.IncentiveDTO;
 import Income.Incentive_ValueDAO;
@@ -52,6 +53,9 @@ public class InfoLoadController extends HttpServlet {
 
 		// Now you can use the 'formattedDate' in your code
 		System.out.println("Current Year and Month: " + formattedDate);
+		
+		CountSalaryDAO cDao = new CountSalaryDAO();
+		cDao.countSalary(userId, formattedDate);
 
 		AttendanceDAO attenddao = new AttendanceDAO();
 		Map<String, Map<String, String>> attendDateMap = attenddao.loadDateAttendance(userId, currentDate);

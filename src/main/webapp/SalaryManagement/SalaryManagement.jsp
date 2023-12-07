@@ -66,6 +66,17 @@ body {
 		var selectedTeam = document.getElementById("selectTeam").value;
 		window.location.href = "SalaryManagement.do?selectTeam=" + selectedTeam;
 	}
+
+	function openModifyWindow(team, name, emp_num, emp_grade, pay, total_pay,
+			incentive, holiday_pay, extra_work_pay) {
+		var detailsUrl = "../SalaryManagement/EmployeeDetails.jsp" + "?team=" + team + "&name="
+				+ name + "&emp_num=" + emp_num + "&emp_grade=" + emp_grade
+				+ "&pay=" + pay + "&total_pay=" + total_pay + "&incentive="
+				+ incentive + "&holiday_pay=" + holiday_pay
+				+ "&extra_work_pay=" + extra_work_pay;
+
+		window.open(detailsUrl, "_blank", "width=600, height=400");
+	}
 </script>
 </head>
 <body>
@@ -111,20 +122,23 @@ body {
 					</c:when>
 					<c:otherwise>
 						<c:forEach
-							items="${ salaryEMPList }"
+							items="${salaryEMPList}"
 							var="EMPLists"
 							varStatus="loop"
 						>
-							<tr align="center">
-								<td>${ EMPLists.team }</td>
-								<td>${ EMPLists.name }</td>
-								<td>${ EMPLists.emp_num }</td>
-								<td>${ EMPLists.emp_grade }</td>
-								<td>${ EMPLists.pay }</td>
-								<td>${ EMPLists.total_pay }</td>
-								<td>${ EMPLists.incentive }</td>
-								<td>${ EMPLists.holiday_pay }</td>
-								<td>${ EMPLIsts.extra_work_pay }</td>
+							<tr
+								align="center"
+								onclick="openModifyWindow('${EMPLists.team}', '${EMPLists.name}', '${EMPLists.emp_num}', '${EMPLists.emp_grade}', '${EMPLists.pay}', '${EMPLists.total_pay}', '${EMPLists.incentive}', '${EMPLists.holiday_pay}', '${EMPLists.extra_work_pay}')"
+							>
+								<td>${EMPLists.team}</td>
+								<td>${EMPLists.name}</td>
+								<td>${EMPLists.emp_num}</td>
+								<td>${EMPLists.emp_grade}</td>
+								<td>${EMPLists.pay}</td>
+								<td>${EMPLists.total_pay}</td>
+								<td>${EMPLists.incentive}</td>
+								<td>${EMPLists.holiday_pay}</td>
+								<td>${EMPLists.extra_work_pay}</td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>

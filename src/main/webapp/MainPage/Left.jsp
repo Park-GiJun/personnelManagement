@@ -142,7 +142,7 @@
 			<%
 			int inpGrade = (int) session.getAttribute("inpGrade");
 			System.out.println(inpGrade);
-			if (inpGrade < 2) {
+			if (inpGrade < 3) {
 			%>
 			<div class="left_new_Id_background">
 				<a

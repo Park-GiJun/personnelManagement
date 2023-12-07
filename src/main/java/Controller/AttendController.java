@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import CountSalary.CountSalaryDAO;
 import attend.AttendanceDAO;
 
 @WebServlet("/Controller/Attend.do")
@@ -36,6 +37,8 @@ public class AttendController extends HttpServlet {
 		} else {
 			dao.updateLeaveTime(emp_num, date, currentTime);
 		}
+		
+		
 		
 	}
 
