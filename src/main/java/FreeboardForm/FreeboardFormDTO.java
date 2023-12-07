@@ -10,21 +10,6 @@ public class FreeboardFormDTO {
 	private Date post_date;
 	private int visitcount;
 
-	public FreeboardFormDTO(int anno_board_num,int board_pass, String title,String content
-			, Date post_date,int visitcount) {
-		this.anno_board_num =anno_board_num;
-		this.board_pass =board_pass ;
-		this.title = title;
-		this.content = content;
-		this.post_date = post_date;
-		this.visitcount = visitcount;
-
-	}
-
-	public FreeboardFormDTO() {
-
-	}
-
 	public int getanno_board_num() {
 		return anno_board_num;
 	}

@@ -140,8 +140,9 @@
 		</div>
 		<div>
 			<%
-			String inpemp_grade = (String) session.getAttribute("inpemp_grade");
-			if (inpemp_grade != null && inpemp_grade.equals("사장")) {
+			int inpGrade = (int) session.getAttribute("inpGrade");
+			System.out.println(inpGrade);
+			if (inpGrade < 2) {
 			%>
 			<div class="left_new_Id_background">
 				<a
@@ -154,7 +155,7 @@
 			<div class="left_salaryManagement_background">
 				<a
 					class="left_salaryManagement_section"
-					href="../SalaryManagement/SalaryManagement.jsp"
+					href="../Controller/SalaryManagement.do"
 				>
 					<span class="left_salaryManagement_text">급여관리</span>
 				</a>

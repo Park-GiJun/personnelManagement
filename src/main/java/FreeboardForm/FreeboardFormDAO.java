@@ -83,16 +83,16 @@ public class FreeboardFormDAO extends DBConnPool {
 		return anno_boards;
 	}
 
-	public int freeinsertWrite(String title, String content, String pass) {
+	public int freeinsertWrite(String title, String content, int pass) {
 		int result = 0;
 		try {
 			System.out.println("freeinsertWrite");
-			String query = "INSERT INTO anno_board (anno_board_num, board_pass, title, content, visitcount ) VALUES (anno_board_num.NEXTVAL,?, ?, ?, 0)";
+			String query = "INSERT INTO anno_board (anno_board_num, board_pass, title, content, visitcount ) VALUES (anno_board_num.NEXTVAL, ?, ?, ?, 0)";
 
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, title);
 			psmt.setString(2, content);
-			psmt.setString(3, pass);
+			psmt.setInt(3, pass);
 			result = psmt.executeUpdate();
 
 			System.out.println(title);

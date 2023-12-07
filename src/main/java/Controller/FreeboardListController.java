@@ -79,8 +79,6 @@ public class FreeboardListController extends HttpServlet {
 		request.setAttribute("FreeboardFormLists", FreeboardFormLists);
 		request.setAttribute("map2", map);
 		request.getRequestDispatcher("/BulletinBoard/FreeboardForm.jsp").forward(request, response);
-
-		request.getRequestDispatcher("/BulletinBoard/Freeboard.jsp").forward(request, response);
 	}
 
 }

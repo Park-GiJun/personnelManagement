@@ -61,33 +61,74 @@ body {
 	width: 100%;
 }
 </style>
+<script>
+	function handleChange() {
+		var selectedTeam = document.getElementById("selectTeam").value;
+		window.location.href = "SalaryManagement.do?selectTeam=" + selectedTeam;
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="../MainPage/Left.jsp" />
 	<div class="content">
-		<div class="none"></div>
+		<div class="none">
+			<select
+				id="selectTeam"
+				name="selectTeam"
+				onchange="handleChange()"
+			>
+				<option value="기본">팀선택</option>
+				<option value="전체">전체</option>
+				<option value="인사">인사</option>
+				<option value="디자인">디자인</option>
+				<option value="개발">개발</option>
+			</select>
+		</div>
 		<div class="salary_table_background">
 			<table
 				border="1"
 				class="salary_table"
 			>
 				<tr>
+					<td>부서</td>
 					<td>이름</td>
 					<td>사번</td>
+					<td>직급</td>
 					<td>기본급</td>
 					<td>총 인센티브</td>
 					<td>성과급</td>
-					<td>기본급</td>
+					<td>추가급</td>
 					<td>추가근무수당</td>
 				</tr>
-				<tr>
-					<td>류동규</td>
-					<td>2023120401</td>
-					<td>200</td>
-					<td>300</td>
-					<td>100</td>
-					<td>100</td>
-					<td>20</td>
+				<c:choose>
+					<c:when test="${ empty salaryEMPList } ">
+						<tr>
+							<td
+								colspan="9"
+								align="center"
+							>정보 없음</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach
+							items="${ salaryEMPList }"
+							var="EMPLists"
+							varStatus="loop"
+						>
+							<tr align="center">
+								<td>${ EMPLists.team }</td>
+								<td>${ EMPLists.name }</td>
+								<td>${ EMPLists.emp_num }</td>
+								<td>${ EMPLists.emp_grade }</td>
+								<td>${ EMPLists.pay }</td>
+								<td>${ EMPLists.total_pay }</td>
+								<td>${ EMPLists.incentive }</td>
+								<td>${ EMPLists.holiday_pay }</td>
+								<td>${ EMPLIsts.extra_work_pay }</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</table>
 		</div>
 	</div>
