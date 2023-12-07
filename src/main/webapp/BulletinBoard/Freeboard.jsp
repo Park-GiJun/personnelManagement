@@ -48,7 +48,6 @@ body {
 				if (form.Freeboardcontent.value == null
 						|| form.Freeboardcontent.value.trim() === "") {
 					alert("내용을 입력하세요");
-					form.Freeboardcontent.focus();
 					return false;
 				}
 				if (form.Freeboardpassword.value == null
@@ -61,20 +60,27 @@ body {
 					alert("제목을 입력해주세요.");
 					return false;
 				}
+				// 작성 완료 메시지
+				alert("작성 완료되었습니다");
+
+				// 페이지 이동
+				window.location.href = '../BulletinBoard/FreeboardForm.jsp';
+
+		
 			}
 		</script>
-		<form name="FreeboardFrame" method="post"
-			enctype="multipart/form-data" action="../Controller/Freeboard.do"
+		<form method="post" action="../Controller/FreeboardWrite.do"
 			onsubmit="return validateForm(this)">
 			<table align="center" border="1" height="80%" width="90%">
 				<tr>
 					<td><input type="text" value="제목을 입력해 주세요."
-						name="Freeboardtitle" style="width: 90%;" />
+						name="Freeboardtitle" style="width: 90%;"
+						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
 					</td>
 				</tr>
 				<tr>
-					<td><textarea name="Freeboardcontent"
-							style="width: 100%; height: 800px;"></textarea></td>
+					<td><input type="text" name="Freeboardcontent"
+						style="width: 100%; height: 800px;"></td>
 				</tr>
 
 				<tr>
@@ -85,7 +91,7 @@ body {
 				<tr>
 					<td colspan="3" style="text-align: right;">
 						<button type="button"
-							onclick="location.href='../Controller/list.do';">목록</button>
+							onclick="location.href='../BulletinBoard/FreeboardForm.jsp';">목록</button>
 						<button type="submit">작성완료</button>
 					</td>
 				</tr>

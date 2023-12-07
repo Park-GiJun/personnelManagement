@@ -1,22 +1,27 @@
 package FreeboardForm;
 
-import java.sql.Date;
+import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.servlet.ServletContext;
+import javax.sql.DataSource;
+
 import DBcontrol.DBConnPool;
 
-public class FreeboardFormDAO extends DBConnPool{
+public class FreeboardFormDAO extends DBConnPool {
 
 	public FreeboardFormDAO() {
 		super();
 	}
 
-	public int FreeboardListCont(Map<String, Object>map) {
+	public int FreeboardListCont(Map<String, Object> map) {
 		System.out.println("FreeboardListCont");
-		int totalcount =0;
-		
+		int totalcount = 0;
+
 		String query = "SELECT COUNT(*) FROM anno_board";
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
@@ -34,7 +39,7 @@ public class FreeboardFormDAO extends DBConnPool{
 		System.out.println(totalcount);
 		return totalcount;
 	}
-	
+
 	public List<FreeboardFormDTO> selectListPage(Map<String, Object> map) {
 		System.out.println("selectListpage");
 		List<FreeboardFormDTO> anno_boards = new Vector<FreeboardFormDTO>();
@@ -50,8 +55,7 @@ public class FreeboardFormDAO extends DBConnPool{
 		query += " ORDER BY anno_board_num DESC) Tb) WHERE rNum BETWEEN ? AND ?";
 		System.out.println("FreeboardFormController : 51 lines --------------------------");
 		System.out.println(query);
-		
-		
+
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, map.get("start").toString());
@@ -71,7 +75,6 @@ public class FreeboardFormDAO extends DBConnPool{
 				dto.setvisitcount(rs.getInt("visitcount"));
 				anno_boards.add(dto);
 				System.out.println(dto.getanno_board_num()+dto.getboard_pass()+dto.gettitle());
-
 			}
 		} catch (Exception e) {
 			System.out.println("게시물 조회중 예외 발생");
@@ -79,6 +82,30 @@ public class FreeboardFormDAO extends DBConnPool{
 		}
 		return anno_boards;
 	}
-	
-	
+
+	public int freeinsertWrite(String title, String content, int pass) {
+		int result = 0;
+		try {
+			System.out.println("freeinsertWrite");
+			String query = "INSERT INTO anno_board (anno_board_num, board_pass, title, content, visitcount ) VALUES (anno_board_num.NEXTVAL, ?, ?, ?, 0)";
+
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, pass);
+			psmt.setString(2, title);
+			psmt.setString(3, content);
+			result = psmt.executeUpdate();
+
+			System.out.println(title);
+			System.out.println(content);
+			System.out.println(pass);
+			con.setAutoCommit(false); // auto-commit을 true로 설정
+//			result = psmt.executeUpdate();
+//			con.commit(); // 트랜잭션 커밋
+		} catch (Exception e) {
+			System.out.println("게시물 입력중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

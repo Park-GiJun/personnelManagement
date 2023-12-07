@@ -1,6 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page
+	language="java"
+	contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+%>
+<%@ taglib
+	prefix="c"
+	uri="http://java.sun.com/jsp/jstl/core"
+%>
 
 <!DOCTYPE html>
 <html>
@@ -82,28 +88,49 @@ body {
 		<!-- 다른 페이지에서 불러오는 내용 -->
 
 
-		<form name="vacation_form" method="post"
-			action="../Controller/HolidayApplicationController.do">
+		<form
+			name="vacation_form"
+			method="post"
+			action="../Controller/HolidayApplicationController.do"
+		>
 
 			<!-- 휴가 신청 버튼 -->
 			<div class="middle-text-container">
 				<a>사용가능 휴가 : ${userholidaycount.annual }일</a>
 			</div>
 			<div class="middle-button-container">
-				<button type="submit" class='my_btn'>휴가 신청</button>
+				<button
+					type="submit"
+					class='my_btn'
+				>휴가 신청</button>
 			</div>
 
 			<!-- 휴가 신청 양식 -->
 			<div class="middle-vaction_request-container">
-				<table border="1" width="100%">
+				<table
+					border="1"
+					width="100%"
+				>
 					<tr>
 						<th colspan="2">휴가 일정 (ex : YYYY-MM-DD)</th>
 					</tr>
 					<tr align="center">
-						<td colspan='2' align="center" style="text-align: center;">
-    						<input type="text" name="start_vacation" style="width: 40%; box-sizing: border-box; text-align: center;"> 
-   							 ~ 
-   							<input type="text" name="end_vacation" style="width: 40%; box-sizing: border-box; text-align: center;">
+						<td
+							colspan='2'
+							align="center"
+							style="text-align: center;"
+						>
+							<input
+								type="text"
+								name="start_vacation"
+								style="width: 40%; box-sizing: border-box; text-align: center;"
+							>
+							~
+							<input
+								type="text"
+								name="end_vacation"
+								style="width: 40%; box-sizing: border-box; text-align: center;"
+							>
 						</td>
 					</tr>
 				</table>
@@ -111,28 +138,38 @@ body {
 
 			<!-- 휴가 신청 진행사항 -->
 			<div class="middle-vaction_list-container">
-				<table border="1" width="100%">
+				<table
+					border="1"
+					width="100%"
+				>
 					<tr>
 						<th width="80%">휴가 일정</th>
 						<th width="20%">승인 여부</th>
 					</tr>
-<c:choose>
-    <c:when test="${empty holidayList}"> <!-- 게시물이 없을 때 -->
-        <tr>
-            <td colspan="2" align="center">
-                신청된 휴가가 없습니다.
-            </td>
-        </tr>
-    </c:when>
-    <c:otherwise> <!-- 게시물이 있을 때 -->
-        <c:forEach items="${holidayList}" var="row" varStatus="loop">
-            <tr align="center">
-                <td>${row.start_vacation} ~ ${row.end_vacation}</td>
-                <td>${row.approval}</td>
-            </tr>
-        </c:forEach>
-    </c:otherwise>
-</c:choose>
+					<c:choose>
+						<c:when test="${empty holidayList}">
+							<!-- 게시물이 없을 때 -->
+							<tr>
+								<td
+									colspan="2"
+									align="center"
+								>신청된 휴가가 없습니다.</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<!-- 게시물이 있을 때 -->
+							<c:forEach
+								items="${holidayList}"
+								var="row"
+								varStatus="loop"
+							>
+								<tr align="center">
+									<td>${row.start_vacation}~ ${row.end_vacation}</td>
+									<td>${row.approval}</td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</table>
 			</div>
 
