@@ -521,49 +521,47 @@ function showDateAndAlert(day) {
     // 예를 들어, 다른 페이지로 이동하려면 window.location.href = '다른페이지.jsp';
 }
 
-// 일정 추가하기 버튼 눌렀을 때 설정
+//일정 추가하기 버튼 눌렀을 때 설정
 function confirmPlus() {
-	
-	while (true) {
-		
-		// 사용자로부터 입력을 받기 위한 prompt 대화상자 사용
-		var userInput = prompt("일정을 추가하시겠습니까?", "");
+    while (true) {
+        // 사용자로부터 입력을 받기 위한 prompt 대화상자 사용
+        var userInput = prompt("일정을 추가하시겠습니까?", "");
 
-		// 사용자가 "확인"을 클릭하고 값을 입력한 경우
-		if (userInput !== null && userInput !== "") {
-		    // 사용자가 "확인"을 클릭하고 값을 입력한 경우, userInput 변수에 입력된 값이 포함됩니다.
-		    console.log("사용자가 이벤트를 추가하려고 합니다:", userInput);
-		    
-		    var result = confirm("일정을 추가하시겠습니까?");
-		    if (result) {
-		    	var result = confirm("추가되었습니다");
-		    	break;
-		    } else {
-		    	var result = confirm("취소되었습니다");
-		    	break;
-		    }
+        // 사용자가 "확인"을 클릭하고 값을 입력한 경우
+        if (userInput !== null && userInput !== "") {
+            // 사용자가 "확인"을 클릭하고 값을 입력한 경우, userInput 변수에 입력된 값이 포함됩니다.
+            console.log("사용자가 이벤트를 추가하려고 합니다:", userInput);
 
-		    // userInput 값을 사용하여 필요한 작업을 수행합니다.
-		} else if (userInput === "") {
-		    // 사용자가 "확인"을 클릭하고 값을 입력하지 않은 경우
-		    alert("일정을 입력해주세요.");
-		} else {
-		    // 사용자가 "취소"를 클릭하거나 대화상자를 아무 값도 입력하지 않고 닫은 경우
-		    console.log("사용자가 대화상자를 취소했거나 닫았습니다.");
-		    break;
-		}
-		
-	}
-    
+            // 일정 추가 여부를 물어보고 결과에 따라 메시지 표시
+            var result = window.confirm("일정을 추가하시겠습니까?");
+            if (result) {
+                window.alert("추가되었습니다");
+                break;
+            } else {
+                window.alert("취소되었습니다");
+                break;
+            }
+        } else if (userInput === "") {
+            // 사용자가 "확인"을 클릭하고 값을 입력하지 않은 경우
+            alert("일정을 입력해주세요.");
+        } else {
+            // 사용자가 "취소"를 클릭하거나 대화상자를 아무 값도 입력하지 않고 닫은 경우
+            console.log("사용자가 대화상자를 취소했거나 닫았습니다.");
+            break;
+        }
+    }
 }
 
 // 일정 삭제하기 버튼 눌렀을 때 설정
 function confirmDelete() {
-    var result = confirm("일정을 삭제하시겠습니까?");
+    // 일정 삭제 여부를 물어보고 결과에 따라 메시지 표시
+    var result = window.confirm("일정을 삭제하시겠습니까?");
     if (result) {
-    	var result = confirm("삭제되었습니다");
+        window.alert("삭제되었습니다");
     } else {
-        
+        // 사용자가 "취소"를 클릭한 경우
+        // 추가적인 작업을 수행하거나 아무 작업도 하지 않음
+    }
 }
 
 
