@@ -39,7 +39,6 @@
 
 /* 텍스트 스타일 */
 .left_calender_text, .left_shareform_text, .left_freeboard_text,
-<<<<<<< HEAD
 	.left_holiday_text, .left_info_text, .left_new_Id_text,
 	.left_salaryManagement_text {
 	width: 100%;
@@ -92,7 +91,6 @@
 </style>
 </head>
 <body>
-<<<<<<< HEAD
 	<div class="left_table">
 		<div class="left_calender_background">
 			<a
