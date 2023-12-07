@@ -165,13 +165,13 @@ body {
 						</tr>
 						<c:choose>
 							<c:when test="${empty selectList}">
-								<!-- 게시물이 없을 때 -->
+								<!-- 사원이 없을 때 -->
 								<tr>
 									<td colspan="4" align="center">회사가 망했나?</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
-								<!-- 게시물이 있을 때 -->
+								<!-- 사원이 있을 때 -->
 								<c:forEach items="${selectList}" var="row" varStatus="loop">
 									<tr align="center">
 										<td>${row.name}</td>
