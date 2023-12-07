@@ -525,7 +525,7 @@ function showDateAndAlert(day) {
 function confirmPlus() {
     while (true) {
         // 사용자로부터 입력을 받기 위한 prompt 대화상자 사용
-        var userInput = prompt("일정을 추가하시겠습니까?", "");
+        var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
 
         // 사용자가 "확인"을 클릭하고 값을 입력한 경우
         if (userInput !== null && userInput !== "") {
@@ -535,7 +535,7 @@ function confirmPlus() {
             // 일정 추가 여부를 물어보고 결과에 따라 메시지 표시
             var result = window.confirm("일정을 추가하시겠습니까?");
             if (result) {
-                window.alert("추가되었습니다");
+                window.alert("일정이 추가되었습니다");
                 break;
             } else {
                 window.alert("취소되었습니다");
