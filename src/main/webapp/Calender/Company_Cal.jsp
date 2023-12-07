@@ -50,6 +50,32 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
     box-sizing: border-box;
 }
 
+.scl{
+  top:480px;
+  animation-direction:scl;
+  
+  position:absolute;
+  left:985px;
+  width:185px;
+  height:20px;
+  background-color :#1C427E;
+  border: none;
+  color:#fff;
+  
+  font-size: 13px;
+  /* animation-name:direction; */
+  animation-duration:2s;
+  animation-iteration-count:3;
+  animation-timing-function:ease-in;
+  position: relative; /* 상대적인 위치 지정 */
+}
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+.scl:hover {
+  color:#fff;
+  background:green;
+}
+
 /* 개인 일정 버튼 */
 .my_btn {
   background-color: #1C427E;
@@ -422,6 +448,10 @@ body {
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
 	
 	<button class='next_btn' onclick="location.href='Scl5.jsp';"><</button>
+	
+	<button class="scl" onclick="location.href='Scl5.jsp';">
+		<font class="myFont">여기에 회사 일정 내용 담기</font>
+	</button>  <!-- 1개당 1개의 일정 제목 표시 -->
 
    <div class="calendar" style="width: 1050px; height: 300px;">
       <div class="title" >
@@ -481,7 +511,7 @@ body {
             for (int i = 1; i <= lastDay; i++) {
                cls = year == ty && month == tm && i == td ? "today" : "";
 
-               out.print("<td class='" + cls + "'><button onclick=\"alert('클릭한 날짜 : " + i + "일');\">" + i + "</button></td>");
+               out.print("<td class='" + cls + "'><button onclick=\"window.location.href='Scl5.jsp';\" showDate(" + i + ")\">" + i + "</button></td>");
                if (lastDay != i && (++week) % 7 == 1) {
                   out.print("</tr><tr>");
                }

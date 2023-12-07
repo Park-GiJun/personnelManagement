@@ -15,6 +15,7 @@ int td = cal.get(Calendar.DATE);
 
 int year = cal.get(Calendar.YEAR);
 int month = cal.get(Calendar.MONTH) + 1;
+int day = cal.get(Calendar.DATE);
 
 // 파라미터 받기
 String sy = request.getParameter("year");
@@ -50,14 +51,125 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
     box-sizing: border-box;
 }
 
+.scl{
+  top:480px;
+  animation-direction:scl;
+  
+  position:absolute;
+  left:985px;
+  width:185px;
+  height:20px;
+  background-color :#1C427E;
+  border: none;
+  color:#fff;
+  
+  font-size: 13px;
+  /* animation-name:direction; */
+  animation-duration:2s;
+  animation-iteration-count:3;
+  animation-timing-function:ease-in;
+  position: relative; /* 상대적인 위치 지정 */
+}
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+.scl:hover {
+  color:#fff;
+  background:green;
+}
+
+.re_day {
+	text-align: center;
+	font-size: 35px;
+	position: absolute;
+	color : orange;
+    top: 15px;
+    left: 40px;
+}
+
+
+
+/* 개인 일정 추가하기 버튼 설정 */
+.plus_btn {
+	text-align: center;
+	font-size: 15px;
+	position: absolute;
+	background-color: #fff;
+    top: 80px;
+    left: 70px;
+    
+    border: none;
+    color: #1C427E;
+    
+    width: 80px;
+  	height: 40px;
+    
+    border-radius: 30px;
+    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+}
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+.plus_btn:hover {
+  color: white;
+  background: orange;
+}
+
+/* 개인 일정 삭제하기 버튼 설정 */
+.del_btn {
+	text-align: center;
+	font-size: 15px;
+	position: absolute;
+	background-color: #fff;
+    top: 80px;
+    left: 160px;
+    
+    border: none;
+    color: #1C427E;
+    
+    width: 80px;
+  	height: 40px;
+    
+    border-radius: 30px;
+    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+}
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+.del_btn:hover {
+  color: white;
+  background: orange;
+}
+
+
+.content1 {
+	font-size: 20px;
+	position: absolute;
+	color : #fff;	
+	top : 1px
+	
+	cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+}
+
+.content2 {
+	font-size: 20px;
+	position: absolute;
+	color : #fff;	
+}
+
+.content3 {
+	font-size: 20px;
+	position: absolute;
+	color : #fff;
+}
+
 
 .reverse{
   top:30px;
   animation-direction:reverse;
   
+   overflow: auto;
+
    position:absolute;
   left:1600px;
-  width:350px;
+  width:330px;
   height:950px;
   background:#1C427E;
   color:#fff;
@@ -65,6 +177,10 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   animation-duration:2s;
   animation-iteration-count:3;
   animation-timing-function:ease-in;
+}
+
+.reverse::-webkit-scrollbar {
+    display: none; /* 스크롤 기능은 계속 적용되지만 안 보이게 설정 */
 }
 
 @-webkit-keyframes direction {
@@ -76,6 +192,29 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   }
 }
 
+
+
+.reverse2{
+  top:140px;
+  
+  
+   overflow: auto;
+
+   position:absolute;
+  left:10px;
+  width:310px;
+  height:900px;
+  background: #1C427E;
+  color:#fff;
+  /* animation-name:direction; */
+  animation-duration:2s;
+  animation-iteration-count:3;
+  animation-timing-function:ease-in;
+}
+
+.reverse2::-webkit-scrollbar {
+    display: none; /* 스크롤 기능은 계속 적용되지만 안 보이게 설정 */
+}
 
 
 
@@ -216,7 +355,7 @@ button.next_btn:hover {
 	
 	position: absolute;
   	top: -40px;
-  	left: 300px;
+  	left: 250px;
   	
   	font-size: 100x;
   	border-radius: 30px;
@@ -406,13 +545,100 @@ function change() {
    f.submit();
 }
 
-function updateCalendar() {
-	   var year = document.getElementById("yearSelect").value;
-	   var month = document.getElementById("monthSelect").value;
+function showDateAndAlert(day) {
+    // 클릭한 날짜를 JavaScript 변수에 저장
+    var clickedDay = day;
+    // 클릭한 날짜를 해당 <h2> 요소에 표시
+    document.querySelector('.re_day').innerText = "<%= year %>년 <%= month %>월 " + clickedDay + "일";
 
-	   var url = "calendar.jsp?year=" + year + "&month=" + month;
-	   window.location.href = url;
-	}
+    // 클릭한 날짜를 alert 창에도 표시
+    alert('클릭한 날짜: ' + clickedDay + '일');
+
+    // 여기에서 필요한 작업 수행 가능
+    // 예를 들어, 다른 요소에도 표시하려면
+    document.querySelector('.content1').innerText = "1. 일정1";
+    document.querySelector('.content2').innerText = "2. 일정2";
+    document.querySelector('.content3').innerText = "3. 일정3";
+    
+    // 원하는 작업 수행 가능
+    // 예를 들어, 다른 페이지로 이동하려면 window.location.href = '다른페이지.jsp';
+}
+
+//일정 추가하기 버튼 눌렀을 때 설정
+// 일정 추가를 위한 고유한 식별자
+var eventCounter = 1;
+
+function confirmPlus() {
+    // 사용자로부터 입력을 받기 위한 prompt 대화상자 사용
+    var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
+
+    // 사용자가 "확인"을 클릭하고 값을 입력한 경우
+    if (userInput !== null && userInput !== "") {
+        // 사용자가 "확인"을 클릭하고 값을 입력한 경우, userInput 변수에 입력된 값이 포함됩니다.
+        console.log("사용자가 이벤트를 추가하려고 합니다:", userInput);
+
+        // 일정 추가 여부를 물어보고 결과에 따라 메시지 표시
+        var result = window.confirm("일정을 추가하시겠습니까?");
+        if (result) {
+            // 사용자가 입력을 취소하지 않은 경우 새로운 <p> 엘리먼트 생성
+            var newParagraph = document.createElement('p');
+            newParagraph.textContent = userInput;
+
+            // 고유한 ID 추가
+            newParagraph.id = 'event' + eventCounter;
+
+            // 고유한 식별자를 증가시킴
+            eventCounter++;
+
+            // <div class="reverse2" id="contentContainer">에 <p> 추가
+            document.getElementById('contentContainer').appendChild(newParagraph);
+
+            window.alert("일정이 추가되었습니다");
+        } else {
+            window.alert("취소되었습니다");
+        }
+    } else if (userInput === "") {
+        // 사용자가 "확인"을 클릭하고 값을 입력하지 않은 경우
+        alert("일정을 입력해주세요.");
+    } else {
+        // 사용자가 "취소"를 클릭하거나 대화상자를 아무 값도 입력하지 않고 닫은 경우
+        console.log("사용자가 대화상자를 취소했거나 닫았습니다.");
+    }
+}
+
+// 일정 삭제하기 버튼 눌렀을 때 설정
+function confirmDelete() {
+    // 일정 삭제 여부를 물어보고 결과에 따라 메시지 표시
+    var result = window.confirm("일정을 삭제하시겠습니까?");
+    if (result) {
+    	var paragraphs = document.querySelectorAll('.reverse p');
+        var lastParagraph = paragraphs[paragraphs.length - 1];
+        window.alert("삭제되었습니다");
+        
+        if (lastParagraph) {
+            lastParagraph.remove();
+        }
+    } else {
+        // 사용자가 "취소"를 클릭한 경우
+        // 추가적인 작업을 수행하거나 아무 작업도 하지 않음
+    }
+}
+
+
+
+
+
+
+//DOM 요소를 선택
+//var contentContainer = document.getElementById('contentContainer');
+
+// <p> 요소들을 선택
+//var paragraphs = contentContainer.querySelectorAll('p');
+
+// <p> 요소들을 순회하면서 순서대로 출력
+//paragraphs.forEach(function (paragraph, index) {
+   // console.log(paragraph.textContent); // 순서대로 출력
+//});
 
 </script>
 
@@ -460,12 +686,25 @@ body {
 	
 	<button class='next_btn' onclick="location.href='Company_Cal.jsp';">></button>
 	
-	<div class="reverse"></div>
+	<div class="reverse">
+		 <h2 class='re_day'><%= year %>년 <%= month %>월 <%= day %>일</h2>
+		 
+		 <button class='plus_btn' onclick="confirmPlus();">추가하기</button>
+		 <button class='del_btn' onclick="confirmDelete();">삭제하기</button>
+		 
+		 <div class="reverse2" id="contentContainer" >
+			<!-- 개인 스케쥴 내용 올 공간 -->		 	
+		 </div>	 
+	</div>
+	
+	<button class="scl" onclick="location.href='Company_Cal.jsp';">
+		<font class="myFont">여기에 회사 일정 내용 담기</font>
+	</button>  <!-- 1개당 1개의 일정 제목 표시 -->
   
   	
 
    <div class="calendar" style="width: 1300px; height: 300px;">
-      <div class="title" >
+      <div class="title" > <!-- 년도 월 선택 리스트 만드는 위치 -->
          <form name="frm" method="post" >
             <select id="yearSelect" name="year" class="selectField" onchange="change()"  >
                <%
@@ -515,14 +754,15 @@ body {
                //out.print("<td>&nbsp;</td>");
                out.print("<td class='gray'><button disabled>" + (preDate++) + "</button></td>");
             }
-
+			
+            int click_day = 0;
             // 1일부터 말일까지 출력
             int lastDay = cal.getActualMaximum(Calendar.DATE);
             String cls;
             for (int i = 1; i <= lastDay; i++) {
                cls = year == ty && month == tm && i == td ? "today" : "";
 
-               out.print("<td class='" + cls + "'><button onclick=\"alert('클릭한 날짜 : " + i + "일');\">" + i + "</button></td>");
+               out.print("<td class='" + cls + "'><button onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button></td>");
                if (lastDay != i && (++week) % 7 == 1) {
                   out.print("</tr><tr>");
                }

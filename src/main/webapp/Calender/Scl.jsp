@@ -667,14 +667,14 @@ body {
 		 <button class='del_btn' onclick="confirmDelete();">삭제하기</button>
 		 
 		 <div class="reverse2" id="contentContainer" >
-		 	
+			<!-- 개인 스케쥴 내용 올 공간 -->		 	
 		 </div>	 
 	</div>
   
   	
 
    <div class="calendar" style="width: 1300px; height: 300px;">
-      <div class="title" >
+      <div class="title" > <!-- 년도 월 선택 리스트 만드는 위치 -->
          <form name="frm" method="post" >
             <select id="yearSelect" name="year" class="selectField" onchange="change()"  >
                <%
