@@ -1,7 +1,7 @@
 <%@ page
-	language="java"
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
+   language="java"
+   contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"
 %>
 <!DOCTYPE html>
 <html>
@@ -10,18 +10,18 @@
 <title>Left</title>
 <style>
 * {
-	box-sizing: border-box;
+   box-sizing: border-box;
 }
 
 .left_table {
-	width: 10%;
-	height: 100%;
-	background: rgb(0, 64, 128);
-	opacity: 1;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	overflow: hidden;
+   width: 10%;
+   height: 100%;
+   background: rgb(0, 64, 128);
+   opacity: 1;
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   overflow: hidden;
 }
 
 /* 공통 스타일 */
@@ -39,6 +39,7 @@
 
 /* 텍스트 스타일 */
 .left_calender_text, .left_shareform_text, .left_freeboard_text,
+<<<<<<< HEAD
 	.left_holiday_text, .left_info_text, .left_new_Id_text,
 	.left_salaryManagement_text {
 	width: 100%;
@@ -55,7 +56,7 @@
 
 /* 각 섹션 간격 조정 */
 .left_calender_background {
-	top: 0;
+   top: 0;
 }
 
 .left_shareform_background {
@@ -91,6 +92,7 @@
 </style>
 </head>
 <body>
+<<<<<<< HEAD
 	<div class="left_table">
 		<div class="left_calender_background">
 			<a

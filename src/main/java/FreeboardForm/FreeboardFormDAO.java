@@ -90,17 +90,17 @@ public class FreeboardFormDAO extends DBConnPool {
 			String query = "INSERT INTO anno_board (anno_board_num, board_pass, title, content, visitcount ) VALUES (anno_board_num.NEXTVAL, ?, ?, ?, 0)";
 
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, title);
-			psmt.setString(2, content);
-			psmt.setInt(3, pass);
+			psmt.setInt(1, pass);
+			psmt.setString(2, title);
+			psmt.setString(3, content);
 			result = psmt.executeUpdate();
 
 			System.out.println(title);
 			System.out.println(content);
 			System.out.println(pass);
-			con.setAutoCommit(true); // auto-commit을 true로 설정
-			result = psmt.executeUpdate();
-			con.commit(); // 트랜잭션 커밋
+			con.setAutoCommit(false); // auto-commit을 true로 설정
+//			result = psmt.executeUpdate();
+//			con.commit(); // 트랜잭션 커밋
 		} catch (Exception e) {
 			System.out.println("게시물 입력중 예외 발생");
 			e.printStackTrace();

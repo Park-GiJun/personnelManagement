@@ -16,16 +16,28 @@ import FreeboardForm.FreeboardFormDAO;
 import FreeboardForm.FreeboardFormDTO;
 import utils.BoardPage;
 
-@WebServlet("/Controller/FreeboardList.do")
-public class FreeboardListController extends HttpServlet {
+
+@WebServlet("/Controller/FreeboardWrite.do")
+public class FreeboardWrite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+			request.setCharacterEncoding("UTF-8");
+		System.out.println("call controller");
 
-		System.out.println("FreeboardList.do");
-
-		// DAO 생성
+		String title = request.getParameter("Freeboardtitle");
+		String content = request.getParameter("Freeboardcontent");
+		int pass = Integer.parseInt(request.getParameter("Freeboardpassword")); 
 		FreeboardFormDAO dao = new FreeboardFormDAO();
+
+		
+		dao.freeinsertWrite(title, content, pass);
+		
+
+		
+		
 
 		// 맵 생성
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -79,6 +91,12 @@ public class FreeboardListController extends HttpServlet {
 		request.setAttribute("FreeboardFormList", FreeboardFormList);
 		request.setAttribute("map2", map);
 		request.getRequestDispatcher("/BulletinBoard/FreeboardForm.jsp").forward(request, response);
+		 
+	}
+
+	private String Intger(String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -66,8 +66,7 @@ body {
 				// 페이지 이동
 				window.location.href = '../BulletinBoard/FreeboardForm.jsp';
 
-				// 폼 제출 방지
-				return false;
+		
 			}
 		</script>
 		<form method="post" action="../Controller/FreeboardWrite.do"
