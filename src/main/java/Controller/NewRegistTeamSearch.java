@@ -22,7 +22,7 @@ public class NewRegistTeamSearch extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		String TeamSearch = req.getParameter("department");
+		String TeamSearch = req.getParameter("department_search");
 
 		NewRegistDAO dao = new NewRegistDAO();
 
