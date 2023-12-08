@@ -28,7 +28,7 @@
 .left_calender_background, .left_shareform_background,
 	.left_freeboard_background, .left_holiday_background,
 	.left_info_background, .left_new_Id_background,
-	.left_salaryManagement_background {
+	.left_salaryManagement_background, .left_Holiday_Approval_background {
 	width: 100%;
 	height: 8%;
 	background: rgb(0, 64, 128);
@@ -40,7 +40,7 @@
 /* 텍스트 스타일 */
 .left_calender_text, .left_shareform_text, .left_freeboard_text,
 	.left_holiday_text, .left_info_text, .left_new_Id_text,
-	.left_salaryManagement_text {
+	.left_salaryManagement_text, .left_Holiday_Approval_background {
 	width: 100%;
 	color: rgb(255, 255, 255);
 	position: absolute;
@@ -80,6 +80,10 @@
 
 .left_salaryManagement_background {
 	top: 70%;
+}
+
+.left_Holiday_Approval_background{
+	top:60%
 }
 
 /* 섹션에 커서 포인터 스타일 적용 */
@@ -127,7 +131,7 @@
 				class="left_holiday_section"
 				href="../Controller/HoliDayCount.do"
 			>
-				<span class="left_holiday_text">휴가관리</span>
+				<span class="left_holiday_text">휴가신청</span>
 			</a>
 		</div>
 		<div class="left_info_background">
@@ -145,19 +149,20 @@
 			if (inpGrade < 3) {
 			%>
 			<div class="left_new_Id_background">
-				<a
-					class="left_new_id_section"
-					href="../NewRegist/NewRegist.jsp"
-				>
+				<a class="left_new_id_section" href="../Controller/NewRegistLoad.do">
 					<span class="left_new_Id_text">사원관리</span>
 				</a>
 			</div>
+			
 			<div class="left_salaryManagement_background">
-				<a
-					class="left_salaryManagement_section"
-					href="../Controller/SalaryManagement.do"
-				>
+				<a class="left_salaryManagement_section" href="../Controller/SalaryManagement.do">
 					<span class="left_salaryManagement_text">급여관리</span>
+				</a>
+			</div>
+			
+			<div class="left_Holiday_Approval_background">
+				<a class="left_salaryManagement_section" href="../Controller/HolidayApprovalLoad.do">
+					<span class="left_salaryManagement_text">휴가관리</span>
 				</a>
 			</div>
 			<%
