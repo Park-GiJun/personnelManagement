@@ -70,4 +70,9 @@ public class DBConnPool {
         }
     }
 
+	public static Connection getConnection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

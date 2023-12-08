@@ -41,13 +41,17 @@ body {
 </script>
 </head>
 <body>
+	int pageNumber=1; 
+	if(request.getParameter("pageNumber")!=null){
+	pageNumber=Integer.parseInt(request.getParameter("pageNumber")); }
 	<div class="content">
 		<!-- 다른 페이지에서 불러오는 내용 -->
 		<script type="text/javascript">
 			function validateForm(form) {
 				if (form.Freeboardpassword.value == null
-						&& form.Freeboarduser.value == null&&form.Freeboarduser.value.trim() === ""
-						&&form.Freeboardpassword.value.trim() === "") {
+						&& form.Freeboarduser.value == null
+						&& form.Freeboarduser.value.trim() === ""
+						&& form.Freeboardpassword.value.trim() === "") {
 					alert("비밀 번호를 입력해주세요.");
 					return true;
 				} else if (form.Freeboarduser.value == null
@@ -62,49 +66,49 @@ body {
 				}
 
 			}
-			
-			   function crystal() {
-		            var userInput = prompt("입력하세요:", "");
-		            
-		            // 사용자가 입력을 취소하거나 빈 문자열을 입력한 경우
-		            if (userInput === null || userInput.trim() === "") {
-		                alert("입력이 취소되었거나 유효하지 않은 값입니다.");
-		            } else {
-		                // 입력값을 사용할 수 있습니다. 여기서는 간단히 경고창에 출력하는 예제입니다.
-		                alert("입력된 값: " + userInput);
-		            }
-		        }
-			   
-			   function elimination() {
-		            var userInput = prompt("입력하세요:", "");
-		            
-		            // 사용자가 입력을 취소하거나 빈 문자열을 입력한 경우
-		            if (userInput === null || userInput.trim() === "") {
-		                alert("입력이 취소되었거나 유효하지 않은 값입니다.");
-		            } else {
-		                // 입력값을 사용할 수 있습니다. 여기서는 간단히 경고창에 출력하는 예제입니다.
-		                alert("입력된 값: " + userInput);
-		            }
-		        }
+
+			function crystal() {
+				var userInput = prompt("입력하세요:", "");
+
+				// 사용자가 입력을 취소하거나 빈 문자열을 입력한 경우
+				if (userInput === null || userInput.trim() === "") {
+					alert("입력이 취소되었거나 유효하지 않은 값입니다.");
+				} else {
+					// 입력값을 사용할 수 있습니다. 여기서는 간단히 경고창에 출력하는 예제입니다.
+					alert("입력된 값: " + userInput);
+				}
+			}
+
+			function elimination() {
+				var userInput = prompt("입력하세요:", "");
+
+				// 사용자가 입력을 취소하거나 빈 문자열을 입력한 경우
+				if (userInput === null || userInput.trim() === "") {
+					alert("입력이 취소되었거나 유효하지 않은 값입니다.");
+				} else {
+					// 입력값을 사용할 수 있습니다. 여기서는 간단히 경고창에 출력하는 예제입니다.
+					alert("입력된 값: " + userInput);
+				}
+			}
 		</script>
 		<form name="FreeboardFrame" method="post"
 			enctype="multipart/form-data" action="../Controller/Freeboard.do"
 			onsubmit="return validateForm(this)">
 			<table align="center" border="1" height="80%" width="90%">
-				<tr><!-- DTO연결 후 변경 -->
+				<tr>
+					<!-- DTO연결 후 변경 -->
 					<td><input type="text" value="제목 이름 삽입" name="Freeboardtitle"
 						style="width: 70%;" onfocus="clearDefaultText(this)"
-						onblur="restoreDefaultText(this)" /> 
-						<input type="text" value="시간 삽입" name="Freeboardtitle" style="width: 20%;"
+						onblur="restoreDefaultText(this)" /> <input type="text"
+						value="시간 삽입" name="Freeboardtitle" style="width: 20%;"
 						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
-						<button type="submit"onclick="crystal()">수정</button>
-						<button type="submit"onclick="elimination()">삭제</button>
-					</td>
+						<button type="submit" onclick="crystal()">수정</button>
+						<button type="submit" onclick="elimination()">삭제</button></td>
 				</tr>
 				<tr>
 					<td><textarea name="Freeboard"
 							style="width: 100%; height: 600px;"></textarea></td>
-							<!-- DTO연결 후 변경 -->
+					<!-- DTO연결 후 변경 -->
 				</tr>
 				<tr>
 					<td><textarea name="Comments list"

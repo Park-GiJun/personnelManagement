@@ -72,7 +72,7 @@ body {
                      </td>
                      <td align="center">
                         <!-- 제목 -->
-                        <a>${ row.title }</a>
+                        <a href="BoardDetailAction.bo?num=${board.board_num}&pageNum=${spage}">${ row.title }</a>
                      </td>
                      <td align="center">
                         <a>${ row.post_date }</a>

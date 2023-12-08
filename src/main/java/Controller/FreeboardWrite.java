@@ -35,10 +35,6 @@ public class FreeboardWrite extends HttpServlet {
 		
 		dao.freeinsertWrite(title, content, pass);
 		
-
-		
-		
-
 		// 맵 생성
 		Map<String, Object> map = new HashMap<String, Object>();
 
