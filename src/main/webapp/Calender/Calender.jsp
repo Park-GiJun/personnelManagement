@@ -51,6 +51,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
     box-sizing: border-box;
 }
 
+/* 일정 나오는 곳 설정 (여기에서는 의미 없음) */
 .scl{
   top:480px;
   animation-direction:scl;
@@ -94,7 +95,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 개인 일정 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.my_btn:hover {
   color: white;
   background: orange;
@@ -115,7 +116,7 @@ button.my_btn:hover {
   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 부서 휴가 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.my_btn2:hover {
   color: white;
   background: orange;
@@ -137,7 +138,7 @@ button.my_btn2:hover {
   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 부서 일정 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.my_btn3:hover {
   color: white;
   background: orange;
@@ -159,7 +160,7 @@ button.my_btn3:hover {
   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 회사 일정 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.my_btn4:hover {
   color: white;
   background: orange;
@@ -174,6 +175,7 @@ button.my_btn4:hover {
     font-family: 'Kanit', sans-serif;
 }
 
+/* 일정 리스트 불러오는 버튼 설정 */
 .next_btn {
 background-color: #1C427E;
   color: white;
@@ -194,7 +196,7 @@ background-color: #1C427E;
    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */	
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 일정 리스트 불러오는 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.next_btn:hover {
   color: white;
   background: orange;
@@ -205,8 +207,7 @@ button.next_btn:hover {
 /*   ↑ 여기까지 버튼 위치, 크기 조절   */
 
 
-
-
+/* 크게 무슨 월인지 표시 설정 */
 .em {
 	color: #1C427E;
 	
@@ -233,6 +234,7 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+
 a:active, a:hover {
    text-decoration: underline;
    color: #F28011;
@@ -242,6 +244,10 @@ a:active, a:hover {
    width: 700px;
    margin: 40px auto;
 }
+
+
+
+/* 년도 월 선택 리스트 설정 */
 .calendar .title{
    position: absolute;
    top: 120px;
@@ -249,8 +255,6 @@ a:active, a:hover {
    width: 100%;
    z-index: 1; 
 }
-
-
 
 /* 년도 선택 리스트 */
 .selectField {
@@ -273,6 +277,8 @@ a:active, a:hover {
    margin-left: 5px;
 }
 
+
+
 .calendar table {
    width: 100%;
    border-collapse: collapse;
@@ -285,17 +291,12 @@ a:active, a:hover {
     color: white;
 }
 
-
 /* 요일, 날짜 칸 크기 조절 */
 .calendar table td{
    padding: 40px 80px;
    text-align: left;
    border: 1px solid #ccc;
-   
 }
-
-
-
 
 /* 월, 화, 수, 목, 금 글자 색상 설정 */
 .calendar table td:nth-child(1)
@@ -304,12 +305,10 @@ a:active, a:hover {
 .calendar table td:nth-child(4)
 .calendar table td:nth-child(5) {
    color: white; 
-   
 }
 
 /* 일요일 색상 지정 */
 .calendar table td:nth-child(7n+1){
-   
    color: red;
 }
 
@@ -337,7 +336,6 @@ a:active, a:hover {
    font-family: 'Kanit', sans-serif;
    
    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
-   
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
@@ -345,14 +343,11 @@ a:active, a:hover {
    color: green;
 }
 
-
-
 /* 오늘 날짜 스타일 */
 .calendar table td.today{
    font-weight:700;
    background: orange;
     color: #000;
-   
 }
 
 /* 일요일 날짜 스타일 */
@@ -366,20 +361,16 @@ a:active, a:hover {
    color: green;
 }
 
-
 /* 토요일 날짜 스타일 */
 .calendar table td:nth-child(7n) button {
    color: blue;
    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
-   
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 .calendar table td:nth-child(7n) button:hover {
    color: green;
-   
 }
-
 
 /* 전월의 날짜 색상 지정 */
 .calendar table td.gray button {
@@ -389,7 +380,6 @@ a:active, a:hover {
 /* 다음달의 날짜 색상 지정 */
 .calendar table td.gray2 button {
    color: #ccc;
-   
 }
 
 
@@ -422,12 +412,14 @@ function showDateAndAlert(day) {
     
     
  	// year2와 month2를 생성하여 Scl.jsp로 이동
-    var year = <%= year %>; 
-	var month = <%= month %>; 
-
+    //var year2 = <%= year %>; 
+	//var month2 = <%= month %>; 
+	
+	//console.log('year:', year);
+    //console.log('month:', month);
 
     // URL 파라미터를 추가하여 페이지 이동
-    window.location.href = 'Scl.jsp?year=' + year + '&month=' + month;
+    window.location.href = 'Scl.jsp?year=' + year2 + '&month=' + month2;
 
     // 여기에서 필요한 작업 수행 가능
     // 예를 들어, 다른 요소에도 표시하려면

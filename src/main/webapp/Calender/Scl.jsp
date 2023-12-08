@@ -8,9 +8,8 @@
 request.setCharacterEncoding("utf-8");
 
 String name = request.getParameter("name");
-String cl_year = request.getParameter("year");
-String cl_month = request.getParameter("month");
-
+String cl_year = request.getParameter("year2");
+String cl_month = request.getParameter("month2");
 Calendar cal = Calendar.getInstance();
 
 // 시스템 오늘날짜
@@ -655,7 +654,18 @@ body {
 	
 	
 	<div class="reverse">
-		 <h2 class='re_day'><%= cl_year %>년 <%= cl_month %>월 <%= name %>일</h2>
+		
+		<%
+		if (cl_year != null && cl_month != null) {
+		%>
+			<h2 class='re_day'><%= cl_year %>년 <%= cl_month %>월 <%= name %>일</h2>
+		<%
+		} else {
+		%>
+			<h2 class='re_day'>값이 없습니다.</h2>
+		<%
+		}
+		%>
 		 
 		 <button class='plus_btn' onclick="confirmPlus();">추가하기</button>
 		 <button class='del_btn' onclick="confirmDelete();">삭제하기</button>
