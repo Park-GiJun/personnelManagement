@@ -5,6 +5,7 @@
 
 <%
 request.setCharacterEncoding("utf-8");
+String name = request.getParameter("name");
 
 Calendar cal = Calendar.getInstance();
 
@@ -598,22 +599,6 @@ function confirmDelete() {
     }
 }
 
-
-
-
-
-
-//DOM 요소를 선택
-//var contentContainer = document.getElementById('contentContainer');
-
-// <p> 요소들을 선택
-//var paragraphs = contentContainer.querySelectorAll('p');
-
-// <p> 요소들을 순회하면서 순서대로 출력
-//paragraphs.forEach(function (paragraph, index) {
-   // console.log(paragraph.textContent); // 순서대로 출력
-//});
-
 </script>
 
 
@@ -661,7 +646,7 @@ body {
 	<button class='next_btn' onclick="location.href='Calender.jsp';">></button>
 	
 	<div class="reverse">
-		 <h2 class='re_day'><%= year %>년 <%= month %>월 <%= day %>일</h2>
+		 <h2 class='re_day'><%= year %>년 <%= month %>월 <%= name %>일</h2>
 		 
 		 <button class='plus_btn' onclick="confirmPlus();">추가하기</button>
 		 <button class='del_btn' onclick="confirmDelete();">삭제하기</button>

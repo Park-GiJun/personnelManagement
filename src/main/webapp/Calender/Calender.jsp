@@ -539,7 +539,7 @@ body {
                cls = year == ty && month == tm && i == td ? "today" : "";
                										
                // 각 날짜가 button 타입으로 이루어져 있고, 클릭하면 해당 페이지로 이동함.
-               out.print("<td class='" + cls + "'><button onclick=\"window.location.href='Scl.jsp';\" showDate(" + i + ")\">" + i + "</button></td>");
+               out.print("<td class='" + cls + "'><button onclick=\"window.location.href='Scl.jsp?name=" + i + "'; showDate(" + i + ");\">" + i + "</button></td>");
                if (lastDay != i && (++week) % 7 == 1) {
                   out.print("</tr><tr>");
                }
