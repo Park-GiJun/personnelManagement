@@ -11,40 +11,72 @@ public class SalaryManagementDAO extends DBConnPool {
 		super();
 	}
 
-	public List<SalaryManagementDTO> selectSalaryList(String team) {
+	public List<SalaryManagementDTO> selectSalaryList(String selectTeam, String selectedYear, String selectedMonth) {
 		System.out.println("selectSalaryList DAO");
+		
+		System.out.println("check select team : " + selectTeam);
 
-		List<SalaryManagementDTO> salaryEMPList = new ArrayList<SalaryManagementDTO>();
+		List<SalaryManagementDTO> salaryEMPList = new ArrayList<>();
 
-		String query = "SELECT emp.TEAM, emp.NAME, emp.EMP_NUM, emp.EMP_GRADE, emp.grade, i.PAY, "
+		String query = "SELECT emp.TEAM, emp.NAME, emp.EMP_NUM, emp.EMP_GRADE, emp.grade, i.PAY, iv.yearmonth, "
 				+ "SUM(iv.HOLIDAY_PAY + iv.INCENTIVE + iv.EXTRA_WORK_PAY) AS TOTAL_PAY, iv.INCENTIVE, "
 				+ "iv.HOLIDAY_PAY, iv.EXTRA_WORK_PAY FROM emp JOIN INCENTIVE i ON emp.emp_num = i.emp_num "
-				+ "JOIN INCENTIVE_VALUE iv ON i.emp_num = iv.EMP_NUM";
+				+ "JOIN INCENTIVE_VALUE iv ON i.emp_num = iv.EMP_NUM AND i.yearmonth = iv.yearmonth";
 
-		if (!team.equals("전체")) {
+		// Check if a specific team is selected
+		if (!"전체".equals(selectTeam)) {
 			query += " WHERE emp.TEAM = ?";
 		}
 
-		query += " GROUP BY emp.TEAM, emp.NAME, emp.EMP_NUM, emp.EMP_GRADE, emp.grade, i.PAY, iv.INCENTIVE, "
-				+ "iv.HOLIDAY_PAY, iv.EXTRA_WORK_PAY ORDER BY emp.grade";
+		// Check if a specific date is selected
+		if (selectedYear != null && selectedMonth != null) {
+			if (!"전체".equals(selectTeam)) {
+				query += " AND";
+			} else {
+				query += " WHERE";
+			}
+			// 수정된 부분: 월이 '전체'가 아닐 때와 '전체'일 때의 조건을 나눠 처리
+			if ("전체".equals(selectedMonth)) {
+				System.out.println("a월이 전체입니다." + selectedMonth);
+				query += "  TO_CHAR(iv.yearmonth, 'YYYY') = ?";
+			} else {
+				System.out.println("a월이 전체가 아닙니다." + selectedMonth);
+				query += " iv.yearmonth = TO_DATE(?, 'YYYY-MM')";
+			}
 
-		// 이하 실행 부분 (PreparedStatement 생성 등)
+		}
+		query += " GROUP BY emp.TEAM, emp.NAME, emp.EMP_NUM, emp.EMP_GRADE, emp.grade, i.PAY, iv.yearmonth, "
+				+ "iv.INCENTIVE, iv.HOLIDAY_PAY, iv.EXTRA_WORK_PAY ORDER BY emp.grade";
 
 		System.out.println("query : " + query);
 
 		try {
 			psmt = con.prepareStatement(query);
 
-			if (!team.equals("전체")) {
-				psmt.setString(1, team);
+			int parameterIndex = 1;
+
+			if (!"전체".equals(selectTeam)) {
+				psmt.setString(parameterIndex++, selectTeam);
 			}
 
+			if (selectedYear != null && selectedMonth != null) {
+				// 수정된 부분: '전체'가 아닐 때와 '전체'일 때의 매개변수 설정
+				if ("전체".equals(selectedMonth)) {
+					System.out.println("b:월이 전체입니다." + selectedMonth);
+					psmt.setString(parameterIndex++, selectedYear);
+				} else {
+					System.out.println("b:월이 전체가 아닙니다." + selectedMonth);
+					psmt.setString(parameterIndex++, selectedYear + "-" + selectedMonth);
+				}
+
+			}
+
+			// 쿼리를 실행하고 결과를 처리합니다
 			rs = psmt.executeQuery();
 
 			int i = 0;
 
 			while (rs.next()) {
-
 				SalaryManagementDTO dto = new SalaryManagementDTO();
 
 				dto.setTeam(rs.getString("TEAM"));
@@ -57,6 +89,7 @@ public class SalaryManagementDAO extends DBConnPool {
 				dto.setIncentive(rs.getInt("INCENTIVE"));
 				dto.setHoliday_pay(rs.getInt("HOLIDAY_PAY"));
 				dto.setExtra_work_pay(rs.getInt("EXTRA_WORK_PAY"));
+				dto.setYearmonth(rs.getString("yearmonth"));
 
 				salaryEMPList.add(dto);
 
@@ -69,7 +102,6 @@ public class SalaryManagementDAO extends DBConnPool {
 		}
 
 		return salaryEMPList;
-
 	}
 
 	public SalaryManagementDTO salaryPrint(String emp_num, String Date) {
@@ -91,7 +123,7 @@ public class SalaryManagementDAO extends DBConnPool {
 			psmt.setString(2, Date);
 
 			rs = psmt.executeQuery();
-			
+
 			System.out.println("확인용 : " + emp_num + Date);
 
 			if (rs.next()) {
@@ -105,8 +137,9 @@ public class SalaryManagementDAO extends DBConnPool {
 				dto.setIncentive(rs.getInt("INCENTIVE"));
 				dto.setHoliday_pay(rs.getInt("HOLIDAY_PAY"));
 				dto.setExtra_work_pay(rs.getInt("EXTRA_WORK_PAY"));
-				
-				// Assuming you have a SalaryManagementDTO object named 'dto' with the above attributes set
+
+				// Assuming you have a SalaryManagementDTO object named 'dto' with the above
+				// attributes set
 
 				System.out.println("Name: " + dto.getName());
 				System.out.println("Employee Number: " + dto.getEmp_num());
