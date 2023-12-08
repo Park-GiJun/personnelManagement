@@ -38,6 +38,8 @@ public class CalenderDAO extends DBConnPool{
 		return totalcount;
 	}
 	
+	
+	
 	public List<CalenderDTO> selectListPage(Map<String,Object> map) {
 		List<CalenderDTO> board = new Vector<CalenderDTO>();
 		
@@ -66,9 +68,9 @@ public class CalenderDAO extends DBConnPool{
 			while (rs.next()) {
 				CalenderDTO dto = new CalenderDTO();
 				
-				dto.setPerson_content(rs.getString(1));
-				dto.setPerson_day(rs.getString(2));
-				dto.setPerson_num(rs.getString(3));
+				dto.setPersonal_diaray_schedule(rs.getString(1));
+				dto.setPersonal_diaray_date(rs.getString(2));
+				dto.setemp_num(rs.getString(3));
 				
 				board.add(dto);
 			}

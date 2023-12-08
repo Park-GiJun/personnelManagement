@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%@page import="java.util.Calendar"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 
 <%
 request.setCharacterEncoding("utf-8");
+
 String name = request.getParameter("name");
+String cl_year = request.getParameter("year");
+String cl_month = request.getParameter("month");
 
 Calendar cal = Calendar.getInstance();
 
@@ -528,6 +532,7 @@ function showDateAndAlert(day) {
 
     // 클릭한 날짜를 alert 창에도 표시
     alert('클릭한 날짜: ' + clickedDay + '일');
+    
 
     // 여기에서 필요한 작업 수행 가능
     // 예를 들어, 다른 요소에도 표시하려면
@@ -538,6 +543,8 @@ function showDateAndAlert(day) {
     // 원하는 작업 수행 가능
     // 예를 들어, 다른 페이지로 이동하려면 window.location.href = '다른페이지.jsp';
 }
+
+
 
 //일정 추가하기 버튼 눌렀을 때 설정
 // 일정 추가를 위한 고유한 식별자
@@ -644,15 +651,18 @@ body {
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
 	
 	<button class='next_btn' onclick="location.href='Calender.jsp';">></button>
+
+	
 	
 	<div class="reverse">
-		 <h2 class='re_day'><%= year %>년 <%= month %>월 <%= name %>일</h2>
+		 <h2 class='re_day'><%= cl_year %>년 <%= cl_month %>월 <%= name %>일</h2>
 		 
 		 <button class='plus_btn' onclick="confirmPlus();">추가하기</button>
 		 <button class='del_btn' onclick="confirmDelete();">삭제하기</button>
 		 
 		 <div class="reverse2" id="contentContainer" >
-			<!-- 개인 스케쥴 내용 올 공간 -->		 	
+			<!-- 개인 스케쥴 내용 올 공간 -->	
+				 	
 		 </div>	 
 	</div>
   

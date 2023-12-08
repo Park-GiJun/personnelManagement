@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%@page import="java.util.Calendar"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 
@@ -398,7 +399,6 @@ a:active, a:hover {
 <script type="text/javascript">
 function change() {
    var f = document.frm;
- 
    f.submit();
 }
 
@@ -408,9 +408,9 @@ function updateCalendar() {
 
 	   var url = "calendar.jsp?year=" + year + "&month=" + month;
 	   window.location.href = url;
-	}
+}
 	
-function showDateAndAlert(day) {
+function showDateAndAlert(day) {  
     // 클릭한 날짜를 JavaScript 변수에 저장
     var clickedDay = day;
     // 클릭한 날짜를 해당 <h2> 요소에 표시
@@ -418,6 +418,16 @@ function showDateAndAlert(day) {
 
     // 클릭한 날짜를 alert 창에도 표시
     alert('클릭한 날짜: ' + clickedDay + '일');
+    
+    
+    
+ 	// year2와 month2를 생성하여 Scl.jsp로 이동
+    var year = <%= year %>; 
+	var month = <%= month %>; 
+
+
+    // URL 파라미터를 추가하여 페이지 이동
+    window.location.href = 'Scl.jsp?year=' + year + '&month=' + month;
 
     // 여기에서 필요한 작업 수행 가능
     // 예를 들어, 다른 요소에도 표시하려면
