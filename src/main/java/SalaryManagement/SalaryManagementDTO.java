@@ -12,6 +12,8 @@ public class SalaryManagementDTO {
 	private int holiday_pay;
 	private int extra_work_pay;
 	private int grade;
+	private String phone;
+	private String email;
 	
 	
 	public String getTeam() {
@@ -73,6 +75,18 @@ public class SalaryManagementDTO {
 	}
 	public void setGrade(int grade) {
 		this.grade = grade;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }
