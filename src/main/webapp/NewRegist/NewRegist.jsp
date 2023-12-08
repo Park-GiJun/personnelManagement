@@ -27,14 +27,20 @@
 /* 부서 버튼 위치 수정 */
 .middle-Team_btn-container {
 	position: relative;
-	margin-top: 10%;
+	margin-top: 2.5%;
 	margin-left: 50%;
 }
 
-/* 정보등록 위치 수정 */
+/* 정보등록 버튼 위치 수정 */
 .middle-button-container {
 	position: relative;
 	margin-top: 2%;
+	margin-left: 0%;
+}
+
+.Edit-table-container {
+	position: relative;
+	margin-top: 10%;
 	margin-left: 0%;
 }
 
@@ -64,13 +70,6 @@
 	font-size: 150%;
 }
 
-</
-head> <style> /* 공통 스타일 */ * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-
 body {
 	font-size: 16px;
 }
@@ -91,17 +90,14 @@ body {
 		<form name="team_form" method="post"
 			action="../Controller/NewRegistTeamSearch.do" accept-charset="UTF-8">
 			<div class="middle-Team_btn-container">
-				<label>
-				<input type="radio" name="department" value="전체" onclick="submitForm()">전체
-				</label>
-				<label>
-				<input type="radio" name="department" value="개발" onclick="submitForm()">개발
-				</label>
-				<label>
-				<input type="radio" name="department" value="인사" onclick="submitForm()">인사
-				</label>
-				<label>
-				<input type="radio" name="department" value="디자인" onclick="submitForm()">디자인
+				<label> <input type="radio" name="department_search"
+					value="전체" onclick="submitForm()">전체
+				</label> <label> <input type="radio" name="department_search"
+					value="개발" onclick="submitForm()">개발
+				</label> <label> <input type="radio" name="department_search"
+					value="인사" onclick="submitForm()">인사
+				</label> <label> <input type="radio" name="department_search"
+					value="디자인" onclick="submitForm()">디자인
 				</label>
 			</div>
 		</form>
@@ -111,6 +107,8 @@ body {
 				document.forms["team_form"].submit();
 			}
 		</script>
+
+		<!-- ---------------------------------------------------------------------------------------------------------------- -->
 
 		<form name="vacation_form" method="post"
 			action="../Controller/NewRegist.do" accept-charset="UTF-8">
@@ -150,18 +148,61 @@ body {
 						<button type="submit" class='my_btn'>정보등록</button>
 					</div>
 
+					<!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+					<!-- 사원 정보 수정 -->
+					<div class="Edit-table-container">
+						<table border="1" width="98%">
+							<tr>
+								<th colspan='4'>사원 정보 수정</th>
+							</tr>
+							<tr align="center">
+								<th width="25">이름</th>
+								<th width="25">사번(아이디)</th>
+								<th width="25">직급</th>
+								<th width="25">부서</th>
+							</tr>
+							<tr>
+								<td align="center" width="25%">
+									<input name="nameinfo" readonly="readonly" style="text-align: center;">
+								</td>
+
+								<td align="center" width="25%">
+									<input name="emp_numinfo" readonly="readonly" style="text-align: center;">
+								</td>
+
+								<td align="center" width="25%"><input type="text"
+									name="emp_grade"
+									style="width: 90%; box-sizing: border-box; text-align: center;">
+								</td>
+
+								<td align="center" width="25%"><input type="text"
+									name="team"
+									style="width: 90%; box-sizing: border-box; text-align: center;">
+								</td>
+							</tr>
+						</table>
+
+						<div class="middle-button-container">
+							<button type="submit" class='my_btn'>정보수정</button>
+						</div>
+					</div>
+
+					<!-- ---------------------------------------------------------------------------------------------------------------- -->
+
 				</div>
 
 				<div class="table-container">
 					<table border="1" width="98%">
 						<tr>
-							<th colspan='4'>사원 리스트</th>
+							<th colspan='5'>사원 리스트</th>
 						</tr>
 						<tr align="center">
-							<th width="25">이름</th>
-							<th width="25">사번</th>
-							<th width="25">직급</th>
-							<th width="25">부서</th>
+							<th width="20"></th>
+							<th width="30">이름</th>
+							<th width="10">사번</th>
+							<th width="20">직급</th>
+							<th width="20">부서</th>
 						</tr>
 						<c:choose>
 							<c:when test="${empty selectList}">
@@ -174,6 +215,10 @@ body {
 								<!-- 사원이 있을 때 -->
 								<c:forEach items="${selectList}" var="row" varStatus="loop">
 									<tr align="center">
+										<td align="center"><label> <input type="radio"
+												name="department_edit" value="info"
+												onclick="infosubmitForm('${row.name}', '${row.emp_num}')">
+										</label></td>
 										<td>${row.name}</td>
 										<td>${row.emp_num}</td>
 										<td>${row.emp_grade}</td>
@@ -183,6 +228,14 @@ body {
 							</c:otherwise>
 						</c:choose>
 					</table>
+
+					<script>
+						function infosubmitForm(nameinfo, emp_numinfo) {
+							// "사원 정보 수정" 테이블의 필드에 값을 채우기
+							document.forms["vacation_form"]["nameinfo"].value = nameinfo;
+							document.forms["vacation_form"]["emp_numinfo"].value = emp_numinfo;
+						}
+					</script>
 				</div>
 			</div>
 		</form>

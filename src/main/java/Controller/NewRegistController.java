@@ -22,12 +22,19 @@ public class NewRegistController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		NewRegistDAO dao = new NewRegistDAO();
 
 		String grade = "";
+		String nameinfo = req.getParameter("nameinfo");
+		String emp_numinfo = req.getParameter("emp_numinfo");
 		String name = req.getParameter("name");
 		String emp_num = req.getParameter("emp_num");
 		String emp_grade = req.getParameter("emp_grade");
 		String team = req.getParameter("team");
+		
+		System.out.println(nameinfo);
+		System.out.println(emp_numinfo);
+		
 		// 부서별 검색
 		String department = req.getParameter("department");
 		System.out.println(department);
@@ -46,13 +53,6 @@ public class NewRegistController extends HttpServlet {
 			grade = "7";
 		}
 
-		System.out.println("[" + grade + "]");
-		System.out.println("[" + name + "]");
-		System.out.println("[" + emp_num + "]");
-		System.out.println("[" + emp_grade + "]");
-		System.out.println("[" + team + "]");
-
-		NewRegistDAO dao = new NewRegistDAO();
 		//사원 등록
 		dao.NewRegist(name, emp_num, emp_grade, team, grade);
 		//휴가테이블 사원정보 입력
@@ -104,6 +104,9 @@ public class NewRegistController extends HttpServlet {
 		map.put("pageNum", pageNum);
 
 		// 전달할 데이터를 request 영역애 저장후 List.jsp 로 포워드
+		
+		req.setAttribute("nameinfo", nameinfo);
+		req.setAttribute("emp_numinfo", emp_numinfo);
 		req.setAttribute("selectList", selectList);
 		req.setAttribute("map", map);
 		req.getRequestDispatcher("/NewRegist/NewRegist.jsp").forward(req, resp);
