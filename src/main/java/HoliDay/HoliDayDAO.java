@@ -1,10 +1,10 @@
 package HoliDay;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
 import DBcontrol.DBConnPool;
@@ -14,10 +14,10 @@ public class HoliDayDAO extends DBConnPool {
 		super();
 	}
 
-	//사용한 휴가 계한후 업데이트
+	// 사용한 휴가 계한후 업데이트
 	public HoliDayDTO holidayCalculation(String login_Id, String start_vacation, String end_vacation) {
 		int holidaycount = 0;
-		//기존 사용가능한 휴가 조회
+		// 기존 사용가능한 휴가 조회
 		HoliDayDTO dto = new HoliDayDTO();
 
 		String query = "SELECT annual FROM holiday where emp_num=?";
@@ -58,11 +58,11 @@ public class HoliDayDAO extends DBConnPool {
 		long difference = (endDate.getTime() - startDate.getTime());
 
 		// 차이값을 일 단위로 변환
-		int daysDifference = (int) (difference / (24 * 60 * 60 * 1000));
+		long daysDifference = (difference / (24 * 60 * 60 * 1000));
 
-		System.out.println("두 날짜 간의 일 수 차이: " + daysDifference + "일");
-		//기존 날짜 와 신청한 날짜의 계산식
-		String holiday_date = Integer.toString(holidaycount - daysDifference);
+		System.out.println("두 날짜 간의 일 수 차이: " + (daysDifference + 1) + "일");
+		// 기존 날짜 와 신청한 날짜의 계산식
+		String holiday_date = Long.toString(holidaycount - (daysDifference + 1));
 
 		// 쿼리 작성
 		String querys = "UPDATE holiday SET annual = ? WHERE emp_num = ?";
@@ -134,17 +134,19 @@ public class HoliDayDAO extends DBConnPool {
 	}
 
 	// 게시물 수를 가져오는 쿼리
-	public int selectCount(Map<String, Object> map) {
-
+	public int selectCount(String login_Id) {
 		int totalCount = 0;
 
-		String query = "SELECT COUNT(*) FROM holiday_check";
-
+		String query = "SELECT COUNT(*) FROM holiday_check WHERE emp_num=?";
 		try {
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(query);
-			rs.next();
+			// 쿼리 실행
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, login_Id);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
 			totalCount = rs.getInt(1);
+			}
 		} catch (Exception e) {
 			System.out.println("게시물 수를 구하는 중 예외 발생");
 			e.printStackTrace();
@@ -153,16 +155,17 @@ public class HoliDayDAO extends DBConnPool {
 	}
 
 	// 신청한 휴가 목록 조회 쿼리
-	public List<HoliDayDTO> selectList(Map<String, Object> map) {
-
+	public List<HoliDayDTO> selectList(String login_Id) {
 		List<HoliDayDTO> bbs = new Vector<HoliDayDTO>();
 
-		String query = "SELECT * FROM holiday_check ORDER BY start_vacation DESC";
+		String query = "SELECT * FROM holiday_check WHERE emp_num = ? ORDER BY start_vacation DESC";
 
 		try {
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(query);
+			// 쿼리 실행
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, login_Id);
 
+			rs = psmt.executeQuery();
 			while (rs.next()) {
 				HoliDayDTO dto = new HoliDayDTO();
 
@@ -177,7 +180,7 @@ public class HoliDayDAO extends DBConnPool {
 		} catch (Exception e) {
 			System.out.println("게시물 조회 중 예외 발생");
 			e.printStackTrace();
-		}
+		} 
 		return bbs;
 	}
 }

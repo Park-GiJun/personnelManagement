@@ -12,43 +12,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import HoliDay.HoliDayDAO;
-import HoliDay.HoliDayDTO;
+import NewRegist.NewRegistDAO;
+import NewRegist.NewRegistDTO;
 import utils.BoardPage;
 
-@WebServlet("/Controller/HolidayApplicationController.do")
-public class HolidayApplicationController extends HttpServlet {
+@WebServlet("/Controller/NewRegistLoad.do")
+public class NewRegistLoadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String userId = (String) req.getSession().getAttribute("loginid");
-		String Team = (String) req.getSession().getAttribute("inpteam");
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		NewRegistDAO dao = new NewRegistDAO();
 
-		String start_vacation = req.getParameter("start_vacation");
-		String end_vacation = req.getParameter("end_vacation");
-		
-		HoliDayDAO dao = new HoliDayDAO();
-		// 신청한 휴가 날자 DB 저장
-		dao.getHolidayApplication(userId, start_vacation, end_vacation, Team);
-		// 사용가능한 휴가 계산후 DB저장
-		dao.holidayCalculation(userId, start_vacation, end_vacation);
-		// 사용가능한 휴가 조회
-		HoliDayDTO userholidaycount = dao.selectholidaycount(userId);
-
-		// 뷰에 전달할 매개 변수 저장용 맵 생성
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		String searchField = req.getParameter("searchfield");
+		String searchField = req.getParameter("searchField");
 		String searchWord = req.getParameter("searchWord");
-
-		if (searchField != null) {
-			// 쿼리스트링으로 전달받은 매개변수 중 검색어가 있다면 map에 저장
+		if (searchWord != null) {
 			map.put("searchField", searchField);
 			map.put("searchWord", searchWord);
 		}
 
-		int totalCount = dao.selectCount(userId);
+		// 사원수 조회
+		int totalCount = dao.selectCount(map);
 
 		// 페이지 처리 start
 		ServletContext application = getServletContext();
@@ -69,8 +55,8 @@ public class HolidayApplicationController extends HttpServlet {
 		map.put("end", end);
 		// 페이지 처리 end
 
-		// 게시물 목록 받기
-		List<HoliDayDTO> holidayList = dao.selectList(userId);
+		// 사원 목록 받기
+		List<NewRegistDTO> selectList = dao.selectList(map);
 
 		dao.close();// DB 연결닫기
 
@@ -84,11 +70,8 @@ public class HolidayApplicationController extends HttpServlet {
 		map.put("pageNum", pageNum);
 
 		// 전달할 데이터를 request 영역애 저장후 List.jsp 로 포워드
-		req.setAttribute("holidayList", holidayList);
+		req.setAttribute("selectList", selectList);
 		req.setAttribute("map", map);
-		req.setAttribute("userholidaycount", userholidaycount);
-
-		req.getRequestDispatcher("/HoliDay/HoliDay.jsp").forward(req, resp);
+		req.getRequestDispatcher("/NewRegist/NewRegist.jsp").forward(req, resp);
 	}
-
 }

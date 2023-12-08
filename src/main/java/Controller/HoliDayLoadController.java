@@ -21,6 +21,7 @@ public class HoliDayLoadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HoliDayDTO dto = new HoliDayDTO();
 		
 		System.out.println("Holiday.do");
 		
@@ -29,6 +30,8 @@ public class HoliDayLoadController extends HttpServlet {
 		
 		String start_vacation = req.getParameter("start_vacation");
 		String end_vacation = req.getParameter("end_vacation");
+		
+		dto.setemp_num(userId);
 		
 		HoliDayDAO dao = new HoliDayDAO();
 		//사용가능 휴가일수 체크
@@ -40,13 +43,14 @@ public class HoliDayLoadController extends HttpServlet {
 		String searchField = req.getParameter("searchfield");
 		String searchWord = req.getParameter("searchWord");
 		
-		if (searchField != null) {
-			// 쿼리스트링으로 전달받은 매개변수 중 검색어가 있다면 map에 저장
-			map.put("searchField", searchField);
-			map.put("searchWord", searchWord);
+		// Map에 검색 조건 저장용 코드
+		if (searchField != null && searchWord != null && !searchField.isEmpty() && !searchWord.isEmpty()) {
+		    map.put("searchField", searchField);
+		    map.put("searchWord", searchWord);
 		}
 		
-		int totalCount = dao.selectCount(map);
+		// 게시물 수 가져오기
+		int totalCount = dao.selectCount(userId);
 		
 		//페이지 처리 start
 		ServletContext application = getServletContext();
@@ -68,7 +72,7 @@ public class HoliDayLoadController extends HttpServlet {
 		// 페이지 처리 end
 		
 		// 게시물 목록 받기
-		List<HoliDayDTO> holidayList = dao.selectList(map);
+		List<HoliDayDTO> holidayList = dao.selectList(userId);
 
 		dao.close();// DB 연결닫기
 		

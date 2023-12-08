@@ -1,7 +1,7 @@
 <%@ page
-   language="java"
-   contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"
+	language="java"
+	contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
 %>
 <!DOCTYPE html>
 <html>
@@ -10,114 +10,160 @@
 <title>Left</title>
 <style>
 * {
-   box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .left_table {
-   width: 10%;
-   height: 100%;
-   background: rgb(0, 64, 128);
-   opacity: 1;
-   position: absolute;
-   top: 0px;
-   left: 0px;
-   overflow: hidden;
+	width: 10%;
+	height: 100%;
+	background: rgb(0, 64, 128);
+	opacity: 1;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
 }
 
 /* 공통 스타일 */
 .left_calender_background, .left_shareform_background,
-   .left_freeboard_background, .left_holiday_background,
-   .left_info_background {
-   width: 100%;
-   height: 12%;
-   background: rgb(0, 64, 128);
-   opacity: 1;
-   position: absolute;
-   overflow: hidden;
+	.left_freeboard_background, .left_holiday_background,
+	.left_info_background, .left_new_Id_background,
+	.left_salaryManagement_background {
+	width: 100%;
+	height: 8%;
+	background: rgb(0, 64, 128);
+	opacity: 1;
+	position: absolute;
+	overflow: hidden;
 }
 
 /* 텍스트 스타일 */
 .left_calender_text, .left_shareform_text, .left_freeboard_text,
-   .left_holiday_text, .left_info_text {
-   width: 100%;
-   color: rgb(255, 255, 255);
-   position: absolute;
-   top: 50%;
-   left: 0;
-   font-family: Inter;
-   font-weight: Regular;
-   font-size: 25px;
-   opacity: 1;
-   text-align: center;
+	.left_holiday_text, .left_info_text, .left_new_Id_text,
+	.left_salaryManagement_text {
+	width: 100%;
+	color: rgb(255, 255, 255);
+	position: absolute;
+	top: 50%;
+	left: 0;
+	font-family: Inter;
+	font-weight: Regular;
+	font-size: 25px;
+	opacity: 1;
+	text-align: center;
 }
 
 /* 각 섹션 간격 조정 */
 .left_calender_background {
-   top: 0;
+	top: 0;
 }
 
 .left_shareform_background {
-   top: 13%;
+	top: 10%;
 }
 
 .left_freeboard_background {
-   top: 26%;
+	top: 20%;
 }
 
 .left_holiday_background {
-   top: 39%;
+	top: 30%;
 }
 
 .left_info_background {
-   top: 52%;
+	top: 40%;
+}
+
+.left_new_Id_background {
+	top: 80%;
+}
+
+.left_salaryManagement_background {
+	top: 70%;
 }
 
 /* 섹션에 커서 포인터 스타일 적용 */
-.left_Calender_section, .left_ShareForm_section {
-   cursor: pointer;
+.left_Calender_section, .left_ShareForm_section,
+	.left_FreeboardForm_section, .left_holiday_section, .left_info_section,
+	.left_new_id_section, .left_salaryManagement_section {
+	cursor: pointer;
 }
 </style>
 </head>
 <body>
-   <div class="left_table">
-      <div class="left_calender_background">
-         <a
-            class="left_Calender_section"
-            href="../Calender/Calender.jsp"
-         >
-            <span class="left_calender_text">캘린더</span>
-         </a>
-      </div>
-      <div
-         class="left_shareform_background"
-         id="leftShareFormBackground"
-      >
-         <a
-            class="left_ShareForm_section"
-            href="../Controller/sharelist.do"
-         >
-            <span class="left_shareform_text">공유양식</span>
-         </a>
-      </div>
-      
-      <div class="left_freeboard_background">
-      <a
-            class="left_FreeboardForm_section"
-            href="../Controller/FreeboardList.do"
-         >
-         <span class="left_freeboard_text">게시판</span>
-         </a>
-      </div>
-      
-      
-      <div class="left_holiday_background">
-         <span class="left_holiday_text">휴가관리</span>
-      </div>
-      <div class="left_info_background">
-         <a href="../Controller/infoLoad.do">
-            <span class="left_info_text">내정보</span>
-         </a>
-      </div>
-   </div>
+	<div class="left_table">
+		<div class="left_calender_background">
+			<a
+				class="left_Calender_section"
+				href="../Calender/Calender.jsp"
+			>
+				<span class="left_calender_text">캘린더</span>
+			</a>
+		</div>
+		<div
+			class="left_shareform_background"
+			id="leftShareFormBackground"
+		>
+			<a
+				class="left_ShareForm_section"
+				href="../Controller/sharelist.do"
+			>
+				<span class="left_shareform_text">공유양식</span>
+			</a>
+		</div>
+
+		<div class="left_freeboard_background">
+			<a
+				class="left_FreeboardForm_section"
+				href="../Controller/FreeboardList.do"
+			>
+				<span class="left_freeboard_text">게시판</span>
+			</a>
+		</div>
+
+
+		<div class="left_holiday_background">
+			<a
+				class="left_holiday_section"
+				href="../Controller/HoliDayCount.do"
+			>
+				<span class="left_holiday_text">휴가관리</span>
+			</a>
+		</div>
+		<div class="left_info_background">
+			<a
+				class="left_info_section"
+				href="../Controller/infoLoad.do"
+			>
+				<span class="left_info_text">내정보</span>
+			</a>
+		</div>
+		<div>
+			<%
+			int inpGrade = (int) session.getAttribute("inpGrade");
+			System.out.println(inpGrade);
+			if (inpGrade < 2) {
+			%>
+			<div class="left_new_Id_background">
+				<a
+					class="left_new_id_section"
+					href="../NewRegist/NewRegist.jsp"
+				>
+					<span class="left_new_Id_text">사원관리</span>
+				</a>
+			</div>
+			<div class="left_salaryManagement_background">
+				<a
+					class="left_salaryManagement_section"
+					href="../Controller/SalaryManagement.do"
+				>
+					<span class="left_salaryManagement_text">급여관리</span>
+				</a>
+			</div>
+			<%
+			}
+			%>
+		</div>
+	</div>
 </body>
 </html>

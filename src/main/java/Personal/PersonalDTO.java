@@ -11,6 +11,7 @@ public class PersonalDTO {
 	private String emp_grade;
 	private String phone;
 	private Date work_start_date;
+	private int grade;
 
 	public String getName() {
 		return name;
@@ -74,6 +75,14 @@ public class PersonalDTO {
 
 	public void setWork_start_date(Date work_start_date) {
 		this.work_start_date = work_start_date;
+	}
+
+	public int getGrade() {
+		return grade;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
 	}
 
 }

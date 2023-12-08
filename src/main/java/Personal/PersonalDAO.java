@@ -40,6 +40,7 @@ public class PersonalDAO extends DBConnPool {
 				dto.setEmp_grade(rs.getString("emp_grade"));
 				dto.setPhone(rs.getString("phone"));
 				dto.setWork_start_date(rs.getDate("work_start_day"));
+				dto.setGrade(rs.getInt("grade"));
 
 				System.out.println("dto 받음");
 
@@ -82,6 +83,7 @@ public class PersonalDAO extends DBConnPool {
 				dto.setEmp_grade(rs.getString("emp_grade"));
 				dto.setPhone(rs.getString("phone"));
 				dto.setWork_start_date(rs.getDate("work_start_day"));
+				dto.setGrade(rs.getInt("grade"));
 
 				System.out.println("dto 받음");
 

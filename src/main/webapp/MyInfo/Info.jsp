@@ -1,8 +1,5 @@
-<%@ page
-	language="java"
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="attend.AttendanceDTO"%>
 <%@ page import="java.util.ArrayList"%>
@@ -11,10 +8,6 @@
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.HashMap"%>
 
-<%
-String attendDateJson = (String) request.getAttribute("attendDateMap");
-%>
-
 <!DOCTYPE html>
 <html>
 
@@ -22,9 +15,11 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 <meta charset="UTF-8">
 <title>MyInfo</title>
 <script>
-	var attendDateMap = JSON.parse('<%=attendDateJson%>');
 
-	function getCurrentTime() {
+var jsonString = '<%=request.getAttribute("attendDateMap")%>';
+var InitAttendData =  JSON.parse(jsonString);
+
+function getCurrentTime() {
 		var now = new Date();
 		var hours = now.getHours();
 		var minutes = now.getMinutes();
@@ -91,13 +86,16 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 											sendAttendanceRequest('leave', formattedDate, currentTime);
 										});
 
-						generateCalendar();
+						generateCalendar(InitAttendData);
 						updateMonthYearText();
 
 					});
-	function generateCalendar() {
+	function generateCalendar(attendDateMap) {
 		var datepickerTable = document.getElementById('datepicker-table');
 		datepickerTable.innerHTML = '';
+
+		
+
 
 		var firstDay = new Date(currentYear, currentMonth, 1);
 		var lastDay = new Date(currentYear, currentMonth + 1, 0);
@@ -125,7 +123,6 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 					// Iterate over the attendDateMap in JavaScript
 					var currentDate = formatDate(new Date(currentYear,
 							currentMonth, day));
-					console.log("currentDate : " + currentDate);
 					var currentDateMap = attendDateMap[currentDate];
 
 					if (currentDateMap) {
@@ -165,7 +162,17 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 			currentYear++;
 		}
 
-		generateCalendar();
+		var updatedYearMonth = formatUpdateDate(currentYear, currentMonth);
+		console.log("updatedYearMonth : " + updatedYearMonth);
+
+		sessionStorage.setItem('updateCurrentDate', updatedYearMonth);
+
+		var updateCurrentDate = sessionStorage.getItem('updateCurrentDate');
+		console.log("업데이트 현재 날짜 가져오기 : " + updateCurrentDate);
+
+		// updateCalendar 함수 호출
+		updateCalendar(updateCurrentDate);
+
 		updateMonthYearText();
 	}
 
@@ -175,9 +182,9 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 		currentMonthYearText.textContent = currentYear + '년 '
 				+ (currentMonth + 1) + '월';
 
-		sessionStorage.setItem('currentDate', currentYear + "-"
+		sessionStorage.setItem('CurrentDate', currentYear + "-"
 				+ (currentMonth + 1));
-		console.log(sessionStorage.getItem('currentDate'));
+		console.log(sessionStorage.getItem('CurrentDate'));
 
 	}
 
@@ -188,6 +195,13 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 		return year + '-' + (month < 10 ? '0' : '') + month + '-'
 				+ (day < 10 ? '0' : '') + day;
 	}
+
+	function formatUpdateDate(Year, Month) {
+		var year = Year;
+		var month = Month + 1;
+		return year + '-' + (month < 10 ? '0' : '') + month;
+	}
+
 	function findCellByDate(day) {
 		// 특정 날짜의 셀을 찾아서 반환
 		var cells = document.querySelectorAll('.date-text');
@@ -198,32 +212,38 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 		}
 		return null; // 찾지 못한 경우
 	}
-	
+
 	// 서버로 출근 또는 퇴근 요청을 보내는 함수
 	function sendAttendanceRequest(action, date, time) {
-	    fetch('../Controller/Attend.do', {
-	        method: 'POST',
-	        headers: {
-	            'Content-Type': 'application/x-www-form-urlencoded',
-	        },
-	        body: 'action=' + action + '&checkdate=' + date + '&time=' + time,
-	    })
-	    .then(response => {
-	        // 서버 응답 처리
-	        if (!response.ok) {
-	            throw new Error('Network response was not ok');
-	        }
-	        return response.json();
-	    })
-	    .then(data => {
-	        // 서버 응답 데이터 처리
-	        console.log(data);
-	    })
-	    .catch(error => {
-	        // 오류 처리
-	        console.error('There was a problem with the fetch operation:', error);
-	    });
+		fetch('../Controller/Attend.do', {
+			method : 'POST',
+			headers : {
+				'Content-Type' : 'application/x-www-form-urlencoded',
+			},
+			body : 'action=' + action + '&checkdate=' + date + '&time=' + time,
+		});
 	}
+
+	// 서버로부터 날짜 데이터를 가져와서 달력을 업데이트하는 함수
+	function updateCalendar(updateCurrentDate) {
+    fetch('../Controller/LoadDate.do', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'updateCurrentDate=' + updateCurrentDate,
+    })
+    .then(response => response.json())  // 응답을 JSON 형태로 파싱
+    .then(attendDateMap => {
+    	 console.log(attendDateMap);
+    	generateCalendar(attendDateMap);
+       
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+}
+
 </script>
 </head>
 <style>
@@ -393,34 +413,21 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 		<div class="info_profile">
 			<div class="info_profile_photo">
 				<div class="info_profile_texts">
-					<a> 이름 : ${ userinfolist.name } </a>
-					<br />
-					<a> 사번 : ${ userinfolist.empNum } </a>
-					<br />
-					<a> 전화번호 : ${ userinfolist.phone }</a>
-					<br />
-					<a> 이메일 : ${ userinfolist.email }</a>
+					<a> 이름 : ${ userinfolist.name } </a> <br /> <a> 사번 : ${ userinfolist.empNum }
+					</a> <br /> <a> 전화번호 : ${ userinfolist.phone }</a> <br /> <a> 이메일
+						: ${ userinfolist.email }</a>
 				</div>
 			</div>
 		</div>
 		<div class="info_income">
-			<div
-				class="info_income_text"
-				align="center"
-			>
+			<div class="info_income_text" align="center">
 				<div class="info_income_textbox">
 					급여정보
-					<button
-						name="print_income"
-						class="print_income"
-					>출력하기</button>
+					<button name="print_income" class="print_income">출력하기</button>
 				</div>
 
 			</div>
-			<table
-				class="income_table"
-				border="1"
-			>
+			<table class="income_table" border="1">
 				<tr>
 					<th>기본급</th>
 					<th>${ incentivelist.pay }</th>
@@ -445,62 +452,30 @@ String attendDateJson = (String) request.getAttribute("attendDateMap");
 			</table>
 		</div>
 		<div class="datepicker-container">
-			<form
-				id="monthForm"
-				action="../Controller/LoadDate.do"
-				method="post"
-			>
-				<input
-					type="hidden"
-					name="currentYear"
-					id="currentYear"
-					value=""
-				>
-				<input
-					type="hidden"
-					name="currentMonth"
-					id="currentMonth"
-					value=""
-				>
+			<form id="monthForm" action="../Controller/LoadDate.do" method="post">
+				<input type="hidden" name="currentYear" id="currentYear" value="">
+				<input type="hidden" name="currentMonth" id="currentMonth" value="">
 			</form>
 			<div class="navigation-btn">
 				<!-- 이전달로 이동하는 버튼 -->
-				<form
-					action="../Controller/LoadDate.do"
-					method="post"
-				>
-					<button
-						id="prev-month-btn"
-						onclick="changeMonth(-1)"
-					>이전달</button>
-				</form>
-
+				<button
+					id="prev-month-btn"
+					onclick="changeMonth(-1)"
+				>이전달</button>
 				<!-- 현재 월과 년도를 표시하는 곳 -->
 				<a id="current-month-year"></a>
-
 				<!-- 다음달로 이동하는 버튼 -->
-				<form
-					action="../Controller/LoadDate.do"
-					method="post"
-				>
-					<button
-						id="next-month-btn"
-						onclick="changeMonth(1)"
-					>다음달</button>
-				</form>
+				<button
+					id="next-month-btn"
+					onclick="changeMonth(1)"
+				>다음달</button>
 			</div>
 			<table id="datepicker-table">
 			</table>
 			<div class="info_check_buttons"></div>
 			<div class="check_btn">
-				<button
-					type="button"
-					id='commute-button'
-				>출근</button>
-				<button
-					type="button"
-					id='leave-button'
-				>퇴근</button>
+				<button type="button" id='commute-button'>출근</button>
+				<button type="button" id='leave-button'>퇴근</button>
 			</div>
 		</div>
 		<div class="info_commute"></div>

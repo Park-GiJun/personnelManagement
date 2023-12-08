@@ -2,6 +2,7 @@ package Controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,30 +10,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import attend.AttendanceDAO;
 import attend.AttendanceDTO;
 
 @WebServlet("/Controller/LoadDate.do")
-public class LoadDate extends HttpServlet {
+public class LoadDateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("application/json;charset=UTF-8");
+
 		String userId = (String) request.getSession().getAttribute("loginid");
-		int currentYear = Integer.parseInt(request.getParameter("currentYear"));
-		int currentMonth = Integer.parseInt(request.getParameter("currentMonth"));
+		String currentDate = (String) request.getParameter("updateCurrentDate");
 
 		// 업데이트된 currentYear와 currentMonth를 세션에 저장
-		request.getSession().setAttribute("currentYear", currentYear);
-		request.getSession().setAttribute("currentMonth", currentMonth);
-		System.out.println("UserID : " + userId);
-		System.out.println("LoadDateController currentYear : " + currentYear);
-		System.out.println("LoadDateController currentMonth : " + currentMonth);
+		System.out.println("UserID: " + userId);
+		System.out.println("LoadDateController currentYear: " + currentDate);
 
 		AttendanceDAO attenddao = new AttendanceDAO();
+		Map<String, Map<String, String>> attendDateMap = attenddao.loadDateAttendance(userId, currentDate);
 
+		System.out.println("LoadDate.do doPost 완료");
 
-		request.getRequestDispatcher("/MyInfo/Info.jsp").forward(request, response);
+		// Gson을 사용하여 Map을 JSON 형식으로 변환
+		String jsonAttendDateMap = new Gson().toJson(attendDateMap);
+
+		// 응답으로 JSON 데이터 전송
+		response.setContentType("application/json");
+		response.getWriter().write(jsonAttendDateMap);
 	}
 }
