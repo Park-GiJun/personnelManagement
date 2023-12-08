@@ -145,7 +145,7 @@ body {
 					</table>
 
 					<div class="middle-button-container">
-						<button type="submit" class='my_btn'>정보등록</button>
+						<button type="submit" class='my_btn' name="NewRegistType" value="NewRegist">정보등록</button>
 					</div>
 
 					<!-- ---------------------------------------------------------------------------------------------------------------- -->
@@ -171,20 +171,18 @@ body {
 									<input name="emp_numinfo" readonly="readonly" style="text-align: center;">
 								</td>
 
-								<td align="center" width="25%"><input type="text"
-									name="emp_grade"
-									style="width: 90%; box-sizing: border-box; text-align: center;">
+								<td align="center" width="25%">
+									<input type="text" name="emp_grade_Edit"	style="width: 90%; box-sizing: border-box; text-align: center;">
 								</td>
 
-								<td align="center" width="25%"><input type="text"
-									name="team"
-									style="width: 90%; box-sizing: border-box; text-align: center;">
+								<td align="center" width="25%">
+									<input type="text" name="team_Edit" style="width: 90%; box-sizing: border-box; text-align: center;">
 								</td>
 							</tr>
 						</table>
 
 						<div class="middle-button-container">
-							<button type="submit" class='my_btn'>정보수정</button>
+							<button type="submit" class='my_btn' name="NewRegistType" value="Edit">정보수정</button>
 						</div>
 					</div>
 
