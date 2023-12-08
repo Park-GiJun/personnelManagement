@@ -17,38 +17,57 @@ import HolidayApproval.HolidayApprovalDAO;
 import HolidayApproval.HolidayApprovalDTO;
 import utils.BoardPage;
 
-@WebServlet("/Controller/HolidayApproval.do")
+@WebServlet("/Controller/HolidayApprovalTrue.do")
 public class HolidayApprovalController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		HolidayApprovalDAO dao = new HolidayApprovalDAO();
-		String teamvalue = "";
-		
+		String approvalType = req.getParameter("approvalType");
+		String approval_num = "";
+
 		String[] selectedDepartments = req.getParameterValues("department");
-		if (selectedDepartments != null) {
-			for (String department : selectedDepartments) {
-				String[] values = department.split(", ");
-	            String emp_num = values[0];
-	            String start_vacation = values[1];
-	            String end_vacation = values[2];
-	            String team = values[3];
-	            
-	            dao.TeamHoliday(team, emp_num, start_vacation, end_vacation);
-	            dao.HolidayApproval(emp_num, start_vacation, end_vacation, team);
+
+		if ("false".equals(approvalType)) {
+			
+			// 휴가 거절
+			if (selectedDepartments != null) {
+				for (String department : selectedDepartments) {
+					String[] values = department.split(", ");
+					String emp_num = values[0];
+					String start_vacation = values[1];
+					String end_vacation = values[2];
+					String team = values[3];
+					approval_num = "3";
+
+					dao.HolidayApprovalFalse(approval_num, emp_num, start_vacation, end_vacation, team);
+					dao.holidayCalculation(emp_num, start_vacation, end_vacation);
+				}
+			}
+		} else if ("true".equals(approvalType)) {
+
+			// 휴가 승인
+			if (selectedDepartments != null) {
+				for (String department : selectedDepartments) {
+					String[] values = department.split(", ");
+					String emp_num = values[0];
+					String start_vacation = values[1];
+					String end_vacation = values[2];
+					String team = values[3];
+					approval_num = "2";
+
+					dao.TeamHoliday(team, emp_num, start_vacation, end_vacation);
+					dao.HolidayApprovalTrue(approval_num, emp_num, start_vacation, end_vacation, team);
+				}
 			}
 		}
-		
+
 		HoliDayDTO dto = new HoliDayDTO();
 
 		System.out.println("Holiday.do");
 
 		String userId = (String) req.getSession().getAttribute("loginid");
-		String Team = (String) req.getSession().getAttribute("inpteam");
-
-		String start_vacation = req.getParameter("start_vacation");
-		String end_vacation = req.getParameter("end_vacation");
 
 		dto.setemp_num(userId);
 
@@ -92,7 +111,8 @@ public class HolidayApprovalController extends HttpServlet {
 		dao.close();// DB 연결닫기
 
 		// 뷰에 전달할 매개 변수 추가
-		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "../HoliDayApproval/HoliDayApproval.do");
+		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum,
+				"../HoliDayApproval/HoliDayApproval.do");
 
 		// 바로가기 영역 HTML 문자열
 		map.put("pagingImg", pagingImg);

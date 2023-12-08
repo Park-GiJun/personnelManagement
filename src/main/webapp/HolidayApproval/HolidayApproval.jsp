@@ -22,18 +22,22 @@
 	height: 300%;
 	font-size: 200%;
 	border-radius: 30px;
+	height: 300%;
 }
 
 .btncontent {
-	margin-left: 40%;
+	display: flex;
+	justify-content: space-between;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 .tablecontent {
 	margin-top: 2%;
 }
 
-</
-head> <style> /* 공통 스타일 */ * {
+<
+style> /* 공통 스타일 */ * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
@@ -57,10 +61,14 @@ body {
 	<div class="content">
 
 		<form name="HolidayApproval_form" method="post"
-			action="../Controller/HolidayApproval.do" accept-charset="UTF-8">
+			action="../Controller/HolidayApprovalTrue.do" accept-charset="UTF-8">
 			<div class="btncontent">
-				<button type="submit" class='my_btn'>휴가승인</button>
+				<button type="submit" class='my_btn' name="approvalType"
+					value="true">휴가승인</button>
+				<button type="submit" class='my_btn' name="approvalType"
+					value="false">휴가거절</button>
 			</div>
+
 			<div class="tablecontent">
 				<table border="1" width="100%">
 					<tr>
@@ -84,9 +92,18 @@ body {
 							<c:forEach items="${holidayapprovalList}" var="row"
 								varStatus="loop">
 								<tr align="center">
-									<td><label>
-									<input type="checkbox" name="department" value="${row.emp_num}, ${row.start_vacation}, ${row.end_vacation}, ${row.team}">
-									</label></td>
+									<c:if
+										test="${not (row.approval eq '승인 완료' or row.approval eq '승인 거절')}">
+										<td><label> <input type="checkbox"
+												name="department"
+												value="${row.emp_num}, ${row.start_vacation}, ${row.end_vacation}, ${row.team}">
+										</label></td>
+									</c:if>
+									<c:if
+										test="${(row.approval eq '승인 완료' or row.approval eq '승인 거절')}">
+										<td>&nbsp;</td>
+									</c:if>
+
 									<td>${row.name}</td>
 									<td>${row.emp_num}</td>
 									<td>${row.start_vacation}~${row.end_vacation}</td>

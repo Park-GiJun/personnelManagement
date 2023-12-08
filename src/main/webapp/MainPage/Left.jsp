@@ -131,7 +131,7 @@
 				class="left_holiday_section"
 				href="../Controller/HoliDayCount.do"
 			>
-				<span class="left_holiday_text">휴가관리</span>
+				<span class="left_holiday_text">휴가신청</span>
 			</a>
 		</div>
 		<div class="left_info_background">
