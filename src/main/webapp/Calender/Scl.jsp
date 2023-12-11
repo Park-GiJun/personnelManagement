@@ -95,6 +95,35 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   background: orange;
 }
 
+
+.scl{
+  top:480px;
+  animation-direction:scl;
+  
+  position:absolute;
+  left:992px;
+  width:185px;
+  height:20px;
+  background-color :#1C427E;
+  border: none;
+  color:#fff;
+  
+  font-size: 13px;
+  /* animation-name:direction; */
+  animation-duration:2s;
+  animation-iteration-count:3;
+  animation-timing-function:ease-in;
+  position: relative; /* 상대적인 위치 지정 */
+}
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+.scl:hover {
+  color:#fff;
+  background:green;
+}
+
+
+
 /* 개인 일정 삭제하기 버튼 설정 */
 .del_btn {
 	text-align: center;
@@ -365,7 +394,7 @@ a:active, a:hover {
 
 .calendar {
    width: 1500px;
-   margin: 70px auto;
+   margin: 40px auto;
    margin-left: 250px;
 }
 
@@ -691,8 +720,9 @@ body {
 							${map.totalCount-(((map.pageNum-1)*map.pageSize)+loop.index)}
 						</td>
 						<td align="left">
-							<a href="../mvcboard/view.do?idx=${row.idx}">${row.title}</a>
+							<a href="../mvcboard/view.do?Personal_diaray_schedule=${row.Personal_diaray_schedule}"></a>
 						</td>
+						<td>${row.Personal_diaray_schedule}</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
@@ -700,6 +730,11 @@ body {
 		 </table> 	
 		 </div>
 	</div>	 
+	
+	
+	<button class="scl" onclick="location.href='Company_Cal.jsp';">
+		<font class="myFont">여기에 회사 일정 내용 담기</font>
+	</button>  <!-- 1개당 1개의 일정 제목 표시 -->
   
   	
 
