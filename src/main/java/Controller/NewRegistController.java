@@ -1,6 +1,8 @@
 package Controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import NewRegist.NewRegistDAO;
 import NewRegist.NewRegistDTO;
+import SalaryManagement.SalaryManagementDAO;
 import utils.BoardPage;
 
 @WebServlet("/Controller/NewRegist.do")
@@ -25,6 +28,14 @@ public class NewRegistController extends HttpServlet {
 		NewRegistDAO dao = new NewRegistDAO();
 		
 		String grade = "";
+		
+		LocalDate currentDate = LocalDate.now();
+
+        // 원하는 형식으로 포맷팅
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM");
+        String formattedYearMonth = currentDate.format(formatter);
+
+       
 		
 		String name = req.getParameter("name");
 		String emp_num = req.getParameter("emp_num");
@@ -50,12 +61,19 @@ public class NewRegistController extends HttpServlet {
 		} else if (emp_grade.equals("인턴") || emp_grade_Edit.equals("인턴")) {
 			grade = "7";
 		}
+		
+		
+		
+		
+		SalaryManagementDAO sDao = new SalaryManagementDAO();
+		
 
 		System.out.println(NewRegistType);
 		if (NewRegistType.equals("NewRegist")) {
 			// 사원 등록
 			dao.NewRegist(name, emp_num, emp_grade, team, grade);
 			// 휴가테이블 사원정보 입력
+			sDao.noExistDate(emp_num, formattedYearMonth);
 			dao.NewRegistHoliday(emp_num);
 		} else if (NewRegistType.equals("Edit")) {
 			// 사원정보 수정

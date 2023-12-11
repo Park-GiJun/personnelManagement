@@ -1,5 +1,6 @@
 package SalaryManagement;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -164,25 +165,54 @@ public class SalaryManagementDAO extends DBConnPool {
 	}
 
 	public void updateIncentive(String emp, String incentive, String holiday, String yearmonth) {
-		
+
 		System.out.println("확인용2 : " + emp + " " + incentive + " " + holiday + " " + yearmonth);
 
 		try {
 
 			String query = "UPDATE incentive_value SET incentive=?, holiday_pay=? WHERE emp_num=? AND TO_DATE(?, 'YYYY-MM') = yearmonth";
-			
+
 			psmt = con.prepareStatement(query);
-			
+
 			psmt.setString(1, incentive);
 			psmt.setString(2, holiday);
 			psmt.setString(3, emp);
 			psmt.setString(4, yearmonth);
-			
+
 			psmt.executeUpdate();
-			
+
 		} catch (Exception e) {
 			System.out.println("인센티브 설정중 예외 발생");
 			e.printStackTrace();
+		}
+	}
+
+	public void noExistDate(String emp, String date) {
+		System.out.println("noExistDate1");
+
+		String query1 = "INSERT INTO incentive (emp_num, pay, ADDITIONAL_PAY, yearmonth) VALUES (? , 0, 0, TO_DATE(? , 'YYYY-MM'))";
+		try {
+			System.out.println("인센티브 밸류 실행");
+			psmt = con.prepareStatement(query1);
+			psmt.setString(1, emp);
+			psmt.setString(2, date);
+			psmt.executeUpdate();
+		} catch (Exception e2) {
+			System.out.println("첫번째 새 달 생성중 예외발생");
+			e2.printStackTrace();
+		}
+
+		String query2 = "INSERT INTO incentive_value (emp_num, incentive_value_date, holiday_pay, incentive, extra_work_pay, yearmonth) VALUES (? , TO_DATE(? , 'YYYY-MM'), 0, 0, 0, TO_DATE(? , 'YYYY-MM'))";
+		try {
+			System.out.println("인센티브 실행");
+			psmt = con.prepareStatement(query2);
+			psmt.setString(1, emp);
+			psmt.setString(2, date);
+			psmt.setString(3, date);
+			psmt.executeUpdate();
+		} catch (Exception e2) {
+			System.out.println("두번째 새 달 생성중 예외발생");
+			e2.printStackTrace();
 		}
 	}
 
