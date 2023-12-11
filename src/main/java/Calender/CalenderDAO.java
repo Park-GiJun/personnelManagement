@@ -12,6 +12,7 @@ public class CalenderDAO extends DBConnPool{
 		super();
 	}
 	
+	//1
 	public int ScheduleListCount(Map<String, Object> map) {
 		System.out.println("ScheduleListCount");
 		int totalcount = 0;
@@ -39,7 +40,7 @@ public class CalenderDAO extends DBConnPool{
 	}
 	
 	
-	
+	//2
 	public List<CalenderDTO> selectListPage(Map<String,Object> map) {
 		List<CalenderDTO> board = new Vector<CalenderDTO>();
 		
@@ -55,7 +56,7 @@ public class CalenderDAO extends DBConnPool{
 		}
 		
 		query += "		OEDER BY Personal_diaray_date DESC "
-			   + "	) Td "
+			   + "	) Tb "
 			   + " ) "
 			   + " WHERE rNum BETWEEN ? AND ?";
 		
@@ -80,11 +81,46 @@ public class CalenderDAO extends DBConnPool{
 			e.printStackTrace();
 		}
 		return board;
-		
 	}
 	
 	
+	//3 삭제
+	public int deletePost(String Personal_diaray_schedule) {
+		int result = 0;
+		try {
+			String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_schedule=?";
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, Personal_diaray_schedule);
+			result = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("게시물 삭제 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
+	
+	//4 입력, 저장
+	public int insertWrite(CalenderDTO dto) {
+		int result = 0;
+
+		try {
+			String query = "INSERT INTO Personal_diaray ("
+					+ "Personal_diaray_schedule) "
+					+ " VALUES ( "
+					+ " seq_board_num.NEXTVAL, ?)";
+
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getPersonal_diaray_schedule());
+			result = psmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("게시물 입력 중 예외 발생");
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 	
 
 }

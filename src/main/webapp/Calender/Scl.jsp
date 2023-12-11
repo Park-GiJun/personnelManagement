@@ -55,6 +55,10 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
     box-sizing: border-box;
 }
 
+.conti {
+	text-align: center;
+}
+
 .re_day {
 	text-align: center;
 	font-size: 35px;
@@ -182,7 +186,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   left:10px;
   width:310px;
   height:900px;
-  background: #1C427E;
+  background: orange;
   color:#fff;
   /* animation-name:direction; */
   animation-duration:2s;
@@ -670,11 +674,32 @@ body {
 		 <button class='plus_btn' onclick="confirmPlus();">추가하기</button>
 		 <button class='del_btn' onclick="confirmDelete();">삭제하기</button>
 		 
-		 <div class="reverse2" id="contentContainer" >
-			<!-- 개인 스케쥴 내용 올 공간 -->	
-				 	
-		 </div>	 
-	</div>
+		 
+		 <!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
+		 <div class="reverse2">
+		 <table width="90%">
+		 <c:choose>
+		 	<c:when test="${empty boardLists}">
+				<tr>
+					<td class="conti" colspan="6" align="center">등록된 일정이 없습니다*^^*</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${boardLists}" var="row" varStatus="loop">
+					<tr align="center">
+						<td>
+							${map.totalCount-(((map.pageNum-1)*map.pageSize)+loop.index)}
+						</td>
+						<td align="left">
+							<a href="../mvcboard/view.do?idx=${row.idx}">${row.title}</a>
+						</td>
+					</tr>
+				</c:forEach>
+			</c:otherwise>
+		 </c:choose>	
+		 </table> 	
+		 </div>
+	</div>	 
   
   	
 
