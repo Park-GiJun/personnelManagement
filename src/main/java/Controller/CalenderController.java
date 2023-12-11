@@ -63,7 +63,7 @@ public class CalenderController extends HttpServlet {
 		map.put("end", end);
 		/* 페이지 처리 end */
 				
-		List<CalenderDTO> FreeboardFormLists = dao.selectListPage(map);	
+		List<CalenderDTO> CalenderLists = dao.selectListPage(map);	
 		
 		// 게시물 목록 받기
 		dao.close();

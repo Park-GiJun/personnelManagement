@@ -716,7 +716,7 @@ body {
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${boardLists}" var="row" varStatus="loop">
+				<c:forEach items="${CalenderLists}" var="row" varStatus="loop">
 					<tr align="center">
 						<td>
 							${map.totalCount-(((map.pageNum-1)*map.pageSize)+loop.index)}
