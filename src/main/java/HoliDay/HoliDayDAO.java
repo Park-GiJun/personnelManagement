@@ -158,7 +158,7 @@ public class HoliDayDAO extends DBConnPool {
 	public List<HoliDayDTO> selectList(String login_Id) {
 		List<HoliDayDTO> bbs = new Vector<HoliDayDTO>();
 
-		String query = "SELECT * FROM holiday_check WHERE emp_num = ? ORDER BY start_vacation DESC";
+		String query = "SELECT * FROM holiday_check WHERE emp_num = ? ORDER BY approval_num, start_vacation DESC";
 
 		try {
 			// 쿼리 실행
