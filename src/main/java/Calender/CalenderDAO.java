@@ -8,6 +8,9 @@ import DBcontrol.DBConnPool;
 
 public class CalenderDAO extends DBConnPool{
 	
+	String driver="orable.jdbc.driver.OracleDriver";
+	String url="jdbc:oracle:thin:@localhost:1521:xe";
+	
 	public CalenderDAO() {
 		super();
 	}

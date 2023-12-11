@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
-<%@page import="java.util.Calendar"%>
+<%@ page import="java.util.Calendar"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ page import="Calender.CalenderDTO" %>
+<%@ page import="Calender.CalenderDAO" %>
 
 <%
 request.setCharacterEncoding("utf-8");
@@ -706,11 +708,11 @@ body {
 		 
 		 <!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
 		 <div class="reverse2">
-		 <table width="90%">
+		 <table class="caltabke" width="90%">
 		 <c:choose>
 		 	<c:when test="${empty boardLists}">
 				<tr>
-					<td class="conti" colspan="6" align="center">등록된 일정이 없습니다*^^*</td>
+					<td class="conti"  align="center">등록된 일정이 없습니다*^^*</td>
 				</tr>
 			</c:when>
 			<c:otherwise>
@@ -741,7 +743,7 @@ body {
    <div class="calendar" style="width: 1300px; height: 300px;">
       <div class="title" > <!-- 년도 월 선택 리스트 만드는 위치 -->
          <form name="frm" method="post" >
-            <select id="yearSelect" name="year" class="selectField" onchange="change()"  >
+            <select id="yearSelect" name="year" class="selectField" onchange="change()">
                <%
                for (int i = year - 50; i <= year + 50; i++) {
                %>

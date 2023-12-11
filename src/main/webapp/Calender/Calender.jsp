@@ -484,7 +484,7 @@ body {
    <div class="calendar" style="width: 1050px; height: 300px;">
       <div class="title" >
          <form name="frm" method="post" >
-            <select id="yearSelect" name="year" class="selectField" onchange="change()"  >
+            <select id="yearSelect" name="year" class="selectField" onchange="change()" >
                <%
                for (int i = year - 50; i <= year + 50; i++) {
                %>
