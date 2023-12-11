@@ -92,10 +92,9 @@ body {
 							<c:forEach items="${holidayapprovalList}" var="row"
 								varStatus="loop">
 								<tr align="center">
-									<c:if
-										test="${not (row.approval eq '승인 완료' or row.approval eq '승인 거절')}">
-										<td><label> <input type="checkbox"
-												name="department"
+									<c:if test="${not (row.approval eq '승인 완료' or row.approval eq '승인 거절')}">
+										<td><label>
+										<input type="checkbox" name="department"
 												value="${row.emp_num}, ${row.start_vacation}, ${row.end_vacation}, ${row.team}">
 										</label></td>
 									</c:if>

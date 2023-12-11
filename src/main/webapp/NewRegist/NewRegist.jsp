@@ -102,12 +102,6 @@ body {
 			</div>
 		</form>
 
-		<script>
-			function submitForm() {
-				document.forms["team_form"].submit();
-			}
-		</script>
-
 		<!-- ---------------------------------------------------------------------------------------------------------------- -->
 
 		<form name="vacation_form" method="post"
@@ -134,20 +128,36 @@ body {
 								style="width: 90%; box-sizing: border-box; text-align: center;">
 							</td>
 
-							<td align="center"><input type="text" name="emp_grade"
-								style="width: 90%; box-sizing: border-box; text-align: center;">
+							<td align="center">
+								<!-- <input type="text" name="emp_grade" style="width: 90%; box-sizing: border-box; text-align: center;"> -->
+								<select id="emp_grade" name="emp_grade" size="1" style="width: 90%">
+									<option value="">선택하세요.</option>
+									<option value="부장">부장</option>
+									<option value="차장">차장</option>
+									<option value="과장">과장</option>
+									<option value="대리">대리</option>
+									<option value="사원">사원</option>
+									<option value="인턴">인턴</option>
+							</select>
 							</td>
 
-							<td align="center"><input type="text" name="team"
-								style="width: 90%; box-sizing: border-box; text-align: center;">
+							<td align="center">
+								<!-- <input type="text" name="team" style="width: 90%; box-sizing: border-box; text-align: center;"> -->
+								<select id="team" name="team" size="1" style="width: 90%;">
+									<option value="">선택하세요.</option>
+									<option value="인사">인사</option>
+									<option value="개발">개발</option>
+									<option value="디자인">디자인</option>
+							</select>
 							</td>
 						</tr>
 					</table>
 
 					<div class="middle-button-container">
-						<button type="submit" class='my_btn' name="NewRegistType" value="NewRegist">정보등록</button>
+						<button type="submit" class='my_btn' name="NewRegistType"
+							value="NewRegist" onclick="validateForm()">정보등록</button>
 					</div>
-
+					
 					<!-- ---------------------------------------------------------------------------------------------------------------- -->
 
 					<!-- 사원 정보 수정 -->
@@ -163,26 +173,35 @@ body {
 								<th width="25">부서</th>
 							</tr>
 							<tr>
-								<td align="center" width="25%">
-									<input name="nameinfo" readonly="readonly" style="text-align: center;">
-								</td>
+								<td align="center" width="25%"><input name="nameinfo"
+									readonly="readonly" style="text-align: center;"></td>
+
+								<td align="center" width="25%"><input name="emp_numinfo"
+									readonly="readonly" style="text-align: center;"></td>
 
 								<td align="center" width="25%">
-									<input name="emp_numinfo" readonly="readonly" style="text-align: center;">
-								</td>
+								<select id="emp_grade_Edit"	name="emp_grade_Edit" size="1" style="width: 90%">
+										<option value="">선택하세요.</option>
+										<option value="부장">부장</option>
+										<option value="차장">차장</option>
+										<option value="과장">과장</option>
+										<option value="대리">대리</option>
+										<option value="사원">사원</option>
+										<option value="인턴">인턴</option>
+								</select></td>
 
 								<td align="center" width="25%">
-									<input type="text" name="emp_grade_Edit"	style="width: 90%; box-sizing: border-box; text-align: center;">
-								</td>
-
-								<td align="center" width="25%">
-									<input type="text" name="team_Edit" style="width: 90%; box-sizing: border-box; text-align: center;">
-								</td>
+								<select id="team_Edit"	name="team_Edit" size="1" style="width: 90%;">
+										<option value="">선택하세요.</option>
+										<option value="인사">인사</option>
+										<option value="개발">개발</option>
+										<option value="디자인">디자인</option>
+								</select></td>
 							</tr>
 						</table>
 
 						<div class="middle-button-container">
-							<button type="submit" class='my_btn' name="NewRegistType" value="Edit">정보수정</button>
+							<button type="submit" class='my_btn' name="NewRegistType" value="Edit" onclick="validate_Edit_Form()">정보수정</button>
 						</div>
 					</div>
 
@@ -228,10 +247,44 @@ body {
 					</table>
 
 					<script>
+						//리스트정보 받아서 정보수정부분에 입력
 						function infosubmitForm(nameinfo, emp_numinfo) {
 							// "사원 정보 수정" 테이블의 필드에 값을 채우기
 							document.forms["vacation_form"]["nameinfo"].value = nameinfo;
 							document.forms["vacation_form"]["emp_numinfo"].value = emp_numinfo;
+						}
+						
+						// 정보 등록
+						function validateForm() {
+							var emp_grade = document.getElementById("emp_grade").value;
+							var team = document.getElementById("team").value;
+
+							if (emp_grade === "" || team === "") {
+								alert("직급 또는 부서를 선택해주세요.");
+							} else {
+								// 폼 제출 로직 추가 (예: document.forms["vacation_form"].submit();)
+								document.forms["vacation_form"].submit();
+								alert("사원정보가 등록 되었습니다..");
+							}
+						}
+						
+						// 정보 수정
+						function validate_Edit_Form() {
+							var emp_grade_Edit = document.getElementById("emp_grade_Edit").value;
+							var team_Edit = document.getElementById("team_Edit").value;
+
+							if (emp_grade_Edit === "" || team_Edit === "") {
+								alert("직급 또는 부서를 선택해주세요.");
+							} else {
+								// 폼 제출 로직 추가 (예: document.forms["vacation_form"].submit();)
+								document.forms["vacation_form"].submit();
+								alert("사원정보가 수정 되었습니다..");
+							}
+						}
+						
+						// 부서별 사원 검색
+						function submitForm() {
+							document.forms["team_form"].submit();
 						}
 					</script>
 				</div>
