@@ -8,7 +8,7 @@ import DBcontrol.DBConnPool;
 
 public class CalenderDAO extends DBConnPool{
 	
-	String driver="orable.jdbc.driver.OracleDriver";
+	String driver="oracle.jdbc.driver.OracleDriver";
 	String url="jdbc:oracle:thin:@localhost:1521:xe";
 	
 	public CalenderDAO() {
@@ -27,6 +27,10 @@ public class CalenderDAO extends DBConnPool{
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
 		}
+		
+		//if (map.get("searchWord") != null) {
+		    //query += " WHERE " + map.get("searchCategory") + " LIKE ?";
+		//}
 		
 		try {
 			stmt = con.createStatement();  // 쿼리문 생성
@@ -58,7 +62,7 @@ public class CalenderDAO extends DBConnPool{
 				   + " LIKE '%" + map.get("searchWord") + "%' ";
 		}
 		
-		query += "		OEDER BY Personal_diaray_date DESC "
+		query += "		ORDER BY Personal_diaray_date DESC "
 			   + "	) Tb "
 			   + " ) "
 			   + " WHERE rNum BETWEEN ? AND ?";
@@ -91,7 +95,7 @@ public class CalenderDAO extends DBConnPool{
 	public int deletePost(String Personal_diaray_schedule) {
 		int result = 0;
 		try {
-			String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_schedule=?";
+			String query = "INSERT INTO Personal_diaray (Personal_diaray_schedule) VALUES (?)";
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, Personal_diaray_schedule);
 			result = psmt.executeUpdate();
