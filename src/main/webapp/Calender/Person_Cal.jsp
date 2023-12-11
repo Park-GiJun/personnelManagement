@@ -52,7 +52,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 
 /* 개인 일정 버튼 */
 .my_btn {
-  background-color: #1C427E;
+  background-color: orange;
   color: white;
   border: none;
   

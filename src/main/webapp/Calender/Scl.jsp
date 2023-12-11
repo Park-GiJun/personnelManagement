@@ -1,11 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<%@page import="java.util.Calendar"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ page import="java.util.Calendar"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ page import="Calender.CalenderDTO" %>
+<%@ page import="Calender.CalenderDAO" %>
 
 <%
 request.setCharacterEncoding("utf-8");
 
+String name = request.getParameter("name");
+String cl_year = request.getParameter("year2");
+String cl_month = request.getParameter("month2");
 Calendar cal = Calendar.getInstance();
 
 // 시스템 오늘날짜
@@ -51,6 +57,10 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
     box-sizing: border-box;
 }
 
+.conti {
+	text-align: center;
+}
+
 .re_day {
 	text-align: center;
 	font-size: 35px;
@@ -86,6 +96,35 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   color: white;
   background: orange;
 }
+
+
+.scl{
+  top:480px;
+  animation-direction:scl;
+  
+  position:absolute;
+  left:992px;
+  width:185px;
+  height:20px;
+  background-color :#1C427E;
+  border: none;
+  color:#fff;
+  
+  font-size: 13px;
+  /* animation-name:direction; */
+  animation-duration:2s;
+  animation-iteration-count:3;
+  animation-timing-function:ease-in;
+  position: relative; /* 상대적인 위치 지정 */
+}
+
+/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+.scl:hover {
+  color:#fff;
+  background:green;
+}
+
+
 
 /* 개인 일정 삭제하기 버튼 설정 */
 .del_btn {
@@ -178,7 +217,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   left:10px;
   width:310px;
   height:900px;
-  background: #1C427E;
+  background: orange;
   color:#fff;
   /* animation-name:direction; */
   animation-duration:2s;
@@ -357,7 +396,7 @@ a:active, a:hover {
 
 .calendar {
    width: 1500px;
-   margin: 70px auto;
+   margin: 40px auto;
    margin-left: 250px;
 }
 
@@ -527,6 +566,7 @@ function showDateAndAlert(day) {
 
     // 클릭한 날짜를 alert 창에도 표시
     alert('클릭한 날짜: ' + clickedDay + '일');
+    
 
     // 여기에서 필요한 작업 수행 가능
     // 예를 들어, 다른 요소에도 표시하려면
@@ -538,45 +578,47 @@ function showDateAndAlert(day) {
     // 예를 들어, 다른 페이지로 이동하려면 window.location.href = '다른페이지.jsp';
 }
 
+
+
 //일정 추가하기 버튼 눌렀을 때 설정
+// 일정 추가를 위한 고유한 식별자
+var eventCounter = 1;
+
 function confirmPlus() {
-    while (true) {
-        // 사용자로부터 입력을 받기 위한 prompt 대화상자 사용
-        var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
+    // 사용자로부터 입력을 받기 위한 prompt 대화상자 사용
+    var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
 
-        // 사용자가 "확인"을 클릭하고 값을 입력한 경우
-        if (userInput !== null && userInput !== "") {
-            // 사용자가 "확인"을 클릭하고 값을 입력한 경우, userInput 변수에 입력된 값이 포함됩니다.
-            console.log("사용자가 이벤트를 추가하려고 합니다:", userInput);
+    // 사용자가 "확인"을 클릭하고 값을 입력한 경우
+    if (userInput !== null && userInput !== "") {
+        // 사용자가 "확인"을 클릭하고 값을 입력한 경우, userInput 변수에 입력된 값이 포함됩니다.
+        console.log("사용자가 이벤트를 추가하려고 합니다:", userInput);
 
-            // 일정 추가 여부를 물어보고 결과에 따라 메시지 표시
-            var result = window.confirm("일정을 추가하시겠습니까?");
-            if (result) {
-                // 사용자가 입력을 취소하지 않은 경우 새로운 <p> 엘리먼트 생성
-                var newParagraph = document.createElement('p');
-                newParagraph.textContent = userInput;
-                
-                var existingParagraphs = document.querySelectorAll('.reverse p');
-                var lastParagraph = existingParagraphs[existingParagraphs.length - 1];
-                
-                if (lastParagraph) {
-                    lastParagraph.insertAdjacentElement('afterend', newParagraph);
-                }
-                
-                window.alert("일정이 추가되었습니다");
-                break;
-            } else {
-                window.alert("취소되었습니다");
-                break;
-            }
-        } else if (userInput === "") {
-            // 사용자가 "확인"을 클릭하고 값을 입력하지 않은 경우
-            alert("일정을 입력해주세요.");
+        // 일정 추가 여부를 물어보고 결과에 따라 메시지 표시
+        var result = window.confirm("일정을 추가하시겠습니까?");
+        if (result) {
+            // 사용자가 입력을 취소하지 않은 경우 새로운 <p> 엘리먼트 생성
+            var newParagraph = document.createElement('p');
+            newParagraph.textContent = userInput;
+
+            // 고유한 ID 추가
+            newParagraph.id = 'event' + eventCounter;
+
+            // 고유한 식별자를 증가시킴
+            eventCounter++;
+
+            // <div class="reverse2" id="contentContainer">에 <p> 추가
+            document.getElementById('contentContainer').appendChild(newParagraph);
+
+            window.alert("일정이 추가되었습니다");
         } else {
-            // 사용자가 "취소"를 클릭하거나 대화상자를 아무 값도 입력하지 않고 닫은 경우
-            console.log("사용자가 대화상자를 취소했거나 닫았습니다.");
-            break;
+            window.alert("취소되었습니다");
         }
+    } else if (userInput === "") {
+        // 사용자가 "확인"을 클릭하고 값을 입력하지 않은 경우
+        alert("일정을 입력해주세요.");
+    } else {
+        // 사용자가 "취소"를 클릭하거나 대화상자를 아무 값도 입력하지 않고 닫은 경우
+        console.log("사용자가 대화상자를 취소했거나 닫았습니다.");
     }
 }
 
@@ -597,36 +639,6 @@ function confirmDelete() {
         // 추가적인 작업을 수행하거나 아무 작업도 하지 않음
     }
 }
-
-
-function addContent(contentText) {
-    // 새로운 <p> 엘리먼트 생성
-    var newParagraph = document.createElement('p');
-    newParagraph.textContent = contentText;
-
-    // 이미 존재하는 <p> 엘리먼트들을 가져옴
-    var existingParagraphs = document.querySelectorAll('.reverse1 p');
-
-    // 새로운 <p> 엘리먼트의 위치를 계산하여 추가
-    var newTopPosition = (existingParagraphs.length) * 40; // 40px 간격으로 조절, 원하는 값으로 수정 가능
-    newParagraph.style.top = newTopPosition + 'px';
-
-    // 새로운 <p> 엘리먼트를 컨테이너에 추가
-    document.getElementById('contentContainer').appendChild(newParagraph);
-}
-
-
-
-//DOM 요소를 선택
-//var contentContainer = document.getElementById('contentContainer');
-
-// <p> 요소들을 선택
-//var paragraphs = contentContainer.querySelectorAll('p');
-
-// <p> 요소들을 순회하면서 순서대로 출력
-//paragraphs.forEach(function (paragraph, index) {
-   // console.log(paragraph.textContent); // 순서대로 출력
-//});
 
 </script>
 
@@ -673,24 +685,65 @@ body {
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
 	
 	<button class='next_btn' onclick="location.href='Calender.jsp';">></button>
+
+	
 	
 	<div class="reverse">
-		 <h2 class='re_day'><%= year %>년 <%= month %>월 <%= day %>일</h2>
+		
+		<%
+		if (cl_year != null && cl_month != null) {
+		%>
+			<h2 class='re_day'><%= cl_year %>년 <%= cl_month %>월 <%= name %>일</h2>
+		<%
+		} else {
+		%>
+			<h2 class='re_day'>값이 없습니다.</h2>
+		<%
+		}
+		%>
 		 
 		 <button class='plus_btn' onclick="confirmPlus();">추가하기</button>
 		 <button class='del_btn' onclick="confirmDelete();">삭제하기</button>
 		 
-		 <div class="reverse2" id="contentContainer" >
-		 	<p class='content1' onclick="location.href='Calender.jsp';">  </p>
-		 </div>	 
-	</div>
+		 
+		 <!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
+		 <div class="reverse2">
+		 <table class="caltabke" width="90%">
+		 <c:choose>
+		 	<c:when test="${empty boardLists}">
+				<tr>
+					<td class="conti"  align="center">등록된 일정이 없습니다*^^*</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${CalenderLists}" var="row" varStatus="loop">
+					<tr align="center">
+						<td>
+							${map.totalCount-(((map.pageNum-1)*map.pageSize)+loop.index)}
+						</td>
+						<td align="left">
+							<a href="../mvcboard/view.do?Personal_diaray_schedule=${row.Personal_diaray_schedule}"></a>
+						</td>
+						<td>${row.Personal_diaray_schedule}</td>
+					</tr>
+				</c:forEach>
+			</c:otherwise>
+		 </c:choose>	
+		 </table> 	
+		 </div>
+	</div>	 
+	
+	
+	<button class="scl" onclick="location.href='Company_Cal.jsp';">
+		<font class="myFont">여기에 회사 일정 내용 담기</font>
+	</button>  <!-- 1개당 1개의 일정 제목 표시 -->
   
   	
 
    <div class="calendar" style="width: 1300px; height: 300px;">
-      <div class="title" >
+      <div class="title" > <!-- 년도 월 선택 리스트 만드는 위치 -->
          <form name="frm" method="post" >
-            <select id="yearSelect" name="year" class="selectField" onchange="change()"  >
+            <select id="yearSelect" name="year" class="selectField" onchange="change()">
                <%
                for (int i = year - 50; i <= year + 50; i++) {
                %>
