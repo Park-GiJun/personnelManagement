@@ -139,11 +139,7 @@
 			</a>
 		</div>
 		<div>
-			<%
-			int inpGrade = (int) session.getAttribute("inpGrade");
-			System.out.println(inpGrade);
-			if (inpGrade < 2) {
-			%>
+	
 			<div class="left_new_Id_background">
 				<a
 					class="left_new_id_section"
@@ -160,9 +156,7 @@
 					<span class="left_salaryManagement_text">급여관리</span>
 				</a>
 			</div>
-			<%
-			}
-			%>
+			
 		</div>
 	</div>
 </body>

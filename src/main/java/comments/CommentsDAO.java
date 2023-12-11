@@ -3,8 +3,11 @@ package comments;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 import DBcontrol.DBConnPool;
+import FreeboardForm.FreeboardFormDTO;
 
 public class CommentsDAO extends DBConnPool {
     private ResultSet rs;
@@ -55,7 +58,7 @@ public class CommentsDAO extends DBConnPool {
     		 con = DBConnPool.getConnection();
              
              StringBuffer sql = new StringBuffer();
-             sql.append("select * from anno_boardwhere anno_board_num = ?");
+             sql.append("select * from Comments where anno_board_num<? and Turn=? and content order by Turn ");
              
              pstmt = con.prepareStatement(sql.toString());
              pstmt.setInt(1, anno_board_num);
@@ -76,9 +79,56 @@ public class CommentsDAO extends DBConnPool {
          close();
          return board;
      } // end getDetail()
-     
-    	
-    	
     
-    
+  //지정 게시물 찾아 내용을 반환
+  	public FreeboardFormDTO selectdetailsView(int anno_board_num) {
+  		FreeboardFormDTO dto = new FreeboardFormDTO();
+  		String query = " SELECT anno_board_num, title, content FROM anno_board WHERE anno_board_num=?";
+  		try {
+  			psmt = con.prepareStatement(query);
+  			psmt.setInt(1, anno_board_num);
+  			rs = psmt.executeQuery();
+  			
+  			if(rs.next()) {
+  				dto.setanno_board_num(rs.getInt(1));
+  				dto.settitle(rs.getString(2));
+  				dto.setcontent(rs.getString(3));
+  				
+  				
+  			}
+  		} 
+  		catch(Exception e) {
+  			System.out.println("게시물 상세보기 중 예외 발생");
+  			e.printStackTrace();
+  		}
+  		return dto;
+  	}
+  	
+  	//댓글
+  	public List<CommentsDTO> selectView(int anno_board_num) {
+  		String query = "select * from Comments where anno_board_num = ? order by turn";
+
+
+  		List<CommentsDTO> list = new Vector<CommentsDTO>();
+  		try {
+  		    psmt = con.prepareStatement(query);
+  		    psmt.setInt(1, anno_board_num);  // 이 부분 수정
+  		    rs = psmt.executeQuery();
+  		    while (rs.next()) {
+  		        CommentsDTO comments = new CommentsDTO();
+  		        comments.setanno_board_num(rs.getInt(1));
+  		        comments.setTurn(rs.getInt(2));
+  		        comments.setcontent(rs.getString(3));
+  		        list.add(comments);
+  		        
+  		        System.out.println(rs.getInt(1));
+  		      System.out.println(rs.getInt(2));
+  		    System.out.println(rs.getString(3));
+  		    }
+  		} catch (Exception e) {
+  		    System.out.println("게시물 댓글 조회 중 예외 발생");
+  		    e.printStackTrace();
+  		}
+  		return list;
+  	}
 }

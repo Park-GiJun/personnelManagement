@@ -60,11 +60,7 @@ body {
                </tr>
             </c:when>
             <c:otherwise>
-               <c:forEach
-                  items="${ FreeboardFormList }"
-                  var="row"
-                  varStatus="loop"
-               >
+               <c:forEach items="${ FreeboardFormList }" var="row" varStatus="loop">
 
                   <tr align="center">
                      <!-- 번호 -->
@@ -72,7 +68,9 @@ body {
                      </td>
                      <td align="center">
                         <!-- 제목 -->
-                        <a href="BoardDetailAction.bo?num=${board.board_num}&pageNum=${spage}">${ row.title }</a>
+                        <a href="../Controller/DetailsController.do?anno_board_num=${ row.anno_board_num }">
+                     	<c:out value="${ row.title }"></c:out>
+                     	</a>
                      </td>
                      <td align="center">
                         <a>${ row.post_date }</a>
@@ -83,41 +81,22 @@ body {
          </c:choose>
       </table>
       <!-- 하단 메뉴 -->
-      <form
-         method="get"
-         action="../Controller/FreeboardFormList.do"
-      >
-         <table
-            border="1"
-            width="90%"
-         >
+      <form method="get" action="../Controller/FreeboardFormList.do">
+         <table border="1" width="90%">
             <tr>
-               <th
-                  align="center"
-                  colspan="2"
-               ><select name="searchCategory">
+               <th align="center" colspan="2">
+               <select name="searchCategory">
                      <option value="title">제목</option>
-               </select> <input
-                     type="text"
-                     name="searchWord"
-                  /> <input
-                     type="submit"
-                     name="listSearch"
-                     value="검색하기"
-                     id="listSearch"
-                  /></th>
+               </select> 
+               <input type="text" name="searchWord"/>  
+               <input type="submit" name="listSearch" value="검색하기" id="listSearch"/></th>
             </tr>
             <tr align="center">
 
                <th>${ map2.paginImg }</th>
-               <th
-                  width="100"
-                  rowspan="2"
-               >
-                  <button
-                     type="button"
-                     onclick="location.href='../BulletinBoard/Freeboard.jsp';"
-                  >글작성</button>
+               <th width="100" rowspan="2">
+                  <button type="button" onclick="location.href='../BulletinBoard/Freeboard.jsp';">
+                  글작성</button>                     
                </th>
             </tr>
          </table>

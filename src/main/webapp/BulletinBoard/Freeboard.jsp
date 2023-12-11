@@ -45,6 +45,11 @@ body {
 		<!-- 다른 페이지에서 불러오는 내용 -->
 		<script type="text/javascript">
 			function validateForm(form) {
+				if (form.Freeboardtitle.value == null
+						|| form.Freeboardtitle.value.trim() === "") {
+					alert("제목을 입력해주세요.");
+					return false;
+				}
 				if (form.Freeboardcontent.value == null
 						|| form.Freeboardcontent.value.trim() === "") {
 					alert("내용을 입력하세요");
@@ -55,17 +60,12 @@ body {
 					alert("비밀 번호를 입력해주세요.");
 					return false;
 				}
-				if (form.Freeboardtitle.value == null
-						|| form.Freeboardtitle.value.trim() === "") {
-					alert("제목을 입력해주세요.");
-					return false;
-				}
+			
 				// 작성 완료 메시지
 				alert("작성 완료되었습니다");
 
 				// 페이지 이동
 				window.location.href = '../BulletinBoard/FreeboardForm.jsp';
-
 		
 			}
 		</script>
@@ -78,6 +78,7 @@ body {
 						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
 					</td>
 				</tr>
+				
 				<tr>
 					<td><input type="text" name="Freeboardcontent"
 						style="width: 100%; height: 800px;"></td>
@@ -85,7 +86,9 @@ body {
 
 				<tr>
 					<td colspan="3" style="text-align: left;">비밀번호 <input
-						type="text" name="Freeboardpassword" />
+						type="text" value="숫자만 입력해 주세요." name="Freeboardpassword"
+						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
+						
 					</td>
 				</tr>
 				<tr>
