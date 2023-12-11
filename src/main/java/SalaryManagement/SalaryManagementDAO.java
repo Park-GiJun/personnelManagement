@@ -13,12 +13,12 @@ public class SalaryManagementDAO extends DBConnPool {
 
 	public List<SalaryManagementDTO> selectSalaryList(String selectTeam, String selectedYear, String selectedMonth) {
 		System.out.println("selectSalaryList DAO");
-		
+
 		System.out.println("check select team : " + selectTeam);
 
 		List<SalaryManagementDTO> salaryEMPList = new ArrayList<>();
 
-		String query = "SELECT emp.TEAM, emp.NAME, emp.EMP_NUM, emp.EMP_GRADE, emp.grade, i.PAY, iv.yearmonth, "
+		String query = "SELECT emp.TEAM, emp.NAME, emp.EMP_NUM, emp.EMP_GRADE, emp.grade, i.PAY, TO_CHAR(iv.yearmonth, 'YYYY-MM') AS yearmonth, "
 				+ "SUM(iv.HOLIDAY_PAY + iv.INCENTIVE + iv.EXTRA_WORK_PAY) AS TOTAL_PAY, iv.INCENTIVE, "
 				+ "iv.HOLIDAY_PAY, iv.EXTRA_WORK_PAY FROM emp JOIN INCENTIVE i ON emp.emp_num = i.emp_num "
 				+ "JOIN INCENTIVE_VALUE iv ON i.emp_num = iv.EMP_NUM AND i.yearmonth = iv.yearmonth";
@@ -161,6 +161,29 @@ public class SalaryManagementDAO extends DBConnPool {
 
 		return dto;
 
+	}
+
+	public void updateIncentive(String emp, String incentive, String holiday, String yearmonth) {
+		
+		System.out.println("확인용2 : " + emp + " " + incentive + " " + holiday + " " + yearmonth);
+
+		try {
+
+			String query = "UPDATE incentive_value SET incentive=?, holiday_pay=? WHERE emp_num=? AND TO_DATE(?, 'YYYY-MM') = yearmonth";
+			
+			psmt = con.prepareStatement(query);
+			
+			psmt.setString(1, incentive);
+			psmt.setString(2, holiday);
+			psmt.setString(3, emp);
+			psmt.setString(4, yearmonth);
+			
+			psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("인센티브 설정중 예외 발생");
+			e.printStackTrace();
+		}
 	}
 
 }

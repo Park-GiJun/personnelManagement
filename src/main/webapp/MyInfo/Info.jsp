@@ -247,6 +247,23 @@ function getCurrentTime() {
     });
 }
 	
+	function openModifyWindow() {
+		var infoName = document.getElementById('infoName').innerText;
+	    var infoEmpNum = document.getElementById('infoEmpNum').innerText;
+	    var infoPhone = document.getElementById('infoPhone').innerText;
+	    var infoEmail = document.getElementById('infoEmail').innerText;
+		
+	    
+	    var detailsUrl = '../MyInfo/InfoModify.jsp'
+	        + '?infoName=' + encodeURIComponent(infoName)
+	        + '&infoEmpNum=' + encodeURIComponent(infoEmpNum)
+	        + '&infoPhone=' + encodeURIComponent(infoPhone)
+	        + '&infoEmail=' + encodeURIComponent(infoEmail);
+
+		window.open(detailsUrl, "_blank", "width=600, height=400");
+	}
+
+
 
 </script>
 </head>
@@ -417,16 +434,21 @@ function getCurrentTime() {
 		<div class="info_profile">
 			<div class="info_profile_photo">
 				<div class="info_profile_texts">
-					<a> 이름 : ${ Infolist.name } </a>
+					이름 : <a id="infoName">${ Infolist.name } </a>
 					<br />
-					<a> 사번 : ${ Infolist.emp_num } </a>
+					사번 : <a id="infoEmpNum">${ Infolist.emp_num } </a>
 					<br />
-					<a> 전화번호 : ${ Infolist.phone }</a>
+					전화번호 : <a id="infoPhone">${ Infolist.phone }</a>
 					<br />
-					<a> 이메일 : ${ Infolist.email }</a>
+					이메일 : <a id="infoEmail">${ Infolist.email }</a>
 				</div>
 			</div>
+
 		</div>
+		<button
+			type="button"
+			onclick="openModifyWindow()"
+		>수정하기</button>
 		<div class="info_income">
 			<div class="info_income_textbox">
 				<label for="yearSelect">연도:</label> <select
@@ -508,7 +530,6 @@ function getCurrentTime() {
 
 
 </script>
-
 			<table
 				class="income_table"
 				border="1"
@@ -585,8 +606,6 @@ function getCurrentTime() {
 		</div>
 		<div class="info_commute"></div>
 	</div>
-
-
 </body>
 
 </html>

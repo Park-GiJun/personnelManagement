@@ -27,9 +27,9 @@ body {
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
-	margin-left: 400px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
+	position: relative;
+	left: 10%;
 	padding: 20px;
-	font-size: 12px;
 	max-height: 100%;
 }
 </style>
@@ -76,7 +76,10 @@ body {
 							</td>
 							<td>
 								<c:if test="${ not empty row.shareofile }">
-									<a>[Down]</a>
+										${ dto.ofile }
+									<a
+										href="../Controller/ShareFormDownload.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }"
+									>[다운로드]</a>
 								</c:if>
 							</td>
 						</tr>
@@ -117,7 +120,7 @@ body {
 					>
 						<button
 							type="button"
-							onclick="location.href='../Controller/ShareWrite.do';"
+							onclick="location.href='../ShareForm/Write.jsp';"
 						>글작성</button>
 					</th>
 				</tr>

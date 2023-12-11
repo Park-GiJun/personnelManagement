@@ -99,4 +99,23 @@ public class PersonalDAO extends DBConnPool {
 		}
 		return dto;
 	}
+
+	public void modifyInfo(String emp, String phone, String email) {
+		
+		System.out.println(emp + " " + phone + " " + email);
+		try {
+			String query = "UPDATE emp SET phone=?, email=? WHERE emp_num=?";
+
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, phone);
+			psmt.setString(2, email);
+			psmt.setString(3, emp);
+
+			psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("사용자 정보 업데이트중 예외 발생");
+			e.printStackTrace();
+		}
+	}
 }
