@@ -63,8 +63,7 @@
 	font-size: 150%;
 }
 
-</
-head> <style> /* 공통 스타일 */ * {
+/* 공통 스타일 */ * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
