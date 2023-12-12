@@ -29,8 +29,10 @@ public class CalenderController extends HttpServlet {
 		
 		System.out.println("Person_Cal.do");
 		
+		// DAO 생성
 		CalenderDAO dao = new CalenderDAO();
 		
+		// Map 생성
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		String Person_content = request.getParameter("Person_content");
@@ -63,7 +65,7 @@ public class CalenderController extends HttpServlet {
 		map.put("end", end);
 		/* 페이지 처리 end */
 				
-		List<CalenderDTO> CalenderLists = dao.selectListPage(map);	
+		List<CalenderDTO> calenderlists = dao.selectListPage(map);	
 		
 		// 게시물 목록 받기
 		dao.close();
@@ -78,7 +80,7 @@ public class CalenderController extends HttpServlet {
 		map.put("pageNum", pageNum);
 
 		// 포워딩
-		//request.setAttribute("CalenderLists", CalenderLists);
+		request.setAttribute("calenderlists", calenderlists);
 		request.setAttribute("map2", map);
 		request.getRequestDispatcher("/BulletinBoard/FreeboardForm.jsp").forward(request, response);
 	}

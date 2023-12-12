@@ -7,14 +7,14 @@ import java.util.Vector;
 import DBcontrol.DBConnPool;
 import Calender.CalenderDTO;
 
-public class CalenderDAO extends DBConnPool{
+public class TeamVactionDAO extends DBConnPool{
 	
 	//String driver="oracle.jdbc.driver.OracleDriver";
 	//String url="jdbc:oracle:thin:@localhost:1521:xe";
 	
-	private static CalenderDAO calenderDao = new CalenderDAO();
+	private static TeamVactionDAO calenderDao = new TeamVactionDAO();
 	
-	public CalenderDAO() {
+	public TeamVactionDAO() {
 		super();
 	}
 	

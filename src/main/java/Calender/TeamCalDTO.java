@@ -1,16 +1,16 @@
 package Calender;
 
-public class CalenderDTO {
+public class TeamCalDTO {
 
 	private String Personal_diaray_schedule;
 	private String Personal_diaray_date;
 	private String emp_num;
 	
-	public CalenderDTO() {
+	public TeamCalDTO() {
 		super();
 	}
 	
-	public CalenderDTO(String Personal_diaray_schedule, String Personal_diaray_date, String emp_num) {
+	public TeamCalDTO(String Personal_diaray_schedule, String Personal_diaray_date, String emp_num) {
 		super();
 		this.Personal_diaray_schedule = Personal_diaray_schedule;
 		this.Personal_diaray_date = Personal_diaray_date;

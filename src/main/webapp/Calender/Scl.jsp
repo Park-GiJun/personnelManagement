@@ -217,7 +217,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   left:10px;
   width:310px;
   height:900px;
-  background: orange;
+  background: orange;  /* 칸 보려고 색상 지정 */
   color:#fff;
   /* animation-name:direction; */
   animation-duration:2s;
@@ -721,10 +721,7 @@ body {
 						<td>
 							${map.totalCount-(((map.pageNum-1)*map.pageSize)+loop.index)}
 						</td>
-						<td align="left">
-							<a href="../mvcboard/view.do?Personal_diaray_schedule=${row.Personal_diaray_schedule}"></a>
-						</td>
-						<td>${row.Personal_diaray_schedule}</td>
+						<td>${row.Personal_diaray_schedule}</td>  <!-- 일정 내용 표시 -->
 					</tr>
 				</c:forEach>
 			</c:otherwise>
