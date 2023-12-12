@@ -12,6 +12,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
 body {
 	display: flex;
@@ -19,6 +21,7 @@ body {
 	justify-content: center;
 	height: 100vh;
 	margin: 0;
+	background-color: #272b30
 }
 
 form {
@@ -30,6 +33,19 @@ form {
 input {
 	margin-bottom: 10px;
 }
+
+.btn-light {
+	width: 180px;
+	height: 80px;
+	border-radius: 25px;
+}
+
+.form-control {
+	width: 400px;
+	height: 80px;
+	border-radius: 50px;
+}
+
 </style>
 </head>
 <body>
@@ -45,29 +61,13 @@ input {
 			}
 		}
 	</script>
-	<form
-		name="login_form"
-		method="post"
-		action="../Controller/login.do"
-		onsubmit="return checkLogin(this)"
-	>
-		<input
-			type="text"
-			name="login_Id"
-			style="width: 400px; height: 80px;"
-		/>
+	<form name="login_form" method="post" action="../Controller/login.do" onsubmit="return checkLogin(this)">
+	
+		<input type="text" class="form-control" name="login_Id" placeholder="ID">
 
-		<input
-			type="password"
-			name="login_Pwd"
-			style="width: 400px; height: 80px;"
-		/>
+		<input type="password" class="form-control" name="login_Pwd" placeholder="Password">
 
-		<input
-			type="submit"
-			value="로그인"
-			style="width: 180px; height: 80px;"
-		/>
+		<button type="submit" class="btn-light"	value="로그인">Login</button>
 	</form>
 	<%
 	}

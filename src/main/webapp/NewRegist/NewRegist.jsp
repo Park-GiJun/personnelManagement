@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 * {
 	margin: 0;
@@ -24,11 +26,62 @@
 	border-radius: 30px;
 }
 
+.btn-info {
+	width: 98%;
+	font-size:200%;
+	height: 200%;
+	border-radius: 25px;
+}
+
+.table-info {
+	background-color: #5bc0de;
+}
+
+.table-dark1 {
+	background-color: #272b30;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark2 {
+	background-color: rgb(54, 60, 67);;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark3 {
+	background-color: rgb(68, 74, 83);
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
 /* 부서 버튼 위치 수정 */
 .middle-Team_btn-container {
 	position: relative;
 	margin-top: 2.5%;
 	margin-left: 50%;
+}
+
+.form-check {
+    display: flex; /* flex 컨테이너로 설정 */
+    justify-content: space-between; /* 버튼 사이의 간격을 균등하게 조절 */
+    position: relative;
+    margin-top: 2.5%;
+    margin-left: 50%;
+    width: 15%;
+    --bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.form-check-input {
+	background-color: #fff;
+	border-color: #5bc0de;
+	outline: 0;
+	box-shadow: 0 0 0 0.15rem rgba(255, 255, 255);
+}
+
+.form-select {
+	height: 80%;
 }
 
 /* 정보등록 버튼 위치 수정 */
@@ -42,6 +95,8 @@
 	position: relative;
 	margin-top: 10%;
 	margin-left: 0%;
+	width: 100%;
+	height: 100%;
 }
 
 .middle-NewRegist-container {
@@ -72,6 +127,7 @@
 
 body {
 	font-size: 16px;
+	background-color: #272b30;
 }
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
@@ -80,6 +136,7 @@ body {
 	padding: 20px;
 	font-size: 12px;
 }
+
 </style>
 </head>
 <body>
@@ -89,15 +146,21 @@ body {
 
 		<form name="team_form" method="post"
 			action="../Controller/NewRegistTeamSearch.do" accept-charset="UTF-8">
-			<div class="middle-Team_btn-container">
-				<label> <input type="radio" name="department_search"
-					value="전체" onclick="submitForm()">전체
-				</label> <label> <input type="radio" name="department_search"
-					value="개발" onclick="submitForm()">개발
-				</label> <label> <input type="radio" name="department_search"
-					value="인사" onclick="submitForm()">인사
-				</label> <label> <input type="radio" name="department_search"
-					value="디자인" onclick="submitForm()">디자인
+			<div class="form-check">
+				<label>
+					<input class="form-check-input" type="radio" name="department_search" value="전체" onclick="submitForm()">전체
+				</label>
+				
+				<label>
+					<input class="form-check-input" type="radio" name="department_search" value="개발" onclick="submitForm()">개발
+				</label>
+				
+				<label>
+					<input class="form-check-input" type="radio" name="department_search" value="인사" onclick="submitForm()">인사
+				</label>
+				
+				<label>
+					<input class="form-check-input" type="radio" name="department_search" value="디자인" onclick="submitForm()">디자인
 				</label>
 			</div>
 		</form>
@@ -110,27 +173,27 @@ body {
 			<!-- 신입사원 등록 양식 -->
 			<div class="middle-NewRegist-container">
 				<div class="table-container">
-					<table border="1" width="98%">
-						<tr>
-							<th colspan='4'>신입사원 정보 등록</th>
+					<table border="1" width="98%" height="26%">
+						<tr align="center" class="table-dark1">
+							<th colspan='4' align="center" scope="row">신입사원 정보 등록</th>
 						</tr>
-						<tr align="center">
-							<th width="25">이름</th>
+						<tr align="center" class="table-dark2">
+							<th width="25" scope="row">이름</th>
 							<th width="25">사번(아이디)</th>
 							<th width="25">직급</th>
 							<th width="25">부서</th>
 						</tr>
-						<tr>
-							<td align="center"><input type="text" name="name"
-								style="width: 90%; box-sizing: border-box; text-align: center;">
+						<tr class="table-dark3">
+							<td align="center" width="25%" height="100%" scope="row">
+								<input type="text" class="form-control" name="name" placeholder="이름" style="width: 90%; height: 80%; box-sizing: border-box; text-align: center;">
 							</td>
-							<td align="center"><input type="text" name="emp_num"
-								style="width: 90%; box-sizing: border-box; text-align: center;">
+							<td align="center" width="25%">
+								<input type="text" class="form-control" name="emp_num" placeholder="사번" style="width: 90%; height: 80%; box-sizing: border-box; text-align: center;">
 							</td>
 
-							<td align="center">
+							<td align="center" width="25%">
 								<!-- <input type="text" name="emp_grade" style="width: 90%; box-sizing: border-box; text-align: center;"> -->
-								<select id="emp_grade" name="emp_grade" size="1" style="width: 90%">
+								<select id="emp_grade" name="emp_grade" size="1" style="width: 90%;" class="form-select">
 									<option value="">선택하세요.</option>
 									<option value="부장">부장</option>
 									<option value="차장">차장</option>
@@ -141,9 +204,9 @@ body {
 							</select>
 							</td>
 
-							<td align="center">
+							<td align="center" width="25%">
 								<!-- <input type="text" name="team" style="width: 90%; box-sizing: border-box; text-align: center;"> -->
-								<select id="team" name="team" size="1" style="width: 90%;">
+								<select id="team" name="team" size="1" style="width: 90%;" class="form-select">
 									<option value="">선택하세요.</option>
 									<option value="인사">인사</option>
 									<option value="개발">개발</option>
@@ -154,7 +217,7 @@ body {
 					</table>
 
 					<div class="middle-button-container">
-						<button type="submit" class='my_btn' name="NewRegistType"
+						<button type="submit" class="btn-info" name="NewRegistType"
 							value="NewRegist" onclick="validateForm()">정보등록</button>
 					</div>
 					
@@ -162,25 +225,27 @@ body {
 
 					<!-- 사원 정보 수정 -->
 					<div class="Edit-table-container">
-						<table border="1" width="98%">
-							<tr>
-								<th colspan='4'>사원 정보 수정</th>
+						<table border="1" width="98%" height="26%">
+							<tr align="center" class="table-dark1">
+								<th colspan='4' scope="row">사원 정보 수정</th>
 							</tr>
-							<tr align="center">
-								<th width="25">이름</th>
+							<tr align="center" class="table-dark2">
+								<th width="25" scope="row">이름</th>
 								<th width="25">사번(아이디)</th>
 								<th width="25">직급</th>
 								<th width="25">부서</th>
 							</tr>
-							<tr>
-								<td align="center" width="25%"><input name="nameinfo"
-									readonly="readonly" style="text-align: center;"></td>
+							<tr class="table-dark3">
+								<td align="center" width="25%" height="100%" scope="row">
+									<input type="text" class="form-control" name="nameinfo" placeholder="이름" style="width: 90%; height: 80%; text-align: center;">
+								</td>
 
-								<td align="center" width="25%"><input name="emp_numinfo"
-									readonly="readonly" style="text-align: center;"></td>
+								<td align="center" width="25%" height="100%">
+									<input type="text" class="form-control" name="emp_numinfo" placeholder="사번" style="width: 90%; height: 80%; text-align: center;">
+								</td>
 
-								<td align="center" width="25%">
-								<select id="emp_grade_Edit"	name="emp_grade_Edit" size="1" style="width: 90%">
+								<td align="center" width="25%" height="100%">
+									<select id="emp_grade_Edit"	name="emp_grade_Edit" size="1" style="width: 90%;" class="form-select">
 										<option value="">선택하세요.</option>
 										<option value="부장">부장</option>
 										<option value="차장">차장</option>
@@ -188,20 +253,22 @@ body {
 										<option value="대리">대리</option>
 										<option value="사원">사원</option>
 										<option value="인턴">인턴</option>
-								</select></td>
+									</select>
+								</td>
 
-								<td align="center" width="25%">
-								<select id="team_Edit"	name="team_Edit" size="1" style="width: 90%;">
+								<td align="center" width="25%" height="100%">
+									<select id="team_Edit"	name="team_Edit" size="1" style="width: 90%;" class="form-select">
 										<option value="">선택하세요.</option>
 										<option value="인사">인사</option>
 										<option value="개발">개발</option>
 										<option value="디자인">디자인</option>
-								</select></td>
+									</select>
+								</td>
 							</tr>
 						</table>
 
 						<div class="middle-button-container">
-							<button type="submit" class='my_btn' name="NewRegistType" value="Edit" onclick="validate_Edit_Form()">정보수정</button>
+							<button type="submit" class='btn-info' name="NewRegistType" value="Edit" onclick="validate_Edit_Form()">정보수정</button>
 						</div>
 					</div>
 
@@ -211,11 +278,11 @@ body {
 
 				<div class="table-container">
 					<table border="1" width="98%">
-						<tr>
-							<th colspan='5'>사원 리스트</th>
+						<tr align="center" class="table-dark1">
+							<th colspan='5' scope="row">사원 리스트</th>
 						</tr>
-						<tr align="center">
-							<th width="20"></th>
+						<tr align="center" align="center" class="table-dark2">
+							<th width="20" scope="row"></th>
 							<th width="30">이름</th>
 							<th width="10">사번</th>
 							<th width="20">직급</th>
@@ -224,18 +291,20 @@ body {
 						<c:choose>
 							<c:when test="${empty selectList}">
 								<!-- 사원이 없을 때 -->
-								<tr>
-									<td colspan="4" align="center">회사가 망했나?</td>
+								<tr class="table-dark3">
+									<td colspan="4" align="center" scope="row">회사가 망했나?</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
 								<!-- 사원이 있을 때 -->
 								<c:forEach items="${selectList}" var="row" varStatus="loop">
-									<tr align="center">
-										<td align="center"><label> <input type="radio"
-												name="department_edit" value="info"
-												onclick="infosubmitForm('${row.name}', '${row.emp_num}')">
-										</label></td>
+									<tr align="center" class="table-dark3">
+										<td align="center" scope="row">
+											<label>
+												<input type="radio"	name="department_edit" value="info" class="form-check-input"
+													onclick="infosubmitForm('${row.name}', '${row.emp_num}')">
+											</label>
+										</td>
 										<td>${row.name}</td>
 										<td>${row.emp_num}</td>
 										<td>${row.emp_grade}</td>
@@ -245,7 +314,7 @@ body {
 							</c:otherwise>
 						</c:choose>
 					</table>
-
+				<!-- ---------------------------------------------------------------------------------------------------------------- -->
 					<script>
 						//리스트정보 받아서 정보수정부분에 입력
 						function infosubmitForm(nameinfo, emp_numinfo) {
