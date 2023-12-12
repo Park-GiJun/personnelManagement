@@ -558,6 +558,8 @@ function change() {
    f.submit();
 }
 
+
+
 function showDateAndAlert(day) {
     // 클릭한 날짜를 JavaScript 변수에 저장
     var clickedDay = day;
@@ -567,15 +569,11 @@ function showDateAndAlert(day) {
     // 클릭한 날짜를 alert 창에도 표시
     alert('클릭한 날짜: ' + clickedDay + '일');
     
+ 	// 선택한 날짜를 숨은 필드에 설정
+    document.getElementById('selectedDay').value = clickedDay;
 
-    // 여기에서 필요한 작업 수행 가능
-    // 예를 들어, 다른 요소에도 표시하려면
-    document.querySelector('.content1').innerText = "1. 일정1";
-    document.querySelector('.content2').innerText = "2. 일정2";
-    document.querySelector('.content3').innerText = "3. 일정3";
-    
-    // 원하는 작업 수행 가능
-    // 예를 들어, 다른 페이지로 이동하려면 window.location.href = '다른페이지.jsp';
+    // 폼 제출
+    document.forms["calender_form"].submit();
 }
 
 
@@ -672,6 +670,11 @@ body {
 <body>
    <jsp:include page="../MainPage/Left.jsp"></jsp:include>
 
+	<form name="calender_form" method="post" action="../Controller/CalenderController.do">
+	<input type="hidden" name="selectedYear" id="selectedYear" value="<%= year %>">
+	<input type="hidden" name="selectedMonth" id="selectedMonth" value="<%= month %>">
+	<input type="hidden" name="selectedDay" id="selectedDay" value="">
+	
 
    <div class="middle-button">
       <!-- 다른 페이지에서 불러오는 내용 -->
@@ -708,31 +711,31 @@ body {
 		 
 		 <!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
 		 <div class="reverse2">
-		 <table class="caltabke" width="90%">
+		 
+		 
+		 <table class="caltabke" border="1" width="100%">
+
 		 <c:choose>
-		 	<c:when test="${empty boardLists}">
+		 	<c:when test="${empty calenderlists}">
 				<tr>
-					<td class="conti"  align="center">등록된 일정이 없습니다*^^*</td>
+					<td class="conti"  align="center">등록된 일정이 없습니다 *^^*</td>
 				</tr>
 			</c:when>
 			<c:otherwise>
 				<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 				<c:forEach items="${CalenderLists}" var="row" varStatus="loop">
 					<tr align="center">
-						<td>
-							${map.totalCount-(((map.pageNum-1)*map.pageSize)+loop.index)}
-						</td>
 						<td>${row.Personal_diaray_schedule}</td>  <!-- 일정 내용 표시 -->
 					</tr>
 				</c:forEach>
 			</c:otherwise>
 		 </c:choose>	
-		 </table> 	
-		 </div>
+	   </table> 	
+	 </div>
 	</div>	 
 	
 	
-	<button class="scl" onclick="location.href='Company_Cal.jsp';">
+	<button class="scl" onclick="location.href='Scl_Cal.jsp';">
 		<font class="myFont">여기에 회사 일정 내용 담기</font>
 	</button>  <!-- 1개당 1개의 일정 제목 표시 -->
   
@@ -797,7 +800,7 @@ body {
             for (int i = 1; i <= lastDay; i++) {
                cls = year == ty && month == tm && i == td ? "today" : "";
 
-               out.print("<td class='" + cls + "'><button onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button></td>");
+               out.print("<td class='" + cls + "'><button id=\"update\" onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button></td>");
                if (lastDay != i && (++week) % 7 == 1) {
                   out.print("</tr><tr>");
                }
@@ -816,6 +819,7 @@ body {
 
    </div>
    
+   </form>
 
 
 </body>
