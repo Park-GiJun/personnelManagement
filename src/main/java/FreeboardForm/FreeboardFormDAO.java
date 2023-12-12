@@ -98,9 +98,7 @@ public class FreeboardFormDAO extends DBConnPool {
 			System.out.println(title);
 			System.out.println(content);
 			System.out.println(pass);
-			con.setAutoCommit(false); // auto-commit을 true로 설정
-//			result = psmt.executeUpdate();
-//			con.commit(); // 트랜잭션 커밋
+			con.setAutoCommit(false); 
 		} catch (Exception e) {
 			System.out.println("게시물 입력중 예외 발생");
 			e.printStackTrace();
@@ -108,4 +106,5 @@ public class FreeboardFormDAO extends DBConnPool {
 		return result;
 	}
 
+	
 }

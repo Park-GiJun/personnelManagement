@@ -158,7 +158,6 @@
 			int inpGrade = (int) session.getAttribute("inpGrade");
 			if (inpGrade < 3) {
 			%>
-			
 			<div class="left_new_Id_background">
 				<a class="left_new_id_section" href="../Controller/NewRegistLoad.do">
 					<span class="left_new_Id_text">사원관리</span>
@@ -170,7 +169,6 @@
 					<span class="left_salaryManagement_text">급여관리</span>
 				</a>
 			</div>
-			
 			<div class="left_Holiday_Approval_background">
 				<a class="left_salaryManagement_section" href="../Controller/HolidayApprovalLoad.do">
 					<span class="left_salaryManagement_text">휴가관리</span>

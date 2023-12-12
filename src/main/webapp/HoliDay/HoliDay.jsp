@@ -1,12 +1,6 @@
-<%@ page
-	language="java"
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
-<%@ taglib
-	prefix="c"
-	uri="http://java.sun.com/jsp/jstl/core"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -87,21 +81,15 @@ body {
 		<!-- 다른 페이지에서 불러오는 내용 -->
 
 
-		<form
-			name="vacation_form"
-			method="post"
-			action="../Controller/HolidayApplicationController.do"
-		>
+		<form name="vacation_form" method="post"
+			action="../Controller/HolidayApplicationController.do">
 
 			<!-- 휴가 신청 버튼 -->
 			<div class="middle-text-container">
 				<a>사용가능 휴가 : ${userholidaycount.annual }일</a>
 			</div>
 			<div class="middle-button-container">
-				<button
-					type="submit"
-					class='my_btn'
-				>휴가 신청</button>
+				<button type="submit" class='my_btn'>휴가 신청</button>
 			</div>
 
 			<!-- 휴가 신청 양식 -->
@@ -111,6 +99,7 @@ body {
 						<th colspan="3">휴가 일정</th>
 					</tr>
 					<tr align="center">
+<<<<<<< HEAD
 						<td	align="center" width="49%" style="text-align: center;">
 						
 							<select id="start_vacation_year" name="start_vacation_year" size="1" style="width: 25%">
@@ -165,6 +154,13 @@ body {
                         				<option value="<c:if test='${day lt 10}'>0</c:if>${day}">${day}</option>
                     				</c:forEach>
 							</select>
+=======
+						<td colspan='2' align="center" style="text-align: center;">
+							<input type="text" name="start_vacation"
+							style="width: 40%; box-sizing: border-box; text-align: center;">
+							~ <input type="text" name="end_vacation"
+							style="width: 40%; box-sizing: border-box; text-align: center;">
+>>>>>>> refs/remotes/origin/김소형
 						</td>
 					</tr>
 				</table>
@@ -172,10 +168,7 @@ body {
 
 			<!-- 휴가 신청 진행사항 -->
 			<div class="middle-vaction_list-container">
-				<table
-					border="1"
-					width="100%"
-				>
+				<table border="1" width="100%">
 					<tr>
 						<th width="80%">휴가 일정</th>
 						<th width="20%">승인 여부</th>
@@ -184,21 +177,14 @@ body {
 						<c:when test="${empty holidayList}">
 							<!-- 게시물이 없을 때 -->
 							<tr>
-								<td
-									colspan="2"
-									align="center"
-								>신청된 휴가가 없습니다.</td>
+								<td colspan="2" align="center">신청된 휴가가 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<!-- 게시물이 있을 때 -->
-							<c:forEach
-								items="${holidayList}"
-								var="row"
-								varStatus="loop"
-							>
+							<c:forEach items="${holidayList}" var="row" varStatus="loop">
 								<tr align="center">
-									<td>${row.start_vacation}~ ${row.end_vacation}</td>
+									<td>${row.start_vacation}~${row.end_vacation}</td>
 									<td>${row.approval}</td>
 								</tr>
 							</c:forEach>

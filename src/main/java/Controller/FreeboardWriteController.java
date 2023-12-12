@@ -36,9 +36,6 @@ public class FreeboardWriteController extends HttpServlet {
 		dao.freeinsertWrite(title, content, pass);
 		
 
-		
-		
-
 		// 맵 생성
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -92,11 +89,6 @@ public class FreeboardWriteController extends HttpServlet {
 		request.setAttribute("map2", map);
 		request.getRequestDispatcher("/BulletinBoard/FreeboardForm.jsp").forward(request, response);
 		 
-	}
-
-	private String Intger(String string) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
