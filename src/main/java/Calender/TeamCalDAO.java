@@ -12,7 +12,7 @@ public class TeamCalDAO extends DBConnPool{
 	//String driver="oracle.jdbc.driver.OracleDriver";
 	//String url="jdbc:oracle:thin:@localhost:1521:xe";
 	
-	private static TeamCalDAO calenderDao = new TeamCalDAO();
+	private static TeamCalDAO teamDao = new TeamCalDAO();
 	
 	public TeamCalDAO() {
 		super();
@@ -24,7 +24,7 @@ public class TeamCalDAO extends DBConnPool{
 		int totalcount = 0;
 		
 		// 쿼리문 준비
-		String query = "SELECT COUNT (*) FROM Personal_diaray";
+		String query = "SELECT COUNT (*) FROM Team_calender";
 		
 		// 검색 조건이 있다면 where절로 추가
 		if (map.get("searchWord") != null) {

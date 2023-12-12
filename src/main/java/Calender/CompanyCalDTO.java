@@ -2,48 +2,37 @@ package Calender;
 
 public class CompanyCalDTO {
 
-	private String Personal_diaray_schedule;
-	private String Personal_diaray_date;
-	private String emp_num;
+	private String company_calender_date;
+	private String company_schedule;
 	
 	public CompanyCalDTO() {
 		super();
 	}
 	
-	public CompanyCalDTO(String Personal_diaray_schedule, String Personal_diaray_date, String emp_num) {
+	public CompanyCalDTO(String company_calender_date, String company_schedule) {
 		super();
-		this.Personal_diaray_schedule = Personal_diaray_schedule;
-		this.Personal_diaray_date = Personal_diaray_date;
-		this.emp_num = emp_num;
+		this.company_calender_date = company_calender_date;
+		this.company_schedule = company_schedule;
 	}
 	
 	// (개인 일정) 내용
-	public String getPersonal_diaray_schedule() {
-		return Personal_diaray_schedule;
+	public String getcompany_calender_date() {
+		return company_calender_date;
 	}
 	
-	public void setPersonal_diaray_schedule(String Personal_diaray_schedule) {
-		this.Personal_diaray_schedule = Personal_diaray_schedule;
+	public void setcompany_calender_date(String company_calender_date) {
+		this.company_calender_date = company_calender_date;
 	}
 	
 	
 	// (개인 일정) 날짜
-	public String getPersonal_diaray_date() {
-		return Personal_diaray_date;
+	public String getcompany_schedule() {
+		return company_schedule;
 	}
 	
-	public void setPersonal_diaray_date(String Personal_diaray_date) {
-		this.Personal_diaray_date = Personal_diaray_date;
+	public void setcompany_schedule(String company_schedule) {
+		this.company_schedule = company_schedule;
 	}
 	
-	
-	// (개인 일정) 사번
-	public String getemp_num() {
-		return emp_num;
-	}
-	
-	public void setemp_num(String emp_num) {
-		this.emp_num = emp_num;
-	}
 	
 }

@@ -2,38 +2,38 @@ package Calender;
 
 public class TeamVactionDTO {
 
-	private String Personal_diaray_schedule;
-	private String Personal_diaray_date;
+	private String Start_vacation;
+	private String end_vacation;
 	private String emp_num;
 	
 	public TeamVactionDTO() {
 		super();
 	}
 	
-	public TeamVactionDTO(String Personal_diaray_schedule, String Personal_diaray_date, String emp_num) {
+	public TeamVactionDTO(String Start_vacation, String end_vacation, String emp_num) {
 		super();
-		this.Personal_diaray_schedule = Personal_diaray_schedule;
-		this.Personal_diaray_date = Personal_diaray_date;
+		this.Start_vacation = Start_vacation;
+		this.end_vacation = end_vacation;
 		this.emp_num = emp_num;
 	}
 	
 	// (개인 일정) 내용
-	public String getPersonal_diaray_schedule() {
-		return Personal_diaray_schedule;
+	public String getStart_vacation() {
+		return Start_vacation;
 	}
 	
-	public void setPersonal_diaray_schedule(String Personal_diaray_schedule) {
-		this.Personal_diaray_schedule = Personal_diaray_schedule;
+	public void setStart_vacation(String Start_vacation) {
+		this.Start_vacation = Start_vacation;
 	}
 	
 	
 	// (개인 일정) 날짜
-	public String getPersonal_diaray_date() {
-		return Personal_diaray_date;
+	public String getend_vacation() {
+		return end_vacation;
 	}
 	
-	public void setPersonal_diaray_date(String Personal_diaray_date) {
-		this.Personal_diaray_date = Personal_diaray_date;
+	public void setend_vacation(String end_vacation) {
+		this.end_vacation = end_vacation;
 	}
 	
 	

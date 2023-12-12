@@ -2,48 +2,48 @@ package Calender;
 
 public class TeamCalDTO {
 
-	private String Personal_diaray_schedule;
-	private String Personal_diaray_date;
-	private String emp_num;
+	private String Team_calender_date;
+	private String team;
+	private String team_schedule;
 	
 	public TeamCalDTO() {
 		super();
 	}
 	
-	public TeamCalDTO(String Personal_diaray_schedule, String Personal_diaray_date, String emp_num) {
+	public TeamCalDTO(String Team_calender_date, String team, String team_schedule) {
 		super();
-		this.Personal_diaray_schedule = Personal_diaray_schedule;
-		this.Personal_diaray_date = Personal_diaray_date;
-		this.emp_num = emp_num;
+		this.Team_calender_date = Team_calender_date;
+		this.team = team;
+		this.team_schedule = team_schedule;
 	}
 	
 	// (개인 일정) 내용
-	public String getPersonal_diaray_schedule() {
-		return Personal_diaray_schedule;
+	public String getTeam_calender_date() {
+		return Team_calender_date;
 	}
 	
-	public void setPersonal_diaray_schedule(String Personal_diaray_schedule) {
-		this.Personal_diaray_schedule = Personal_diaray_schedule;
+	public void setTeam_calender_date(String Team_calender_date) {
+		this.Team_calender_date = Team_calender_date;
 	}
 	
 	
 	// (개인 일정) 날짜
-	public String getPersonal_diaray_date() {
-		return Personal_diaray_date;
+	public String getteam() {
+		return team;
 	}
 	
-	public void setPersonal_diaray_date(String Personal_diaray_date) {
-		this.Personal_diaray_date = Personal_diaray_date;
+	public void setteam(String team) {
+		this.team = team;
 	}
 	
 	
 	// (개인 일정) 사번
-	public String getemp_num() {
-		return emp_num;
+	public String getteam_schedule() {
+		return team_schedule;
 	}
 	
-	public void setemp_num(String emp_num) {
-		this.emp_num = emp_num;
+	public void setteam_schedule(String team_schedule) {
+		this.team_schedule = team_schedule;
 	}
 	
 }

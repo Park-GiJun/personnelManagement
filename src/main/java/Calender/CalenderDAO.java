@@ -24,7 +24,7 @@ public class CalenderDAO extends DBConnPool{
 		int totalcount = 0;
 		
 		// 쿼리문 준비
-		String query = "SELECT COUNT (*) FROM Personal_diaray";
+		String query = "INSERT INTO Personal_diaray (Personal_diaray_schedule) VALUES (?)";
 		
 		// 검색 조건이 있다면 where절로 추가
 		if (map.get("searchWord") != null) {
@@ -98,7 +98,7 @@ public class CalenderDAO extends DBConnPool{
 	public int deletePost(String Personal_diaray_schedule) {
 		int result = 0;
 		try {
-			String query = "INSERT INTO Personal_diaray (Personal_diaray_schedule) VALUES (?)";
+			String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_schedule = ?";
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, Personal_diaray_schedule);
 			result = psmt.executeUpdate();
