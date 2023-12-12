@@ -1,5 +1,9 @@
 package Calender;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -8,33 +12,26 @@ import DBcontrol.DBConnPool;
 
 public class CalenderDAO extends DBConnPool{
 	
-	String driver="oracle.jdbc.driver.OracleDriver";
-	String url="jdbc:oracle:thin:@localhost:1521:xe";
+
 	
 	public CalenderDAO() {
 		super();
 	}
 	
 	//1
-	public int ScheduleListCount(Map<String, Object> map) {
+	public int ScheduleListCount(String selecteddate, String emp_num) {
 		System.out.println("ScheduleListCount");
 		int totalcount = 0;
 		
 		// 쿼리문 준비
-		String query = "SELECT COUNT (*) FROM Personal_diaray";
+		String query = "SELECT COUNT(*) FROM Personal_diaray WHERE Personal_diaray_date = ? , emp_num = ?";
 		
-		// 검색 조건이 있다면 where절로 추가
-		if (map.get("searchWord") != null) {
-			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
-		}
-		
-		//if (map.get("searchWord") != null) {
-		    //query += " WHERE " + map.get("searchCategory") + " LIKE ?";
-		//}
 		
 		try {
-			stmt = con.createStatement();  // 쿼리문 생성
-			rs = stmt.executeQuery(query);  // 쿼리문 실행
+			psmt = con.prepareStatement(query);  // 쿼리문 생성
+			psmt.setString(1, selecteddate);
+			psmt.setString(2, emp_num);
+			rs = psmt.executeQuery(query);  // 쿼리문 실행
 			rs.next();
 			totalcount = rs.getInt(1);
 		} catch (Exception e) {
@@ -47,38 +44,26 @@ public class CalenderDAO extends DBConnPool{
 	}
 	
 	
+	
+	
 	//2
-	public List<CalenderDTO> selectListPage(Map<String,Object> map) {
+	public List<CalenderDTO> selectListPage(String selecteddate, String emp_num) {
 		List<CalenderDTO> board = new Vector<CalenderDTO>();
 		
 		// 쿼리문 준비
-		String query = " "
-					 + "SELECT * FROM ( "
-					 + "    SELECT Tb.*, ROWNUM rNum FROM ( "
-					 + "		SELECT * FROM Personal_diaray ";
-		
-		if (map.get("searchWord") != null) {
-			query +=  " WHERE " + map.get("searchCategory")
-				   + " LIKE '%" + map.get("searchWord") + "%' ";
-		}
-		
-		query += "		ORDER BY Personal_diaray_date DESC "
-			   + "	) Tb "
-			   + " ) "
-			   + " WHERE rNum BETWEEN ? AND ?";
+		String query = "SELECT Personal_diaray_schedule FROM Personal_diaray WHERE Personal_diaray_date = ? , emp_num = ?";
+					 
 		
 		try {
 			psmt = con.prepareStatement(query);
-			psmt.setString(1,  map.get("start").toString());
-			psmt.setString(2,  map.get("end").toString());
+			psmt.setString(1, selecteddate);
+			psmt.setString(2, emp_num);
 			rs = psmt.executeQuery();
 			
 			while (rs.next()) {
 				CalenderDTO dto = new CalenderDTO();
 				
-				dto.setPersonal_diaray_schedule(rs.getString(1));
-				dto.setPersonal_diaray_date(rs.getString(2));
-				dto.setemp_num(rs.getString(3));
+				dto.setPersonal_diaray_schedule(rs.getString("Personal_diaray_schedule"));
 				
 				board.add(dto);
 			}
@@ -95,7 +80,7 @@ public class CalenderDAO extends DBConnPool{
 	public int deletePost(String Personal_diaray_schedule) {
 		int result = 0;
 		try {
-			String query = "INSERT INTO Personal_diaray (Personal_diaray_schedule) VALUES (?)";
+			String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_schedule = ?";
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, Personal_diaray_schedule);
 			result = psmt.executeUpdate();
@@ -128,6 +113,39 @@ public class CalenderDAO extends DBConnPool{
 
 		return result;
 	}
+	
+	
+	public int addCalendarEvent(String Personal_diaray_date, String Personal_diaray_schedule, String emp_num) {
+        int result = 0;
+
+        try {
+            // JDBC 드라이버 로딩
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+
+            // 데이터베이스 연결
+            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "사용자명", "비밀번호");
+
+            // SQL 쿼리 작성
+            String query = "INSERT INTO Personal_diaray (Personal_diaray_date, Personal_diaray_schedule, emp_num) VALUES (?, ?, ?)";
+
+            // PreparedStatement 생성
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, Personal_diaray_date);
+            pstmt.setString(2, Personal_diaray_schedule);
+            pstmt.setString(3, emp_num);
+
+            // 쿼리 실행 및 결과 확인
+            result = pstmt.executeUpdate();
+
+            // 리소스 해제
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 	
 
 }

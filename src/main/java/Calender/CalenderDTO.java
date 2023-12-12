@@ -6,6 +6,17 @@ public class CalenderDTO {
 	private String Personal_diaray_date;
 	private String emp_num;
 	
+	public CalenderDTO() {
+		super();
+	}
+	
+	public CalenderDTO(String Personal_diaray_schedule, String Personal_diaray_date, String emp_num) {
+		super();
+		this.Personal_diaray_schedule = Personal_diaray_schedule;
+		this.Personal_diaray_date = Personal_diaray_date;
+		this.emp_num = emp_num;
+	}
+	
 	// (개인 일정) 내용
 	public String getPersonal_diaray_schedule() {
 		return Personal_diaray_schedule;
