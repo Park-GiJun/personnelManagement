@@ -17,6 +17,8 @@
 <head>
 <meta charset="UTF-8">
 <title>MyInfo</title>
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <script>
 
 var jsonString = '<%=request.getAttribute("attendDateMap")%>';
@@ -275,6 +277,12 @@ function getCurrentTime() {
 	padding: 0;
 }
 
+.btn-info {
+	border-radius: 25px;
+	margin-left: 200px;
+	font-size: 20px;
+}
+
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
 	position: relative;
@@ -284,12 +292,15 @@ function getCurrentTime() {
 }
 
 .info_profile {
+	display: flex;
 	width: 50%;
 	height: 20%;
 	position: relative;
 	top: 80px;
 	left: 2%;
 	top: 2%;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
 }
 
 .info_profile_photo {
@@ -300,17 +311,11 @@ function getCurrentTime() {
 }
 
 .info_profile_texts {
-	width: 100%;
-	font-size: 15px;
+	display: flex;
+	width: 150%;
+	font-size: 20px;
 	display: inline-block;
-	vertical-align: middle;
-	margin-left: 120%;
-}
-
-.info_profile_texts a {
-	display: block;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-left: 105%;
 }
 
 .info_income {
@@ -323,14 +328,14 @@ function getCurrentTime() {
 	position: relative;
 	top: 80px;
 	left: 50px;
-
 	/* 여백 추가 */
+	--bs-table-color: #000;
+	color: var(--bs-table-color);
 }
 
 .info_income_text {
 	width: 500px;
 	height: 60px;
-	color: white;
 	margin: 0 auto;
 	/* 가운데 정렬을 위해 추가 */
 }
@@ -361,7 +366,10 @@ function getCurrentTime() {
 }
 
 .info_income_textbox {
+	display: flex;
 	margin-right: -120px;
+	--bs-table-color: #000;
+	color: var(--bs-table-color);
 }
 
 .current-month-year {
@@ -379,6 +387,8 @@ function getCurrentTime() {
 	border-radius: 5px;
 	max-width: 60%;
 	z-index: 1; /* 다른 요소 위에 표시되도록 z-index 추가 */
+	--bs-table-color: #000;
+	color: var(--bs-table-color);
 }
 
 .datepicker-container table {
@@ -425,6 +435,55 @@ function getCurrentTime() {
 .leaveText {
 	font-size: 15px;
 }
+
+.form-select {
+	margin-top: 3.5px;
+	width: 20%;
+	height: 20px;
+}
+
+/* 수정하기 버튼 스타일 */
+#modify-button {
+	margin-top: 0.5%;
+    margin-left: 2.5%;
+    width: 100px; /* 수정하기 버튼의 너비 설정 */
+}
+
+/* 출력하기 버튼 스타일 */
+#print-button {
+	margin-top: 0.5%;
+    margin-left: 80px;
+    width: 150px; /* 출력하기 버튼의 너비 설정 */
+}
+
+#prev-month-btn {
+	margin-left: 0%;
+	width: 100px;
+}
+
+#next-month-btn {
+	margin-left: 0%;
+	width: 100px;
+}
+
+#commute-button {
+	margin-left: 0%;
+	width: 100px;
+} 
+#leave-button {
+	margin-left: 0%;
+	width: 100px;
+}
+
+#yearSelect {
+	--bs-table-color: #000;
+	color: var(--bs-table-color);
+}
+
+#monthSelect {
+	--bs-table-color: #000;
+	color: var(--bs-table-color);
+}
 </style>
 
 <body>
@@ -434,36 +493,26 @@ function getCurrentTime() {
 		<div class="info_profile">
 			<div class="info_profile_photo">
 				<div class="info_profile_texts">
-					이름 : <a id="infoName">${ Infolist.name } </a>
-					<br />
-					사번 : <a id="infoEmpNum">${ Infolist.emp_num } </a>
-					<br />
-					전화번호 : <a id="infoPhone">${ Infolist.phone }</a>
-					<br />
-					이메일 : <a id="infoEmail">${ Infolist.email }</a>
+					<p>이름 : <a id="infoName">${ Infolist.name } </a></p>
+					<p>사번 : <a id="infoEmpNum">${ Infolist.emp_num } </a></p>
+					<p>전화번호 : <a id="infoPhone">${ Infolist.phone }</a></p>
+					<p>이메일 : <a id="infoEmail">${ Infolist.email }</a></p>
 				</div>
 			</div>
-
 		</div>
-		<button
-			type="button"
-			onclick="openModifyWindow()"
-		>수정하기</button>
+		
+		<button	type="button" id="modify-button" onclick="openModifyWindow()" class="btn-info">수정하기</button>
 		<div class="info_income">
 			<div class="info_income_textbox">
-				<label for="yearSelect">연도:</label> <select
-					id="yearSelect"
-					name="yearSelect"
-				></select> <label for="monthSelect">월:</label> <select
-					id="monthSelect"
-					name="monthSelect"
-				></select>
+			
+				<label for="yearSelect">연도:</label>
+				<!-- &nbsp;	<select	id="yearSelect" size="1" name="yearSelect" class="form-select"></select> -->
+				&nbsp;	<label for="monthSelect">월:</label>  
+				<!-- &nbsp;	<select	id="monthSelect" size="1" name="monthSelect" class="form-select"></select> -->
 
-				<button
-					name="print_income"
-					class="print_income"
-				>출력하기</button>
+				<button	name="print_income" id="print-button"	class="btn-info">출력하기</button>
 			</div>
+<!-- ---------------------------------------------------------------------------------------------------------------------- -->
 			<script>
 			document.addEventListener('DOMContentLoaded', function () {
 			    var yearSelect = document.getElementById("yearSelect");
@@ -530,10 +579,8 @@ function getCurrentTime() {
 
 
 </script>
-			<table
-				class="income_table"
-				border="1"
-			>
+	<!-- ------------------------------------------------------------------------------------------------------------- -->
+			<table class="income_table"	border="1">
 				<tr>
 					<th>기본급</th>
 					<th id="payCell">${ Infolist.pay }</th>
@@ -578,30 +625,18 @@ function getCurrentTime() {
 			</form>
 			<div class="navigation-btn">
 				<!-- 이전달로 이동하는 버튼 -->
-				<button
-					id="prev-month-btn"
-					onclick="changeMonth(-1)"
-				>이전달</button>
+				<button	id="prev-month-btn"	onclick="changeMonth(-1)" class="btn-info">이전달</button>
 				<!-- 현재 월과 년도를 표시하는 곳 -->
 				<a id="current-month-year"></a>
 				<!-- 다음달로 이동하는 버튼 -->
-				<button
-					id="next-month-btn"
-					onclick="changeMonth(1)"
-				>다음달</button>
+				<button	id="next-month-btn"	onclick="changeMonth(1)" class="btn-info">다음달</button>
 			</div>
 			<table id="datepicker-table">
 			</table>
 			<div class="info_check_buttons"></div>
 			<div class="check_btn">
-				<button
-					type="button"
-					id='commute-button'
-				>출근</button>
-				<button
-					type="button"
-					id='leave-button'
-				>퇴근</button>
+				<button	type="button" id='commute-button' class="btn-info">출근</button>
+				<button	type="button" id='leave-button' class="btn-info">퇴근</button>
 			</div>
 		</div>
 		<div class="info_commute"></div>

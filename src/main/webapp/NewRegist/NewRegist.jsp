@@ -192,7 +192,6 @@ body {
 							</td>
 
 							<td align="center" width="25%">
-								<!-- <input type="text" name="emp_grade" style="width: 90%; box-sizing: border-box; text-align: center;"> -->
 								<select id="emp_grade" name="emp_grade" size="1" style="width: 90%;" class="form-select">
 									<option value="">선택하세요.</option>
 									<option value="부장">부장</option>
@@ -205,7 +204,6 @@ body {
 							</td>
 
 							<td align="center" width="25%">
-								<!-- <input type="text" name="team" style="width: 90%; box-sizing: border-box; text-align: center;"> -->
 								<select id="team" name="team" size="1" style="width: 90%;" class="form-select">
 									<option value="">선택하세요.</option>
 									<option value="인사">인사</option>
