@@ -25,16 +25,20 @@ public class SalaryManagementController extends HttpServlet {
 		}
 		
 		String selectTeam = (String) request.getParameter("selectTeam");
+		String year = (String) request.getParameter("selectedYear");
+		String month = (String) request.getParameter("selectedMonth");
 		
-		if (selectTeam == null) {
+		if (selectTeam == null || selectTeam.equals("기본")) {
 	        selectTeam = "전체";
 	    }
 		
 		SalaryManagementDAO dao = new SalaryManagementDAO();
 		
-		List<SalaryManagementDTO> salaryEMPList = dao.selectSalaryList(selectTeam);
+		List<SalaryManagementDTO> salaryEMPList = dao.selectSalaryList(selectTeam, year, month);
 		
 		request.setAttribute("salaryEMPList", salaryEMPList);
+		
+		System.out.println(year + " : " + month);
 		request.getRequestDispatcher("../SalaryManagement/SalaryManagement.jsp").forward(request, response);
 	}
 

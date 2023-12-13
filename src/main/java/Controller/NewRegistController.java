@@ -1,6 +1,8 @@
 package Controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import NewRegist.NewRegistDAO;
 import NewRegist.NewRegistDTO;
+import SalaryManagement.SalaryManagementDAO;
 import utils.BoardPage;
 
 @WebServlet("/Controller/NewRegist.do")
@@ -22,42 +25,61 @@ public class NewRegistController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-
+		NewRegistDAO dao = new NewRegistDAO();
+		
 		String grade = "";
+		
+		LocalDate currentDate = LocalDate.now();
+
+        // 원하는 형식으로 포맷팅
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM");
+        String formattedYearMonth = currentDate.format(formatter);
+
+       
+		
 		String name = req.getParameter("name");
 		String emp_num = req.getParameter("emp_num");
 		String emp_grade = req.getParameter("emp_grade");
 		String team = req.getParameter("team");
-		// 부서별 검색
-		String department = req.getParameter("department");
-		System.out.println(department);
 		
-		if (emp_grade.equals("부장")) {
+		String NewRegistType = req.getParameter("NewRegistType");
+		String nameinfo = req.getParameter("nameinfo");
+		String emp_numinfo = req.getParameter("emp_numinfo");
+		String emp_grade_Edit = req.getParameter("emp_grade_Edit");
+		String team_Edit = req.getParameter("team_Edit");
+		
+		if (emp_grade.equals("부장") || emp_grade_Edit.equals("부장")) {
 			grade = "2";
-		} else if (emp_grade.equals("차장")) {
+		} else if (emp_grade.equals("차장") || emp_grade_Edit.equals("차장")) {
 			grade = "3";
-		} else if (emp_grade.equals("과장")) {
+		} else if (emp_grade.equals("과장") || emp_grade_Edit.equals("과장")) {
 			grade = "4";
-		} else if (emp_grade.equals("대리")) {
+		} else if (emp_grade.equals("대리") || emp_grade_Edit.equals("대리")) {
 			grade = "5";
-		} else if (emp_grade.equals("사원")) {
+		} else if (emp_grade.equals("사원") || emp_grade_Edit.equals("사원")) {
 			grade = "6";
-		} else if (emp_grade.equals("인턴")) {
+		} else if (emp_grade.equals("인턴") || emp_grade_Edit.equals("인턴")) {
 			grade = "7";
 		}
-
-		System.out.println("[" + grade + "]");
-		System.out.println("[" + name + "]");
-		System.out.println("[" + emp_num + "]");
-		System.out.println("[" + emp_grade + "]");
-		System.out.println("[" + team + "]");
-
-		NewRegistDAO dao = new NewRegistDAO();
-		//사원 등록
-		dao.NewRegist(name, emp_num, emp_grade, team, grade);
-		//휴가테이블 사원정보 입력
-		dao.NewRegistHoliday(emp_num);
 		
+		
+		
+		
+		SalaryManagementDAO sDao = new SalaryManagementDAO();
+		
+
+		System.out.println(NewRegistType);
+		if (NewRegistType.equals("NewRegist")) {
+			// 사원 등록
+			dao.NewRegist(name, emp_num, emp_grade, team, grade);
+			// 휴가테이블 사원정보 입력
+			sDao.noExistDate(emp_num, formattedYearMonth);
+			dao.NewRegistHoliday(emp_num);
+		} else if (NewRegistType.equals("Edit")) {
+			// 사원정보 수정
+			dao.RegistEdit(emp_grade_Edit, team_Edit, grade, nameinfo, emp_numinfo);
+		}
+
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		String searchField = req.getParameter("searchField");
@@ -104,6 +126,9 @@ public class NewRegistController extends HttpServlet {
 		map.put("pageNum", pageNum);
 
 		// 전달할 데이터를 request 영역애 저장후 List.jsp 로 포워드
+
+		req.setAttribute("nameinfo", nameinfo);
+		req.setAttribute("emp_numinfo", emp_numinfo);
 		req.setAttribute("selectList", selectList);
 		req.setAttribute("map", map);
 		req.getRequestDispatcher("/NewRegist/NewRegist.jsp").forward(req, resp);

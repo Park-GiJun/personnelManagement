@@ -95,7 +95,7 @@ button.my_btn2:hover {
 
 /* 부서 일정 버튼 */
 .my_btn3 {
-  background-color: #1C427E;
+  background-color: orange;
   color: white;
   border: none;
   

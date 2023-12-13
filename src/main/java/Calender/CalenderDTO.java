@@ -2,37 +2,37 @@ package Calender;
 
 public class CalenderDTO {
 
-	private String Person_content;
-	private String Person_day;
-	private String Person_num;
+	private String Personal_diaray_schedule;
+	private String Personal_diaray_date;
+	private String emp_num;
 	
 	// (개인 일정) 내용
-	public String getPerson_content() {
-		return Person_content;
+	public String getPersonal_diaray_schedule() {
+		return Personal_diaray_schedule;
 	}
 	
-	public void setPerson_content(String Person_content) {
-		this.Person_content = Person_content;
+	public void setPersonal_diaray_schedule(String Personal_diaray_schedule) {
+		this.Personal_diaray_schedule = Personal_diaray_schedule;
 	}
 	
 	
 	// (개인 일정) 날짜
-	public String getPerson_day() {
-		return Person_day;
+	public String getPersonal_diaray_date() {
+		return Personal_diaray_date;
 	}
 	
-	public void setPerson_day(String Person_day) {
-		this.Person_day = Person_day;
+	public void setPersonal_diaray_date(String Personal_diaray_date) {
+		this.Personal_diaray_date = Personal_diaray_date;
 	}
 	
 	
 	// (개인 일정) 사번
-	public String getPerson_num() {
-		return Person_num;
+	public String getemp_num() {
+		return emp_num;
 	}
 	
-	public void setPerson_num(String Person_num) {
-		this.Person_num = Person_num;
+	public void setemp_num(String emp_num) {
+		this.emp_num = emp_num;
 	}
 	
 }

@@ -79,4 +79,27 @@ public class ShareFormDAO extends DBConnPool {
 		return boards;
 	}
 
+	public int insertFile(ShareFormDTO dto) {
+
+		int result = 0;
+		try {
+
+			String query = "INSERT INTO board (board_num, title, ofile, sfile, password) VALUES (BOARD_NUM.NEXTVAL, ?, ?, ?, ?)";
+
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getShareofile());
+			psmt.setString(3, dto.getSharesfile());
+			psmt.setString(4, dto.getPassword());
+
+			result = psmt.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("파일 업로드중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 }

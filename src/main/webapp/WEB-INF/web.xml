@@ -22,11 +22,11 @@
 	</context-param>
 	<context-param>
 		<param-name>OracleId</param-name>
-		<param-value>C##TEST1234</param-value>
+		<param-value>c##test1234</param-value>
 	</context-param>
 	<context-param>
 		<param-name>OraclePwd</param-name>
-		<param-value>TEST1234</param-value>
+		<param-value>test1234</param-value>
 	</context-param>
 	<context-param>
 		<param-name>POSTS_PER_PAGE</param-name>
@@ -36,4 +36,15 @@
 		<param-name>PAGES_PER_BLOCK</param-name>
 		<param-value>5</param-value>
 	</context-param>
+
+
+	<context-param>
+		<param-name>maxPostSize</param-name>
+		<param-value>1024000</param-value>
+	</context-param>
+
+	<!-- 서블렛 -->
+
+
+
 </web-app>

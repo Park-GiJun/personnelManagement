@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import CountSalary.CountSalaryDAO;
+import CountSalary.CountSalaryDTO;
 import attend.AttendanceDAO;
 import attend.AttendanceDTO;
 
@@ -27,7 +29,6 @@ public class LoadDateController extends HttpServlet {
 		String userId = (String) request.getSession().getAttribute("loginid");
 		String currentDate = (String) request.getParameter("updateCurrentDate");
 
-		// 업데이트된 currentYear와 currentMonth를 세션에 저장
 		System.out.println("UserID: " + userId);
 		System.out.println("LoadDateController currentYear: " + currentDate);
 
@@ -35,6 +36,11 @@ public class LoadDateController extends HttpServlet {
 		Map<String, Map<String, String>> attendDateMap = attenddao.loadDateAttendance(userId, currentDate);
 
 		System.out.println("LoadDate.do doPost 완료");
+		
+		CountSalaryDAO cDao = new CountSalaryDAO();
+		CountSalaryDTO cDto = cDao.countSalary(userId, currentDate);
+		cDao.updateSalary(cDto);
+		
 
 		// Gson을 사용하여 Map을 JSON 형식으로 변환
 		String jsonAttendDateMap = new Gson().toJson(attendDateMap);

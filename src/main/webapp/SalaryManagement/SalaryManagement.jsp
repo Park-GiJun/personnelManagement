@@ -64,8 +64,59 @@ body {
 <script>
 	function handleChange() {
 		var selectedTeam = document.getElementById("selectTeam").value;
-		window.location.href = "SalaryManagement.do?selectTeam=" + selectedTeam;
+		var selectedYear = document.getElementById("yearSelect").value;
+		var selectedMonth = document.getElementById("monthSelect").value;
+		window.location.href = "SalaryManagement.do?selectTeam=" + selectedTeam
+				+ "&selectedYear=" + selectedYear + "&selectedMonth="
+				+ selectedMonth;
 	}
+
+	function openModifyWindow(team, name, emp_num, emp_grade, pay, total_pay,
+			incentive, holiday_pay, extra_work_pay, yearmonth) {
+		var detailsUrl = "../SalaryManagement/EmployeeDetails.jsp" + "?team="
+				+ team + "&name=" + name + "&emp_num=" + emp_num
+				+ "&emp_grade=" + emp_grade + "&pay=" + pay + "&total_pay="
+				+ total_pay + "&incentive=" + incentive + "&holiday_pay="
+				+ holiday_pay + "&extra_work_pay=" + extra_work_pay
+				+ "&yearmonth=" + yearmonth;
+
+		window.open(detailsUrl, "_blank", "width=600, height=400");
+	}
+
+	function populateYears() {
+		var yearSelect = document.getElementById("yearSelect");
+		var currentYear = new Date().getFullYear();
+
+		for (var year = currentYear; year >= currentYear - 10; year--) {
+			var option = document.createElement("option");
+			option.value = year;
+			option.text = year;
+			yearSelect.add(option);
+		}
+	}
+
+	function populateMonths() {
+		var monthSelect = document.getElementById("monthSelect");
+
+		for (var month = 1; month <= 12; month++) {
+			var monthText = month < 10 ? '0' + month : '' + month;
+			var option = document.createElement("option");
+			option.value = monthText;
+			option.text = monthText;
+			monthSelect.add(option);
+		}
+
+		// Add onchange event handler to monthSelect
+		monthSelect.onchange = function() {
+			handleChange();
+		};
+	}
+
+	// Call the functions to populate year and month select boxes
+	document.addEventListener('DOMContentLoaded', function() {
+		populateYears();
+		populateMonths();
+	});
 </script>
 </head>
 <body>
@@ -82,7 +133,18 @@ body {
 				<option value="인사">인사</option>
 				<option value="디자인">디자인</option>
 				<option value="개발">개발</option>
+			</select> <label for="yearSelect">연도:</label> <select
+				id="yearSelect"
+				name="yearSelect"
+			>
+			</select> <label for="monthSelect">월:</label> <select
+				id="monthSelect"
+				name="monthSelect"
+			>
+				<option value="전체">전체</option>
 			</select>
+
+			<button onclick="handleChange()">검색</button>
 		</div>
 		<div class="salary_table_background">
 			<table
@@ -99,6 +161,7 @@ body {
 					<td>성과급</td>
 					<td>추가급</td>
 					<td>추가근무수당</td>
+					<td>날짜</td>
 				</tr>
 				<c:choose>
 					<c:when test="${ empty salaryEMPList } ">
@@ -111,20 +174,25 @@ body {
 					</c:when>
 					<c:otherwise>
 						<c:forEach
-							items="${ salaryEMPList }"
+							items="${salaryEMPList}"
 							var="EMPLists"
 							varStatus="loop"
 						>
-							<tr align="center">
-								<td>${ EMPLists.team }</td>
-								<td>${ EMPLists.name }</td>
-								<td>${ EMPLists.emp_num }</td>
-								<td>${ EMPLists.emp_grade }</td>
-								<td>${ EMPLists.pay }</td>
-								<td>${ EMPLists.total_pay }</td>
-								<td>${ EMPLists.incentive }</td>
-								<td>${ EMPLists.holiday_pay }</td>
-								<td>${ EMPLIsts.extra_work_pay }</td>
+							<tr
+								align="center"
+								onclick="openModifyWindow('${EMPLists.team}', '${EMPLists.name}', '${EMPLists.emp_num}', '${EMPLists.emp_grade}', '${EMPLists.pay}', '${EMPLists.total_pay}', '${EMPLists.incentive}', '${EMPLists.holiday_pay}', '${EMPLists.extra_work_pay}', '${EMPLists.yearmonth}')"
+							>
+
+								<td>${EMPLists.team}</td>
+								<td>${EMPLists.name}</td>
+								<td>${EMPLists.emp_num}</td>
+								<td>${EMPLists.emp_grade}</td>
+								<td>${EMPLists.pay}</td>
+								<td>${EMPLists.total_pay}</td>
+								<td>${EMPLists.incentive}</td>
+								<td>${EMPLists.holiday_pay}</td>
+								<td>${EMPLists.extra_work_pay}</td>
+								<td>${EMPLists.yearmonth }</td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>
@@ -132,6 +200,5 @@ body {
 			</table>
 		</div>
 	</div>
-
 </body>
 </html>

@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page
+	language="java"
+	contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+%>
 <%@ page import="java.util.List"%>
 <%@ page import="attend.AttendanceDTO"%>
 <%@ page import="java.util.ArrayList"%>
@@ -243,6 +246,24 @@ function getCurrentTime() {
         console.error('Error fetching data:', error);
     });
 }
+	
+	function openModifyWindow() {
+		var infoName = document.getElementById('infoName').innerText;
+	    var infoEmpNum = document.getElementById('infoEmpNum').innerText;
+	    var infoPhone = document.getElementById('infoPhone').innerText;
+	    var infoEmail = document.getElementById('infoEmail').innerText;
+		
+	    
+	    var detailsUrl = '../MyInfo/InfoModify.jsp'
+	        + '?infoName=' + encodeURIComponent(infoName)
+	        + '&infoEmpNum=' + encodeURIComponent(infoEmpNum)
+	        + '&infoPhone=' + encodeURIComponent(infoPhone)
+	        + '&infoEmail=' + encodeURIComponent(infoEmail);
+
+		window.open(detailsUrl, "_blank", "width=600, height=400");
+	}
+
+
 
 </script>
 </head>
@@ -413,48 +434,147 @@ function getCurrentTime() {
 		<div class="info_profile">
 			<div class="info_profile_photo">
 				<div class="info_profile_texts">
-					<a> 이름 : ${ userinfolist.name } </a> <br /> <a> 사번 : ${ userinfolist.empNum }
-					</a> <br /> <a> 전화번호 : ${ userinfolist.phone }</a> <br /> <a> 이메일
-						: ${ userinfolist.email }</a>
+					이름 : <a id="infoName">${ Infolist.name } </a>
+					<br />
+					사번 : <a id="infoEmpNum">${ Infolist.emp_num } </a>
+					<br />
+					전화번호 : <a id="infoPhone">${ Infolist.phone }</a>
+					<br />
+					이메일 : <a id="infoEmail">${ Infolist.email }</a>
 				</div>
 			</div>
-		</div>
-		<div class="info_income">
-			<div class="info_income_text" align="center">
-				<div class="info_income_textbox">
-					급여정보
-					<button name="print_income" class="print_income">출력하기</button>
-				</div>
 
+		</div>
+		<button
+			type="button"
+			onclick="openModifyWindow()"
+		>수정하기</button>
+		<div class="info_income">
+			<div class="info_income_textbox">
+				<label for="yearSelect">연도:</label> <select
+					id="yearSelect"
+					name="yearSelect"
+				></select> <label for="monthSelect">월:</label> <select
+					id="monthSelect"
+					name="monthSelect"
+				></select>
+
+				<button
+					name="print_income"
+					class="print_income"
+				>출력하기</button>
 			</div>
-			<table class="income_table" border="1">
+			<script>
+			document.addEventListener('DOMContentLoaded', function () {
+			    var yearSelect = document.getElementById("yearSelect");
+			    var monthSelect = document.getElementById("monthSelect");
+
+			    var currentYear = new Date().getFullYear();
+
+			    // Set default values for year and month
+			    yearSelect.value = currentYear;
+			    monthSelect.value = new Date().getMonth() + 1; // Note: JavaScript months are 0-based
+
+			    // 연도를 현재 연도부터 10년 전까지 생성
+			    for (var year = currentYear; year >= currentYear - 10; year--) {
+			        var option = document.createElement("option");
+			        option.value = year;
+			        option.text = year;
+			        yearSelect.add(option);
+			    }
+
+			    // 월은 1부터 12까지 생성
+			    for (var month = 1; month <= 12; month++) {
+			        var monthText = month < 10 ? '0' + month : '' + month;
+			        var option = document.createElement("option");
+			        option.value = monthText;
+			        option.text = monthText;
+			        monthSelect.add(option);
+			    }
+
+			    // Add onchange event handler
+			    yearSelect.onchange = monthSelect.onchange = function () {
+			        var selectedYear = yearSelect.value;
+			        var selectedMonth = monthSelect.value;
+			        console.log('Selected Year:', selectedYear);
+			        console.log('Selected Month:', selectedMonth);
+
+			        // You can customize the fetch request based on your needs
+			        fetch('../Controller/SalaryPrint.do', {
+			            method: 'POST',
+			            headers: {
+			                'Content-Type': 'application/x-www-form-urlencoded',
+			            },
+			            body: 'selectedDate=' + selectedYear + "-" + selectedMonth,
+			        })
+			        .then(response => response.json())
+			        .then(chageDateSalary => {
+    // Process the fetched data as needed
+    console.log('Fetched Data:', chageDateSalary);
+
+    // Assuming 'chageDateSalary' is an object with properties corresponding to the table values
+    document.getElementById('payCell').innerText = chageDateSalary.pay;
+    document.getElementById('totalPayCell').innerText = chageDateSalary.total_pay;
+    document.getElementById('holidayPayCell').innerText = chageDateSalary.holiday_pay;
+    document.getElementById('incentiveCell').innerText = chageDateSalary.incentive;
+    document.getElementById('extraWorkPayCell').innerText = chageDateSalary.extra_work_pay;
+})
+			        .catch(error => {
+			            console.error('Error fetching data:', error);
+			        });
+			    };
+
+			    // Trigger the onchange event to fetch data for the default values
+			    yearSelect.onchange();
+			});
+
+
+</script>
+			<table
+				class="income_table"
+				border="1"
+			>
 				<tr>
 					<th>기본급</th>
-					<th>${ incentivelist.pay }</th>
+					<th id="payCell">${ Infolist.pay }</th>
 				</tr>
 				<tr>
 					<th>총 인센티브</th>
-					<th>${ incentivelist.addtional_pay }</th>
+					<th id="totalPayCell">${ Infolist.total_pay }</th>
 				</tr>
 				<tr>
 					<th>추가급</th>
-					<th>${ incentivevaluelist.holiday_pay }</th>
+					<th id="holidayPayCell">${ Infolist.holiday_pay }</th>
 				</tr>
 				<tr>
 					<th>성과급</th>
-					<th>${ incentivevaluelist.incentive }</th>
+					<th id="incentiveCell">${ Infolist.incentive }</th>
 				</tr>
 				<tr>
 					<th>추가 근무 수당</th>
-					<th>${ incentivevaluelist.extra_work_pay }</th>
+					<th id="extraWorkPayCell">${ Infolist.extra_work_pay }</th>
 				</tr>
-
 			</table>
+
 		</div>
 		<div class="datepicker-container">
-			<form id="monthForm" action="../Controller/LoadDate.do" method="post">
-				<input type="hidden" name="currentYear" id="currentYear" value="">
-				<input type="hidden" name="currentMonth" id="currentMonth" value="">
+			<form
+				id="monthForm"
+				action="../Controller/LoadDate.do"
+				method="post"
+			>
+				<input
+					type="hidden"
+					name="currentYear"
+					id="currentYear"
+					value=""
+				>
+				<input
+					type="hidden"
+					name="currentMonth"
+					id="currentMonth"
+					value=""
+				>
 			</form>
 			<div class="navigation-btn">
 				<!-- 이전달로 이동하는 버튼 -->
@@ -474,14 +594,18 @@ function getCurrentTime() {
 			</table>
 			<div class="info_check_buttons"></div>
 			<div class="check_btn">
-				<button type="button" id='commute-button'>출근</button>
-				<button type="button" id='leave-button'>퇴근</button>
+				<button
+					type="button"
+					id='commute-button'
+				>출근</button>
+				<button
+					type="button"
+					id='leave-button'
+				>퇴근</button>
 			</div>
 		</div>
 		<div class="info_commute"></div>
 	</div>
-
-
 </body>
 
 </html>

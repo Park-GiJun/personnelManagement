@@ -73,7 +73,7 @@ button.my_btn:hover {
 
 /* 부서 휴가 버튼 */
 .my_btn2 {
-  background-color: #1C427E;
+  background-color: orange;
   color: white;
   border: none;
   

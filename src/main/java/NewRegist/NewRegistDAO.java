@@ -31,16 +31,16 @@ public class NewRegistDAO extends DBConnPool {
 		}
 		return null;
 	}
-	
-	public HoliDayDTO NewRegistHoliday (String emp_num) {
+
+	public HoliDayDTO NewRegistHoliday(String emp_num) {
 		String query = "INSERT INTO HOLIDAY (emp_num) VALUES (?)";
-		
+
 		System.out.println("휴가정보등록 쿼리 실행");
-		
+
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, emp_num);
-			
+
 			psmt.executeUpdate();
 			System.out.println("휴가정보등록 완료");
 		} catch (Exception e) {
@@ -101,27 +101,27 @@ public class NewRegistDAO extends DBConnPool {
 		}
 		return bbs;
 	}
-	
+
 	// 부서별 사원수 를 가져오는 쿼리
-		public int selectdepartmentCount(String TeamSearch) {
-			int totalCount = 0;
+	public int selectdepartmentCount(String TeamSearch) {
+		int totalCount = 0;
 
-			String query = "SELECT COUNT(*) FROM emp WHERE team=?";
-			try {
-				// 쿼리 실행
-				psmt = con.prepareStatement(query);
-				psmt.setString(1, TeamSearch);
+		String query = "SELECT COUNT(*) FROM emp WHERE team=?";
+		try {
+			// 쿼리 실행
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, TeamSearch);
 
-				rs = psmt.executeQuery();
-				if (rs.next()) {
-					totalCount = rs.getInt(1);
-				}
-			} catch (Exception e) {
-				System.out.println("부서별 사원수를 구하는 중 예외 발생");
-				e.printStackTrace();
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				totalCount = rs.getInt(1);
 			}
-			return totalCount;
+		} catch (Exception e) {
+			System.out.println("부서별 사원수를 구하는 중 예외 발생");
+			e.printStackTrace();
 		}
+		return totalCount;
+	}
 
 	// 부서별 사원 목록 조회 쿼리
 	public List<NewRegistDTO> selectdepartmentList(String TeamSearch) {
@@ -154,5 +154,25 @@ public class NewRegistDAO extends DBConnPool {
 			e.printStackTrace();
 		}
 		return bbs;
+	}
+
+	public NewRegistDTO RegistEdit(String emp_grade, String team, String grade, String name, String emp_num) {
+		String query = "UPDATE emp SET emp_grade = ?, team = ?, grade = ? WHERE name = ? AND emp_num= ?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, emp_grade);
+			psmt.setString(2, team);
+			psmt.setString(3, grade);
+			psmt.setString(4, name);
+			psmt.setString(5, emp_num);
+
+			psmt.executeUpdate();
+			System.out.println("정보 수정 완료");
+		} catch (Exception e) {
+			System.out.println("정보 수정 중 예외 발생");
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

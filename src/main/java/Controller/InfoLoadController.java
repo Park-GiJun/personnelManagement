@@ -13,12 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import CountSalary.CountSalaryDAO;
+import CountSalary.CountSalaryDTO;
 import Income.IncentiveDAO;
 import Income.IncentiveDTO;
 import Income.Incentive_ValueDAO;
 import Income.Incentive_ValueDTO;
 import Personal.PersonalDAO;
 import Personal.PersonalDTO;
+import SalaryManagement.SalaryManagementDAO;
+import SalaryManagement.SalaryManagementDTO;
 import attend.AttendanceDAO;
 
 @WebServlet("/Controller/infoLoad.do")
@@ -35,14 +39,14 @@ public class InfoLoadController extends HttpServlet {
 
 		System.out.println("infoLoadController currentDate : " + currentDate);
 
-		PersonalDAO personaldao = new PersonalDAO();
-		PersonalDTO userinfolist = personaldao.getInfo(userId);
-
-		Incentive_ValueDAO incentivevaluedao = new Incentive_ValueDAO();
-		Incentive_ValueDTO incentivevaluelist = incentivevaluedao.load_Incentive_Value(userId);
-
-		IncentiveDAO incentivedao = new IncentiveDAO();
-		IncentiveDTO incentivelist = incentivedao.load_Incentive(userId);
+//		PersonalDAO personaldao = new PersonalDAO();
+//		PersonalDTO userinfolist = personaldao.getInfo(userId);
+//
+//		Incentive_ValueDAO incentivevaluedao = new Incentive_ValueDAO();
+//		Incentive_ValueDTO incentivevaluelist = incentivevaluedao.load_Incentive_Value(userId);
+//
+//		IncentiveDAO incentivedao = new IncentiveDAO();
+//		IncentiveDTO incentivelist = incentivedao.load_Incentive(userId);
 
 		LocalDate currentDay = LocalDate.now();
 
@@ -52,14 +56,22 @@ public class InfoLoadController extends HttpServlet {
 
 		// Now you can use the 'formattedDate' in your code
 		System.out.println("Current Year and Month: " + formattedDate);
+		
+		CountSalaryDAO cDao = new CountSalaryDAO();
+		CountSalaryDTO cDTO = cDao.countSalary(userId, formattedDate);
+		cDao.updateSalary(cDTO);
+		
+		SalaryManagementDAO dao = new SalaryManagementDAO();
+		SalaryManagementDTO dto = dao.salaryPrint(userId, formattedDate);
 
 		AttendanceDAO attenddao = new AttendanceDAO();
 		Map<String, Map<String, String>> attendDateMap = attenddao.loadDateAttendance(userId, currentDate);
 
 		request.setAttribute("attendDateMap", new Gson().toJson(attendDateMap));
-		request.setAttribute("userinfolist", userinfolist);
-		request.setAttribute("incentivevaluelist", incentivevaluelist);
-		request.setAttribute("incentivelist", incentivelist);
+//		request.setAttribute("userinfolist", userinfolist);
+//		request.setAttribute("incentivevaluelist", incentivevaluelist);
+//		request.setAttribute("incentivelist", incentivelist);
+		request.setAttribute("Infolist", dto);
 		request.getRequestDispatcher("/MyInfo/Info.jsp").forward(request, response);
 	}
 
