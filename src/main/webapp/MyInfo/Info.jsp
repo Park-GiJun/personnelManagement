@@ -425,6 +425,10 @@ function getCurrentTime() {
 .leaveText {
 	font-size: 15px;
 }
+
+.modifyBtn {
+	right:0%;
+}
 </style>
 
 <body>
@@ -443,12 +447,13 @@ function getCurrentTime() {
 					이메일 : <a id="infoEmail">${ Infolist.email }</a>
 				</div>
 			</div>
-
-		</div>
-		<button
+			<button
 			type="button"
+			class="modifyBtn"
 			onclick="openModifyWindow()"
 		>수정하기</button>
+		</div>
+		
 		<div class="info_income">
 			<div class="info_income_textbox">
 				<label for="yearSelect">연도:</label> <select
@@ -471,7 +476,7 @@ function getCurrentTime() {
 
 			    var currentYear = new Date().getFullYear();
 
-			    // Set default values for year and month
+			    // 연도와 월 셀렉트 창 초기화
 			    yearSelect.value = currentYear;
 			    monthSelect.value = new Date().getMonth() + 1; // Note: JavaScript months are 0-based
 
@@ -492,41 +497,46 @@ function getCurrentTime() {
 			        monthSelect.add(option);
 			    }
 
-			    // Add onchange event handler
+			    // 연도 또는 월이 변경될 때 데이터를 가져오는 이벤트 핸들러 추가
 			    yearSelect.onchange = monthSelect.onchange = function () {
 			        var selectedYear = yearSelect.value;
 			        var selectedMonth = monthSelect.value;
 			        console.log('Selected Year:', selectedYear);
 			        console.log('Selected Month:', selectedMonth);
 
-			        // You can customize the fetch request based on your needs
+			        // 데이터 가져오기
+			        fetchData(selectedYear, selectedMonth);
+			    };
+
+			    // 페이지 로드 시 기본값으로 데이터 가져오기
+			    fetchData(currentYear, new Date().getMonth() + 1);
+
+			    function fetchData(year, month) {
 			        fetch('../Controller/SalaryPrint.do', {
 			            method: 'POST',
 			            headers: {
 			                'Content-Type': 'application/x-www-form-urlencoded',
 			            },
-			            body: 'selectedDate=' + selectedYear + "-" + selectedMonth,
+			            body: 'selectedDate=' + year + "-" + month,
 			        })
 			        .then(response => response.json())
 			        .then(chageDateSalary => {
-    // Process the fetched data as needed
-    console.log('Fetched Data:', chageDateSalary);
+			            // 데이터 처리
+			            console.log('Fetched Data:', chageDateSalary);
 
-    // Assuming 'chageDateSalary' is an object with properties corresponding to the table values
-    document.getElementById('payCell').innerText = chageDateSalary.pay;
-    document.getElementById('totalPayCell').innerText = chageDateSalary.total_pay;
-    document.getElementById('holidayPayCell').innerText = chageDateSalary.holiday_pay;
-    document.getElementById('incentiveCell').innerText = chageDateSalary.incentive;
-    document.getElementById('extraWorkPayCell').innerText = chageDateSalary.extra_work_pay;
-})
+			            // 결과를 화면에 업데이트
+			            document.getElementById('payCell').innerText = chageDateSalary.pay;
+			            document.getElementById('totalPayCell').innerText = chageDateSalary.total_pay;
+			            document.getElementById('holidayPayCell').innerText = chageDateSalary.holiday_pay;
+			            document.getElementById('incentiveCell').innerText = chageDateSalary.incentive;
+			            document.getElementById('extraWorkPayCell').innerText = chageDateSalary.extra_work_pay;
+			        })
 			        .catch(error => {
 			            console.error('Error fetching data:', error);
 			        });
-			    };
-
-			    // Trigger the onchange event to fetch data for the default values
-			    yearSelect.onchange();
+			    }
 			});
+
 
 
 </script>

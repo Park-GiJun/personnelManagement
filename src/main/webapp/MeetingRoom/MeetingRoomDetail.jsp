@@ -89,7 +89,9 @@
 		    })
 		    .then(() => {
 		        // 서버의 응답을 처리
-		        console.log('서버 응답:', data);
+		        console.log('서버 응답:');
+		        alert("신청이 완료 되었습니다.")
+		        window.close();
 		    })
 
 		    .catch(error => {
@@ -101,57 +103,70 @@
 
 
 		function populateTable() {
-			var tableBody = document.getElementById('meetingRoomTableBody');
+		    var tableBody = document.getElementById('meetingRoomTableBody');
 
-			for (var hour = 9; hour < 18; hour++) {
-				var row = document.createElement('tr');
-				var timeCell = document.createElement('td');
-				var empNumCell = document.createElement('td');
-				var nameCell = document.createElement('td'); // 추가: 이름 표시
-				var teamCell = document.createElement('td');
-				var statusCell = document.createElement('td');
-				var reserveCell = document.createElement('td');
+		    for (var hour = 9; hour < 18; hour++) {
+		        var row = document.createElement('tr');
+		        var timeCell = document.createElement('td');
+		        var empNumCell = document.createElement('td');
+		        var nameCell = document.createElement('td');
+		        var teamCell = document.createElement('td');
+		        var statusCell = document.createElement('td');
+		        var reserveCell = document.createElement('td');
 
-				var entry = meetingRoomLists.find(function(item) {
-					return parseInt(item.date) === hour;
-				});
+		        var entry = meetingRoomLists.find(function(item) {
+		            return parseInt(item.date) === hour;
+		        });
 
-				if (entry) {
-					empNumCell.textContent = entry.empNum;
-					nameCell.textContent = entry.name; // 추가: 이름 표시
-					teamCell.textContent = entry.team;
-					statusCell.textContent = entry.status;
-				}
+		        if (entry) {
+		            empNumCell.textContent = entry.empNum;
+		            nameCell.textContent = entry.name;
+		            teamCell.textContent = entry.team;
+		            statusCell.textContent = entry.status;
+		        }
 
-				// Check if the time is already reserved
-				var isReserved = entry && entry.status === 'Wait'; // Modify this condition as needed
+		        // Check if the time is already reserved or rejected
+		        var isReservedOrRejected = entry && (entry.status === 'Wait' || entry.status === 'Confirm');
+		        
+		        var isReject = entry && entry.status === 'Reject';
 
-				// Create a checkbox for each row if not reserved
-				if (!isReserved) {
-					var checkbox = document.createElement('input');
-					checkbox.type = 'checkbox';
-					checkbox.id = 'reserveCheckbox' + hour;
-					checkbox.value = hour;
+		        // Create a checkbox for each row if not reserved or rejected
+		        if (!isReservedOrRejected) {
+		            var checkbox = document.createElement('input');
+		            checkbox.type = 'checkbox';
+		            checkbox.id = 'reserveCheckbox' + hour;
+		            checkbox.value = hour;
 
-					// Append the checkbox to the reserveCell
-					reserveCell.appendChild(checkbox);
-				}
+		            // Append the checkbox to the reserveCell
+		            reserveCell.appendChild(checkbox);
+		        }
 
-				// Set the content of cells based on the entry
-				timeCell.textContent = formatTime(hour);
+		        // Set the content of cells based on the entry
+		        timeCell.textContent = formatTime(hour);
 
-				// Append cells to the row
-				row.appendChild(timeCell);
-				row.appendChild(empNumCell);
-				row.appendChild(nameCell); // 추가: 이름 표시
-				row.appendChild(teamCell);
-				row.appendChild(statusCell);
-				row.appendChild(reserveCell);
+		        // Append cells to the row only if not reserved or rejected
+		        row.appendChild(timeCell);
+		        if (!isReject) {
+		            row.appendChild(empNumCell);
+		            row.appendChild(nameCell);
+		            row.appendChild(teamCell);
+		            row.appendChild(statusCell);
+		        } else {
+		            // If rejected, create empty cells and append them
+		            row.appendChild(document.createElement('td'));
+		            row.appendChild(document.createElement('td'));
+		            row.appendChild(document.createElement('td'));
+		            row.appendChild(document.createElement('td'));
+		        }
+		        row.appendChild(reserveCell);
 
-				// Append the row to the table body
-				tableBody.appendChild(row);
-			}
+		        // Append the row to the table body
+		        tableBody.appendChild(row);
+		    }
 		}
+
+
+		
 
 		// Call the function to populate the table
 		populateTable();
