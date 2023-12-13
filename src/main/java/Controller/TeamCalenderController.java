@@ -53,7 +53,7 @@ public class TeamCalenderController extends HttpServlet {
 		
 		System.out.println("aaaaa " + selecteddate);
 		
-		
+		//d
 		if (searchWord != null) {
 			map.put("searchField", searchField);
 			map.put("searchWord", searchWord);
