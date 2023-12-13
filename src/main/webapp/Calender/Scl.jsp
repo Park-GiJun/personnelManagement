@@ -6,6 +6,9 @@
 <%@ page import="Calender.CalenderDTO"%>
 <%@ page import="Calender.CalenderDAO"%>
 
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
+
 <%
 request.setCharacterEncoding("utf-8");
 
@@ -656,7 +659,7 @@ body {
 						<c:otherwise>
 							<c:forEach items="${calenderlists}" var="row" varStatus="loop">
 								<tr align="center">
-									<td>${row.Personal_diaray_schedule}</td>
+									<td>${row.personal_diaray_schedule}</td>
 									<!-- 일정 내용 표시 -->
 								</tr>
 							</c:forEach>
