@@ -62,6 +62,14 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 	box-sizing: border-box;
 }
 
+.scheduleLink.selected {
+        color: orange;
+    }
+    
+.scheduleLink {
+	color: white;
+}    
+
 .conti {
 	text-align: center;
 }
@@ -199,7 +207,7 @@ to {
 	left: 10px;
 	width: 310px;
 	height: 900px;
-	background: orange; /* 칸 보려고 색상 지정 */
+	background: #1C427E;
 	color: #fff;
 	/* animation-name:direction; */
 	animation-duration: 2s;
@@ -531,8 +539,7 @@ function showDateAndAlert(day) {
 				eventCounter++;
 
 				// <div class="reverse2" id="contentContainer">에 <p> 추가
-				document.getElementById('contentContainer').appendChild(
-						newParagraph);
+				document.getElementById('contentContainer').appendChild(newParagraph);
 
 				window.alert("일정이 추가되었습니다");
 			} else {
@@ -547,23 +554,38 @@ function showDateAndAlert(day) {
 		}
 	}
 
-	// 일정 삭제하기 버튼 눌렀을 때 설정
-	function confirmDelete() {
-		// 일정 삭제 여부를 물어보고 결과에 따라 메시지 표시
-		var result = window.confirm("일정을 삭제하시겠습니까?");
-		if (result) {
-			var paragraphs = document.querySelectorAll('.reverse p');
-			var lastParagraph = paragraphs[paragraphs.length - 1];
-			window.alert("삭제되었습니다");
+	 // 선택한 일정 삭제하기 버튼 눌렀을 때 설정
+     function confirmDelete() {
+        // 선택된 링크를 모두 가져오기
+        var links = document.querySelectorAll('.scheduleLink.selected');
 
-			if (lastParagraph) {
-				lastParagraph.remove();
-			}
-		} else {
-			// 사용자가 "취소"를 클릭한 경우
-			// 추가적인 작업을 수행하거나 아무 작업도 하지 않음
-		}
-	}
+        if (links.length > 0) {
+            var result = window.confirm("선택한 일정을 삭제하시겠습니까?");
+            if (result) {
+                links.forEach(function (link) {
+                    // 선택된 링크의 부모 행을 찾아서 삭제
+                    var row = findRowByLink(link);
+                    if (row) {
+                        row.remove();
+                    }
+                });
+                window.alert("선택한 일정이 삭제되었습니다");
+            } else {
+                window.alert("삭제가 취소되었습니다");
+            }
+        } else {
+            window.alert("삭제할 일정을 선택해주세요");
+        }
+    }
+
+    // 링크 클릭 시 선택 및 해제를 토글하는 함수
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('scheduleLink')) {
+            event.preventDefault();
+            event.target.classList.toggle('selected');
+        }
+    });
+    
 </script>
 
 
@@ -628,10 +650,7 @@ body {
 			<%
 			if (cl_year != null && cl_month != null) {
 			%>
-			<h2 class='re_day'><%=cl_year%>년
-				<%=cl_month%>월
-				<%=name%>일
-			</h2>
+			<h2 class='re_day'><%=cl_year%>년 <%=cl_month%>월 <%=name%>일 </h2>
 			<%
 			} else {
 			%>
@@ -646,27 +665,30 @@ body {
 
 			<!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
 			<div class="reverse2">
-
-
-				<table class="caltabke" border="1" width="100%">
-
-					<c:choose>
-						<c:when test="${empty calenderlists}">
-							<tr>
-								<td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${calenderlists}" var="row" varStatus="loop">
-								<tr align="center">
-									<td>${row.personal_diaray_schedule}</td>
-									<!-- 일정 내용 표시 -->
-								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</table>
+    			<table class="caltabke" width="100%">
+        			<c:choose>
+            			<c:when test="${empty calenderlists}">
+                			<tr>
+                    			<td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>
+                			</tr>
+            			</c:when>
+            			<c:otherwise>
+                			<c:forEach items="${calenderlists}" var="row" varStatus="loop">
+                    			<tr>
+                        			<td>
+                            			<a href="#" class="scheduleLink" data-schedule="${row.personal_diaray_schedule}">
+                                			${row.personal_diaray_schedule}
+                            			</a>
+                        			</td>
+                    			</tr>
+                			</c:forEach>
+            			</c:otherwise>
+        			</c:choose>
+    			</table>
 			</div>
+
+			<button class='del_btn' onclick="confirmDelete();">삭제하기</button>
+
 		</div>
 
 
