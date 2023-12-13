@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import DBcontrol.DBConnPool;
 
+
 public class CalenderDAO extends DBConnPool {
 
 	public CalenderDAO() {
@@ -76,16 +77,39 @@ public class CalenderDAO extends DBConnPool {
 	public int deletePost(String Personal_diaray_schedule) {
 		int result = 0;
 		try {
-			String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_schedule = ?";
+			String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_schedule=?";
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, Personal_diaray_schedule);
 			result = psmt.executeUpdate();
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			System.out.println("게시물 삭제 중 예외 발생");
 			e.printStackTrace();
 		}
 		return result;
 	}
+	
+	public CalenderDTO selectView(String Personal_diaray_schedule) {
+		CalenderDTO dto = new CalenderDTO();
+		String query = "SELECT * FROM Personal_diaray WHERE Personal_diaray_schedule=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1,  Personal_diaray_schedule);
+			rs = psmt.executeQuery();
+			
+			if (rs.next()) {
+				dto.setPersonal_diaray_date(rs.getString(1));
+				dto.setPersonal_diaray_schedule(rs.getString(2));
+				dto.setemp_num(rs.getString(3));
+			}
+		}
+		catch (Exception e) {
+			System.out.println("게시물 상세보기 중 예외 발생");
+			e.printStackTrace();
+		}
+		return dto;
+	}
+		
 
 	// 4 입력, 저장
 	public int insertWrite(CalenderDTO dto) {
@@ -139,3 +163,4 @@ public class CalenderDAO extends DBConnPool {
 	}
 
 }
+
