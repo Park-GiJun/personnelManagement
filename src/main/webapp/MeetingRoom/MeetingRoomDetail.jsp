@@ -1,0 +1,160 @@
+<%@ page
+	language="java"
+	contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+%>
+<%@ taglib
+	uri="http://java.sun.com/jsp/jstl/core"
+	prefix="c"
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta
+	name="viewport"
+	content="width=device-width, initial-scale=1.0"
+>
+<title>Meeting Room Detail</title>
+</head>
+<body>
+	<h1>Meeting Room Detail</h1>
+
+	<table
+		border="1"
+		align="center"
+	>
+		<thead>
+			<tr>
+				<th>시간</th>
+				<th>사번</th>
+				<th>이름</th>
+				<th>부서</th>
+				<th>상태</th>
+				<th>예약</th>
+			</tr>
+		</thead>
+		<tbody id="meetingRoomTableBody">
+		</tbody>
+	</table>
+
+	<button onclick="sendReservation()">예약 보내기</button>
+
+	<script>
+		var urlParams = new URLSearchParams(window.location.search);
+		var meetingRoomLists = JSON.parse(urlParams.get('meetingRoomLists'));
+
+		function formatTime(hour) {
+		    return hour + ":00-" + (hour + 1) + ":00";
+		}
+
+		function sendReservation() {
+		    var meetingRoomId = localStorage.getItem('meetingRoomId');
+		    var selectedDate = localStorage.getItem('date');
+		    var reservations = [];
+
+		    for (var hour = 9; hour < 18; hour++) {
+		        var checkbox = document.getElementById('reserveCheckbox' + hour);
+
+		        if (checkbox && checkbox.checked) {
+		            // 숫자를 문자열로 변환
+		            var formattedHour = String(hour + 9);
+
+		            var combinedDate = new Date(selectedDate + 'T' + formattedHour + ':00:00');
+
+		            // Convert combinedDate to a formatted string
+		            var formattedDate = combinedDate.toISOString().slice(0, 19).replace('T', ' ');
+
+		            var reservationData = {
+		                Date: formattedDate,
+		            };
+
+		            reservations.push(reservationData);
+		        }
+		    }
+
+		    // meetingRoomId를 별도의 키로 추가
+		    var requestData = {
+		        meetingRoomId: meetingRoomId,
+		        reservations: reservations
+		    };
+
+		    // 예약 정보와 meetingRoomId를 서버로 전송
+		    fetch('../Contorller/MeetingRoomReservation.do', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json',
+		        },
+		        body: JSON.stringify(requestData),
+		    })
+		    .then(() => {
+		        // 서버의 응답을 처리
+		        console.log('서버 응답:', data);
+		    })
+
+		    .catch(error => {
+		        console.error('에러:', error);
+		    });
+		}
+
+
+
+
+		function populateTable() {
+			var tableBody = document.getElementById('meetingRoomTableBody');
+
+			for (var hour = 9; hour < 18; hour++) {
+				var row = document.createElement('tr');
+				var timeCell = document.createElement('td');
+				var empNumCell = document.createElement('td');
+				var nameCell = document.createElement('td'); // 추가: 이름 표시
+				var teamCell = document.createElement('td');
+				var statusCell = document.createElement('td');
+				var reserveCell = document.createElement('td');
+
+				var entry = meetingRoomLists.find(function(item) {
+					return parseInt(item.date) === hour;
+				});
+
+				if (entry) {
+					empNumCell.textContent = entry.empNum;
+					nameCell.textContent = entry.name; // 추가: 이름 표시
+					teamCell.textContent = entry.team;
+					statusCell.textContent = entry.status;
+				}
+
+				// Check if the time is already reserved
+				var isReserved = entry && entry.status === 'Wait'; // Modify this condition as needed
+
+				// Create a checkbox for each row if not reserved
+				if (!isReserved) {
+					var checkbox = document.createElement('input');
+					checkbox.type = 'checkbox';
+					checkbox.id = 'reserveCheckbox' + hour;
+					checkbox.value = hour;
+
+					// Append the checkbox to the reserveCell
+					reserveCell.appendChild(checkbox);
+				}
+
+				// Set the content of cells based on the entry
+				timeCell.textContent = formatTime(hour);
+
+				// Append cells to the row
+				row.appendChild(timeCell);
+				row.appendChild(empNumCell);
+				row.appendChild(nameCell); // 추가: 이름 표시
+				row.appendChild(teamCell);
+				row.appendChild(statusCell);
+				row.appendChild(reserveCell);
+
+				// Append the row to the table body
+				tableBody.appendChild(row);
+			}
+		}
+
+		// Call the function to populate the table
+		populateTable();
+	</script>
+</body>
+</html>

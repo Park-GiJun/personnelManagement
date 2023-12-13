@@ -1,21 +1,19 @@
 package Controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Comments.CommentsDAO;
+import Comments.CommentsDTO;
 import FreeboardForm.FreeboardFormDTO;
-import comments.CommentsDAO;
-import comments.CommentsDTO;
 
 @WebServlet("/Controller/DetailsController.do")
 public class DetailsController extends HttpServlet {

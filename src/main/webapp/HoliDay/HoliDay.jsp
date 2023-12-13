@@ -99,7 +99,6 @@ body {
 						<th colspan="3">휴가 일정</th>
 					</tr>
 					<tr align="center">
-
 						<td	align="center" width="49%" style="text-align: center;">
 						
 							<select id="start_vacation_year" name="start_vacation_year" size="1" style="width: 25%">
@@ -154,7 +153,11 @@ body {
                         				<option value="<c:if test='${day lt 10}'>0</c:if>${day}">${day}</option>
                     				</c:forEach>
 							</select>
-
+						<td colspan='2' align="center" style="text-align: center;">
+							<input type="text" name="start_vacation"
+							style="width: 40%; box-sizing: border-box; text-align: center;">
+							~ <input type="text" name="end_vacation"
+							style="width: 40%; box-sizing: border-box; text-align: center;">
 						</td>
 					</tr>
 				</table>

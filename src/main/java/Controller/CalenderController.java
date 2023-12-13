@@ -20,30 +20,39 @@ import utils.BoardPage;
 /**
  * Servlet implementation class CalenderController
  */
-@WebServlet("/CalenderController")
+@WebServlet("/Controller/CalenderController.do")
 public class CalenderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("Person_Cal.do");
 		
+		// DAO 생성
 		CalenderDAO dao = new CalenderDAO();
 		
+		// Map 생성
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		String Person_content = request.getParameter("Person_content");
-		String Person_day = request.getParameter("Person_day");
+		String searchField = request.getParameter("searchField");
+		String searchWord = request.getParameter("searchWord");
+		String selectedDay = request.getParameter("selectedDay");
+		String selectedYear = request.getParameter("selectedYear");
+		String selectedMonth = request.getParameter("selectedMonth");
+		String selecteddate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
+		String emp_num = request.getParameter("emp_num");
+		
+		System.out.println(selecteddate);
 		
 		
-		if (Person_day != null) {
-			map.put("Person_content", Person_content);
-			map.put("Person_day", Person_day);
+		if (searchWord != null) {
+			map.put("searchField", searchField);
+			map.put("searchWord", searchWord);
 		}
 		
 		/* 페이지 처리 start */
-		int totalCount = dao.ScheduleListCount(map); // 게시물 개수
+		int totalCount = dao.ScheduleListCount(selecteddate, emp_num); // 게시물 개수
 		
 		ServletContext application = getServletContext();
 		int pageSize = Integer.parseInt(application.getInitParameter("POSTS_PER_PAGE"));
@@ -63,7 +72,7 @@ public class CalenderController extends HttpServlet {
 		map.put("end", end);
 		/* 페이지 처리 end */
 				
-		List<CalenderDTO> CalenderLists = dao.selectListPage(map);	
+		List<CalenderDTO> calenderlists = dao.selectListPage(selecteddate, emp_num);	
 		
 		// 게시물 목록 받기
 		dao.close();
@@ -78,11 +87,14 @@ public class CalenderController extends HttpServlet {
 		map.put("pageNum", pageNum);
 
 		// 포워딩
-		//request.setAttribute("CalenderLists", CalenderLists);
+		request.setAttribute("calenderlists", calenderlists);
 		request.setAttribute("map2", map);
-		request.getRequestDispatcher("/BulletinBoard/FreeboardForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/Calender/Scl.jsp").forward(request, response);
+		
 	}
-
+	
+	
+	
 	
 
 }

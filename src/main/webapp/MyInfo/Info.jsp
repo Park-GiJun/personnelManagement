@@ -278,7 +278,7 @@ function getCurrentTime() {
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
 	position: relative;
-	left: 10%;
+	left: 15%;
 	padding: 20px;
 	max-height: 100%;
 }
