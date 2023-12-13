@@ -39,58 +39,37 @@ body {
 			input.value = input.defaultValue;
 		}
 	}
-
-	function validateForm(form) {
-		if (form.Freeboardpassword.value == null
-				&& form.Freeboarduser.value == null
-				&& form.Freeboarduser.value.trim() === ""
-				&& form.Freeboardpassword.value.trim() === "") {
-			alert("비밀 번호를 입력해주세요.");
-			return true;
-		} else if (form.Freeboarduser.value == null
-				|| form.Freeboarduser.value.trim() === "") {
-			alert("내용을 입력하세요");
-			form.Freeboarduser.focus();
-			return false;
-		} else if (form.Freeboardpassword.value == null
-				|| form.Freeboardpassword.value.trim() === "") {
-			alert("제목을 입력해주세요.");
-			return false;
-		}
-
-	}
-
-	function crystal() {
-		var userInput = prompt("입력하세요:", "");
-
-		// 사용자가 입력을 취소하거나 빈 문자열을 입력한 경우
-		if (userInput === null || userInput.trim() === "") {
-			alert("입력이 취소되었거나 유효하지 않은 값입니다.");
-		} else {
-			// 입력값을 사용할 수 있습니다. 여기서는 간단히 경고창에 출력하는 예제입니다.
-			alert("입력된 값: " + userInput);
-		}
-	}
-
-	function elimination() {
-		var userInput = prompt("입력하세요:", "");
-
-		// 사용자가 입력을 취소하거나 빈 문자열을 입력한 경우
-		if (userInput === null || userInput.trim() === "") {
-			alert("입력이 취소되었거나 유효하지 않은 값입니다.");
-		} else {
-			// 입력값을 사용할 수 있습니다. 여기서는 간단히 경고창에 출력하는 예제입니다.
-			alert("입력된 값: " + userInput);
-		}
-	}
 </script>
 </head>
 <body>
-
 	<div class="content">
 		<!-- 다른 페이지에서 불러오는 내용 -->
-		<form name="FreeboardFrame" method="post"
-			enctype="multipart/form-data" action="../Controller/Freeboard.do"
+		<script type="text/javascript">
+		function validateForm(form) {
+			
+			if (form.Commentscontent.value == null
+					|| form.Commentscontent.value.trim() === "") {
+				alert("내용을 입력하세요");
+				return false;
+			}
+			if (form.commentspassword.value == null
+					|| form.commentspassword.value.trim() === "") {
+				alert("비밀 번호를 입력해주세요.");
+				return false;
+			}
+			
+			// 작성 완료 메시지
+			alert("작성 완료되었습니다");
+
+			// 페이지 이동
+			window.location.href = '../BulletinBoard/Comments.jsp';
+	
+		}
+		</script>
+
+		<!-- 다른 페이지에서 불러오는 내용 -->
+		<form name="Comments" method="post"
+			action="../Controller/CommentsController.do"
 			onsubmit="return validateForm(this)">
 			<table border="1" width="90%">
 				<tr>
@@ -114,30 +93,30 @@ body {
 				<tr>
 					<td colspan="5">댓글 리스트</td>
 				</tr>
-				
+
 				<c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
 					<tr>
-						<td colspan="5">${comment.turn} - ${comment.content}</td>
+						<td colspan="5">${comment.turn}- ${comment.content}</td>
 					</tr>
 				</c:forEach>
 				<tr>
 					<td colspan="5">댓글 적는 란</td>
 				</tr>
 				<tr>
-					<td colspan="5"></td>
+					<td colspan="5"><input type="text" value="내용을 입력해 주세요."
+						name="Commentscontent" style="width: 90%;"
+						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" /></td>
 				</tr>
 
 
 				<tr>
 					<td colspan="5" style="text-align: right;">비밀번호 <input
-						type="password" name="Freeboardpassword" />
-						<button type="submit">등록</button>
+						type="text" name="commentspassword" />
 					</td>
 				</tr>
 				<tr>
 					<td colspan="5" style="text-align: right;">
-						<button type="button"
-							onclick="location.href='../Controller/list.do';">목록</button>
+						<button type="button" onclick="location.href='../BulletinBoard/FreeboardForm.jsp';">목록</button>
 						<button type="submit">작성완료</button>
 					</td>
 				</tr>

@@ -65,7 +65,7 @@ body {
 				alert("작성 완료되었습니다");
 
 				// 페이지 이동
-				window.location.href = '../BulletinBoard/FreeboardForm.jsp';
+				window.location.href = '../BulletinBoard/Comments.jsp';
 		
 			}
 		</script>
