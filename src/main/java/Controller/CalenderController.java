@@ -38,12 +38,19 @@ public class CalenderController extends HttpServlet {
 		String searchField = request.getParameter("searchField");
 		String searchWord = request.getParameter("searchWord");
 		String selectedDay = request.getParameter("selectedDay");
+		
+		System.out.println("confirm : " + selectedDay);
+		
+		if (Integer.parseInt(selectedDay) < 10) {
+			selectedDay = "0" + selectedDay;
+		}
+			
 		String selectedYear = request.getParameter("selectedYear");
 		String selectedMonth = request.getParameter("selectedMonth");
 		String selecteddate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
-		String emp_num = request.getParameter("emp_num");
+		String emp_num = (String) request.getSession().getAttribute("loginid");
 		
-		System.out.println(selecteddate);
+		System.out.println("aaaaa " + selecteddate);
 		
 		
 		if (searchWord != null) {
@@ -74,8 +81,6 @@ public class CalenderController extends HttpServlet {
 				
 		List<CalenderDTO> calenderlists = dao.selectListPage(selecteddate, emp_num);	
 		
-		// 게시물 목록 받기
-		dao.close();
 
 		// 페이징 이미지 전달
 		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/Calender.do");
@@ -89,7 +94,7 @@ public class CalenderController extends HttpServlet {
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);
 		request.setAttribute("map2", map);
-		request.getRequestDispatcher("/Calender/Scl.jsp").forward(request, response);
+		request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
 		
 	}
 	
