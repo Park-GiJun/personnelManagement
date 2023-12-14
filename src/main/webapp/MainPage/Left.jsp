@@ -14,9 +14,12 @@
 }
 
 .left_table {
+	margin-top:0.5%;
+	margin-left:0.5%;
+	border-radius: 50px;
 	width: 10%;
-	height: 100%;
-	background: rgb(0, 64, 128);
+	height: 98%;
+	background: rgb(68, 74, 83);
 	opacity: 1;
 	position: absolute;
 	top: 0px;
@@ -31,7 +34,7 @@
 	.left_salaryManagement_background, .left_Holiday_Approval_background, .left_MeetingRoom_background {
 	width: 100%;
 	height: 8%;
-	background: rgb(0, 64, 128);
+	background: rgb(68, 74, 83);
 	opacity: 1;
 	position: absolute;
 	overflow: hidden;
@@ -42,13 +45,13 @@
 	.left_holiday_text, .left_info_text, .left_new_Id_text,
 	.left_salaryManagement_text, .left_Holiday_Approval_background, .left_meetingroom_text {
 	width: 100%;
-	color: rgb(255, 255, 255);
+	color: #6fc8e2;
 	position: absolute;
-	top: 50%;
+	top: 20%;
 	left: 0;
 	font-family: Inter;
 	font-weight: Regular;
-	font-size: 25px;
+	font-size: 22.5px;
 	opacity: 1;
 	text-align: center;
 }
@@ -59,19 +62,19 @@
 }
 
 .left_shareform_background {
-	top: 10%;
+	top: 8%;
 }
 
 .left_freeboard_background {
-	top: 20%;
+	top: 16%;
 }
 
 .left_holiday_background {
-	top: 30%;
+	top: 24%;
 }
 
 .left_info_background {
-	top: 50%;
+	top: 32%;
 }
 
 .left_MeetingRoom_background{
@@ -79,15 +82,15 @@
 }
 
 .left_new_Id_background {
-	top: 90%;
+	top: 92%;
 }
 
 .left_salaryManagement_background {
-	top: 80%;
+	top: 84%;
 }
 
 .left_Holiday_Approval_background{
-	top:70%
+	top: 76%
 }
 
 /* 섹션에 커서 포인터 스타일 적용 */
@@ -101,30 +104,18 @@
 <body>
 	<div class="left_table">
 		<div class="left_calender_background">
-			<a
-				class="left_Calender_section"
-				href="../Calender/Calender.jsp"
-			>
+			<a class="left_Calender_section" href="../Calender/Calender.jsp">
 				<span class="left_calender_text">캘린더</span>
 			</a>
 		</div>
-		<div
-			class="left_shareform_background"
-			id="leftShareFormBackground"
-		>
-			<a
-				class="left_ShareForm_section"
-				href="../Controller/sharelist.do"
-			>
+		<div class="left_shareform_background" id="leftShareFormBackground">
+			<a class="left_ShareForm_section" href="../Controller/sharelist.do">
 				<span class="left_shareform_text">공유양식</span>
 			</a>
 		</div>
 
 		<div class="left_freeboard_background">
-			<a
-				class="left_FreeboardForm_section"
-				href="../Controller/FreeboardList.do"
-			>
+			<a class="left_FreeboardForm_section" href="../Controller/FreeboardList.do">
 				<span class="left_freeboard_text">게시판</span>
 			</a>
 		</div>

@@ -18,6 +18,11 @@
 	box-sizing: border-box;
 }
 
+td {
+   border: 1px solid gray; /* 테두리 스타일 지정 */
+   padding: 1px; /* 셀 안의 내용과 테두리 사이의 간격 조정 */
+}
+
 .btn-info {
 	width: 98%;
 	font-size: 200%;
@@ -54,6 +59,7 @@
 }
 
 .form-select {
+	padding: 0rem 0rem 0rem 3rem;
 	height: 80%;
 }
 
@@ -147,61 +153,61 @@ body {
 					</tr>
 
 					<tr class="table-dark3">
-						<td width="5%" scope="row" align="center">
+						<th width="5%" scope="row" align="center">
 							<select id="start_vacation_year" name="start_vacation_year" class="form-select" style="width: 90%">
 								<option value="">년도를 선택해주세요</option>
 								<c:forEach var="year" begin="2023" end="2026">
 									<option value="${year}">${year}</option>
 								</c:forEach>
 							</select>
-						</td>
+						</th>
 						
-						<td width="5%" align="center">
+						<th width="5%" align="center">
 						<select id="start_vacation_month" name="start_vacation_month" class="form-select" style="width: 90%">
 								<option value="">월를 선택해주세요</option>
 								<c:forEach var="month" begin="1" end="12">
 									<option value="<c:if test='${month lt 10}'>0</c:if>${month}">${month}</option>
 								</c:forEach>
 						</select>
-						</td>
+						</th>
 						
-						<td width="5%" align="center">
+						<th width="5%" align="center">
 							<select id="start_vacation_day" name="start_vacation_day" class="form-select" style="width: 90%">
 								<option value="">일자를 선택해주세요</option>
 								<c:forEach var="day" begin="1" end="31">
 									<option value="<c:if test='${day lt 10}'>0</c:if>${day}">${day}</option>
 								</c:forEach>
 						</select>
-						</td>
+						</th>
 
-						<td width="1%" align="center">~</td>
+						<th width="1%" align="center">~</th>
 
-						<td width="5%" align="center">
+						<th width="5%" align="center">
 							<select id="end_vacation_year" name="end_vacation_year" class="form-select" style="width: 90%">
 								<option value="">년도를 선택해주세요</option>
 								<c:forEach var="year" begin="2023" end="2026">
 									<option value="${year}">${year}</option>
 								</c:forEach>
 						</select>
-						</td>
+						</th>
 						
-						<td width="5%" align="center">
+						<th width="5%" align="center">
 							<select id="end_vacation_month"	name="end_vacation_month" class="form-select" style="width: 90%">
 								<option value="">월를 선택해주세요</option>
 								<c:forEach var="month" begin="1" end="12">
 									<option value="<c:if test='${month lt 10}'>0</c:if>${month}">${month}</option>
 								</c:forEach>
 						</select>
-						</td>
+						</th>
 						
-						<td width="5%" align="center">
+						<th width="5%" align="center">
 							<select id="end_vacation_day" name="end_vacation_day" class="form-select" style="width: 90%">
 								<option value="">일자를 선택해주세요</option>
 								<c:forEach var="day" begin="1" end="31">
 									<option value="<c:if test='${day lt 10}'>0</c:if>${day}">${day}</option>
 								</c:forEach>
 						</select>
-						</td>
+						</th>
 					</tr>
 				</table>
 			</div>

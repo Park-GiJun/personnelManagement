@@ -15,6 +15,11 @@
 	box-sizing: border-box;
 }
 
+td {
+   border: 1px solid gray; /* 테두리 스타일 지정 */
+   padding: 1px; /* 셀 안의 내용과 테두리 사이의 간격 조정 */
+}
+
 /* 각 종류 버튼 스타일 */
 .my_btn {
 	background-color: #1C427E;

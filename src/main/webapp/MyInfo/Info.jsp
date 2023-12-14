@@ -278,8 +278,9 @@ function getCurrentTime() {
 }
 
 .btn-info {
+	margin-top: 17px;
 	border-radius: 25px;
-	margin-left: 200px;
+	margin-left: 400px;
 	font-size: 20px;
 }
 
@@ -365,13 +366,6 @@ function getCurrentTime() {
 	/* 텍스트 가운데 정렬 */
 }
 
-.info_income_textbox {
-	display: flex;
-	margin-right: -120px;
-	--bs-table-color: #000;
-	color: var(--bs-table-color);
-}
-
 .current-month-year {
 	font-size: 12px;
 }
@@ -381,7 +375,7 @@ function getCurrentTime() {
 	top: 10%;
 	left: 65%;
 	margin: auto;
-	background-color: #fff;
+	background-color: gray;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	padding: 2%;
 	border-radius: 5px;
@@ -437,9 +431,28 @@ function getCurrentTime() {
 }
 
 .form-select {
-	margin-top: 3.5px;
-	width: 20%;
-	height: 20px;
+	padding: 0rem 0rem 0rem 3rem;
+	margin-top: 17px;
+	width: 15%;
+	height: 1%;
+}
+
+.info_income_textbox {
+	display: flex;
+	margin-left: 5px;
+	margin-right: -120px;
+	--bs-table-color: #000;
+	color: var(--bs-table-color);
+}
+
+label[for="yearSelect"] {
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+label[for="monthSelect"] {
+    margin-top: 15px;
+    font-size: 20px;
 }
 
 /* 수정하기 버튼 스타일 */
@@ -451,8 +464,8 @@ function getCurrentTime() {
 
 /* 출력하기 버튼 스타일 */
 #print-button {
-	margin-top: 0.5%;
-    margin-left: 80px;
+	margin-top: 13px;
+    margin-left: 120px;
     width: 150px; /* 출력하기 버튼의 너비 설정 */
 }
 
@@ -504,11 +517,13 @@ function getCurrentTime() {
 		<button	type="button" id="modify-button" onclick="openModifyWindow()" class="btn-info">수정하기</button>
 		<div class="info_income">
 			<div class="info_income_textbox">
-			
 				<label for="yearSelect">연도:</label>
-				<!-- &nbsp;	<select	id="yearSelect" size="1" name="yearSelect" class="form-select"></select> -->
-				&nbsp;	<label for="monthSelect">월:</label>  
-				<!-- &nbsp;	<select	id="monthSelect" size="1" name="monthSelect" class="form-select"></select> -->
+				&nbsp;	
+				<select	id="yearSelect" size="1" name="yearSelect" class="form-select" style="color: black;"></select>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<label for="monthSelect">월:</label> 
+				&nbsp;	
+				<select	id="monthSelect" size="1" name="monthSelect" class="form-select" style="color: black;"></select>
 
 				<button	name="print_income" id="print-button"	class="btn-info">출력하기</button>
 			</div>
@@ -605,23 +620,9 @@ function getCurrentTime() {
 
 		</div>
 		<div class="datepicker-container">
-			<form
-				id="monthForm"
-				action="../Controller/LoadDate.do"
-				method="post"
-			>
-				<input
-					type="hidden"
-					name="currentYear"
-					id="currentYear"
-					value=""
-				>
-				<input
-					type="hidden"
-					name="currentMonth"
-					id="currentMonth"
-					value=""
-				>
+			<form id="monthForm" action="../Controller/LoadDate.do"	method="post">
+				<input type="hidden" name="currentYear" id="currentYear" value="">
+				<input type="hidden" name="currentMonth" id="currentMonth" value="">
 			</form>
 			<div class="navigation-btn">
 				<!-- 이전달로 이동하는 버튼 -->

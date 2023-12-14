@@ -12,6 +12,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Share Form Write</title>
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
 /* 공통 스타일 */
 * {
@@ -30,6 +32,54 @@ body {
 	left: 10%;
 	padding: 20px;
 	max-height: 100%;
+}
+
+.btn-info {
+	margin-top:1%;
+	margin-bottom: 0.5%;
+	font-size: 17.5px;
+	height: 100%;
+	border-radius: 25px;
+	width: 10%;
+}
+
+.table-info {
+	background-color: #5bc0de;
+}
+
+.table-dark1 {
+	background-color: #272b30;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark2 {
+	background-color: rgb(54, 60, 67);;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark3 {
+	background-color: rgb(68, 74, 83);
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.form-select {
+	padding: 0rem 0rem 0rem 3rem;
+	margin-top: 0.5%;
+	width: 100px;
+}
+
+.form-control {
+	margin-top: 0.5%;
+	width: 400px;
+	height: 10px;
+}
+#file {
+	padding: 0.25rem 1rem;
+	font-size: 15px;
+	height: 30px;
 }
 </style>
 <jsp:include page="../MainPage/Left.jsp" />
@@ -66,54 +116,24 @@ body {
 				}
 			}
 		</script>
-		<form
-			name="shareFrame"
-			method="post"
-			enctype="multipart/form-data"
-			action="../Controller/ShareWrite.do"
-			onsubmit="return validateForm(this)"
-		>
-			<table
-				align="center"
-				border="1"
-				height="80%"
-				width="90%"
-			>
+		<form name="shareFrame" method="post" enctype="multipart/form-data"	action="../Controller/ShareWrite.do" onsubmit="return validateForm(this)">
+			<table align="center" border="1" height="80%" width="90%" class="table-dark2">
 				<tr>
 					<td>
-						<input
-							type="text"
-							value="제목을 입력해 주세요."
-							name="sharetitle"
-							style="width: 90%;"
-							onfocus="clearDefaultText(this)"
-							onblur="restoreDefaultText(this)"
-						/>
-					</td>
-				</tr>
-				<tr>
-					<td
-						colspan="3"
-						style="text-align: left;"
-					>
-						첨부파일
-						<input
-							type="file"
-							name="shareOfile"
-						/>
+						<input type="text" value="제목을 입력해 주세요."	name="sharetitle" style="width: 98%; margin-left:1%;" class="form-control"
+							onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)"/>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input
-							type="password"
-							name="sharepassword"
-						/>
-					<button
-						type="button"
-						onclick="location.href='../Controller/list.do';"
-					>목록</button>
-					<button type="submit">작성완료</button>
+						<input class="form-control" type="file" id="file" name="shareOfile" style="margin-left:1%;">
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: left; font-size: 15px; display: flex; align-items: center; margin-left: 1%;">
+						<input type="password" name="sharepassword" class="form-control">
+						<button	type="button" onclick="location.href='../Controller/list.do';" class="btn-info">목록</button>
+						<button type="submit" class="btn-info">작성완료</button>
 					</td>
 				</tr>
 			</table>

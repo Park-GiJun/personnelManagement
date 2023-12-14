@@ -85,33 +85,6 @@ public class HolidayApprovalDAO extends DBConnPool {
 		return null;
 	}
 
-	// 부서별 휴가자 DB저장
-	public HolidayApprovalDTO TeamHoliday(String team, String emp_num, String start_vacation, String end_vacation) {
-		String query = "";
-
-		if (team.equals("개발")) {
-			query = "INSERT INTO  DEVELOPMENT_TEAM  (emp_num, start_vacation, end_vacation) VALUES (?, ?, ?)";
-		} else if (team.equals("디자인")) {
-			query = "INSERT INTO  design_team  (emp_num, start_vacation, end_vacation) VALUES (?, ?, ?)";
-		} else if (team.equals("인사")) {
-			query = "INSERT INTO  HumanResources_Team  (emp_num, start_vacation, end_vacation) VALUES (?, ?, ?)";
-		}
-
-		try {
-			psmt = con.prepareStatement(query);
-			psmt.setString(1, emp_num);
-			psmt.setString(2, start_vacation);
-			psmt.setString(3, end_vacation);
-
-			psmt.executeUpdate();
-			System.out.println("부서별 휴가자 등록");
-		} catch (Exception e) {
-			System.out.println("부서별 휴가자 등록 중 예외 발생");
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	// 휴가 거절 쿼리
 	public HolidayApprovalDTO HolidayApprovalFalse(String approval_num, String emp_num, String start_vacation, String end_vacation,
 			String team) {
