@@ -45,26 +45,79 @@ body {
 	<div class="content">
 		<!-- 다른 페이지에서 불러오는 내용 -->
 		<script type="text/javascript">
-		function validateForm(form) {
+			function promptModification() {
+				if (confirm("정말로 수정하시겠습니까?")) {
+					var modificationText = prompt("비밀번호를 입력하세요:");
+					if (modificationText == ${dto.board_pass}) {
+						// 사용자가 확인을 눌렀을 때의 동작
+						// modificationText를 어떻게 사용할지 결정하고, 필요한 동작 추가
+						//alert("수정된 내용: " + modificationText);
+						alert("비밀번호가 일치합니다." + ${dto.board_pass})
+						window.location.href = '../BulletinBoard/FreeboardForm.jsp';	
+					}else{
+						alert("비밀번호가 일치하지 않습니다.")
+					}
+						
+					} else {
+						// 사용자가 취소를 눌렀을 때의 동작
+						// 아무 동작 없음 또는 필요한 동작 추가
+					}
+				}
 			
-			if (form.Commentscontent.value == null
-					|| form.Commentscontent.value.trim() === "") {
-				alert("내용을 입력하세요");
-				return false;
-			}
-			if (form.commentspassword.value == null
-					|| form.commentspassword.value.trim() === "") {
-				alert("비밀 번호를 입력해주세요.");
-				return false;
+			function promptDeletion() {
+				if (confirm("정말로 삭제하시겠습니까?")) {
+					var deletionText = prompt("비밀번호를 입력하세요:");
+					if (deletionText == ${dto.board_pass}) {
+						window.location.href = '../BulletinBoard/FreeboardForm.jsp';
+						alert("삭제 되었습니다.")
+					} else {
+						// 사용자가 취소를 눌렀을 때의 동작
+						// 아무 동작 없음 또는 필요한 동작 추가
+						alert("비밀번호가 일치하지 않습니다.")
+					}
+				} else {
+					// 사용자가 확인을 누르지 않았을 때의 동작
+					// 아무 동작 없음 또는 필요한 동작 추가
+				}
 			}
 			
-			// 작성 완료 메시지
-			alert("작성 완료되었습니다");
+			function CommentsDeletion() {
+				if (confirm("정말로 삭제하시겠습니까?")) {
+					var deletionText = prompt("비밀번호를 입력하세요:");
+					if (deletionText == ${dto.board_pass}) {
+						window.location.href = '../BulletinBoard/FreeboardForm.jsp';
+						alert("삭제 되었습니다.")
+					} else {
+						// 사용자가 취소를 눌렀을 때의 동작
+						// 아무 동작 없음 또는 필요한 동작 추가
+						alert("비밀번호가 일치하지 않습니다.")
+					}
+				} else {
+					// 사용자가 확인을 누르지 않았을 때의 동작
+					// 아무 동작 없음 또는 필요한 동작 추가
+				}
+			}
+			
+			function validateForm(form) {
 
-			// 페이지 이동
-			window.location.href = '../BulletinBoard/Comments.jsp';
-	
-		}
+				if (form.Commentscontent.value == null
+						|| form.Commentscontent.value.trim() === "") {
+					alert("내용을 입력하세요");
+					return false;
+				}
+				if (form.commentspassword.value == null
+						|| form.commentspassword.value.trim() === "") {
+					alert("비밀 번호를 입력해주세요.");
+					return false;
+				}
+
+				// 작성 완료 메시지
+				alert("작성 완료되었습니다");
+
+				// 페이지 이동
+				window.location.href = '../BulletinBoard/Comments.jsp';
+
+			}
 		</script>
 
 		<!-- 다른 페이지에서 불러오는 내용 -->
@@ -78,25 +131,31 @@ body {
 					<th width="25%">작성일</th>
 					<th width="25%">${dto.post_date}</th>
 					<td>
-						<button type="submit" onclick="crystal()" width="10%">수정</button>
-						<button type="submit" onclick="elimination()" width="10%">삭제</button>
+						<button type="button" onclick="promptModification()" width="10%">수정</button>
+						<button type="button" onclick="promptDeletion()" width="10%">삭제</button>
 					</td>
 				</tr>
 				<tr>
 					<td>제목</td>
-					<td colspan="4">${dto.title }</td>
+					<th colspan="4">${dto.title }</th>
 				</tr>
 				<tr>
 					<td>내용</td>
-					<td colspan="4">${dto.content}</td>
+					<th colspan="4">${dto.content}</th>
 				</tr>
+			</table>
+			<table border="1" width="90%">
 				<tr>
 					<td colspan="5">댓글 리스트</td>
 				</tr>
 
 				<c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
 					<tr>
-						<td colspan="5">${comment.turn}- ${comment.content}</td>
+						<td width="20%">${comment.turn}</td>
+						<td width="75%">${comment.content}</td>
+						<td>
+						<button type="button" onclick="CommentsDeletion()">삭제</button></td>
+
 					</tr>
 				</c:forEach>
 				<tr>
@@ -116,7 +175,8 @@ body {
 				</tr>
 				<tr>
 					<td colspan="5" style="text-align: right;">
-						<button type="button" onclick="location.href='../BulletinBoard/FreeboardForm.jsp';">목록</button>
+						<button type="button"
+							onclick="location.href='../Controller/FreeboardList.do';">목록</button>
 						<button type="submit">작성완료</button>
 					</td>
 				</tr>

@@ -42,10 +42,10 @@ public class CommentsController extends HttpServlet {
 		
 		dao.commentWrite(anno_board_num ,commentscontent, pass);
 	     // 댓글 리스트 가져오기
-		List<CommentsDTO> commentsList = dao.getCommentsList(anno_board_num);
+		List<CommentsDTO> Commentsdto1 = dao.selectView(anno_board_num);
 
         // 가져온 댓글 리스트를 request에 저장
-        request.setAttribute("commentsList", commentsList);
+        request.setAttribute("Commentsdto1", Commentsdto1);
 		
 		// 포워딩
         request.setAttribute("dto", dto);

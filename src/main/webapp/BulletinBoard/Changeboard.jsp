@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Freeboard</title>
+<title>Changeboard</title>
 <style>
 /* 공통 스타일 */
 * {

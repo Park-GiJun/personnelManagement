@@ -80,7 +80,7 @@ public class CommentsDAO extends DBConnPool {
 	// 지정 게시물 찾아 내용을 반환
 	public FreeboardFormDTO selectdetailsView(int anno_board_num) {
 		FreeboardFormDTO dto = new FreeboardFormDTO();
-		String query = " SELECT anno_board_num, title, content FROM anno_board WHERE anno_board_num=?";
+		String query = " SELECT anno_board_num, title, content ,post_date,board_pass  FROM anno_board WHERE anno_board_num=?";
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setInt(1, anno_board_num);
@@ -90,7 +90,8 @@ public class CommentsDAO extends DBConnPool {
 				dto.setanno_board_num(rs.getInt(1));
 				dto.settitle(rs.getString(2));
 				dto.setcontent(rs.getString(3));
-
+				dto.setpost_date(rs.getDate(4));
+				dto.setboard_pass(rs.getInt("board_pass"));
 			}
 		} catch (Exception e) {
 			System.out.println("게시물 상세보기 중 예외 발생");

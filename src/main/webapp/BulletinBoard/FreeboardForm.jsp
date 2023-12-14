@@ -81,7 +81,7 @@ body {
          </c:choose>
       </table>
       <!-- 하단 메뉴 -->
-      <form method="get" action="../Controller/FreeboardFormList.do">
+      <form method="get" action="../Controller/FreeboardList.do">
          <table border="1" width="90%">
             <tr>
                <th align="center" colspan="2">

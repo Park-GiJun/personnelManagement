@@ -302,7 +302,7 @@ body {
 										<td align="center" scope="row">
 											<label>
 												<input type="radio"	name="department_edit" value="info" class="form-check-input"
-													onclick="infosubmitForm('${row.name}', '${row.emp_num}')">
+													onclick="('${row.name}', '${row.emp_num}')">
 											</label>
 										</td>
 										<td>${row.name}</td>
@@ -317,7 +317,7 @@ body {
 				<!-- ---------------------------------------------------------------------------------------------------------------- -->
 					<script>
 						//리스트정보 받아서 정보수정부분에 입력
-						function infosubmitForm(nameinfo, emp_numinfo) {
+						function (nameinfo, emp_numinfo) {
 							// "사원 정보 수정" 테이블의 필드에 값을 채우기
 							document.forms["vacation_form"]["nameinfo"].value = nameinfo;
 							document.forms["vacation_form"]["emp_numinfo"].value = emp_numinfo;

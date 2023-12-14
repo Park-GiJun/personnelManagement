@@ -23,6 +23,7 @@ public class FreeboardFormDAO extends DBConnPool {
 		int totalcount = 0;
 
 		String query = "SELECT COUNT(*) FROM anno_board";
+		
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
 		}
@@ -33,7 +34,7 @@ public class FreeboardFormDAO extends DBConnPool {
 			rs.next();
 			totalcount = rs.getInt(1);
 		} catch (Exception e) {
-			System.out.println("게시물 카운트 중 예외 발생");
+			System.out.println("양식 게시물 카운트 중 예외 발생");
 			e.printStackTrace();
 		}
 		System.out.println(totalcount);
@@ -44,7 +45,7 @@ public class FreeboardFormDAO extends DBConnPool {
 		System.out.println("selectListpage");
 		List<FreeboardFormDTO> anno_boards = new Vector<FreeboardFormDTO>();
 
-		System.out.println("SelectListPage 실행");
+		System.out.println("게시판 SelectListPage 실행");
 		// 쿼리문
 		String query = "SELECT * FROM (SELECT Tb.*, ROWNUM AS rNum FROM (SELECT * FROM anno_board";
 		if (map.get("searchWord") != null) {
@@ -97,7 +98,7 @@ public class FreeboardFormDAO extends DBConnPool {
 
 			System.out.println(title);
 			System.out.println(content);
-			System.out.println(pass);
+			System.out.println(pass); 
 			con.setAutoCommit(false); 
 		} catch (Exception e) {
 			System.out.println("게시물 입력중 예외 발생");
