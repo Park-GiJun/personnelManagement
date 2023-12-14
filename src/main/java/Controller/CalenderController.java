@@ -94,6 +94,7 @@ public class CalenderController extends HttpServlet {
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);
 		request.setAttribute("map2", map);
+		request.setAttribute("selecteddate", selecteddate);
 		request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
 		
 	}

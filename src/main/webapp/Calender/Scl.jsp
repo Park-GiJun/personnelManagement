@@ -76,10 +76,10 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 
 .re_day {
 	text-align: center;
-	font-size: 35px;
+	font-size: 50px;
 	position: absolute;
 	color: orange;
-	top: 15px;
+	top: 5px;
 	left: 40px;
 }
 
@@ -646,19 +646,9 @@ body {
 
 
 		<div class="reverse">
-
-			<%
-			if (cl_year != null && cl_month != null) {
-			%>
-			<h2 class='re_day'><%=cl_year%>년 <%=cl_month%>월 <%=name%>일 </h2>
-			<%
-			} else {
-			%>
-			<h2 class='re_day'>값이 없습니다.</h2>
-			<%
-			}
-			%>
-
+			
+			<h2 class='re_day'>${selecteddate}</h2>
+		
 			<button class='plus_btn' onclick="confirmPlus();">추가하기</button>
 			<button class='del_btn' onclick="confirmDelete();">삭제하기</button>
 
