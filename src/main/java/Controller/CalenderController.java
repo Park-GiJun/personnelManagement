@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import Calender.CalenderDAO;
 import Calender.CalenderDTO;
-import FreeboardForm.FreeboardFormDTO;
 import utils.BoardPage;
 
 /**
@@ -73,13 +72,30 @@ public class CalenderController extends HttpServlet {
 		}
 
 		// 목록에 출력할 게시물 범위 계산
-		int start = (pageNum - 1) * pageSize + 1; // 첫 게시물 번호
+		int start = (pageNum + 1) * pageSize + 1; // 첫 게시물 번호
 		int end = pageNum * pageSize;
 		map.put("start", start);
 		map.put("end", end);
 		/* 페이지 처리 end */
 				
 		List<CalenderDTO> calenderlists = dao.selectListPage(selecteddate, emp_num);	
+		
+		
+		String action = request.getParameter("action");
+
+		if ("delete".equals(action)) {
+		    // 삭제 작업 처리
+		    String personalDiarayScheduleToDelete = request.getParameter("Personal_diaray_schedule");
+		    int deleteResult = dao.deletePost(personalDiarayScheduleToDelete);
+
+		    // 선택적으로 deleteResult를 확인하고 메시지 설정 가능
+		    if (deleteResult > 0) {
+		        request.setAttribute("deleteMessage", "이벤트가 성공적으로 삭제되었습니다");
+		    } else {
+		        request.setAttribute("deleteMessage", "이벤트 삭제에 실패했습니다");
+		    }
+		}
+
 		
 
 		// 페이징 이미지 전달
@@ -96,6 +112,7 @@ public class CalenderController extends HttpServlet {
 		request.setAttribute("map2", map);
 		request.setAttribute("selecteddate", selecteddate);
 		request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
+		
 		
 	}
 	

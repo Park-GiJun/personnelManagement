@@ -488,11 +488,19 @@ a:active, a:hover {
 </style>
 
 <script type="text/javascript">
+
 function change() {
-   var f = document.frm;
- 
-   f.submit();
-}
+	   var f = document.frm;
+	   f.submit();
+	}
+
+	function updateCalendar() {
+		   var year = document.getElementById("yearSelect").value;
+		   var month = document.getElementById("monthSelect").value;
+
+		   var url = "calendar.jsp?year=" + year + "&month=" + month;
+		   window.location.href = url;
+	}
 
 
 
@@ -556,27 +564,29 @@ function showDateAndAlert(day) {
 
 	 // 선택한 일정 삭제하기 버튼 눌렀을 때 설정
      function confirmDelete() {
-        // 선택된 링크를 모두 가져오기
-        var links = document.querySelectorAll('.scheduleLink.selected');
+    var links = document.querySelectorAll('.scheduleLink.selected');
 
-        if (links.length > 0) {
-            var result = window.confirm("선택한 일정을 삭제하시겠습니까?");
-            if (result) {
-                links.forEach(function (link) {
-                    // 선택된 링크의 부모 행을 찾아서 삭제
-                    var row = findRowByLink(link);
-                    if (row) {
-                        row.remove();
-                    }
-                });
-                window.alert("선택한 일정이 삭제되었습니다");
-            } else {
-                window.alert("삭제가 취소되었습니다");
-            }
+    if (links.length > 0) {
+        var result = window.confirm("선택한 일정을 삭제하시겠습니까?");
+        if (result) {
+            links.forEach(function (link) {
+                // 여기서 link.dataset.schedule을 이용해 개인 일정 내용에 접근
+                var scheduleToDelete = link.dataset.schedule;
+
+                // 서버로 삭제 요청을 보내는 코드 (Ajax 등을 사용)
+                // 여기서는 일단 console.log로 확인
+                console.log("삭제할 일정 내용: " + scheduleToDelete);
+
+                // TODO: 서버로 일정 삭제 요청을 보내고, 성공하면 화면에서 해당 일정 제거
+            });
+            window.alert("선택한 일정이 삭제되었습니다");
         } else {
-            window.alert("삭제할 일정을 선택해주세요");
+            window.alert("삭제가 취소되었습니다");
         }
+    } else {
+        window.alert("삭제할 일정을 선택해주세요");
     }
+}
 
     // 링크 클릭 시 선택 및 해제를 토글하는 함수
     document.addEventListener('click', function (event) {
@@ -618,8 +628,7 @@ body {
 <body>
 	<jsp:include page="../MainPage/Left.jsp"></jsp:include>
 
-	<form name="calender_form" method="post"
-		action="../Controller/CalenderController.do">
+	<form name="calender_form" id="calender_form" method="post" action="../Controller/CalenderController.do">
 		<input type="hidden" name="selectedYear" id="selectedYear" value="<%=year%>">
 		<input type="hidden" name="selectedMonth" id="selectedMonth" value="<%=month%>">
 		<input type="hidden" name="selectedDay" id="selectedDay" value="">
@@ -665,6 +674,9 @@ body {
             			<c:otherwise>
                 			<c:forEach items="${calenderlists}" var="row" varStatus="loop">
                     			<tr>
+                    				<td>
+										${loop.index + 1}
+									</td>
                         			<td>
                             			<a href="#" class="scheduleLink" data-schedule="${row.personal_diaray_schedule}">
                                 			${row.personal_diaray_schedule}
@@ -680,6 +692,10 @@ body {
 			<button class='del_btn' onclick="confirmDelete();">삭제하기</button>
 
 		</div>
+		
+		<c:if test="${not empty deleteMessage}">
+    		<div>${deleteMessage}</div>
+		</c:if>
 
 
 		<button class="scl" onclick="location.href='Scl_Cal.jsp';">
@@ -689,7 +705,7 @@ body {
 
 
 
-		<div class="calendar" style="width: 1300px; height: 300px;">
+		<div class="calendar" id="calendar-container" style="width: 1300px; height: 300px;">
 			<div class="title">
 				<!-- 년도 월 선택 리스트 만드는 위치 -->
 				<form name="frm" method="post">
