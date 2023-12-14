@@ -79,7 +79,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 	font-size: 50px;
 	position: absolute;
 	color: orange;
-	top: 5px;
+	top: 2px;
 	left: 40px;
 }
 
@@ -675,7 +675,7 @@ body {
                 			<c:forEach items="${calenderlists}" var="row" varStatus="loop">
                     			<tr>
                     				<td>
-										${loop.index + 1}
+										${loop.index + 1} .
 									</td>
                         			<td>
                             			<a href="#" class="scheduleLink" data-schedule="${row.personal_diaray_schedule}">
