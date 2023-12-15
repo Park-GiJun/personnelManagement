@@ -70,7 +70,7 @@ public class ShareListController extends HttpServlet {
 		dao.close();
 
 		// 페이징 이미지 전달
-		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/list.do");
+		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/sharelist.do");
 
 		// 바로가기 영역 HTML 문자열
 		map.put("pagingImg", pagingImg);

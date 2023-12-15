@@ -6,11 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
+
+td {
+   border: 1px solid gray; /* 테두리 스타일 지정 */
+   padding: 1px; /* 셀 안의 내용과 테두리 사이의 간격 조정 */
 }
 
 /* 각 종류 버튼 스타일 */
@@ -25,6 +32,55 @@
 	height: 300%;
 }
 
+.form-check {
+    display: flex; /* flex 컨테이너로 설정 */
+    justify-content: space-between; /* 버튼 사이의 간격을 균등하게 조절 */
+    position: relative;
+    margin-top: 2.5%;
+    margin-left: 50%;
+    width: 15%;
+    --bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.form-check-input {
+	background-color: #5bc0de;
+	border-color: #5bc0de;
+	outline: 0;
+	box-shadow: 0 0 0 0.15rem rgba(255, 255, 255);
+}
+
+.btn-info {
+	width: 25%;
+	font-size:200%;
+	height: 200%;
+	border-radius: 25px;
+}
+
+.table-info {
+	background-color: #5bc0de;
+}
+
+.table-dark1 {
+	background-color: #272b30;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark2 {
+	font-size: 150%;
+	background-color: rgb(54, 60, 67);;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark3 {
+	font-size: 150%;
+	background-color: rgb(68, 74, 83);
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
 .btncontent {
 	display: flex;
 	justify-content: space-between;
@@ -36,8 +92,7 @@
 	margin-top: 2%;
 }
 
-<
-style> /* 공통 스타일 */ * {
+/* 공통 스타일 */ * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
@@ -63,16 +118,14 @@ body {
 		<form name="HolidayApproval_form" method="post"
 			action="../Controller/HolidayApprovalTrue.do" accept-charset="UTF-8">
 			<div class="btncontent">
-				<button type="submit" class='my_btn' name="approvalType"
-					value="true">휴가승인</button>
-				<button type="submit" class='my_btn' name="approvalType"
-					value="false">휴가거절</button>
+				<button type="submit" name="approvalType" value="true" class="btn-info">휴가승인</button>
+				<button type="submit" name="approvalType" value="false" class="btn-info">휴가거절</button>
 			</div>
 
 			<div class="tablecontent">
 				<table border="1" width="100%">
-					<tr>
-						<th width="5%"></th>
+					<tr class="table-drak2" align="center" style="font-size: 150%; color: #fff;">
+						<th width="5%" scope="row">&nbsp;</th>
 						<th width="10%">이름</th>
 						<th width="10%">사번</th>
 						<th width="30%">휴가 일정</th>
@@ -83,20 +136,22 @@ body {
 					<c:choose>
 						<c:when test="${empty holidayapprovalList}">
 							<!-- 게시물이 없을 때 -->
-							<tr>
-								<td colspan="2" align="center">신청된 휴가가 없습니다.</td>
+							<tr class="table-dark3">
+								<td colspan="7" align="center" scope="row">신청된 휴가가 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<!-- 게시물이 있을 때 -->
 							<c:forEach items="${holidayapprovalList}" var="row"
 								varStatus="loop">
-								<tr align="center">
+								<tr align="center" class="table-dark3">
 									<c:if test="${not (row.approval eq '승인 완료' or row.approval eq '승인 거절')}">
-										<td><label>
-										<input type="checkbox" name="department"
-												value="${row.emp_num}, ${row.start_vacation}, ${row.end_vacation}, ${row.team}">
-										</label></td>
+										<td scope="row">
+											<label>
+												<input type="checkbox" name="department"
+													value="${row.emp_num}, ${row.start_vacation}, ${row.end_vacation}, ${row.team}" class="form-check-input">
+											</label>
+										</td>
 									</c:if>
 									<c:if
 										test="${(row.approval eq '승인 완료' or row.approval eq '승인 거절')}">

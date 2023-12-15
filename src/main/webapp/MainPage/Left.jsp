@@ -10,9 +10,12 @@
 }
 
 .left_table {
+	margin-top:0.5%;
+	margin-left:0.5%;
+	border-radius: 50px;
 	width: 10%;
-	height: 100%;
-	background: rgb(0, 64, 128);
+	height: 98%;
+	background: rgb(68, 74, 83);
 	opacity: 1;
 	position: absolute;
 	top: 0px;
@@ -30,6 +33,7 @@
 	width: 100%;
 	height: 5%;
 	background: rgb(0, 64, 128);
+	background: rgb(68, 74, 83);
 	opacity: 1;
 	position: absolute;
 	overflow: hidden;
@@ -42,9 +46,9 @@
 	.left_meetingroom_text, .left_MeetingRoomReservation_text,
 	.left_WorkBoard_text {
 	width: 100%;
-	color: rgb(255, 255, 255);
+	color: #6fc8e2;
 	position: absolute;
-	top: 30%;
+	top: 20%;
 	left: 0;
 	font-family: Inter;
 	font-weight: Regular;
@@ -98,6 +102,7 @@
 	top: 90%;
 }
 
+
 /* 섹션에 커서 포인터 스타일 적용 */
 .left_Calender_section, .left_ShareForm_section,
 	.left_FreeboardForm_section, .left_holiday_section, .left_info_section,
@@ -113,16 +118,19 @@
 <body>
 	<div class="left_table">
 		<div class="left_calender_background">
-			<a class="left_Calender_section" href="../Calender/Calender.jsp"> <span class="left_calender_text">캘린더</span>
+			<a class="left_Calender_section" href="../Calender/Calender.jsp">
+				<span class="left_calender_text">캘린더</span>
 			</a>
 		</div>
 		<div class="left_shareform_background" id="leftShareFormBackground">
-			<a class="left_ShareForm_section" href="../Controller/sharelist.do"> <span class="left_shareform_text">공유양식</span>
+			<a class="left_ShareForm_section" href="../Controller/sharelist.do">
+				<span class="left_shareform_text">공유양식</span>
 			</a>
 		</div>
 
 		<div class="left_freeboard_background">
-			<a class="left_FreeboardForm_section" href="../Controller/FreeboardList.do"> <span class="left_freeboard_text">게시판</span>
+			<a class="left_FreeboardForm_section" href="../Controller/FreeboardList.do">
+				<span class="left_freeboard_text">게시판</span>
 			</a>
 		</div>
 		<div class="left_holiday_background">

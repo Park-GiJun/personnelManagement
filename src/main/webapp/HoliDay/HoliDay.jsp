@@ -1,23 +1,65 @@
-<%@ page
-	language="java"
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
-<%@ taglib
-	prefix="c"
-	uri="http://java.sun.com/jsp/jstl/core"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Vacation</title>
+
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
+
 <style type="text/css">
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
+
+td {
+	border: 1px solid gray; /* 테두리 스타일 지정 */
+	padding: 1px; /* 셀 안의 내용과 테두리 사이의 간격 조정 */
+}
+
+.btn-info {
+	width: 98%;
+	font-size: 200%;
+	height: 200%;
+	border-radius: 25px;
+}
+
+.table-info {
+	background-color: #5bc0de;
+}
+
+.table-dark1 {
+	background-color: #272b30;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark2 {
+	background-color: rgb(54, 60, 67);;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark3 {
+	background-color: rgb(68, 74, 83);
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+/* 추가된 스타일 */
+.table-dark3 select {
+	margin-top: 10px; /* 원하는 만큼 조절 가능한 여백 값 */
+	margin-bottom: 10px; /* 원하는 만큼 조절 가능한 여백 값 */
+}
+
+.form-select {
+	padding: 0rem 0rem 0rem 3rem;
+	height: 80%;
 }
 
 /* 각 종류 버튼 스타일 */
@@ -45,12 +87,14 @@
 	margin-left: 0%;
 	margin-right: 0%;
 	font-size: 200%;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
 }
 
 /* 휴가신청 현황 위치 수정 */
 .middle-vaction_list-container {
 	position: relative;
-	margin-top: 10%;
+	margin-top: 2.5%;
 	margin-left: 0%;
 	font-size: 150%;
 }
@@ -58,7 +102,7 @@
 /* 휴가신청 양식 위치 수정 */
 .middle-vaction_request-container {
 	position: relative;
-	margin-top: 7.5%;
+	margin-top: 2.5%;
 	margin-left: 0%;
 	font-size: 150%;
 }
@@ -81,192 +125,95 @@ body {
 	font-size: 12px;
 }
 </style>
+</head>
 <body>
 	<!--  왼쪽 페이지 목록  -->
 	<jsp:include page="../MainPage/Left.jsp" />
 	<div class="content">
 		<!-- 다른 페이지에서 불러오는 내용 -->
-
-
-		<form
-			name="vacation_form"
-			method="post"
-			action="../Controller/HolidayApplicationController.do"
-		>
+		<form name="vacation_form" method="post" action="../Controller/HolidayApplicationController.do">
 
 			<!-- 휴가 신청 버튼 -->
 			<div class="middle-text-container">
 				<a>사용가능 휴가 : ${userholidaycount.annual }일</a>
 			</div>
 			<div class="middle-button-container">
-				<button
-					type="submit"
-					class='my_btn'
-				>휴가 신청</button>
+				<button type="submit" class='btn-info'>휴가 신청</button>
 			</div>
 
 			<!-- 휴가 신청 양식 -->
 			<div class="middle-vaction_request-container">
-				<table
-					border="1"
-					width="100%"
-				>
-					<tr>
-						<th colspan="3">휴가 일정</th>
+				<table border="1" width="100%" height="26%">
+					<tr class="table-dark2" align="center">
+						<th colspan="9" scope="row">휴가 일정</th>
 					</tr>
-					<tr align="center">
-						<td
-							align="center"
-							width="49%"
-							style="text-align: center;"
-						>
-
-							<select
-								id="start_vacation_year"
-								name="start_vacation_year"
-								size="1"
-								style="width: 25%"
-							>
+					<tr class="table-dark3">
+						<th width="5%" scope="row" align="center"><select id="start_vacation_year" name="start_vacation_year" class="form-select" style="width: 90%">
 								<option value="">년도를 선택해주세요</option>
-								<c:forEach
-									var="year"
-									begin="2023"
-									end="2026"
-								>
+								<c:forEach var="year" begin="2023" end="2026">
 									<option value="${year}">${year}</option>
 								</c:forEach>
-							</select>
-							<a> - </a>
+							</select></th>
 
-							<select
-								id="start_vacation_month"
-								name="start_vacation_month"
-								size="1"
-								style="width: 25%"
-							>
+						<th width="5%" align="center"><select id="start_vacation_month" name="start_vacation_month" class="form-select" style="width: 90%">
 								<option value="">월를 선택해주세요</option>
-								<c:forEach
-									var="month"
-									begin="1"
-									end="12"
-								>
+								<c:forEach var="month" begin="1" end="12">
 									<option value="<c:if test='${month lt 10}'>0</c:if>${month}">${month}</option>
 								</c:forEach>
-							</select>
-							<a> - </a>
+							</select></th>
 
-							<select
-								id="start_vacation_day"
-								name="start_vacation_day"
-								size="1"
-								style="width: 25%"
-							>
+						<th width="5%" align="center"><select id="start_vacation_day" name="start_vacation_day" class="form-select" style="width: 90%">
 								<option value="">일자를 선택해주세요</option>
-								<c:forEach
-									var="day"
-									begin="1"
-									end="31"
-								>
+								<c:forEach var="day" begin="1" end="31">
 									<option value="<c:if test='${day lt 10}'>0</c:if>${day}">${day}</option>
 								</c:forEach>
-							</select>
-						</td>
+							</select></th>
 
-						<td
-							align="center"
-							width="2%"
-							style="text-align: center;"
-						>~</td>
+						<th width="1%" align="center">~</th>
 
-						<td
-							align="center"
-							width="49%"
-							style="text-align: center;"
-						>
-
-							<select
-								id="end_vacation_year"
-								name="end_vacation_year"
-								size="1"
-								style="width: 25%"
-							>
+						<th width="5%" align="center"><select id="end_vacation_year" name="end_vacation_year" class="form-select" style="width: 90%">
 								<option value="">년도를 선택해주세요</option>
-								<c:forEach
-									var="year"
-									begin="2023"
-									end="2026"
-								>
+								<c:forEach var="year" begin="2023" end="2026">
 									<option value="${year}">${year}</option>
 								</c:forEach>
-							</select>
-							<a> - </a>
+							</select></th>
 
-							<select
-								id="end_vacation_month"
-								name="end_vacation_month"
-								size="1"
-								style="width: 25%"
-							>
+						<th width="5%" align="center"><select id="end_vacation_month" name="end_vacation_month" class="form-select" style="width: 90%">
 								<option value="">월를 선택해주세요</option>
-								<c:forEach
-									var="month"
-									begin="1"
-									end="12"
-								>
+								<c:forEach var="month" begin="1" end="12">
 									<option value="<c:if test='${month lt 10}'>0</c:if>${month}">${month}</option>
 								</c:forEach>
-							</select>
-							<a> - </a>
+							</select></th>
 
-							<select
-								id="end_vacation_day"
-								name="end_vacation_day"
-								size="1"
-								style="width: 25%"
-							>
+						<th width="5%" align="center"><select id="end_vacation_day" name="end_vacation_day" class="form-select" style="width: 90%">
 								<option value="">일자를 선택해주세요</option>
-								<c:forEach
-									var="day"
-									begin="1"
-									end="31"
-								>
+								<c:forEach var="day" begin="1" end="31">
 									<option value="<c:if test='${day lt 10}'>0</c:if>${day}">${day}</option>
 								</c:forEach>
-							</select>
-						</td>
+							</select></th>
 					</tr>
 				</table>
 			</div>
 
 			<!-- 휴가 신청 진행사항 -->
 			<div class="middle-vaction_list-container">
-				<table
-					border="1"
-					width="100%"
-				>
-					<tr>
-						<th width="80%">휴가 일정</th>
+				<table border="1" width="100%">
+					<tr class="table-dark2" align="center">
+						<th width="80%" scope="row">휴가 일정</th>
 						<th width="20%">승인 여부</th>
 					</tr>
 					<c:choose>
 						<c:when test="${empty holidayList}">
 							<!-- 게시물이 없을 때 -->
-							<tr>
-								<td
-									colspan="2"
-									align="center"
-								>신청된 휴가가 없습니다.</td>
+							<tr class="table-dark3" align="center">
+								<td colspan="2" align="center" scope="row">신청된 휴가가 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<!-- 게시물이 있을 때 -->
-							<c:forEach
-								items="${holidayList}"
-								var="row"
-								varStatus="loop"
-							>
-								<tr align="center">
-									<td>${row.start_vacation}~${row.end_vacation}</td>
+							<c:forEach items="${holidayList}" var="row" varStatus="loop">
+								<tr align="center" class="table-dark3">
+									<td scope="row">${row.start_vacation}~${row.end_vacation}</td>
 									<td>${row.approval}</td>
 								</tr>
 							</c:forEach>

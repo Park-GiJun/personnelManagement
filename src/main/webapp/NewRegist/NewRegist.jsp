@@ -15,6 +15,11 @@
 	box-sizing: border-box;
 }
 
+td {
+   border: 1px solid gray; /* 테두리 스타일 지정 */
+   padding: 1px; /* 셀 안의 내용과 테두리 사이의 간격 조정 */
+}
+
 /* 각 종류 버튼 스타일 */
 .my_btn {
 	background-color: #1C427E;
@@ -81,7 +86,12 @@
 }
 
 .form-select {
+	padding: 0rem 0rem 0rem 3rem;
 	height: 80%;
+}
+
+.form-control {
+	padding: 0rem 0rem;
 }
 
 /* 정보등록 버튼 위치 수정 */
@@ -184,35 +194,32 @@ body {
 							<th width="25">부서</th>
 						</tr>
 						<tr class="table-dark3">
-							<td align="center" width="25%" height="100%" scope="row">
+							<th align="center" width="25%" height="100%" scope="row">
 								<input type="text" class="form-control" name="name" placeholder="이름" style="width: 90%; height: 80%; box-sizing: border-box; text-align: center;">
-							</td>
-							<td align="center" width="25%">
+							</th>
+							<th align="center" width="25%">
 								<input type="text" class="form-control" name="emp_num" placeholder="사번" style="width: 90%; height: 80%; box-sizing: border-box; text-align: center;">
-							</td>
+							</th>
 
-							<td align="center" width="25%">
-								<!-- <input type="text" name="emp_grade" style="width: 90%; box-sizing: border-box; text-align: center;"> -->
+							<th align="center" width="25%">
 								<select id="emp_grade" name="emp_grade" size="1" style="width: 90%;" class="form-select">
 									<option value="">선택하세요.</option>
-									<option value="부장">부장</option>
-									<option value="차장">차장</option>
+									<option value="임원">임원</option>
 									<option value="과장">과장</option>
+									<option value="팀장">팀장</option>
 									<option value="대리">대리</option>
 									<option value="사원">사원</option>
-									<option value="인턴">인턴</option>
 							</select>
-							</td>
+							</th>
 
-							<td align="center" width="25%">
-								<!-- <input type="text" name="team" style="width: 90%; box-sizing: border-box; text-align: center;"> -->
+							<th align="center" width="25%">
 								<select id="team" name="team" size="1" style="width: 90%;" class="form-select">
 									<option value="">선택하세요.</option>
 									<option value="인사">인사</option>
 									<option value="개발">개발</option>
 									<option value="디자인">디자인</option>
 							</select>
-							</td>
+							</th>
 						</tr>
 					</table>
 
@@ -236,34 +243,33 @@ body {
 								<th width="25">부서</th>
 							</tr>
 							<tr class="table-dark3">
-								<td align="center" width="25%" height="100%" scope="row">
+								<th align="center" width="25%" height="100%" scope="row">
 									<input type="text" class="form-control" name="nameinfo" placeholder="이름" style="width: 90%; height: 80%; text-align: center;">
-								</td>
+								</th>
 
-								<td align="center" width="25%" height="100%">
+								<th align="center" width="25%" height="100%">
 									<input type="text" class="form-control" name="emp_numinfo" placeholder="사번" style="width: 90%; height: 80%; text-align: center;">
-								</td>
+								</th>
 
-								<td align="center" width="25%" height="100%">
+								<th align="center" width="25%" height="100%">
 									<select id="emp_grade_Edit"	name="emp_grade_Edit" size="1" style="width: 90%;" class="form-select">
 										<option value="">선택하세요.</option>
-										<option value="부장">부장</option>
-										<option value="차장">차장</option>
+										<option value="임원">임원</option>
 										<option value="과장">과장</option>
+										<option value="팀장">팀장</option>
 										<option value="대리">대리</option>
 										<option value="사원">사원</option>
-										<option value="인턴">인턴</option>
 									</select>
-								</td>
+								</th>
 
-								<td align="center" width="25%" height="100%">
+								<th align="center" width="25%" height="100%">
 									<select id="team_Edit"	name="team_Edit" size="1" style="width: 90%;" class="form-select">
 										<option value="">선택하세요.</option>
 										<option value="인사">인사</option>
 										<option value="개발">개발</option>
 										<option value="디자인">디자인</option>
 									</select>
-								</td>
+								</th>
 							</tr>
 						</table>
 

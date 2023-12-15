@@ -1,5 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page
+	language="java"
+	contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+%>
+<%@ taglib
+	prefix="c"
+	uri="http://java.sun.com/jsp/jstl/core"
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,6 +45,7 @@ input {
 	height: 80px;
 	border-radius: 50px;
 }
+
 </style>
 </head>
 <body>
@@ -54,10 +62,12 @@ input {
 		}
 	</script>
 	<form name="login_form" method="post" action="../Controller/login.do" onsubmit="return checkLogin(this)">
+	
+		<input type="text" class="form-control" name="login_Id" placeholder="ID">
 
-		<input type="text" class="form-control" name="login_Id" placeholder="ID"> <input type="password" class="form-control" name="login_Pwd" placeholder="Password">
+		<input type="password" class="form-control" name="login_Pwd" placeholder="Password">
 
-		<button type="submit" class="btn-light" value="로그인">Login</button>
+		<button type="submit" class="btn-light"	value="로그인">Login</button>
 	</form>
 	<%
 	}
