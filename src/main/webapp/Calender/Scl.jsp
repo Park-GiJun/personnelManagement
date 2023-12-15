@@ -8,6 +8,7 @@
 
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="fileupload.FileUtil" %>
 
 <%
 request.setCharacterEncoding("utf-8");
@@ -16,6 +17,8 @@ String name = request.getParameter("name");
 String cl_year = request.getParameter("year2");
 String cl_month = request.getParameter("month2");
 Calendar cal = Calendar.getInstance();
+
+
 
 // 시스템 오늘날짜
 int ty = cal.get(Calendar.YEAR);
@@ -489,18 +492,35 @@ a:active, a:hover {
 
 <script type="text/javascript">
 
-function change() {
-	   var f = document.frm;
-	   f.submit();
-	}
+function updateCalendar() {
+    var year = document.getElementById("yearSelect").value;
+    var month = document.getElementById("monthSelect").value;
 
-	function updateCalendar() {
-		   var year = document.getElementById("yearSelect").value;
-		   var month = document.getElementById("monthSelect").value;
+    // AJAX를 이용하여 서버로 요청을 보냅니다.
+    $.ajax({
+        url: "calendar.jsp",
+        type: "GET",
+        data: {
+            year: year,
+            month: month
+        },
+        success: function (data) {
+            // 서버로부터 받아온 데이터(data)를 사용하여 달력을 업데이트합니다.
+            // 이 부분은 서버에서 받아온 데이터를 어떻게 처리할지에 따라 구현이 달라집니다.
+            // data를 이용하여 달력을 업데이트하는 코드를 작성하세요.
 
-		   var url = "calendar.jsp?year=" + year + "&month=" + month;
-		   window.location.href = url;
-	}
+            // 예시: 받아온 데이터를 'calendar-container'라는 ID를 가진 엘리먼트의 innerHTML로 설정
+            document.getElementById('calendar-container').innerHTML = data;
+        },
+        error: function () {
+            console.error("Failed to fetch calendar data from the server.");
+        }
+    });
+}
+
+window.onload = function () {
+    updateCalendar();
+};
 
 
 

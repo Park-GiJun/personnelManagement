@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import Calender.CalenderDAO;
 import Calender.CalenderDTO;
 import utils.BoardPage;
+import utils.JSFunction;
 
 /**
  * Servlet implementation class CalenderController
@@ -51,6 +52,23 @@ public class CalenderController extends HttpServlet {
 		
 		System.out.println("aaaaa " + selecteddate);
 		
+		String Personal_diaray_schedule = request.getParameter("Personal_diaray_schedule");
+		
+		if (Personal_diaray_schedule != null && !Personal_diaray_schedule.isEmpty()) {
+	        // 선택한 일정이 존재하면 삭제 처리
+	        dao = new CalenderDAO();
+	        int result = dao.deletePost(Personal_diaray_schedule);
+	        dao.close();
+
+	        if (result > 0) {
+	            JSFunction.alertLocation(response, "선택한 일정이 삭제되었습니다.", "../Calender/Scl.do");
+	            System.out.println(1);
+	        } else {
+	            JSFunction.alertLocation(response, "일정 삭제에 실패했습니다.", "../Calender/Scl.do");
+	            System.out.println(2);
+	        }
+	    }
+		
 		
 		if (searchWord != null) {
 			map.put("searchField", searchField);
@@ -77,24 +95,14 @@ public class CalenderController extends HttpServlet {
 		map.put("start", start);
 		map.put("end", end);
 		/* 페이지 처리 end */
+		
+		
+		
 				
 		List<CalenderDTO> calenderlists = dao.selectListPage(selecteddate, emp_num);	
 		
 		
 		String action = request.getParameter("action");
-
-		if ("delete".equals(action)) {
-		    // 삭제 작업 처리
-		    String personalDiarayScheduleToDelete = request.getParameter("Personal_diaray_schedule");
-		    int deleteResult = dao.deletePost(personalDiarayScheduleToDelete);
-
-		    // 선택적으로 deleteResult를 확인하고 메시지 설정 가능
-		    if (deleteResult > 0) {
-		        request.setAttribute("deleteMessage", "이벤트가 성공적으로 삭제되었습니다");
-		    } else {
-		        request.setAttribute("deleteMessage", "이벤트 삭제에 실패했습니다");
-		    }
-		}
 
 		
 
