@@ -76,6 +76,8 @@ public class CommentsDAO extends DBConnPool {
 		close();
 		return board;
 	} // end getDetail()
+	
+	
 
 	// 지정 게시물 찾아 내용을 반환
 	public FreeboardFormDTO selectdetailsView(int anno_board_num) {

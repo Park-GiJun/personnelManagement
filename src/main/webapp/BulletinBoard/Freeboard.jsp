@@ -81,7 +81,7 @@ body {
 				
 				<tr>
 					<td><input type="text" name="Freeboardcontent"
-						style="width: 100%; height: 800px;"></td>
+						style="width: 100%; height: 600px;"></td>
 				</tr>
 
 				<tr>

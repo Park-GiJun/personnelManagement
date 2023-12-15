@@ -18,12 +18,40 @@ public class FreeboardFormDAO extends DBConnPool {
 		super();
 	}
 
+	// 수정할 게시물 찾아 내용을 반환
+	public FreeboardFormDTO selectChangeView(int anno_board_num) {
+		FreeboardFormDTO dto = new FreeboardFormDTO();
+		String query = " SELECT anno_board_num, title, content ,post_date,board_pass  FROM anno_board WHERE anno_board_num=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, anno_board_num);
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				dto.setanno_board_num(rs.getInt(1));
+				dto.settitle(rs.getString(2));
+				dto.setcontent(rs.getString(3));
+				dto.setpost_date(rs.getDate(4));
+				dto.setboard_pass(rs.getInt("board_pass"));
+				System.out.println(rs.getInt(1));
+				System.out.println(rs.getString(2));
+				System.out.println(rs.getString(3));
+				System.out.println(rs.getDate(4));
+				System.out.println(rs.getInt("board_pass"));
+			}
+		} catch (Exception e) {
+			System.out.println("게시물 상세보기 중 예외 발생");
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
 	public int FreeboardListCont(Map<String, Object> map) {
 		System.out.println("FreeboardListCont");
 		int totalcount = 0;
 
 		String query = "SELECT COUNT(*) FROM anno_board";
-		
+
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
 		}
@@ -75,7 +103,7 @@ public class FreeboardFormDAO extends DBConnPool {
 				dto.setpost_date(rs.getDate("post_date"));
 				dto.setvisitcount(rs.getInt("visitcount"));
 				anno_boards.add(dto);
-				System.out.println(dto.getanno_board_num()+dto.getboard_pass()+dto.gettitle());
+				System.out.println(dto.getanno_board_num() + dto.getboard_pass() + dto.gettitle());
 			}
 		} catch (Exception e) {
 			System.out.println("게시물 조회중 예외 발생");
@@ -98,8 +126,8 @@ public class FreeboardFormDAO extends DBConnPool {
 
 			System.out.println(title);
 			System.out.println(content);
-			System.out.println(pass); 
-			con.setAutoCommit(false); 
+			System.out.println(pass);
+			con.setAutoCommit(false);
 		} catch (Exception e) {
 			System.out.println("게시물 입력중 예외 발생");
 			e.printStackTrace();
@@ -107,5 +135,32 @@ public class FreeboardFormDAO extends DBConnPool {
 		return result;
 	}
 
-	
+	public int crystalWrite(int anno_board_num, String title, String content, int pass) {
+		int result = 0;
+		try {
+			System.out.println("crystalWrite");
+			String query = "UPDATE anno_board SET  title=?, content=?,board_pass=? WHERE anno_board_num=?";
+
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, content);
+			psmt.setString(2, title);
+			
+			psmt.setInt(3, anno_board_num);
+			psmt.setInt(4, pass);
+			
+			result = psmt.executeUpdate();
+
+			System.out.println(title);
+			System.out.println(content);
+			System.out.println(pass);
+			con.setAutoCommit(false);
+		} catch (Exception e) {
+			System.out.println("게시물 수정 중 예외 발생");
+			e.printStackTrace();
+		}
+		System.out.println("UPDATE anno_board SET  title=" + title + ", content=" + content + ",board_pass=" + pass
+				+ " WHERE anno_board_num=" + anno_board_num);
+		return result;
+	}
+
 }

@@ -49,11 +49,37 @@ body {
 				if (confirm("정말로 수정하시겠습니까?")) {
 					var modificationText = prompt("비밀번호를 입력하세요:");
 					if (modificationText == ${dto.board_pass}) {
-						// 사용자가 확인을 눌렀을 때의 동작
-						// modificationText를 어떻게 사용할지 결정하고, 필요한 동작 추가
-						//alert("수정된 내용: " + modificationText);
-						alert("비밀번호가 일치합니다." + ${dto.board_pass})
-						window.location.href = '../BulletinBoard/FreeboardForm.jsp';	
+						  var boardNum = "${dto.anno_board_num}";
+				            var title = "${dto.title}";
+				            var content = "${dto.content}";
+
+				            // 폼 요소를 동적으로 생성
+				            var form = document.createElement('form');
+				            form.method = 'POST';
+				            form.action = '../Controller/BoardeditController.do';
+
+				            // hidden 필드를 생성하여 데이터 추가
+				            var inputBoardNum = document.createElement('input');
+				            inputBoardNum.type = 'hidden';
+				            inputBoardNum.name = 'boardNum';
+				            inputBoardNum.value = boardNum;
+				            form.appendChild(inputBoardNum);
+
+				            var inputTitle = document.createElement('input');
+				            inputTitle.type = 'hidden';
+				            inputTitle.name = 'title';
+				            inputTitle.value = title;
+				            form.appendChild(inputTitle);
+
+				            var inputContent = document.createElement('input');
+				            inputContent.type = 'hidden';
+				            inputContent.name = 'content';
+				            inputContent.value = content;
+				            form.appendChild(inputContent);
+
+				            // 폼을 body에 추가하고 submit
+				            document.body.appendChild(form);
+				            form.submit();
 					}else{
 						alert("비밀번호가 일치하지 않습니다.")
 					}
@@ -68,24 +94,7 @@ body {
 				if (confirm("정말로 삭제하시겠습니까?")) {
 					var deletionText = prompt("비밀번호를 입력하세요:");
 					if (deletionText == ${dto.board_pass}) {
-						window.location.href = '../BulletinBoard/FreeboardForm.jsp';
-						alert("삭제 되었습니다.")
-					} else {
-						// 사용자가 취소를 눌렀을 때의 동작
-						// 아무 동작 없음 또는 필요한 동작 추가
-						alert("비밀번호가 일치하지 않습니다.")
-					}
-				} else {
-					// 사용자가 확인을 누르지 않았을 때의 동작
-					// 아무 동작 없음 또는 필요한 동작 추가
-				}
-			}
-			
-			function CommentsDeletion() {
-				if (confirm("정말로 삭제하시겠습니까?")) {
-					var deletionText = prompt("비밀번호를 입력하세요:");
-					if (deletionText == ${dto.board_pass}) {
-						window.location.href = '../BulletinBoard/FreeboardForm.jsp';
+						"location.href='../Controller/BoardeditController.do';"
 						alert("삭제 되었습니다.")
 					} else {
 						// 사용자가 취소를 눌렀을 때의 동작
@@ -137,11 +146,11 @@ body {
 				</tr>
 				<tr>
 					<td>제목</td>
-					<th colspan="4">${dto.title }</th>
+					<th colspan="4" style="width: 100%; height: 50px;">${dto.title }</th>
 				</tr>
 				<tr>
 					<td>내용</td>
-					<th colspan="4">${dto.content}</th>
+					<th colspan="4" style="width: 100%; height: 600px;">${dto.content}</th>
 				</tr>
 			</table>
 			<table border="1" width="90%">
