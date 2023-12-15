@@ -37,6 +37,8 @@
             }
         }
     }
+    
+    
 </script>
 </head>
 <body>
@@ -64,34 +66,34 @@
 				</thead>
 				<tbody>
 					<tr class="table-primary">
-						<td>개발</td>
-						<td>사장</td>
-						<td>1234567890</td>
-						<td>홍길동</td>
+						<td id="cell_1_team">개발</td>
+						<td id="cell_1_grade">사장</td>
+						<td id="cell_1_emp">1234567890</td>
+						<td id="cell_1_name">홍길동</td>
 					</tr>
 					<tr class="table-primary">
-						<td>개발</td>
-						<td>사장</td>
-						<td>1234567890</td>
-						<td>홍길동</td>
+						<td id="cell_2_team">개발</td>
+						<td id="cell_2_grade">사장</td>
+						<td id="cell_2_emp">1234567890</td>
+						<td id="cell_2_name">홍길동</td>
 					</tr>
 					<tr class="table-primary">
-						<td>개발</td>
-						<td>사장</td>
-						<td>1234567890</td>
-						<td>홍길동</td>
+						<td id="cell_3_team">개발</td>
+						<td id="cell_3_grade">사장</td>
+						<td id="cell_3_emp">1234567890</td>
+						<td id="cell_3_name">홍길동</td>
 					</tr>
 					<tr class="table-primary">
-						<td>개발</td>
-						<td>사장</td>
-						<td>1234567890</td>
-						<td>홍길동</td>
+						<td id="cell_4_team">개발</td>
+						<td id="cell_4_grade">사장</td>
+						<td id="cell_4_emp">1234567890</td>
+						<td id="cell_4_name">홍길동</td>
 					</tr>
 					<tr class="table-primary">
-						<td>개발</td>
-						<td>사장</td>
-						<td>1234567890</td>
-						<td>홍길동</td>
+						<td id="cell_5_team">개발</td>
+						<td id="cell_5_grade">사장</td>
+						<td id="cell_5_emp">1234567890</td>
+						<td id="cell_5_name">홍길동</td>
 					</tr>
 				</tbody>
 			</table>

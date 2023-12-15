@@ -125,11 +125,8 @@ td {
 				<tr align="center">
 					<th>${ map.pagingImg }</th>
 					<th width="100" rowspan="2">
-						<button type="button" onclick="location.href='../ShareForm/Write.jsp';">글작성</button> ======= </select> <input type="text" name="searchWord" class="form-control">
-
 						<button type="submit" name="listSearch" value="검색하기" id="listSearch" class="btn-info" style="margin-right: 27.5%;">검색하기</button>
-
-						<button type="button" onclick="location.href='../BulletinBoard/Freeboard.jsp';" class="btn-info">글작성</button> >>>>>>> refs/remotes/origin/류동규
+						<button type="button" onclick="location.href='../ShareForm/Write.jsp';" class="btn-info">글작성</button>
 					</th>
 				</tr>
 			</table>
