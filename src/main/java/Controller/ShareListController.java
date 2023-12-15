@@ -60,6 +60,8 @@ public class ShareListController extends HttpServlet {
 		int end = pageNum * pageSize;
 		map.put("start", start);
 		map.put("end", end);
+		
+		System.out.println("페이징 확인 : " + totalCount + " " + start + " " + end);
 		/* 페이지 처리 end */
 
 		List<ShareFormDTO> shareboardlists = dao.selectListPage(map);
