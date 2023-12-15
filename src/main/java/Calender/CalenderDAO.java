@@ -72,8 +72,10 @@ public class CalenderDAO extends DBConnPool {
 		}
 		return board;
 	}
+	
+	
 
-	// 3 삭제
+	// 3 삭제하기 기능
 	public int deletePost(String Personal_diaray_schedule) {
 		int result = 0;
 		try {
@@ -88,6 +90,9 @@ public class CalenderDAO extends DBConnPool {
 		}
 		return result;
 	}
+	
+	
+	
 	
 	
 	public CalenderDTO selectView(String Personal_diaray_schedule) {

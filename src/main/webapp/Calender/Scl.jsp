@@ -652,7 +652,8 @@ body {
 		<input type="hidden" name="selectedYear" id="selectedYear" value="<%=year%>">
 		<input type="hidden" name="selectedMonth" id="selectedMonth" value="<%=month%>">
 		<input type="hidden" name="selectedDay" id="selectedDay" value="">
-
+		<input type="hidden" name="selectedContent" id="selectedContent" value="${row.personal_diaray_schedule}">
+		<!-- <input type="hidden" name="selectedContent" id="selectedContent" value="<c:out value="${empty row.personal_diaray_schedule ? '' : row.personal_diaray_schedule}"/>"> -->
 
 		<div class="middle-button">
 			<!-- 다른 페이지에서 불러오는 내용 -->
