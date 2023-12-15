@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,15 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Calender.CalenderDAO;
 import Calender.CalenderDTO;
 import utils.BoardPage;
-import utils.JSFunction;
 
-/**
- * Servlet implementation class CalenderController
- */
+
 @WebServlet("/Controller/CalenderController.do")
 public class CalenderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -41,8 +40,29 @@ public class CalenderController extends HttpServlet {
 		
 		System.out.println("confirm : " + selectedDay);
 		
+		/*
 		if (Integer.parseInt(selectedDay) < 10) {
 			selectedDay = "0" + selectedDay;
+		}
+		*/
+		
+		if (selectedDay != null && !selectedDay.isEmpty()) {
+		    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도
+		    int dayValue;
+		    try {
+		        dayValue = Integer.parseInt(selectedDay);
+
+		        // 변환된 값이 10보다 작으면 앞에 0을 붙여서 문자열로 만듦
+		        if (dayValue < 10) {
+		            selectedDay = "0" + dayValue;
+		        }
+		    } catch (NumberFormatException e) {
+		        // 정수로 변환 중 예외가 발생한 경우
+		        e.printStackTrace(); // 또는 적절한 로깅 처리
+		    }
+		} else {
+		    // selectedDay가 null이거나 비어있는 경우 처리
+		    // 적절한 로깅 또는 예외 처리를 수행
 		}
 			
 		String selectedYear = request.getParameter("selectedYear");
@@ -52,22 +72,10 @@ public class CalenderController extends HttpServlet {
 		
 		System.out.println("aaaaa " + selecteddate);
 		
-		String selectedContent = request.getParameter("selectedContent");
 		
-		if (selectedContent != null && !selectedContent.isEmpty()) {
-	        // 선택한 일정이 존재하면 삭제 처리
-	        dao = new CalenderDAO();
-	        int result = dao.deletePost(selectedContent);
-	        dao.close();
-
-	        if (result > 0) {
-	            JSFunction.alertLocation(response, "선택한 일정이 삭제되었습니다.", "../Calender/Scl.do");
-	            System.out.println(1);
-	        } else {
-	            JSFunction.alertLocation(response, "일정 삭제에 실패했습니다.", "../Calender/Scl.do");
-	            System.out.println(2);
-	        }
-	    }
+		String selectedSchedules = request.getParameter("selectedSchedules");
+		
+		
 		
 		
 		if (searchWord != null) {
@@ -95,16 +103,8 @@ public class CalenderController extends HttpServlet {
 		map.put("start", start);
 		map.put("end", end);
 		/* 페이지 처리 end */
-		
-		
-		
 				
 		List<CalenderDTO> calenderlists = dao.selectListPage(selecteddate, emp_num);	
-		
-		
-		String action = request.getParameter("action");
-
-		
 
 		// 페이징 이미지 전달
 		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/Calender.do");
@@ -119,13 +119,15 @@ public class CalenderController extends HttpServlet {
 		request.setAttribute("calenderlists", calenderlists);
 		request.setAttribute("map2", map);
 		request.setAttribute("selecteddate", selecteddate);
+		request.setAttribute("selectedSchedules", selectedSchedules); // 리스트 값
 		request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
-		
 		
 	}
 	
 	
 	
+}
+	
+	
 	
 
-}

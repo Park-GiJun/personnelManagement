@@ -490,7 +490,10 @@ a:active, a:hover {
 }
 </style>
 
-<script type="text/javascript">
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js">
 
 function updateCalendar() {
     var year = document.getElementById("yearSelect").value;
@@ -498,7 +501,7 @@ function updateCalendar() {
 
     // AJAX를 이용하여 서버로 요청을 보냅니다.
     $.ajax({
-        url: "calendar.jsp",
+        url: "Scl.jsp",
         type: "GET",
         data: {
             year: year,
@@ -521,6 +524,14 @@ function updateCalendar() {
 window.onload = function () {
     updateCalendar();
 };
+
+
+</script>
+
+
+<script type="text/javascript">
+
+
 
 
 
@@ -582,39 +593,71 @@ function showDateAndAlert(day) {
 		}
 	}
 
+	var selectedSchedule;
+	
 	 // 선택한 일정 삭제하기 버튼 눌렀을 때 설정
-     function confirmDelete() {
-    var links = document.querySelectorAll('.scheduleLink.selected');
+    function confirmDelete() {
+    var selectedSchedules = document.querySelectorAll('.selectedScheduleIds');
 
-    if (links.length > 0) {
-        var result = window.confirm("선택한 일정을 삭제하시겠습니까?");
-        if (result) {
-            links.forEach(function (link) {
-                // 여기서 link.dataset.schedule을 이용해 개인 일정 내용에 접근
-                var scheduleToDelete = link.dataset.schedule;
+    if (selectedSchedules.length > 0) {
+        var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
 
-                // 서버로 삭제 요청을 보내는 코드 (Ajax 등을 사용)
-                // 여기서는 일단 console.log로 확인
-                console.log("삭제할 일정 내용: " + scheduleToDelete);
+        if (confirmed) {
+            // 선택한 일정의 ID를 저장할 배열
+            var selectedScheduleIds = [];
 
-                // TODO: 서버로 일정 삭제 요청을 보내고, 성공하면 화면에서 해당 일정 제거
+            // 각 선택한 일정의 ID를 배열에 추가
+            selectedSchedules.forEach(function (link) {
+                var scheduleId = link.getAttribute('data-schedule-id');
+                if (scheduleId) {
+                    selectedScheduleIds.push(scheduleId);
+                }
             });
-            window.alert("선택한 일정이 삭제되었습니다");
-        } else {
-            window.alert("삭제가 취소되었습니다");
+
+            // 콘솔에 선택한 일정의 ID 출력
+            console.log('선택한 일정의 ID: ' + selectedScheduleIds.join(', '));
+
+            // 이후의 삭제 처리 등을 진행
+            // ...
         }
     } else {
-        window.alert("삭제할 일정을 선택해주세요");
+        alert("삭제할 일정을 선택해주세요.");
     }
-}
 
-    // 링크 클릭 시 선택 및 해제를 토글하는 함수
-    document.addEventListener('click', function (event) {
-        if (event.target.classList.contains('scheduleLink')) {
-            event.preventDefault();
-            event.target.classList.toggle('selected');
+    
+}
+	 
+	 
+    console.log('잘 실행되는지 확인용1111111111111111111111');
+	 
+
+  // 링크 클릭 시 선택 및 해제를 토글하는 함수
+  var selectedSchedules = [];
+
+document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('scheduleLink')) {
+        event.preventDefault();
+        var selectedSchedule = event.target.getAttribute('data-schedule');
+        var isSelected = event.target.classList.toggle('selected');
+
+        alert(selectedSchedule + ' 확인용');
+
+        // 선택한 일정을 리스트에 추가 또는 제거
+        if (isSelected) {
+            selectedSchedules.push(selectedSchedule);
+        } else {
+            // 해당 값이 리스트에 존재하면 제거
+            var index = selectedSchedules.indexOf(selectedSchedule);
+            if (index !== -1) {
+                selectedSchedules.splice(index, 1);
+            }
         }
-    });
+
+        // 선택한 일정들을 콘솔에 출력
+        console.log('선택한 일정들:', selectedSchedules);
+        
+    }
+});
     
 </script>
 
@@ -652,7 +695,7 @@ body {
 		<input type="hidden" name="selectedYear" id="selectedYear" value="<%=year%>">
 		<input type="hidden" name="selectedMonth" id="selectedMonth" value="<%=month%>">
 		<input type="hidden" name="selectedDay" id="selectedDay" value="">
-		<input type="hidden" name="selectedContent" id="selectedContent" value="${row.personal_diaray_schedule}">
+		<input type="hidden" name="selectedContent" id="selectedContent" value="selectedSchedule">
 		<!-- <input type="hidden" name="selectedContent" id="selectedContent" value="<c:out value="${empty row.personal_diaray_schedule ? '' : row.personal_diaray_schedule}"/>"> -->
 
 		<div class="middle-button">
@@ -709,8 +752,6 @@ body {
         			</c:choose>
     			</table>
 			</div>
-
-			<button class='del_btn' onclick="confirmDelete();">삭제하기</button>
 
 		</div>
 		
