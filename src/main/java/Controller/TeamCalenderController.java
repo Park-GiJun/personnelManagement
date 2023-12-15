@@ -12,25 +12,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Calender.CalenderDAO;
-import Calender.CalenderDTO;
+import Calender.TeamCalDAO;
+import Calender.TeamCalDTO;
+import FreeboardForm.FreeboardFormDTO;
 import utils.BoardPage;
-import utils.JSFunction;
 
-/**
- * Servlet implementation class CalenderController
- */
-@WebServlet("/Controller/CalenderController.do")
-public class CalenderController extends HttpServlet {
+
+
+@WebServlet("/Controller/TeamCalenderController.do")
+public class TeamCalenderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("Person_Cal.do");
+		System.out.println("TeamCal.do");
 		
 		// DAO 생성
-		CalenderDAO dao = new CalenderDAO();
+		TeamCalDAO dao = new TeamCalDAO();
+		
 		
 		// Map 생성
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -49,27 +49,11 @@ public class CalenderController extends HttpServlet {
 		String selectedMonth = request.getParameter("selectedMonth");
 		String selecteddate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
 		String emp_num = (String) request.getSession().getAttribute("loginid");
+		String selectedTeam = request.getParameter("team");
 		
 		System.out.println("aaaaa " + selecteddate);
 		
-		String selectedContent = request.getParameter("selectedContent");
-		
-		if (selectedContent != null && !selectedContent.isEmpty()) {
-	        // 선택한 일정이 존재하면 삭제 처리
-	        dao = new CalenderDAO();
-	        int result = dao.deletePost(selectedContent);
-	        dao.close();
-
-	        if (result > 0) {
-	            JSFunction.alertLocation(response, "선택한 일정이 삭제되었습니다.", "../Calender/Scl.do");
-	            System.out.println(1);
-	        } else {
-	            JSFunction.alertLocation(response, "일정 삭제에 실패했습니다.", "../Calender/Scl.do");
-	            System.out.println(2);
-	        }
-	    }
-		
-		
+		//d
 		if (searchWord != null) {
 			map.put("searchField", searchField);
 			map.put("searchWord", searchWord);
@@ -90,20 +74,13 @@ public class CalenderController extends HttpServlet {
 		}
 
 		// 목록에 출력할 게시물 범위 계산
-		int start = (pageNum + 1) * pageSize + 1; // 첫 게시물 번호
+		int start = (pageNum - 1) * pageSize + 1; // 첫 게시물 번호
 		int end = pageNum * pageSize;
 		map.put("start", start);
 		map.put("end", end);
 		/* 페이지 처리 end */
-		
-		
-		
 				
-		List<CalenderDTO> calenderlists = dao.selectListPage(selecteddate, emp_num);	
-		
-		
-		String action = request.getParameter("action");
-
+		List<TeamCalDTO> calenderlists = dao.selectListPage(selecteddate, selectedTeam);	
 		
 
 		// 페이징 이미지 전달
@@ -118,9 +95,7 @@ public class CalenderController extends HttpServlet {
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);
 		request.setAttribute("map2", map);
-		request.setAttribute("selecteddate", selecteddate);
-		request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("../Calender/Scl4.jsp").forward(request, response);
 		
 	}
 	

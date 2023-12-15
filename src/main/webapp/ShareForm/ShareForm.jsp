@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -22,8 +21,8 @@ body {
 }
 
 td {
-   border: 1px solid gray; /* 테두리 스타일 지정 */
-   padding: 1px; /* 셀 안의 내용과 테두리 사이의 간격 조정 */
+	border: 1px solid gray; /* 테두리 스타일 지정 */
+	padding: 1px; /* 셀 안의 내용과 테두리 사이의 간격 조정 */
 }
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
@@ -76,7 +75,6 @@ td {
 	width: 400px;
 	height: 35px;
 }
-
 </style>
 <body>
 	<jsp:include page="../MainPage/Left.jsp" />
@@ -103,15 +101,13 @@ td {
 					<c:forEach items="${ shareboardlists }" var="row" varStatus="loop">
 						<tr align="center" class="table-dark2">
 							<!-- 번호 -->
-							<td scope="row">${ map.totalCount -(((map.pageNum-1) * map.pageSize) + loop.index) }
-							</td>
+							<td scope="row">${ map.totalCount -(((map.pageNum-1) * map.pageSize) + loop.index) }</td>
 							<td align="center">
 								<!-- 제목 --> <a>${ row.title }</a>
 							</td>
 							<td><c:if test="${ not empty row.shareofile }">
 										${ dto.ofile }
-									<a
-										href="../Controller/ShareFormDownload.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">[다운로드]</a>
+									<a href="../Controller/ShareFormDownload.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">[다운로드]</a>
 								</c:if></td>
 						</tr>
 					</c:forEach>
@@ -122,16 +118,18 @@ td {
 		<form method="get" action="../Controller/sharelist.do">
 			<table border="1" width="90%" height="50px">
 				<tr class="table-dark3" align="center">
-					<th style="display: flex; margin-left:27.5%;" scope="row">
-						<select name="searchCategory" class="form-select">
+					<th style="display: flex; margin-left: 27.5%;" scope="row"><select name="searchCategory" class="form-select">
 							<option value="title">제목</option>
-						</select>
-						
-						<input type="text" name="searchWord" class="form-control">
-						
+						</select> <input type="text" name="searchWord" /> <input type="submit" name="listSearch" value="검색하기" id="listSearch" /></th>
+				</tr>
+				<tr align="center">
+					<th>${ map.pagingImg }</th>
+					<th width="100" rowspan="2">
+						<button type="button" onclick="location.href='../ShareForm/Write.jsp';">글작성</button> ======= </select> <input type="text" name="searchWord" class="form-control">
+
 						<button type="submit" name="listSearch" value="검색하기" id="listSearch" class="btn-info" style="margin-right: 27.5%;">검색하기</button>
-						
-						<button type="button" onclick="location.href='../BulletinBoard/Freeboard.jsp';" class="btn-info">글작성</button>
+
+						<button type="button" onclick="location.href='../BulletinBoard/Freeboard.jsp';" class="btn-info">글작성</button> >>>>>>> refs/remotes/origin/류동규
 					</th>
 				</tr>
 			</table>

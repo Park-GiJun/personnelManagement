@@ -1,8 +1,4 @@
-<%@ page
-	language="java"
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="attend.AttendanceDTO"%>
 <%@ page import="java.util.ArrayList"%>
@@ -446,27 +442,27 @@ function getCurrentTime() {
 }
 
 label[for="yearSelect"] {
-    margin-top: 15px;
-    font-size: 20px;
+	margin-top: 15px;
+	font-size: 20px;
 }
 
 label[for="monthSelect"] {
-    margin-top: 15px;
-    font-size: 20px;
+	margin-top: 15px;
+	font-size: 20px;
 }
 
 /* 수정하기 버튼 스타일 */
 #modify-button {
 	margin-top: 0.5%;
-    margin-left: 2.5%;
-    width: 100px; /* 수정하기 버튼의 너비 설정 */
+	margin-left: 2.5%;
+	width: 100px; /* 수정하기 버튼의 너비 설정 */
 }
 
 /* 출력하기 버튼 스타일 */
 #print-button {
 	margin-top: 13px;
-    margin-left: 120px;
-    width: 150px; /* 출력하기 버튼의 너비 설정 */
+	margin-left: 120px;
+	width: 150px; /* 출력하기 버튼의 너비 설정 */
 }
 
 #prev-month-btn {
@@ -482,7 +478,8 @@ label[for="monthSelect"] {
 #commute-button {
 	margin-left: 0%;
 	width: 100px;
-} 
+}
+
 #leave-button {
 	margin-left: 0%;
 	width: 100px;
@@ -506,28 +503,37 @@ label[for="monthSelect"] {
 		<div class="info_profile">
 			<div class="info_profile_photo">
 				<div class="info_profile_texts">
-					<p>이름 : <a id="infoName">${ Infolist.name } </a></p>
-					<p>사번 : <a id="infoEmpNum">${ Infolist.emp_num } </a></p>
-					<p>전화번호 : <a id="infoPhone">${ Infolist.phone }</a></p>
-					<p>이메일 : <a id="infoEmail">${ Infolist.email }</a></p>
+					<p>
+						이름 :
+						<a id="infoName">${ Infolist.name } </a>
+					</p>
+					<p>
+						사번 :
+						<a id="infoEmpNum">${ Infolist.emp_num } </a>
+					</p>
+					<p>
+						전화번호 :
+						<a id="infoPhone">${ Infolist.phone }</a>
+					</p>
+					<p>
+						이메일 :
+						<a id="infoEmail">${ Infolist.email }</a>
+					</p>
 				</div>
 			</div>
 		</div>
-		
-		<button	type="button" id="modify-button" onclick="openModifyWindow()" class="btn-info">수정하기</button>
+
+		<button type="button" id="modify-button" onclick="openModifyWindow()" class="btn-info">수정하기</button>
 		<div class="info_income">
 			<div class="info_income_textbox">
-				<label for="yearSelect">연도:</label>
-				&nbsp;	
-				<select	id="yearSelect" size="1" name="yearSelect" class="form-select" style="color: black;"></select>
-				&nbsp;&nbsp;&nbsp;&nbsp;
-				<label for="monthSelect">월:</label> 
-				&nbsp;	
-				<select	id="monthSelect" size="1" name="monthSelect" class="form-select" style="color: black;"></select>
+				<label for="yearSelect">연도:</label> &nbsp;
+				<select id="yearSelect" size="1" name="yearSelect" class="form-select" style="color: black;"></select>
+				&nbsp;&nbsp;&nbsp;&nbsp; <label for="monthSelect">월:</label> &nbsp;
+				<select id="monthSelect" size="1" name="monthSelect" class="form-select" style="color: black;"></select>
 
-				<button	name="print_income" id="print-button"	class="btn-info">출력하기</button>
+				<button name="print_income" id="print-button" class="btn-info">출력하기</button>
 			</div>
-<!-- ---------------------------------------------------------------------------------------------------------------------- -->
+			<!-- ---------------------------------------------------------------------------------------------------------------------- -->
 			<script>
 			document.addEventListener('DOMContentLoaded', function () {
 			    var yearSelect = document.getElementById("yearSelect");
@@ -594,8 +600,8 @@ label[for="monthSelect"] {
 
 
 </script>
-	<!-- ------------------------------------------------------------------------------------------------------------- -->
-			<table class="income_table"	border="1">
+			<!-- ------------------------------------------------------------------------------------------------------------- -->
+			<table class="income_table" border="1">
 				<tr>
 					<th>기본급</th>
 					<th id="payCell">${ Infolist.pay }</th>
@@ -620,24 +626,23 @@ label[for="monthSelect"] {
 
 		</div>
 		<div class="datepicker-container">
-			<form id="monthForm" action="../Controller/LoadDate.do"	method="post">
-				<input type="hidden" name="currentYear" id="currentYear" value="">
-				<input type="hidden" name="currentMonth" id="currentMonth" value="">
+			<form id="monthForm" action="../Controller/LoadDate.do" method="post">
+				<input type="hidden" name="currentYear" id="currentYear" value=""> <input type="hidden" name="currentMonth" id="currentMonth" value="">
 			</form>
 			<div class="navigation-btn">
 				<!-- 이전달로 이동하는 버튼 -->
-				<button	id="prev-month-btn"	onclick="changeMonth(-1)" class="btn-info">이전달</button>
+				<button id="prev-month-btn" onclick="changeMonth(-1)" class="btn-info">이전달</button>
 				<!-- 현재 월과 년도를 표시하는 곳 -->
 				<a id="current-month-year"></a>
 				<!-- 다음달로 이동하는 버튼 -->
-				<button	id="next-month-btn"	onclick="changeMonth(1)" class="btn-info">다음달</button>
+				<button id="next-month-btn" onclick="changeMonth(1)" class="btn-info">다음달</button>
 			</div>
 			<table id="datepicker-table">
 			</table>
 			<div class="info_check_buttons"></div>
 			<div class="check_btn">
-				<button	type="button" id='commute-button' class="btn-info">출근</button>
-				<button	type="button" id='leave-button' class="btn-info">퇴근</button>
+				<button type="button" id='commute-button' class="btn-info">출근</button>
+				<button type="button" id='leave-button' class="btn-info">퇴근</button>
 			</div>
 		</div>
 		<div class="info_commute"></div>

@@ -116,6 +116,21 @@ body {
 </style>
 
 <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+	// Add an event listener to call getMeetingRoomInfo on DOMContentLoaded
+	getMeetingRoomInfo();
+
+	// Set the initial value of the datepicker to the current date
+	var datePickerInput = document.getElementById('datePickerInput');
+	var today = new Date();
+	var yyyy = today.getFullYear();
+	var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+	var dd = String(today.getDate()).padStart(2, '0');
+	var currentDate = yyyy + '-' + mm + '-' + dd;
+	datePickerInput.value = currentDate;
+});
+
 	function showDatePicker() {
 		var datePickerInput = document.getElementById("datePickerInput");
 

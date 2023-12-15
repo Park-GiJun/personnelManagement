@@ -386,7 +386,38 @@ a:active, a:hover {
 
 </style>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js">
+
+function updateCalendar() {
+    var year = document.getElementById("yearSelect").value;
+    var month = document.getElementById("monthSelect").value;
+
+    // AJAX를 이용하여 서버로 요청을 보냅니다.
+    $.ajax({
+        url: "calendar.jsp",
+        type: "GET",
+        data: {
+            year: year,
+            month: month
+        },
+        success: function (data) {
+            // 서버로부터 받아온 데이터(data)를 사용하여 달력을 업데이트합니다.
+            // 이 부분은 서버에서 받아온 데이터를 어떻게 처리할지에 따라 구현이 달라집니다.
+            // data를 이용하여 달력을 업데이트하는 코드를 작성하세요.
+
+            // 예시: 받아온 데이터를 'calendar-container'라는 ID를 가진 엘리먼트의 innerHTML로 설정
+            document.getElementById('calendar-container').innerHTML = data;
+        },
+        error: function () {
+            console.error("Failed to fetch calendar data from the server.");
+        }
+    });
+}
+
+</script>
 <script type="text/javascript">
+
+
 function change() {
    var f = document.frm;
    f.submit();
@@ -399,6 +430,7 @@ function updateCalendar() {
 	   var url = "calendar.jsp?year=" + year + "&month=" + month;
 	   window.location.href = url;
 }
+	
 	
 function showDateAndAlert(day) {  
     // 클릭한 날짜를 JavaScript 변수에 저장

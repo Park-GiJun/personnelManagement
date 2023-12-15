@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Personal.PersonalDAO;
 import Personal.PersonalDTO;
@@ -59,6 +60,10 @@ public class LoginController extends HttpServlet {
 			request.getSession().setAttribute("currentDate", formattedDate);
 			request.getSession().setAttribute("inpteam", inpTeam);
 			response.sendRedirect("../Calender/Calender.jsp");
+			
+			HttpSession httpSession = request.getSession();
+			httpSession.setAttribute("userId", loginNum);
+			httpSession.setAttribute("userGrade", inpGrade);
 
 		} else {
 			// 로그인 실패
