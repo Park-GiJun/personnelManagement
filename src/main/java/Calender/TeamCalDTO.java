@@ -27,7 +27,7 @@ public class TeamCalDTO {
 	}
 	
 	
-	// (개인 일정) 날짜
+	
 	public String getteam() {
 		return team;
 	}
