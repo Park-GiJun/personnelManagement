@@ -30,6 +30,7 @@ public class HolidayApprovalController extends HttpServlet {
 		String[] selectedDepartments = req.getParameterValues("department");
 		int grade = (int) req.getSession().getAttribute("inpGrade");
 		String Team = (String) req.getSession().getAttribute("inpteam");
+		String Team_num = (String) req.getSession().getAttribute("inpteam_num");
 		System.out.println(grade);
 
 		if ("false".equals(approvalType)) {
@@ -58,9 +59,17 @@ public class HolidayApprovalController extends HttpServlet {
 					String start_vacation = values[1];
 					String end_vacation = values[2];
 					String team = values[3];
-					approval_num = "2";
-
-					dao.HolidayApprovalTrue(approval_num, emp_num, start_vacation, end_vacation, team);
+					if (grade == 4 || grade == 2) {
+						// 1차 승인 완료
+						approval_num = "1";
+					}
+					
+					if (grade == 3 || grade == 1) {
+						//승인 완료
+						approval_num = "2";
+					}
+ 
+					dao.HolidayApprovalTrue(approval_num, emp_num, start_vacation, end_vacation, team, grade);
 				}
 			}
 		}
@@ -108,7 +117,7 @@ public class HolidayApprovalController extends HttpServlet {
 		// 페이지 처리 end
 
 		// 게시물 목록 받기
-		List<HolidayApprovalDTO> holidayapprovalList = dao.selectList(grade, Team);
+		List<HolidayApprovalDTO> holidayapprovalList = dao.selectList(grade, Team, Team_num);
 
 		dao.close();// DB 연결닫기
 
@@ -125,6 +134,7 @@ public class HolidayApprovalController extends HttpServlet {
 		// 전달할 데이터를 request 영역애 저장후 List.jsp 로 포워드
 		req.setAttribute("holidayapprovalList", holidayapprovalList);
 		req.setAttribute("map", map);
+		req.setAttribute("grade", grade);
 		req.getRequestDispatcher("/HolidayApproval/HolidayApproval.jsp").forward(req, resp);
 	}
 }

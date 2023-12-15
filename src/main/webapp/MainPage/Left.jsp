@@ -10,11 +10,8 @@
 }
 
 .left_table {
-	margin-top:0.5%;
-	margin-left:0.5%;
-	border-radius: 50px;
 	width: 10%;
-	height: 98%;
+	height: 100%;
 	background: rgb(68, 74, 83);
 	opacity: 1;
 	position: absolute;
@@ -170,6 +167,20 @@
 			</div>
 			<div class="left_MeetingRoomReservation_background">
 				<a class="left_MeetingRoom_section" href="../Controller/MeetingRoomReservationManagement.do"> <span class="left_MeetingRoomReservation_text">회의실관리</span>
+				</a>
+			</div>
+			<%
+			}
+			%>
+		</div>
+		
+		<div>
+			<%
+			inpGrade = (int) session.getAttribute("inpGrade");
+			if (inpGrade == 4) {
+			%>
+			<div class="left_Holiday_Approval_background">
+				<a class="left_salaryManagement_section" href="../Controller/HolidayApprovalLoad.do"> <span class="left_salaryManagement_text">휴가관리</span>
 				</a>
 			</div>
 			<%

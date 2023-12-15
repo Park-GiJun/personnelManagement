@@ -41,16 +41,19 @@ public class NewRegistController extends HttpServlet {
 		String emp_num = req.getParameter("emp_num");
 		String emp_grade = req.getParameter("emp_grade");
 		String team = req.getParameter("team");
+		String team_num = req.getParameter("team_num");
 		
 		String NewRegistType = req.getParameter("NewRegistType");
 		String nameinfo = req.getParameter("nameinfo");
 		String emp_numinfo = req.getParameter("emp_numinfo");
 		String emp_grade_Edit = req.getParameter("emp_grade_Edit");
 		String team_Edit = req.getParameter("team_Edit");
+		String team_num_Edit = req.getParameter("team_num_Edit");
+		System.out.println(team_num_Edit);
 		
 		if (emp_grade.equals("임원") || emp_grade_Edit.equals("임원")) {
 			grade = "2";
-		} else if (emp_grade.equals("과장") || emp_grade_Edit.equals("과장")) {
+		} else if (emp_grade.equals("부장") || emp_grade_Edit.equals("부장")) {
 			grade = "3";
 		} else if (emp_grade.equals("팀장") || emp_grade_Edit.equals("대리")) {
 			grade = "4";
@@ -69,13 +72,13 @@ public class NewRegistController extends HttpServlet {
 		System.out.println(NewRegistType);
 		if (NewRegistType.equals("NewRegist")) {
 			// 사원 등록
-			dao.NewRegist(name, emp_num, emp_grade, team, grade);
+			dao.NewRegist(name, emp_num, emp_grade, team, grade, team_num);
 			// 휴가테이블 사원정보 입력
 			sDao.noExistDate(emp_num, formattedYearMonth);
 			dao.NewRegistHoliday(emp_num);
 		} else if (NewRegistType.equals("Edit")) {
 			// 사원정보 수정
-			dao.RegistEdit(emp_grade_Edit, team_Edit, grade, nameinfo, emp_numinfo);
+			dao.RegistEdit(emp_grade_Edit, team_Edit, grade, team_num_Edit, nameinfo, emp_numinfo);
 		}
 
 		Map<String, Object> map = new HashMap<String, Object>();

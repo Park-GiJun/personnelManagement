@@ -6,10 +6,31 @@ public class HolidayApprovalDTO {
 	private String end_vacation;
 	private String team;
 	private String Approval;
+	private String team_approval;
 	private String emp_num;
 	private String emp_grade;
+	private String grade;
+	private String team_num;
 	
 	
+	public String getTeam_approval() {
+		return team_approval;
+	}
+	public void setTeam_approval(String team_approval) {
+		this.team_approval = team_approval;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+	public String getTeam_num() {
+		return team_num;
+	}
+	public void setTeam_num(String team_num) {
+		this.team_num = team_num;
+	}
 	public String getName() {
 		return name;
 	}
