@@ -204,12 +204,11 @@ body {
 							<th align="center" width="25%">
 								<select id="emp_grade" name="emp_grade" size="1" style="width: 90%;" class="form-select">
 									<option value="">선택하세요.</option>
-									<option value="부장">부장</option>
-									<option value="차장">차장</option>
+									<option value="임원">임원</option>
 									<option value="과장">과장</option>
+									<option value="팀장">팀장</option>
 									<option value="대리">대리</option>
 									<option value="사원">사원</option>
-									<option value="인턴">인턴</option>
 							</select>
 							</th>
 
@@ -255,12 +254,11 @@ body {
 								<th align="center" width="25%" height="100%">
 									<select id="emp_grade_Edit"	name="emp_grade_Edit" size="1" style="width: 90%;" class="form-select">
 										<option value="">선택하세요.</option>
-										<option value="부장">부장</option>
-										<option value="차장">차장</option>
+										<option value="임원">임원</option>
 										<option value="과장">과장</option>
+										<option value="팀장">팀장</option>
 										<option value="대리">대리</option>
 										<option value="사원">사원</option>
-										<option value="인턴">인턴</option>
 									</select>
 								</th>
 

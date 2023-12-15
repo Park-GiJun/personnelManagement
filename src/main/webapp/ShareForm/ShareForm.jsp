@@ -21,6 +21,11 @@ body {
 	font-size: 16px;
 }
 
+td {
+   border: 1px solid gray; /* 테두리 스타일 지정 */
+   padding: 1px; /* 셀 안의 내용과 테두리 사이의 간격 조정 */
+}
+
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
 	position: relative;
