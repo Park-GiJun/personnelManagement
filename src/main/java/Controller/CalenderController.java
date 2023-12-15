@@ -52,12 +52,12 @@ public class CalenderController extends HttpServlet {
 		
 		System.out.println("aaaaa " + selecteddate);
 		
-		String Personal_diaray_schedule = request.getParameter("Personal_diaray_schedule");
+		String selectedContent = request.getParameter("selectedContent");
 		
-		if (Personal_diaray_schedule != null && !Personal_diaray_schedule.isEmpty()) {
+		if (selectedContent != null && !selectedContent.isEmpty()) {
 	        // 선택한 일정이 존재하면 삭제 처리
 	        dao = new CalenderDAO();
-	        int result = dao.deletePost(Personal_diaray_schedule);
+	        int result = dao.deletePost(selectedContent);
 	        dao.close();
 
 	        if (result > 0) {
