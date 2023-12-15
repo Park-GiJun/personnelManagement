@@ -28,6 +28,9 @@ public class HolidayApprovalController extends HttpServlet {
 		String approval_num = "";
 
 		String[] selectedDepartments = req.getParameterValues("department");
+		int grade = (int) req.getSession().getAttribute("inpGrade");
+		String Team = (String) req.getSession().getAttribute("inpteam");
+		System.out.println(grade);
 
 		if ("false".equals(approvalType)) {
 			
@@ -105,7 +108,7 @@ public class HolidayApprovalController extends HttpServlet {
 		// 페이지 처리 end
 
 		// 게시물 목록 받기
-		List<HolidayApprovalDTO> holidayapprovalList = dao.selectList(map);
+		List<HolidayApprovalDTO> holidayapprovalList = dao.selectList(grade, Team);
 
 		dao.close();// DB 연결닫기
 

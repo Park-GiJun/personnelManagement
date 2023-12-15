@@ -27,10 +27,10 @@ public class HolidayApprovalLoadController extends HttpServlet {
 		System.out.println("Holiday.do");
 
 		String userId = (String) req.getSession().getAttribute("loginid");
+		int grade = (int) req.getSession().getAttribute("inpGrade");
 		String Team = (String) req.getSession().getAttribute("inpteam");
-
-		String start_vacation = req.getParameter("start_vacation");
-		String end_vacation = req.getParameter("end_vacation");
+		System.out.println(grade);
+		System.out.println(Team);
 
 		dto.setemp_num(userId);
 
@@ -71,7 +71,7 @@ public class HolidayApprovalLoadController extends HttpServlet {
 		// 페이지 처리 end
 
 		// 게시물 목록 받기
-		List<HolidayApprovalDTO> holidayapprovalList = dao.selectList(map);
+		List<HolidayApprovalDTO> holidayapprovalList = dao.selectList(grade, Team);
 
 		dao.close();// DB 연결닫기
 

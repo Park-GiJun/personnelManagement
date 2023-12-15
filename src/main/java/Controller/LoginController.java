@@ -32,7 +32,7 @@ public class LoginController extends HttpServlet {
 		String inpTeam = String.valueOf(dto.getTeam());
 		String inploginPwd = dto.getPassword();
 		int inpGrade = dto.getGrade();
-
+		
 		System.out.println("inp : " + inploginNum + " " + inploginPwd + " db : " + loginNum + " " + loginPassword);
 		
 

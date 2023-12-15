@@ -32,16 +32,37 @@ public class HolidayApprovalDAO extends DBConnPool {
 	}
 
 	// 신청한 휴가 목록 조회 쿼리
-	public List<HolidayApprovalDTO> selectList(Map<String, Object> map) {
+	public List<HolidayApprovalDTO> selectList(int Grade, String Team) {
 		List<HolidayApprovalDTO> bbs = new Vector<HolidayApprovalDTO>();
-
-		String query = "SELECT * FROM emp JOIN holiday_check ON emp.emp_num = holiday_check.emp_num ORDER BY approval_num, start_vacation, grade, emp.team";
-
+		String query = "";
+		
+		
+		if (Grade == 1) {
+			query = "SELECT * FROM emp JOIN holiday_check ON emp.emp_num = holiday_check.emp_num "
+					+ "WHERE grade <= 3 "
+					+ "ORDER BY approval_num, start_vacation, grade, emp.team";			
+		}
+		
+		if (Grade == 2) {
+			query = "SELECT * FROM emp JOIN holiday_check ON emp.emp_num = holiday_check.emp_num "
+					+ "WHERE grade <= 3 AND emp.team = ? "
+					+ "ORDER BY approval_num, start_vacation, grade, emp.team";
+		}
+		
+		if (Grade == 3) {
+			query = "SELECT * FROM emp JOIN holiday_check ON emp.emp_num = holiday_check.emp_num "
+					+ "WHERE grade >= 4 AND emp.team = ? "
+					+ "ORDER BY approval_num, start_vacation, grade, emp.team";
+		}
+		
 		try {
 			// 쿼리 실행
-			stmt = con.prepareStatement(query);
+			psmt = con.prepareStatement(query);
+			if (Grade > 1) {
+				psmt.setString(1, Team);
+			}
 
-			rs = stmt.executeQuery(query);
+			rs = psmt.executeQuery();
 			while (rs.next()) {
 				HolidayApprovalDTO dto = new HolidayApprovalDTO();
 

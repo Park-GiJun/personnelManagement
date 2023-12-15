@@ -147,7 +147,7 @@
 		<div>
 			<%
 			int inpGrade = (int) session.getAttribute("inpGrade");
-			if (inpGrade < 3) {
+			if (inpGrade < 4) {
 			%>
 			<div class="left_new_Id_background">
 				<a class="left_new_id_section" href="../Controller/NewRegistLoad.do">
