@@ -103,17 +103,18 @@ public class CalenderDAO extends DBConnPool {
 	public int insertWrite(CalenderDTO dto) {
 	    int result = 0;
 
-	    try {
-	        String query = "INSERT INTO Personal_diaray (Personal_diaray_schedule) VALUES (?)";
-
-	        psmt = con.prepareStatement(query);
-	        psmt.setString(1, dto.getPersonal_diaray_schedule());
-	        result = psmt.executeUpdate();
+	    try  {
+	    	String query = "INSERT INTO Personal_diaray ( "
+	    			     + " Personal_diaray_schedule) "
+	    			     + " VALUES ( "
+	    			     + " seq_board_num.NEXTVAL,?)";
+	    	psmt = con.prepareStatement(query);
+	    	psmt.setString(1, dto.getPersonal_diaray_schedule());
+	    	result = psmt.executeUpdate();
 	    } catch (Exception e) {
-	        System.out.println("게시물 입력 중 예외 발생");
-	        e.printStackTrace();
+	    	System.out.println("게시물 입력 중 예외 발생");
+	    	e.printStackTrace();
 	    }
-
 	    return result;
 	}
 	
@@ -121,7 +122,8 @@ public class CalenderDAO extends DBConnPool {
 	
 	
 	// 3 삭제하기 기능
-	public int deleteCalender(List<String> personal_diaray_schedule) {
+	// 추가된 메서드: 여러 개의 일정 삭제
+    public int deleteCalender(List<String> selectedSchedules) {
         int result = 0;
 
         try {
@@ -129,7 +131,7 @@ public class CalenderDAO extends DBConnPool {
             String query = "DELETE FROM Personal_diaray WHERE personal_diaray_schedule=?";
             psmt = con.prepareStatement(query);
 
-            for (String schedule : personal_diaray_schedule) {
+            for (String schedule : selectedSchedules) {
                 psmt.setString(1, schedule);
                 psmt.addBatch();
             }
@@ -146,10 +148,35 @@ public class CalenderDAO extends DBConnPool {
         }
 
         return result;
+    }	
+    
+    
+    
+	
+    
+ // CalenderDAO 클래스에 추가된 deleteSchedule 메서드
+    public int deleteSchedule(int scheduleId) {
+        int result = 0;
+
+        try {
+            String query = "DELETE FROM Personal_diaray WHERE schedule_id = ?";
+            psmt = con.prepareStatement(query);
+            psmt.setInt(1, scheduleId);
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("일정 삭제 중 예외 발생");
+            e.printStackTrace();
+        } finally {
+            // 리소스 해제
+            close();
+        }
+
+        return result;
     }
+    
+    
 	
-	
-	public int deleteCalenderByDate(String selecteddate, String emp_num) {
+    public int deleteCalenderByDate(String selecteddate, String emp_num) {
         int result = 0;
 
         try {
@@ -163,9 +190,12 @@ public class CalenderDAO extends DBConnPool {
 
             // 쿼리 실행
             result = psmt.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("일정 삭제 중 예외 발생");
             e.printStackTrace();
+        } finally {
+            // 리소스 해제
+            close();
         }
 
         return result;

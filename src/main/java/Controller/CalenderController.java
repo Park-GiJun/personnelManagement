@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import Calender.CalenderDAO;
 import Calender.CalenderDTO;
@@ -27,7 +26,7 @@ public class CalenderController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("Person_Cal.do");
-		
+		 System.out.println("");
 		// DAO 생성
 		CalenderDAO dao = new CalenderDAO();
 		
@@ -57,8 +56,7 @@ public class CalenderController extends HttpServlet {
 		            selectedDay = "0" + dayValue;
 		        }
 		    } catch (NumberFormatException e) {
-		        // 정수로 변환 중 예외가 발생한 경우
-		        e.printStackTrace(); // 또는 적절한 로깅 처리
+		    	
 		    }
 		} else {
 		    // selectedDay가 null이거나 비어있는 경우 처리
@@ -72,11 +70,26 @@ public class CalenderController extends HttpServlet {
 		
 		System.out.println("aaaaa " + selecteddate);
 		
+		 // 추가된 코드: 선택한 일정 삭제
+		String[] selectedContent = request.getParameterValues("selectedContent");
+		//System.out.println("확인용2222222222222222222"); 잘 나옴
+        if (selectedContent != null && selectedContent.length > 0) {
+            // 선택한 일정이 있을 경우 삭제
+            for (String scheduleId : selectedContent) {
+                // scheduleId를 이용하여 삭제 수행
+                dao.deleteCalender(Arrays.asList(scheduleId));
+                System.out.println("확인용333333333333333333");
+            }
+        }
 		
-		String selectedSchedules = request.getParameter("selectedSchedules");
-		
-		
-		
+        
+        System.out.println();
+        System.out.println("list 확인용 11111111 >>>>>>>>>>>" + selectedContent);  // 자바스크립트에서 저장된 리스트 값 출력 시험
+        //for (int i = 0; i < selectedContent.length; i++) {            
+        	//System.out.println(selectedContent[i]);        
+        //}
+        System.out.println();
+        
 		
 		if (searchWord != null) {
 			map.put("searchField", searchField);
@@ -114,20 +127,16 @@ public class CalenderController extends HttpServlet {
 		map.put("totalCount", totalCount);
 		map.put("pageSize", pageSize);
 		map.put("pageNum", pageNum);
+		
+	
 
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);
 		request.setAttribute("map2", map);
 		request.setAttribute("selecteddate", selecteddate);
-		request.setAttribute("selectedSchedules", selectedSchedules); // 리스트 값
+		//request.setAttribute("selectedContent", selectedContent); // 리스트 값
 		request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
 		
 	}
 	
-	
-	
 }
-	
-	
-	
-

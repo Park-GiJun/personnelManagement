@@ -492,48 +492,7 @@ a:active, a:hover {
 
 
 
-
-<script src="https://code.jquery.com/jquery-3.6.4.min.js">
-
-function updateCalendar() {
-    var year = document.getElementById("yearSelect").value;
-    var month = document.getElementById("monthSelect").value;
-
-    // AJAX를 이용하여 서버로 요청을 보냅니다.
-    $.ajax({
-        url: "Scl.jsp",
-        type: "GET",
-        data: {
-            year: year,
-            month: month
-        },
-        success: function (data) {
-            // 서버로부터 받아온 데이터(data)를 사용하여 달력을 업데이트합니다.
-            // 이 부분은 서버에서 받아온 데이터를 어떻게 처리할지에 따라 구현이 달라집니다.
-            // data를 이용하여 달력을 업데이트하는 코드를 작성하세요.
-
-            // 예시: 받아온 데이터를 'calendar-container'라는 ID를 가진 엘리먼트의 innerHTML로 설정
-            document.getElementById('calendar-container').innerHTML = data;
-        },
-        error: function () {
-            console.error("Failed to fetch calendar data from the server.");
-        }
-    });
-}
-
-window.onload = function () {
-    updateCalendar();
-};
-
-
-</script>
-
-
 <script type="text/javascript">
-
-
-
-
 
 function showDateAndAlert(day) {
     // 클릭한 날짜를 JavaScript 변수에 저장
@@ -550,6 +509,31 @@ function showDateAndAlert(day) {
 		// 폼 제출
 		document.forms["calender_form"].submit();
 	}
+
+
+
+function sendUserAddedScheduleToServer(userAddedSchedule) {
+    // Ajax를 사용하여 서버로 데이터 전송
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "../Controller/CalenderController.do", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // 서버 응답에 대한 추가 처리
+            console.log('서버 응답:', xhr.responseText);
+            // 여기에서 화면 갱신 등의 작업을 수행할 수 있습니다.
+            location.reload(); // 예제로 간단히 페이지 리로드를 수행합니다.
+        }
+    };
+    
+    // 서버로 전송할 데이터 조합
+    var data = "userAddedSchedule=" + encodeURIComponent(userAddedSchedule);
+    
+    // 데이터 전송
+    xhr.send(data);
+}
+
+
 
 	//일정 추가하기 버튼 눌렀을 때 설정
 	// 일정 추가를 위한 고유한 식별자
@@ -589,43 +573,62 @@ function showDateAndAlert(day) {
 			alert("일정을 입력해주세요.");
 		} else {
 			// 사용자가 "취소"를 클릭하거나 대화상자를 아무 값도 입력하지 않고 닫은 경우
-			console.log("사용자가 대화상자를 취소했거나 닫았습니다.");
+			console.log("일정 저장을 취소하였습니다.");
 		}
 	}
 
-	var selectedSchedule;
+	
 	
 	 // 선택한 일정 삭제하기 버튼 눌렀을 때 설정
-    function confirmDelete() {
-    var selectedSchedules = document.querySelectorAll('.selectedScheduleIds');
+function confirmDelete() {
+        var selectedSchedules = document.querySelectorAll('.scheduleLink');
 
-    if (selectedSchedules.length > 0) {
-        var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
+        if (selectedSchedules.length > 0) {
+            var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
 
-        if (confirmed) {
-            // 선택한 일정의 ID를 저장할 배열
-            var selectedScheduleIds = [];
+            if (confirmed) {
+                // 선택한 일정의 ID를 저장할 배열
+                var selectedScheduleIds = Array.from(selectedSchedules).map(function (schedule) {
+                    return schedule.getAttribute('data-schedule');
+                });
 
-            // 각 선택한 일정의 ID를 배열에 추가
-            selectedSchedules.forEach(function (link) {
-                var scheduleId = link.getAttribute('data-schedule-id');
-                if (scheduleId) {
-                    selectedScheduleIds.push(scheduleId);
-                }
-            });
-
-            // 콘솔에 선택한 일정의 ID 출력
-            console.log('선택한 일정의 ID: ' + selectedScheduleIds.join(', '));
-
-            // 이후의 삭제 처리 등을 진행
-            // ...
+                // 선택한 일정의 ID를 서버로 전송
+                sendSelectedSchedulesToServer(selectedScheduleIds);
+            }
+        } else {
+            alert("삭제할 일정을 선택해주세요.");
         }
-    } else {
-        alert("삭제할 일정을 선택해주세요.");
     }
+	 
+	 
+function sendSelectedSchedulesToServer(selectedScheduleIds) {
+    // 서버로 보낼 데이터 객체 생성
+    var data = {
+        selectedSchedules: selectedScheduleIds
+    };
 
-    
-}
+    // fetch를 사용하여 서버로 데이터 전송
+    fetch('/Controller/CalenderController.do', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); // 서버에서의 응답을 JSON으로 파싱
+    })
+    .then(data => {
+        // 서버 응답에 대한 추가 처리
+        console.log('서버 응답:', data);
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
+}	 
 	 
 	 
     console.log('잘 실행되는지 확인용1111111111111111111111');
@@ -633,7 +636,7 @@ function showDateAndAlert(day) {
 
   // 링크 클릭 시 선택 및 해제를 토글하는 함수
   var selectedSchedules = [];
-
+ 
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('scheduleLink')) {
         event.preventDefault();
@@ -657,7 +660,16 @@ document.addEventListener('click', function (event) {
         console.log('선택한 일정들:', selectedSchedules);
         
     }
+    
+ 	// Ajax를 사용하여 Java 서버에 배열 전송
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/Controller/CalenderController.do", true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.send(JSON.stringify({ array: selectedSchedules }));
+
 });
+
+
     
 </script>
 
@@ -695,7 +707,7 @@ body {
 		<input type="hidden" name="selectedYear" id="selectedYear" value="<%=year%>">
 		<input type="hidden" name="selectedMonth" id="selectedMonth" value="<%=month%>">
 		<input type="hidden" name="selectedDay" id="selectedDay" value="">
-		<input type="hidden" name="selectedContent" id="selectedContent" value="selectedSchedule">
+		<!-- <input type="hidden" name="selectedContent" id="selectedContent" value="selectedSchedules"> -->
 		<!-- <input type="hidden" name="selectedContent" id="selectedContent" value="<c:out value="${empty row.personal_diaray_schedule ? '' : row.personal_diaray_schedule}"/>"> -->
 
 		<div class="middle-button">
@@ -722,7 +734,7 @@ body {
 			
 			<h2 class='re_day'>${selecteddate}</h2>
 		
-			<button class='plus_btn' onclick="confirmPlus();">추가하기</button>
+			<button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>
 			<button class='del_btn' onclick="confirmDelete();">삭제하기</button>
 
 
@@ -739,11 +751,11 @@ body {
                 			<c:forEach items="${calenderlists}" var="row" varStatus="loop">
                     			<tr>
                     				<td>
-										${loop.index + 1} .
+										${loop.index + 1} <!-- 각 일정마다 번호 출력 -->
 									</td>
                         			<td>
                             			<a href="#" class="scheduleLink" data-schedule="${row.personal_diaray_schedule}">
-                                			${row.personal_diaray_schedule}
+                                			${row.personal_diaray_schedule}  <!-- db에 있는 개인 일정 출력 -->
                             			</a>
                         			</td>
                     			</tr>
@@ -818,7 +830,7 @@ body {
 					int preDate = preCal.get(Calendar.DATE);
 
 					out.print("<tr>");
-					// 1일 앞 부분
+					// 전 달 끝부분 일자 출력
 					for (int i = 1; i < week; i++) {
 						//out.print("<td>&nbsp;</td>");
 						out.print("<td class='gray'><button disabled>" + (preDate++) + "</button></td>");
@@ -837,7 +849,7 @@ body {
 						}
 					}
 
-					// 마지막 주 마지막 일자 다음 처리..
+					// 다음 달 첫부분 일자 출력
 					int n = 1;
 					for (int i = (week - 1) % 7; i < 6; i++) {
 						// out.print("<td>&nbsp;</td>");
