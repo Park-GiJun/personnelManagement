@@ -162,5 +162,40 @@ public class FreeboardFormDAO extends DBConnPool {
 				+ " WHERE anno_board_num=" + anno_board_num);
 		return result;
 	}
+	
+	//게시물 삭제
+	public String Elimination(int anno_board_num) {
+		
+		try {
+			System.out.println("게시글 삭제 DAO");
+			String query = "DELETE FROM ANNO_BOARD WHERE ANNO_BOARD_NUM =?";
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, anno_board_num);
+			psmt.executeUpdate();
+			
+		} catch(Exception e) {
+			System.out.println("게시물 삭제 중 예외 발생");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	//게시물 삭제시 댓글 삭제
+	
+	public String Eliminations(int anno_board_num) {
+		
+		try {
+			System.out.println("게시글 댓글 삭제 DAO");
+			String query = "DELETE FROM Comments WHERE ANNO_BOARD_NUM =?";
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, anno_board_num);
+			psmt.executeUpdate();
+			
+		} catch(Exception e) {
+			System.out.println("게시물 삭제 중 예외 발생");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 
 }

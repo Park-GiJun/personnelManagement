@@ -57,7 +57,6 @@ public class HolidayApprovalController extends HttpServlet {
 					String team = values[3];
 					approval_num = "2";
 
-					dao.TeamHoliday(team, emp_num, start_vacation, end_vacation);
 					dao.HolidayApprovalTrue(approval_num, emp_num, start_vacation, end_vacation, team);
 				}
 			}

@@ -44,7 +44,6 @@ public class CommentsController extends HttpServlet {
 	     // 댓글 리스트 가져오기
 		List<CommentsDTO> Commentsdto1 = dao.selectView(anno_board_num);
 
-        // 가져온 댓글 리스트를 request에 저장
         request.setAttribute("Commentsdto1", Commentsdto1);
 		
 		// 포워딩

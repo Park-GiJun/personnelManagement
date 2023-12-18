@@ -116,6 +116,7 @@ public class CommentsDAO extends DBConnPool {
 				comments.setanno_board_num(rs.getInt(1));
 				comments.setTurn(rs.getInt(2));
 				comments.setcontent(rs.getString(3));
+				comments.setpass(rs.getInt(4));
 				list.add(comments);
 
 				System.out.println(rs.getInt(1));
@@ -176,4 +177,40 @@ public class CommentsDAO extends DBConnPool {
 	        }
 	        return commentsList;
 	    }
+	  
+	  
+//댓글삭제
+		public String EliminationsComments(int Turn) {
+			
+			try {
+				System.out.println("댓글 삭제 DAO");
+				String query = "DELETE FROM Comments WHERE Turn =?";
+				psmt = con.prepareStatement(query);
+				psmt.setInt(1, Turn);
+				psmt.executeUpdate();
+				
+			} catch(Exception e) {
+				System.out.println("게시물 삭제 중 예외 발생");
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		//댓글 패스워드
+	  public int Commentpass(int Turn) {
+			int resurt=0;
+		  try {
+				System.out.println("댓글 삭제 전 패스워드 조회 DAO");
+				String query = "SELECT * FROM Comments WHERE Turn =?";
+				psmt = con.prepareStatement(query);
+				psmt.setInt(1, Turn);
+				psmt.executeUpdate();
+				
+			} catch(Exception e) {
+				System.out.println("댓글 삭제 중 예외 발생");
+				e.printStackTrace();
+			}
+			return resurt;
+	  }
+		
 }

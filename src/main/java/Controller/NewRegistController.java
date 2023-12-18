@@ -48,18 +48,16 @@ public class NewRegistController extends HttpServlet {
 		String emp_grade_Edit = req.getParameter("emp_grade_Edit");
 		String team_Edit = req.getParameter("team_Edit");
 		
-		if (emp_grade.equals("부장") || emp_grade_Edit.equals("부장")) {
+		if (emp_grade.equals("임원") || emp_grade_Edit.equals("임원")) {
 			grade = "2";
-		} else if (emp_grade.equals("차장") || emp_grade_Edit.equals("차장")) {
-			grade = "3";
 		} else if (emp_grade.equals("과장") || emp_grade_Edit.equals("과장")) {
+			grade = "3";
+		} else if (emp_grade.equals("팀장") || emp_grade_Edit.equals("대리")) {
 			grade = "4";
-		} else if (emp_grade.equals("대리") || emp_grade_Edit.equals("대리")) {
+		} else if (emp_grade.equals("대리") || emp_grade_Edit.equals("사원")) {
 			grade = "5";
-		} else if (emp_grade.equals("사원") || emp_grade_Edit.equals("사원")) {
+		} else if (emp_grade.equals("사원") || emp_grade_Edit.equals("인턴")) {
 			grade = "6";
-		} else if (emp_grade.equals("인턴") || emp_grade_Edit.equals("인턴")) {
-			grade = "7";
 		}
 		
 		
