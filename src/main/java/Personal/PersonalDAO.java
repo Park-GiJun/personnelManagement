@@ -1,6 +1,9 @@
 package Personal;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import DBcontrol.DBConnPool;
@@ -101,7 +104,7 @@ public class PersonalDAO extends DBConnPool {
 	}
 
 	public void modifyInfo(String emp, String phone, String email) {
-		
+
 		System.out.println(emp + " " + phone + " " + email);
 		try {
 			String query = "UPDATE emp SET phone=?, email=? WHERE emp_num=?";
@@ -112,10 +115,104 @@ public class PersonalDAO extends DBConnPool {
 			psmt.setString(3, emp);
 
 			psmt.executeUpdate();
-			
+
 		} catch (Exception e) {
 			System.out.println("사용자 정보 업데이트중 예외 발생");
 			e.printStackTrace();
 		}
+	}
+
+	public List<Depart> PersonList() {
+
+		List<Depart> org = new ArrayList<>();
+		Map<String, Depart> departMap = new HashMap<>();
+		Map<String, Team> teamMap = new HashMap<>();
+		String query = "SELECT * FROM emp ORDER BY  TEAM_NUM , GRADE, TEAM , name, EMP_NUM";
+
+		try {
+
+			psmt = con.prepareStatement(query);
+
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				PersonalDTO dto = new PersonalDTO();
+				dto.setName(rs.getString("name"));
+				dto.setEmpNum(rs.getString("emp_num"));
+				dto.setEmp_grade(rs.getString("emp_grade"));
+				dto.setTeam(rs.getString("team"));
+				dto.setTeamDetail(rs.getString("team_num"));
+
+				String departName = dto.getTeam();
+				String teamName = dto.getTeamDetail();
+				String personName = dto.getName();
+
+				// 부서 객체 가져오기, 없으면 생성
+				Depart depart = departMap.getOrDefault(departName, new Depart());
+				depart.setcDepartname(departName);
+
+				// 팀 객체 가져오기, 없으면 생성
+				Team team = teamMap.getOrDefault(teamName, new Team());
+				team.setName(teamName);
+
+				// 개인 매핑 추가
+				if (team.getTeam() == null) {
+					team.setTeam(new HashMap<>());
+				}
+				team.getTeam().put(personName, dto);
+
+				// 팀이 부서에 없으면 추가
+				if (!depart.getDeparts().contains(team)) {
+					depart.getDeparts().add(team);
+				}
+
+				// 맵에 부서 객체 저장
+				departMap.put(departName, depart);
+				// 맵에 팀 객체 저장
+				teamMap.put(teamName, team);
+
+				// 최종 리스트에 부서 객체 추가
+				if (!org.contains(depart)) {
+					org.add(depart);
+				}
+			}
+
+		} catch (Exception e) {
+			System.out.println("사람 리스트 불러오는중 예외 발생");
+			e.printStackTrace();
+		}
+		return org;
+	}
+	
+	public PersonalDTO findPerson(String empnum) {
+		
+		PersonalDTO dto = new PersonalDTO();
+		
+		String query ="SELECT * FROM emp WHERE emp_num=?";
+		
+		try {
+			
+			psmt = con.prepareStatement(query);
+			
+			psmt.setString(1, empnum);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				dto.setTeam(rs.getString("team"));
+				dto.setEmp_grade(rs.getString("emp_grade"));
+				dto.setEmpNum(rs.getString("emp_num"));
+				dto.setName(rs.getString("name"));
+				
+			}
+			
+		} catch (Exception e) {
+			System.out.println("사람 찾는중 예외 발생");
+			e.printStackTrace();
+
+		}
+		
+		return dto;
 	}
 }

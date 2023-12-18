@@ -64,6 +64,7 @@ public class LoginController extends HttpServlet {
 			HttpSession httpSession = request.getSession();
 			httpSession.setAttribute("userId", loginNum);
 			httpSession.setAttribute("userGrade", inpGrade);
+			httpSession.setAttribute("userTeam", inpTeam);
 
 		} else {
 			// 로그인 실패

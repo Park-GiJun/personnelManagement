@@ -1,6 +1,8 @@
 package Personal;
 
 import java.sql.Date;
+import java.util.List;
+import java.util.Map;
 
 public class PersonalDTO {
 	private String name;
@@ -12,6 +14,15 @@ public class PersonalDTO {
 	private String phone;
 	private Date work_start_date;
 	private int grade;
+	private String teamDetail;
+
+	public String getTeamDetail() {
+		return teamDetail;
+	}
+
+	public void setTeamDetail(String teamDetail) {
+		this.teamDetail = teamDetail;
+	}
 
 	public String getName() {
 		return name;
