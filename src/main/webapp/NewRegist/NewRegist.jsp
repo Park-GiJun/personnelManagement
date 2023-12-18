@@ -49,7 +49,7 @@ td {
 }
 
 .table-dark2 {
-	background-color: rgb(54, 60, 67);;
+	background-color: rgb(54, 60, 67);
 	--bs-table-color: #fff;
 	color: var(--bs-table-color);
 }
@@ -86,8 +86,9 @@ td {
 }
 
 .form-select {
+	margin-top: 2%;
+	margin-bottom: 2%;
 	padding: 0rem 0rem 0rem 3rem;
-	height: 80%;
 }
 
 .form-control {
@@ -158,9 +159,11 @@ body {
 			action="../Controller/NewRegistTeamSearch.do" accept-charset="UTF-8">
 			<div class="form-check">
 				<label>
-					<select id="department_search" name="department_search" size="1" style="width: 100%; height: 100%;" class="form-select" onchange="submitForm()">
+					<select id="department_search" name="department_search" size="1" style="width: 120%; height: 100%;" class="form-select" onchange="submitForm()">
 							<option value="전체">선택해주세요.</option>
 							<option value="전체">전체</option>
+							<option value="임원">임원급</option>
+							<option value="">------</option>
 							<option value="개발">개발팀전체</option>
 							<option value="개발 1팀">개발 1팀</option>
 							<option value="개발 2팀">개발 2팀</option>
@@ -188,7 +191,7 @@ body {
 			<!-- 신입사원 등록 양식 -->
 			<div class="middle-NewRegist-container">
 				<div class="table-container">
-					<table border="1" width="98%" height="26%">
+					<table border="1" width="98%">
 						<tr align="center" class="table-dark1">
 							<th colspan='5' align="center" scope="row">신입사원 정보 등록</th>
 						</tr>
@@ -198,18 +201,18 @@ body {
 							<td width="25">직급</td>
 							<td width="25" colspan='2'>부서</td>
 						</tr>
-						<tr class="table-dark3">
-							<th align="center" width="20%" height="100%" scope="row">
-								<input type="text" class="form-control" name="name" placeholder="이름" style="width: 90%; height: 80%; box-sizing: border-box; text-align: center;">
+						<tr class="table-dark3" align="center">
+							<th align="center" width="20%" scope="row">
+								<input type="text" class="form-control" name="name" placeholder="이름" style="width: 90%; box-sizing: border-box; text-align: center;">
 							</th>
 							<th align="center" width="20%">
-								<input type="text" class="form-control" name="emp_num" placeholder="사번" style="width: 90%; height: 80%; box-sizing: border-box; text-align: center;">
+								<input type="text" class="form-control" name="emp_num" placeholder="사번" style="width: 90%; box-sizing: border-box; text-align: center;">
 							</th>
 
 							<th align="center" width="20%">
 								<select id="emp_grade" name="emp_grade" size="1" style="width: 90%;" class="form-select">
 									<option value="">선택하세요.</option>
-									<option value="임원">임원</option>
+									<option value="이사">이사</option>
 									<option value="부장">부장</option>
 									<option value="팀장">팀장</option>
 									<option value="대리">대리</option>
@@ -220,6 +223,7 @@ body {
 							<th align="center" width="20%">
 								<select id="team" name="team" size="1" style="width: 90%;" class="form-select">
 									<option value="">선택하세요.</option>
+									<option value="임원">임원</option>
 									<option value="인사">인사</option>
 									<option value="개발">개발</option>
 									<option value="디자인">디자인</option>
@@ -229,6 +233,7 @@ body {
 							<th align="center" width="20%">
 								<select id="team_num" name="team_num" size="1" style="width: 90%;" class="form-select">
 									<option value="">선택하세요.</option>
+									<option value="임원">임원</option>
 									<option value="1팀">1팀</option>
 									<option value="2팀">2팀</option>
 									<option value="3팀">3팀</option>
@@ -246,7 +251,7 @@ body {
 
 					<!-- 사원 정보 수정 -->
 					<div class="Edit-table-container">
-						<table border="1" width="98%" height="26%">
+						<table border="1" width="98%">
 							<tr align="center" class="table-dark1">
 								<th colspan='4' scope="row">사원 정보 수정</th>
 							</tr>
@@ -256,19 +261,19 @@ body {
 								<td width="25">직급</td>
 								<td width="25" colspan='2'>부서</td>
 							</tr>
-							<tr class="table-dark3">
-								<th align="center" width="20%" height="100%" scope="row">
-									<input type="text" class="form-control" name="nameinfo" placeholder="이름" style="width: 90%; height: 80%; text-align: center;" readonly="readonly">
+							<tr class="table-dark3" align="center" >
+								<th align="center" width="20%" scope="row">
+									<input type="text" class="form-control" name="nameinfo" placeholder="이름" style="width: 90%; text-align: center;" readonly="readonly">
 								</th>
 
-								<th align="center" width="20%" height="100%">
-									<input type="text" class="form-control" name="emp_numinfo" placeholder="사번" style="width: 90%; height: 80%; text-align: center;" readonly="readonly">
+								<th align="center" width="20%">
+									<input type="text" class="form-control" name="emp_numinfo" placeholder="사번" style="width: 90%; text-align: center;" readonly="readonly">
 								</th>
 
-								<th align="center" width="20%" height="100%">
+								<th align="center" width="20%">
 									<select id="emp_grade_Edit"	name="emp_grade_Edit" size="1" style="width: 90%;" class="form-select">
 										<option value="">선택하세요.</option>
-										<option value="임원">임원</option>
+										<option value="이사">이사</option>
 										<option value="부장">부장</option>
 										<option value="팀장">팀장</option>
 										<option value="대리">대리</option>
@@ -276,9 +281,10 @@ body {
 									</select>
 								</th>
 
-								<th align="center" width="20%" height="100%">
+								<th align="center" width="20%">
 									<select id="team_Edit"	name="team_Edit" size="1" style="width: 90%;" class="form-select">
 										<option value="">선택하세요.</option>
+										<option value="임원">임원</option>
 										<option value="인사">인사</option>
 										<option value="개발">개발</option>
 										<option value="디자인">디자인</option>
@@ -288,6 +294,7 @@ body {
 								<th align="center" width="20%">
 								<select id="team_num_Edit" name="team_num_Edit" size="1" style="width: 90%;" class="form-select">
 									<option value="">선택하세요.</option>
+									<option value="임원">임원</option>
 									<option value="1팀">1팀</option>
 									<option value="2팀">2팀</option>
 									<option value="3팀">3팀</option>

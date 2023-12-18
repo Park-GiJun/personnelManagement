@@ -51,7 +51,23 @@ public class NewRegistController extends HttpServlet {
 		String team_num_Edit = req.getParameter("team_num_Edit");
 		System.out.println(team_num_Edit);
 		
-		if (emp_grade.equals("임원") || emp_grade_Edit.equals("임원")) {
+		if (team_num.equals("임원")) {
+			team_num = "  ";
+		}
+		
+		if (team.equals("임원")) {
+			team = "  ";
+		}
+		
+		if (team_num_Edit.equals("임원")) {
+			team_num_Edit = "  ";
+		}
+		
+		if (team_Edit.equals("임원")) {
+			team_Edit = "  ";
+		}
+		
+		if (emp_grade.equals("이사") || emp_grade_Edit.equals("이사")) {
 			grade = "2";
 		} else if (emp_grade.equals("부장") || emp_grade_Edit.equals("부장")) {
 			grade = "3";

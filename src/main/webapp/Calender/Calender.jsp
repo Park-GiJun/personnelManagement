@@ -224,6 +224,7 @@ day {
 }
 
 body {
+	background-color: #272b30;
    font-size: px;
   font-family: 'Kanit', sans-serif;
     /*color: white;*/
@@ -287,15 +288,15 @@ a:active, a:hover {
 
 /* 요일 칸 배경 색 지정 */
 .calendar table thead tr:first-child{
-   background: #1c427e;
+	background-color: rgb(68, 74, 83);
     color: white;
 }
 
 /* 요일, 날짜 칸 크기 조절 */
 .calendar table td{
-   padding: 40px 80px;
-   text-align: left;
-   border: 1px solid #ccc;
+  	padding: 40px 80px;
+   	text-align: left;
+   	border: 1px solid #ccc;
 }
 
 /* 월, 화, 수, 목, 금 글자 색상 설정 */
@@ -304,7 +305,7 @@ a:active, a:hover {
 .calendar table td:nth-child(3)
 .calendar table td:nth-child(4)
 .calendar table td:nth-child(5) {
-   color: white; 
+   color: white;
 }
 
 /* 일요일 색상 지정 */
@@ -324,6 +325,7 @@ a:active, a:hover {
 
 /* 날짜 버튼 스타일 지정 */
 .calendar table button {
+	color: #fff;
    border: none;
    padding: 0;
    background: none;
@@ -347,7 +349,7 @@ a:active, a:hover {
 .calendar table td.today{
    font-weight:700;
    background: orange;
-    color: #000;
+   color: #000;
 }
 
 /* 일요일 날짜 스타일 */
@@ -374,12 +376,12 @@ a:active, a:hover {
 
 /* 전월의 날짜 색상 지정 */
 .calendar table td.gray button {
-   color: #ccc;
+   color: #000;
 }
 
 /* 다음달의 날짜 색상 지정 */
 .calendar table td.gray2 button {
-   color: #ccc;
+   color: #000;
 }
 
 
@@ -480,6 +482,10 @@ body {
    font-size: 20px;
 }
 
+tbody {
+	background : gray;
+}
+
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
    margin-left: 400px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
@@ -571,7 +577,7 @@ body {
             String cls;
             for (int i = 1; i <= lastDay; i++) {
                cls = year == ty && month == tm && i == td ? "today" : "";
-               										
+               
                // 각 날짜가 button 타입으로 이루어져 있고, 클릭하면 해당 페이지로 이동함.
                out.print("<td class='" + cls + "'><button onclick=\"window.location.href='Scl.jsp?name=" + i + "'; showDate(" + i + ");\">" + i + "</button></td>");
                if (lastDay != i && (++week) % 7 == 1) {

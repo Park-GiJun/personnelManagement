@@ -1,44 +1,90 @@
-<%@ page
-	language="java"
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
-<%@ taglib
-	uri="http://java.sun.com/jsp/jstl/core"
-	prefix="c"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta
-	name="viewport"
-	content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meeting Room Detail</title>
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
+<style>
+h1 {
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+th {
+   	border: 1px solid gray; /* 테두리 스타일 지정 */
+   	padding: 1px; /* 셀 안의 내용과 테두리 사이의 간격 조정 */
+}
+tbody {
+	border: 1px solid gray; /* 테두리 스타일 지정 */
+  	padding: 1px; /* 셀 안의 내용과 테두리 사이의 간격 조정 */
+}
+
+.my_btn {
+	background-color: #1C427E;
+	color: white;
+	border: none;
+	width: 98%;
+	height: 200%;
+	font-size: 200%;
+	border-radius: 30px;
+}
+
+.btn-info {
+	margin-top: 0.5%;
+	width: 10%;
+	height: 50px;
+	font-size:80%;
+	border-radius: 25px;
+}
+
+.table-info {
+	background-color: #5bc0de;
+}
+
+.table-dark1 {
+	background-color: #272b30;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark2 {
+	font-size:20px;
+	background-color: rgb(54, 60, 67);;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark3 {
+	font-size:20px;
+	background-color: rgb(68, 74, 83);
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+</style>
 </head>
 <body>
 	<h1>Meeting Room Detail</h1>
 
-	<table
-		border="1"
-		align="center"
-	>
+	<table border="1" width="30%">
 		<thead>
-			<tr>
-				<th>시간</th>
-				<th>사번</th>
-				<th>이름</th>
-				<th>부서</th>
-				<th>상태</th>
-				<th>예약</th>
+			<tr class="table-dark2" align="center">
+				<th width="20%">시간</th>
+				<th width="20%">사번</th>
+				<th width="15%">이름</th>
+				<th width="15%">부서</th>
+				<th width="15%">상태</th>
+				<th width="15%">예약</th>
 			</tr>
 		</thead>
-		<tbody id="meetingRoomTableBody">
+			<tbody id="meetingRoomTableBody" class="table-dark3" align="center">
 		</tbody>
 	</table>
 
-	<button onclick="sendReservation()">예약 보내기</button>
+	<button onclick="sendReservation()" class="btn-info">예약 보내기</button>
 
 	<script>
 		var urlParams = new URLSearchParams(window.location.search);

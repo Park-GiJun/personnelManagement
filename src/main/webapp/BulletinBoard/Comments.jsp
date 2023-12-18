@@ -59,7 +59,7 @@ td, th {
 }
 
 .table-dark2 {
-	background-color: rgb(54, 60, 67);;
+	background-color: rgb(54, 60, 67);
 	--bs-table-color: #fff;
 	color: var(--bs-table-color);
 }
@@ -70,6 +70,16 @@ td, th {
 	--bs-table-border-color: #fff;
 	color: var(--bs-table-color);
 	border-color: var(--bs-table-border-color);
+}
+
+.table-dark4 {
+	background-color: rgb(54, 60, 67);
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark4:nth-child(odd) {
+	background-color: rgb(49, 55, 62);
 }
 
 .form-select {
@@ -197,7 +207,7 @@ td, th {
             </tr>
 
             <c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
-               <tr class="table-dark2">
+               <tr class="table-dark4">
                 <td width="5%" align="center">${comment.turn}</td>
                 <td width="90%">${comment.content}</td>
                 <td width="5%" align="center">

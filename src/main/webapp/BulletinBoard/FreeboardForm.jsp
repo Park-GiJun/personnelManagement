@@ -71,6 +71,16 @@ td {
 	color: var(--bs-table-color);
 }
 
+.table-dark4 {
+	background-color: rgb(54, 60, 67);
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark4:nth-child(odd) {
+	background-color: rgb(49, 55, 62);
+}
+
 .form-select {
 	padding: 0rem 0rem 0rem 3rem;
 	margin-top: 0.7%;
@@ -107,7 +117,7 @@ td {
             <c:otherwise>
                <c:forEach items="${ FreeboardFormList }" var="row" varStatus="loop">
 
-                  <tr align="center" class="table-dark2">
+                  <tr align="center" class="table-dark4">
                      <!-- 번호 -->
                      <td scope="row">${ map2.totalCount -(((map2.pageNum-1) * map2.pageSize) + loop.index) }
                      </td>

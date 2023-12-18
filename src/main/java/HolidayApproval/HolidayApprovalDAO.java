@@ -52,7 +52,7 @@ public class HolidayApprovalDAO extends DBConnPool {
 		// 부장이 휴가 신청 조회할 경우
 		if (Grade == 3) {
 			query = "SELECT * FROM emp JOIN holiday_check ON emp.emp_num = holiday_check.emp_num "
-					+ "WHERE grade >= 4 AND emp.team = ? AND emp.team_num = ? AND team_approval = ? "
+					+ "WHERE grade >= 4 AND emp.team = ? AND team_approval = ? "
 					+ "ORDER BY approval_num, start_vacation, emp.team, emp.team_num, grade";
 		}
 		// 팀장이 휴가 신청 조회할 경우
@@ -65,15 +65,17 @@ public class HolidayApprovalDAO extends DBConnPool {
 		try {
 			// 쿼리 실행
 			psmt = con.prepareStatement(query);
-			// 부장이 휴가신청 조회할경우
-			if (Grade > 2) {
+			// 팀장이 휴가신청 조회할경우
+			if (Grade == 4) {
 				psmt.setString(1, Team);
 				psmt.setString(2, Team_num);
-				if (Grade == 3) {
-				psmt.setString(3, approval);
-				}
 			}
-
+			// 부장이 휴가신청 조회할경우
+			if (Grade == 3) {
+				psmt.setString(1, Team);
+				psmt.setString(2, approval);
+			}
+			
 			rs = psmt.executeQuery();
 			while (rs.next()) {
 				HolidayApprovalDTO dto = new HolidayApprovalDTO();

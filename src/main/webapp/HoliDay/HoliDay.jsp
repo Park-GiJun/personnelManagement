@@ -147,7 +147,7 @@ body {
 					<tr class="table-dark2" align="center">
 						<th colspan="9" scope="row">휴가 일정</th>
 					</tr>
-					<tr class="table-dark3">
+					<tr class="table-dark3" align="center">
 						<th width="5%" scope="row" align="center">
 							<select id="start_vacation_year" name="start_vacation_year" class="form-select" style="width: 90%; align: center;">
 								<option value="">년도를 선택해주세요</option>
@@ -211,8 +211,27 @@ body {
 			<div class="middle-vaction_list-container">
 				<table border="1" width="100%">
 					<tr class="table-dark2" align="center">
-						<th width="80%" scope="row">휴가 일정</th>
-						<th width="20%">승인 여부</th>
+						<th width="80%" scope="row" rowspan="2">휴가 일정</th>
+						<th width="20%" colspan="2">승인 여부</th>
+					</tr>
+					
+					<tr class="table-dark2" align="center">
+					<!-- 과장 ~ 사원 휴가신청 현황  -->
+					<c:if test="${grade > 4}">
+						<th width="10%">팀장 승인</th>
+						<th width="10%">부장 승인</th>
+					</c:if>
+					<!-- 팀장 휴가신청 현황  -->
+					<c:if test="${grade eq '4'}">
+						<th width="10%">부장 승인</th>
+						<th width="10%">이사 승인</th>
+					</c:if>
+					<!-- 부장 휴가신청 현황  -->
+					<c:if test="${grade eq '3'}">
+						<th width="10%">이사 승인</th>
+						<th width="10%">사장 승인</th>
+					</c:if>
+						
 					</tr>
 					<c:choose>
 						<c:when test="${empty holidayList}">
@@ -227,6 +246,9 @@ body {
 								<tr align="center" class="table-dark3">
 									<td scope="row">${row.start_vacation}~${row.end_vacation}</td>
 									<td>${row.approval}</td>
+									<c:if test="${grade > 2}">
+										<td>${row.team_approval }</td>
+									</c:if>
 								</tr>
 							</c:forEach>
 						</c:otherwise>

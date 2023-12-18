@@ -137,14 +137,21 @@ public class NewRegistDAO extends DBConnPool {
 		if (num == 2) {
 			query = "SELECT * FROM emp WHERE team=? AND team_num=? ORDER BY team, team_num, grade, name";
 		}
+		
+		if (num == 3) {
+			query = "SELECT * FROM emp WHERE GRADE <= 3 ORDER BY grade, name, team";
+		}
 
 		try {
 			// 쿼리 실행
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, TeamSearch);
+			if (num == 1) {
+				psmt.setString(1, TeamSearch);
+			}
 			
 			// 부서별 팀 조회
 			if (num == 2) {
+				psmt.setString(1, TeamSearch);
 				psmt.setString(2, team_num);
 			}
 
@@ -189,9 +196,6 @@ public class NewRegistDAO extends DBConnPool {
 			System.out.println("정보 수정 중 예외 발생");
 			e.printStackTrace();
 		}
-		
-		System.out.println("UPDATE emp SET emp_grade =" + emp_grade + ", team = " + team + ", grade = " + grade + ", Team_num = " + team_num_Edit + 
-									" WHERE name = " + name + " AND emp_num= " + emp_num );
 		return null;
 	}
 }

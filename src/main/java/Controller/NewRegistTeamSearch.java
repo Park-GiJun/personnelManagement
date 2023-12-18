@@ -79,7 +79,11 @@ public class NewRegistTeamSearch extends HttpServlet {
 			System.out.println(team_num);
 			num = 2;
 			selectList = dao.selectdepartmentList(TeamSearch, team_num, num);
-			
+		}
+		
+		if (TeamSearch.equals("임원")) {
+			num = 3;
+			selectList = dao.selectdepartmentList(TeamSearch, team_num, num);
 		}
 		
 		dao.close();// DB 연결닫기
