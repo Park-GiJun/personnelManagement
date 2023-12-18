@@ -221,7 +221,7 @@ td, th {
 			        if (deletionComments == commentsPassword) {
 			            var boardNum = commentsturn;
 			            console.log(boardNum)
-			            // 폼 요소를 동적으로 생성
+			            // 폼 요소를 동적으로 생성 
 			            var form = document.createElement('form');
 			            form.method = 'POST';
 			            form.action = '../Controller/CommentsDeletionController.do';
