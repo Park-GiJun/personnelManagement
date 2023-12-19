@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -84,6 +85,7 @@ public class CalenderController extends HttpServlet {
            
         }
 		
+      
         
         System.out.println();
         System.out.println("list 확인용 11111111 >>>>>>>>>>>" + selectedContent);  // 자바스크립트에서 저장된 리스트 값 출력 시험

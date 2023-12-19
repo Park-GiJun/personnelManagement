@@ -558,43 +558,46 @@ function showDateAndAlert(day) {
 	
 	
 	// 삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
-	function confirmDelete() {
-	    var selectedSchedules = Array.from(document.querySelectorAll('.scheduleLink.selected')).map(function (schedule) {
-	        return schedule.getAttribute('data-schedule');
-	    });
+function confirmDelete() {
+    var selectedSchedules = Array.from(document.querySelectorAll('.scheduleLink.selected')).map(function (schedule) {
+        return schedule.getAttribute('data-schedule');
+    });
 
-	    if (selectedSchedules.length > 0) {
-	        var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
-	        if (confirmed) {
-	            // 선택한 일정의 ID를 서버로 전송
-	            sendSelectedSchedulesToServer(selectedSchedules);
-	        }
-	    } else {
-	        alert("삭제할 일정을 선택해주세요.");
-	    }
-	}
+    if (selectedSchedules.length > 0) {
+        var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
+        if (confirmed) {
+            // 선택한 일정의 ID를 서버로 전송
+            sendSelectedSchedulesToServer(selectedSchedules);
+        }
+    } else {
+        alert("삭제할 일정을 선택해주세요.");
+    }
+}
 	 
 	 
 	// 선택한 일정 삭제를 서버로 전송하는 함수
-	function sendSelectedSchedulesToServer(selectedSchedules) {
-	    // Ajax를 사용하여 Java 서버에 배열 전송
-	    const xhr = new XMLHttpRequest();
-	    xhr.open("POST", "/deleteSelectedSchedules", true);
-	    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-	    xhr.send(JSON.stringify(selectedSchedules));
+function sendSelectedSchedulesToServer(selectedSchedules) {
+    // Ajax를 사용하여 Java 서버에 배열 전송
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "../Controller/CalenderController.do", true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    
+    // 선택한 일정의 ID를 서버로 전송
+    var data = JSON.stringify({ selectedSchedules: selectedSchedules });
+    xhr.send(data);
 
-	    xhr.onreadystatechange = function () {
-	        if (xhr.readyState === 4) {
-	            if (xhr.status === 200) {
-	                alert("일정이 삭제되었습니다.");
-	                // 페이지 리로드 또는 필요한 갱신 작업 수행
-	                location.reload();
-	            } else {
-	                alert("일정 삭제에 실패했습니다.");
-	            }
-	        }
-	    };
-	}
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                alert("일정이 삭제되었습니다.");
+                // 페이지 리로드 또는 필요한 갱신 작업 수행
+                location.reload();
+            } else {
+                alert("일정 삭제에 실패했습니다.");
+            }
+        }
+    };
+}
 	 
 	 
     console.log('잘 실행되는지 확인용1111111111111111111111');
