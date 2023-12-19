@@ -124,7 +124,6 @@ public class CalenderDAO extends DBConnPool {
 	
 	
 	// 3 삭제하기 기능
-	// 추가된 메서드: 여러 개의 일정 삭제
     public int deleteCalender(List<String> selectedSchedules) {
     	System.out.println("확인 : " + selectedSchedules);
         int result = 0;

@@ -1,11 +1,11 @@
 package Controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -85,6 +85,47 @@ public class CalenderController extends HttpServlet {
            
         }
 		
+     // 클라이언트에서 전송한 데이터 읽기
+        BufferedReader reader = request.getReader();
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
+        }
+        String jsonString = sb.toString();
+        
+        List<String> selectedSchedules = Arrays.asList(jsonString.split(","));
+        
+     // 선택한 일정에 대한 로직 추가
+        for (String scheduleId : selectedSchedules) {
+            // scheduleId를 이용하여 일정에 대한 작업 수행
+            System.out.println("선택한 일정 ID: " + scheduleId);
+            // 여기에 선택한 일정에 대한 추가 작업을 수행하세요.
+        }
+
+        // jsonString을 원하는 형태로 파싱 또는 처리
+        // 여기에 선택한 일정에 대한 로직을 추가
+
+        // 예시: 콘솔에 출력
+        System.out.println("선택한 일정들: " + jsonString);
+        
+        try {
+            
+            // 선택한 일정에 대한 로직 추가
+            for (String scheduleId : selectedSchedules) {
+                // scheduleId를 이용하여 일정에 대한 작업 수행
+                System.out.println("선택한 일정 ID: " + scheduleId);
+                // 여기에 선택한 일정에 대한 추가 작업을 수행하세요.
+            }
+            System.out.println("선택한 일정들 파싱 및 처리 완료");
+        } catch (Exception e) {
+            System.out.println("선택한 일정 파싱 오류: " + e.getMessage());
+        }
+
+        // 응답 설정 (예시)
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"status\": \"success\"}");
       
         
         System.out.println();

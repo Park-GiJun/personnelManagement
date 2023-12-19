@@ -558,7 +558,7 @@ function showDateAndAlert(day) {
 	
 	
 	// 삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
-function confirmDelete() {
+	function confirmDelete() {
     var selectedSchedules = Array.from(document.querySelectorAll('.scheduleLink.selected')).map(function (schedule) {
         return schedule.getAttribute('data-schedule');
     });
@@ -576,14 +576,18 @@ function confirmDelete() {
 	 
 	 
 	// 선택한 일정 삭제를 서버로 전송하는 함수
-function sendSelectedSchedulesToServer(selectedSchedules) {
+	function sendSelectedSchedulesToServer() {
     // Ajax를 사용하여 Java 서버에 배열 전송
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "../Controller/CalenderController.do", true);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    // 선택한 일정의 ID 스택을 문자열로 변환하여 서버로 전송
+    //var data = "selectedSchedules=" + encodeURIComponent(scheduleStack.join(','));
+    //xhr.send(data);
     
-    // 선택한 일정의 ID를 서버로 전송
-    var data = JSON.stringify({ selectedSchedules: selectedSchedules });
+ // 선택한 일정의 ID를 문자열 배열로 변환
+    const data = JSON.stringify(selectedSchedules);
     xhr.send(data);
 
     xhr.onreadystatechange = function () {
