@@ -34,7 +34,7 @@ input {
 }
 
 .form-control {
-	width: 400px;
+	width: 400px;	`
 	height: 80px;
 	border-radius: 50px;
 }

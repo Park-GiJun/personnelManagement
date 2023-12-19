@@ -495,39 +495,9 @@ a:active, a:hover {
 }
 </style>
 
+
+
 <script type="text/javascript">
-
-function updateCalendar() {
-    var year = document.getElementById("yearSelect").value;
-    var month = document.getElementById("monthSelect").value;
-
-    // AJAX를 이용하여 서버로 요청을 보냅니다.
-    $.ajax({
-        url: "calendar.jsp",
-        type: "GET",
-        data: {
-            year: year,
-            month: month
-        },
-        success: function (data) {
-            // 서버로부터 받아온 데이터(data)를 사용하여 달력을 업데이트합니다.
-            // 이 부분은 서버에서 받아온 데이터를 어떻게 처리할지에 따라 구현이 달라집니다.
-            // data를 이용하여 달력을 업데이트하는 코드를 작성하세요.
-
-            // 예시: 받아온 데이터를 'calendar-container'라는 ID를 가진 엘리먼트의 innerHTML로 설정
-            document.getElementById('calendar-container').innerHTML = data;
-        },
-        error: function () {
-            console.error("Failed to fetch calendar data from the server.");
-        }
-    });
-}
-
-window.onload = function () {
-    updateCalendar();
-};
-
-
 
 function showDateAndAlert(day) {
     // 클릭한 날짜를 JavaScript 변수에 저장
@@ -544,6 +514,9 @@ function showDateAndAlert(day) {
 		// 폼 제출
 		document.forms["calender_form"].submit();
 	}
+
+
+
 
 	//일정 추가하기 버튼 눌렀을 때 설정
 	// 일정 추가를 위한 고유한 식별자
@@ -583,43 +556,94 @@ function showDateAndAlert(day) {
 			alert("일정을 입력해주세요.");
 		} else {
 			// 사용자가 "취소"를 클릭하거나 대화상자를 아무 값도 입력하지 않고 닫은 경우
-			console.log("사용자가 대화상자를 취소했거나 닫았습니다.");
+			console.log("일정 저장을 취소하였습니다.");
 		}
 	}
 
-	 // 선택한 일정 삭제하기 버튼 눌렀을 때 설정
-     function confirmDelete() {
-    var links = document.querySelectorAll('.scheduleLink.selected');
+	
+	
+	// 삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
+function confirmDelete() {
+    var selectedSchedules = Array.from(document.querySelectorAll('.scheduleLink.selected')).map(function (schedule) {
+        return schedule.getAttribute('data-schedule');
+    });
 
-    if (links.length > 0) {
-        var result = window.confirm("선택한 일정을 삭제하시겠습니까?");
-        if (result) {
-            links.forEach(function (link) {
-                // 여기서 link.dataset.schedule을 이용해 개인 일정 내용에 접근
-                var scheduleToDelete = link.dataset.schedule;
-
-                // 서버로 삭제 요청을 보내는 코드 (Ajax 등을 사용)
-                // 여기서는 일단 console.log로 확인
-                console.log("삭제할 일정 내용: " + scheduleToDelete);
-
-                // TODO: 서버로 일정 삭제 요청을 보내고, 성공하면 화면에서 해당 일정 제거
-            });
-            window.alert("선택한 일정이 삭제되었습니다");
-        } else {
-            window.alert("삭제가 취소되었습니다");
+    if (selectedSchedules.length > 0) {
+        var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
+        if (confirmed) {
+            // 선택한 일정의 ID를 서버로 전송
+            sendSelectedSchedulesToServer(selectedSchedules);
         }
     } else {
-        window.alert("삭제할 일정을 선택해주세요");
+        alert("삭제할 일정을 선택해주세요.");
     }
 }
+	 
+	 
+	// 선택한 일정 삭제를 서버로 전송하는 함수
+function sendSelectedSchedulesToServer(selectedSchedules) {
+    // Ajax를 사용하여 Java 서버에 배열 전송
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "../Controller/CalenderController.do", true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    
+    // 선택한 일정의 ID를 서버로 전송
+    var data = JSON.stringify({ selectedSchedules: selectedSchedules });
+    xhr.send(data);
 
-    // 링크 클릭 시 선택 및 해제를 토글하는 함수
-    document.addEventListener('click', function (event) {
-        if (event.target.classList.contains('scheduleLink')) {
-            event.preventDefault();
-            event.target.classList.toggle('selected');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                alert("일정이 삭제되었습니다.");
+                // 페이지 리로드 또는 필요한 갱신 작업 수행
+                location.reload();
+            } else {
+                alert("일정 삭제에 실패했습니다.");
+            }
         }
-    });
+    };
+}
+	 
+	 
+    console.log('잘 실행되는지 확인용1111111111111111111111');
+	 
+
+  // 링크 클릭 시 선택 및 해제를 토글하는 함수
+  var selectedSchedules = [];  // 선택한 일정이 저장되는 곳
+ 
+document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('scheduleLink')) {
+        event.preventDefault();
+        var selectedSchedule = event.target.getAttribute('data-schedule');
+        var isSelected = event.target.classList.toggle('selected');
+
+        alert(selectedSchedule + ' 확인용');
+
+        // 선택한 일정을 리스트에 추가 또는 제거
+        if (isSelected) {
+            selectedSchedules.push(selectedSchedule);
+        } else {
+            // 해당 값이 리스트에 존재하면 제거
+            var index = selectedSchedules.indexOf(selectedSchedule);
+            if (index !== -1) {
+                selectedSchedules.splice(index, 1);
+            }
+        }
+
+        // 선택한 일정들을 콘솔에 출력
+        console.log('선택한 일정들:', selectedSchedules);
+        
+    }
+    
+ 	// Ajax를 사용하여 Java 서버에 배열 전송
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/Controller/CalenderController.do", true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    //xhr.send(JSON.stringify({ array: selectedSchedules }));
+
+});
+
+
     
 </script>
 
@@ -661,7 +685,7 @@ tbody {
 		<input type="hidden" name="selectedYear" id="selectedYear" value="<%=year%>">
 		<input type="hidden" name="selectedMonth" id="selectedMonth" value="<%=month%>">
 		<input type="hidden" name="selectedDay" id="selectedDay" value="">
-		<input type="hidden" name="selectedContent" id="selectedContent" value="${row.personal_diaray_schedule}">
+		<!-- <input type="hidden" name="selectedContent" id="selectedContent" value="selectedSchedules"> -->
 		<!-- <input type="hidden" name="selectedContent" id="selectedContent" value="<c:out value="${empty row.personal_diaray_schedule ? '' : row.personal_diaray_schedule}"/>"> -->
 
 		<div class="middle-button">
@@ -688,7 +712,7 @@ tbody {
 			
 			<h2 class='re_day'>${selecteddate}</h2>
 		
-			<button class='plus_btn' onclick="confirmPlus();">추가하기</button>
+			<button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>
 			<button class='del_btn' onclick="confirmDelete();">삭제하기</button>
 
 
@@ -705,11 +729,11 @@ tbody {
                 			<c:forEach items="${calenderlists}" var="row" varStatus="loop">
                     			<tr>
                     				<td>
-										${loop.index + 1} .
+										${loop.index + 1} <!-- 각 일정마다 번호 출력 -->
 									</td>
                         			<td>
                             			<a href="#" class="scheduleLink" data-schedule="${row.personal_diaray_schedule}">
-                                			${row.personal_diaray_schedule}
+                                			${row.personal_diaray_schedule}  <!-- db에 있는 개인 일정 출력 -->
                             			</a>
                         			</td>
                     			</tr>
@@ -718,8 +742,6 @@ tbody {
         			</c:choose>
     			</table>
 			</div>
-
-			<button class='del_btn' onclick="confirmDelete();">삭제하기</button>
 
 		</div>
 		
@@ -786,7 +808,7 @@ tbody {
 					int preDate = preCal.get(Calendar.DATE);
 
 					out.print("<tr>");
-					// 1일 앞 부분
+					// 전 달 끝부분 일자 출력
 					for (int i = 1; i < week; i++) {
 						//out.print("<td>&nbsp;</td>");
 						out.print("<td class='gray'><button disabled>" + (preDate++) + "</button></td>");
@@ -805,7 +827,7 @@ tbody {
 						}
 					}
 
-					// 마지막 주 마지막 일자 다음 처리..
+					// 다음 달 첫부분 일자 출력
 					int n = 1;
 					for (int i = (week - 1) % 7; i < 6; i++) {
 						// out.print("<td>&nbsp;</td>");

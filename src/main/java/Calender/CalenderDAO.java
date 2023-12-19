@@ -3,7 +3,10 @@ package Calender;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import DBcontrol.DBConnPool;
@@ -74,27 +77,6 @@ public class CalenderDAO extends DBConnPool {
 	}
 	
 	
-
-	// 3 삭제하기 기능
-	public int deletePost(String Personal_diaray_schedule) {
-		int result = 0;
-		try {
-			String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_schedule=?";
-			psmt = con.prepareStatement(query);
-			psmt.setString(1, Personal_diaray_schedule);
-			result = psmt.executeUpdate();
-		}
-		catch (Exception e) {
-			System.out.println("게시물 삭제 중 예외 발생");
-			e.printStackTrace();
-		}
-		return result;
-	}
-	
-	
-	
-	
-	
 	public CalenderDTO selectView(String Personal_diaray_schedule) {
 		CalenderDTO dto = new CalenderDTO();
 		String query = "SELECT * FROM Personal_diaray WHERE Personal_diaray_schedule=?";
@@ -115,26 +97,93 @@ public class CalenderDAO extends DBConnPool {
 		}
 		return dto;
 	}
+	
+	
 		
 
 	// 4 입력, 저장
 	public int insertWrite(CalenderDTO dto) {
-		int result = 0;
+	    int result = 0;
 
-		try {
-			String query = "INSERT INTO Personal_diaray (" + "Personal_diaray_schedule) " + " VALUES ( "
-					+ " seq_board_num.NEXTVAL, ?)";
-
-			psmt = con.prepareStatement(query);
-			psmt.setString(1, dto.getPersonal_diaray_schedule());
-			result = psmt.executeUpdate();
-		} catch (Exception e) {
-			System.out.println("게시물 입력 중 예외 발생");
-			e.printStackTrace();
-		}
-
-		return result;
+	    try  {
+	    	String query = "INSERT INTO Personal_diaray ( "
+	    			     + " Personal_diaray_schedule) "
+	    			     + " VALUES ( "
+	    			     + " seq_board_num.NEXTVAL,?)";
+	    	psmt = con.prepareStatement(query);
+	    	psmt.setString(1, dto.getPersonal_diaray_schedule());
+	    	result = psmt.executeUpdate();
+	    } catch (Exception e) {
+	    	System.out.println("게시물 입력 중 예외 발생");
+	    	e.printStackTrace();
+	    }
+	    return result;
 	}
+	
+	
+	
+	
+	// 3 삭제하기 기능
+	// 추가된 메서드: 여러 개의 일정 삭제
+    public int deleteCalender(List<String> selectedSchedules) {
+    	System.out.println("확인 : " + selectedSchedules);
+        int result = 0;
+
+        try {
+            // PreparedStatement를 사용하여 일괄 삭제
+            String query = "DELETE FROM Personal_diaray WHERE personal_diaray_schedule=?";
+            psmt = con.prepareStatement(query);
+
+            for (String schedule : selectedSchedules) {
+                psmt.setString(1, schedule);
+                psmt.addBatch();
+            }
+
+            // 일괄 실행
+            int[] batchResults = psmt.executeBatch();
+
+            // 총 영향 받은 행 계산
+            for (int batchResult : batchResults) {
+                result += batchResult;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }	
+    
+
+      
+	
+    public int deleteCalenderByDate(String selecteddate, String emp_num) {
+    	
+        int result = 0;
+
+        try {
+            // 쿼리문 준비
+            String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_date = ? AND emp_num = ?";
+            psmt = con.prepareStatement(query);
+
+            // 파라미터 설정
+            psmt.setString(1, selecteddate);
+            psmt.setString(2, emp_num);
+
+            // 쿼리 실행
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("일정 삭제 중 예외 발생");
+            e.printStackTrace();
+        } finally {
+            // 리소스 해제
+            close();
+        }
+
+        return result;
+    }
+
+	
+	
 
 	public int addCalendarEvent(String Personal_diaray_date, String Personal_diaray_schedule, String emp_num) {
 		int result = 0;
