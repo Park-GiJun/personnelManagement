@@ -14,6 +14,7 @@ public class PersonalDTO {
 	private String phone;
 	private Date work_start_date;
 	private int grade;
+
 	private String teamDetail;
 
 	public String getTeamDetail() {
@@ -22,6 +23,7 @@ public class PersonalDTO {
 
 	public void setTeamDetail(String teamDetail) {
 		this.teamDetail = teamDetail;
+
 	}
 
 	public String getName() {

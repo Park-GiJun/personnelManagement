@@ -31,9 +31,10 @@ public class LoginController extends HttpServlet {
 
 		String inploginNum = String.valueOf(dto.getEmpNum());
 		String inpTeam = String.valueOf(dto.getTeam());
+		String inpTeam_num = String.valueOf(dto.getTeam_num());
 		String inploginPwd = dto.getPassword();
 		int inpGrade = dto.getGrade();
-
+		
 		System.out.println("inp : " + inploginNum + " " + inploginPwd + " db : " + loginNum + " " + loginPassword);
 		
 
@@ -59,6 +60,7 @@ public class LoginController extends HttpServlet {
 			System.out.println("LoginController : " + inpGrade);
 			request.getSession().setAttribute("currentDate", formattedDate);
 			request.getSession().setAttribute("inpteam", inpTeam);
+			request.getSession().setAttribute("inpteam_num", inpTeam_num);
 			response.sendRedirect("../Calender/Calender.jsp");
 			
 			HttpSession httpSession = request.getSession();

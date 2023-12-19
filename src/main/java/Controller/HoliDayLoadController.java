@@ -27,6 +27,7 @@ public class HoliDayLoadController extends HttpServlet {
 		
 		String userId = (String) req.getSession().getAttribute("loginid");
 		String Team = (String) req.getSession().getAttribute("inpteam");
+		int grade = (int) req.getSession().getAttribute("inpGrade");
 		
 		String start_vacation = req.getParameter("start_vacation");
 		String end_vacation = req.getParameter("end_vacation");
@@ -89,6 +90,7 @@ public class HoliDayLoadController extends HttpServlet {
 		req.setAttribute("holidayList", holidayList);
 		req.setAttribute("map", map);
 		req.setAttribute("userholidaycount", userholidaycount);
+		req.setAttribute("grade", grade);
 		req.getRequestDispatcher("/HoliDay/HoliDay.jsp").forward(req, resp);
 	}
 }

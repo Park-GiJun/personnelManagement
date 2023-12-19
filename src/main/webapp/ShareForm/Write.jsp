@@ -132,7 +132,7 @@ body {
 				<tr>
 					<td style="text-align: left; font-size: 15px; display: flex; align-items: center; margin-left: 1%;">
 						<input type="password" name="sharepassword" class="form-control">
-						<button	type="button" onclick="location.href='../Controller/list.do';" class="btn-info">목록</button>
+						<button	type="button" onclick="location.href='../Controller/sharelist.do';" class="btn-info">목록</button>
 						<button type="submit" class="btn-info">작성완료</button>
 					</td>
 				</tr>

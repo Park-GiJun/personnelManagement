@@ -23,6 +23,8 @@ public class NewRegistTeamSearch extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String TeamSearch = req.getParameter("department_search");
+		String team_num = "";
+		int num = 0;
 
 		NewRegistDAO dao = new NewRegistDAO();
 
@@ -58,13 +60,32 @@ public class NewRegistTeamSearch extends HttpServlet {
 		// 페이지 처리 end
 
 		List<NewRegistDTO> selectList = null;
-		if (TeamSearch.equals("전체")) {
+		if (TeamSearch.equals("전체") || TeamSearch.equals("")) {
 			selectList = dao.selectList(map);
-		} else {
-			// 사원 목록 받기
-			selectList = dao.selectdepartmentList(TeamSearch);
 		}
-
+		if (TeamSearch.equals("개발") || TeamSearch.equals("인사") || TeamSearch.equals("디자인")) {
+			// 사원 목록 받기
+			num = 1;
+			selectList = dao.selectdepartmentList(TeamSearch, team_num, num);
+		}
+		
+		if (TeamSearch.equals("개발 1팀") || TeamSearch.equals("개발 2팀") || TeamSearch.equals("개발 3팀") ||
+			TeamSearch.equals("인사 1팀") || TeamSearch.equals("인사 2팀") || TeamSearch.equals("인사 3팀") ||
+			TeamSearch.equals("디자인 1팀") || TeamSearch.equals("디자인 2팀") || TeamSearch.equals("디자인 3팀")) {
+			String[] Team = TeamSearch.split(" ");
+			TeamSearch = Team[0];
+			System.out.println(TeamSearch);
+			team_num = Team[1];
+			System.out.println(team_num);
+			num = 2;
+			selectList = dao.selectdepartmentList(TeamSearch, team_num, num);
+		}
+		
+		if (TeamSearch.equals("임원")) {
+			num = 3;
+			selectList = dao.selectdepartmentList(TeamSearch, team_num, num);
+		}
+		
 		dao.close();// DB 연결닫기
 
 		// 뷰에 전달할 매개 변수 추가

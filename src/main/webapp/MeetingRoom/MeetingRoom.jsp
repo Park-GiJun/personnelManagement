@@ -12,6 +12,8 @@
 <head>
 <meta charset="UTF-8">
 <title>MeetingRoom</title>
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 
 <style type="text/css">
 * {
@@ -43,6 +45,7 @@ body {
 }
 
 .MeetingRooms {
+	margin-left:5%;
 	position: relative;
 	left: 10%;
 	top: 30%;
@@ -53,7 +56,7 @@ body {
 .MeetingRoomA {
 	width: 300px;
 	height: 300px;
-	background-color: #3498db;
+	background-color: #272b30;
 	margin: 10px;
 	float: left;
 	position: relative;
@@ -62,7 +65,7 @@ body {
 .MeetingRoomA-1 {
 	width: 300px;
 	height: 150px;
-	background-color: #2c3e50;
+	background-color: gray;
 	margin: 0px;
 	float: left;
 }
@@ -70,7 +73,7 @@ body {
 .MeetingRoomA-2 {
 	width: 150px;
 	height: 150px;
-	background-color: #2c3e50;
+	background-color: gray;
 	margin: 0px;
 	float: left;
 }
@@ -78,7 +81,7 @@ body {
 .MeetingRoomB {
 	width: 300px;
 	height: 150px;
-	background-color: #2c3e50;
+	background-color: gray;
 	margin: 10px;
 	float: left;
 }
@@ -86,7 +89,7 @@ body {
 .MeetingRoomC {
 	width: 150px;
 	height: 300px;
-	background-color: #2c3e50;
+	background-color: gray;
 	margin: 10px;
 	float: left;
 }
@@ -238,12 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	<jsp:include page="../MainPage/Left.jsp" />
 	<div class="content">
 		<div class="datePicker">
-			<input
-				type="text"
-				id="datePickerInput"
-				readonly
-				onclick="showDatePicker()"
-			>
+			<input type="text" id="datePickerInput" readonly onclick="showDatePicker()">
 		</div>
 		<div class="MeetingRooms">
 			<div class="MeetingRoomA">
