@@ -260,9 +260,7 @@ function getCurrentTime() {
 
 		window.open(detailsUrl, "_blank", "width=600, height=400");
 	}
-
-
-
+	
 </script>
 </head>
 <style>
@@ -427,7 +425,8 @@ function getCurrentTime() {
 }
 
 .form-select {
-	padding: 0rem 0rem 0rem 3rem;
+	padding: 0rem 0rem 0rem 1rem;
+	background-position: right 1rem center;
 	margin-top: 17px;
 	width: 15%;
 	height: 1%;

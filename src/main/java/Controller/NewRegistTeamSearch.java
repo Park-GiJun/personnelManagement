@@ -65,7 +65,6 @@ public class NewRegistTeamSearch extends HttpServlet {
 		}
 		if (TeamSearch.equals("개발") || TeamSearch.equals("인사") || TeamSearch.equals("디자인")) {
 			// 사원 목록 받기
-			num = 1;
 			selectList = dao.selectdepartmentList(TeamSearch, team_num, num);
 		}
 		

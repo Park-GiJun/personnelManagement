@@ -58,7 +58,8 @@ td {
 }
 
 .form-select {
-	padding: 0rem 0rem 0rem 3rem;
+	padding: 0rem 0rem 0rem 1rem;
+	background-position: right 1rem center;
 	height: 80%;
 }
 

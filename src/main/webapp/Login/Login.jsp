@@ -17,6 +17,18 @@ body {
 	background-color: #272b30
 }
 
+h1 {
+	background-color: red;
+	border-radius: 15px;
+	margin-bottom: 3%;
+	width: 110%;
+	padding: 0rem 0rem 0.5rem 0rem;
+	text-align: center;
+	font-weight: 900;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
 form {
 	display: flex;
 	flex-direction: column;
@@ -25,6 +37,11 @@ form {
 
 input {
 	margin-bottom: 10px;
+}
+
+a {
+	--bs-table-color: skyblue;
+	color: var(--bs-table-color);
 }
 
 .btn-light {
@@ -54,8 +71,15 @@ input {
 		}
 	</script>
 	<form name="login_form" method="post" action="../Controller/login.do" onsubmit="return checkLogin(this)">
-		<input type="text" class="form-control" name="login_Id" placeholder="ID"> <input type="password" class="form-control" name="login_Pwd" placeholder="Password">
-		<button type="submit" class="btn-light" value="로그인">Login</button>
+		<h1>PersonnelManagement</h1>
+	
+		<input type="text" class="form-control" name="login_Id" placeholder="ID">
+
+		<input type="password" class="form-control" name="login_Pwd" placeholder="Password">
+
+		<button type="submit" class="btn-light"	value="로그인">Login</button>
+		
+		<a href="../PasswordSearch/PasswordSearch.jsp">Forgot Password?</a>
 	</form>
 	<%
 	}

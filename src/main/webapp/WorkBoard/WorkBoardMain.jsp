@@ -59,7 +59,10 @@
 				<option>제목</option>
 				<option>작성일</option>
 			</select>
-			<input type="date"> <input type="text" id="textInput" name="userInput" placeholder="Type something..."> <input type="button" class="btn btn-secondary" value="검색" style="--bs-btn-line-height: 0.01;"> <input type="button" id="writeButton" class="btn btn-secondary" style="--bs-btn-line-height: 0.01;" value="글작성" />
+			<input type="date">
+			<input type="text" id="textInput" name="userInput" placeholder="Type something...">
+			<input type="button" class="btn btn-secondary" value="검색" style="--bs-btn-line-height: 0.01;">
+			<input type="button" id="writeButton" class="btn btn-secondary" style="--bs-btn-line-height: 0.01;" value="글작성" />
 		</div>
 		<div class="Main">
 			<div class="DocList">
