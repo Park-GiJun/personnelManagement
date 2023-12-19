@@ -1,4 +1,4 @@
-package comments;
+package Comments;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
