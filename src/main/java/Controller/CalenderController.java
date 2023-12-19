@@ -39,12 +39,13 @@ public class CalenderController extends HttpServlet {
 		
 		System.out.println("confirm : " + selectedDay);
 		
-		/*
+		/* 참고
 		if (Integer.parseInt(selectedDay) < 10) {
 			selectedDay = "0" + selectedDay;
 		}
 		*/
 		
+		// 년-월-일 에서 1~9일은 앞에 0을 붙여주는 코드
 		if (selectedDay != null && !selectedDay.isEmpty()) {
 		    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도
 		    int dayValue;
@@ -80,6 +81,7 @@ public class CalenderController extends HttpServlet {
                 dao.deleteCalender(Arrays.asList(scheduleId));
                 System.out.println("확인용333333333333333333");
             }
+           
         }
 		
         
@@ -95,6 +97,8 @@ public class CalenderController extends HttpServlet {
 			map.put("searchField", searchField);
 			map.put("searchWord", searchWord);
 		}
+		
+		
 		
 		/* 페이지 처리 start */
 		int totalCount = dao.ScheduleListCount(selecteddate, emp_num); // 게시물 개수
@@ -137,6 +141,11 @@ public class CalenderController extends HttpServlet {
 		//request.setAttribute("selectedContent", selectedContent); // 리스트 값
 		request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
 		
+		
+		
 	}
+	
+	
+	
 	
 }

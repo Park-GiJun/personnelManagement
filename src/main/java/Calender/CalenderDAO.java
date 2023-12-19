@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import DBcontrol.DBConnPool;
@@ -124,6 +126,7 @@ public class CalenderDAO extends DBConnPool {
 	// 3 삭제하기 기능
 	// 추가된 메서드: 여러 개의 일정 삭제
     public int deleteCalender(List<String> selectedSchedules) {
+    	System.out.println("확인 : " + selectedSchedules);
         int result = 0;
 
         try {
@@ -150,33 +153,11 @@ public class CalenderDAO extends DBConnPool {
         return result;
     }	
     
-    
-    
-	
-    
- // CalenderDAO 클래스에 추가된 deleteSchedule 메서드
-    public int deleteSchedule(int scheduleId) {
-        int result = 0;
 
-        try {
-            String query = "DELETE FROM Personal_diaray WHERE schedule_id = ?";
-            psmt = con.prepareStatement(query);
-            psmt.setInt(1, scheduleId);
-            result = psmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("일정 삭제 중 예외 발생");
-            e.printStackTrace();
-        } finally {
-            // 리소스 해제
-            close();
-        }
-
-        return result;
-    }
-    
-    
+      
 	
     public int deleteCalenderByDate(String selecteddate, String emp_num) {
+    	
         int result = 0;
 
         try {

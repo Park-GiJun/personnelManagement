@@ -512,28 +512,6 @@ function showDateAndAlert(day) {
 
 
 
-function sendUserAddedScheduleToServer(userAddedSchedule) {
-    // Ajax를 사용하여 서버로 데이터 전송
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "../Controller/CalenderController.do", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            // 서버 응답에 대한 추가 처리
-            console.log('서버 응답:', xhr.responseText);
-            // 여기에서 화면 갱신 등의 작업을 수행할 수 있습니다.
-            location.reload(); // 예제로 간단히 페이지 리로드를 수행합니다.
-        }
-    };
-    
-    // 서버로 전송할 데이터 조합
-    var data = "userAddedSchedule=" + encodeURIComponent(userAddedSchedule);
-    
-    // 데이터 전송
-    xhr.send(data);
-}
-
-
 
 	//일정 추가하기 버튼 눌렀을 때 설정
 	// 일정 추가를 위한 고유한 식별자
@@ -579,63 +557,51 @@ function sendUserAddedScheduleToServer(userAddedSchedule) {
 
 	
 	
-	 // 선택한 일정 삭제하기 버튼 눌렀을 때 설정
-function confirmDelete() {
-        var selectedSchedules = document.querySelectorAll('.scheduleLink');
+	// 삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
+	function confirmDelete() {
+	    var selectedSchedules = Array.from(document.querySelectorAll('.scheduleLink.selected')).map(function (schedule) {
+	        return schedule.getAttribute('data-schedule');
+	    });
 
-        if (selectedSchedules.length > 0) {
-            var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
-
-            if (confirmed) {
-                // 선택한 일정의 ID를 저장할 배열
-                var selectedScheduleIds = Array.from(selectedSchedules).map(function (schedule) {
-                    return schedule.getAttribute('data-schedule');
-                });
-
-                // 선택한 일정의 ID를 서버로 전송
-                sendSelectedSchedulesToServer(selectedScheduleIds);
-            }
-        } else {
-            alert("삭제할 일정을 선택해주세요.");
-        }
-    }
+	    if (selectedSchedules.length > 0) {
+	        var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
+	        if (confirmed) {
+	            // 선택한 일정의 ID를 서버로 전송
+	            sendSelectedSchedulesToServer(selectedSchedules);
+	        }
+	    } else {
+	        alert("삭제할 일정을 선택해주세요.");
+	    }
+	}
 	 
 	 
-function sendSelectedSchedulesToServer(selectedScheduleIds) {
-    // 서버로 보낼 데이터 객체 생성
-    var data = {
-        selectedSchedules: selectedScheduleIds
-    };
+	// 선택한 일정 삭제를 서버로 전송하는 함수
+	function sendSelectedSchedulesToServer(selectedSchedules) {
+	    // Ajax를 사용하여 Java 서버에 배열 전송
+	    const xhr = new XMLHttpRequest();
+	    xhr.open("POST", "/deleteSelectedSchedules", true);
+	    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	    xhr.send(JSON.stringify(selectedSchedules));
 
-    // fetch를 사용하여 서버로 데이터 전송
-    fetch('/Controller/CalenderController.do', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json(); // 서버에서의 응답을 JSON으로 파싱
-    })
-    .then(data => {
-        // 서버 응답에 대한 추가 처리
-        console.log('서버 응답:', data);
-    })
-    .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
-    });
-}	 
+	    xhr.onreadystatechange = function () {
+	        if (xhr.readyState === 4) {
+	            if (xhr.status === 200) {
+	                alert("일정이 삭제되었습니다.");
+	                // 페이지 리로드 또는 필요한 갱신 작업 수행
+	                location.reload();
+	            } else {
+	                alert("일정 삭제에 실패했습니다.");
+	            }
+	        }
+	    };
+	}
 	 
 	 
     console.log('잘 실행되는지 확인용1111111111111111111111');
 	 
 
   // 링크 클릭 시 선택 및 해제를 토글하는 함수
-  var selectedSchedules = [];
+  var selectedSchedules = [];  // 선택한 일정이 저장되는 곳
  
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('scheduleLink')) {
@@ -665,7 +631,7 @@ document.addEventListener('click', function (event) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/Controller/CalenderController.do", true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.send(JSON.stringify({ array: selectedSchedules }));
+    //xhr.send(JSON.stringify({ array: selectedSchedules }));
 
 });
 
