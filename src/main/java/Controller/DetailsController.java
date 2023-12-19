@@ -24,7 +24,7 @@ public class DetailsController extends HttpServlet {
 		System.out.println("DetailsController");
 		CommentsDAO dao = new CommentsDAO();
 		int anno_board_num = Integer.parseInt(request.getParameter("anno_board_num"));
-        FreeboardFormDTO dto = dao.selectdetailsView(anno_board_num);
+		FreeboardFormDTO dto = dao.selectdetailsView(anno_board_num);
 		
 		
 		Map<String, Object>map = new HashMap<String, Object>();
@@ -42,6 +42,7 @@ public class DetailsController extends HttpServlet {
 		// 게시물 목록 받기
 		dao.close();
 		// 포워딩
+		request.getSession().setAttribute("anno_board_num", anno_board_num);
         request.setAttribute("dto", dto);
         request.setAttribute("Commentsdto1", Commentsdto1);
 		request.getRequestDispatcher("/BulletinBoard/Comments.jsp").forward(request, response);

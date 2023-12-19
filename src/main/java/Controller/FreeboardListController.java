@@ -67,7 +67,7 @@ public class FreeboardListController extends HttpServlet {
 
 		// 페이징 이미지 전달
 		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum,
-				"../Controller/FreeboardList.do");
+				"../Controller/List.do");
 
 		// 바로가기 영역 HTML 문자열
 		map.put("pagingImg", pagingImg);

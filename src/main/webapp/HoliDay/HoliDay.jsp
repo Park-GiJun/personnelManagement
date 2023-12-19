@@ -148,61 +148,50 @@ body {
 						<th colspan="9" scope="row">휴가 일정</th>
 					</tr>
 					<tr class="table-dark3" align="center">
-						<th width="5%" scope="row" align="center">
-							<select id="start_vacation_year" name="start_vacation_year" class="form-select" style="width: 90%; align: center;">
+						<th width="5%" scope="row" align="center"><select id="start_vacation_year" name="start_vacation_year" class="form-select" style="width: 90%; align: center;">
 								<option value="">년도를 선택해주세요</option>
 								<c:forEach var="year" begin="2023" end="2026">
 									<option value="${year}">${year}</option>
 								</c:forEach>
-							</select>
-						</th>
-
-						<th width="5%" align="center">
-							<select id="start_vacation_month" name="start_vacation_month" class="form-select" style="width: 90%; align: center;">
+							</select></th>
+						<th width="5%" align="center"><select id="start_vacation_month" name="start_vacation_month" class="form-select" style="width: 90%; align: center;">
 								<option value="">월를 선택해주세요</option>
 								<c:forEach var="month" begin="1" end="12">
 									<option value="<c:if test='${month lt 10}'>0</c:if>${month}">${month}</option>
 								</c:forEach>
-							</select>
-						</th>
-
-						<th width="5%" align="center">
-							<select id="start_vacation_day" name="start_vacation_day" class="form-select" style="width: 90%; align: center;">
+							</select></th>
+						<th width="5%" align="center"><select id="start_vacation_day" name="start_vacation_day" class="form-select" style="width: 90%; align: center;">
 								<option value="">일자를 선택해주세요</option>
 								<c:forEach var="day" begin="1" end="31">
 									<option value="<c:if test='${day lt 10}'>0</c:if>${day}">${day}</option>
 								</c:forEach>
-							</select>
-						</th>
+							</select></th>
 
 						<th width="1%" align="center">~</th>
-
-						<th width="5%" align="center">
-							<select id="end_vacation_year" name="end_vacation_year" class="form-select" style="width: 90%; align: center;">
+						<th width="5%" align="center"><select id="end_vacation_year" name="end_vacation_year" class="form-select" style="width: 90%; align: center;">
 								<option value="">년도를 선택해주세요</option>
 								<c:forEach var="year" begin="2023" end="2026">
 									<option value="${year}">${year}</option>
 								</c:forEach>
-							</select>
-						</th>
 
-						<th width="5%" align="center">
-							<select id="end_vacation_month" name="end_vacation_month" class="form-select" style="width: 90%; align: center;">
+							</select></th>
+
+						<th width="5%" align="center"><select id="end_vacation_month" name="end_vacation_month" class="form-select" style="width: 90%; align: center;">
+
 								<option value="">월를 선택해주세요</option>
 								<c:forEach var="month" begin="1" end="12">
 									<option value="<c:if test='${month lt 10}'>0</c:if>${month}">${month}</option>
 								</c:forEach>
-							</select>
-						</th>
 
-						<th width="5%" align="center">
-							<select id="end_vacation_day" name="end_vacation_day" class="form-select" style="width: 90%; align: center;">
+							</select></th>
+
+						<th width="5%" align="center"><select id="end_vacation_day" name="end_vacation_day" class="form-select" style="width: 90%; align: center;">
+
 								<option value="">일자를 선택해주세요</option>
 								<c:forEach var="day" begin="1" end="31">
 									<option value="<c:if test='${day lt 10}'>0</c:if>${day}">${day}</option>
 								</c:forEach>
-							</select>
-						</th>
+							</select></th>
 					</tr>
 				</table>
 			</div>
@@ -214,24 +203,24 @@ body {
 						<th width="80%" scope="row" rowspan="2">휴가 일정</th>
 						<th width="20%" colspan="2">승인 여부</th>
 					</tr>
-					
+
 					<tr class="table-dark2" align="center">
-					<!-- 과장 ~ 사원 휴가신청 현황  -->
-					<c:if test="${grade > 4}">
-						<th width="10%">팀장 승인</th>
-						<th width="10%">부장 승인</th>
-					</c:if>
-					<!-- 팀장 휴가신청 현황  -->
-					<c:if test="${grade eq '4'}">
-						<th width="10%">부장 승인</th>
-						<th width="10%">이사 승인</th>
-					</c:if>
-					<!-- 부장 휴가신청 현황  -->
-					<c:if test="${grade eq '3'}">
-						<th width="10%">이사 승인</th>
-						<th width="10%">사장 승인</th>
-					</c:if>
-						
+						<!-- 과장 ~ 사원 휴가신청 현황  -->
+						<c:if test="${grade > 4}">
+							<th width="10%">팀장 승인</th>
+							<th width="10%">부장 승인</th>
+						</c:if>
+						<!-- 팀장 휴가신청 현황  -->
+						<c:if test="${grade eq '4'}">
+							<th width="10%">부장 승인</th>
+							<th width="10%">이사 승인</th>
+						</c:if>
+						<!-- 부장 휴가신청 현황  -->
+						<c:if test="${grade eq '3'}">
+							<th width="10%">이사 승인</th>
+							<th width="10%">사장 승인</th>
+						</c:if>
+
 					</tr>
 					<c:choose>
 						<c:when test="${empty holidayList}">
