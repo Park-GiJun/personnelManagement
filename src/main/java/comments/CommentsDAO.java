@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import DBcontrol.DBConnPool;
@@ -12,6 +13,71 @@ import FreeboardForm.FreeboardFormDTO;
 public class CommentsDAO extends DBConnPool {
 	private ResultSet rs;
 	private PreparedStatement pstmt;
+	
+	public List<CommentsDTO> selectListPage(Map<String, Object> map) {
+		System.out.println("selectListpage");
+		List<CommentsDTO> anno_boards = new Vector<CommentsDTO>();
+
+		System.out.println("상세보기 댓글 SelectListPage 실행");
+		// 쿼리문
+		String query = "SELECT * FROM (SELECT Tb.*, ROWNUM AS rNum FROM (SELECT * FROM 채ㅡㅡ둣ㄴ";
+		if (map.get("searchWord") != null) {
+			// 조건 추가
+			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
+		}
+
+		query += " ORDER BY anno_board_num DESC) Tb) WHERE rNum BETWEEN ? AND ?";
+		System.out.println("FreeboardFormController : 51 lines --------------------------");
+		System.out.println(query);
+
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, map.get("start").toString());
+			psmt.setString(2, map.get("end").toString());
+			System.out.println("FreeboardFormController :" + query);
+			rs = psmt.executeQuery();
+
+			// 반환된 게시물 목록을 컬렉션에 추가
+			while (rs.next()) {
+				CommentsDTO dto = new CommentsDTO();
+
+				dto.setanno_board_num(rs.getInt("anno_board_num"));
+				dto.setcontent(rs.getString("content"));
+				dto.setpass(rs.getInt("pass"));
+				dto.setTurn(rs.getInt("Turn"));
+				anno_boards.add(dto);
+				System.out.println(dto.getanno_board_num() + dto.getcontent() + dto.getpass());
+			}
+		} catch (Exception e) {
+			System.out.println("게시물 조회중 예외 발생");
+			e.printStackTrace();
+		}
+		return anno_boards;
+	}
+	
+	public int FreeboardListCont(Map<String, Object> map) {
+		System.out.println("CommentsListCont");
+		int totalcount = 0;
+
+		String query = "SELECT COUNT(*) FROM Comments";
+
+		if (map.get("searchWord") != null) {
+			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
+		}
+
+		try {
+			stmt = con.createStatement(); // 쿼리문 생성
+			rs = stmt.executeQuery(query); // 쿼리문 실행
+			rs.next();
+			totalcount = rs.getInt(1);
+		} catch (Exception e) {
+			System.out.println("양식 게시물 카운트 중 예외 발생");
+			e.printStackTrace();
+		}
+		System.out.println(totalcount);
+		return totalcount;
+	}
+
 
 	public ArrayList<CommentsDTO> getList(int anno_board_num, int Turn) {
 		String Sql = "select * from Comments where anno_board_num<? and Turn=? and content order by Turn ";

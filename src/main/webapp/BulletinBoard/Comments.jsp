@@ -289,7 +289,7 @@ td, th {
 
 				<c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
 					<tr class="table-dark2">
-						<td width="5%" align="center" >${comment.turn}</td>
+						<td width="5%" align="center" >${ map2.totalCount +(((map2.pageNum-1) * map2.pageSize) + loop.index) }</td>
 						<td width="90%">${comment.content}</td>
 						<td width="5%" align="center">
 							<button type="button" onclick="CommentsDeletion('${comment.pass}','${comment.turn}' )"
