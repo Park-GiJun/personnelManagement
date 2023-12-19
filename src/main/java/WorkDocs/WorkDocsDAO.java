@@ -118,7 +118,7 @@ public class WorkDocsDAO extends DBConnPool {
 				+ "LEFT JOIN APPROVAL_LINE al4 ON ad.FOURTH_CODE = al4.code "
 				+ "LEFT JOIN APPROVAL_LINE al5 ON ad.FIFTH_CODE = al5.CODE "
 				+ "WHERE ? IN (al.EMP_NUM, al2.EMP_NUM, al3.EMP_NUM, al4.EMP_NUM, al5.EMP_NUM) "
-				+ "ORDER BY ad.idx, ad.APPROVAL_DOC_DATE";
+				+ "ORDER BY ad.idx DESC, ad.APPROVAL_DOC_DATE";
 
 		try {
 
@@ -186,17 +186,24 @@ public class WorkDocsDAO extends DBConnPool {
 
 		WorkDocsDTO dto = new WorkDocsDTO();
 
-		String query = "SELECT " + "ad.APPROVAL_DOC_TITLE, " + "ad.APPROVAL_DOC_CONTENT, " + "ad.APPROVAL_DOC_OFILE, "
-				+ "ad.APPROVAL_DOC_SFILE, " + "e.team AS FIRSTTEAM, " + "e.EMP_GRADE AS FIRSTGRADE, "
-				+ "e.EMP_NUM AS FIRSTEMP, " + "e.NAME AS FIRSTNAME, " + "al.APPROVAL_STATE AS FIRSTSTATUS, "
-				+ "e2.team AS SECONDTEAM, " + "e2.EMP_GRADE AS SECONDGRADE, " + "e2.EMP_NUM AS SECONDEMP, "
-				+ "e2.NAME AS SECONDNAME, " + "al2.APPROVAL_STATE AS SECONDSTATUS, " + "e3.team AS THIRDTEAM, "
-				+ "e3.EMP_GRADE AS THIRDGRADE, " + "e3.EMP_NUM AS THIRDEMP, " + "e3.NAME AS THIRDNAME, "
-				+ "al3.APPROVAL_STATE AS THIRDSTATUS, " + "e4.team AS FOURTHTEAM, " + "e4.EMP_GRADE AS FOURTHGRADE, "
-				+ "e4.EMP_NUM AS FOURTHEMP, " + "e4.NAME AS FOURTHNAME, " + "al4.APPROVAL_STATE AS FOURTHSTATUS, "
-				+ "e5.team AS FIFTHTEAM, " + "e5.EMP_GRADE AS FIFTHGRADE, " + "e5.EMP_NUM AS FIFTHEMP, "
-				+ "e5.NAME AS FIFTHNAME, " + "al5.APPROVAL_STATE AS FIFTHSTATUS " + "FROM APPROVAL_DOC ad "
-				+ "LEFT JOIN APPROVAL_LINE al ON al.CODE = ad.FIRST_CODE "
+		String query = "SELECT " + "COALESCE(ad.APPROVAL_DOC_TITLE, '') AS APPROVAL_DOC_TITLE, "
+				+ "COALESCE(ad.APPROVAL_DOC_CONTENT, '') AS APPROVAL_DOC_CONTENT, "
+				+ "COALESCE(ad.APPROVAL_DOC_OFILE, '') AS APPROVAL_DOC_OFILE, "
+				+ "COALESCE(ad.APPROVAL_DOC_SFILE, '') AS APPROVAL_DOC_SFILE, " + "COALESCE(e.team, '') AS FIRSTTEAM, "
+				+ "COALESCE(e.EMP_GRADE, '') AS FIRSTGRADE, " + "COALESCE(e.EMP_NUM, '') AS FIRSTEMP, "
+				+ "COALESCE(e.NAME, '') AS FIRSTNAME, " + "COALESCE(al.APPROVAL_STATE, '') AS FIRSTSTATUS, "
+				+ "COALESCE(e2.team, '') AS SECONDTEAM, " + "COALESCE(e2.EMP_GRADE, '') AS SECONDGRADE, "
+				+ "COALESCE(e2.EMP_NUM, '') AS SECONDEMP, " + "COALESCE(e2.NAME, '') AS SECONDNAME, "
+				+ "COALESCE(al2.APPROVAL_STATE, '') AS SECONDSTATUS, " + "COALESCE(e3.team, '') AS THIRDTEAM, "
+				+ "COALESCE(e3.EMP_GRADE, '') AS THIRDGRADE, " + "COALESCE(e3.EMP_NUM, '') AS THIRDEMP, "
+				+ "COALESCE(e3.NAME, '') AS THIRDNAME, " + "COALESCE(al3.APPROVAL_STATE, '') AS THIRDSTATUS, "
+				+ "COALESCE(e4.team, '') AS FOURTHTEAM, " + "COALESCE(e4.EMP_GRADE, '') AS FOURTHGRADE, "
+				+ "COALESCE(e4.EMP_NUM, '') AS FOURTHEMP, " + "COALESCE(e4.NAME, '') AS FOURTHNAME, "
+				+ "COALESCE(al4.APPROVAL_STATE, '') AS FOURTHSTATUS, " + "COALESCE(e5.team, '') AS FIFTHTEAM, "
+				+ "COALESCE(e5.EMP_GRADE, '') AS FIFTHGRADE, " + "COALESCE(e5.EMP_NUM, '') AS FIFTHEMP, "
+				+ "COALESCE(e5.NAME, '') AS FIFTHNAME, " + "COALESCE(al5.APPROVAL_STATE, '') AS FIFTHSTATUS, "
+				+ "ad.FIRST_CODE, ad.SECOND_CODE, ad.THIRD_CODE, ad.FOURTH_CODE, ad.FIFTH_CODE "
+				+ "FROM APPROVAL_DOC ad " + "LEFT JOIN APPROVAL_LINE al ON al.CODE = ad.FIRST_CODE "
 				+ "LEFT JOIN EMP e ON al.EMP_NUM = e.EMP_NUM "
 				+ "LEFT JOIN APPROVAL_LINE al2 ON al2.CODE = ad.SECOND_CODE "
 				+ "LEFT JOIN EMP e2 ON al2.EMP_NUM = e2.EMP_NUM "
@@ -225,40 +232,40 @@ public class WorkDocsDAO extends DBConnPool {
 				dto.setFirstEmp(rs.getString("FIRSTEMP"));
 				dto.setFirstNAME(rs.getString("FIRSTNAME"));
 				dto.setFirststatus(rs.getString("FIRSTSTATUS"));
+				dto.setFirstCODE(rs.getString("FIRST_CODE"));
 
 				dto.setSecondTEAM(rs.getString("SECONDTEAM"));
 				dto.setSecondGRADE(rs.getString("SECONDGRADE"));
 				dto.setSecondEmp(rs.getString("SECONDEMP"));
 				dto.setSecondNAME(rs.getString("SECONDNAME"));
 				dto.setSecondstatus(rs.getString("SECONDSTATUS"));
+				dto.setSecondCODE(rs.getString("SECOND_CODE"));
 
 				dto.setThirdTEAM(rs.getString("THIRDTEAM"));
 				dto.setThirdGRADE(rs.getString("THIRDGRADE"));
 				dto.setThirdEmp(rs.getString("THIRDEMP"));
 				dto.setThirdNAME(rs.getString("THIRDNAME"));
 				dto.setThirdstatus(rs.getString("THIRDSTATUS"));
+				dto.setThirdCODE(rs.getString("THIRD_CODE"));
 
 				dto.setFourthTEAM(rs.getString("FOURTHTEAM"));
 				dto.setFourthGRADE(rs.getString("FOURTHGRADE"));
 				dto.setFourthEmp(rs.getString("FOURTHEMP"));
 				dto.setFourthNAME(rs.getString("FOURTHNAME"));
-				dto.setFourthstauts(rs.getString("FOURTHSTATUS"));
+				dto.setFourthstatus(rs.getString("FOURTHSTATUS"));
+				dto.setFourthCODE(rs.getString("FOURTH_CODE"));
 
 				dto.setFifthTEAM(rs.getString("FIFTHTEAM"));
 				dto.setFifthGRADE(rs.getString("FIFTHGRADE"));
 				dto.setFifthEmp(rs.getString("FIFTHEMP"));
 				dto.setFifthNAME(rs.getString("FIFTHNAME"));
 				dto.setFifthstatus(rs.getString("FIFTHSTATUS"));
-
+				dto.setFifthCODE(rs.getString("FIFTH_CODE"));
 			}
-
 		} catch (Exception e) {
 			System.out.println("결재문서 디테일 불러오는중 예외 발생");
 			e.printStackTrace();
 		}
-
-		return null;
-
+		return dto;
 	}
-
 }

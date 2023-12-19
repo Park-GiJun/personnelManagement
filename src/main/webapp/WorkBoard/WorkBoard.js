@@ -1,6 +1,21 @@
 let buttonNumber = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
+
+	var table = document.querySelector('.table'); // 승인 버튼이 포함된 테이블 선택
+
+	table.addEventListener('click', function(event) {
+		var target = event.target;
+
+		if (target.classList.contains('btn-success')) {
+			// 승인 버튼 클릭 처리
+			var code = target.getAttribute('data-code'); // data-code 속성을 이용하여 코드 추출
+			approval(code); // approval 함수 호출
+		} else if (target.classList.contains('btn-danger')) {
+			// 거절 버튼 클릭 처리
+			// 여기에 거절 버튼에 대한 처리 로직 추가
+		}
+	});
 	let writeButton = document.getElementById("writeButton");
 	let docs = document.getElementsByClassName("docs");
 
@@ -22,8 +37,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		doc.addEventListener("click", function() {
 			let idxNum = this.getAttribute("id"); // 현재 요소의 id 속성 가져오기
 			let xhr = new XMLHttpRequest();
-			//			let htmlFilePath = "../Controller/DocDetail.do?idx=" + idxNum; // 쿼리 파라미터 추가
-			let htmlFilePath = "../WorkBoard/DocDetail.jsp";
+			let htmlFilePath = "../Controller/DocDetail.do?idx=" + idxNum; // 쿼리 파라미터 추가
+			//			let htmlFilePath = "../WorkBoard/DocDetail.jsp";
 
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState === 4 && xhr.status === 200) {
@@ -250,5 +265,21 @@ function submitForm() {
 		});
 }
 
-
-
+function approval(code) {
+	fetch('../Controller/approval.do', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+		body: 'code=' + code
+	})
+		.then(response => response.text())
+		.then(data => {
+			console.log(data);
+			// 여기에 성공 시 수행할 추가적인 로직을 구현할 수 있습니다.
+		})
+		.catch(error => {
+			console.error('Error:', error);
+			// 여기에 오류 시 수행할 로직을 구현할 수 있습니다.
+		});
+}

@@ -32,68 +32,69 @@ body {
 								<table class="table table-hover" border="1">
 									<thead>
 										<tr class="table-info">
-											<th style="text-align: center;">team</th>
-											<th style="text-align: center;">grade</th>
-											<th style="text-align: center;">emp</th>
+											<th style="text-align: center;">팀</th>
+											<th style="text-align: center;">직급</th>
+											<th style="text-align: center;">사번</th>
 											<th style="text-align: center;">이름</th>
 											<th style="text-align: center;">상태</th>
-											<th style="text-align: center;">승인여부</th>
+											<th style="text-align: center;">승인버튼</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr class="table-light">
 											<td style="text-align: center;">${ Doc.firstTEAM }</td>
 											<td style="text-align: center;">${ Doc.firstGRADE }</td>
-											<td style="text-align: center;">${ Doc.firstEMP }</td>
+											<td style="text-align: center;">${ Doc.firstEmp }</td>
 											<td style="text-align: center;">${ Doc.firstNAME }</td>
-											<td style="text-align: center;">${ Doc.firstSTATUS }</td>
-											<td style="text-align: center;"><button type="button" class="btn btn-success btn-sm">승인</button>
-												<button type="button" class="btn btn-danger btn-sm">거절</button></td>
+											<td style="text-align: center;">${ Doc.firststatus }</td>
+											<td style="text-align: center;"><c:if test="${ Doc.firstMakeButton == 'Y' }">
+													<button type="button" class="btn btn-success btn-sm" data-code="${ Doc.firstCODE }" onclick="approval(this.getAttribute('data-code'))">승인</button>
+													<button type="button" class="btn btn-danger btn-sm">거절</button>
+												</c:if></td>
 										</tr>
 										<tr class="table-light">
 											<td style="text-align: center;">${ Doc.secondTEAM }</td>
 											<td style="text-align: center;">${ Doc.secondGRADE }</td>
-											<td style="text-align: center;">${ Doc.secondEMP }</td>
+											<td style="text-align: center;">${ Doc.secondEmp }</td>
 											<td style="text-align: center;">${ Doc.secondNAME }</td>
-											<td style="text-align: center;">${ Doc.secondSTATUS }</td>
-											<td style="text-align: center;"><button type="button" class="btn btn-success btn-sm">승인</button>
-												<button type="button" class="btn btn-danger btn-sm">거절</button></td>
+											<td style="text-align: center;">${ Doc.secondstatus }</td>
+											<td style="text-align: center;"><c:if test="${ Doc.secondMakeButton == 'Y' }">
+													<button type="button" class="btn btn-success btn-sm" data-code="${ Doc.secondCODE }" onclick="approval(this.getAttribute('data-code'))">승인</button>
+													<button type="button" class="btn btn-danger btn-sm">거절</button>
+												</c:if></td>
 										</tr>
 										<tr class="table-light">
 											<td style="text-align: center;">${ Doc.thirdTEAM }</td>
 											<td style="text-align: center;">${ Doc.thirdGRADE }</td>
-											<td style="text-align: center;">${ Doc.thirdEMP }</td>
+											<td style="text-align: center;">${ Doc.thirdEmp }</td>
 											<td style="text-align: center;">${ Doc.thirdNAME }</td>
-											<td style="text-align: center;">${ Doc.thirdSTATUS }</td>
-											<td style="text-align: center;"><button type="button" class="btn btn-success btn-sm">승인</button>
-												<button type="button" class="btn btn-danger btn-sm">거절</button></td>
+											<td style="text-align: center;">${ Doc.thirdstatus }</td>
+											<td style="text-align: center;"><c:if test="${ Doc.thirdMakeButton == 'Y' }">
+													<button type="button" class="btn btn-success btn-sm" data-code="${ Doc.thirdCODE }" onclick="approval(this.getAttribute('data-code'))">승인</button>
+													<button type="button" class="btn btn-danger btn-sm">거절</button>
+												</c:if></td>
 										</tr>
 										<tr class="table-light">
 											<td style="text-align: center;">${ Doc.fourthTEAM }</td>
 											<td style="text-align: center;">${ Doc.fourthGRADE }</td>
-											<td style="text-align: center;">${ Doc.fourthEMP }</td>
+											<td style="text-align: center;">${ Doc.fourthEmp }</td>
 											<td style="text-align: center;">${ Doc.fourthNAME }</td>
-											<td style="text-align: center;">${ Doc.fourthSTATUS }</td>
-											<td style="text-align: center;"><button type="button" class="btn btn-success btn-sm">승인</button>
-												<button type="button" class="btn btn-danger btn-sm">거절</button></td>
+											<td style="text-align: center;">${ Doc.fourthstatus }</td>
+											<td style="text-align: center;"><c:if test="${ Doc.fourthMakeButton == 'Y' }">
+													<button type="button" class="btn btn-success btn-sm" data-code="${ Doc.fourthCODE }" onclick="approval(this.getAttribute('data-code'))">승인</button>
+													<button type="button" class="btn btn-danger btn-sm">거절</button>
+												</c:if></td>
 										</tr>
 										<tr class="table-light">
 											<td style="text-align: center;">${ Doc.fifthTEAM }</td>
 											<td style="text-align: center;">${ Doc.fifthGRADE }</td>
-											<td style="text-align: center;">${ Doc.fifthEMP }</td>
+											<td style="text-align: center;">${ Doc.fifthEmp }</td>
 											<td style="text-align: center;">${ Doc.fifthNAME }</td>
-											<td style="text-align: center;">${ Doc.fifthSTATUS }</td>
-											<td style="text-align: center;"><button type="button" class="btn btn-success btn-sm">승인</button>
-												<button type="button" class="btn btn-danger btn-sm">거절</button></td>
-										</tr>
-										<tr class="table-light">
-											<td style="text-align: center;">${ Doc.secondTEAM }</td>
-											<td style="text-align: center;">${ Doc.secondGRADE }</td>
-											<td style="text-align: center;">${ Doc.secondEMP }</td>
-											<td style="text-align: center;">${ Doc.secondNAME }</td>
-											<td style="text-align: center;">${ Doc.secondSTATUS }</td>
-											<td style="text-align: center;"><button type="button" class="btn btn-success btn-sm">승인</button>
-												<button type="button" class="btn btn-danger btn-sm">거절</button></td>
+											<td style="text-align: center;">${ Doc.fifthstatus }</td>
+											<td style="text-align: center;"><c:if test="${ Doc.fifthMakeButton == 'Y' }">
+													<button type="button" class="btn btn-success btn-sm" data-code="${ Doc.fifthCODE }" onclick="approval(this.getAttribute('data-code'))">승인</button>
+													<button type="button" class="btn btn-danger btn-sm">거절</button>
+												</c:if></td>
 										</tr>
 									</tbody>
 								</table>

@@ -172,7 +172,6 @@
 				<c:if test="${(list.status eq 'Confirm' or list.status eq 'Reject')}">
 					<td>&nbsp;</td>
 				</c:if>
-				
 					<td>${ list.team }</td>
 					<td>${ list.empNum }</td>
 					<td>${ list.name }</td>
