@@ -2,6 +2,7 @@ let buttonNumber = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
 	let writeButton = document.getElementById("writeButton");
+	let docs = document.getElementsByClassName("docs");
 
 	writeButton.addEventListener("click", function() {
 		let detailElement = document.querySelector(".Detail");
@@ -15,6 +16,24 @@ document.addEventListener("DOMContentLoaded", function() {
 		};
 		xhr.open("GET", htmlFilePath, true);
 		xhr.send();
+	});
+
+	Array.from(docs).forEach(function(doc) {
+		doc.addEventListener("click", function() {
+			let idxNum = this.getAttribute("id"); // 현재 요소의 id 속성 가져오기
+			let xhr = new XMLHttpRequest();
+			//			let htmlFilePath = "../Controller/DocDetail.do?idx=" + idxNum; // 쿼리 파라미터 추가
+			let htmlFilePath = "../WorkBoard/DocDetail.jsp";
+
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					let detailElement = document.querySelector(".Detail");
+					detailElement.innerHTML = xhr.responseText;
+				}
+			};
+			xhr.open("GET", htmlFilePath, true);
+			xhr.send();
+		});
 	});
 });
 
@@ -67,7 +86,7 @@ function updateRefTable(dataJ) {
 	});
 
 	// 행이 5개 미만일 때만 "추가" 버튼 행 추가
-	if (rowCount < 6) {
+	if (rowCount < 5) {
 		var addRow = tableBody.insertRow();
 		var addCell = addRow.insertCell();
 		addCell.colSpan = 6;
@@ -108,7 +127,7 @@ function addTableEmp(data, status) {
 	}
 	var cellAction = row.insertCell();
 	cellAction.innerHTML = '<button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">제거</button>';
-	
+
 	rowCount = tableBody.rows.length;
 
 	// 행이 5개 미만일 때만 "추가" 버튼 행 추가
@@ -203,7 +222,7 @@ function submitForm() {
 		formData.append('state' + i, cells[4].textContent);
 
 	}
-	
+
 	formData.append('rowCount', rowCount);
 	console.log(formData);
 
@@ -213,7 +232,18 @@ function submitForm() {
 	})
 		.then(response => response.json())
 		.then(result => {
-			console.log('Success:', result);
+			alert("글작성이 완료 되었습니다.");
+			let detailElement = document.querySelector(".Detail");
+			let xhr = new XMLHttpRequest();
+			let htmlFilePath = "../WorkBoard/WorkBoardWrite.jsp";
+
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					detailElement.innerHTML = xhr.responseText;
+				}
+			};
+			xhr.open("GET", htmlFilePath, true);
+			xhr.send();
 		})
 		.catch(error => {
 			console.error('Error:', error);

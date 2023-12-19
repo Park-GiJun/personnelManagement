@@ -146,7 +146,7 @@
 			</a>
 		</div>
 		<div class="left_WorkBoard_background">
-			<a class="left_WorkBoard_section" href="../WorkBoard/WorkBoardMain.jsp"> <span class="left_WorkBoard_text">전자결재</span>
+			<a class="left_WorkBoard_section" href="../Controller/WorkBoardList.do"> <span class="left_WorkBoard_text">전자결재</span>
 			</a>
 		</div>
 

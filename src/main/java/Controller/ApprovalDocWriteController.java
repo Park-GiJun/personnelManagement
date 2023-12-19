@@ -98,7 +98,6 @@ public class ApprovalDocWriteController extends HttpServlet {
 
 			codeList.add(code);
 
-			System.out.println("화아기인용 : " + mr.getParameter("emp" + i) + " " + mr.getParameter("state" + i));
 		}
 
 		WorkDocsDAO dao = new WorkDocsDAO();
