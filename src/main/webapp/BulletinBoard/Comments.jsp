@@ -43,7 +43,6 @@ td, th {
 
 .form-control {
 	margin-left: 0.5%;
-	margin-top: 0.5%;
 	width: 20%;
 	height: 10px;
 }
@@ -211,7 +210,7 @@ td, th {
                 <td width="5%" align="center">${comment.turn}</td>
                 <td width="90%">${comment.content}</td>
                 <td width="5%" align="center">
-					<button type="button" onclick="CommentsDeletion()" class="btn-info" id="delete">삭제</button>
+					<button type="button" onclick="CommentsDeletion()" class="btn-info" id="delete" style="font-size: 10px;">삭제</button>
                 </td>
 
                </tr>
@@ -219,15 +218,17 @@ td, th {
             </table>
             <table border="1" width="90%">
             	<tr class="table-dark1">
-              		<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">댓글
-               			<input type="text" value="내용을 입력해 주세요." name="Commentscontent" style="width: 95%;" class="form-control"
+              		<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">
+              		<a style="margin-left: 1%;">댓글</a>
+               			<input type="text" value="내용을 입력해 주세요." name="Commentscontent" style="width: 95%; margin-left: 1%;" class="form-control"
                               onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
                		</td>
             	</tr>
 
             	<tr class="table-dark1">
-              		<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">비밀번호
-               			<input type="text" name="commentspassword" class="form-control" width="25%"/>
+              		<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">
+              		<a style="margin-left: 1%; width: 7%;">비밀번호</a>
+               			<input type="text" name="commentspassword" class="form-control" width="25%" style="margin-left: 0%; margin-top: 1%;">
                			<button type="button" onclick="location.href='../Controller/FreeboardList.do';" class="btn-info" style="margin-left:54%;">목록</button>
                			<button type="submit" class="btn-info">댓글쓰기</button>
                		</td>

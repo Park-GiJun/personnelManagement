@@ -88,7 +88,12 @@ td {
 .form-select {
 	margin-top: 2%;
 	margin-bottom: 2%;
-	padding: 0rem 0rem 0rem 3rem;
+	padding: 0rem 0rem 0rem 1rem;
+	background-position: right 1rem center;
+}
+
+.form-select-option {
+	background-color: rgb(222.5,222.5,222.5);
 }
 
 .form-control {
@@ -159,25 +164,34 @@ body {
 			action="../Controller/NewRegistTeamSearch.do" accept-charset="UTF-8">
 			<div class="form-check">
 				<label>
-					<select id="department_search" name="department_search" size="1" style="width: 120%; height: 100%;" class="form-select" onchange="submitForm()">
+					<select id="department_search" name="department_search" size="1" style="width: 130%; height: 100%;" class="form-select" onchange="submitForm()">
 							<option value="전체">선택해주세요.</option>
-							<option value="전체">전체</option>
-							<option value="임원">임원급</option>
-							<option value="">------</option>
-							<option value="개발">개발팀전체</option>
-							<option value="개발 1팀">개발 1팀</option>
-							<option value="개발 2팀">개발 2팀</option>
-							<option value="개발 3팀">개발 3팀</option>
-							<option value="">------</option>
-							<option value="인사">인사팀전체</option>
-							<option value="인사 1팀">인사 1팀</option>
-							<option value="인사 2팀">인사 2팀</option>
-							<option value="인사 3팀">인사 3팀</option>
-							<option value="">------</option>
-							<option value="디자인">디자인팀전체</option>
-							<option value="디자인 1팀">디자인 1팀</option>
-							<option value="디자인 2팀">디자인 2팀</option>
-							<option value="디자인 3팀">디자인 3팀</option>
+							
+							<optgroup label="전체 or 임원">
+								<option value="전체">전체</option>
+								<option value="임원">임원급</option>
+							</optgroup>
+							
+							<optgroup label="개발팀" class="form-select-option">
+								<option value="개발">전체</option>
+								<option value="개발 1팀">1팀</option>
+								<option value="개발 2팀">2팀</option>
+								<option value="개발 3팀">3팀</option>
+							</optgroup>
+							
+							<optgroup label="인사팀">
+								<option value="인사">전체</option>
+								<option value="인사 1팀">1팀</option>
+								<option value="인사 2팀">2팀</option>
+								<option value="인사 3팀">3팀</option>
+							</optgroup>
+							
+							<optgroup label="디자인팀" class="form-select-option">
+								<option value="디자인">전체</option>
+								<option value="디자인 1팀">1팀</option>
+								<option value="디자인 2팀">2팀</option>
+								<option value="디자인 3팀">3팀</option>
+							</optgroup>
 					</select>
 				</label>
 			</div>

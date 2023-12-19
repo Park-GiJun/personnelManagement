@@ -102,16 +102,17 @@ public class PersonalDAO extends DBConnPool {
 		return dto;
 	}
 
-	public void modifyInfo(String emp, String phone, String email) {
+	public void modifyInfo(String emp, String phone, String email, String pass) {
 		
-		System.out.println(emp + " " + phone + " " + email);
+		System.out.println(emp + " " + phone + " " + email + " " + pass);
 		try {
-			String query = "UPDATE emp SET phone=?, email=? WHERE emp_num=?";
+			String query = "UPDATE emp SET phone=?, email=?, pass=? WHERE emp_num=?";
 
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, phone);
 			psmt.setString(2, email);
-			psmt.setString(3, emp);
+			psmt.setString(3, pass);
+			psmt.setString(4, emp);
 
 			psmt.executeUpdate();
 			
@@ -119,5 +120,6 @@ public class PersonalDAO extends DBConnPool {
 			System.out.println("사용자 정보 업데이트중 예외 발생");
 			e.printStackTrace();
 		}
+		System.out.println("UPDATE emp SET phone= " + phone + ", email= " + email + ", pass= " + pass + " WHERE emp_num= " + emp);
 	}
 }

@@ -151,9 +151,8 @@ body {
 								<tr align="center" class="table-dark3">
 									<c:if
 										test="${not (row.approval eq '승인 완료' or row.approval eq '승인 거절' or row.team_approval eq '승인 완료' or row.team_approval eq '승인 거절')}">
-										<td scope="row" width="5%"><label> <input
-												type="checkbox" name="department"
-												value="${row.emp_num}, ${row.start_vacation}, ${row.end_vacation}, ${row.team}"
+										<td scope="row" width="5%"><label>
+										<input type="checkbox" name="department" value="${row.emp_num}, ${row.start_vacation}, ${row.end_vacation}, ${row.team}"
 												class="form-check-input">
 										</label></td>
 									</c:if>
@@ -165,8 +164,16 @@ body {
 									<td width="15%">${row.emp_num}</td>
 									<td width="15%">${row.start_vacation}~${row.end_vacation}</td>
 									<td width="10%">${row.emp_grade}</td>
-									<td width="10%">${row.team}</td>
-									<td width="10%">${row.team_num }</td>
+									<!-- 이사 ~ 사원 까지 로그인시 -->
+									<c:if test="${(grade > 1)}">
+										<td width="10%">${row.team}</td>
+										<td width="10%">${row.team_num }</td>
+									</c:if>
+									<!-- 사장 로그인시 -->
+									<c:if test="${(grade eq '1')}">
+										<td width="10%" colspan="2">${row.team}</td>
+									</c:if>
+									
 									<td>
 										<c:if test="${grade eq '4' or grade eq '2'}">
 											${row.team_approval }

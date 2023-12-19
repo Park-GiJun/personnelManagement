@@ -59,6 +59,13 @@
 .table-dark4:nth-child(odd) {
 	background-color: rgb(44, 50, 57);
 }
+
+.form-check-input {
+	background-color: #5bc0de;
+	border-color: #5bc0de;
+	outline: 0;
+	box-shadow: 0 0 0 0.15rem rgba(255, 255, 255);
+}
 </style>
 <script type="text/javascript">
         function confirmAction() {
@@ -165,7 +172,7 @@
 				<tr class="table-dark4" style="font-size: 20px;" align="center">
 				<c:if test="${not(list.status eq 'Confirm' or list.status eq 'Reject')}">
 					<td>
-						<input type="checkbox">
+						<input type="checkbox" class="form-check-input">
 					</td>
 				</c:if>
 				
