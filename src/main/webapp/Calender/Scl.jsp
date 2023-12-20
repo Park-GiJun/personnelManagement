@@ -553,12 +553,12 @@ function showDateAndAlert(day) {
 			// 사용자가 "취소"를 클릭하거나 대화상자를 아무 값도 입력하지 않고 닫은 경우
 			console.log("일정 저장을 취소하였습니다.");
 		}
-	}
+}
 
 	
 	
-	// 삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
-	function confirmDelete() {
+// 삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
+function confirmDelete() {
     var selectedSchedules = Array.from(document.querySelectorAll('.scheduleLink.selected')).map(function (schedule) {
         return schedule.getAttribute('data-schedule');
     });
@@ -566,7 +566,7 @@ function showDateAndAlert(day) {
     if (selectedSchedules.length > 0) {
         var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
         if (confirmed) {
-            // 선택한 일정의 ID를 서버로 전송
+            // 수정된 부분: 선택한 일정의 ID를 서버로 전송
             sendSelectedSchedulesToServer(selectedSchedules);
         }
     } else {
@@ -574,12 +574,12 @@ function showDateAndAlert(day) {
     }
 }
 	 
-	 
-	// 선택한 일정 삭제를 서버로 전송하는 함수
-	function sendSelectedSchedulesToServer() {
+	
+// 선택한 일정 삭제를 서버로 전송하는 함수
+function sendSelectedSchedulesToServer() {
     // Ajax를 사용하여 Java 서버에 배열 전송
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "../Controller/CalenderController.do", true);
+    xhr.open("POST", "../Controller/CalenderDeleteController.do", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     // 선택한 일정의 ID 스택을 문자열로 변환하여 서버로 전송
@@ -636,7 +636,7 @@ document.addEventListener('click', function (event) {
     
  	// Ajax를 사용하여 Java 서버에 배열 전송
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/Controller/CalenderController.do", true);
+    xhr.open("POST", "/Controller/CalenderDeleteConteController.do", true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     //xhr.send(JSON.stringify({ array: selectedSchedules }));
 
@@ -708,7 +708,7 @@ body {
 			<h2 class='re_day'>${selecteddate}</h2>
 		
 			<button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>
-			<button class='del_btn' onclick="confirmDelete();">삭제하기</button>
+			<button class='del_btn' type='submit' onclick="confirmDelete();">삭제하기</button>
 
 
 			<!-- db에 저장된 개인 일정 내용 가져오는 공간 -->

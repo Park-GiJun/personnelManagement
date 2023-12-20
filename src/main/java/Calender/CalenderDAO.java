@@ -1,6 +1,7 @@
 package Calender;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -124,33 +125,35 @@ public class CalenderDAO extends DBConnPool {
 	
 	
 	// 3 삭제하기 기능
-    public int deleteCalender(List<String> selectedSchedules) {
-    	System.out.println("확인 : " + selectedSchedules);
-        int result = 0;
+	public int deleteCalender(List<String> selectedSchedules) {
+	    int result = 0;
 
-        try {
-            // PreparedStatement를 사용하여 일괄 삭제
-            String query = "DELETE FROM Personal_diaray WHERE personal_diaray_schedule=?";
-            psmt = con.prepareStatement(query);
+	    try {
+	        // PreparedStatement를 사용하여 일괄 삭제
+	        String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_schedule=?";
+	        psmt = con.prepareStatement(query);
 
-            for (String schedule : selectedSchedules) {
-                psmt.setString(1, schedule);
-                psmt.addBatch();
-            }
+	        for (String schedule : selectedSchedules) {
+	            psmt.setString(1, schedule);
+	            psmt.addBatch();
+	        }
 
-            // 일괄 실행
-            int[] batchResults = psmt.executeBatch();
+	        // 일괄 실행
+	        int[] batchResults = psmt.executeBatch();
 
-            // 총 영향 받은 행 계산
-            for (int batchResult : batchResults) {
-                result += batchResult;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+	        // 총 영향 받은 행 계산
+	        for (int batchResult : batchResults) {
+	            result += batchResult;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        // 리소스 해제
+	        close();
+	    }
 
-        return result;
-    }	
+	    return result;
+}	
     
 
       
