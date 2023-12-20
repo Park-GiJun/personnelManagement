@@ -97,6 +97,10 @@ td, th {
 	font-size: 10px;
 	background: #fff;
 }
+
+#delete {
+	font-size: 15px;
+}
 </style>
 <jsp:include page="../MainPage/Left.jsp" />
 <script type="text/javascript">
@@ -173,7 +177,6 @@ td, th {
 				            form.method = 'POST';
 				            form.action = '../Controller/EliminationController.do';
 
-<<<<<<< HEAD
 				            // hidden 필드를 생성하여 데이터 추가
 				            var inputBoardNum = document.createElement('input');
 				            inputBoardNum.type = 'hidden';
@@ -181,35 +184,9 @@ td, th {
 				            inputBoardNum.value = boardNum;
 				            form.appendChild(inputBoardNum);
 				            
-=======
-            <c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
-               <tr class="table-dark4">
-                <td width="5%" align="center">${comment.turn}</td>
-                <td width="90%">${comment.content}</td>
-                <td width="5%" align="center">
-					<button type="button" onclick="CommentsDeletion()" class="btn-info" id="delete" style="font-size: 10px;">삭제</button>
-                </td>
->>>>>>> refs/remotes/origin/류동규
-
-<<<<<<< HEAD
 				            // 폼을 body에 추가하고 submit
 				            document.body.appendChild(form);
 				            form.submit();
-=======
-               </tr>
-            </c:forEach>
-            </table>
-            <table border="1" width="90%">
-            	<tr class="table-dark1">
-              		<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">
-              		<a style="margin-left: 1%;">댓글</a>
-               			<input type="text" value="내용을 입력해 주세요." name="Commentscontent" style="width: 95%; margin-left: 1%;" class="form-control"
-                              onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
-               		</td>
-            	</tr>
->>>>>>> refs/remotes/origin/류동규
-
-<<<<<<< HEAD
 						alert("삭제 되었습니다.")
 					} else {
 						// 사용자가 취소를 눌렀을 때의 동작
@@ -225,18 +202,6 @@ td, th {
 		
 			
 			function validateForm(form) {
-=======
-            	<tr class="table-dark1">
-              		<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">
-              		<a style="margin-left: 1%; width: 7%;">비밀번호</a>
-               			<input type="text" name="commentspassword" class="form-control" width="25%" style="margin-left: 0%; margin-top: 1%;">
-               			<button type="button" onclick="location.href='../Controller/FreeboardList.do';" class="btn-info" style="margin-left:54%;">목록</button>
-               			<button type="submit" class="btn-info">댓글쓰기</button>
-               		</td>
-            	</tr>
-         </table>
->>>>>>> refs/remotes/origin/류동규
-
 				if (form.Commentscontent.value == null
 						|| form.Commentscontent.value.trim() === "") {
 					alert("내용을 입력하세요");
@@ -325,7 +290,7 @@ td, th {
 				</tr>
 
 				<c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
-					<tr class="table-dark2">
+					<tr class="table-dark4">
 						<td width="5%" align="center">${ map2.totalCount +(((map2.pageNum-1) * map2.pageSize) + loop.index) }</td>
 						<td width="90%">${comment.content}</td>
 						<td width="5%" align="center">
@@ -336,13 +301,14 @@ td, th {
 			</table>
 			<table border="1" width="90%">
 				<tr class="table-dark1">
-					<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">댓글 <input type="text" value="내용을 입력해 주세요." name="Commentscontent" style="width: 95%;" class="form-control" onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
+					<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">댓글 
+						<input type="text" value="내용을 입력해 주세요." name="Commentscontent" style="width: 95%;" class="form-control" onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
 					</td>
 				</tr>
 
 				<tr class="table-dark1">
 					<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">비밀번호 <input type="text" name="commentspassword" class="form-control" width="25%" />
-						<button type="button" onclick="location.href='../Controller/FreeboardList.do';" class="sbtn-info" style="margin-left: 54%;">목록</button>
+						<button type="button" onclick="location.href='../Controller/FreeboardList.do';" class="btn-info" style="margin-left: 54%;">목록</button>
 						<button type="submit" class="btn-info">댓글쓰기</button>
 					</td>
 				</tr>

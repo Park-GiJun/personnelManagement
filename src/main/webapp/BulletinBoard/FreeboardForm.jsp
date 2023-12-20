@@ -128,17 +128,16 @@ td {
 			<table border="1" width="90%" height="50px">
 
 				<tr class="table-dark3" align="center">
-
-					<th style="display: flex; margin-left: 27.5%;" scope="row"><select name="searchCategory" class="form-select">
+					<th style="display: flex; margin-left:32.5%;" scope="row">
+						<select name="searchCategory" class="form-select">
 							<option value="title">제목</option>
-						</select> <input type="text" name="searchWord" class="form-control" /> <input type="submit" name="listSearch" value="검색하기" id="listSearch" /></th>
-				</tr>
-				<tr align="center">
-
-					<th>${ map2.paginImg }</th>
-					<th width="100" rowspan="2">
-						<button type="button" onclick="location.href='../BulletinBoard/Freeboard.jsp';">글작성</button>
-
+						</select>
+						
+						<input type="text" name="searchWord" class="form-control">
+						
+						<button type="submit" name="listSearch" value="검색하기" id="listSearch" class="btn-info" style="margin-right: 37.5%;">검색하기</button>
+						
+						<button type="button" onclick="location.href='../BulletinBoard/Freeboard.jsp';" class="btn-info">글작성</button>
 					</th>
 				</tr>
 			</table>

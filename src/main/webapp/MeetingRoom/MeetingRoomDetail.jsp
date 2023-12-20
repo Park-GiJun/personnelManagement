@@ -12,6 +12,7 @@
 h1 {
 	--bs-table-color: #fff;
 	color: var(--bs-table-color);
+	margin-left: 5%;
 }
 
 th {
@@ -34,8 +35,9 @@ tbody {
 }
 
 .btn-info {
-	margin-top: 0.5%;
-	width: 10%;
+	margin-top: 1%;
+	margin-left: 5%;
+	width: 20%;
 	height: 50px;
 	font-size:80%;
 	border-radius: 25px;
@@ -69,7 +71,7 @@ tbody {
 <body>
 	<h1>Meeting Room Detail</h1>
 
-	<table border="1" width="30%">
+	<table border="1" style="width: 90%; margin-left: 5%;">
 		<thead>
 			<tr class="table-dark2" align="center">
 				<th width="20%">시간</th>
@@ -137,6 +139,7 @@ tbody {
 		        // 서버의 응답을 처리
 		        console.log('서버 응답:');
 		        alert("신청이 완료 되었습니다.")
+		        window.opener.location.reload(); // 부모 창 새로 고침
 		        window.close();
 		    })
 

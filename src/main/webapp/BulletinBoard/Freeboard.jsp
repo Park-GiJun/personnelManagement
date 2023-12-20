@@ -21,7 +21,7 @@ body {
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
-	margin-left: 150px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
+	margin-left: 200px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;
 	min-height: 400px; /* Set a minimum height for the content area */
@@ -150,25 +150,16 @@ body {
 				</tr>
 
 				<tr>
-					<td colspan="3"
-						style="text-align: left; font-size: 15px; display: flex; align-items: center;">
-						<input type="text" value="비밀번호" name="Freeboardpassword"
-						class="form-control" id="Freeboardpassword"
-						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
-
-						<button type="button"
-							onclick="location.href='../BulletinBoard/FreeboardForm.jsp';"
-							class="btn-info" style="margin-left: 69%;">목록</button>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3" style="text-align: right;">
-						<button type="submit" class="btn-info">작성완료</button>
+					<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">
+						<input type="text" value="비밀번호" name="Freeboardpassword" class="form-control" id="Freeboardpassword"
+							onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
+							
+						<button type="button" onclick="location.href='../BulletinBoard/FreeboardForm.jsp';" class="btn-info" style="margin-left: 69%;">목록</button>
 						
+						<button type="submit" class="btn-info">작성완료</button>
 					</td>
 				</tr>
 			</table>
-
 		</form>
 	</div>
 </body>

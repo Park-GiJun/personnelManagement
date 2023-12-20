@@ -77,7 +77,7 @@ td {
 /* 휴가 신청 위치 수정 */
 .middle-button-container {
 	position: relative;
-	margin-top: -3%;
+	margin-top: -2%;
 	margin-left: 80%;
 }
 

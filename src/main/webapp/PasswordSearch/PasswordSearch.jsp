@@ -75,7 +75,7 @@ button {
 
 		<input type="Password" class="form-control" name="Check_Password" placeholder="Check Password">
 
-		<button type="button" class="btn-light" value="비밀번호 변경" onclick="PassForm()">Submit</button>
+		<button type="button" class="btn-light" value="비밀번호 변경" onclick="PassForm()">Password Change</button>
 
 		<script>
 			function PassForm() {
