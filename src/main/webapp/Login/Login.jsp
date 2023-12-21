@@ -8,6 +8,21 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/intelone-mono-font-family-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
 body {
 	display: flex;
 	align-items: center;
@@ -22,9 +37,10 @@ h1 {
 	border-radius: 15px;
 	margin-bottom: 3%;
 	width: 110%;
-	padding: 0rem 0rem 0.5rem 0rem;
+	padding: 0.25rem 0rem 0.25rem 0rem;
 	text-align: center;
 	font-weight: 900;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 	--bs-table-color: #fff;
 	color: var(--bs-table-color);
 }
@@ -40,6 +56,7 @@ input {
 }
 
 a {
+	font-family: 'intelone-mono-font-family-regular', sans-serif;
 	--bs-table-color: skyblue;
 	color: var(--bs-table-color);
 }
@@ -48,12 +65,14 @@ a {
 	width: 180px;
 	height: 80px;
 	border-radius: 25px;
+	font-family: 'intelone-mono-font-family-regular', sans-serif;
 }
 
 .form-control {
 	width: 400px;	`
 	height: 80px;
 	border-radius: 50px;
+	font-family: 'intelone-mono-font-family-regular', sans-serif;
 }
 </style>
 </head>

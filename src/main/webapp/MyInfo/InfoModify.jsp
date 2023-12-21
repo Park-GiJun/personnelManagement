@@ -11,6 +11,18 @@
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 
 <style type="text/css">
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+body {
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
 .btn-info {
 	margin-top: 17.5%;
 	margin-left: 1%;

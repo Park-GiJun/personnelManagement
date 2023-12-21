@@ -12,6 +12,13 @@
 <meta charset="UTF-8">
 <title>Left</title>
 <style>
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -46,30 +53,31 @@
 /* 텍스트 스타일 */
 .left_calender_text, .left_shareform_text, .left_freeboard_text,
 	.left_holiday_text, .left_info_text, .left_new_Id_text,
-	.left_salaryManagement_text, .left_Holiday_Approval_background,
+	.left_salaryManagement_text, .left_Holiday_Approval_text,
 	.left_meetingroom_text, .left_MeetingRoomReservation_text,
 	.left_WorkBoard_text {
 	width: 100%;
-	color: #6fc8e2;
+	color: #fff;
 	position: absolute;
-	top: 20%;
+	top: 5%;
 	left: 0;
-	font-family: Inter;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 	font-weight: Regular;
-	font-size: 18px;
+	font-size: 150%;
 	opacity: 1;
 	text-align: center;
 }
 
 .left_Time_text {
+	margin-top: 2%;
 	width: 100%;
-	color: #6fc8e2;
+	color: #fff;
 	position: absolute;
 	top: 10%;
 	left: 0;
-	font-family: Inter;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 	font-weight: Regular;
-	font-size: 18px;
+	font-size: 25px;
 	opacity: 1;
 	text-align: center;
 }
@@ -107,19 +115,19 @@
 }
 
 .left_Holiday_Approval_background {
-	top: 74%
+	top: 71.5%;
 }
 
 .left_salaryManagement_background {
-	top: 81%;
+	top: 78.5%;
 }
 
 .left_new_Id_background {
-	top: 88%;
+	top: 85.5%;
 }
 
 .left_MeetingRoomReservation_background {
-	top: 95%;
+	top: 92.5%;
 }
 
 
@@ -132,7 +140,11 @@
 }
 </style>
 <script>
-	
+function openHoliDayWindow() {
+	var detailsUrl = "../Controller/HoliDayCount.do";
+
+	window.open(detailsUrl, "_blank", "width=600, height=400");
+}
 </script>
 </head>
 <body>
@@ -158,7 +170,8 @@
 			</a>
 		</div>
 		<div class="left_holiday_background">
-			<a class="left_holiday_section" href="../Controller/HoliDayCount.do"> <span class="left_holiday_text">휴가신청</span>
+			<a class="left_holiday_section" onclick="openHoliDayWindow()"> <span class="left_holiday_text">휴가신청</span>
+			<!-- "../Controller/HoliDayCount.do"-->
 			</a>
 		</div>
 		<div class="left_info_background">

@@ -9,6 +9,14 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style type="text/css">
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -105,6 +113,7 @@ body {
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 	margin-left: 10%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;

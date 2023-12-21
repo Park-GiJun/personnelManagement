@@ -264,6 +264,14 @@ function getCurrentTime() {
 </script>
 </head>
 <style>
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
 /* 공통 스타일 */
 * {
 	box-sizing: border-box;
@@ -284,6 +292,7 @@ function getCurrentTime() {
 	left: 15%;
 	padding: 20px;
 	max-height: 100%;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 .info_profile {

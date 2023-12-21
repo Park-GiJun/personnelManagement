@@ -9,6 +9,22 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'SF_HambakSnow';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'SF_HambakSnow', sans-serif;
+}
+
 /* 공통 스타일 */
 * {
 	box-sizing: border-box;
@@ -18,6 +34,7 @@
 
 body {
 	font-size: 16px;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 td {
@@ -94,7 +111,7 @@ td {
 
 		<!-- 목록테이블 -->
 		<table border="1" width="90%">
-			<tr align="center" class="table-dark1">
+			<tr align="center" class="table-dark1" style="font-family: 'SF_HambakSnow', sans-serif;">
 				<th width="10%" scope="row">번호</th>
 				<th width="*">제목</th>
 				<th width="10%">작성일</th>

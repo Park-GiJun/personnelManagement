@@ -8,6 +8,22 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'SF_HambakSnow';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'SF_HambakSnow', sans-serif;
+}
+
 /* 공통 스타일 */
 * {
 	box-sizing: border-box;
@@ -17,6 +33,7 @@
 
 body {
 	font-size: 16px;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 td, th {
@@ -263,25 +280,25 @@ td, th {
 		<!-- 다른 페이지에서 불러오는 내용 -->
 		<form name="Comments" method="post" action="../Controller/CommentsController.do" onsubmit="return validateForm(this)">
 			<table border="1" width="90%">
-				<tr class="table-dark1" align="center">
+				<tr class="table-dark1" align="center" style="font-size:18px; font-family: 'SF_HambakSnow', sans-serif;">
 
 					<th width="20%">번호</th>
 					<th width="20%">${dto.anno_board_num}</th>
 					<th width="25%">작성일</th>
 					<th width="25%">${dto.post_date}</th>
 
-					<td style="text-align: left; font-size: 15px; display: flex; align-items: center;">
+					<td style="text-align: left; font-size: 18px; display: flex; align-items: center;">
 						<button type="button" onclick="promptModification()" width="10%" id="btn2" class="btn-info">수정</button>
 						<button type="button" onclick="promptDeletion()" width="10%" id="btn2" class="btn-info">삭제</button>
 					</td>
 				</tr>
 				<tr class="table-dark2" align="center">
-					<td style="width: 10%;">제목</td>
-					<th colspan="4" style="width: 90%; height: 50px;">${dto.title }</th>
+					<td style="width: 10%; font-size:18px;">제목</td>
+					<th colspan="4" style="width: 90%; height: 50px; font-size:20px; font-family: 'SF_HambakSnow', sans-serif;">${dto.title }</th>
 				</tr>
 				<tr class="table-dark3" align="center">
-					<td scope="row" style="width: 10%;">내용</td>
-					<th colspan="4" style="width: 90%; height: 500px;">${dto.content}</th>
+					<td scope="row" style="width: 10%; font-size:18px;">내용</td>
+					<th colspan="4" style="width: 90%; height: 500px; font-size:20px; font-family: 'SF_HambakSnow', sans-serif;">${dto.content}</th>
 				</tr>
 			</table>
 			<table border="1" width="90%">
@@ -292,7 +309,7 @@ td, th {
 				<c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
 					<tr class="table-dark4">
 						<td width="5%" align="center">${ map2.totalCount +(((map2.pageNum-1) * map2.pageSize) + loop.index) }</td>
-						<td width="90%">${comment.content}</td>
+						<td width="90%" style="font-size: 18px; font-family: 'SF_HambakSnow', sans-serif;">${comment.content}</td>
 						<td width="5%" align="center">
 							<button type="button" onclick="CommentsDeletion('${comment.pass}','${comment.turn}' )" class="btn-info" id="delete">삭제</button>
 						</td>
