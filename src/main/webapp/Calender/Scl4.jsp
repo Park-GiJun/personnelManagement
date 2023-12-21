@@ -246,7 +246,7 @@ button.my_btn2:hover {
 
 /* 부서 일정 버튼 */
 .my_btn3 {
-	background-color: #1C427E;
+	background-color: orange;
 	color: white;
 	border: none;
 	width: 150px;
@@ -602,8 +602,7 @@ tbody {
 <body>
 	<jsp:include page="../MainPage/Left.jsp"></jsp:include>
 
-	<form name="calender_form" method="post"
-		action="../Controller/CalenderController.do">
+	<form name="calender_form" method="post" action="../Controller/CompanyController.do">
 		<input type="hidden" name="selectedYear" id="selectedYear" value="<%=year%>">
 		<input type="hidden" name="selectedMonth" id="selectedMonth" value="<%=month%>">
 		<input type="hidden" name="selectedDay" id="selectedDay" value="">
@@ -646,8 +645,8 @@ tbody {
 			}
 			%>
 
-			<button class='plus_btn' onclick="confirmPlus();">추가하기</button>
-			<button class='del_btn' onclick="confirmDelete();">삭제하기</button>
+			<button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>
+			<button class='del_btn' type='submit' onclick="confirmDelete();">삭제하기</button>
 
 
 			<!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
@@ -673,7 +672,39 @@ tbody {
 					</c:choose>
 				</table>
 			</div>
+			
+			<div class="reverse2">
+    			<table class="caltabke" width="100%">
+        			<c:choose>
+            			<c:when test="${empty calenderlists}">
+                			<tr>
+                    			<td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>
+                			</tr>
+            			</c:when>
+            			<c:otherwise>
+                			<c:forEach items="${calenderlists}" var="row" varStatus="loop">
+                    			<tr>
+                    				<td>
+										${loop.index + 1} <!-- 각 일정마다 번호 출력 -->
+									</td>
+                        			<td>
+                            			<a href="#" class="scheduleLink" data-schedule="${row.team_schedule}">
+                                			${row.team_schedule}  <!-- db에 있는 개인 일정 출력 -->
+                            			</a>
+                        			</td>
+                    			</tr>
+                			</c:forEach>
+            			</c:otherwise>
+        			</c:choose>
+    			</table>
+			</div>
+			
+			
 		</div>
+		
+		<c:if test="${not empty deleteMessage}">
+    		<div>${deleteMessage}</div>
+		</c:if>
 
 
 		<button class="scl" onclick="location.href='Scl4_Cal.jsp';">

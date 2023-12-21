@@ -9,18 +9,22 @@
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
 @font-face {
-    font-family: 'ChungjuKimSaengTTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-family: 'ChungjuKimSaengTTF', sans-serif;
+	font-family: 'ChungjuKimSaengTTF';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 @font-face {
-    font-family: 'intelone-mono-font-family-regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/intelone-mono-font-family-regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
+	font-family: 'intelone-mono-font-family-regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/intelone-mono-font-family-regular.woff2')
+		format('woff2');
+	font-weight: 400;
+	font-style: normal;
 }
 
 body {
@@ -69,7 +73,7 @@ a {
 }
 
 .form-control {
-	width: 400px;	`
+	width: 400px; `
 	height: 80px;
 	border-radius: 50px;
 	font-family: 'intelone-mono-font-family-regular', sans-serif;
@@ -90,15 +94,8 @@ a {
 		}
 	</script>
 	<form name="login_form" method="post" action="../Controller/login.do" onsubmit="return checkLogin(this)">
-		<h1>PersonnelManagement</h1>
-	
-		<input type="text" class="form-control" name="login_Id" placeholder="ID">
-
-		<input type="password" class="form-control" name="login_Pwd" placeholder="Password">
-
-		<button type="submit" class="btn-light"	value="로그인">Login</button>
-		
-		<a href="../PasswordSearch/PasswordSearch.jsp">Forgot Password?</a>
+		<input type="text" class="form-control" name="login_Id" placeholder="ID"> <input type="password" class="form-control" name="login_Pwd" placeholder="Password">
+		<button type="submit" class="btn-light" value="로그인">Login</button>
 	</form>
 	<%
 	}

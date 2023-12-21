@@ -1,11 +1,11 @@
 package Controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -72,35 +72,10 @@ public class CalenderController extends HttpServlet {
 		
 		System.out.println("aaaaa " + selecteddate);
 		
-		 // 추가된 코드: 선택한 일정 삭제
-		String[] selectedContent = request.getParameterValues("selectedContent");
-		//System.out.println("확인용2222222222222222222"); 잘 나옴
-        if (selectedContent != null && selectedContent.length > 0) {
-            // 선택한 일정이 있을 경우 삭제
-            for (String scheduleId : selectedContent) {
-                // scheduleId를 이용하여 삭제 수행
-                dao.deleteCalender(Arrays.asList(scheduleId));
-                System.out.println("확인용333333333333333333");
-            }
-           
-        }
-		
-      
-        
-        System.out.println();
-        System.out.println("list 확인용 11111111 >>>>>>>>>>>" + selectedContent);  // 자바스크립트에서 저장된 리스트 값 출력 시험
-        //for (int i = 0; i < selectedContent.length; i++) {            
-        	//System.out.println(selectedContent[i]);        
-        //}
-        System.out.println();
-        
-		
 		if (searchWord != null) {
 			map.put("searchField", searchField);
 			map.put("searchWord", searchWord);
 		}
-		
-		
 		
 		/* 페이지 처리 start */
 		int totalCount = dao.ScheduleListCount(selecteddate, emp_num); // 게시물 개수
@@ -140,7 +115,8 @@ public class CalenderController extends HttpServlet {
 		request.setAttribute("calenderlists", calenderlists);
 		request.setAttribute("map2", map);
 		request.setAttribute("selecteddate", selecteddate);
-		//request.setAttribute("selectedContent", selectedContent); // 리스트 값
+		//request.setAttribute("selectedSchedules", selectedSchedules); // 리스트 값
+        //request.setAttribute("selectedSchedules", Arrays.asList(selectedContent));  // 화면에 선택한 일정들을 전달
 		request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
 		
 		

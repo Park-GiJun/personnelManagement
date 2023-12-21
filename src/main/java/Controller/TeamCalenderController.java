@@ -41,8 +41,22 @@ public class TeamCalenderController extends HttpServlet {
 		
 		System.out.println("confirm : " + selectedDay);
 		
-		if (Integer.parseInt(selectedDay) < 10) {
-			selectedDay = "0" + selectedDay;
+		if (selectedDay != null && !selectedDay.isEmpty()) {
+		    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도
+		    int dayValue;
+		    try {
+		        dayValue = Integer.parseInt(selectedDay);
+
+		        // 변환된 값이 10보다 작으면 앞에 0을 붙여서 문자열로 만듦
+		        if (dayValue < 10) {
+		            selectedDay = "0" + dayValue;
+		        }
+		    } catch (NumberFormatException e) {
+		    	
+		    }
+		} else {
+		    // selectedDay가 null이거나 비어있는 경우 처리
+		    // 적절한 로깅 또는 예외 처리를 수행
 		}
 			
 		String selectedYear = request.getParameter("selectedYear");
@@ -95,6 +109,7 @@ public class TeamCalenderController extends HttpServlet {
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);
 		request.setAttribute("map2", map);
+		request.setAttribute("selecteddate", selecteddate);
 		request.getRequestDispatcher("../Calender/Scl4.jsp").forward(request, response);
 		
 	}
