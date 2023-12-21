@@ -151,18 +151,22 @@ body {
 
 				<tr>
 					<td colspan="3"
+						
 						style="text-align: left; font-size: 15px; display: flex; align-items: center;">
+						비밀번호
 						<input type="text" value="비밀번호" name="Freeboardpassword"
 						class="form-control" id="Freeboardpassword"
 						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
 
-						<button type="button"
-							onclick="location.href='../BulletinBoard/FreeboardForm.jsp';"
-							class="btn-info" style="margin-left: 69%;">목록</button>
+						
 					</td>
 				</tr>
 				<tr>
+				
 					<td colspan="3" style="text-align: right;">
+					<button type="button"
+							onclick="location.href='../Controller/FreeboardList.do';"
+							class="btn-info" style="margin-left: 69%;">목록</button>
 						<button type="submit" class="btn-info">작성완료</button>
 						
 					</td>

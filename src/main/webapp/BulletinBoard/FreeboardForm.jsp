@@ -42,6 +42,8 @@ td {
 	border-radius: 25px;
 }
 
+
+
 .table-info {
 	background-color: #5bc0de;
 }
@@ -85,6 +87,13 @@ td {
 	width: 400px;
 	height: 30px;
 }
+
+#btn2 {
+	width: 10%;
+	font-size: 10px;
+	background: #fff;
+}
+
 </style>
 <body>
 	<jsp:include page="../MainPage/Left.jsp" />
@@ -131,13 +140,12 @@ td {
 
 					<th style="display: flex; margin-left: 27.5%;" scope="row"><select name="searchCategory" class="form-select">
 							<option value="title">제목</option>
-						</select> <input type="text" name="searchWord" class="form-control" /> <input type="submit" name="listSearch" value="검색하기" id="listSearch" /></th>
-				</tr>
-				<tr align="center">
-
+						</select> <input type="text" name="searchWord" class="form-control" /> <input type="submit" class="btn-info" name="listSearch" value="검색하기" id="btn2" />
+						</th>
+						
 					<th>${ map2.paginImg }</th>
 					<th width="100" rowspan="2">
-						<button type="button" onclick="location.href='../BulletinBoard/Freeboard.jsp';">글작성</button>
+						<button type="button" onclick="location.href='../BulletinBoard/Freeboard.jsp';" class="btn-info" >글작성</button>
 
 					</th>
 				</tr>

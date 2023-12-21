@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Comments.CommentsDAO;
-import Comments.CommentsDTO;
 import FreeboardForm.FreeboardFormDTO;
+import comments.CommentsDAO;
+import comments.CommentsDTO;
 
 @WebServlet("/Controller/CommentsController.do")
 public class CommentsController extends HttpServlet {
@@ -73,7 +73,7 @@ public class CommentsController extends HttpServlet {
 		// 포워딩
         request.setAttribute("dto", dto);
         request.getSession().setAttribute("anno_board_num", anno_board_num);
-		request.getRequestDispatcher("/BulletinBoard/Comments.jsp").forward(request, response);
+		request.getRequestDispatcher("/Controller/ReturnCommentsController.do").forward(request, response);
 		
 	}
 

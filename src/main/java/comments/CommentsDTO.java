@@ -1,4 +1,4 @@
-package Comments;
+package comments;
 
 public class CommentsDTO {
     private int anno_board_num;

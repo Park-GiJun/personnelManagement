@@ -1,4 +1,4 @@
-package Comments;
+package comments;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +20,7 @@ public class CommentsDAO extends DBConnPool {
 
 		System.out.println("상세보기 댓글 SelectListPage 실행");
 		// 쿼리문
-		String query = "SELECT * FROM (SELECT Tb.*, ROWNUM AS rNum FROM (SELECT * FROM 채ㅡㅡ둣ㄴ";
+		String query = "SELECT * FROM (SELECT Tb.*, ROWNUM AS rNum FROM (SELECT * FROM Comments";
 		if (map.get("searchWord") != null) {
 			// 조건 추가
 			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
