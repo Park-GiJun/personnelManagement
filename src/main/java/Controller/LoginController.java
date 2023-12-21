@@ -57,6 +57,7 @@ public class LoginController extends HttpServlet {
 
 			// Store formatted date in session 세션의 값저장
 			request.getSession().setAttribute("inpGrade", inpGrade);
+			request.getSession().setAttribute("inploginPwd", inploginPwd);
 			System.out.println("LoginController : " + inpGrade);
 			request.getSession().setAttribute("currentDate", formattedDate);
 			request.getSession().setAttribute("inpteam", inpTeam);

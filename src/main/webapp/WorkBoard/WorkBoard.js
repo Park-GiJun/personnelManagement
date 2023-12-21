@@ -1,6 +1,21 @@
 let buttonNumber = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
+
+	var table = document.querySelector('.table');
+
+	table.addEventListener('click', function(event) {
+		var target = event.target;
+
+		if (target.classList.contains('btn-success')) {
+			console.log("승인버튼 클릭");
+			var code = target.getAttribute('data-code');
+			approval(code);
+		} else if (target.classList.contains('btn-danger')) {
+			var code = target.getAttribute('data-code');
+			reject(code);
+		}
+	});
 	let writeButton = document.getElementById("writeButton");
 	let docs = document.getElementsByClassName("docs");
 
@@ -22,8 +37,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		doc.addEventListener("click", function() {
 			let idxNum = this.getAttribute("id"); // 현재 요소의 id 속성 가져오기
 			let xhr = new XMLHttpRequest();
-			//			let htmlFilePath = "../Controller/DocDetail.do?idx=" + idxNum; // 쿼리 파라미터 추가
-			let htmlFilePath = "../WorkBoard/DocDetail.jsp";
+			let htmlFilePath = "../Controller/DocDetail.do?idx=" + idxNum; // 쿼리 파라미터 추가
+			//			let htmlFilePath = "../WorkBoard/DocDetail.jsp";
 
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState === 4 && xhr.status === 200) {
@@ -226,6 +241,7 @@ function submitForm() {
 	formData.append('rowCount', rowCount);
 	console.log(formData);
 
+	// JavaScript
 	fetch('../Controller/ApprovalWrite.do', {
 		method: 'POST',
 		body: formData
@@ -233,22 +249,152 @@ function submitForm() {
 		.then(response => response.json())
 		.then(result => {
 			alert("글작성이 완료 되었습니다.");
-			let detailElement = document.querySelector(".Detail");
-			let xhr = new XMLHttpRequest();
-			let htmlFilePath = "../WorkBoard/WorkBoardWrite.jsp";
-
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState === 4 && xhr.status === 200) {
-					detailElement.innerHTML = xhr.responseText;
-				}
-			};
-			xhr.open("GET", htmlFilePath, true);
-			xhr.send();
+			window.location.reload(); // 페이지 새로 고침
 		})
 		.catch(error => {
 			console.error('Error:', error);
 		});
 }
 
+function approval(code) {
+	fetch('../Controller/DocApproval.do', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+		body: 'code=' + code
+	})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			alert("승인 완료");
+			window.location.reload(); // 페이지 새로 고침
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+}
+
+
+function reject(code) {
+	fetch('../Controller/DocReject.do', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+		body: 'code=' + code
+	})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			alert("거절 완료");
+			window.location.reload(); // 페이지 새로 고침
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+}
+function dateChanged() {
+	var dateValue = document.getElementById('datePicker').value;
+	console.log(dateValue);
+
+	fetch('../Controller/selectedDateOnWorkBoard.do?date=' + encodeURIComponent(dateValue), {
+		method: 'GET'
+	})
+		.then(response => response.json()) // 서버 응답을 JSON 형식으로 파싱
+		.then(data => {
+			console.log(data);
+
+			// 여기에 게시판에 정보를 추가하는 로직을 구현합니다.
+			updateTableWithData(data); // 예시로 함수를 호출하여 정보를 업데이트
+
+			// 추가로 원하는 작업을 수행할 수 있습니다.
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+}
+
+// 게시판 정보를 업데이트하는 함수
+function updateTableWithData(data) {
+	const tableBody = document.getElementById("boarlist").getElementsByTagName("tbody")[0];
+	tableBody.innerHTML = ''; // 기존 테이블 내용 제거
+
+	// JSON 데이터에서 정보를 추출하고 게시판에 추가합니다.
+	data.list.forEach((item, index) => {
+		const row = tableBody.insertRow();
+
+		// INDEX
+		const cellIndex = row.insertCell(0);
+		cellIndex.textContent = index + 1;
+		cellIndex.style.textAlign = "center";
+
+		// TITLE
+		const cellTitle = row.insertCell(1);
+		const titleLink = document.createElement("a");
+		titleLink.className = "docs";
+		titleLink.id = item.idx;
+		titleLink.textContent = item.approval_doc_title;
+		cellTitle.appendChild(titleLink);
+		cellTitle.style.textAlign = "center";
+
+		// TEAM
+		const cellTeam = row.insertCell(2);
+		cellTeam.textContent = item.team;
+		cellTeam.style.textAlign = "center";
+
+		// EMP
+		const cellEmp = row.insertCell(3);
+		cellEmp.textContent = item.emp_num;
+		cellEmp.style.textAlign = "center";
+
+		// DATE
+		const cellDate = row.insertCell(4);
+		cellDate.textContent = item.approval_doc_date;
+		cellDate.style.textAlign = "center";
+
+		// 파일 다운로드 링크
+		const cellFile = row.insertCell(5);
+		cellFile.style.textAlign = "center";
+		if (item.approval_doc_ofile) {
+			const downloadLink = document.createElement("a");
+			downloadLink.href = ""; // 여기에 다운로드 링크 주소를 넣으세요
+			downloadLink.textContent = "[다운로드]";
+			cellFile.appendChild(item.approval_doc_ofile);
+			cellFile.appendChild(downloadLink);
+		}
+
+		// STATUS
+		const cellStatus = row.insertCell(6);
+		cellStatus.textContent = item.doc_status;
+		cellStatus.style.textAlign = "cetner";
+	});
+
+	// 페이지 정보를 출력하거나 필요한 다른 작업을 수행합니다.
+	console.log("Total Count: " + data.map.totalCount);
+	console.log("Paging HTML: " + data.map.pagingImg);
+
+	// Attach a click event listener to the table container
+	document.querySelector('.table').addEventListener('click', function(event) {
+		var target = event.target;
+
+		// Check if a title was clicked
+		if (target.classList.contains('docs')) {
+			var idxNum = target.getAttribute("id"); // Get the ID from the clicked title
+			var xhr = new XMLHttpRequest();
+			var htmlFilePath = "../Controller/DocDetail.do?idx=" + idxNum;
+
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					var detailElement = document.querySelector(".Detail");
+					detailElement.innerHTML = xhr.responseText;
+				}
+			};
+			xhr.open("GET", htmlFilePath, true);
+			xhr.send();
+		}
+	});
+
+}
 
 

@@ -38,8 +38,109 @@ public class WorkDocsDTO {
 	private String firststatus;
 	private String secondstatus;
 	private String thirdstatus;
-	private String fourthstauts;
+	private String fourthstatus;
 	private String fifthstatus;
+	private String firstMakeButton;
+	private String secondMakeButton;
+	private String thirdMakeButton;
+	private String fourthMakeButton;
+	private String fifthMakeButton;
+	private String firstCODE;
+	private String secondCODE;
+	private String thirdCODE;
+	private String fourthCODE;
+	private String fifthCODE;
+	private String doc_status;
+	
+	
+
+	public String getDoc_status() {
+		return doc_status;
+	}
+
+	public void setDoc_status(String doc_status) {
+		this.doc_status = doc_status;
+	}
+
+	public String getFirstCODE() {
+		return firstCODE;
+	}
+
+	public String getSecondCODE() {
+		return secondCODE;
+	}
+
+	public String getThirdCODE() {
+		return thirdCODE;
+	}
+
+	public String getFourthCODE() {
+		return fourthCODE;
+	}
+
+	public String getFifthCODE() {
+		return fifthCODE;
+	}
+
+	public void setFirstCODE(String firstCODE) {
+		this.firstCODE = firstCODE;
+	}
+
+	public void setSecondCODE(String secondCODE) {
+		this.secondCODE = secondCODE;
+	}
+
+	public void setThirdCODE(String thirdCODE) {
+		this.thirdCODE = thirdCODE;
+	}
+
+	public void setFourthCODE(String fourthCODE) {
+		this.fourthCODE = fourthCODE;
+	}
+
+	public void setFifthCODE(String fifthCODE) {
+		this.fifthCODE = fifthCODE;
+	}
+
+	public String getFirstMakeButton() {
+		return firstMakeButton;
+	}
+
+	public String getSecondMakeButton() {
+		return secondMakeButton;
+	}
+
+	public String getThirdMakeButton() {
+		return thirdMakeButton;
+	}
+
+	public String getFourthMakeButton() {
+		return fourthMakeButton;
+	}
+
+	public String getFifthMakeButton() {
+		return fifthMakeButton;
+	}
+
+	public void setFirstMakeButton(String firstMakeButton) {
+		this.firstMakeButton = firstMakeButton;
+	}
+
+	public void setSecondMakeButton(String secondMakeButton) {
+		this.secondMakeButton = secondMakeButton;
+	}
+
+	public void setThirdMakeButton(String thirdMakeButton) {
+		this.thirdMakeButton = thirdMakeButton;
+	}
+
+	public void setFourthMakeButton(String fourthMakeButton) {
+		this.fourthMakeButton = fourthMakeButton;
+	}
+
+	public void setFifthMakeButton(String fifthMakeButton) {
+		this.fifthMakeButton = fifthMakeButton;
+	}
 
 	public int getIdx() {
 		return idx;
@@ -137,8 +238,8 @@ public class WorkDocsDTO {
 		return thirdstatus;
 	}
 
-	public String getFourthstauts() {
-		return fourthstauts;
+	public String getFourthstatus() {
+		return fourthstatus;
 	}
 
 	public String getFifthstatus() {
@@ -237,8 +338,8 @@ public class WorkDocsDTO {
 		this.thirdstatus = thirdstatus;
 	}
 
-	public void setFourthstauts(String fourthstauts) {
-		this.fourthstauts = fourthstauts;
+	public void setFourthstatus(String fourthstatus) {
+		this.fourthstatus = fourthstatus;
 	}
 
 	public void setFifthstatus(String fifthstatus) {

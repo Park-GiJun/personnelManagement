@@ -8,7 +8,15 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style type="text/css">
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .content {
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 	margin-left: 10%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;
@@ -58,6 +66,13 @@
 
 .table-dark4:nth-child(odd) {
 	background-color: rgb(44, 50, 57);
+}
+
+.form-check-input {
+	background-color: #5bc0de;
+	border-color: #5bc0de;
+	outline: 0;
+	box-shadow: 0 0 0 0.15rem rgba(255, 255, 255);
 }
 </style>
 <script type="text/javascript">
@@ -165,14 +180,13 @@
 				<tr class="table-dark4" style="font-size: 20px;" align="center">
 				<c:if test="${not(list.status eq 'Confirm' or list.status eq 'Reject')}">
 					<td>
-						<input type="checkbox">
+						<input type="checkbox" class="form-check-input">
 					</td>
 				</c:if>
 				
 				<c:if test="${(list.status eq 'Confirm' or list.status eq 'Reject')}">
 					<td>&nbsp;</td>
 				</c:if>
-				
 					<td>${ list.team }</td>
 					<td>${ list.empNum }</td>
 					<td>${ list.name }</td>

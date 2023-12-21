@@ -9,6 +9,26 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+@font-face {
+	font-family: 'ChungjuKimSaengTTF';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'SF_HambakSnow', sans-serif;
+}
+
 /* 공통 스타일 */
 * {
 	box-sizing: border-box;
@@ -18,6 +38,7 @@
 
 body {
 	font-size: 16px;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 td, th {
@@ -43,7 +64,6 @@ td, th {
 
 .form-control {
 	margin-left: 0.5%;
-	margin-top: 0.5%;
 	width: 20%;
 	height: 10px;
 }
@@ -99,6 +119,14 @@ td, th {
 	font-size: 10px;
 	background: #fff;
 }
+
+#delete {
+	font-size: 15px;
+}
+
+.input-group{    margin-bottom: 5px;
+}
+
 </style>
 <jsp:include page="../MainPage/Left.jsp" />
 <script type="text/javascript">
@@ -182,11 +210,9 @@ td, th {
 				            inputBoardNum.value = boardNum;
 				            form.appendChild(inputBoardNum);
 				            
-
 				            // 폼을 body에 추가하고 submit
 				            document.body.appendChild(form);
 				            form.submit();
-
 						alert("삭제 되었습니다.")
 					} else {
 						// 사용자가 취소를 눌렀을 때의 동작
@@ -202,7 +228,6 @@ td, th {
 		
 			
 			function validateForm(form) {
-
 				if (form.Commentscontent.value == null
 						|| form.Commentscontent.value.trim() === "") {
 					alert("내용을 입력하세요");
@@ -267,39 +292,54 @@ td, th {
 			action="../Controller/CommentsController.do"
 			onsubmit="return validateForm(this)">
 			<table border="1" width="90%">
-				<tr class="table-dark1" align="center">
+				<tr class="table-dark1" align="center"
+					style="font-size: 18px; font-family: 'SF_HambakSnow', sans-serif;">
 
 					<th width="20%">번호</th>
 					<th width="20%">${dto.anno_board_num}</th>
 					<th width="25%">작성일</th>
 					<th width="25%">${dto.post_date}</th>
 
+
 					<td
-						style="text-align: left; font-size: 15px; display: flex; align-items: center;">
+						style="text-align: left; font-size: 18px; display: flex; align-items: center;">
 						<button type="button" onclick="promptModification()" width="10%"
 							id="btn2" class="btn-info">수정</button>
 						<button type="button" onclick="promptDeletion()" width="10%"
 							id="btn2" class="btn-info">삭제</button>
+
 					</td>
 				</tr>
+			
+			<tr class="input-group mb-20">
+			<th colspan="5" style="width: 100%; height: 100%; font-size: 0px;">
+				  <input name="boardFile" type="file" class="form-control" id="inputGroupFile02" style="font-size: 10px; padding: 10px;">
+			</th>
+			</tr>
+
+
 				<tr class="table-dark2" align="center">
-					<td style="width: 10%;">제목</td>
-					<th colspan="4" style="width: 90%; height: 50px;">${dto.title }</th>
+					<td style="width: 10%; font-size: 18px;">제목</td>
+					<th colspan="4"
+						style="width: 90%; height: 50px; font-size: 20px; font-family: 'SF_HambakSnow', sans-serif;">${dto.title }</th>
 				</tr>
 				<tr class="table-dark3" align="center">
-					<td scope="row" style="width: 10%;">내용</td>
-					<th colspan="4" style="width: 90%; height: 500px;">${dto.content}</th>
+					<td scope="row" style="width: 10%; font-size: 18px;">내용</td>
+					<th colspan="4"
+						style="width: 90%; height: 500px; font-size: 20px; font-family: 'SF_HambakSnow', sans-serif;">${dto.content}</th>
 				</tr>
 			</table>
 			<table border="1" width="90%">
 				<tr class="table-dark2">
-					<td colspan="4">댓글 리스트</td>
+					<td colspan="4" style="font-size: 15px;">댓글 리스트</td>
 				</tr>
 
 				<c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
-					<tr class="table-dark2">
-						<td width="5%" align="center">${ map2.totalCount +(((map2.pageNum-1) * map2.pageSize) + loop.index+1) }</td>
-						<td width="90%">${comment.content}</td>
+					<tr class="table-dark4">
+						<td width="5%" align="center">${ map2.totalCount +(((map2.pageNum-1) * map2.pageSize) + loop.index) }</td>
+						<td width="90%"
+							style="font-size: 18px; font-family: 'SF_HambakSnow', sans-serif;">${comment.content}</td>
+
 						<td width="5%" align="center">
 							<button type="button"
 								onclick="CommentsDeletion('${comment.pass}','${comment.turn}' )"
@@ -310,15 +350,18 @@ td, th {
 			</table>
 			<table border="1" width="90%">
 				<tr class="table-dark1">
+
 					<td colspan="3"
 						style="text-align: left; font-size: 15px; display: flex; align-items: center;">댓글
 						<input type="text" value="내용을 입력해 주세요." name="Commentscontent"
 						style="width: 95%;" class="form-control"
 						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
+
 					</td>
 				</tr>
 
 				<tr class="table-dark1">
+
 					<td colspan="3"
 						style="text-align: left; font-size: 15px; display: flex; align-items: center;">비밀번호
 						<input type="text" name="commentspassword" class="form-control"

@@ -4,17 +4,41 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Changeboard</title>
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
 /* 공통 스타일 */
+@font-face {
+	font-family: 'ChungjuKimSaengTTF';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'SF_HambakSnow', sans-serif;
+}
+
+
+
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
+
 
 body {
 	font-size: 16px;
@@ -26,6 +50,7 @@ body {
 	padding: 10px; /*넓이*/
 	font-size: 12px; /*글자사이즈*/
 	min-height: 400px; /* Set a minimum height for the content area */
+	height : 100%;
 }
 
 td, th {
@@ -145,28 +170,28 @@ td, th {
 		</script>
 		<form method="post" action="../Controller/CrystalController.do"
 			onsubmit="return validateForm(this)">
-			<table align="center" border="1" height="80%" width="90%">
+			<table align="center" border="1" height="80%" width="90%" style="font-family: 'SF_HambakSnow', sans-serif;">
 				<tr class="table-dark1" align="center">
-					<th width="20%">번호</th>
-					<th width="20%">${dto.anno_board_num}</th>
-					<th width="25%">작성일</th>
-					<th width="25%">${dto.post_date}</th>
+					<th width="20%" style="font-size: 20px;">번호</th>
+					<th width="20%" style="font-size: 20px;">${dto.anno_board_num}</th>
+					<th width="25%" style="font-size: 20px;" >작성일</th>
+					<th width="25%" style="font-size: 20px;">${dto.post_date}</th>
 				</tr>
 
 				<tr class="table-dark1" align="center">
-					<td width="20%">제목</td>
-					<td colspan="4"><input type="text" value="${dto.title}"
+					<td width="20%" style="font-size: 20px;">제목</td>
+					<td colspan="4" style="font-size: 20px;"><input type="text" value="${dto.title}"
 						name="Freeboardtitle" style="width: 100%;"
 						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" /></td>
 				</tr>
 
-				<tr class="table-dark3" align="center">
-					<td width="20%">내용</td>
-					<td colspan="4"><input type="text" value="${dto.content}"
-						name="Freeboardcontent" style="width: 100%; height: 800px;"></td>
+				<tr class="table-dark3" align="center" >
+					<td width="20%"  style="font-size: 20px;">내용</td>
+					<td colspan="4" style="font-size: 20px;"><input type="text" value="${dto.content}"
+						name="Freeboardcontent" style="width: 100%; height: 600px;"></td>
 				</tr>
 			</table>
-			<table border="1" width="90%">
+			<table border="1" width="90%" style="font-family: 'SF_HambakSnow', sans-serif;">
 				<tr class="table-dark1">
 					<td
 						style="text-align: left; font-size: 15px; display: flex; align-items: center;">

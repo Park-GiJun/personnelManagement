@@ -3,26 +3,28 @@ package SalaryManagement;
 public class SalaryManagementDTO {
 	
 	private String team;
+	private String team_num;
 	private String name;
 	private String emp_num;
 	private String emp_grade;
+	private String phone;
+	private String email;
+	private String yearmonth;
 	private int pay;
 	private int total_pay;
 	private int incentive;
 	private int holiday_pay;
 	private int extra_work_pay;
+	private int grade;
+
+	
+	
 	public String getYearmonth() {
 		return yearmonth;
 	}
 	public void setYearmonth(String yearmonth) {
 		this.yearmonth = yearmonth;
 	}
-	private int grade;
-	private String phone;
-	private String email;
-	private String yearmonth;
-	
-	
 	public String getTeam() {
 		return team;
 	}
@@ -95,5 +97,11 @@ public class SalaryManagementDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	public String getTeam_num() {
+		return team_num;
+	}
+	public void setTeam_num(String team_num) {
+		this.team_num = team_num;
+	}
+	
 }

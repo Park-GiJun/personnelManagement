@@ -9,6 +9,14 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style type="text/css">
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -105,6 +113,7 @@ body {
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 	margin-left: 10%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;
@@ -151,9 +160,8 @@ body {
 								<tr align="center" class="table-dark3">
 									<c:if
 										test="${not (row.approval eq '승인 완료' or row.approval eq '승인 거절' or row.team_approval eq '승인 완료' or row.team_approval eq '승인 거절')}">
-										<td scope="row" width="5%"><label> <input
-												type="checkbox" name="department"
-												value="${row.emp_num}, ${row.start_vacation}, ${row.end_vacation}, ${row.team}"
+										<td scope="row" width="5%"><label>
+										<input type="checkbox" name="department" value="${row.emp_num}, ${row.start_vacation}, ${row.end_vacation}, ${row.team}"
 												class="form-check-input">
 										</label></td>
 									</c:if>
@@ -165,8 +173,16 @@ body {
 									<td width="15%">${row.emp_num}</td>
 									<td width="15%">${row.start_vacation}~${row.end_vacation}</td>
 									<td width="10%">${row.emp_grade}</td>
-									<td width="10%">${row.team}</td>
-									<td width="10%">${row.team_num }</td>
+									<!-- 이사 ~ 사원 까지 로그인시 -->
+									<c:if test="${(grade > 1)}">
+										<td width="10%">${row.team}</td>
+										<td width="10%">${row.team_num }</td>
+									</c:if>
+									<!-- 사장 로그인시 -->
+									<c:if test="${(grade eq '1')}">
+										<td width="10%" colspan="2">${row.team}</td>
+									</c:if>
+									
 									<td>
 										<c:if test="${grade eq '4' or grade eq '2'}">
 											${row.team_approval }

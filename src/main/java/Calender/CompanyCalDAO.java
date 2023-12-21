@@ -104,7 +104,7 @@ public class CompanyCalDAO extends DBConnPool {
 		return result;
 	}
 
-	public int addCalendarEvent(String company_calender_date, String company_schedule, String team) {
+	public int addCalendarEvent(String company_calender_date, String company_schedule) {
 		int result = 0;
 
 		try {
@@ -115,13 +115,13 @@ public class CompanyCalDAO extends DBConnPool {
 			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "사용자명", "비밀번호");
 
 			// SQL 쿼리 작성
-			String query = "INSERT INTO company_calender_date (company_calender_date, company_schedule, team) VALUES (?, ?, ?)";
+			String query = "INSERT INTO company_calender_date (company_calender_date, company_schedule) VALUES (?, ?)";
 
 			// PreparedStatement 생성
 			PreparedStatement pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, company_calender_date);
 			pstmt.setString(2, company_schedule);
-			pstmt.setString(3, team);
+		
 
 			// 쿼리 실행 및 결과 확인
 			result = pstmt.executeUpdate();
