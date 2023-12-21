@@ -44,6 +44,11 @@
 	border-collapse: collapse;
 	text-align: center;
 }
+
+.docs {
+	color: black;
+	cursor: pointer;
+}
 </style>
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <script src="../WorkBoard/WorkBoard.js"></script>

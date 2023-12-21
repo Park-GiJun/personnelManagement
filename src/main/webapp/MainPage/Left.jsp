@@ -213,7 +213,6 @@ function openHoliDayWindow() {
 			}
 			%>
 		</div>
-		
 		<div>
 			<%
 			inpGrade = (int) session.getAttribute("inpGrade");
@@ -226,6 +225,8 @@ function openHoliDayWindow() {
 			<%
 			}
 			%>
+			
+			<script src="../MainPage/WebServer.js"></script>
 		</div>
 	</div>
 </body>
