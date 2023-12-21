@@ -40,7 +40,6 @@ public class WebServer {
 		System.out.println(myValue + "//" + grade);
 		System.out.println("WebSocket 연결됨");
 
-		printAllSessionGrades();
 	}
 
 	@OnClose

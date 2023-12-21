@@ -108,7 +108,7 @@ public class WorkDocsDAO extends DBConnPool {
 
 		List<WorkDocsDTO> list = new ArrayList<WorkDocsDTO>();
 
-		String query = "SELECT * FROM ( " + "    SELECT ad.idx, ad.APPROVAL_DOC_TITLE AS title, ad.TEAM AS writerteam, "
+		String query = "SELECT * FROM ( " + "    SELECT ad.idx, ad.APPROVAL_DOC_OFILE, ad.APPROVAL_DOC_TITLE AS title, ad.TEAM AS writerteam, "
 				+ "    ad.APPROVAL_DOC_DATE AS writedate, ad.EMP_NUM AS writer, ad.DOC_STATUS AS status, "
 				+ "    ROW_NUMBER() OVER (ORDER BY ad.idx DESC) rNum " + "    FROM APPROVAL_DOC ad "
 				+ "    LEFT JOIN APPROVAL_LINE al ON ad.FIRST_CODE = al.CODE "
@@ -116,10 +116,16 @@ public class WorkDocsDAO extends DBConnPool {
 				+ "    LEFT JOIN APPROVAL_LINE al3 ON ad.THIRD_CODE = al3.CODE "
 				+ "    LEFT JOIN APPROVAL_LINE al4 ON ad.FOURTH_CODE = al4.code "
 				+ "    LEFT JOIN APPROVAL_LINE al5 ON ad.FIFTH_CODE = al5.CODE "
-				+ "    WHERE ? IN (al.EMP_NUM, al2.EMP_NUM, al3.EMP_NUM, al4.EMP_NUM, al5.EMP_NUM) " + ") "
-				+ "WHERE rNum BETWEEN ? AND ? " + "ORDER BY idx DESC, writedate";
+				+ "    WHERE ? IN (al.EMP_NUM, al2.EMP_NUM, al3.EMP_NUM, al4.EMP_NUM, al5.EMP_NUM) ";
+				
+		
+		// 검색 조건이 있다면 where절로 추가
+		if (map.get("searchWord") != null) {
+			query += " AND " + map.get("Category") + " LIKE '%" + map.get("searchWord") + "%'";
+		}
+		
+		query +=  ") " + "WHERE rNum BETWEEN ? AND ? " + "ORDER BY idx DESC, writedate";
 		try {
-
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, emp);
 			psmt.setString(2, map.get("start").toString());
@@ -136,6 +142,7 @@ public class WorkDocsDAO extends DBConnPool {
 				dto.setApproval_doc_date(rs.getDate("writedate"));
 				dto.setEmp_num(rs.getString("writer"));
 				dto.setDoc_status(rs.getString("status"));
+				dto.setApproval_doc_ofile(rs.getString("APPROVAL_DOC_OFILE"));
 
 				System.out.println("제목 확인 : " + dto.getApproval_doc_title());
 
@@ -164,11 +171,13 @@ public class WorkDocsDAO extends DBConnPool {
 				+ "LEFT JOIN APPROVAL_LINE al5 ON ad.FIFTH_CODE = al5.CODE "
 				+ "WHERE ? IN (al.EMP_NUM, al2.EMP_NUM, al3.EMP_NUM, al4.EMP_NUM, al5.EMP_NUM)";
 
-//		// 검색 조건이 있다면 where절로 추가
-//		if (map.get("searchWord") != null) {
-//			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
-//		}
+		// 검색 조건이 있다면 where절로 추가
+		if (map.get("searchWord") != null) {
+			query += " AND " + map.get("Category") + " LIKE '%" + map.get("searchWord") + "%'";
+		}
 
+		
+		System.out.println("쿼리 출력 확인 : " + query);
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, emp);
@@ -179,7 +188,7 @@ public class WorkDocsDAO extends DBConnPool {
 			System.out.println("게시물 카운트 중 예외 발생");
 			e.printStackTrace();
 		}
-		System.out.println(totalcount);
+		System.out.println("total count : " + totalcount);
 		return totalcount;
 	}
 
@@ -278,19 +287,17 @@ public class WorkDocsDAO extends DBConnPool {
 
 		List<WorkDocsDTO> list = new ArrayList<WorkDocsDTO>();
 
-		String query = "SELECT * FROM ( "
-	            + "    SELECT ad.idx, ad.APPROVAL_DOC_TITLE AS title, ad.TEAM AS writerteam, "
-	            + "    ad.APPROVAL_DOC_DATE AS writedate, ad.EMP_NUM AS writer, ad.DOC_STATUS AS status, "
-	            + "    ROW_NUMBER() OVER (ORDER BY ad.idx DESC) rNum "
-	            + "    FROM APPROVAL_DOC ad "
-	            + "    LEFT JOIN APPROVAL_LINE al ON ad.FIRST_CODE = al.CODE "
-	            + "    LEFT JOIN APPROVAL_LINE al2 ON ad.SECOND_CODE = al2.CODE "
-	            + "    LEFT JOIN APPROVAL_LINE al3 ON ad.THIRD_CODE = al3.CODE "
-	            + "    LEFT JOIN APPROVAL_LINE al4 ON ad.FOURTH_CODE = al4.code "
-	            + "    LEFT JOIN APPROVAL_LINE al5 ON ad.FIFTH_CODE = al5.CODE "
-	            + "    WHERE ? IN (al.EMP_NUM, al2.EMP_NUM, al3.EMP_NUM, al4.EMP_NUM, al5.EMP_NUM) "
-	            + ") WHERE rNum BETWEEN ? AND ? AND TO_CHAR(writedate, 'YYYY-MM-DD') = ? "
-	            + "ORDER BY idx DESC, writedate";
+		String query = "SELECT * FROM ( " + "    SELECT ad.idx, ad.APPROVAL_DOC_TITLE AS title, ad.TEAM AS writerteam, "
+				+ "    ad.APPROVAL_DOC_DATE AS writedate, ad.EMP_NUM AS writer, ad.DOC_STATUS AS status, "
+				+ "    ROW_NUMBER() OVER (ORDER BY ad.idx DESC) rNum " + "    FROM APPROVAL_DOC ad "
+				+ "    LEFT JOIN APPROVAL_LINE al ON ad.FIRST_CODE = al.CODE "
+				+ "    LEFT JOIN APPROVAL_LINE al2 ON ad.SECOND_CODE = al2.CODE "
+				+ "    LEFT JOIN APPROVAL_LINE al3 ON ad.THIRD_CODE = al3.CODE "
+				+ "    LEFT JOIN APPROVAL_LINE al4 ON ad.FOURTH_CODE = al4.code "
+				+ "    LEFT JOIN APPROVAL_LINE al5 ON ad.FIFTH_CODE = al5.CODE "
+				+ "    WHERE ? IN (al.EMP_NUM, al2.EMP_NUM, al3.EMP_NUM, al4.EMP_NUM, al5.EMP_NUM) "
+				+ ") WHERE rNum BETWEEN ? AND ? AND TO_CHAR(writedate, 'YYYY-MM-DD') = ? "
+				+ "ORDER BY idx DESC, writedate";
 
 		try {
 
@@ -332,19 +339,15 @@ public class WorkDocsDAO extends DBConnPool {
 
 		// 쿼리문 준비
 		String query = "SELECT count(*) FROM APPROVAL_DOC ad "
-	            + "LEFT JOIN APPROVAL_LINE al ON ad.FIRST_CODE = al.CODE "
-	            + "LEFT JOIN APPROVAL_LINE al2 ON ad.SECOND_CODE = al2.CODE "
-	            + "LEFT JOIN APPROVAL_LINE al3 ON ad.THIRD_CODE = al3.CODE "
-	            + "LEFT JOIN APPROVAL_LINE al4 ON ad.FOURTH_CODE = al4.CODE "
-	            + "LEFT JOIN APPROVAL_LINE al5 ON ad.FIFTH_CODE = al5.CODE "
-	            + "WHERE ? IN (al.EMP_NUM, al2.EMP_NUM, al3.EMP_NUM, al4.EMP_NUM, al5.EMP_NUM) "
-	            + "AND TO_CHAR(ad.APPROVAL_DOC_DATE, 'YYYY-MM-DD') = ?";
+				+ "LEFT JOIN APPROVAL_LINE al ON ad.FIRST_CODE = al.CODE "
+				+ "LEFT JOIN APPROVAL_LINE al2 ON ad.SECOND_CODE = al2.CODE "
+				+ "LEFT JOIN APPROVAL_LINE al3 ON ad.THIRD_CODE = al3.CODE "
+				+ "LEFT JOIN APPROVAL_LINE al4 ON ad.FOURTH_CODE = al4.CODE "
+				+ "LEFT JOIN APPROVAL_LINE al5 ON ad.FIFTH_CODE = al5.CODE "
+				+ "WHERE ? IN (al.EMP_NUM, al2.EMP_NUM, al3.EMP_NUM, al4.EMP_NUM, al5.EMP_NUM) "
+				+ "AND TO_CHAR(ad.APPROVAL_DOC_DATE, 'YYYY-MM-DD') = ?";
 
-
-//		// 검색 조건이 있다면 where절로 추가
-//		if (map.get("searchWord") != null) {
-//			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
-//		}
+		
 
 		try {
 			psmt = con.prepareStatement(query);

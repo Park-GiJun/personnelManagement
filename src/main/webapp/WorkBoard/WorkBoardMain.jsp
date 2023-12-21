@@ -58,14 +58,17 @@
 	<jsp:include page="../MainPage/Left.jsp" />
 	<div class="content">
 		<div class="sort_tab">
-			<select name="Category">
-				<option value="all">전체</option>
-				<option value="SearchTitle">제목</option>
-				<option value="SearchWriter">작성자</option>
-				<option value="SearchFileName">파일명</option>
-				<option value="SearchTeam">부서</option>
-			</select>
-			<input type="date" id="datePicker" onchange="dateChanged()"> <input type="text" id="textInput" name="userInput" placeholder="검색어를 입력하세요."> <input type="button" class="btn btn-secondary" value="검색" style="--bs-btn-line-height: 0.01;"> <input type="button" id="writeButton" class="btn btn-secondary" style="--bs-btn-line-height: 0.01;" value="글작성" />
+			<form method="GET" action="../Controller/WorkBoardList.do">
+				<input type="date" id="datePicker" onchange="dateChanged()">
+				<select name="Category">
+					<option value="">전체</option>
+					<option value="APPROVAL_DOC_TITLE">제목</option>
+					<option value="APPROVAL_DOC_CONTENT">내용</option>
+					<option value="APPROVAL_DOC_OFILE">파일명</option>
+					<option value="TEAM">부서</option>
+				</select>
+				<input type="text" id="textInput" name="searchWord" placeholder="검색어를 입력하세요."> <input type="submit" class="btn btn-secondary" value="검색" style="--bs-btn-line-height: 0.01;"> <input type="button" id="writeButton" class="btn btn-secondary" style="--bs-btn-line-height: 0.01;" value="글작성" />
+			</form>
 		</div>
 		<div class="Main">
 			<div class="DocList">
@@ -100,7 +103,6 @@
 										<td style="text-align: center;">${ row.approval_doc_date }</td>
 										<td style="text-align: center;"><c:if test="${ not empty row.approval_doc_ofile }">
 										${ row.approval_doc_ofile }
-									<a href="">[다운로드]</a>
 											</c:if></td>
 										<td style="text-align: center;">${ row.doc_status }</td>
 									</tr>

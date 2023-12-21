@@ -295,25 +295,12 @@ function reject(code) {
 		});
 }
 function dateChanged() {
-	var dateValue = document.getElementById('datePicker').value;
-	console.log(dateValue);
-
-	fetch('../Controller/selectedDateOnWorkBoard.do?date=' + encodeURIComponent(dateValue), {
-		method: 'GET'
-	})
-		.then(response => response.json()) // 서버 응답을 JSON 형식으로 파싱
-		.then(data => {
-			console.log(data);
-
-			// 여기에 게시판에 정보를 추가하는 로직을 구현합니다.
-			updateTableWithData(data); // 예시로 함수를 호출하여 정보를 업데이트
-
-			// 추가로 원하는 작업을 수행할 수 있습니다.
-		})
-		.catch(error => {
-			console.error('Error:', error);
-		});
+    var dateValue = document.getElementById('datePicker').value;
+    var newUrl = '../Controller/selectedDateOnWorkBoard.do?date=' + encodeURIComponent(dateValue);
+    window.location.href = newUrl;  // 현재 페이지를 새 URL로 리다이렉트
 }
+
+
 
 // 게시판 정보를 업데이트하는 함수
 function updateTableWithData(data) {
