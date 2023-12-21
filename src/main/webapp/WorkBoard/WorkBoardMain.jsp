@@ -89,7 +89,7 @@
 							<c:when test="${ empty workdocslist }">
 								<!-- 게시물이 없다면 -->
 								<tr class="table-light">
-									<td colspan="6" align="center" scope="row">결재할 게시물이 없습니다.</td>
+									<td colspan="7" align="center" scope="row">결재할 게시물이 없습니다.</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
