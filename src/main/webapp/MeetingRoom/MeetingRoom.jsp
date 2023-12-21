@@ -142,7 +142,7 @@ body {
 
 .MeetingRoom-table {
 	display: flex;
-	margin-top: 20%;
+	margin-top: 22%;
 	font-size: 20px;
 }
 
@@ -272,7 +272,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	        	  localStorage.setItem('meetingRoomId', meetingRoomId);
 	        	  localStorage.setItem('date', date);
 	        	  console.log("확인용 : " + date + " " + meetingRoomId);
-	        	  var newWindow = window.open("../MeetingRoom/MeetingRoomDetail.jsp?meetingRoomLists=" + encodeURIComponent(JSON.stringify(meetingRoomLists)), 'MeetingRoomDetail', 'width=600,height=350,resizable=yes');
+	        	  
+	        	  
+	        	  var newWindow = window.open("../MeetingRoom/MeetingRoomDetail.jsp?meetingRoomLists=" + encodeURIComponent(JSON.stringify(meetingRoomLists)), 'MeetingRoomDetail', 'width=800,height=500,resizable=yes');
 	        })
 	        .catch(error => console.error('Error:', error));
 	}
