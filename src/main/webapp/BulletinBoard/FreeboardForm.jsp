@@ -134,7 +134,6 @@ td {
 						</select> <input type="text" name="searchWord" class="form-control" /> <input type="submit" name="listSearch" value="검색하기" id="listSearch" /></th>
 				</tr>
 				<tr align="center">
-
 					<th>${ map2.paginImg }</th>
 					<th width="100" rowspan="2">
 						<button type="button" onclick="location.href='../BulletinBoard/Freeboard.jsp';">글작성</button>

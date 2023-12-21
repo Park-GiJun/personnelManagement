@@ -188,7 +188,5 @@
 			%>
 		</div>
 	</div>
-
-	<script src="../MainPage/WebServer.js"></script>
 </body>
 </html>

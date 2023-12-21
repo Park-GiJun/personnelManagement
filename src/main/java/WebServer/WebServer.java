@@ -32,11 +32,13 @@ public class WebServer {
 		HttpSession httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
 		String myValue = (String) httpSession.getAttribute("userId");
 		int grade = (int) httpSession.getAttribute("userGrade");
-		
-		 sessionGradeMap.put(session, grade);
+
+		sessionGradeMap.put(session, grade);
 
 		System.out.println(myValue + "//" + grade);
 		System.out.println("WebSocket 연결됨");
+		
+		 printAllSessionGrades();
 	}
 
 	@OnClose
@@ -52,16 +54,16 @@ public class WebServer {
 	}
 
 	public static void sendReservationNotification(String message) {
-        for (Session session : sessions) {
-            if (session.isOpen() && sessionGradeMap.containsKey(session) && sessionGradeMap.get(session) <= 3) {
-                try {
-                    session.getBasicRemote().sendText(message);
-                } catch (IOException e) {
-                    System.err.println("WebSocket 알림 전송 오류: " + e.getMessage());
-                }
-            }
-        }
-    }
+		for (Session session : sessions) {
+			if (session.isOpen() && sessionGradeMap.containsKey(session) && sessionGradeMap.get(session) <= 3) {
+				try {
+					session.getBasicRemote().sendText(message);
+				} catch (IOException e) {
+					System.err.println("WebSocket 알림 전송 오류: " + e.getMessage());
+				}
+			}
+		}
+	}
 
 	public static class HttpSessionConfigurator extends ServerEndpointConfig.Configurator {
 		@Override
@@ -71,4 +73,16 @@ public class WebServer {
 			config.getUserProperties().put(HttpSession.class.getName(), httpSession);
 		}
 	}
+
+	@SuppressWarnings("unused")
+	private void printAllSessionGrades() {
+		synchronized (sessionGradeMap) {
+			for (Map.Entry<Session, Integer> entry : sessionGradeMap.entrySet()) {
+				Session session = entry.getKey();
+				Integer grade = entry.getValue();
+				System.out.println("Session ID: " + session.getId() + " | Grade: " + grade);
+			}
+		}
+	}
+
 }

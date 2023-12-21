@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import Approval_Code.CodeDAO;
 
-@WebServlet("/Controller/DocApproval.do")
-public class DocApprovalController extends HttpServlet {
+@WebServlet("/Controller/DocReject.do")
+public class DocRejectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -22,11 +22,11 @@ public class DocApprovalController extends HttpServlet {
 
 		CodeDAO dao = new CodeDAO();
 
-		dao.updateState(code);
-		
+		dao.rejectState(code);
+
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write("{\"message\":\"승인 처리 완료\"}");
+		response.getWriter().write("{\"message\":\"거절 처리 완료\"}");
 	}
 
 }

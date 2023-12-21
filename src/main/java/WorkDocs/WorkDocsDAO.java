@@ -15,8 +15,6 @@ public class WorkDocsDAO extends DBConnPool {
 
 	public void writeBoard(WorkDocsDTO dto, List<String> codelist) {
 
-		List<String> prex = Arrays.asList("first", "second", "third", "fourth", "fifth");
-
 		int count = codelist.size();
 
 		System.out.println(count);
@@ -104,26 +102,28 @@ public class WorkDocsDAO extends DBConnPool {
 
 	}
 
-	public List<WorkDocsDTO> boardList(String emp) {
+	public List<WorkDocsDTO> boardList(String emp, Map<String, Object> map) {
 
 		System.out.println("boardList : " + emp);
 
 		List<WorkDocsDTO> list = new ArrayList<WorkDocsDTO>();
 
-		String query = "SELECT ad.idx, ad.APPROVAL_DOC_TITLE AS title, ad.TEAM AS writerteam, "
-				+ "ad.APPROVAL_DOC_DATE AS writedate, ad.EMP_NUM AS writer " + "FROM APPROVAL_DOC ad "
-				+ "LEFT JOIN APPROVAL_LINE al ON ad.FIRST_CODE = al.CODE "
-				+ "LEFT JOIN APPROVAL_LINE al2 ON ad.SECOND_CODE = al2.CODE "
-				+ "LEFT JOIN APPROVAL_LINE al3 ON ad.THIRD_CODE = al3.CODE "
-				+ "LEFT JOIN APPROVAL_LINE al4 ON ad.FOURTH_CODE = al4.code "
-				+ "LEFT JOIN APPROVAL_LINE al5 ON ad.FIFTH_CODE = al5.CODE "
-				+ "WHERE ? IN (al.EMP_NUM, al2.EMP_NUM, al3.EMP_NUM, al4.EMP_NUM, al5.EMP_NUM) "
-				+ "ORDER BY ad.idx DESC, ad.APPROVAL_DOC_DATE";
-
+		String query = "SELECT * FROM ( " + "    SELECT ad.idx, ad.APPROVAL_DOC_TITLE AS title, ad.TEAM AS writerteam, "
+				+ "    ad.APPROVAL_DOC_DATE AS writedate, ad.EMP_NUM AS writer, ad.DOC_STATUS AS status, "
+				+ "    ROW_NUMBER() OVER (ORDER BY ad.idx DESC) rNum " + "    FROM APPROVAL_DOC ad "
+				+ "    LEFT JOIN APPROVAL_LINE al ON ad.FIRST_CODE = al.CODE "
+				+ "    LEFT JOIN APPROVAL_LINE al2 ON ad.SECOND_CODE = al2.CODE "
+				+ "    LEFT JOIN APPROVAL_LINE al3 ON ad.THIRD_CODE = al3.CODE "
+				+ "    LEFT JOIN APPROVAL_LINE al4 ON ad.FOURTH_CODE = al4.code "
+				+ "    LEFT JOIN APPROVAL_LINE al5 ON ad.FIFTH_CODE = al5.CODE "
+				+ "    WHERE ? IN (al.EMP_NUM, al2.EMP_NUM, al3.EMP_NUM, al4.EMP_NUM, al5.EMP_NUM) " + ") "
+				+ "WHERE rNum BETWEEN ? AND ? " + "ORDER BY idx DESC, writedate";
 		try {
 
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, emp);
+			psmt.setString(2, map.get("start").toString());
+			psmt.setString(3, map.get("end").toString());
 
 			rs = psmt.executeQuery();
 
@@ -135,6 +135,7 @@ public class WorkDocsDAO extends DBConnPool {
 				dto.setTeam(rs.getString("writerteam"));
 				dto.setApproval_doc_date(rs.getDate("writedate"));
 				dto.setEmp_num(rs.getString("writer"));
+				dto.setDoc_status(rs.getString("status"));
 
 				System.out.println("제목 확인 : " + dto.getApproval_doc_title());
 
@@ -234,6 +235,8 @@ public class WorkDocsDAO extends DBConnPool {
 				dto.setFirststatus(rs.getString("FIRSTSTATUS"));
 				dto.setFirstCODE(rs.getString("FIRST_CODE"));
 
+				System.out.println("firststatus : " + dto.getFirststatus());
+
 				dto.setSecondTEAM(rs.getString("SECONDTEAM"));
 				dto.setSecondGRADE(rs.getString("SECONDGRADE"));
 				dto.setSecondEmp(rs.getString("SECONDEMP"));
@@ -267,5 +270,94 @@ public class WorkDocsDAO extends DBConnPool {
 			e.printStackTrace();
 		}
 		return dto;
+	}
+
+	public List<WorkDocsDTO> dateboardList(String emp, String date, Map<String, Object> map) {
+
+		System.out.println("dateboardList : " + emp + " date : " + date);
+
+		List<WorkDocsDTO> list = new ArrayList<WorkDocsDTO>();
+
+		String query = "SELECT * FROM ( "
+	            + "    SELECT ad.idx, ad.APPROVAL_DOC_TITLE AS title, ad.TEAM AS writerteam, "
+	            + "    ad.APPROVAL_DOC_DATE AS writedate, ad.EMP_NUM AS writer, ad.DOC_STATUS AS status, "
+	            + "    ROW_NUMBER() OVER (ORDER BY ad.idx DESC) rNum "
+	            + "    FROM APPROVAL_DOC ad "
+	            + "    LEFT JOIN APPROVAL_LINE al ON ad.FIRST_CODE = al.CODE "
+	            + "    LEFT JOIN APPROVAL_LINE al2 ON ad.SECOND_CODE = al2.CODE "
+	            + "    LEFT JOIN APPROVAL_LINE al3 ON ad.THIRD_CODE = al3.CODE "
+	            + "    LEFT JOIN APPROVAL_LINE al4 ON ad.FOURTH_CODE = al4.code "
+	            + "    LEFT JOIN APPROVAL_LINE al5 ON ad.FIFTH_CODE = al5.CODE "
+	            + "    WHERE ? IN (al.EMP_NUM, al2.EMP_NUM, al3.EMP_NUM, al4.EMP_NUM, al5.EMP_NUM) "
+	            + ") WHERE rNum BETWEEN ? AND ? AND TO_CHAR(writedate, 'YYYY-MM-DD') = ? "
+	            + "ORDER BY idx DESC, writedate";
+
+		try {
+
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, emp);
+			psmt.setString(2, map.get("start").toString());
+			psmt.setString(3, map.get("end").toString());
+			psmt.setString(4, date);
+
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				WorkDocsDTO dto = new WorkDocsDTO();
+
+				dto.setIdx(rs.getInt("idx"));
+				dto.setApproval_doc_title(rs.getString("title"));
+				dto.setTeam(rs.getString("writerteam"));
+				dto.setApproval_doc_date(rs.getDate("writedate"));
+				dto.setEmp_num(rs.getString("writer"));
+				dto.setDoc_status(rs.getString("status"));
+
+				System.out.println("제목 확인 : " + dto.getApproval_doc_title());
+
+				list.add(dto);
+			}
+
+		} catch (Exception e) {
+			System.out.println("결재문서 불러오는중 예외 발생");
+			e.printStackTrace();
+		}
+
+		return list;
+
+	}
+
+	public int dateWorkDocsListCount(Map<String, Object> map, String emp, String date) {
+		System.out.println("WorkDocsCount");
+		int totalcount = 0;
+
+		// 쿼리문 준비
+		String query = "SELECT count(*) FROM APPROVAL_DOC ad "
+	            + "LEFT JOIN APPROVAL_LINE al ON ad.FIRST_CODE = al.CODE "
+	            + "LEFT JOIN APPROVAL_LINE al2 ON ad.SECOND_CODE = al2.CODE "
+	            + "LEFT JOIN APPROVAL_LINE al3 ON ad.THIRD_CODE = al3.CODE "
+	            + "LEFT JOIN APPROVAL_LINE al4 ON ad.FOURTH_CODE = al4.CODE "
+	            + "LEFT JOIN APPROVAL_LINE al5 ON ad.FIFTH_CODE = al5.CODE "
+	            + "WHERE ? IN (al.EMP_NUM, al2.EMP_NUM, al3.EMP_NUM, al4.EMP_NUM, al5.EMP_NUM) "
+	            + "AND TO_CHAR(ad.APPROVAL_DOC_DATE, 'YYYY-MM-DD') = ?";
+
+
+//		// 검색 조건이 있다면 where절로 추가
+//		if (map.get("searchWord") != null) {
+//			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
+//		}
+
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, emp);
+			psmt.setString(2, date);
+			rs = psmt.executeQuery();
+			rs.next();
+			totalcount = rs.getInt(1);
+		} catch (Exception e) {
+			System.out.println("게시물 카운트 중 예외 발생");
+			e.printStackTrace();
+		}
+		System.out.println(totalcount);
+		return totalcount;
 	}
 }

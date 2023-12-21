@@ -50,8 +50,17 @@ public class WorkDocsDTO {
 	private String thirdCODE;
 	private String fourthCODE;
 	private String fifthCODE;
+	private String doc_status;
 	
 	
+
+	public String getDoc_status() {
+		return doc_status;
+	}
+
+	public void setDoc_status(String doc_status) {
+		this.doc_status = doc_status;
+	}
 
 	public String getFirstCODE() {
 		return firstCODE;
