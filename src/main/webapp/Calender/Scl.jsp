@@ -517,6 +517,7 @@ function showDateAndAlert(day) {
 	// 일정 추가를 위한 고유한 식별자
 	var eventCounter = 1;
 
+	/*
 	function confirmPlus() {
 		// 사용자로부터 입력을 받기 위한 prompt 대화상자 사용
 		var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
@@ -554,6 +555,47 @@ function showDateAndAlert(day) {
 			console.log("일정 저장을 취소하였습니다.");
 		}
 }
+	*/
+	
+	
+	function confirmPlus() {
+	    var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
+
+	    if (userInput !== null && userInput !== "") {
+	        // 사용자가 확인을 클릭하면 입력한 일정을 서블릿으로 전송
+	        sendNewScheduleToServer(userInput);
+	    } else if (userInput === "") {
+	        alert("일정을 입력해주세요.");
+	    } else {
+	        console.log("일정 저장을 취소하였습니다.");
+	    }
+	}
+
+	// 새로운 일정을 서버로 전송하는 함수
+	function sendNewScheduleToServer(newSchedule) {
+	    const xhr = new XMLHttpRequest();
+	    xhr.open("POST", "/Controller/CalenderPlusController", true);
+	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+
+	    // 서버로 전송할 데이터 설정
+	    const data = "userInput=" + encodeURIComponent(newSchedule)
+        + "&selectedDay=" + encodeURIComponent(selectedDay)
+        + "&selectedYear=" + encodeURIComponent(selectedYear)
+        + "&selectedMonth=" + encodeURIComponent(selectedMonth);
+	    xhr.send(data);
+
+	    xhr.onreadystatechange = function () {
+	        if (xhr.readyState === 4) {
+	            if (xhr.status === 200) {
+	                alert(xhr.responseText); // 서버 응답을 알림으로 표시
+	            } else {
+	                alert("일정 추가에 실패했습니다.");
+	            }
+	        }
+	    };
+	    
+	    
+	}
 	 
 	 
     console.log('잘 실행되는지 확인용1111111111111111111111');
@@ -606,6 +648,9 @@ function confirmDelete() {
         if (confirmed) {
             // 수정된 부분: 선택한 일정의 ID를 서버로 전송
             sendSelectedSchedulesToServer(selectedSchedules);
+        } else {
+        	//location.reload();
+        	 window.location.href = 'Scl.jsp';
         }
     } else {
         alert("삭제할 일정을 선택해주세요.");
