@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import comments.CommentsDAO;
+import Comments.CommentsDAO;
 
 
  
@@ -26,5 +26,4 @@ public class CommentsDeletionController extends HttpServlet {
 		 
 		request.getRequestDispatcher("/Controller/ReturnCommentsController.do").forward(request, response);
 	}
-
 }

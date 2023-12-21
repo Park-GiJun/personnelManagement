@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Comments.CommentsDAO;
+import Comments.CommentsDTO;
 import FreeboardForm.FreeboardFormDTO;
-import comments.CommentsDAO;
-import comments.CommentsDTO;
 
 @WebServlet("/Controller/DetailsController.do")
 public class DetailsController extends HttpServlet {
