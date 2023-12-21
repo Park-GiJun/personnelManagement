@@ -100,5 +100,9 @@ a {
 	<%
 	}
 	%>
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 </body>
 </html>
