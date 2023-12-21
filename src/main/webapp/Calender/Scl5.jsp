@@ -338,16 +338,9 @@ day {
 }
 
 body {
-<<<<<<< HEAD
 	font-size: px;
 	font-family: 'Kanit', sans-serif;
 	/*color: white;*/
-=======
-   font-size: px;
-  font-family: 'Kanit', sans-serif;
-  background-color: #272b30;
-    /*color: white;*/
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 a {
@@ -403,29 +396,16 @@ a:active, a:hover {
 }
 
 /* 요일 칸 배경 색 지정 */
-<<<<<<< HEAD
 .calendar table thead tr:first-child {
 	background: #1c427e;
 	color: white;
-=======
-.calendar table thead tr:first-child{
-	background-color: rgb(68, 74, 83);
-    color: white;
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 /* 요일, 날짜 칸 크기 조절 */
-<<<<<<< HEAD
 .calendar table td {
 	padding: 40px 80px;
 	text-align: left;
 	border: 1px solid #ccc;
-=======
-.calendar table td{
-  	padding: 40px 80px;
-   	text-align: left;
-   	border: 1px solid #ccc;
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 /* 월, 화, 수, 목, 금 글자 색상 설정 */
@@ -434,21 +414,12 @@ a:active, a:hover {
 .calendar table td:nth-child(3)
 .calendar table td:nth-child(4)
 .calendar table td:nth-child(5) {
-<<<<<<< HEAD
 	color: white;
-=======
-   color: white;
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 /* 일요일 색상 지정 */
-<<<<<<< HEAD
 .calendar table td:nth-child(7n+1) {
 	color: red;
-=======
-.calendar table td:nth-child(7n+1){
-   color: red;
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 /* 토요일 색상 지정 */
@@ -463,7 +434,6 @@ a:active, a:hover {
 
 /* 날짜 버튼 스타일 지정 */
 .calendar table button {
-<<<<<<< HEAD
 	border: none;
 	padding: 0;
 	background: none;
@@ -473,21 +443,6 @@ a:active, a:hover {
 	left: -70px; /* 왼쪽 여백 조정 */
 	font-family: 'Kanit', sans-serif;
 	cursor: pointer; /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
-=======
-	color: #fff;
-   border: none;
-   padding: 0;
-   background: none;
-   font-size: 20px;
-   
-   position: relative;  /* 상대적인 위치 설정 */
-   top: -40px;  /* 상단 여백 조정 */
-   left: -70px;  /* 왼쪽 여백 조정 */
-   
-   font-family: 'Kanit', sans-serif;
-   
-   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
@@ -496,17 +451,10 @@ a:active, a:hover {
 }
 
 /* 오늘 날짜 스타일 */
-<<<<<<< HEAD
 .calendar table td.today {
 	font-weight: 700;
 	background: orange;
 	color: #000;
-=======
-.calendar table td.today{
-   font-weight:700;
-   background: orange;
-   color: #000;
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 /* 일요일 날짜 스타일 */
@@ -533,20 +481,12 @@ a:active, a:hover {
 
 /* 전월의 날짜 색상 지정 */
 .calendar table td.gray button {
-<<<<<<< HEAD
 	color: #ccc;
-=======
-   color: #000;
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 /* 다음달의 날짜 색상 지정 */
 .calendar table td.gray2 button {
-<<<<<<< HEAD
 	color: #ccc;
-=======
-   color: #000;
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 </style>
 
@@ -719,10 +659,6 @@ document.addEventListener('click', function (event) {
 
 body {
 	font-size: 20px;
-}
-
-tbody {
-	background : gray;
 }
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
