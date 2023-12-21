@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
+
 <style type="text/css">
 .content {
 	margin-left: 10%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
@@ -30,8 +29,6 @@
 	position: absolute;
 	width: 50%;
 	height: 100%;
-	border: 1px;
-	border-color: black;
 	background: rgb(72, 75, 79);
 }
 
@@ -42,12 +39,13 @@
 	height: 100%;
 }
 
-.table-secondary {
+.docslist {
 	width: 100%;
 	border-collapse: collapse;
 	text-align: center;
 }
 </style>
+<link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <script src="../WorkBoard/WorkBoard.js"></script>
 </head>
 <body>
@@ -61,18 +59,52 @@
 				<option>제목</option>
 				<option>작성일</option>
 			</select>
-			<input type="date"> <input type="text" id="textInput" name="userInput" placeholder="Type something..."> <input type="button" class="btn btn-secondary" value="검색" style="--bs-btn-line-height: 0.01;"> <input type="button" id="writeButton" class="btn btn-secondary" style="--bs-btn-line-height: 0.01;" value="글작성" />
+			<input type="date">
+			<input type="text" id="textInput" name="userInput" placeholder="Type something...">
+			<input type="button" class="btn btn-secondary" value="검색" style="--bs-btn-line-height: 0.01;">
+			<input type="button" id="writeButton" class="btn btn-secondary" style="--bs-btn-line-height: 0.01;" value="글작성" />
 		</div>
 		<div class="Main">
 			<div class="DocList">
-				<table class="table-secondary" border="1">
-					<tr>
-						<th>INDEX</th>
-						<th>Title</th>
-						<th>TEAM</th>
-						<th>EMP</th>
-						<th>DATE</th>
-					</tr>
+				<table class="table table-hover" border="1">
+					<thead class="table-info">
+						<tr class="table-info">
+							<th style="text-align: center;">INDEX</th>
+							<th style="text-align: center;">TITLE</th>
+							<th style="text-align: center;">TEAM</th>
+							<th style="text-align: center;">EMP</th>
+							<th style="text-align: center;">DATE</th>
+						</tr>
+					</thead>
+					<tbody class="table-light">
+						<c:choose>
+							<c:when test="${ empty workdocslist }">
+								<!-- 게시물이 없다면 -->
+								<tr class="table-light">
+									<td colspan="5" align="center" scope="row">결재할 게시물이 없습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<!-- 게시물이 있을때 -->
+								<c:forEach items="${ workdocslist }" var="row" varStatus="loop">
+									<tr class="table-light">
+										<!-- 번호 -->
+										<td scope="row"  style="text-align: center;">${ map.totalCount -(((map.pageNum-1) * map.pageSize) + loop.index) }</td>
+										<td style="text-align: center;">
+											<!-- 제목 --> <a class="docs" id="${ row.idx }">${ row.approval_doc_title }</a>
+										</td>
+										<td style="text-align: center;">${ row.team }</td>
+										<td style="text-align: center;">${ row.emp_num }</td>
+										<td style="text-align: center;">${ row.approval_doc_date }</td>
+										<td style="text-align: center;"><c:if test="${ not empty row.approval_doc_ofile }">
+										${ row.approval_doc_ofile }
+									<a href="">[다운로드]</a>
+											</c:if></td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
 				</table>
 			</div>
 			<div class="Detail"></div>

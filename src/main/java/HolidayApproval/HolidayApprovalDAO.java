@@ -32,16 +32,51 @@ public class HolidayApprovalDAO extends DBConnPool {
 	}
 
 	// 신청한 휴가 목록 조회 쿼리
-	public List<HolidayApprovalDTO> selectList(Map<String, Object> map) {
+	public List<HolidayApprovalDTO> selectList(int Grade, String Team, String Team_num) {
 		List<HolidayApprovalDTO> bbs = new Vector<HolidayApprovalDTO>();
-
-		String query = "SELECT * FROM emp JOIN holiday_check ON emp.emp_num = holiday_check.emp_num ORDER BY approval_num, start_vacation, grade, emp.team";
-
+		String query = "";
+		String approval = "승인 완료";
+		
+		//사장이 휴가신청 조회할 경우
+		if (Grade == 1) {
+			query = "SELECT * FROM emp JOIN holiday_check ON emp.emp_num = holiday_check.emp_num "
+					+ "WHERE grade <= 3 "        
+					+ "ORDER BY approval_num, start_vacation, emp.team, emp.team_num, grade";			
+		}
+		//임원이 휴가 신청 조회할 경우
+		if (Grade == 2) {
+			query = "SELECT * FROM emp JOIN holiday_check ON emp.emp_num = holiday_check.emp_num "
+					+ "WHERE grade = 3 "
+					+ "ORDER BY approval_num, start_vacation, emp.team, emp.team_num, grade";
+		}
+		// 부장이 휴가 신청 조회할 경우
+		if (Grade == 3) {
+			query = "SELECT * FROM emp JOIN holiday_check ON emp.emp_num = holiday_check.emp_num "
+					+ "WHERE grade >= 4 AND emp.team = ? AND team_approval = ? "
+					+ "ORDER BY approval_num, start_vacation, emp.team, emp.team_num, grade";
+		}
+		// 팀장이 휴가 신청 조회할 경우
+		if (Grade == 4) {
+			query = "SELECT * FROM emp JOIN holiday_check ON emp.emp_num = holiday_check.emp_num "
+					+ "WHERE grade >= 5 AND emp.team = ? AND emp.team_num = ? "
+					+ "ORDER BY approval_num, start_vacation, emp.team, emp.team_num, grade";
+		}
+		
 		try {
 			// 쿼리 실행
-			stmt = con.prepareStatement(query);
-
-			rs = stmt.executeQuery(query);
+			psmt = con.prepareStatement(query);
+			// 팀장이 휴가신청 조회할경우
+			if (Grade == 4) {
+				psmt.setString(1, Team);
+				psmt.setString(2, Team_num);
+			}
+			// 부장이 휴가신청 조회할경우
+			if (Grade == 3) {
+				psmt.setString(1, Team);
+				psmt.setString(2, approval);
+			}
+			
+			rs = psmt.executeQuery();
 			while (rs.next()) {
 				HolidayApprovalDTO dto = new HolidayApprovalDTO();
 
@@ -52,6 +87,9 @@ public class HolidayApprovalDAO extends DBConnPool {
 				dto.setTeam(rs.getString("team"));
 				dto.setApproval(rs.getString("approval"));
 				dto.setEmp_grade(rs.getString("emp_grade"));
+				dto.setGrade(rs.getString("grade"));
+				dto.setTeam_num(rs.getString("team_num"));
+				dto.setTeam_approval(rs.getString("team_approval"));
 
 				bbs.add(dto);
 			}
@@ -63,11 +101,17 @@ public class HolidayApprovalDAO extends DBConnPool {
 	}
 
 	// 휴가 승인 쿼리
-	public HolidayApprovalDTO HolidayApprovalTrue(String approval_num, String emp_num, String start_vacation, String end_vacation,
-			String team) {
-
-		String query = "UPDATE holiday_check SET approval='승인 완료', approval_num=? WHERE emp_num=? AND start_vacation=? AND end_vacation=? AND team=?";
-
+	public HolidayApprovalDTO HolidayApprovalTrue(String approval_num, String emp_num, String start_vacation, String end_vacation, String team, int grade) {
+		String query = "";
+		// 1차 승인
+		if (grade == 4 || grade == 2) {
+			query = "UPDATE holiday_check SET team_approval='승인 완료', approval_num=? WHERE emp_num=? AND start_vacation=? AND end_vacation=? AND team=?";
+		}
+		// 2차 승인
+		if (grade == 3 || grade == 1) {
+			query = "UPDATE holiday_check SET approval='승인 완료', team_approval='승인 완료', approval_num=? WHERE emp_num=? AND start_vacation=? AND end_vacation=? AND team=?";
+		}
+		
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, approval_num);
@@ -89,7 +133,7 @@ public class HolidayApprovalDAO extends DBConnPool {
 	public HolidayApprovalDTO HolidayApprovalFalse(String approval_num, String emp_num, String start_vacation, String end_vacation,
 			String team) {
 
-		String query = "UPDATE holiday_check SET approval='승인 거절', approval_num=? WHERE emp_num=? AND start_vacation=? AND end_vacation=? AND team=?";
+		String query = "UPDATE holiday_check SET approval='승인 거절', team_approval='승인 거절', approval_num=? WHERE emp_num=? AND start_vacation=? AND end_vacation=? AND team=?";
 
 		try {
 			psmt = con.prepareStatement(query);
@@ -172,4 +216,5 @@ public class HolidayApprovalDAO extends DBConnPool {
 			}
 			return null;
 		}
+		
 }

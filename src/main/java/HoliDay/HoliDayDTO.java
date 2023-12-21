@@ -12,6 +12,8 @@ public class HoliDayDTO {
 	private String Approval;
 	private String emp_num;
 	private String Annual;
+	private String Team_approval;
+	
 	
 	public String getTeam() {
 		return Team;
@@ -45,6 +47,12 @@ public class HoliDayDTO {
 	}
 	public String getemp_num() {
 		return emp_num;
+	}
+	public String getTeam_approval() {
+		return Team_approval;
+	}
+	public void setTeam_approval(String team_approval) {
+		Team_approval = team_approval;
 	}
 	public void setemp_num(String emp_num) {
 		this.emp_num = emp_num;

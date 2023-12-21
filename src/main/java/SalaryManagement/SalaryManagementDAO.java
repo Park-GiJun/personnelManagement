@@ -12,21 +12,30 @@ public class SalaryManagementDAO extends DBConnPool {
 		super();
 	}
 
-	public List<SalaryManagementDTO> selectSalaryList(String selectTeam, String selectedYear, String selectedMonth) {
+	public List<SalaryManagementDTO> selectSalaryList(String selectTeam, String selectTeam_NUM, String selectedYear, String selectedMonth, int num) {
 		System.out.println("selectSalaryList DAO");
 
 		System.out.println("check select team : " + selectTeam);
 
 		List<SalaryManagementDTO> salaryEMPList = new ArrayList<>();
 
-		String query = "SELECT emp.TEAM, emp.NAME, emp.EMP_NUM, emp.EMP_GRADE, emp.grade, i.PAY, TO_CHAR(iv.yearmonth, 'YYYY-MM') AS yearmonth, "
+		String query = "SELECT emp.TEAM_NUM, emp.TEAM, emp.NAME, emp.EMP_NUM, emp.EMP_GRADE, emp.grade, i.PAY, TO_CHAR(iv.yearmonth, 'YYYY-MM') AS yearmonth, "
 				+ "SUM(iv.HOLIDAY_PAY + iv.INCENTIVE + iv.EXTRA_WORK_PAY) AS TOTAL_PAY, iv.INCENTIVE, "
 				+ "iv.HOLIDAY_PAY, iv.EXTRA_WORK_PAY FROM emp JOIN INCENTIVE i ON emp.emp_num = i.emp_num "
 				+ "JOIN INCENTIVE_VALUE iv ON i.emp_num = iv.EMP_NUM AND i.yearmonth = iv.yearmonth";
 
 		// Check if a specific team is selected
-		if (!"전체".equals(selectTeam)) {
-			query += " WHERE emp.TEAM = ?";
+		// 부서별 전체조회
+		if (num == 1) {
+			query += " WHERE emp.TEAM = ? ";
+		}
+		// 부서, 팀별 조회
+		if (num == 2) {
+			query += " WHERE emp.TEAM=? AND emp.TEAM_NUM=? ";
+		}
+		// 임원급 조회 (부장~사장)
+		if (num == 3) {
+			query += " WHERE emp.GRADE <= 3 ";
 		}
 
 		// Check if a specific date is selected
@@ -46,8 +55,8 @@ public class SalaryManagementDAO extends DBConnPool {
 			}
 
 		}
-		query += " GROUP BY emp.TEAM, emp.NAME, emp.EMP_NUM, emp.EMP_GRADE, emp.grade, i.PAY, iv.yearmonth, "
-				+ "iv.INCENTIVE, iv.HOLIDAY_PAY, iv.EXTRA_WORK_PAY ORDER BY emp.grade";
+		query += " GROUP BY emp.Team_NUM, emp.TEAM, emp.NAME, emp.EMP_NUM, emp.EMP_GRADE, emp.grade, i.PAY, iv.yearmonth, "
+				+ "iv.INCENTIVE, iv.HOLIDAY_PAY, iv.EXTRA_WORK_PAY ORDER BY emp.grade, emp.team, emp.team_num";
 
 		System.out.println("query : " + query);
 
@@ -56,8 +65,14 @@ public class SalaryManagementDAO extends DBConnPool {
 
 			int parameterIndex = 1;
 
-			if (!"전체".equals(selectTeam)) {
+			if (num == 1) {
 				psmt.setString(parameterIndex++, selectTeam);
+			}
+			
+			// 부서별 팀 조회
+			if (num == 2) {
+				psmt.setString(parameterIndex++, selectTeam);
+				psmt.setString(parameterIndex++, selectTeam_NUM);
 			}
 
 			if (selectedYear != null && selectedMonth != null) {
@@ -81,6 +96,7 @@ public class SalaryManagementDAO extends DBConnPool {
 				SalaryManagementDTO dto = new SalaryManagementDTO();
 
 				dto.setTeam(rs.getString("TEAM"));
+				dto.setTeam_num(rs.getString("TEAM_NUM"));
 				dto.setName(rs.getString("NAME"));
 				dto.setEmp_num(rs.getString("EMP_NUM"));
 				dto.setEmp_grade(rs.getString("EMP_GRADE"));

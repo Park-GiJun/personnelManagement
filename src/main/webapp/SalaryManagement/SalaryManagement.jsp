@@ -1,17 +1,13 @@
-<%@ page
-	language="java"
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
-<%@ taglib
-	prefix="c"
-	uri="http://java.sun.com/jsp/jstl/core"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>SalaryManagement</title>
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style> /* 공통 스타일 */
 * {
 	box-sizing: border-box;
@@ -23,6 +19,59 @@ body {
 	font-size: 16px;
 }
 
+.btn-info {
+	margin-top: 7px;
+	width: 5%;
+	font-size: 20px;
+	height: 80%;
+	border-radius: 25px;
+}
+
+.table-info {
+	background-color: #5bc0de;
+}
+
+.table-dark1 {
+	font-size: 30px;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	border-collapse: collapse;
+	width: 100% background-color: #272b30;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark2 {
+	background-color: rgb(54, 60, 67);;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark3 {
+	background-color: rgb(68, 74, 83);
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.form-select {
+	margin-top: 10px;
+	margin-right: 10px;
+	height: 30px;
+	width: 10%;
+	padding: 0rem 0rem 0rem 1rem;
+	background-position: right 1rem center;
+}
+
+.form-select-option {
+	background-color: rgb(222.5,222.5,222.5);
+}
+
+td {
+	border: 1px solid gray; /* 테두리 스타일 지정 */
+	padding: 1px; /* 셀 안의 내용과 테두리 사이의 간격 조정 */
+}
+
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
 	margin-left: 10%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
@@ -31,12 +80,14 @@ body {
 }
 
 .none {
+	font-size: 30px;
+	display: flex;
 	width: 85%;
-	height: 200px;
 	position: relative;
 	left: 5%;
-	background: red;
 	left: 5%;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
 }
 
 .salary_table_header {
@@ -60,6 +111,7 @@ body {
 	border-collapse: collapse;
 	width: 100%;
 }
+
 </style>
 <script>
 	function handleChange() {
@@ -106,10 +158,6 @@ body {
 			monthSelect.add(option);
 		}
 
-		// Add onchange event handler to monthSelect
-		monthSelect.onchange = function() {
-			handleChange();
-		};
 	}
 
 	// Call the functions to populate year and month select boxes
@@ -123,34 +171,45 @@ body {
 	<jsp:include page="../MainPage/Left.jsp" />
 	<div class="content">
 		<div class="none">
-			<select
-				id="selectTeam"
-				name="selectTeam"
-				onchange="handleChange()"
-			>
-				<option value="기본">팀선택</option>
-				<option value="전체">전체</option>
-				<option value="인사">인사</option>
-				<option value="디자인">디자인</option>
-				<option value="개발">개발</option>
-			</select> <label for="yearSelect">연도:</label> <select
-				id="yearSelect"
-				name="yearSelect"
-			>
-			</select> <label for="monthSelect">월:</label> <select
-				id="monthSelect"
-				name="monthSelect"
-			>
+			<select id="selectTeam" name="selectTeam" class="form-select">
+			
+				<optgroup label="전체/임원"  class="form-select-option">
+					<option value="전체">전체</option>
+					<option value="임원">임원급</option>
+				</optgroup>
+				
+				<optgroup label="인사팀">
+					<option value="인사">전체</option>
+					<option value="인사 1팀">1팀</option>
+					<option value="인사 2팀">2팀</option>
+					<option value="인사 3팀">3팀</option>
+				</optgroup>
+				
+				<optgroup label="디자인팀"  class="form-select-option">
+					<option value="디자인">전체</option>
+					<option value="디자인 1팀">1팀</option>
+					<option value="디자인 2팀">2팀</option>
+					<option value="디자인 3팀">3팀</option>
+				</optgroup>
+				
+				<optgroup label="개발팀">
+					<option value="개발">전체</option>
+					<option value="개발 1팀">1팀</option>
+					<option value="개발 2팀">2팀</option>
+					<option value="개발 3팀">3팀</option>
+				</optgroup>
+			</select>
+			<label for="yearSelect">연도:</label>
+				<select id="yearSelect" name="yearSelect" class="form-select" style="margin-left: 10px"></select>
+			<label for="monthSelect">월:</label>
+				<select id="monthSelect" name="monthSelect" class="form-select" style="margin-left: 10px">
 				<option value="전체">전체</option>
 			</select>
 
-			<button onclick="handleChange()">검색</button>
+			<button class="btn-info" onclick="handleChange()">검색</button>
 		</div>
 		<div class="salary_table_background">
-			<table
-				border="1"
-				class="salary_table"
-			>
+			<table border="1" class="table-dark1">
 				<tr>
 					<td>부서</td>
 					<td>이름</td>
@@ -165,25 +224,18 @@ body {
 				</tr>
 				<c:choose>
 					<c:when test="${ empty salaryEMPList } ">
-						<tr>
-							<td
-								colspan="9"
-								align="center"
-							>정보 없음</td>
+						<tr class="table-dark2">
+							<td colspan="9" align="center">정보 없음</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach
-							items="${salaryEMPList}"
-							var="EMPLists"
-							varStatus="loop"
-						>
-							<tr
-								align="center"
-								onclick="openModifyWindow('${EMPLists.team}', '${EMPLists.name}', '${EMPLists.emp_num}', '${EMPLists.emp_grade}', '${EMPLists.pay}', '${EMPLists.total_pay}', '${EMPLists.incentive}', '${EMPLists.holiday_pay}', '${EMPLists.extra_work_pay}', '${EMPLists.yearmonth}')"
-							>
+						<c:forEach items="${salaryEMPList}" var="EMPLists"
+							varStatus="loop">
+							<tr align="center" class="table-dark2"
+								onclick="openModifyWindow('${EMPLists.team}', '${EMPLists.name}', '${EMPLists.emp_num}', '${EMPLists.emp_grade}', '${EMPLists.pay}', '${EMPLists.total_pay}', '${EMPLists.incentive}', '${EMPLists.holiday_pay}', '${EMPLists.extra_work_pay}', '${EMPLists.yearmonth}')">
 
 								<td>${EMPLists.team}</td>
+								<td>${EMPLists.team_num}</td>
 								<td>${EMPLists.name}</td>
 								<td>${EMPLists.emp_num}</td>
 								<td>${EMPLists.emp_grade}</td>

@@ -174,6 +174,7 @@ public class HoliDayDAO extends DBConnPool {
 				dto.setEnd_vacation(rs.getString("end_vacation"));
 				dto.setTeam(rs.getString("team"));
 				dto.setApproval(rs.getString("approval"));
+				dto.setTeam_approval(rs.getString("team_approval"));
 
 				bbs.add(dto);
 			}

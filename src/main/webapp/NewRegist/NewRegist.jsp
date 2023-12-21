@@ -49,7 +49,7 @@ td {
 }
 
 .table-dark2 {
-	background-color: rgb(54, 60, 67);;
+	background-color: rgb(54, 60, 67);
 	--bs-table-color: #fff;
 	color: var(--bs-table-color);
 }
@@ -86,8 +86,14 @@ td {
 }
 
 .form-select {
-	padding: 0rem 0rem 0rem 3rem;
-	height: 80%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	padding: 0rem 0rem 0rem 1rem;
+	background-position: right 1rem center;
+}
+
+.form-select-option {
+	background-color: rgb(222.5,222.5,222.5);
 }
 
 .form-control {
@@ -158,19 +164,35 @@ body {
 			action="../Controller/NewRegistTeamSearch.do" accept-charset="UTF-8">
 			<div class="form-check">
 				<label>
-					<input class="form-check-input" type="radio" name="department_search" value="전체" onclick="submitForm()">전체
-				</label>
-				
-				<label>
-					<input class="form-check-input" type="radio" name="department_search" value="개발" onclick="submitForm()">개발
-				</label>
-				
-				<label>
-					<input class="form-check-input" type="radio" name="department_search" value="인사" onclick="submitForm()">인사
-				</label>
-				
-				<label>
-					<input class="form-check-input" type="radio" name="department_search" value="디자인" onclick="submitForm()">디자인
+					<select id="department_search" name="department_search" size="1" style="width: 130%; height: 100%;" class="form-select" onchange="submitForm()">
+							<option value="전체">선택해주세요.</option>
+							
+							<optgroup label="전체 or 임원">
+								<option value="전체">전체</option>
+								<option value="임원">임원급</option>
+							</optgroup>
+							
+							<optgroup label="개발팀" class="form-select-option">
+								<option value="개발">전체</option>
+								<option value="개발 1팀">1팀</option>
+								<option value="개발 2팀">2팀</option>
+								<option value="개발 3팀">3팀</option>
+							</optgroup>
+							
+							<optgroup label="인사팀">
+								<option value="인사">전체</option>
+								<option value="인사 1팀">1팀</option>
+								<option value="인사 2팀">2팀</option>
+								<option value="인사 3팀">3팀</option>
+							</optgroup>
+							
+							<optgroup label="디자인팀" class="form-select-option">
+								<option value="디자인">전체</option>
+								<option value="디자인 1팀">1팀</option>
+								<option value="디자인 2팀">2팀</option>
+								<option value="디자인 3팀">3팀</option>
+							</optgroup>
+					</select>
 				</label>
 			</div>
 		</form>
@@ -183,42 +205,53 @@ body {
 			<!-- 신입사원 등록 양식 -->
 			<div class="middle-NewRegist-container">
 				<div class="table-container">
-					<table border="1" width="98%" height="26%">
+					<table border="1" width="98%">
 						<tr align="center" class="table-dark1">
-							<th colspan='4' align="center" scope="row">신입사원 정보 등록</th>
+							<th colspan='5' align="center" scope="row">신입사원 정보 등록</th>
 						</tr>
 						<tr align="center" class="table-dark2">
-							<th width="25" scope="row">이름</th>
-							<th width="25">사번(아이디)</th>
-							<th width="25">직급</th>
-							<th width="25">부서</th>
+							<td width="25" scope="row">이름</td>
+							<td width="25">사번(아이디)</td>
+							<td width="25">직급</td>
+							<td width="25" colspan='2'>부서</td>
 						</tr>
-						<tr class="table-dark3">
-							<th align="center" width="25%" height="100%" scope="row">
-								<input type="text" class="form-control" name="name" placeholder="이름" style="width: 90%; height: 80%; box-sizing: border-box; text-align: center;">
+						<tr class="table-dark3" align="center">
+							<th align="center" width="20%" scope="row">
+								<input type="text" class="form-control" name="name" placeholder="이름" style="width: 90%; box-sizing: border-box; text-align: center;">
 							</th>
-							<th align="center" width="25%">
-								<input type="text" class="form-control" name="emp_num" placeholder="사번" style="width: 90%; height: 80%; box-sizing: border-box; text-align: center;">
+							<th align="center" width="20%">
+								<input type="text" class="form-control" name="emp_num" placeholder="사번" style="width: 90%; box-sizing: border-box; text-align: center;">
 							</th>
 
-							<th align="center" width="25%">
+							<th align="center" width="20%">
 								<select id="emp_grade" name="emp_grade" size="1" style="width: 90%;" class="form-select">
 									<option value="">선택하세요.</option>
-									<option value="임원">임원</option>
-									<option value="과장">과장</option>
+									<option value="이사">이사</option>
+									<option value="부장">부장</option>
 									<option value="팀장">팀장</option>
 									<option value="대리">대리</option>
 									<option value="사원">사원</option>
 							</select>
 							</th>
 
-							<th align="center" width="25%">
+							<th align="center" width="20%">
 								<select id="team" name="team" size="1" style="width: 90%;" class="form-select">
 									<option value="">선택하세요.</option>
+									<option value="임원">임원</option>
 									<option value="인사">인사</option>
 									<option value="개발">개발</option>
 									<option value="디자인">디자인</option>
-							</select>
+								</select>
+							</th>
+							
+							<th align="center" width="20%">
+								<select id="team_num" name="team_num" size="1" style="width: 90%;" class="form-select">
+									<option value="">선택하세요.</option>
+									<option value="임원">임원</option>
+									<option value="1팀">1팀</option>
+									<option value="2팀">2팀</option>
+									<option value="3팀">3팀</option>
+								</select>
 							</th>
 						</tr>
 					</table>
@@ -232,44 +265,55 @@ body {
 
 					<!-- 사원 정보 수정 -->
 					<div class="Edit-table-container">
-						<table border="1" width="98%" height="26%">
+						<table border="1" width="98%">
 							<tr align="center" class="table-dark1">
 								<th colspan='4' scope="row">사원 정보 수정</th>
 							</tr>
 							<tr align="center" class="table-dark2">
-								<th width="25" scope="row">이름</th>
-								<th width="25">사번(아이디)</th>
-								<th width="25">직급</th>
-								<th width="25">부서</th>
+								<td width="25" scope="row">이름</td>
+								<td width="25">사번(아이디)</td>
+								<td width="25">직급</td>
+								<td width="25" colspan='2'>부서</td>
 							</tr>
-							<tr class="table-dark3">
-								<th align="center" width="25%" height="100%" scope="row">
-									<input type="text" class="form-control" name="nameinfo" placeholder="이름" style="width: 90%; height: 80%; text-align: center;">
+							<tr class="table-dark3" align="center" >
+								<th align="center" width="20%" scope="row">
+									<input type="text" class="form-control" name="nameinfo" placeholder="이름" style="width: 90%; text-align: center;" readonly="readonly">
 								</th>
 
-								<th align="center" width="25%" height="100%">
-									<input type="text" class="form-control" name="emp_numinfo" placeholder="사번" style="width: 90%; height: 80%; text-align: center;">
+								<th align="center" width="20%">
+									<input type="text" class="form-control" name="emp_numinfo" placeholder="사번" style="width: 90%; text-align: center;" readonly="readonly">
 								</th>
 
-								<th align="center" width="25%" height="100%">
+								<th align="center" width="20%">
 									<select id="emp_grade_Edit"	name="emp_grade_Edit" size="1" style="width: 90%;" class="form-select">
 										<option value="">선택하세요.</option>
-										<option value="임원">임원</option>
-										<option value="과장">과장</option>
+										<option value="이사">이사</option>
+										<option value="부장">부장</option>
 										<option value="팀장">팀장</option>
 										<option value="대리">대리</option>
 										<option value="사원">사원</option>
 									</select>
 								</th>
 
-								<th align="center" width="25%" height="100%">
+								<th align="center" width="20%">
 									<select id="team_Edit"	name="team_Edit" size="1" style="width: 90%;" class="form-select">
 										<option value="">선택하세요.</option>
+										<option value="임원">임원</option>
 										<option value="인사">인사</option>
 										<option value="개발">개발</option>
 										<option value="디자인">디자인</option>
 									</select>
 								</th>
+								
+								<th align="center" width="20%">
+								<select id="team_num_Edit" name="team_num_Edit" size="1" style="width: 90%;" class="form-select">
+									<option value="">선택하세요.</option>
+									<option value="임원">임원</option>
+									<option value="1팀">1팀</option>
+									<option value="2팀">2팀</option>
+									<option value="3팀">3팀</option>
+								</select>
+							</th>
 							</tr>
 						</table>
 
@@ -288,33 +332,34 @@ body {
 							<th colspan='5' scope="row">사원 리스트</th>
 						</tr>
 						<tr align="center" align="center" class="table-dark2">
-							<th width="20" scope="row"></th>
-							<th width="30">이름</th>
-							<th width="10">사번</th>
-							<th width="20">직급</th>
-							<th width="20">부서</th>
+							<th width="10%" scope="row"></th>
+							<th width="15%">이름</th>
+							<th width="15%">사번</th>
+							<th width="20%">직급</th>
+							<th width="20%" colspan='2'>부서</th>
 						</tr>
 						<c:choose>
 							<c:when test="${empty selectList}">
 								<!-- 사원이 없을 때 -->
 								<tr class="table-dark3">
-									<td colspan="4" align="center" scope="row">회사가 망했나?</td>
+									<td colspan="5" align="center" scope="row">해당 부서에는 사원이 존재하지 않습니다.</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
 								<!-- 사원이 있을 때 -->
 								<c:forEach items="${selectList}" var="row" varStatus="loop">
 									<tr align="center" class="table-dark3">
-										<td align="center" scope="row">
+										<td align="center" scope="row" width="10%">
 											<label>
 												<input type="radio"	name="department_edit" value="info" class="form-check-input"
-													onclick="infosubmitForm('${row.name}', '${row.emp_num}')">
+													onclick="('${row.name}', '${row.emp_num}')">
 											</label>
 										</td>
-										<td>${row.name}</td>
-										<td>${row.emp_num}</td>
-										<td>${row.emp_grade}</td>
-										<td>${row.team}</td>
+										<td width="15%">${row.name}</td>
+										<td width="15%">${row.emp_num}</td>
+										<td width="20%">${row.emp_grade}</td>
+										<td width="10%">${row.team}</td>
+										<td width="10%">${row.team_num}</td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
@@ -323,7 +368,7 @@ body {
 				<!-- ---------------------------------------------------------------------------------------------------------------- -->
 					<script>
 						//리스트정보 받아서 정보수정부분에 입력
-						function infosubmitForm(nameinfo, emp_numinfo) {
+						function (nameinfo, emp_numinfo) {
 							// "사원 정보 수정" 테이블의 필드에 값을 채우기
 							document.forms["vacation_form"]["nameinfo"].value = nameinfo;
 							document.forms["vacation_form"]["emp_numinfo"].value = emp_numinfo;
@@ -333,8 +378,9 @@ body {
 						function validateForm() {
 							var emp_grade = document.getElementById("emp_grade").value;
 							var team = document.getElementById("team").value;
+							var team_num = document.getElementById("team_num").value;
 
-							if (emp_grade === "" || team === "") {
+							if (emp_grade === "" || team === "" || team_num === "") {
 								alert("직급 또는 부서를 선택해주세요.");
 							} else {
 								// 폼 제출 로직 추가 (예: document.forms["vacation_form"].submit();)
@@ -347,8 +393,9 @@ body {
 						function validate_Edit_Form() {
 							var emp_grade_Edit = document.getElementById("emp_grade_Edit").value;
 							var team_Edit = document.getElementById("team_Edit").value;
+							var team_num_Edit = document.getElementById("team_num_Edit").value;
 
-							if (emp_grade_Edit === "" || team_Edit === "") {
+							if (emp_grade_Edit === "" || team_Edit === "" || team_num_Edit === "") {
 								alert("직급 또는 부서를 선택해주세요.");
 							} else {
 								// 폼 제출 로직 추가 (예: document.forms["vacation_form"].submit();)
@@ -357,10 +404,10 @@ body {
 							}
 						}
 						
-						// 부서별 사원 검색
-						function submitForm() {
-							document.forms["team_form"].submit();
-						}
+					    // 부서별 사원 검색
+					    function submitForm() {
+					        document.forms["team_form"].submit();
+					    }
 					</script>
 				</div>
 			</div>

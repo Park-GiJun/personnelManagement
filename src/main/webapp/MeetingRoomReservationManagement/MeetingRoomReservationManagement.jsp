@@ -1,17 +1,12 @@
-<%@ page
-	language="java"
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
-<%@ taglib
-	prefix="c"
-	uri="http://java.sun.com/jsp/jstl/core"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 .content {
 	margin-left: 10%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
@@ -24,6 +19,52 @@
 	width: 100%;
 	border-collapse: collapse;
 	width: 100%;
+}
+
+.btn-info {
+	width: 5%;
+	font-size:15px;
+	height: 20%;
+	border-radius: 25px;
+}
+
+.table-info {
+	background-color: #5bc0de;
+}
+
+.table-dark1 {
+	background-color: #272b30;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark2 {
+	background-color: rgb(54, 60, 67);;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark3 {
+	background-color: rgb(68, 74, 83);
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark4 {
+	background-color: rgb(54, 60, 67);
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.table-dark4:nth-child(odd) {
+	background-color: rgb(44, 50, 57);
+}
+
+.form-check-input {
+	background-color: #5bc0de;
+	border-color: #5bc0de;
+	outline: 0;
+	box-shadow: 0 0 0 0.15rem rgba(255, 255, 255);
 }
 </style>
 <script type="text/javascript">
@@ -117,12 +158,8 @@
 
 	<div class="content">
 
-		<table
-			border="1"
-			class="listTable"
-			align="center"
-		>
-			<tr>
+		<table border="1" class="listTable">
+			<tr class="table-dark1" style="font-size: 20px;" align="center">
 				<th></th>
 				<th>팀</th>
 				<th>사번</th>
@@ -131,15 +168,17 @@
 				<th>일자</th>
 				<th>승인여부</th>
 			</tr>
-			<c:forEach
-				items="${ MeetingRoomList }"
-				var="list"
-				varStatus="loop"
-			>
-				<tr>
+			<c:forEach items="${ MeetingRoomList }" var="list" varStatus="loop" >
+				<tr class="table-dark4" style="font-size: 20px;" align="center">
+				<c:if test="${not(list.status eq 'Confirm' or list.status eq 'Reject')}">
 					<td>
-						<input type="checkbox">
+						<input type="checkbox" class="form-check-input">
 					</td>
+				</c:if>
+				
+				<c:if test="${(list.status eq 'Confirm' or list.status eq 'Reject')}">
+					<td>&nbsp;</td>
+				</c:if>
 					<td>${ list.team }</td>
 					<td>${ list.empNum }</td>
 					<td>${ list.name }</td>
@@ -151,14 +190,8 @@
 			</c:forEach>
 		</table>
 		<div class="buttons">
-			<button
-				type="button"
-				onclick="confirmAction()"
-			>승인</button>
-			<button
-				type="button"
-				onclick="rejectAction()"
-			>거절</button>
+			<button type="button" onclick="confirmAction()" class="btn-info">승인</button>
+			<button type="button" onclick="rejectAction()" class="btn-info">거절</button>
 		</div>
 	</div>
 

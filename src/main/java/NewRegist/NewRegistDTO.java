@@ -9,7 +9,14 @@ public class NewRegistDTO {
 	private String Pass;
 	private String Phone;
 	private String Work_start_day;
+	private String Team_num;
 	
+	public String getTeam_num() {
+		return Team_num;
+	}
+	public void setTeam_num(String team_num) {
+		Team_num = team_num;
+	}
 	public String getEmail() {
 		return Email;
 	}

@@ -8,6 +8,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Employee Details</title>
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
+<style>
+body {
+	font-size: 20px;
+	background-color: rgb(54, 60, 67);
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
+}
+
+.btn-info {
+	margin-top: 7px;
+	width: 20%;
+	font-size:20px;
+	height: 80%;
+	border-radius: 25px;
+}
+
+.form-control {
+	width: 20%;
+	padding: 0rem 0rem 0rem 0.75rem;
+}
+
+</style>
 <script>
 function modifySalary(){
     var empNum = "${param.emp_num}";
@@ -48,24 +72,21 @@ function modifySalary(){
 		<li><b>직급:</b> ${param.emp_grade}</li>
 		<li><b>기본급:</b> ${param.pay}</li>
 		<li><b>총 인센티브:</b> ${param.total_pay}</li>
-		<li><b>성과급:</b> <input
-				type="text"
-				id="incentive"
-				value="${param.incentive}"
-			/>
-			<button>+100000</button>
-			<button>-100000</button></li>
-		<li><b>추가급:</b> <input
-				type="text"
-				id="holidaypay"
-				value="${param.holiday_pay}"
-			/>
-			<button>+10</button>
-			<button>-10</button></li>
-		<li><b>추가근무수당:</b> ${param.extra_work_pay}</li>
+		<li style="display: flex; align-items: center;"><b>성과급:</b>
+        	<input type="text" id="incentive" value="${param.incentive}" class="form-control" style="margin-right: 10px; margin-left: 10px;">
+        		<button class="btn-info">+100000</button>
+        		<button class="btn-info">-100000</button>
+		</li>
+		<li style="display: flex; align-items: center;"><b>추가급:</b>
+			<input type="text" id="holidaypay" value="${param.holiday_pay}" class="form-control" style="margin-right: 10px; margin-left: 10px;">
+				<button class="btn-info">+10</button>
+				<button class="btn-info">-10</button>
+		</li>
+		<li>
+			<b>추가근무수당:</b> ${param.extra_work_pay}
+		</li>
 	</ul>
-
-	<button type="button" onclick="modifySalary()">수정 완료</button>
-	<button type="reset">초기화</button>
+	<button type="button" onclick="modifySalary()" class="btn-info">수정 완료</button>
+	<button type="reset" class="btn-info">초기화</button>
 </body>
 </html>

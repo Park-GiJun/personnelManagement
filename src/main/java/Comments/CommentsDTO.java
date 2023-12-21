@@ -3,6 +3,7 @@ package Comments;
 public class CommentsDTO {
     private int anno_board_num;
     private int Turn;
+    private int pass;
     private String content;
 
     public int getanno_board_num() {
@@ -19,6 +20,14 @@ public class CommentsDTO {
 
     public void setTurn(int Turn) {
         this.Turn = Turn;
+    }
+    
+    public int getpass() {
+        return pass;
+    }
+
+    public void setpass(int pass) {
+        this.pass = pass;
     }
 
     public String getcontent() {

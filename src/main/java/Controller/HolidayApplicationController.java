@@ -24,6 +24,7 @@ public class HolidayApplicationController extends HttpServlet {
 		
 		String userId = (String) req.getSession().getAttribute("loginid");
 		String Team = (String) req.getSession().getAttribute("inpteam");
+		int grade = (int) req.getSession().getAttribute("inpGrade");
 
 		String start_vacation_year = req.getParameter("start_vacation_year");
 		String start_vacation_month = req.getParameter("start_vacation_month");
@@ -95,6 +96,7 @@ public class HolidayApplicationController extends HttpServlet {
 		req.setAttribute("holidayList", holidayList);
 		req.setAttribute("map", map);
 		req.setAttribute("userholidaycount", userholidaycount);
+		req.setAttribute("grade", grade);
 
 		req.getRequestDispatcher("/HoliDay/HoliDay.jsp").forward(req, resp);
 	}

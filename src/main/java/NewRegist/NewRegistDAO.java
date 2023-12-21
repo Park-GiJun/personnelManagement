@@ -9,8 +9,9 @@ import HoliDay.HoliDayDAO;
 import HoliDay.HoliDayDTO;
 
 public class NewRegistDAO extends DBConnPool {
-	public NewRegistDTO NewRegist(String name, String emp_num, String emp_grade, String team, String grade) {
-		String query = "INSERT INTO emp (name, emp_num, emp_grade, team, grade) VALUES (?, ?, ?, ?, ?)";
+	
+	public NewRegistDTO NewRegist(String name, String emp_num, String emp_grade, String team, String grade, String Team_num) {
+		String query = "INSERT INTO emp (name, emp_num, emp_grade, team, grade, team_num) VALUES (?, ?, ?, ?, ?, ?)";
 
 		System.out.println("정보등록 쿼리 실행");
 
@@ -22,6 +23,7 @@ public class NewRegistDAO extends DBConnPool {
 			psmt.setString(3, emp_grade);
 			psmt.setString(4, team);
 			psmt.setString(5, grade);
+			psmt.setString(6, Team_num);
 
 			psmt.executeUpdate();
 			System.out.println("정보 등록 완료");
@@ -35,7 +37,7 @@ public class NewRegistDAO extends DBConnPool {
 	public HoliDayDTO NewRegistHoliday(String emp_num) {
 		String query = "INSERT INTO HOLIDAY (emp_num) VALUES (?)";
 
-		System.out.println("휴가정보등록 쿼리 실행");
+		System.out.println("사원 휴가정보등록 쿼리 실행");
 
 		try {
 			psmt = con.prepareStatement(query);
@@ -74,7 +76,7 @@ public class NewRegistDAO extends DBConnPool {
 	public List<NewRegistDTO> selectList(Map<String, Object> map) {
 		List<NewRegistDTO> bbs = new Vector<NewRegistDTO>();
 
-		String query = "SELECT * FROM emp ORDER BY grade, team, name";
+		String query = "SELECT * FROM emp ORDER BY team, team_num, grade, name";
 
 		try {
 			// 쿼리 실행
@@ -92,6 +94,7 @@ public class NewRegistDAO extends DBConnPool {
 				dto.setPhone(rs.getString("phone"));
 				dto.setTeam(rs.getString("team"));
 				dto.setWork_start_day(rs.getString("work_start_day"));
+				dto.setTeam_num(rs.getString("team_num"));
 
 				bbs.add(dto);
 			}
@@ -124,15 +127,33 @@ public class NewRegistDAO extends DBConnPool {
 	}
 
 	// 부서별 사원 목록 조회 쿼리
-	public List<NewRegistDTO> selectdepartmentList(String TeamSearch) {
+	public List<NewRegistDTO> selectdepartmentList(String TeamSearch, String team_num, int num) {
 		List<NewRegistDTO> bbs = new Vector<NewRegistDTO>();
-
-		String query = "SELECT * FROM emp WHERE team=? ORDER BY grade, team, name";
+		String query = "";
+		if (num == 1) {
+			query = "SELECT * FROM emp WHERE team=? ORDER BY team, team_num, grade, name";
+		}
+		
+		if (num == 2) {
+			query = "SELECT * FROM emp WHERE team=? AND team_num=? ORDER BY team, team_num, grade, name";
+		}
+		
+		if (num == 3) {
+			query = "SELECT * FROM emp WHERE GRADE <= 3 ORDER BY grade, name, team";
+		}
 
 		try {
 			// 쿼리 실행
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, TeamSearch);
+			if (num == 1) {
+				psmt.setString(1, TeamSearch);
+			}
+			
+			// 부서별 팀 조회
+			if (num == 2) {
+				psmt.setString(1, TeamSearch);
+				psmt.setString(2, team_num);
+			}
 
 			rs = psmt.executeQuery();
 			while (rs.next()) {
@@ -146,6 +167,7 @@ public class NewRegistDAO extends DBConnPool {
 				dto.setPhone(rs.getString("phone"));
 				dto.setTeam(rs.getString("team"));
 				dto.setWork_start_day(rs.getString("work_start_day"));
+				dto.setTeam_num(rs.getString("team_num"));
 
 				bbs.add(dto);
 			}
@@ -156,16 +178,17 @@ public class NewRegistDAO extends DBConnPool {
 		return bbs;
 	}
 
-	public NewRegistDTO RegistEdit(String emp_grade, String team, String grade, String name, String emp_num) {
-		String query = "UPDATE emp SET emp_grade = ?, team = ?, grade = ? WHERE name = ? AND emp_num= ?";
+	public NewRegistDTO RegistEdit(String emp_grade, String team, String grade, String team_num_Edit, String name, String emp_num) {
+		String query = "UPDATE emp SET emp_grade = ?, team = ?, grade = ?, Team_num = ? WHERE name = ? AND emp_num= ?";
 		
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, emp_grade);
 			psmt.setString(2, team);
 			psmt.setString(3, grade);
-			psmt.setString(4, name);
-			psmt.setString(5, emp_num);
+			psmt.setString(4, team_num_Edit);
+			psmt.setString(5, name);
+			psmt.setString(6, emp_num);
 
 			psmt.executeUpdate();
 			System.out.println("정보 수정 완료");

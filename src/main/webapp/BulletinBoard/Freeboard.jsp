@@ -29,10 +29,9 @@ body {
 	color: var(--bs-table-color);
 }
 
-
 .btn-info {
 	margin-top: 0.25%;
-	width : 10%;
+	width: 10%;
 	font-size: 15px;
 	height: 30px;
 	border-radius: 20px;
@@ -76,7 +75,8 @@ body {
 #listSearch {
 	margin-top: 0.4%;
 	margin-left: 0%;
-	margin-bottom: 0%; width : 100px;
+	margin-bottom: 0%;
+	width: 100px;
 	font-size: 15px;
 	height: 30px;
 	width: 100px;
@@ -123,41 +123,52 @@ body {
 					alert("비밀 번호를 입력해주세요.");
 					return false;
 				}
-			
+
 				// 작성 완료 메시지
 				alert("작성 완료되었습니다");
 
 				// 페이지 이동
-				window.location.href = '../BulletinBoard/FreeboardForm.jsp';
-		
+				window.location.href = '../BulletinBoard/Comments.jsp';
+
 			}
 		</script>
-		<form method="post" action="../Controller/FreeboardWrite.do" onsubmit="return validateForm(this)">
+		<form method="post" action="../Controller/FreeboardWrite.do"
+			onsubmit="return validateForm(this)">
 			<table border="1" width="100%">
 				<tr>
-					<td >
-						<input type="text" value="제목을 입력해 주세요." name="Freeboardtitle" class="form-control"
-							onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
+					<td><input type="text" value="제목을 입력해 주세요."
+						name="Freeboardtitle" class="form-control"
+						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)"/>
 					</td>
-				</tr>
-				
-				<tr>
-					<td>
-						<input type="text" name="Freeboardcontent" style="height: 590px;" class="form-control"></td>
 				</tr>
 
 				<tr>
-					<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">
-						<input type="text" value="비밀번호" name="Freeboardpassword" class="form-control" id="Freeboardpassword"
-							onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
-							
-						<button type="button" onclick="location.href='../BulletinBoard/FreeboardForm.jsp';" class="btn-info" style="margin-left: 69%;">목록</button>
-						
+
+					<td><input type="text" name="Freeboardcontent"
+						style="height: 590px;" class="form-control"></td>
+
+				</tr>
+
+				<tr>
+					<td colspan="3"
+						style="text-align: left; font-size: 15px; display: flex; align-items: center;">
+						<input type="text" value="비밀번호" name="Freeboardpassword"
+						class="form-control" id="Freeboardpassword"
+						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
+
+						<button type="button"
+							onclick="location.href='../BulletinBoard/FreeboardForm.jsp';"
+							class="btn-info" style="margin-left: 69%;">목록</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" style="text-align: right;">
 						<button type="submit" class="btn-info">작성완료</button>
+						
 					</td>
 				</tr>
 			</table>
-					
+
 		</form>
 	</div>
 </body>

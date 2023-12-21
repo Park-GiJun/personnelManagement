@@ -57,6 +57,8 @@ li {
 			<li><b>사번 : </b>&nbsp;${param.infoEmpNum}</li>
 			<li><b>전화번호 : </b>&nbsp;<input type="text" id="modifiedPhone" value="${param.infoPhone}" class="form-control"></li>
 			<li><b>이메일 : </b>&nbsp;<input type="text" id="modifiedEmail" value="${param.infoEmail}" class="form-control"></li>
+			<li><b>비밀번호 재설정 : </b>&nbsp;<input type="password" id="modifiedPass" class="form-control" placeholder="미입력시 기존비밀번호 유지"></li>
+			<li><b>비밀번호 확인 : </b>&nbsp;<input type="password" id="modifiedPass2" class="form-control"></li>
 		</ul>
 	</div>
 	<button type="button" onclick="performModification()" class='btn-info'>수정
@@ -67,34 +69,44 @@ li {
             // 수정된 정보 가져오기
             var modifiedPhone = document.getElementById('modifiedPhone').value;
             var modifiedEmail = document.getElementById('modifiedEmail').value;
+            var modifiedPass = document.getElementById('modifiedPass').value;
+            var modifiedPass2 = document.getElementById('modifiedPass2').value;
             
-            // 사번 정보 가져오기
-            var infoEmpNum = "${param.infoEmpNum}";
+            if (modifiedPass == modifiedPass2) {
+            	alert("정보가 변경되었습니다.")
+            	// 사번 정보 가져오기
+                var infoEmpNum = "${param.infoEmpNum}";
 
-            // 서버로 수정된 정보 전송
-            fetch('../Controller/InfoModify.do', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'modifiedPhone=' + encodeURIComponent(modifiedPhone)
-                    + '&modifiedEmail=' + encodeURIComponent(modifiedEmail)
-                    + '&infoEmpNum=' + encodeURIComponent(infoEmpNum),
-            })
-            .then(response => {
-                if (response.ok) {
-                    // 성공적으로 처리된 경우 원하는 동작 수행
-                    console.log('수정이 완료되었습니다.');
-                    window.close();
-                } else {
-                    // 오류 처리
-                    console.error('수정 중 오류가 발생했습니다.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+                // 서버로 수정된 정보 전송
+                fetch('../Controller/InfoModify.do', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'modifiedPhone=' + encodeURIComponent(modifiedPhone)
+                        + '&modifiedEmail=' + encodeURIComponent(modifiedEmail)
+                        + '&modifiedPass=' + encodeURIComponent(modifiedPass)
+                        + '&infoEmpNum=' + encodeURIComponent(infoEmpNum),
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // 성공적으로 처리된 경우 원하는 동작 수행
+                        console.log('수정이 완료되었습니다.');
+                        window.opener.location.reload(); // 부모 창 새로 고침
+                        window.close();
+                    } else {
+                        // 오류 처리
+                        console.error('수정 중 오류가 발생했습니다.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            } else {
+            	alert("비밀번호가 일치하지 않습니다.")
+            }
         }
+        
     </script>
 </body>
 </html>

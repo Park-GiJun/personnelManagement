@@ -10,11 +10,8 @@
 }
 
 .left_table {
-	margin-top:0.5%;
-	margin-left:0.5%;
-	border-radius: 50px;
 	width: 10%;
-	height: 98%;
+	height: 100%;
 	background: rgb(68, 74, 83);
 	opacity: 1;
 	position: absolute;
@@ -146,14 +143,14 @@
 			</a>
 		</div>
 		<div class="left_WorkBoard_background">
-			<a class="left_WorkBoard_section" href="../WorkBoard/WorkBoardMain.jsp"> <span class="left_WorkBoard_text">전자결재</span>
+			<a class="left_WorkBoard_section" href="../Controller/WorkBoardList.do"> <span class="left_WorkBoard_text">전자결재</span>
 			</a>
 		</div>
 
 		<div>
 			<%
 			int inpGrade = (int) session.getAttribute("inpGrade");
-			if (inpGrade < 3) {
+			if (inpGrade < 4) {
 			%>
 			<div class="left_new_Id_background">
 				<a class="left_new_id_section" href="../Controller/NewRegistLoad.do"> <span class="left_new_Id_text">사원관리</span>
@@ -170,6 +167,20 @@
 			</div>
 			<div class="left_MeetingRoomReservation_background">
 				<a class="left_MeetingRoom_section" href="../Controller/MeetingRoomReservationManagement.do"> <span class="left_MeetingRoomReservation_text">회의실관리</span>
+				</a>
+			</div>
+			<%
+			}
+			%>
+		</div>
+		
+		<div>
+			<%
+			inpGrade = (int) session.getAttribute("inpGrade");
+			if (inpGrade == 4) {
+			%>
+			<div class="left_Holiday_Approval_background">
+				<a class="left_salaryManagement_section" href="../Controller/HolidayApprovalLoad.do"> <span class="left_salaryManagement_text">휴가관리</span>
 				</a>
 			</div>
 			<%
