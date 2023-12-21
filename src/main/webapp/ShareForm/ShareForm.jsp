@@ -10,19 +10,23 @@
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
 @font-face {
-    font-family: 'ChungjuKimSaengTTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-family: 'ChungjuKimSaengTTF', sans-serif;
+	font-family: 'ChungjuKimSaengTTF';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 @font-face {
-    font-family: 'SF_HambakSnow';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-family: 'SF_HambakSnow', sans-serif;
+	font-family: 'SF_HambakSnow';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'SF_HambakSnow', sans-serif;
 }
 
 /* 공통 스타일 */
@@ -120,8 +124,7 @@ td {
 								<!-- 제목 --> <a>${ row.title }</a>
 							</td>
 							<td><c:if test="${ not empty row.shareofile }">
-										${ dto.ofile }
-									<a href="../Controller/ShareFormDownload.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">[다운로드]</a>
+									<a href="../Controller/ShareFormDownload.do?ofile=${ row.shareofile }&sfile=${ row.sharesfile }&idx=${ row.idx }">[다운로드]</a>
 								</c:if></td>
 						</tr>
 					</c:forEach>
@@ -131,6 +134,9 @@ td {
 		<!-- 하단 메뉴 -->
 		<form method="get" action="../Controller/sharelist.do">
 			<table border="1" width="90%" height="50px">
+				<tr>
+					<th style="text-align: center;">${ map.pagingImg }</th>
+				</tr>
 				<tr class="table-dark3" align="center">
 					<th style="display: flex; margin-left: 32.5%;" scope="row"><select name="searchCategory" class="form-select">
 							<option value="title">제목</option>

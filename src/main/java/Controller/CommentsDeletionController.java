@@ -24,7 +24,6 @@ public class CommentsDeletionController extends HttpServlet {
 		 System.out.println(Trun);
 		 dao.EliminationsComments(Trun);
 		 
-		request.getRequestDispatcher("/BulletinBoard/FreeboardForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/Controller/ReturnCommentsController.do").forward(request, response);
 	}
-
 }

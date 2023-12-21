@@ -166,7 +166,7 @@ body {
 							</div>
 						</div>
 						<p class="card-text">${ Doc.approval_doc_content }</p>
-						<a href="#" class="card-link">다운로드</a>
+						<a href="../Controller/DocDetailDownload.do?ofile=${ Doc.approval_doc_ofile }&sfile=${ Doc.approval_doc_sfile }&idx=${ Doc.idx }" class="card-link">다운로드</a>
 					</div>
 				</div>
 			</div>

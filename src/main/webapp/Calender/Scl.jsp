@@ -340,7 +340,6 @@ day {
 body {
 	font-size: px;
 	font-family: 'Kanit', sans-serif;
-	background-color: #272b30;
 	/*color: white;*/
 }
 
@@ -397,16 +396,16 @@ a:active, a:hover {
 }
 
 /* 요일 칸 배경 색 지정 */
-.calendar table thead tr:first-child{
-	background-color: rgb(68, 74, 83);
-    color: white;
+.calendar table thead tr:first-child {
+	background: #1c427e;
+	color: white;
 }
 
 /* 요일, 날짜 칸 크기 조절 */
-.calendar table td{
-  	padding: 40px 80px;
-   	text-align: left;
-   	border: 1px solid #ccc;
+.calendar table td {
+	padding: 40px 80px;
+	text-align: left;
+	border: 1px solid #ccc;
 }
 
 /* 월, 화, 수, 목, 금 글자 색상 설정 */
@@ -415,83 +414,79 @@ a:active, a:hover {
 .calendar table td:nth-child(3)
 .calendar table td:nth-child(4)
 .calendar table td:nth-child(5) {
-   color: white;
+	color: white;
 }
 
 /* 일요일 색상 지정 */
-.calendar table td:nth-child(7n+1){
-   color: red;
+.calendar table td:nth-child(7n+1) {
+	color: red;
 }
 
 /* 토요일 색상 지정 */
-.calendar table td:nth-child(7n){
-   color: blue;
+.calendar table td:nth-child(7n) {
+	color: blue;
 }
 
 /* 전 월의 일 색상 */
 .calendar table td.gray {
-   color: #ccc;
+	color: #ccc;
 }
 
 /* 날짜 버튼 스타일 지정 */
 .calendar table button {
-	color: #fff;
-   border: none;
-   padding: 0;
-   background: none;
-   font-size: 20px;
-   
-   position: relative;  /* 상대적인 위치 설정 */
-   top: -40px;  /* 상단 여백 조정 */
-   left: -70px;  /* 왼쪽 여백 조정 */
-   
-   font-family: 'Kanit', sans-serif;
-   
-   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+	border: none;
+	padding: 0;
+	background: none;
+	font-size: 20px;
+	position: relative; /* 상대적인 위치 설정 */
+	top: -40px; /* 상단 여백 조정 */
+	left: -70px; /* 왼쪽 여백 조정 */
+	font-family: 'Kanit', sans-serif;
+	cursor: pointer; /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 .calendar table button:hover {
-   color: green;
+	color: green;
 }
 
 /* 오늘 날짜 스타일 */
-.calendar table td.today{
-   font-weight:700;
-   background: orange;
-   color: #000;
+.calendar table td.today {
+	font-weight: 700;
+	background: orange;
+	color: #000;
 }
 
 /* 일요일 날짜 스타일 */
 .calendar table td:nth-child(7n+1) button {
-   color: red;
-   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+	color: red;
+	cursor: pointer; /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 .calendar table td:nth-child(7n+1) button:hover {
-   color: green;
+	color: green;
 }
 
 /* 토요일 날짜 스타일 */
 .calendar table td:nth-child(7n) button {
-   color: blue;
-   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+	color: blue;
+	cursor: pointer; /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 .calendar table td:nth-child(7n) button:hover {
-   color: green;
+	color: green;
 }
 
 /* 전월의 날짜 색상 지정 */
 .calendar table td.gray button {
-   color: #000;
+	color: #ccc;
 }
 
 /* 다음달의 날짜 색상 지정 */
 .calendar table td.gray2 button {
-   color: #000;
+	color: #ccc;
 }
 </style>
 
@@ -522,6 +517,7 @@ function showDateAndAlert(day) {
 	// 일정 추가를 위한 고유한 식별자
 	var eventCounter = 1;
 
+	/*
 	function confirmPlus() {
 		// 사용자로부터 입력을 받기 위한 prompt 대화상자 사용
 		var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
@@ -559,6 +555,47 @@ function showDateAndAlert(day) {
 			console.log("일정 저장을 취소하였습니다.");
 		}
 }
+	*/
+	
+	
+	function confirmPlus() {
+	    var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
+
+	    if (userInput !== null && userInput !== "") {
+	        // 사용자가 확인을 클릭하면 입력한 일정을 서블릿으로 전송
+	        sendNewScheduleToServer(userInput);
+	    } else if (userInput === "") {
+	        alert("일정을 입력해주세요.");
+	    } else {
+	        console.log("일정 저장을 취소하였습니다.");
+	    }
+	}
+
+	// 새로운 일정을 서버로 전송하는 함수
+	function sendNewScheduleToServer(newSchedule) {
+	    const xhr = new XMLHttpRequest();
+	    xhr.open("POST", "/Controller/CalenderPlusController", true);
+	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+
+	    // 서버로 전송할 데이터 설정
+	    const data = "userInput=" + encodeURIComponent(newSchedule)
+        + "&selectedDay=" + encodeURIComponent(selectedDay)
+        + "&selectedYear=" + encodeURIComponent(selectedYear)
+        + "&selectedMonth=" + encodeURIComponent(selectedMonth);
+	    xhr.send(data);
+
+	    xhr.onreadystatechange = function () {
+	        if (xhr.readyState === 4) {
+	            if (xhr.status === 200) {
+	                alert(xhr.responseText); // 서버 응답을 알림으로 표시
+	            } else {
+	                alert("일정 추가에 실패했습니다.");
+	            }
+	        }
+	    };
+	    
+	    
+	}
 	 
 	 
     console.log('잘 실행되는지 확인용1111111111111111111111');
@@ -611,6 +648,9 @@ function confirmDelete() {
         if (confirmed) {
             // 수정된 부분: 선택한 일정의 ID를 서버로 전송
             sendSelectedSchedulesToServer(selectedSchedules);
+        } else {
+        	//location.reload();
+        	 window.location.href = 'Scl.jsp';
         }
     } else {
         alert("삭제할 일정을 선택해주세요.");
@@ -623,7 +663,7 @@ function sendSelectedSchedulesToServer(selectedSchedules) {
     // Ajax를 사용하여 Java 서버에 배열 전송
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "../Controller/CalenderDeleteController.do", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
     //xhr.send(JSON.stringify({ selectedSchedules: selectedSchedules }));
 
     // 선택한 일정의 ID 스택을 문자열로 변환하여 서버로 전송
@@ -665,10 +705,6 @@ function sendSelectedSchedulesToServer(selectedSchedules) {
 
 body {
 	font-size: 20px;
-}
-
-tbody {
-	background : gray;
 }
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */

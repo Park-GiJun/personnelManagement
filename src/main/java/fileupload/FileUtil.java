@@ -28,7 +28,7 @@ public class FileUtil {
 	public static void download(HttpServletRequest req, HttpServletResponse resp, String directory, String sfileName,
 			String ofileName) {
 		String userHome = System.getProperty("user.home");
-		String sDirectory  = userHome + "/Uploads";
+		String sDirectory  = userHome + directory;
 
 		try {
 			// 파일을 찾아 입력 스트림 생성

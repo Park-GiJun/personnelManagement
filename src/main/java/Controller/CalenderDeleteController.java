@@ -23,8 +23,9 @@ public class CalenderDeleteController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		System.out.println("CalenderDeleteController.do");
-		 System.out.println("");
+		System.out.println("CalenderPlusController.do");
+		System.out.println("");
+		
 		// DAO 생성
 		CalenderDAO dao = new CalenderDAO();
 		
@@ -35,7 +36,7 @@ public class CalenderDeleteController extends HttpServlet {
 		
 		
 		// 1. 요청 매개변수에서 선택된 일정 가져오기
-        String[] selectedSchedules = request.getParameterValues("selectedSchedules"); // 값이 안 들어옴
+        String[] selectedSchedules = request.getParameterValues("selectedSchedules"); 
         
         System.out.println("selectedSchedules 값 확인: " + Arrays.toString(selectedSchedules));
         
@@ -60,6 +61,7 @@ public class CalenderDeleteController extends HttpServlet {
         
         request.setAttribute("map2", map);
         request.setAttribute("selectedSchedules", selectedSchedules);
+        request.setCharacterEncoding("UTF-8");
         //request.setAttribute("selectedSchedules", Arrays.asList(selectedSchedules));
         //request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
         

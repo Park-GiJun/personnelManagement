@@ -23,6 +23,7 @@ public class WebServer {
 
 	private static final Set<Session> sessions = Collections.synchronizedSet(new HashSet<>());
 	private static final Map<Session, Integer> sessionGradeMap = Collections.synchronizedMap(new HashMap<>());
+	private static final Map<Session, String> sessionIDMap = Collections.synchronizedMap(new HashMap<>());
 
 	@OnOpen
 	public void onOpen(Session session, EndpointConfig config) {
@@ -34,11 +35,11 @@ public class WebServer {
 		int grade = (int) httpSession.getAttribute("userGrade");
 
 		sessionGradeMap.put(session, grade);
+		sessionIDMap.put(session, myValue);
 
 		System.out.println(myValue + "//" + grade);
 		System.out.println("WebSocket 연결됨");
-		
-		 printAllSessionGrades();
+
 	}
 
 	@OnClose
@@ -76,6 +77,13 @@ public class WebServer {
 
 	@SuppressWarnings("unused")
 	private void printAllSessionGrades() {
+		synchronized (sessionIDMap) {
+			for (Map.Entry<Session, Integer> entry : sessionGradeMap.entrySet()) {
+				Session session = entry.getKey();
+				Integer id = entry.getValue();
+				System.out.println("Session ID: " + session.getId() + " | ID: " + id);
+			}
+		}
 		synchronized (sessionGradeMap) {
 			for (Map.Entry<Session, Integer> entry : sessionGradeMap.entrySet()) {
 				Session session = entry.getKey();
@@ -83,6 +91,7 @@ public class WebServer {
 				System.out.println("Session ID: " + session.getId() + " | Grade: " + grade);
 			}
 		}
+
 	}
 
 }

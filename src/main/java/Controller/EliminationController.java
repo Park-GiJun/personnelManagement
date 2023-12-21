@@ -27,7 +27,7 @@ public class EliminationController extends HttpServlet {
 		System.out.println("게시글 삭제 메인 컨트롤러");
 
 		request.getSession().setAttribute("anno_board_num", anno_board_num);
-		request.getRequestDispatcher("/BulletinBoard/FreeboardForm.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/Controller/FreeboardList.do");
 	}
 
 }

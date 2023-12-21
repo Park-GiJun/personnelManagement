@@ -1,7 +1,6 @@
 package Controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import fileupload.FileUtil;
 
-@WebServlet("/Controller/ShareFormDownload.do")
-public class ShareFormDownloadController extends HttpServlet {
+
+@WebServlet("/Controller/DocDetailDownload.do")
+public class DocDetailDownloadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -20,6 +20,7 @@ public class ShareFormDownloadController extends HttpServlet {
 		String sfile = request.getParameter("sfile"); // 저장된 파일명
 
 		// 파일 다운로드
-		FileUtil.download(request, response, "/Uploads/", sfile, ofile);
+		FileUtil.download(request, response, "/WorkBoard/", sfile, ofile);
 	}
+
 }
