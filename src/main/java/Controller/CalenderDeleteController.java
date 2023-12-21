@@ -35,11 +35,13 @@ public class CalenderDeleteController extends HttpServlet {
 		
 		
 		// 1. 요청 매개변수에서 선택된 일정 가져오기
-        String[] selectedSchedules = request.getParameterValues("selectedSchedules");
+        String[] selectedSchedules = request.getParameterValues("selectedSchedules"); // 값이 안 들어옴
         
         System.out.println("selectedSchedules 값 확인: " + Arrays.toString(selectedSchedules));
         
         if (selectedSchedules != null && selectedSchedules.length > 0) {
+        	//CalenderDAO dao = new CalenderDAO();
+        	//dao.deleteCalender(Arrays.asList(selectedSchedules));
             // 2. 선택된 일정 삭제 로직 구현 (실제 삭제 로직으로 대체)
         	System.out.println("선택된 일정 목록:");
             for (String schedule : selectedSchedules) {
@@ -59,7 +61,7 @@ public class CalenderDeleteController extends HttpServlet {
         request.setAttribute("map2", map);
         request.setAttribute("selectedSchedules", selectedSchedules);
         //request.setAttribute("selectedSchedules", Arrays.asList(selectedSchedules));
-        request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
+        //request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
         
         
 	}
