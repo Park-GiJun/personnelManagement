@@ -164,7 +164,7 @@ public class CalenderDAO extends DBConnPool {
 
         try {
             // 쿼리문 준비
-            String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_date = ? AND emp_num = ?";
+        	String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_date = ? AND emp_num = ?";
             psmt = con.prepareStatement(query);
 
             // 파라미터 설정
