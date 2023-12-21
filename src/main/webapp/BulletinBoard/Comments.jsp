@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -262,6 +263,7 @@ td, th {
 			            form.submit();
 
 			            alert("삭제 되었습니다.");
+			            "location.href='../Controller/FreeboardList.do';"
 			        } else {
 			            // 사용자가 취소를 눌렀을 때의 동작
 			            // 아무 동작 없음 또는 필요한 동작 추가
@@ -278,7 +280,9 @@ td, th {
 		</script>
 
 		<!-- 다른 페이지에서 불러오는 내용 -->
-		<form name="Comments" method="post" action="../Controller/CommentsController.do" onsubmit="return validateForm(this)">
+		<form name="Comments" method="post"
+			action="../Controller/CommentsController.do"
+			onsubmit="return validateForm(this)">
 			<table border="1" width="90%">
 				<tr class="table-dark1" align="center" style="font-size:18px; font-family: 'SF_HambakSnow', sans-serif;">
 
@@ -286,10 +290,10 @@ td, th {
 					<th width="20%">${dto.anno_board_num}</th>
 					<th width="25%">작성일</th>
 					<th width="25%">${dto.post_date}</th>
-
 					<td style="text-align: left; font-size: 18px; display: flex; align-items: center;">
 						<button type="button" onclick="promptModification()" width="10%" id="btn2" class="btn-info">수정</button>
 						<button type="button" onclick="promptDeletion()" width="10%" id="btn2" class="btn-info">삭제</button>
+
 					</td>
 				</tr>
 				<tr class="table-dark2" align="center">
@@ -308,10 +312,12 @@ td, th {
 
 				<c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
 					<tr class="table-dark4">
-						<td width="5%" align="center">${ map2.totalCount +(((map2.pageNum-1) * map2.pageSize) + loop.index) }</td>
+						<td width="5%" align="center">${ map2.totalCount +(((map2.pageNum-1) * map2.pageSize) + loop.index+1) }</td>
 						<td width="90%" style="font-size: 18px; font-family: 'SF_HambakSnow', sans-serif;">${comment.content}</td>
 						<td width="5%" align="center">
-							<button type="button" onclick="CommentsDeletion('${comment.pass}','${comment.turn}' )" class="btn-info" id="delete">삭제</button>
+							<button type="button"
+								onclick="CommentsDeletion('${comment.pass}','${comment.turn}' )"
+								class="btn-info" id="delete">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -320,12 +326,14 @@ td, th {
 				<tr class="table-dark1">
 					<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">댓글 
 						<input type="text" value="내용을 입력해 주세요." name="Commentscontent" style="width: 95%;" class="form-control" onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
+
 					</td>
 				</tr>
 
 				<tr class="table-dark1">
 					<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">비밀번호 <input type="text" name="commentspassword" class="form-control" width="25%" />
 						<button type="button" onclick="location.href='../Controller/FreeboardList.do';" class="btn-info" style="margin-left: 54%;">목록</button>
+
 						<button type="submit" class="btn-info">댓글쓰기</button>
 					</td>
 				</tr>
