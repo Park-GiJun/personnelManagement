@@ -104,9 +104,11 @@ public class ApprovalDocWriteController extends HttpServlet {
 		dao.writeBoard(dto, codeList);
 
 		// 응답 처리
-		response.setContentType("text/html");
+		// Java (서블릿)
+		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write("데이터 처리 완료");
+		response.getWriter().write("{\"message\":\"데이터 처리 완료\"}");
+
 	}
 
 }

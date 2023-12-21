@@ -1,5 +1,6 @@
 package DBcontrol;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,6 +17,7 @@ public class DBConnPool {
 	public Statement stmt;
 	public PreparedStatement psmt;
 	public ResultSet rs;
+	public CallableStatement csmt;
 
 	public DBConnPool() {
 		try {
@@ -71,7 +73,6 @@ public class DBConnPool {
     }
 
 	public static Connection getConnection() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

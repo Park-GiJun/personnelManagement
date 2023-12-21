@@ -26,16 +26,11 @@ public class HolidayApplicationController extends HttpServlet {
 		String Team = (String) req.getSession().getAttribute("inpteam");
 		int grade = (int) req.getSession().getAttribute("inpGrade");
 
-		String start_vacation_year = req.getParameter("start_vacation_year");
-		String start_vacation_month = req.getParameter("start_vacation_month");
-		String start_vacation_day = req.getParameter("start_vacation_day");
+		String start_vacation = req.getParameter("start_vacation");
+		System.out.println(start_vacation);
 		
-		String end_vacation_year = req.getParameter("end_vacation_year");
-		String end_vacation_month = req.getParameter("end_vacation_month");
-		String end_vacation_day = req.getParameter("end_vacation_day");
-		
-		String start_vacation = start_vacation_year + "-" + start_vacation_month + "-" + start_vacation_day;
-		String end_vacation = end_vacation_year + "-" + end_vacation_month + "-" + end_vacation_day;
+		String end_vacation = req.getParameter("end_vacation");
+		System.out.println(end_vacation);
 		
 		HoliDayDAO dao = new HoliDayDAO();
 		// 신청한 휴가 날자 DB 저장

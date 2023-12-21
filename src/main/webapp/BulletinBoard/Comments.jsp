@@ -8,6 +8,22 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'SF_HambakSnow';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'SF_HambakSnow', sans-serif;
+}
+
 /* 공통 스타일 */
 * {
 	box-sizing: border-box;
@@ -17,6 +33,7 @@
 
 body {
 	font-size: 16px;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 td, th {
@@ -97,6 +114,10 @@ td, th {
 	font-size: 10px;
 	background: #fff;
 }
+
+#delete {
+	font-size: 15px;
+}
 </style>
 <jsp:include page="../MainPage/Left.jsp" />
 <script type="text/javascript">
@@ -173,7 +194,6 @@ td, th {
 				            form.method = 'POST';
 				            form.action = '../Controller/EliminationController.do';
 
-<<<<<<< HEAD
 				            // hidden 필드를 생성하여 데이터 추가
 				            var inputBoardNum = document.createElement('input');
 				            inputBoardNum.type = 'hidden';
@@ -181,35 +201,9 @@ td, th {
 				            inputBoardNum.value = boardNum;
 				            form.appendChild(inputBoardNum);
 				            
-=======
-            <c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
-               <tr class="table-dark4">
-                <td width="5%" align="center">${comment.turn}</td>
-                <td width="90%">${comment.content}</td>
-                <td width="5%" align="center">
-					<button type="button" onclick="CommentsDeletion()" class="btn-info" id="delete" style="font-size: 10px;">삭제</button>
-                </td>
->>>>>>> refs/remotes/origin/류동규
-
-<<<<<<< HEAD
 				            // 폼을 body에 추가하고 submit
 				            document.body.appendChild(form);
 				            form.submit();
-=======
-               </tr>
-            </c:forEach>
-            </table>
-            <table border="1" width="90%">
-            	<tr class="table-dark1">
-              		<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">
-              		<a style="margin-left: 1%;">댓글</a>
-               			<input type="text" value="내용을 입력해 주세요." name="Commentscontent" style="width: 95%; margin-left: 1%;" class="form-control"
-                              onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
-               		</td>
-            	</tr>
->>>>>>> refs/remotes/origin/류동규
-
-<<<<<<< HEAD
 						alert("삭제 되었습니다.")
 					} else {
 						// 사용자가 취소를 눌렀을 때의 동작
@@ -225,18 +219,6 @@ td, th {
 		
 			
 			function validateForm(form) {
-=======
-            	<tr class="table-dark1">
-              		<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">
-              		<a style="margin-left: 1%; width: 7%;">비밀번호</a>
-               			<input type="text" name="commentspassword" class="form-control" width="25%" style="margin-left: 0%; margin-top: 1%;">
-               			<button type="button" onclick="location.href='../Controller/FreeboardList.do';" class="btn-info" style="margin-left:54%;">목록</button>
-               			<button type="submit" class="btn-info">댓글쓰기</button>
-               		</td>
-            	</tr>
-         </table>
->>>>>>> refs/remotes/origin/류동규
-
 				if (form.Commentscontent.value == null
 						|| form.Commentscontent.value.trim() === "") {
 					alert("내용을 입력하세요");
@@ -298,25 +280,25 @@ td, th {
 		<!-- 다른 페이지에서 불러오는 내용 -->
 		<form name="Comments" method="post" action="../Controller/CommentsController.do" onsubmit="return validateForm(this)">
 			<table border="1" width="90%">
-				<tr class="table-dark1" align="center">
+				<tr class="table-dark1" align="center" style="font-size:18px; font-family: 'SF_HambakSnow', sans-serif;">
 
 					<th width="20%">번호</th>
 					<th width="20%">${dto.anno_board_num}</th>
 					<th width="25%">작성일</th>
 					<th width="25%">${dto.post_date}</th>
 
-					<td style="text-align: left; font-size: 15px; display: flex; align-items: center;">
+					<td style="text-align: left; font-size: 18px; display: flex; align-items: center;">
 						<button type="button" onclick="promptModification()" width="10%" id="btn2" class="btn-info">수정</button>
 						<button type="button" onclick="promptDeletion()" width="10%" id="btn2" class="btn-info">삭제</button>
 					</td>
 				</tr>
 				<tr class="table-dark2" align="center">
-					<td style="width: 10%;">제목</td>
-					<th colspan="4" style="width: 90%; height: 50px;">${dto.title }</th>
+					<td style="width: 10%; font-size:18px;">제목</td>
+					<th colspan="4" style="width: 90%; height: 50px; font-size:20px; font-family: 'SF_HambakSnow', sans-serif;">${dto.title }</th>
 				</tr>
 				<tr class="table-dark3" align="center">
-					<td scope="row" style="width: 10%;">내용</td>
-					<th colspan="4" style="width: 90%; height: 500px;">${dto.content}</th>
+					<td scope="row" style="width: 10%; font-size:18px;">내용</td>
+					<th colspan="4" style="width: 90%; height: 500px; font-size:20px; font-family: 'SF_HambakSnow', sans-serif;">${dto.content}</th>
 				</tr>
 			</table>
 			<table border="1" width="90%">
@@ -325,9 +307,9 @@ td, th {
 				</tr>
 
 				<c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
-					<tr class="table-dark2">
+					<tr class="table-dark4">
 						<td width="5%" align="center">${ map2.totalCount +(((map2.pageNum-1) * map2.pageSize) + loop.index) }</td>
-						<td width="90%">${comment.content}</td>
+						<td width="90%" style="font-size: 18px; font-family: 'SF_HambakSnow', sans-serif;">${comment.content}</td>
 						<td width="5%" align="center">
 							<button type="button" onclick="CommentsDeletion('${comment.pass}','${comment.turn}' )" class="btn-info" id="delete">삭제</button>
 						</td>
@@ -336,13 +318,14 @@ td, th {
 			</table>
 			<table border="1" width="90%">
 				<tr class="table-dark1">
-					<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">댓글 <input type="text" value="내용을 입력해 주세요." name="Commentscontent" style="width: 95%;" class="form-control" onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
+					<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">댓글 
+						<input type="text" value="내용을 입력해 주세요." name="Commentscontent" style="width: 95%;" class="form-control" onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
 					</td>
 				</tr>
 
 				<tr class="table-dark1">
 					<td colspan="3" style="text-align: left; font-size: 15px; display: flex; align-items: center;">비밀번호 <input type="text" name="commentspassword" class="form-control" width="25%" />
-						<button type="button" onclick="location.href='../Controller/FreeboardList.do';" class="sbtn-info" style="margin-left: 54%;">목록</button>
+						<button type="button" onclick="location.href='../Controller/FreeboardList.do';" class="btn-info" style="margin-left: 54%;">목록</button>
 						<button type="submit" class="btn-info">댓글쓰기</button>
 					</td>
 				</tr>

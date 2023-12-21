@@ -71,11 +71,11 @@ public class NewRegistController extends HttpServlet {
 			grade = "2";
 		} else if (emp_grade.equals("부장") || emp_grade_Edit.equals("부장")) {
 			grade = "3";
-		} else if (emp_grade.equals("팀장") || emp_grade_Edit.equals("대리")) {
+		} else if (emp_grade.equals("팀장") || emp_grade_Edit.equals("팀장")) {
 			grade = "4";
-		} else if (emp_grade.equals("대리") || emp_grade_Edit.equals("사원")) {
+		} else if (emp_grade.equals("대리") || emp_grade_Edit.equals("대리")) {
 			grade = "5";
-		} else if (emp_grade.equals("사원") || emp_grade_Edit.equals("인턴")) {
+		} else if (emp_grade.equals("사원") || emp_grade_Edit.equals("사원")) {
 			grade = "6";
 		}
 		
