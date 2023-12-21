@@ -109,6 +109,7 @@ public class CalenderController extends HttpServlet {
 		map.put("pageSize", pageSize);
 		map.put("pageNum", pageNum);
 		
+		request.setAttribute("selecteddate", selecteddate);
 	
 
 		// 포워딩

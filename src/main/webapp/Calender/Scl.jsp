@@ -558,8 +558,10 @@ function showDateAndAlert(day) {
 	*/
 	
 	
+	
 	function confirmPlus() {
 	    var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
+	    
 
 	    if (userInput !== null && userInput !== "") {
 	        // 사용자가 확인을 클릭하면 입력한 일정을 서블릿으로 전송
@@ -572,24 +574,25 @@ function showDateAndAlert(day) {
 	}
 
 	// 새로운 일정을 서버로 전송하는 함수
-	function sendNewScheduleToServer(newSchedule) {
+	function sendNewScheduleToServer(userInput) {
 	    const xhr = new XMLHttpRequest();
-	    xhr.open("POST", "/Controller/CalenderPlusController", true);
+	    xhr.open("POST", "../Controller/CalenderPlusController.do", true);
 	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+	   
 
 	    // 서버로 전송할 데이터 설정
-	    const data = "userInput=" + encodeURIComponent(newSchedule)
-        + "&selectedDay=" + encodeURIComponent(selectedDay)
-        + "&selectedYear=" + encodeURIComponent(selectedYear)
-        + "&selectedMonth=" + encodeURIComponent(selectedMonth);
+	    const data = "userInput=" + encodeURIComponent(userInput);
 	    xhr.send(data);
 
 	    xhr.onreadystatechange = function () {
 	        if (xhr.readyState === 4) {
 	            if (xhr.status === 200) {
 	                alert(xhr.responseText); // 서버 응답을 알림으로 표시
+	                location.reload();
+	                console.log('추가한 일정들:', userInput);
 	            } else {
 	                alert("일정 추가에 실패했습니다.");
+	                console.log('실패한 일정들:', userInput);
 	            }
 	        }
 	    };
@@ -726,8 +729,6 @@ body {
 		<input type="hidden" name="selectedYear" id="selectedYear" value="<%=year%>">
 		<input type="hidden" name="selectedMonth" id="selectedMonth" value="<%=month%>">
 		<input type="hidden" name="selectedDay" id="selectedDay" value="">
-		<!-- <input type="hidden" name="selectedContent" id="selectedContent" value="selectedSchedules"> -->
-		<!-- <input type="hidden" name="selectedContent" id="selectedContent" value="<c:out value="${empty row.personal_diaray_schedule ? '' : row.personal_diaray_schedule}"/>"> -->
 
 		<div class="middle-button">
 			<!-- 다른 페이지에서 불러오는 내용 -->

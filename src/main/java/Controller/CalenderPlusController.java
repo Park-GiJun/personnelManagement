@@ -18,7 +18,7 @@ public class CalenderPlusController extends HttpServlet {
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("CalenderDeleteController.do");
+		System.out.println("CalenderPlusController.do");
 		System.out.println("");
 		
 		CalenderDAO dao = new CalenderDAO();
@@ -28,53 +28,26 @@ public class CalenderPlusController extends HttpServlet {
 	        
 	    System.out.println("추가한 일정 값 확인: " + newSchedule);
 	    
-	    String selectedDay = request.getParameter("selectedDay");
-		
-		System.out.println("confirm : " + selectedDay);
-		
-		/* 참고
-		if (Integer.parseInt(selectedDay) < 10) {
-			selectedDay = "0" + selectedDay;
-		}
-		*/
-		
-		// 년-월-일 에서 1~9일은 앞에 0을 붙여주는 코드
-		if (selectedDay != null && !selectedDay.isEmpty()) {
-		    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도
-		    int dayValue;
-		    try {
-		        dayValue = Integer.parseInt(selectedDay);
+	    // selecteddate와 emp_num을 HttpServletRequest에서 가져와서 사용
+	    String selecteddate = (String) request.getAttribute("selecteddate");
+	    String emp_num = (String) request.getSession().getAttribute("loginid");
+	   
+	    System.out.println("가져온 값 확인: " + selecteddate + " " + emp_num);
+	    
+		 if (newSchedule != null) {
+			 
+			 dao.insertWrite(newSchedule, selecteddate, emp_num);
+			 
+			 response.getWriter().write("일정이 성공적으로 추가되었습니다.");
+	         response.sendRedirect("../Calender/Scl.jsp");
+			 
+		 } else {
+	            response.getWriter().write("추가할 일정이 작성되지 않았습니다.");
+	        }
 
-		        // 변환된 값이 10보다 작으면 앞에 0을 붙여서 문자열로 만듦
-		        if (dayValue < 10) {
-		            selectedDay = "0" + dayValue;
-		        }
-		    } catch (NumberFormatException e) {
-		    	
-		    }
-		} else {
-		    // selectedDay가 null이거나 비어있는 경우 처리
-		    // 적절한 로깅 또는 예외 처리를 수행
-		}
-			
-		String selectedYear = request.getParameter("selectedYear");
-		String selectedMonth = request.getParameter("selectedMonth");
-		String selecteddate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
-		String emp_num = (String) request.getSession().getAttribute("loginid");
-		
-		System.out.println("aaaaa " + selecteddate);
-
-	    dao.insertWrite(newSchedule, selecteddate, emp_num);
+	   
 	        
-	    // 처리 후 필요한 응답을 클라이언트로 전송할 수 있습니다.
-	    response.getWriter().write("일정이 성공적으로 추가되었습니다.");
-	    response.sendRedirect("../Calender/Scl.jsp");
-	    
-	    
-	    request.setAttribute("selecteddate", selecteddate);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("../Calender/Scl.jsp");
-        dispatcher.forward(request, response);
-        return;
+	   
 	    
 	    }
 	
