@@ -9,9 +9,18 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
 h1 {
 	--bs-table-color: #fff;
 	color: var(--bs-table-color);
+	margin-left: 5%;
 }
 
 th {
@@ -21,6 +30,10 @@ th {
 tbody {
 	border: 1px solid gray; /* 테두리 스타일 지정 */
   	padding: 1px; /* 셀 안의 내용과 테두리 사이의 간격 조정 */
+}
+
+body {
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 .my_btn {
@@ -34,8 +47,9 @@ tbody {
 }
 
 .btn-info {
-	margin-top: 0.5%;
-	width: 10%;
+	margin-top: 1%;
+	margin-left: 5%;
+	width: 20%;
 	height: 50px;
 	font-size:80%;
 	border-radius: 25px;
@@ -69,7 +83,7 @@ tbody {
 <body>
 	<h1>Meeting Room Detail</h1>
 
-	<table border="1" width="30%">
+	<table border="1" style="width: 90%; margin-left: 5%;">
 		<thead>
 			<tr class="table-dark2" align="center">
 				<th width="20%">시간</th>
@@ -137,6 +151,7 @@ tbody {
 		        // 서버의 응답을 처리
 		        console.log('서버 응답:');
 		        alert("신청이 완료 되었습니다.")
+		        window.opener.location.reload(); // 부모 창 새로 고침
 		        window.close();
 		    })
 

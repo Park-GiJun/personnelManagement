@@ -225,8 +225,8 @@ day {
 
 body {
 	background-color: #272b30;
-   font-size: px;
-  font-family: 'Kanit', sans-serif;
+   	font-size: px;
+  	font-family: 'Kanit', sans-serif;
     /*color: white;*/
 }
 
@@ -476,10 +476,6 @@ function showDateAndAlert(day) {
    box-sizing: border-box;
    margin: 0;
    padding: 0;
-}
-
-body {
-   font-size: 20px;
 }
 
 tbody {

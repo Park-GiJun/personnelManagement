@@ -9,6 +9,20 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style type="text/css">
+@font-face {
+    font-family: 'GapyeongHanseokbong-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/GapyeongHanseokbong-Bold.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -55,6 +69,7 @@ td {
 }
 
 .table-dark3 {
+	font-size: 20px;
 	background-color: rgb(68, 74, 83);
 	--bs-table-color: #fff;
 	color: var(--bs-table-color);
@@ -148,6 +163,7 @@ body {
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 	margin-left: 10%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;
@@ -257,8 +273,7 @@ body {
 					</table>
 
 					<div class="middle-button-container">
-						<button type="submit" class="btn-info" name="NewRegistType"
-							value="NewRegist" onclick="validateForm()">정보등록</button>
+						<button type="submit" class="btn-info" name="NewRegistType"	value="NewRegist" onclick="validateForm()">정보등록</button>
 					</div>
 					
 					<!-- ---------------------------------------------------------------------------------------------------------------- -->
@@ -352,7 +367,7 @@ body {
 										<td align="center" scope="row" width="10%">
 											<label>
 												<input type="radio"	name="department_edit" value="info" class="form-check-input"
-													onclick="('${row.name}', '${row.emp_num}')">
+													onclick="infosubmitForm('${row.name}', '${row.emp_num}')">
 											</label>
 										</td>
 										<td width="15%">${row.name}</td>
@@ -368,7 +383,7 @@ body {
 				<!-- ---------------------------------------------------------------------------------------------------------------- -->
 					<script>
 						//리스트정보 받아서 정보수정부분에 입력
-						function (nameinfo, emp_numinfo) {
+						function infosubmitForm(nameinfo, emp_numinfo) {
 							// "사원 정보 수정" 테이블의 필드에 값을 채우기
 							document.forms["vacation_form"]["nameinfo"].value = nameinfo;
 							document.forms["vacation_form"]["emp_numinfo"].value = emp_numinfo;

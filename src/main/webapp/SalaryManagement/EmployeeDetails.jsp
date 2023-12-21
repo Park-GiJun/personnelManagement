@@ -11,15 +11,30 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
 body {
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 	font-size: 20px;
 	background-color: rgb(54, 60, 67);
 	--bs-table-color: #fff;
 	color: var(--bs-table-color);
 }
 
+h1 {
+	margin-left:2%;
+	margin-top:2%;
+}
+
 .btn-info {
 	margin-top: 7px;
+	margin-left:2%;
 	width: 20%;
 	font-size:20px;
 	height: 80%;

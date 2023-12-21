@@ -1,10 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+
+<%
+   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+   String currentDate = sdf.format(new Date());
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Left</title>
 <style>
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -26,7 +40,7 @@
 	.left_info_background, .left_new_Id_background,
 	.left_salaryManagement_background, .left_Holiday_Approval_background,
 	.left_MeetingRoom_background, .left_MeetingRoomReservation_background,
-	.left_WorkBoard_background {
+	.left_WorkBoard_background, .left_Time_background {
 	width: 100%;
 	height: 5%;
 	background: rgb(0, 64, 128);
@@ -39,64 +53,81 @@
 /* 텍스트 스타일 */
 .left_calender_text, .left_shareform_text, .left_freeboard_text,
 	.left_holiday_text, .left_info_text, .left_new_Id_text,
-	.left_salaryManagement_text, .left_Holiday_Approval_background,
+	.left_salaryManagement_text, .left_Holiday_Approval_text,
 	.left_meetingroom_text, .left_MeetingRoomReservation_text,
 	.left_WorkBoard_text {
 	width: 100%;
-	color: #6fc8e2;
+	color: #fff;
 	position: absolute;
-	top: 20%;
+	top: 5%;
 	left: 0;
-	font-family: Inter;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 	font-weight: Regular;
-	font-size: 18px;
+	font-size: 150%;
+	opacity: 1;
+	text-align: center;
+}
+
+.left_Time_text {
+	margin-top: 2%;
+	width: 100%;
+	color: #fff;
+	position: absolute;
+	top: 10%;
+	left: 0;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
+	font-weight: Regular;
+	font-size: 25px;
 	opacity: 1;
 	text-align: center;
 }
 
 /* 각 섹션 간격 조정 */
+.left_Time_background {
+	top: 0%;
+}
 .left_calender_background {
-	top: 0;
+	top: 5%;
 }
 
 .left_WorkBoard_background {
-	top: 7%;
+	top: 12%;
 }
 
 .left_shareform_background {
-	top: 14%;
+	top: 19%;
 }
 
 .left_freeboard_background {
-	top: 21%;
+	top: 26%;
 }
 
 .left_holiday_background {
-	top: 28%;
+	top: 33%;
 }
 
 .left_MeetingRoom_background {
-	top: 35%;
+	top: 40%;
 }
 
 .left_info_background {
-	top: 42%;
+	top: 47%;
 }
 
 .left_Holiday_Approval_background {
-	top: 69%
+	top: 71.5%;
 }
 
 .left_salaryManagement_background {
-	top: 76%;
+	top: 78.5%;
 }
 
 .left_new_Id_background {
-	top: 83%;
+	top: 85.5%;
 }
 
 .left_MeetingRoomReservation_background {
-	top: 90%;
+	top: 92.5%;
 }
 
 
@@ -109,11 +140,19 @@
 }
 </style>
 <script>
-	
+function openHoliDayWindow() {
+	var detailsUrl = "../Controller/HoliDayCount.do";
+
+	window.open(detailsUrl, "_blank", "width=600, height=400");
+}
 </script>
 </head>
 <body>
 	<div class="left_table">
+		<div class="left_Time_background">
+			<h3 class="left_Time_text"><%= currentDate %></h3>
+		</div>
+	
 		<div class="left_calender_background">
 			<a class="left_Calender_section" href="../Calender/Calender.jsp">
 				<span class="left_calender_text">캘린더</span>
@@ -131,7 +170,8 @@
 			</a>
 		</div>
 		<div class="left_holiday_background">
-			<a class="left_holiday_section" href="../Controller/HoliDayCount.do"> <span class="left_holiday_text">휴가신청</span>
+			<a class="left_holiday_section" onclick="openHoliDayWindow()"> <span class="left_holiday_text">휴가신청</span>
+			<!-- "../Controller/HoliDayCount.do"-->
 			</a>
 		</div>
 		<div class="left_info_background">
@@ -139,7 +179,7 @@
 			</a>
 		</div>
 		<div class="left_MeetingRoom_background">
-			<a class="left_meetingroom_section" href="../MeetingRoom/MeetingRoom.jsp"> <span class="left_meetingroom_text">회의실 예약</span>
+			<a class="left_meetingroom_section" href="../Controller/MeetingRoomLoadController.do"> <span class="left_meetingroom_text">회의실 예약</span>
 			</a>
 		</div>
 		<div class="left_WorkBoard_background">

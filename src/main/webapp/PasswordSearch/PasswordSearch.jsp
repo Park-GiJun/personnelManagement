@@ -8,6 +8,19 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/intelone-mono-font-family-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
 body {
 	display: flex;
 	align-items: center;
@@ -22,7 +35,8 @@ h1 {
 	border-radius: 15px;
 	margin-bottom: 3%;
 	width: 100%;
-	padding: 0rem 0rem 0.5rem 0rem;
+	padding: 0.25rem 0rem 0.25rem 0rem;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 	text-align: center;
 	font-weight: 900;
 	--bs-table-color: #fff;
@@ -40,6 +54,7 @@ input {
 }
 
 a {
+	font-family: 'intelone-mono-font-family-regular', sans-serif;
 	--bs-table-color: skyblue;
 	color: var(--bs-table-color);
 }
@@ -52,12 +67,14 @@ button {
 	width: 180px;
 	height: 80px;
 	border-radius: 25px;
+	font-family: 'intelone-mono-font-family-regular', sans-serif;
 }
 
 .form-control {
 	width: 400px;
 	height: 55px;
 	border-radius: 15px;
+	font-family: 'intelone-mono-font-family-regular', sans-serif;
 }
 
 .form-select {
@@ -75,7 +92,7 @@ button {
 
 		<input type="Password" class="form-control" name="Check_Password" placeholder="Check Password">
 
-		<button type="button" class="btn-light" value="비밀번호 변경" onclick="PassForm()">Submit</button>
+		<button type="button" class="btn-light" value="비밀번호 변경" onclick="PassForm()">Password Change</button>
 
 		<script>
 			function PassForm() {
