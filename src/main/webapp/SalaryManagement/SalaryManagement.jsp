@@ -29,7 +29,7 @@ body {
 
 .btn-info {
 	margin-top: 7px;
-	width: 5%;
+	width: 7%;
 	font-size: 20px;
 	height: 80%;
 	border-radius: 25px;
@@ -40,9 +40,8 @@ body {
 }
 
 .table-dark1 {
-	font-size: 30px;
+	font-size: 25px;
 	text-align: center;
-	width: 100%;
 	height: 100%;
 	border-collapse: collapse;
 	width: 100% background-color: #272b30;
@@ -51,6 +50,7 @@ body {
 }
 
 .table-dark2 {
+	font-size: 170%;
 	background-color: rgb(54, 60, 67);;
 	--bs-table-color: #fff;
 	color: var(--bs-table-color);
@@ -82,7 +82,7 @@ td {
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
-	margin-left: 10%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
+	margin-left: 5%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;
 	font-family: 'ChungjuKimSaengTTF', sans-serif;
@@ -105,7 +105,7 @@ td {
 
 .salary_table_background {
 	background-color: gray;
-	width: 85%;
+	width: 95%;
 	height: 80%;
 	position: relative;
 	top: 10%;
@@ -141,7 +141,7 @@ td {
 				+ holiday_pay + "&extra_work_pay=" + extra_work_pay
 				+ "&yearmonth=" + yearmonth;
 
-		window.open(detailsUrl, "_blank", "width=600, height=400");
+		window.open(detailsUrl, "_blank", "width=600, height=420");
 	}
 
 	function populateYears() {
@@ -218,9 +218,9 @@ td {
 			<button class="btn-info" onclick="handleChange()">검색</button>
 		</div>
 		<div class="salary_table_background">
-			<table border="1" class="table-dark1">
-				<tr>
-					<td>부서</td>
+			<table border="1">
+				<tr class="table-dark1">
+					<td colspan="2">부서</td>
 					<td>이름</td>
 					<td>사번</td>
 					<td>직급</td>
@@ -243,17 +243,17 @@ td {
 							<tr align="center" class="table-dark2"
 								onclick="openModifyWindow('${EMPLists.team}', '${EMPLists.name}', '${EMPLists.emp_num}', '${EMPLists.emp_grade}', '${EMPLists.pay}', '${EMPLists.total_pay}', '${EMPLists.incentive}', '${EMPLists.holiday_pay}', '${EMPLists.extra_work_pay}', '${EMPLists.yearmonth}')">
 
-								<td>${EMPLists.team}</td>
-								<td>${EMPLists.team_num}</td>
-								<td>${EMPLists.name}</td>
-								<td>${EMPLists.emp_num}</td>
-								<td>${EMPLists.emp_grade}</td>
-								<td>${EMPLists.pay}</td>
-								<td>${EMPLists.total_pay}</td>
-								<td>${EMPLists.incentive}</td>
-								<td>${EMPLists.holiday_pay}</td>
-								<td>${EMPLists.extra_work_pay}</td>
-								<td>${EMPLists.yearmonth }</td>
+								<td width="6%">${EMPLists.team}</td>
+								<td width="6%">${EMPLists.team_num}</td>
+								<td width="6%">${EMPLists.name}</td>
+								<td width="7%">${EMPLists.emp_num}</td>
+								<td width="7%">${EMPLists.emp_grade}</td>
+								<td width="5%">${EMPLists.pay}</td>
+								<td width="5%">${EMPLists.total_pay}</td>
+								<td width="5%">${EMPLists.incentive}</td>
+								<td width="5%">${EMPLists.holiday_pay}</td>
+								<td width="5%">${EMPLists.extra_work_pay}</td>
+								<td width="9%">${EMPLists.yearmonth }</td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>

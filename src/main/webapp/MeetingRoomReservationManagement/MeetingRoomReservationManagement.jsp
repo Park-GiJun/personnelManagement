@@ -22,6 +22,11 @@
 	font-size: 12px;
 }
 
+.buttons {
+	margin-top: 0%;
+	margin-bottom: 1%;
+}
+
 .listTable {
 	top: 20%;
 	width: 100%;
@@ -30,7 +35,7 @@
 }
 
 .btn-info {
-	width: 5%;
+	width: 7%;
 	font-size:15px;
 	height: 20%;
 	border-radius: 25px;
@@ -165,6 +170,11 @@
 	<jsp:include page="../MainPage/Left.jsp" />
 
 	<div class="content">
+	
+		<div class="buttons">
+			<button type="button" onclick="confirmAction()" class="btn-info">승인</button>
+			<button type="button" onclick="rejectAction()" class="btn-info">거절</button>
+		</div>
 
 		<table border="1" class="listTable">
 			<tr class="table-dark1" style="font-size: 20px;" align="center">
@@ -197,10 +207,6 @@
 
 			</c:forEach>
 		</table>
-		<div class="buttons">
-			<button type="button" onclick="confirmAction()" class="btn-info">승인</button>
-			<button type="button" onclick="rejectAction()" class="btn-info">거절</button>
-		</div>
 	</div>
 
 </body>

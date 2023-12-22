@@ -112,6 +112,11 @@ td {
 	font-size: 10px;
 	background: #fff;
 }
+
+a {
+    text-decoration: none;
+    color: inherit; /* 링크의 기본 색상을 상속받음 */
+ }
 </style>
 <body>
 	<jsp:include page="../MainPage/Left.jsp" />
