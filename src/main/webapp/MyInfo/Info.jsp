@@ -324,13 +324,12 @@ function getCurrentTime() {
 
 .info_income {
 	background-color: gray;
-	margin-top: 20px;
 	padding: 20;;
 	width: 600px;
 	height: 500px;
 	/* 높이를 자동으로 조정하도록 수정 */
 	position: relative;
-	top: 80px;
+	top: 25px;
 	left: 50px;
 	/* 여백 추가 */
 	--bs-table-color: #000;

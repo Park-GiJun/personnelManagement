@@ -24,7 +24,7 @@ public class CodeDAO extends DBConnPool {
 			System.out.println("코드 삽입중 예외발생");
 			e.printStackTrace();
 		}
-
+		System.out.println("hi");
 		query = "INSERT INTO APPROVAL_LINE (code, emp_num, approval_state) VALUES (?, ?, ?)";
 
 		try {

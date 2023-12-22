@@ -95,7 +95,21 @@ td {
 	width: 400px;
 	height: 35px;
 }
+
+a {
+    text-decoration: none;
+    color: inherit; /* 링크의 기본 색상을 상속받음 */
+ }
 </style>
+
+<script>
+	function openShareFormWindow() {
+		var detailsUrl = "../ShareForm/Write.jsp";
+
+		window.open(detailsUrl, "_blank", "width=700, height=140");
+	}
+</script>
+
 <body>
 	<jsp:include page="../MainPage/Left.jsp" />
 	<div class="content">
@@ -142,7 +156,7 @@ td {
 							<option value="title">제목</option>
 						</select> <input type="text" name="searchWord" class="form-control">
 						<button type="submit" name="listSearch" value="검색하기" id="listSearch" class="btn-info" style="margin-right: 37.5%;">검색하기</button>
-						<button type="button" onclick="location.href='../ShareForm/Write.jsp';" class="btn-info">글작성</button></th>
+						<button type="button" onclick="openShareFormWindow()" class="btn-info">글작성</button></th>
 				</tr>
 			</table>
 		</form>

@@ -34,7 +34,7 @@ body {
 
 .form-control {
 	margin-top: 5px;
-	width: 40%;
+	width: 45%;
 	height: 10px;
 	text-align: center;
 }

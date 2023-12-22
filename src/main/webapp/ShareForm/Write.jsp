@@ -29,7 +29,6 @@ body {
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
 	position: relative;
-	left: 10%;
 	padding: 20px;
 	max-height: 100%;
 }
@@ -40,7 +39,7 @@ body {
 	font-size: 17.5px;
 	height: 100%;
 	border-radius: 25px;
-	width: 10%;
+	width: 15%;
 }
 
 .table-info {
@@ -80,9 +79,10 @@ body {
 	padding: 0.25rem 1rem;
 	font-size: 15px;
 	height: 30px;
+	--bs-table-color: #fff;
+	color: var(--bs-table-color);
 }
 </style>
-<jsp:include page="../MainPage/Left.jsp" />
 <script>
 	function clearDefaultText(input) {
 		if (input.value === input.defaultValue) {
@@ -117,10 +117,10 @@ body {
 			}
 		</script>
 		<form name="shareFrame" method="post" enctype="multipart/form-data"	action="../Controller/ShareWrite.do" onsubmit="return validateForm(this)">
-			<table align="center" border="1" height="80%" width="90%" class="table-dark2">
+			<table align="center" border="1" height="80%" width="98%" class="table-dark2">
 				<tr>
 					<td>
-						<input type="text" value="제목을 입력해 주세요."	name="sharetitle" style="width: 98%; margin-left:1%;" class="form-control"
+						<input type="text" placeholder="제목을 입력해 주세요."	name="sharetitle" style="width: 98%; margin-left:1%;" class="form-control"
 							onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)"/>
 					</td>
 				</tr>
@@ -131,7 +131,7 @@ body {
 				</tr>
 				<tr>
 					<td style="text-align: left; font-size: 15px; display: flex; align-items: center; margin-left: 1%;">
-						<input type="password" name="sharepassword" class="form-control">
+						<input type="password" name="sharepassword" class="form-control" placeholder="Password">
 						<button	type="button" onclick="location.href='../Controller/sharelist.do';" class="btn-info">목록</button>
 						<button type="submit" class="btn-info">작성완료</button>
 					</td>

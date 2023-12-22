@@ -142,7 +142,7 @@ body {
 
 .MeetingRoom-table {
 	display: flex;
-	margin-top: 22%;
+	margin-top: 25%;
 	font-size: 20px;
 }
 

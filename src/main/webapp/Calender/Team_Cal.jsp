@@ -213,7 +213,7 @@ button.next_btn:hover {
 	
 	position: absolute;
   	top: -40px;
-  	left: 430px;
+  	left: 220px;
   	
   	font-size: 100x;
   	border-radius: 30px;
@@ -264,7 +264,7 @@ a:active, a:hover {
    border-radius: 25px;
   font-family: 'Kanit', sans-serif;
    font-size: 20px;
-   margin-left: 440px;
+   margin-left: 240px;
    top: 10px;
 }
 

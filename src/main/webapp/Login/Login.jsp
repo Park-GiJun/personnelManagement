@@ -59,6 +59,7 @@ a {
 	font-family: 'intelone-mono-font-family-regular', sans-serif;
 	--bs-table-color: skyblue;
 	color: var(--bs-table-color);
+	text-decoration: none;
 }
 
 .btn-light {

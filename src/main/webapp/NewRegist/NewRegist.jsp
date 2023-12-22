@@ -86,7 +86,7 @@ td {
     display: flex; /* flex 컨테이너로 설정 */
     justify-content: space-between; /* 버튼 사이의 간격을 균등하게 조절 */
     position: relative;
-    margin-top: 2.5%;
+    margin-top: 0%;
     margin-left: 50%;
     width: 15%;
     --bs-table-color: #fff;
@@ -176,8 +176,7 @@ body {
 	<jsp:include page="../MainPage/Left.jsp" />
 	<div class="content">
 
-		<form name="team_form" method="post"
-			action="../Controller/NewRegistTeamSearch.do" accept-charset="UTF-8">
+		<form name="team_form" method="post" action="../Controller/NewRegistTeamSearch.do" accept-charset="UTF-8">
 			<div class="form-check">
 				<label>
 					<select id="department_search" name="department_search" size="1" style="width: 130%; height: 100%;" class="form-select" onchange="submitForm()">

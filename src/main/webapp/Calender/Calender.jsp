@@ -210,11 +210,9 @@ button.next_btn:hover {
 /* 크게 무슨 월인지 표시 설정 */
 .em {
 	color: #1C427E;
-	
 	position: absolute;
   	top: -40px;
-  	left: 430px;
-  	
+  	left: 220px;
   	font-size: 100x;
   	border-radius: 30px;
 }
@@ -262,9 +260,9 @@ a:active, a:hover {
    border: 1px solid #999;
    padding: 15px 50px;
    border-radius: 25px;
-  font-family: 'Kanit', sans-serif;
+   font-family: 'Kanit', sans-serif;
    font-size: 20px;
-   margin-left: 440px;
+   margin-left: 240px;
    top: 10px;
 }
 
