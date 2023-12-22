@@ -44,7 +44,7 @@ public class CalenderDeleteController extends HttpServlet {
         	//CalenderDAO dao = new CalenderDAO();
         	//dao.deleteCalender(Arrays.asList(selectedSchedules));
             // 2. 선택된 일정 삭제 로직 구현 (실제 삭제 로직으로 대체)
-        	System.out.println("선택된 일정 목록:");
+        	//System.out.println("선택된 일정 목록:");
             for (String schedule : selectedSchedules) {
                 // 실제 삭제 로직 여기에 구현 (예: 데이터베이스에서 삭제)
                 // 예: CalenderDAO.deleteSchedule(schedule);
