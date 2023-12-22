@@ -23,9 +23,8 @@ public class CalenderDeleteController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		System.out.println("CalenderPlusController.do");
-		System.out.println("");
-		
+		System.out.println("CalenderDeleteController.do");
+		 System.out.println("");
 		// DAO 생성
 		CalenderDAO dao = new CalenderDAO();
 		
@@ -36,7 +35,7 @@ public class CalenderDeleteController extends HttpServlet {
 		
 		
 		// 1. 요청 매개변수에서 선택된 일정 가져오기
-        String[] selectedSchedules = request.getParameterValues("selectedSchedules"); 
+        String[] selectedSchedules = request.getParameterValues("selectedSchedules"); // 값이 안 들어옴
         
         System.out.println("selectedSchedules 값 확인: " + Arrays.toString(selectedSchedules));
         
@@ -44,7 +43,7 @@ public class CalenderDeleteController extends HttpServlet {
         	//CalenderDAO dao = new CalenderDAO();
         	//dao.deleteCalender(Arrays.asList(selectedSchedules));
             // 2. 선택된 일정 삭제 로직 구현 (실제 삭제 로직으로 대체)
-        	//System.out.println("선택된 일정 목록:");
+        	System.out.println("선택된 일정 목록:");
             for (String schedule : selectedSchedules) {
                 // 실제 삭제 로직 여기에 구현 (예: 데이터베이스에서 삭제)
                 // 예: CalenderDAO.deleteSchedule(schedule);

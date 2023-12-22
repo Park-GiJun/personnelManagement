@@ -604,92 +604,89 @@ function showDateAndAlert(day) {
     console.log('잘 실행되는지 확인용1111111111111111111111');
 	 
 
-  // 링크 클릭 시 선택 및 해제를 토글하는 함수
-  var selectedSchedules = [];  // 선택한 일정이 저장되는 곳
- 
-document.addEventListener('click', function (event) {
-    if (event.target.classList.contains('scheduleLink')) {
-        event.preventDefault();
-        var selectedSchedule = event.target.getAttribute('data-schedule');
-        var isSelected = event.target.classList.toggle('selected');
+ // 링크 클릭 시 선택 및 해제를 토글하는 함수
+    var selectedSchedules = [];  // 선택한 일정이 저장되는 곳
+   
+  document.addEventListener('click', function (event) {
+      if (event.target.classList.contains('scheduleLink')) {
+          event.preventDefault();
+          var selectedSchedule = event.target.getAttribute('data-schedule');
+          var isSelected = event.target.classList.toggle('selected');
 
-        alert(selectedSchedule + ' 확인용');
+          alert(selectedSchedule + ' 확인용');
 
-        // 선택한 일정을 리스트에 추가 또는 제거
-        if (isSelected) {
-            selectedSchedules.push(selectedSchedule);
-        } else {
-            // 해당 값이 리스트에 존재하면 제거
-            var index = selectedSchedules.indexOf(selectedSchedule);
-            if (index !== -1) {
-                selectedSchedules.splice(index, 1);
-            }
-        }
+          // 선택한 일정을 리스트에 추가 또는 제거
+          if (isSelected) {
+              selectedSchedules.push(selectedSchedule);
+          } else {
+              // 해당 값이 리스트에 존재하면 제거
+              var index = selectedSchedules.indexOf(selectedSchedule);
+              if (index !== -1) {
+                  selectedSchedules.splice(index, 1);
+              }
+          }
 
-        // 선택한 일정들을 콘솔에 출력
-        console.log('선택한 일정들:', selectedSchedules);
-        
-    }
+          // 선택한 일정들을 콘솔에 출력
+          console.log('선택한 일정들:', selectedSchedules);
+          
+      }
+      
+   	// Ajax를 사용하여 Java 서버에 배열 전송
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "/Controller/CalenderDeleteConteController.do", true);
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      //xhr.send(JSON.stringify({ array: selectedSchedules }));
+
+  });
     
- 	// Ajax를 사용하여 Java 서버에 배열 전송
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/Controller/CalenderDeleteConteController.do", true);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    //xhr.send(JSON.stringify({ array: selectedSchedules }));
-
-});
-  
-  
-//삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
-function confirmDelete() {
-    var selectedSchedules = Array.from(document.querySelectorAll('.scheduleLink.selected')).map(function (schedule) {
-        return schedule.getAttribute('data-schedule');
-    });
-
-    if (selectedSchedules.length > 0) {
-        var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
-        if (confirmed) {
-            // 수정된 부분: 선택한 일정의 ID를 서버로 전송
-            sendSelectedSchedulesToServer(selectedSchedules);
-        } else {
-        	//location.reload();
-        	 window.location.href = 'Scl.jsp';
-        }
-    } else {
-        alert("삭제할 일정을 선택해주세요.");
-    }
-}
-	 
-	
-// 선택한 일정 삭제를 서버로 전송하는 함수
-function sendSelectedSchedulesToServer(selectedSchedules) {
-    // Ajax를 사용하여 Java 서버에 배열 전송
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "../Controller/CalenderDeleteController.do", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-    //xhr.send(JSON.stringify({ selectedSchedules: selectedSchedules }));
-
-    // 선택한 일정의 ID 스택을 문자열로 변환하여 서버로 전송
-    //var data = "selectedSchedules=" + encodeURIComponent(scheduleStack.join(','));
-    //xhr.send(data);
     
- // 선택한 일정의 ID를 문자열 배열로 변환
-    //const data = JSON.stringify(selectedSchedules);
- 	const data = "selectedSchedules=" + encodeURIComponent(selectedSchedules.join(','));
-    xhr.send(data);
+  //삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
+  function confirmDelete() {
+      var selectedSchedules = Array.from(document.querySelectorAll('.scheduleLink.selected')).map(function (schedule) {
+          return schedule.getAttribute('data-schedule');
+      });
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                alert("일정이 삭제되었습니다.");
-                // 페이지 리로드 또는 필요한 갱신 작업 수행
-                location.reload();
-            } else {
-                alert("일정 삭제에 실패했습니다.");
-            }
-        }
-    };
-}  
+      if (selectedSchedules.length > 0) {
+          var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
+          if (confirmed) {
+              // 수정된 부분: 선택한 일정의 ID를 서버로 전송
+              sendSelectedSchedulesToServer(selectedSchedules);
+          }
+      } else {
+          alert("삭제할 일정을 선택해주세요.");
+      }
+  }
+  	 
+  	
+  // 선택한 일정 삭제를 서버로 전송하는 함수
+  function sendSelectedSchedulesToServer(selectedSchedules) {
+      // Ajax를 사용하여 Java 서버에 배열 전송
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "../Controller/CalenderDeleteController.do", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+      //xhr.send(JSON.stringify({ selectedSchedules: selectedSchedules }));
+
+      // 선택한 일정의 ID 스택을 문자열로 변환하여 서버로 전송
+      //var data = "selectedSchedules=" + encodeURIComponent(scheduleStack.join(','));
+      //xhr.send(data);
+      
+   // 선택한 일정의 ID를 문자열 배열로 변환
+      //const data = JSON.stringify(selectedSchedules);
+   	const data = "selectedSchedules=" + encodeURIComponent(selectedSchedules.join(','));
+      xhr.send(data);
+
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                  alert("일정이 삭제되었습니다.");
+                  // 페이지 리로드 또는 필요한 갱신 작업 수행
+                  location.reload();
+              } else {
+                  alert("일정 삭제에 실패했습니다.");
+              }
+          }
+      };
+  }  
 
 
     
