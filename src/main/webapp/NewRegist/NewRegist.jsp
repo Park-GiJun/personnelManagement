@@ -10,17 +10,25 @@
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 @font-face {
-    font-family: 'GapyeongHanseokbong-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/GapyeongHanseokbong-Bold.woff2') format('woff2');
-    font-weight: 300;
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'ChungjuKimSaengTTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
 * {
@@ -88,7 +96,6 @@ td {
     position: relative;
     margin-top: 0%;
     margin-left: 50%;
-    width: 15%;
     --bs-table-color: #fff;
 	color: var(--bs-table-color);
 }
@@ -104,7 +111,7 @@ td {
 	margin-top: 2%;
 	margin-bottom: 2%;
 	padding: 0rem 0rem 0rem 1rem;
-	background-position: right 1rem center;
+	background-position: right 0.25rem center;
 }
 
 .form-select-option {
@@ -179,7 +186,7 @@ body {
 		<form name="team_form" method="post" action="../Controller/NewRegistTeamSearch.do" accept-charset="UTF-8">
 			<div class="form-check">
 				<label>
-					<select id="department_search" name="department_search" size="1" style="width: 130%; height: 100%;" class="form-select" onchange="submitForm()">
+					<select id="department_search" name="department_search" size="1" style="width: 160%; height: 100%;" class="form-select" onchange="submitForm()">
 							<option value="전체">선택해주세요.</option>
 							
 							<optgroup label="전체 or 임원">
@@ -209,6 +216,7 @@ body {
 							</optgroup>
 					</select>
 				</label>
+				<button type="button" class="btn-info" style="width:40%; font-size:20px; margin-left: 50%;" onclick="resetPassword()">비밀번호 초기화</button>
 			</div>
 		</form>
 
@@ -239,7 +247,7 @@ body {
 							</th>
 
 							<th align="center" width="20%">
-								<select id="emp_grade" name="emp_grade" size="1" style="width: 90%;" class="form-select">
+								<select id="emp_grade" name="emp_grade" size="1" style="width: 95%;" class="form-select">
 									<option value="">선택하세요.</option>
 									<option value="이사">이사</option>
 									<option value="부장">부장</option>
@@ -250,7 +258,7 @@ body {
 							</th>
 
 							<th align="center" width="20%">
-								<select id="team" name="team" size="1" style="width: 90%;" class="form-select">
+								<select id="team" name="team" size="1" style="width: 95%;" class="form-select">
 									<option value="">선택하세요.</option>
 									<option value="임원">임원</option>
 									<option value="인사">인사</option>
@@ -260,7 +268,7 @@ body {
 							</th>
 							
 							<th align="center" width="20%">
-								<select id="team_num" name="team_num" size="1" style="width: 90%;" class="form-select">
+								<select id="team_num" name="team_num" size="1" style="width: 95%;" class="form-select">
 									<option value="">선택하세요.</option>
 									<option value="임원">임원</option>
 									<option value="1팀">1팀</option>
@@ -299,7 +307,7 @@ body {
 								</th>
 
 								<th align="center" width="20%">
-									<select id="emp_grade_Edit"	name="emp_grade_Edit" size="1" style="width: 90%;" class="form-select">
+									<select id="emp_grade_Edit"	name="emp_grade_Edit" size="1" style="width: 95%;" class="form-select">
 										<option value="">선택하세요.</option>
 										<option value="이사">이사</option>
 										<option value="부장">부장</option>
@@ -310,7 +318,7 @@ body {
 								</th>
 
 								<th align="center" width="20%">
-									<select id="team_Edit"	name="team_Edit" size="1" style="width: 90%;" class="form-select">
+									<select id="team_Edit"	name="team_Edit" size="1" style="width: 95%;" class="form-select">
 										<option value="">선택하세요.</option>
 										<option value="임원">임원</option>
 										<option value="인사">인사</option>
@@ -320,7 +328,7 @@ body {
 								</th>
 								
 								<th align="center" width="20%">
-								<select id="team_num_Edit" name="team_num_Edit" size="1" style="width: 90%;" class="form-select">
+								<select id="team_num_Edit" name="team_num_Edit" size="1" style="width: 95%;" class="form-select">
 									<option value="">선택하세요.</option>
 									<option value="임원">임원</option>
 									<option value="1팀">1팀</option>
@@ -421,6 +429,40 @@ body {
 					    // 부서별 사원 검색
 					    function submitForm() {
 					        document.forms["team_form"].submit();
+					    }
+					    
+					 // 비밀번호 초기화 함수
+					    function resetPassword() {
+					        // 선택된 라디오 버튼의 값 가져오기
+					        var selectedEmpNum = document.forms["vacation_form"]["emp_numinfo"].value;
+
+					        // 값이 있는지 확인
+					        if (selectedEmpNum) {
+					            // 폼 엘리먼트 생성
+					            var form = document.createElement("form");
+					            form.method = "post";
+					            form.action = "../Controller/PasswordResetController.do";
+
+					            // 선택된 사원 번호 추가
+					            var input = document.createElement("input");
+					            input.type = "hidden";
+					            input.name = "selectedEmpNum";
+					            input.value = selectedEmpNum;
+					            form.appendChild(input);
+
+					            // 폼을 문서에 추가
+					            document.body.appendChild(form);
+
+					            // 폼 제출
+					            form.submit();
+
+					            // 폼을 제거 (선택적)
+					            document.body.removeChild(form);
+					            
+					            alert("비밀번호 초기화 완료");
+					        } else {
+					            alert("사원을 선택해주세요.");
+					        }
 					    }
 					</script>
 				</div>

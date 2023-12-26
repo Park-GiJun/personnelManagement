@@ -15,6 +15,28 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 /* 공통 스타일 */
 * {
 	box-sizing: border-box;
@@ -40,6 +62,7 @@ body {
 	height: 100%;
 	border-radius: 25px;
 	width: 15%;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 .table-info {
@@ -74,6 +97,7 @@ body {
 	margin-top: 0.5%;
 	width: 400px;
 	height: 10px;
+	font-family: 'SF_HambakSnow', sans-serif;
 }
 #file {
 	padding: 0.25rem 1rem;
@@ -120,8 +144,8 @@ body {
 			<table align="center" border="1" height="80%" width="98%" class="table-dark2">
 				<tr>
 					<td>
-						<input type="text" placeholder="제목을 입력해 주세요."	name="sharetitle" style="width: 98%; margin-left:1%;" class="form-control"
-							onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)"/>
+						<input type="text" placeholder="제목을 입력해 주세요."	name="sharetitle" style="width: 98%; margin-left:1%;"
+						class="form-control" onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)"/>
 					</td>
 				</tr>
 				<tr>
