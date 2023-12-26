@@ -120,32 +120,43 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function addDiary() {
-    var inputText = prompt(clickedDate + "의 일정을 입력해주세요.");
+	var inputText = prompt(clickedDate + "의 일정을 입력해주세요.");
 
-    if (inputText) {
+	if (inputText) {
 
-        var sidebar = document.getElementById('sidebar');
+		var sidebar = document.getElementById('sidebar');
 
-        var entryContainer = document.createElement('div');
-        entryContainer.classList.add('diary-entry-container');
-        
-        var newCheckBox = document.createElement('input');
-        newCheckBox.type = 'checkbox';
-        newCheckBox.classList.add('form-check-input');
-        
-        var newEntry = document.createElement('h5');
-        newEntry.textContent = inputText;
-        newEntry.classList.add('text-success', 'diary-text');
+		var entryContainer = document.createElement('div');
+		entryContainer.classList.add('diary-entry-container');
 
-        // Flexbox를 사용하여 체크박스와 텍스트를 가로로 배치합니다.
-        entryContainer.style.display = 'flex';
-        entryContainer.style.alignItems = 'center';  // 위아래로 중앙 정렬
-        entryContainer.style.gap = '10px';  // 요소 사이의 간격 설정
+		var newCheckBox = document.createElement('input');
+		newCheckBox.type = 'checkbox';
+		newCheckBox.classList.add('form-check-input');
 
-        entryContainer.appendChild(newCheckBox);
-        entryContainer.appendChild(newEntry);
-        sidebar.appendChild(entryContainer);
-    }
+		var newEntry = document.createElement('h5');
+		newEntry.textContent = inputText;
+		newEntry.classList.add('text-success', 'diary-text');
+
+		// Flexbox를 사용하여 체크박스와 텍스트를 가로로 배치합니다.
+		entryContainer.style.display = 'flex';
+		entryContainer.style.alignItems = 'center';  // 위아래로 중앙 정렬
+		entryContainer.style.gap = '10px';  // 요소 사이의 간격 설정
+
+		entryContainer.appendChild(newCheckBox);
+		entryContainer.appendChild(newEntry);
+		sidebar.appendChild(entryContainer);
+
+		fetch('../Controller/TestAdd.do', {
+			method: 'POST', // 데이터를 전송할 HTTP 메서드
+			headers: {
+				'Content-Type': 'application/json', // 전송할 데이터의 타입 지정
+			},
+			body: JSON.stringify({ date: clickedDate, text: inputText }) // 서버에 보낼 데이터
+		})
+			.then(response => response.json())  // 서버로부터 받은 응답을 JSON 형태로 변환
+			.then(data => console.log(data))    // 변환된 데이터를 콘솔에 출력
+			.catch(error => console.error('Error:', error));  // 에러 처리
+	}
 }
 
 
@@ -166,30 +177,51 @@ function deleteDiary() {
 	}
 }
 
+// 버튼을 보여주거나 숨기는 함수
+function updateButtonsVisibility() {
+	const addDiaryButton = document.getElementById('addDiaryButton');
+	const deleteDiaryButton = document.getElementById('deleteDiaryButton');
+
+	if (section === 'personal') {
+		// 'personal' 섹션일 때 버튼을 보여줍니다.
+		addDiaryButton.style.display = 'inline-block';
+		deleteDiaryButton.style.display = 'inline-block';
+	} else {
+		// 그 외의 섹션일 때 버튼을 숨깁니다.
+		addDiaryButton.style.display = 'none';
+		deleteDiaryButton.style.display = 'none';
+	}
+}
+
+// 섹션 변경 함수들을 수정하여 버튼의 가시성을 업데이트합니다.
 function company() {
 	section = 'company';
 	console.log(section);
-
+	updateButtonsVisibility();
 }
 
 function team() {
 	section = 'team';
 	console.log(section);
+	updateButtonsVisibility();
 }
 
 function personal() {
 	section = 'personal';
 	console.log(section);
+	updateButtonsVisibility();
 }
 
 function vacation() {
 	section = 'vacation';
 	console.log(section);
+	updateButtonsVisibility();
 }
 
 window.onload = function() {
 	generateCalendar();
 	generateSelect();
+	updateButtonsVisibility();
 
 	const today = new Date();
 	const currentMonth = today.getMonth();

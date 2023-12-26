@@ -156,8 +156,8 @@
 					<h2 id="headerDate" class="text-info"></h2>
 				</div>
 				<div style="display: flex; justify-content: center; align-items: center; width: 100%;">
-					<button onclick="addDiary()" class="btn btn-secondary btn-sm">일정 생성</button>
-					<button onclick="deleteDiary()" class="btn btn-secondary btn-sm">일정 삭제</button>
+					<button id="addDiaryButton" onclick="addDiary()" class="btn btn-secondary btn-sm">일정 생성</button>
+					<button id="deleteDiaryButton" onclick="deleteDiary()" class="btn btn-secondary btn-sm">일정 삭제</button>
 					<button id="sidebarToggle" class="btn btn-primary btn-sm">닫기</button>
 				</div>
 			</div>
