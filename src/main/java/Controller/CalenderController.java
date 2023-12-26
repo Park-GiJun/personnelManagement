@@ -74,6 +74,10 @@ public class CalenderController extends HttpServlet {
 		
 		System.out.println("aaaaa " + selecteddate);
 		
+		 session.setAttribute("selectedYear", selectedYear);
+	     session.setAttribute("selectedMonth", selectedMonth);
+	     session.setAttribute("selectedDay", selectedDay);
+		
 		if (searchWord != null) {
 			map.put("searchField", searchField);
 			map.put("searchWord", searchWord);
@@ -111,32 +115,21 @@ public class CalenderController extends HttpServlet {
 		map.put("pageSize", pageSize);
 		map.put("pageNum", pageNum);
 		
-		request.setAttribute("selecteddate", selecteddate);
-	
-		
-		String a = selectedYear;
-		String b = selectedMonth;
-		String c = selectedDay;
-		
-		System.out.println("--------------" + a + b + c);
+		request.setAttribute("selectedYear", selectedYear);
+	    request.setAttribute("selectedMonth", selectedMonth);
+	    request.setAttribute("selectedDay", selectedDay);
+	    
+	    System.out.print("추가하기 기능 확인용: " + " " + selectedYear + " " + selectedMonth + " " + selectedDay);
+	    System.out.println();
 
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);
 		request.setAttribute("map2", map);
 		request.setAttribute("selecteddate", selecteddate);
-		request.setAttribute("a", a);
-		request.setAttribute("b", b);
-		request.setAttribute("c", c);
 		//request.setAttribute("selectedSchedules", selectedSchedules); // 리스트 값
         //request.setAttribute("selectedSchedules", Arrays.asList(selectedContent));  // 화면에 선택한 일정들을 전달
 		request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
-		request.getRequestDispatcher("../Controller/CalenderPlusController.do").forward(request, response);
-		
-		
 		
 	}
-	
-	
-	
 	
 }

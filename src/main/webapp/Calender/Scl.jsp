@@ -112,21 +112,16 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 
 
 .scl {
-	top: 480px;
-	animation-direction: scl;
-	position: absolute;
-	left: 992px;
+	top: 600px;
+	/* position: absolute; */
+	left: 800px;
 	width: 185px;
 	height: 20px;
 	background-color: #1C427E;
 	border: none;
 	color: #fff;
 	font-size: 13px;
-	/* animation-name:direction; */
-	animation-duration: 2s;
-	animation-iteration-count: 3;
-	animation-timing-function: ease-in;
-	position: relative; /* 상대적인 위치 지정 */
+	/* position: relative; /* 상대적인 위치 지정 */
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
@@ -301,7 +296,7 @@ button.my_btn4:hover {
 .middle-button {
 	text-align: center;
 	padding: 30px 30px;
-	margin-left: -170px;
+	margin-left: 200px;
 	font-family: 'Kanit', sans-serif;
 }
 
@@ -330,9 +325,9 @@ button.next_btn:hover {
 .em {
 	color: #1C427E;
 	position: absolute;
-	top: -40px;
+	top: -30px;
 	left: 250px;
-	font-size: 100x;
+	font-size: 50x;
 	border-radius: 30px;
 }
 
@@ -359,13 +354,13 @@ a:active, a:hover {
 
 .calendar {
 	width: 1500px;
-	margin: 40px auto;
+	margin: -20px auto;
 	margin-left: 250px;
 }
 
 .calendar .title {
 	position: absolute;
-	top: 120px;
+	top: 60px;
 	left: 240px;
 	width: 100%;
 	z-index: 1;
@@ -374,21 +369,21 @@ a:active, a:hover {
 /* 년도 선택 리스트 */
 .selectField {
 	border: 1px solid #999;
-	padding: 15px 50px;
+	padding: 5px 30px;
 	border-radius: 25px;
 	font-family: 'Kanit', sans-serif;
-	font-size: 20px;
-	margin-left: 330px;
-	top: 10px;
+	font-size: 18px;
+	margin-left: 150px;
+	top: 50px;
 }
 
 /* 월 선택 리스트 */
 .selectField2 {
 	border: 1px solid #999;
-	padding: 15px 50px;
+	padding: 5px 30px;
 	border-radius: 25px;
 	font-family: 'Kanit', sans-serif;
-	font-size: 20px;
+	font-size: 18px;
 	margin-left: 5px;
 }
 
@@ -406,7 +401,7 @@ a:active, a:hover {
 
 /* 요일, 날짜 칸 크기 조절 */
 .calendar table td {
-	padding: 40px 80px;
+	padding: 30px 80px;
 	text-align: left;
 	border: 1px solid #ccc;
 }
@@ -419,6 +414,7 @@ a:active, a:hover {
 .calendar table td:nth-child(5) {
 	color: white;
 }
+
 
 /* 일요일 색상 지정 */
 .calendar table td:nth-child(7n+1) {
@@ -433,6 +429,8 @@ a:active, a:hover {
 /* 전 월의 일 색상 */
 .calendar table td.gray {
 	color: #ccc;
+	 height: 30px; /* 각 날짜 셀의 높이를 최대 30px로 설정 */
+     overflow: hidden;
 }
 
 /* 날짜 버튼 스타일 지정 */
@@ -442,10 +440,12 @@ a:active, a:hover {
 	background: none;
 	font-size: 20px;
 	position: relative; /* 상대적인 위치 설정 */
-	top: -40px; /* 상단 여백 조정 */
-	left: -70px; /* 왼쪽 여백 조정 */
+	top: -30px; /* 상단 여백 조정 */
+	left: -80px; /* 왼쪽 여백 조정 */
 	font-family: 'Kanit', sans-serif;
 	cursor: pointer; /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+	/* background: red; */
+	
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
@@ -485,11 +485,20 @@ a:active, a:hover {
 /* 전월의 날짜 색상 지정 */
 .calendar table td.gray button {
 	color: #ccc;
+	position: relative; /* 상대적인 위치 설정 */
+	top: -30px; /* 상단 여백 조정 */
 }
 
 /* 다음달의 날짜 색상 지정 */
 .calendar table td.gray2 button {
 	color: #ccc;
+	position: relative; /* 상대적인 위치 설정 */
+	top: -30px; /* 상단 여백 조정 */
+}
+
+#bin {
+   position: absolute;
+   width: 185px;
 }
 
 
@@ -500,8 +509,6 @@ a:active, a:hover {
 
 <script type="text/javascript">
 
-
-document.getElementById("calender_form").submit();
 
 function showDateAndAlert(day) {
     // 클릭한 날짜를 JavaScript 변수에 저장
@@ -514,11 +521,12 @@ function showDateAndAlert(day) {
 
 		// 선택한 날짜를 숨은 필드에 설정
 		document.getElementById('selectedDay').value = clickedDay;
+		document.getElementById('selectedYear').value = '<%=year%>';
+		document.getElementById('selectedMonth').value = '<%=month%>';
 
 		// 폼 제출
 		document.forms["calender_form"].submit();
 	}
-
 
 
 
@@ -592,6 +600,7 @@ function showDateAndAlert(day) {
 
 	    // 서버로 전송할 데이터 설정
 	    const data = "userInput=" + encodeURIComponent(userInput);
+	 
 	    xhr.send(data);
 
 	    xhr.onreadystatechange = function () {
@@ -750,7 +759,7 @@ body {
 				일정</button>
 		</div>
 
-		<p class="em" style="font-size: 200px"><%=month%></p>
+		<p class="em" style="font-size: 120px"><%=month%></p>
 		<!-- 화면 달력의 월 표시 -->
 
 		<button class='next_btn' onclick="location.href='Calender.jsp';">></button>
@@ -838,15 +847,15 @@ body {
 			<table>
 				<!-- 테이블 표 만드는 곳(달력 만드는 곳) -->
 				<thead>
-					<tr>
-						<td>일</td>
-						<td>월</td>
-						<td>화</td>
-						<td>수</td>
-						<td>목</td>
-						<td>금</td>
-						<td>토</td>
-					</tr>
+					<tr style="width:100%;">
+                  <td width="14.25%">일</td>
+                  <td width="14.25%">월</td>
+                  <td width="14.25%">화</td>
+                  <td width="14.25%">수</td>
+                  <td width="14.25%">목</td>
+                  <td width="14.25%">금</td>
+                  <td width="14.25%">토</td>
+               </tr>
 				</thead>
 				<tbody>
 					<%
@@ -859,7 +868,7 @@ body {
 					// 전 달 끝부분 일자 출력
 					for (int i = 1; i < week; i++) {
 						//out.print("<td>&nbsp;</td>");
-						out.print("<td class='gray'style='width: 100px;'><button disabled>" + (preDate++) + "</button></td>");
+						out.print("<td class='gray'style='width: 100px; position: relative; top: -15px; height: 50px;'><button disabled>" + (preDate++) + "</button></td>");
 					}
 					
 
@@ -871,12 +880,15 @@ body {
 					for (int i = 1; i <= lastDay; i++) {
 					    cls = year == ty && month == tm && i == td ? "today" : "";
 
-					    out.print("<td class='" + cls + "' style='width: 100px;  position: relative;'>");
-					    out.print("<button id=\"update\" onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button>");
+					    out.print("<td class='" + cls + "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
+					    //out.print("<td class='" + cls + "' style='min-width: 100px; max-width: 100px; width: 100px; min-height: 10px !important; max-height: 10px !important; height: 50px !important; position: relative;'>");
+					    out.print("<button id=\"update\" style='max-height: 50px;' onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button>");
 
 					    // 버튼 출력 부분 수정 시작
 					    //out.print("<button class=\"scl\" style=\"font-size: 12px; position: absolute; bottom: 100%; left: 0; background-color: #1C427E;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
-					    out.print("<button class=\"scl\" style=\"font-size: 12px; background-color: #1C427E;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+					    //out.print("<button class=\"scl\" style=\"font-size: 12px; right : 30%;  background-color: #1C427E; color: white; padding: 5px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+					    int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
+					    out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc(" + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
 					    // 버튼 출력 부분 수정 끝
 
 					    out.print("</td>");
@@ -891,7 +903,7 @@ body {
 					int n = 1;
 					for (int i = (week - 1) % 7; i < 6; i++) {
 						// out.print("<td>&nbsp;</td>");
-						out.print("<td class='gray' style='width: 100px;'><button disabled>" + (n++) + "</button></td>");
+						out.print("<td class='gray' style='width: 100px; position: relative; top: -15px; height: 50px;'><button disabled>" + (n++) + "</button></td>");
 					}
 					out.print("</tr>");
 					%>

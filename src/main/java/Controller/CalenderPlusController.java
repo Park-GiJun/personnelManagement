@@ -31,7 +31,7 @@ public class CalenderPlusController extends HttpServlet {
 	        
 	    System.out.println("추가한 일정 값 확인: " + newSchedule);
 	    
-	    String selectedDay = request.getParameter("c");
+	    String selectedDay = (String) session.getAttribute("selectedDay");
 	    if (selectedDay != null && !selectedDay.isEmpty()) {
 		    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도
 		    int dayValue;
@@ -51,8 +51,9 @@ public class CalenderPlusController extends HttpServlet {
 		}
 			
 	    
-	    String selectedYear = request.getParameter("a");
-	    String selectedMonth = request.getParameter("b");
+	    String selectedYear = (String) session.getAttribute("selectedYear");
+        String selectedMonth = (String) session.getAttribute("selectedMonth");
+
 	    String selecteddate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
 	    
 	    // selecteddate와 emp_num을 HttpServletRequest에서 가져와서 사용
@@ -74,7 +75,7 @@ public class CalenderPlusController extends HttpServlet {
 	        }
 
 	   
-		 request.setAttribute("selecteddate", selecteddate);   
+		 request.setAttribute("selecteddate", selecteddate);
 		 
 	   
 	    
