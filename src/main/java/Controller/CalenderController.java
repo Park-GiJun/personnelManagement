@@ -37,9 +37,16 @@ public class CalenderController extends HttpServlet {
 		String searchField = request.getParameter("searchField");
 		String searchWord = request.getParameter("searchWord");
 		String selectedDay = request.getParameter("selectedDay");
-		
+		String searchCategory = request.getParameter("searchCategory");
 		System.out.println("confirm : " + selectedDay);
 		
+		
+		// 검색 단어가 비어있지 않을 경우
+		if (searchWord != null) {
+			map.put("searchCategory", searchCategory);
+			map.put("searchWord", searchWord);
+		}
+
 		/* 참고
 		if (Integer.parseInt(selectedDay) < 10) {
 			selectedDay = "0" + selectedDay;
@@ -83,6 +90,9 @@ public class CalenderController extends HttpServlet {
 			map.put("searchWord", searchWord);
 		}
 		
+		
+		
+		
 		/* 페이지 처리 start */
 		int totalCount = dao.ScheduleListCount(selecteddate, emp_num); // 게시물 개수
 		
@@ -97,6 +107,8 @@ public class CalenderController extends HttpServlet {
 			pageNum = Integer.parseInt(pageTemp); // 요청받은 페이지로 수정
 		}
 
+		
+		
 		// 목록에 출력할 게시물 범위 계산
 		int start = (pageNum + 1) * pageSize + 1; // 첫 게시물 번호
 		int end = pageNum * pageSize;
@@ -105,7 +117,7 @@ public class CalenderController extends HttpServlet {
 		/* 페이지 처리 end */
 				
 		List<CalenderDTO> calenderlists = dao.selectListPage(selecteddate, emp_num);	
-
+		List<CalenderDTO> CalenderList = dao.selectListPage(map);
 		// 페이징 이미지 전달
 		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/Calender.do");
 		
@@ -124,6 +136,7 @@ public class CalenderController extends HttpServlet {
 
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);
+		request.setAttribute("CalenderList", CalenderList);
 		request.setAttribute("map2", map);
 		request.setAttribute("selecteddate", selecteddate);
 		//request.setAttribute("selectedSchedules", selectedSchedules); // 리스트 값

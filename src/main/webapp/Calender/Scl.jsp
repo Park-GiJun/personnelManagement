@@ -528,55 +528,10 @@ function showDateAndAlert(day) {
 		document.forms["calender_form"].submit();
 	}
 
-
-
-
 	//일정 추가하기 버튼 눌렀을 때 설정
 	// 일정 추가를 위한 고유한 식별자
 	var eventCounter = 1;
 
-	/*
-	function confirmPlus() {
-		// 사용자로부터 입력을 받기 위한 prompt 대화상자 사용
-		var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
-
-		// 사용자가 "확인"을 클릭하고 값을 입력한 경우
-		if (userInput !== null && userInput !== "") {
-			// 사용자가 "확인"을 클릭하고 값을 입력한 경우, userInput 변수에 입력된 값이 포함됩니다.
-			console.log("사용자가 이벤트를 추가하려고 합니다:", userInput);
-
-			// 일정 추가 여부를 물어보고 결과에 따라 메시지 표시
-			var result = window.confirm("일정을 추가하시겠습니까?");
-			if (result) {
-				// 사용자가 입력을 취소하지 않은 경우 새로운 <p> 엘리먼트 생성
-				var newParagraph = document.createElement('p');
-				newParagraph.textContent = userInput;
-
-				// 고유한 ID 추가
-				newParagraph.id = 'event' + eventCounter;
-
-				// 고유한 식별자를 증가시킴
-				eventCounter++;
-
-				// <div class="reverse2" id="contentContainer">에 <p> 추가
-				document.getElementById('contentContainer').appendChild(newParagraph);
-
-				window.alert("일정이 추가되었습니다");
-			} else {
-				window.alert("취소되었습니다");
-			}
-		} else if (userInput === "") {
-			// 사용자가 "확인"을 클릭하고 값을 입력하지 않은 경우
-			alert("일정을 입력해주세요.");
-		} else {
-			// 사용자가 "취소"를 클릭하거나 대화상자를 아무 값도 입력하지 않고 닫은 경우
-			console.log("일정 저장을 취소하였습니다.");
-		}
-}
-	*/
-	
-	
-	
 	function confirmPlus() {
 	    var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
 	    
@@ -616,12 +571,9 @@ function showDateAndAlert(day) {
 	        }
 	    };
 	    
-	    
 	}
 	 
-	 
     console.log('잘 실행되는지 확인용1111111111111111111111');
-	 
 
  // 링크 클릭 시 선택 및 해제를 토글하는 함수
     var selectedSchedules = [];  // 선택한 일정이 저장되는 곳
@@ -655,9 +607,7 @@ function showDateAndAlert(day) {
       xhr.open("POST", "/Controller/CalenderDeleteConteController.do", true);
       xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       //xhr.send(JSON.stringify({ array: selectedSchedules }));
-
   });
-    
     
   //삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
   function confirmDelete() {
@@ -676,7 +626,6 @@ function showDateAndAlert(day) {
       }
   }
   	 
-  	
   // 선택한 일정 삭제를 서버로 전송하는 함수
   function sendSelectedSchedulesToServer(selectedSchedules) {
       // Ajax를 사용하여 Java 서버에 배열 전송
@@ -707,11 +656,7 @@ function showDateAndAlert(day) {
       };
   }  
 
-
-    
 </script>
-
-
 
 </head>
 <style>
@@ -764,8 +709,6 @@ body {
 
 		<button class='next_btn' onclick="location.href='Calender.jsp';">></button>
 
-
-
 		<div class="reverse">
 			
 			<h2 class='re_day'>${selecteddate}</h2>
@@ -775,44 +718,36 @@ body {
 
 
 			<!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
-			<div class="reverse2">
-    			<table class="caltabke" width="100%">
-        			<c:choose>
-            			<c:when test="${empty calenderlists}">
-                			<tr>
-                    			<td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>
-                			</tr>
-            			</c:when>
-            			<c:otherwise>
-                			<c:forEach items="${calenderlists}" var="row" varStatus="loop">
-                    			<tr>
-                    				<td>
-										${loop.index + 1} <!-- 각 일정마다 번호 출력 -->
-									</td>
-                        			<td>
-                            			<a href="#" class="scheduleLink" data-schedule="${row.personal_diaray_schedule}">
-                                			${row.personal_diaray_schedule}  <!-- db에 있는 개인 일정 출력 -->
-                            			</a>
-                        			</td>
-                    			</tr>
-                			</c:forEach>
-            			</c:otherwise>
-        			</c:choose>
-    			</table>
-			</div>
-
-		</div>
+         <div class="reverse2">
+             <table class="caltabke" width="100%">
+                 <c:choose>
+                     <c:when test="${empty calenderlists}">
+                         <tr>
+                             <td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>
+                         </tr>
+                     </c:when>
+                     <c:otherwise>
+                         <c:forEach items="${calenderlists}" var="row" varStatus="loop">
+                             <tr>
+                                <td>
+                            	${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
+                           </td>
+                                 <td>
+                                     <a href="#" class="scheduleLink" data-schedule="${row.personal_diaray_schedule}">
+                                         ${row.personal_diaray_schedule}  <!-- db에 있는 개인 일정 출력 -->
+                                     </a>
+                                 </td>
+                             </tr>
+                         </c:forEach>
+                     </c:otherwise>
+                 </c:choose>
+             </table>
+         </div>
+      </div>
 		
 		<c:if test="${not empty deleteMessage}">
     		<div>${deleteMessage}</div>
 		</c:if>
-
-
-
-		<!-- <button class="scl" onclick="location.href='Scl_Cal.jsp';">일정이 있습니다.</button> -->
-		<!-- 1개당 1개의 일정 제목 표시 -->
-
-
 
 		<div class="calendar" id="calendar-container" style="width: 1300px; height: 300px;">
 			<div class="title">
@@ -843,7 +778,6 @@ body {
 				</form>
 			</div>
 
-
 			<table>
 				<!-- 테이블 표 만드는 곳(달력 만드는 곳) -->
 				<thead>
@@ -871,7 +805,6 @@ body {
 						out.print("<td class='gray'style='width: 100px; position: relative; top: -15px; height: 50px;'><button disabled>" + (preDate++) + "</button></td>");
 					}
 					
-
 					int click_day = 0;
 					// 1일부터 말일까지 출력
 					int lastDay = cal.getActualMaximum(Calendar.DATE);
@@ -898,7 +831,6 @@ body {
 					    }
 					}
 
-
 					// 다음 달 첫부분 일자 출력
 					int n = 1;
 					for (int i = (week - 1) % 7; i < 6; i++) {
@@ -909,11 +841,7 @@ body {
 					%>
 				</tbody>
 			</table>
-
 		</div>
-
 	</form>
-
-
 </body>
 </html>
