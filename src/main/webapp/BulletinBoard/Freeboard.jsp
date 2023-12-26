@@ -10,10 +10,24 @@
 <style>
 @font-face {
     font-family: 'ChungjuKimSaengTTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 /* 공통 스타일 */
 * {
@@ -144,37 +158,22 @@ body {
 			onsubmit="return validateForm(this)">
 			<table border="1" width="100%">
 				<tr>
-					<td><input type="text" value="제목을 입력해 주세요."
-						name="Freeboardtitle" class="form-control"
-						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)"/>
+					<td>
+						<input type="text" name="Freeboardtitle" class="form-control" placeholder="제목"
+							onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)"/>
 					</td>
 				</tr>
 
 				<tr>
-
-					<td><input type="text" name="Freeboardcontent"
-						style="height: 590px;" class="form-control"></td>
-
+					<td><input type="text" name="Freeboardcontent" style="height: 590px;" class="form-control" placeholder="내용"></td>
 				</tr>
 
 				<tr>
-					<td colspan="3"
-						
-						style="text-align: left; font-size: 15px; display: flex; align-items: center;">
-						비밀번호
-						<input type="text" value="비밀번호" name="Freeboardpassword"
-						class="form-control" id="Freeboardpassword"
-						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
+					<td colspan="3"	style="text-align: left; font-size: 15px; display: flex; align-items: center;">
+							<input type="password" placeholder="Password" name="Freeboardpassword" class="form-control" id="Freeboardpassword"
+								onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
 
-						
-					</td>
-				</tr>
-				<tr>
-				
-					<td colspan="3" style="text-align: right;">
-					<button type="button"
-							onclick="location.href='../Controller/FreeboardList.do';"
-							class="btn-info" style="margin-left: 69%;">목록</button>
+						<button type="button" onclick="location.href='../Controller/FreeboardList.do';"	class="btn-info" style="margin-left: 69%;">목록</button>
 						<button type="submit" class="btn-info">작성완료</button>
 					</td>
 				</tr>
