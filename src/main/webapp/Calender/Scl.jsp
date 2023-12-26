@@ -521,6 +521,8 @@ function showDateAndAlert(day) {
 
 		// 선택한 날짜를 숨은 필드에 설정
 		document.getElementById('selectedDay').value = clickedDay;
+		document.getElementById('selectedYear').value = '<%=year%>';
+		document.getElementById('selectedMonth').value = '<%=month%>';
 
 		// 폼 제출
 		document.forms["calender_form"].submit();
@@ -598,6 +600,7 @@ function showDateAndAlert(day) {
 
 	    // 서버로 전송할 데이터 설정
 	    const data = "userInput=" + encodeURIComponent(userInput);
+	 
 	    xhr.send(data);
 
 	    xhr.onreadystatechange = function () {
