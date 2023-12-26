@@ -497,8 +497,8 @@ a:active, a:hover {
 }
 
 #bin {
-	position: absolute;
-	width: 180px;
+   position: absolute;
+   width: 185px;
 }
 
 
@@ -847,15 +847,15 @@ body {
 			<table>
 				<!-- 테이블 표 만드는 곳(달력 만드는 곳) -->
 				<thead>
-					<tr>
-						<td>일</td>
-						<td>월</td>
-						<td>화</td>
-						<td>수</td>
-						<td>목</td>
-						<td>금</td>
-						<td>토</td>
-					</tr>
+					<tr style="width:100%;">
+                  <td width="14.25%">일</td>
+                  <td width="14.25%">월</td>
+                  <td width="14.25%">화</td>
+                  <td width="14.25%">수</td>
+                  <td width="14.25%">목</td>
+                  <td width="14.25%">금</td>
+                  <td width="14.25%">토</td>
+               </tr>
 				</thead>
 				<tbody>
 					<%
@@ -888,7 +888,7 @@ body {
 					    //out.print("<button class=\"scl\" style=\"font-size: 12px; position: absolute; bottom: 100%; left: 0; background-color: #1C427E;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
 					    //out.print("<button class=\"scl\" style=\"font-size: 12px; right : 30%;  background-color: #1C427E; color: white; padding: 5px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
 					    int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
-					    out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc(" + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; padding: 5px; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+					    out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc(" + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
 					    // 버튼 출력 부분 수정 끝
 
 					    out.print("</td>");
