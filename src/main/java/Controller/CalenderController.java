@@ -1,8 +1,6 @@
 package Controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Calender.CalenderDAO;
 import Calender.CalenderDTO;
@@ -30,13 +29,15 @@ public class CalenderController extends HttpServlet {
 		 System.out.println("");
 		// DAO 생성
 		CalenderDAO dao = new CalenderDAO();
+		HttpSession session = request.getSession();
 		
 		// Map 생성
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		String searchField = request.getParameter("searchField");
 		String searchWord = request.getParameter("searchWord");
-		String selectedDay = request.getParameter("selectedDay");
+		String selectedDay = (String) request.getSession().getAttribute("selectedDay");
+		session.setAttribute("selectedDay", "selectedDay");
 		
 		System.out.println("confirm : " + selectedDay);
 		
@@ -65,10 +66,14 @@ public class CalenderController extends HttpServlet {
 		    // 적절한 로깅 또는 예외 처리를 수행
 		}
 			
-		String selectedYear = request.getParameter("selectedYear");
-		String selectedMonth = request.getParameter("selectedMonth");
+		String selectedYear = (String) request.getSession().getAttribute("selectedYear");
+		session.setAttribute("selectedYear", "selectedYear");
+		String selectedMonth = (String) request.getSession().getAttribute("selectedMonth");
+		session.setAttribute("selectedMonth", "selectedMonth");
 		String selecteddate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
 		String emp_num = (String) request.getSession().getAttribute("loginid");
+		
+		System.out.println(selectedYear + selectedMonth + selectedDay);
 		
 		System.out.println("aaaaa " + selecteddate);
 		
@@ -109,6 +114,7 @@ public class CalenderController extends HttpServlet {
 		map.put("pageSize", pageSize);
 		map.put("pageNum", pageNum);
 		
+		request.setAttribute("selecteddate", selecteddate);
 	
 
 		// 포워딩

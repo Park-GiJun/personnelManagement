@@ -50,6 +50,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
     box-sizing: border-box;
 }
 
+/* 일정 나오는 곳 설정 (여기에서는 의미 없음) */
 .scl{
   top:480px;
   animation-direction:scl;
@@ -76,6 +77,8 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   background:green;
 }
 
+
+
 /* 개인 일정 버튼 */
 .my_btn {
   background-color: #1C427E;
@@ -91,7 +94,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 개인 일정 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.my_btn:hover {
   color: white;
   background: orange;
@@ -112,7 +115,7 @@ button.my_btn:hover {
   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 부서 휴가 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.my_btn2:hover {
   color: white;
   background: orange;
@@ -134,7 +137,7 @@ button.my_btn2:hover {
   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 부서 일정 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.my_btn3:hover {
   color: white;
   background: orange;
@@ -143,7 +146,7 @@ button.my_btn3:hover {
 
 /* 회사 일정 버튼 */
 .my_btn4 {
-  background-color: orange;
+  background-color: #1C427E;
   color: white;
   border: none;
   
@@ -156,7 +159,7 @@ button.my_btn3:hover {
   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 회사 일정 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.my_btn4:hover {
   color: white;
   background: orange;
@@ -171,6 +174,7 @@ button.my_btn4:hover {
     font-family: 'Kanit', sans-serif;
 }
 
+/* 일정 리스트 불러오는 버튼 설정 */
 .next_btn {
 background-color: #1C427E;
   color: white;
@@ -191,7 +195,7 @@ background-color: #1C427E;
    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */	
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 일정 리스트 불러오는 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.next_btn:hover {
   color: white;
   background: orange;
@@ -202,15 +206,12 @@ button.next_btn:hover {
 /*   ↑ 여기까지 버튼 위치, 크기 조절   */
 
 
-
-
+/* 크게 무슨 월인지 표시 설정 */
 .em {
 	color: #1C427E;
-	
 	position: absolute;
   	top: -40px;
-  	left: 430px;
-  	
+  	left: 220px;
   	font-size: 100x;
   	border-radius: 30px;
 }
@@ -220,8 +221,9 @@ day {
 }
 
 body {
-   font-size: px;
-  font-family: 'Kanit', sans-serif;
+	background-color: #272b30;
+   	font-size: px;
+  	font-family: 'Kanit', sans-serif;
     /*color: white;*/
 }
 
@@ -230,6 +232,7 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+
 a:active, a:hover {
    text-decoration: underline;
    color: #F28011;
@@ -237,8 +240,12 @@ a:active, a:hover {
 
 .calendar {
    width: 700px;
-   margin: 70px auto;
+   margin: 40px auto;
 }
+
+
+
+/* 년도 월 선택 리스트 설정 */
 .calendar .title{
    position: absolute;
    top: 120px;
@@ -247,16 +254,14 @@ a:active, a:hover {
    z-index: 1; 
 }
 
-
-
 /* 년도 선택 리스트 */
 .selectField {
    border: 1px solid #999;
    padding: 15px 50px;
    border-radius: 25px;
-  font-family: 'Kanit', sans-serif;
+   font-family: 'Kanit', sans-serif;
    font-size: 20px;
-   margin-left: 440px;
+   margin-left: 240px;
    top: 10px;
 }
 
@@ -270,6 +275,8 @@ a:active, a:hover {
    margin-left: 5px;
 }
 
+
+
 .calendar table {
    width: 100%;
    border-collapse: collapse;
@@ -278,20 +285,16 @@ a:active, a:hover {
 
 /* 요일 칸 배경 색 지정 */
 .calendar table thead tr:first-child{
-   background: #1c427e;
+	background-color: rgb(68, 74, 83);
     color: white;
 }
 
-
 /* 요일, 날짜 칸 크기 조절 */
 .calendar table td{
-   padding: 40px 80px;
-   text-align: left;
-   border: 1px solid #ccc;
+  	padding: 40px 80px;
+   	text-align: left;
+   	border: 1px solid #ccc;
 }
-
-
-
 
 /* 월, 화, 수, 목, 금 글자 색상 설정 */
 .calendar table td:nth-child(1)
@@ -299,13 +302,11 @@ a:active, a:hover {
 .calendar table td:nth-child(3)
 .calendar table td:nth-child(4)
 .calendar table td:nth-child(5) {
-   color: white; 
-   
+   color: white;
 }
 
 /* 일요일 색상 지정 */
 .calendar table td:nth-child(7n+1){
-   
    color: red;
 }
 
@@ -321,6 +322,7 @@ a:active, a:hover {
 
 /* 날짜 버튼 스타일 지정 */
 .calendar table button {
+	color: #fff;
    border: none;
    padding: 0;
    background: none;
@@ -333,7 +335,6 @@ a:active, a:hover {
    font-family: 'Kanit', sans-serif;
    
    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
-   
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
@@ -341,13 +342,11 @@ a:active, a:hover {
    color: green;
 }
 
-
-
 /* 오늘 날짜 스타일 */
 .calendar table td.today{
    font-weight:700;
    background: orange;
-    color: #000;
+   color: #000;
 }
 
 /* 일요일 날짜 스타일 */
@@ -361,7 +360,6 @@ a:active, a:hover {
    color: green;
 }
 
-
 /* 토요일 날짜 스타일 */
 .calendar table td:nth-child(7n) button {
    color: blue;
@@ -373,15 +371,14 @@ a:active, a:hover {
    color: green;
 }
 
-
 /* 전월의 날짜 색상 지정 */
 .calendar table td.gray button {
-   color: #ccc;
+   color: #000;
 }
 
 /* 다음달의 날짜 색상 지정 */
 .calendar table td.gray2 button {
-   color: #ccc;
+   color: #000;
 }
 
 
@@ -416,8 +413,8 @@ function updateCalendar() {
    padding: 0;
 }
 
-body {
-   font-size: 20px;
+tbody {
+	background : gray;
 }
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */

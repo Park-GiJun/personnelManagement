@@ -166,6 +166,7 @@ td, th {
 
 				</tr>
 
+
 				<tr>
 					<td colspan="3"
 						style="text-align: left; font-size: 15px; display: flex; align-items: center;">

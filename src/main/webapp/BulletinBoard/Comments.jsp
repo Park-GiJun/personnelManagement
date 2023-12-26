@@ -296,9 +296,8 @@ td, th {
 					<th width="20%">번호</th>
 					<th width="20%">${dto.anno_board_num}</th>
 					<th width="25%">작성일</th>
+
 					<th width="25%">${dto.post_date}</th>
-
-
 					<td
 						style="text-align: left; font-size: 18px; display: flex; align-items: center;">
 						<button type="button" onclick="promptModification()" width="10%"
@@ -326,13 +325,12 @@ td, th {
 				<tr class="table-dark2">
 					<td colspan="4" style="font-size: 15px;">댓글 리스트</td>
 				</tr>
+					<c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
 
-				<c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
 					<tr class="table-dark4">
 						<td width="5%" align="center">${ map2.totalCount +(((map2.pageNum-1) * map2.pageSize) + loop.index) }</td>
 						<td width="90%"
 							style="font-size: 18px; font-family: 'SF_HambakSnow', sans-serif;">${comment.content}</td>
-
 						<td width="5%" align="center">
 							<button type="button"
 								onclick="CommentsDeletion('${comment.pass}','${comment.turn}' )"
@@ -349,10 +347,8 @@ td, th {
 						<input type="text" value="내용을 입력해 주세요." name="Commentscontent"
 						style="width: 95%;" class="form-control"
 						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
-
 					</td>
 				</tr>
-
 				<tr class="table-dark1">
 
 					<td colspan="3"

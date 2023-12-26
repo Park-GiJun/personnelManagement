@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -7,9 +6,26 @@
 
 <meta charset="UTF-8">
 <title>Changeboard</title>
-<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
-<link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+@font-face {
+	font-family: 'ChungjuKimSaengTTF';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 /* 공통 스타일 */
 @font-face {
 	font-family: 'ChungjuKimSaengTTF';
@@ -165,10 +181,12 @@ td, th {
 				window.location.href = "/Controller/CommentsController.do";
 			}
 		</script>
+
 		<form method="post" action="../Controller/CrystalController.do"
 			onsubmit="return validateForm(this)">
 			<table align="center" border="1" width="90%"
 				style="font-family: 'SF_HambakSnow', sans-serif;">
+
 				<tr class="table-dark1" align="center">
 					<th width="20%" style="font-size: 18px;">번호</th>
 					<th width="20%" style="font-size: 18px;">${dto.anno_board_num}</th>
@@ -177,10 +195,12 @@ td, th {
 				</tr>
 
 				<tr class="table-dark1" align="center">
+
 					<td width="20%" style="font-size: 20px;">제목</td>
 					<td colspan="4" style="font-size: 20px;"><input type="text"
 						value="${dto.title}" name="Freeboardtitle" style="width: 100%;"
 						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" /></td>
+
 				</tr>
 				<tr class="table-dark3" align="center">
 					<td width="20%" style="font-size: 20px;">내용</td>
@@ -192,13 +212,8 @@ td, th {
 			<table border="1" width="90%"
 				style="font-family: 'SF_HambakSnow', sans-serif;">
 				<tr class="table-dark1">
-					<td
-						style="text-align: left; font-size: 15px; display: flex; align-items: center;">
-						비밀번호 <input type="text" name="Freeboardpassword"
-						class="form-control" width="40%" />
-						<button type="button"
-							onclick="location.href='../Controller/FreeboardList.do';"
-							class="btn-info" style="margin-left: 54%;">목록</button>
+					<td style="text-align: left; font-size: 15px; display: flex; align-items: center;">비밀번호 <input type="text" name="Freeboardpassword" class="form-control" width="40%" />
+						<button type="button" onclick="location.href='../Controller/FreeboardList.do';" class="btn-info" style="margin-left: 54%;">목록</button>
 						<button type="submit" class="btn-info">수정완료</button>
 					</td>
 				</tr>

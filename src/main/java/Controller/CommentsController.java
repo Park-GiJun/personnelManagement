@@ -70,12 +70,10 @@ public class CommentsController extends HttpServlet {
 		request.setAttribute("Commentsdto1", Commentsdto1);
 		request.setAttribute("CommentsFormList", CommentsFormList);
 		request.setAttribute("map2", map);
-		// 포워딩
 
         request.setAttribute("dto", dto);
         request.getSession().setAttribute("anno_board_num", anno_board_num);
 		request.getRequestDispatcher("/Controller/ReturnCommentsController.do").forward(request, response);
-		
 
 	}
 

@@ -28,6 +28,15 @@ public class WorkBoardListController extends HttpServlet {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		String loginId = (String) request.getSession().getAttribute("loginid");
+		
+		String searchCategory = request.getParameter("Category");
+		String searchWord = request.getParameter("searchWord");
+
+		// 검색 단어가 비어있지 않을 경우
+		if (searchWord != null) {
+			map.put("Category", searchCategory);
+			map.put("searchWord", searchWord);
+		}
 
 		int totalCount = dao.WorkDocsListCount(map, loginId); // 게시물 개수
 

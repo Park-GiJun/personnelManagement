@@ -53,16 +53,38 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function openNewJSP() {
-	// 여기에 새로 열 JSP 파일의 URL을 넣어주세요
+	// 새 창의 크기
+	const width = 750;
+	const height = 450;
+
+	// 화면 중앙에 위치시키기 위한 left와 top 값 계산
+	const left = window.screen.width / 2 - width / 2;
+	const top = window.screen.height / 2 - height / 2;
+
+	// 새로 열 JSP 파일의 URL
 	let newJSPURL = "../WorkBoard/References.jsp";
-	window.open(newJSPURL, "_blank", "width=750,height=450");
+
+	// 새 창 열기
+	window.open(newJSPURL, "_blank", `width=${width},height=${height},top=${top},left=${left}`);
 }
 
 function addEmp(button) {
+	// 새 창의 크기
+	const width = 750;
+	const height = 450;
+
+	// 화면 중앙에 위치시키기 위한 left와 top 값 계산
+	const left = window.screen.width / 2 - width / 2;
+	const top = window.screen.height / 2 - height / 2;
+
 	console.log(button.id);
+
 	let newJSPURL = "../WorkBoard/addEMP.jsp?buttonId=" + button.id;
-	window.open(newJSPURL, "_blank", "width=750,height=450");
+
+	window.open(newJSPURL, "_blank", `width=${width},height=${height},top=${top},left=${left}`);
 }
+
+
 
 
 // RefTable 업데이트 함수
@@ -296,24 +318,11 @@ function reject(code) {
 }
 function dateChanged() {
 	var dateValue = document.getElementById('datePicker').value;
-	console.log(dateValue);
-
-	fetch('../Controller/selectedDateOnWorkBoard.do?date=' + encodeURIComponent(dateValue), {
-		method: 'GET'
-	})
-		.then(response => response.json()) // 서버 응답을 JSON 형식으로 파싱
-		.then(data => {
-			console.log(data);
-
-			// 여기에 게시판에 정보를 추가하는 로직을 구현합니다.
-			updateTableWithData(data); // 예시로 함수를 호출하여 정보를 업데이트
-
-			// 추가로 원하는 작업을 수행할 수 있습니다.
-		})
-		.catch(error => {
-			console.error('Error:', error);
-		});
+	var newUrl = '../Controller/selectedDateOnWorkBoard.do?date=' + encodeURIComponent(dateValue);
+	window.location.href = newUrl;  // 현재 페이지를 새 URL로 리다이렉트
 }
+
+
 
 // 게시판 정보를 업데이트하는 함수
 function updateTableWithData(data) {

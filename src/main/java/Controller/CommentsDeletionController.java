@@ -26,5 +26,4 @@ public class CommentsDeletionController extends HttpServlet {
 		 
 		request.getRequestDispatcher("/Controller/ReturnCommentsController.do").forward(request, response);
 	}
-
 }

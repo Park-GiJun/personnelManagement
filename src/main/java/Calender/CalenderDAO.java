@@ -1,13 +1,11 @@
 package Calender;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
 import DBcontrol.DBConnPool;
@@ -101,7 +99,7 @@ public class CalenderDAO extends DBConnPool {
 	
 	
 		
-
+/*
 	// 4 입력, 저장
 	public int insertWrite(CalenderDTO dto) {
 	    int result = 0;
@@ -118,6 +116,30 @@ public class CalenderDAO extends DBConnPool {
 	    	System.out.println("게시물 입력 중 예외 발생");
 	    	e.printStackTrace();
 	    }
+	    return result;
+	}
+	
+	*/
+	
+	public int insertWrite(String newSchedule, String selecteddate, String emp_num) {
+	    int result = 0;
+	    
+
+	    try {
+	        String query = "INSERT INTO Personal_diaray (Personal_diaray_date, Personal_diaray_schedule, emp_num) VALUES (anno_board_num.NEXTVAL, ?, ?, ?)";
+	        psmt = con.prepareStatement(query);
+	        psmt.setString(1, newSchedule);
+	        psmt.setString(2, selecteddate);
+	        psmt.setString(3, emp_num);
+	        result = psmt.executeUpdate();
+	       
+	    } catch (SQLException e) {
+	        System.out.println("게시물 입력 중 예외 발생");
+	        e.printStackTrace();
+	    } finally {
+	        close(); // 리소스를 닫는 코드는 finally 블록에서 수행
+	    }
+
 	    return result;
 	}
 	
@@ -164,7 +186,7 @@ public class CalenderDAO extends DBConnPool {
 
         try {
             // 쿼리문 준비
-            String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_date = ? AND emp_num = ?";
+        	String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_date = ? AND emp_num = ?";
             psmt = con.prepareStatement(query);
 
             // 파라미터 설정

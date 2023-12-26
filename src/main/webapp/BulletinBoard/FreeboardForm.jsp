@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -63,8 +64,6 @@ td {
 	border-radius: 25px;
 }
 
-
-
 .table-info {
 	background-color: #5bc0de;
 }
@@ -115,6 +114,10 @@ td {
 	background: #fff;
 }
 
+a {
+	text-decoration: none;
+	color: inherit; /* 링크의 기본 색상을 상속받음 */
+}
 </style>
 <body>
 	<jsp:include page="../MainPage/Left.jsp" />
@@ -124,7 +127,8 @@ td {
 
 		<!-- 목록테이블 -->
 		<table border="1" width="90%">
-			<tr align="center" class="table-dark1" style="font-family: 'SF_HambakSnow', sans-serif;">
+			<tr align="center" class="table-dark1"
+				style="font-family: 'SF_HambakSnow', sans-serif;">
 				<th width="10%" scope="row">번호</th>
 				<th width="*">제목</th>
 				<th width="10%">작성일</th>
@@ -137,15 +141,17 @@ td {
 					</tr>
 				</c:when>
 				<c:otherwise>
-					<c:forEach items="${ FreeboardFormList }" var="row" varStatus="loop">
+					<c:forEach items="${ FreeboardFormList }" var="row"
+						varStatus="loop">
 
 						<tr align="center" class="table-dark2">
 							<!-- 번호 -->
 							<td scope="row">${ map2.totalCount -(((map2.pageNum-1) * map2.pageSize) + loop.index) }</td>
 							<td align="center">
-								<!-- 제목 --> <a href="../Controller/DetailsController.do?anno_board_num=${ row.anno_board_num }">
+								<!-- 제목 --> <a
+								href="../Controller/DetailsController.do?anno_board_num=${ row.anno_board_num }">
 									<c:out value="${ row.title }"></c:out>
-								</a>
+							</a>
 							</td>
 							<td align="center"><a>${ row.post_date }</a></td>
 						</tr>
@@ -158,16 +164,19 @@ td {
 			<table border="1" width="90%" height="50px">
 
 				<tr class="table-dark3" align="center">
-					<th style="display: flex; margin-left: 32.5%;" scope="row"><select name="searchCategory" class="form-select">
+					<th style="display: flex; margin-left: 32.5%;" scope="row"><select
+						name="searchCategory" class="form-select">
 							<option value="title">제목</option>
+					</select> <input type="text" name="searchWord" class="form-control">
+
+						<button type="submit" name="listSearch" value="검색하기"
+							id="listSearch" class="btn-info" style="margin-right: 37.5%;">검색하기</button>
 
 
-						</select> <input type="text" name="searchWord" class="form-control">
+						<button type="button"
+							onclick="location.href='../BulletinBoard/Freeboard.jsp';"
+							class="btn-info">글작성</button></th>
 
-						<button type="submit" name="listSearch" value="검색하기" id="listSearch" class="btn-info" style="margin-right: 37.5%;">검색하기</button>
-
-
-						<button type="button" onclick="location.href='../BulletinBoard/Freeboard.jsp';" class="btn-info">글작성</button></th>
 				</tr>
 			</table>
 		</form>

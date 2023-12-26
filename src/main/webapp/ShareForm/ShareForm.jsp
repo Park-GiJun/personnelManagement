@@ -10,19 +10,23 @@
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
 @font-face {
-    font-family: 'ChungjuKimSaengTTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-family: 'ChungjuKimSaengTTF', sans-serif;
+	font-family: 'ChungjuKimSaengTTF';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 @font-face {
-    font-family: 'SF_HambakSnow';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-family: 'SF_HambakSnow', sans-serif;
+	font-family: 'SF_HambakSnow';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'SF_HambakSnow', sans-serif;
 }
 
 /* 공통 스타일 */
@@ -91,7 +95,21 @@ td {
 	width: 400px;
 	height: 35px;
 }
+
+a {
+    text-decoration: none;
+    color: inherit; /* 링크의 기본 색상을 상속받음 */
+ }
 </style>
+
+<script>
+	function openShareFormWindow() {
+		var detailsUrl = "../ShareForm/Write.jsp";
+
+		window.open(detailsUrl, "_blank", "width=700, height=140");
+	}
+</script>
+
 <body>
 	<jsp:include page="../MainPage/Left.jsp" />
 	<div class="content">
@@ -120,8 +138,7 @@ td {
 								<!-- 제목 --> <a>${ row.title }</a>
 							</td>
 							<td><c:if test="${ not empty row.shareofile }">
-										${ dto.ofile }
-									<a href="../Controller/ShareFormDownload.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">[다운로드]</a>
+									<a href="../Controller/ShareFormDownload.do?ofile=${ row.shareofile }&sfile=${ row.sharesfile }&idx=${ row.idx }">[다운로드]</a>
 								</c:if></td>
 						</tr>
 					</c:forEach>
@@ -131,12 +148,15 @@ td {
 		<!-- 하단 메뉴 -->
 		<form method="get" action="../Controller/sharelist.do">
 			<table border="1" width="90%" height="50px">
+				<tr>
+					<th style="text-align: center;">${ map.pagingImg }</th>
+				</tr>
 				<tr class="table-dark3" align="center">
 					<th style="display: flex; margin-left: 32.5%;" scope="row"><select name="searchCategory" class="form-select">
 							<option value="title">제목</option>
 						</select> <input type="text" name="searchWord" class="form-control">
 						<button type="submit" name="listSearch" value="검색하기" id="listSearch" class="btn-info" style="margin-right: 37.5%;">검색하기</button>
-						<button type="button" onclick="location.href='../ShareForm/Write.jsp';" class="btn-info">글작성</button></th>
+						<button type="button" onclick="openShareFormWindow()" class="btn-info">글작성</button></th>
 				</tr>
 			</table>
 		</form>

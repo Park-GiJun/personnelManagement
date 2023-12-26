@@ -66,22 +66,26 @@ public class SelectedDateOnWorkBoardController extends HttpServlet {
 		map.put("pageSize", pageSize);
 		map.put("pageNum", pageNum);
 
-		request.setAttribute("workdocsdatelist", list);
-		request.setAttribute("mapdate", map);
+//		request.setAttribute("workdocsdatelist", list);
+//		request.setAttribute("mapdate", map);
 
-		// JSON 데이터 생성
-		JSONObject jsonData = new JSONObject();
-		jsonData.put("map", map);
-		jsonData.put("list", list);
-		// 추가 필요한 정보를 jsonData에 추가
-
-		// JSON 데이터를 문자열로 변환
-		String jsonString = jsonData.toString();
-
-		// 클라이언트로 JSON 응답 전송
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(jsonString);
+//		// JSON 데이터 생성
+//		JSONObject jsonData = new JSONObject();
+//		jsonData.put("map", map);
+//		jsonData.put("list", list);
+//		// 추가 필요한 정보를 jsonData에 추가
+//
+//		// JSON 데이터를 문자열로 변환
+//		String jsonString = jsonData.toString();
+//
+//		// 클라이언트로 JSON 응답 전송
+//		response.setContentType("application/json");
+//		response.setCharacterEncoding("UTF-8");
+//		response.getWriter().write(jsonString);
+		
+		request.setAttribute("workdocslist", list);
+		request.setAttribute("map", map);
+		request.getRequestDispatcher("../WorkBoard/WorkBoardMain.jsp").forward(request, response);
 
 	}
 

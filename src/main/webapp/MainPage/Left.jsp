@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.util.Date"%>
 
 <%
-   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-   String currentDate = sdf.format(new Date());
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+String currentDate = sdf.format(new Date());
 %>
 <!DOCTYPE html>
 <html>
@@ -13,10 +13,12 @@
 <title>Left</title>
 <style>
 @font-face {
-    font-family: 'ChungjuKimSaengTTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'ChungjuKimSaengTTF';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
 }
 
 * {
@@ -40,11 +42,19 @@
 	.left_info_background, .left_new_Id_background,
 	.left_salaryManagement_background, .left_Holiday_Approval_background,
 	.left_MeetingRoom_background, .left_MeetingRoomReservation_background,
-	.left_WorkBoard_background, .left_Time_background {
+	.left_WorkBoard_background {
 	width: 100%;
 	height: 5%;
-	background: rgb(0, 64, 128);
 	background: rgb(68, 74, 83);
+	opacity: 1;
+	position: absolute;
+	overflow: hidden;
+}
+
+.left_Time_background {
+	width: 100%;
+	height: 5%;
+	background: rgb(130, 142, 159);
 	opacity: 1;
 	position: absolute;
 	overflow: hidden;
@@ -86,32 +96,33 @@
 .left_Time_background {
 	top: 0%;
 }
+
 .left_calender_background {
-	top: 5%;
+	top: 7%;
 }
 
 .left_WorkBoard_background {
-	top: 12%;
+	top: 14%;
 }
 
 .left_shareform_background {
-	top: 19%;
+	top: 21%;
 }
 
 .left_freeboard_background {
-	top: 26%;
+	top: 28%;
 }
 
 .left_holiday_background {
-	top: 33%;
+	top: 35%;
 }
 
 .left_MeetingRoom_background {
-	top: 40%;
+	top: 42%;
 }
 
 .left_info_background {
-	top: 47%;
+	top: 49%;
 }
 
 .left_Holiday_Approval_background {
@@ -130,7 +141,6 @@
 	top: 92.5%;
 }
 
-
 /* 섹션에 커서 포인터 스타일 적용 */
 .left_Calender_section, .left_ShareForm_section,
 	.left_FreeboardForm_section, .left_holiday_section, .left_info_section,
@@ -140,19 +150,19 @@
 }
 </style>
 <script>
-function openHoliDayWindow() {
-	var detailsUrl = "../Controller/HoliDayCount.do";
+	function openHoliDayWindow() {
+		var detailsUrl = "../Controller/HoliDayCount.do";
 
-	window.open(detailsUrl, "_blank", "width=600, height=400");
-}
+		window.open(detailsUrl, "_blank", "width=600, height=400");
+	}
 </script>
 </head>
 <body>
 	<div class="left_table">
 		<div class="left_Time_background">
-			<h3 class="left_Time_text"><%= currentDate %></h3>
+			<h3 class="left_Time_text"><%=currentDate%></h3>
 		</div>
-	
+
 		<div class="left_calender_background">
 			<a class="left_Calender_section" href="../Calender/Calender.jsp">
 				<span class="left_calender_text">캘린더</span>
@@ -170,20 +180,24 @@ function openHoliDayWindow() {
 			</a>
 		</div>
 		<div class="left_holiday_background">
-			<a class="left_holiday_section" onclick="openHoliDayWindow()"> <span class="left_holiday_text">휴가신청</span>
-			<!-- "../Controller/HoliDayCount.do"-->
+			<a class="left_holiday_section" onclick="openHoliDayWindow()">
+				<span class="left_holiday_text">휴가신청</span>
+				<!-- "../Controller/HoliDayCount.do"-->
 			</a>
 		</div>
 		<div class="left_info_background">
-			<a class="left_info_section" href="../Controller/infoLoad.do"> <span class="left_info_text">내정보</span>
+			<a class="left_info_section" href="../Controller/infoLoad.do">
+				<span class="left_info_text">내정보</span>
 			</a>
 		</div>
 		<div class="left_MeetingRoom_background">
-			<a class="left_meetingroom_section" href="../Controller/MeetingRoomLoadController.do"> <span class="left_meetingroom_text">회의실 예약</span>
+			<a class="left_meetingroom_section" href="../Controller/MeetingRoomLoadController.do">
+				<span class="left_meetingroom_text">회의실 예약</span>
 			</a>
 		</div>
 		<div class="left_WorkBoard_background">
-			<a class="left_WorkBoard_section" href="../Controller/WorkBoardList.do"> <span class="left_WorkBoard_text">전자결재</span>
+			<a class="left_WorkBoard_section" href="../Controller/WorkBoardList.do">
+				<span class="left_WorkBoard_text">전자결재</span>
 			</a>
 		</div>
 
@@ -193,39 +207,45 @@ function openHoliDayWindow() {
 			if (inpGrade < 4) {
 			%>
 			<div class="left_new_Id_background">
-				<a class="left_new_id_section" href="../Controller/NewRegistLoad.do"> <span class="left_new_Id_text">사원관리</span>
+				<a class="left_new_id_section" href="../Controller/NewRegistLoad.do">
+					<span class="left_new_Id_text">사원관리</span>
 				</a>
 			</div>
 
 			<div class="left_salaryManagement_background">
-				<a class="left_salaryManagement_section" href="../Controller/SalaryManagement.do"> <span class="left_salaryManagement_text">급여관리</span>
+				<a class="left_salaryManagement_section" href="../Controller/SalaryManagement.do">
+					<span class="left_salaryManagement_text">급여관리</span>
 				</a>
 			</div>
 			<div class="left_Holiday_Approval_background">
-				<a class="left_salaryManagement_section" href="../Controller/HolidayApprovalLoad.do"> <span class="left_salaryManagement_text">휴가관리</span>
+				<a class="left_salaryManagement_section" href="../Controller/HolidayApprovalLoad.do">
+					<span class="left_salaryManagement_text">휴가관리</span>
 				</a>
 			</div>
 			<div class="left_MeetingRoomReservation_background">
-				<a class="left_MeetingRoom_section" href="../Controller/MeetingRoomReservationManagement.do"> <span class="left_MeetingRoomReservation_text">회의실관리</span>
+				<a class="left_MeetingRoom_section" href="../Controller/MeetingRoomReservationManagement.do">
+					<span class="left_MeetingRoomReservation_text">회의실관리</span>
 				</a>
 			</div>
 			<%
 			}
 			%>
 		</div>
-		
 		<div>
 			<%
 			inpGrade = (int) session.getAttribute("inpGrade");
 			if (inpGrade == 4) {
 			%>
 			<div class="left_Holiday_Approval_background">
-				<a class="left_salaryManagement_section" href="../Controller/HolidayApprovalLoad.do"> <span class="left_salaryManagement_text">휴가관리</span>
+				<a class="left_salaryManagement_section" href="../Controller/HolidayApprovalLoad.do">
+					<span class="left_salaryManagement_text">휴가관리</span>
 				</a>
 			</div>
 			<%
 			}
 			%>
+
+			<script src="../MainPage/WebServer.js"></script>
 		</div>
 	</div>
 </body>

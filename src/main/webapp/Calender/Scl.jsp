@@ -340,7 +340,6 @@ day {
 body {
 	font-size: px;
 	font-family: 'Kanit', sans-serif;
-	background-color: #272b30;
 	/*color: white;*/
 }
 
@@ -397,16 +396,16 @@ a:active, a:hover {
 }
 
 /* 요일 칸 배경 색 지정 */
-.calendar table thead tr:first-child{
-	background-color: rgb(68, 74, 83);
-    color: white;
+.calendar table thead tr:first-child {
+	background: #1c427e;
+	color: white;
 }
 
 /* 요일, 날짜 칸 크기 조절 */
-.calendar table td{
-  	padding: 40px 80px;
-   	text-align: left;
-   	border: 1px solid #ccc;
+.calendar table td {
+	padding: 40px 80px;
+	text-align: left;
+	border: 1px solid #ccc;
 }
 
 /* 월, 화, 수, 목, 금 글자 색상 설정 */
@@ -415,83 +414,79 @@ a:active, a:hover {
 .calendar table td:nth-child(3)
 .calendar table td:nth-child(4)
 .calendar table td:nth-child(5) {
-   color: white;
+	color: white;
 }
 
 /* 일요일 색상 지정 */
-.calendar table td:nth-child(7n+1){
-   color: red;
+.calendar table td:nth-child(7n+1) {
+	color: red;
 }
 
 /* 토요일 색상 지정 */
-.calendar table td:nth-child(7n){
-   color: blue;
+.calendar table td:nth-child(7n) {
+	color: blue;
 }
 
 /* 전 월의 일 색상 */
 .calendar table td.gray {
-   color: #ccc;
+	color: #ccc;
 }
 
 /* 날짜 버튼 스타일 지정 */
 .calendar table button {
-	color: #fff;
-   border: none;
-   padding: 0;
-   background: none;
-   font-size: 20px;
-   
-   position: relative;  /* 상대적인 위치 설정 */
-   top: -40px;  /* 상단 여백 조정 */
-   left: -70px;  /* 왼쪽 여백 조정 */
-   
-   font-family: 'Kanit', sans-serif;
-   
-   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+	border: none;
+	padding: 0;
+	background: none;
+	font-size: 20px;
+	position: relative; /* 상대적인 위치 설정 */
+	top: -40px; /* 상단 여백 조정 */
+	left: -70px; /* 왼쪽 여백 조정 */
+	font-family: 'Kanit', sans-serif;
+	cursor: pointer; /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 .calendar table button:hover {
-   color: green;
+	color: green;
 }
 
 /* 오늘 날짜 스타일 */
-.calendar table td.today{
-   font-weight:700;
-   background: orange;
-   color: #000;
+.calendar table td.today {
+	font-weight: 700;
+	background: orange;
+	color: #000;
 }
 
 /* 일요일 날짜 스타일 */
 .calendar table td:nth-child(7n+1) button {
-   color: red;
-   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+	color: red;
+	cursor: pointer; /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 .calendar table td:nth-child(7n+1) button:hover {
-   color: green;
+	color: green;
 }
 
 /* 토요일 날짜 스타일 */
 .calendar table td:nth-child(7n) button {
-   color: blue;
-   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+	color: blue;
+	cursor: pointer; /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 .calendar table td:nth-child(7n) button:hover {
-   color: green;
+	color: green;
 }
 
 /* 전월의 날짜 색상 지정 */
 .calendar table td.gray button {
-   color: #000;
+	color: #ccc;
 }
 
 /* 다음달의 날짜 색상 지정 */
 .calendar table td.gray2 button {
-   color: #000;
+	color: #ccc;
 }
 </style>
 
@@ -522,6 +517,7 @@ function showDateAndAlert(day) {
 	// 일정 추가를 위한 고유한 식별자
 	var eventCounter = 1;
 
+	/*
 	function confirmPlus() {
 		// 사용자로부터 입력을 받기 위한 prompt 대화상자 사용
 		var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
@@ -559,94 +555,138 @@ function showDateAndAlert(day) {
 			console.log("일정 저장을 취소하였습니다.");
 		}
 }
+	*/
+	
+	
+	
+	function confirmPlus() {
+	    var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
+	    
+
+	    if (userInput !== null && userInput !== "") {
+	        // 사용자가 확인을 클릭하면 입력한 일정을 서블릿으로 전송
+	        sendNewScheduleToServer(userInput);
+	    } else if (userInput === "") {
+	        alert("일정을 입력해주세요.");
+	    } else {
+	        console.log("일정 저장을 취소하였습니다.");
+	    }
+	}
+
+	// 새로운 일정을 서버로 전송하는 함수
+	function sendNewScheduleToServer(userInput) {
+	    const xhr = new XMLHttpRequest();
+	    xhr.open("POST", "../Controller/CalenderPlusController.do", true);
+	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+	   
+
+	    // 서버로 전송할 데이터 설정
+	    const data = "userInput=" + encodeURIComponent(userInput);
+	    xhr.send(data);
+
+	    xhr.onreadystatechange = function () {
+	        if (xhr.readyState === 4) {
+	            if (xhr.status === 200) {
+	                alert(xhr.responseText); // 서버 응답을 알림으로 표시
+	                location.reload();
+	                console.log('추가한 일정들:', userInput);
+	            } else {
+	                alert("일정 추가에 실패했습니다.");
+	                console.log('실패한 일정들:', userInput);
+	            }
+	        }
+	    };
+	    
+	    
+	}
 	 
 	 
     console.log('잘 실행되는지 확인용1111111111111111111111');
 	 
 
-  // 링크 클릭 시 선택 및 해제를 토글하는 함수
-  var selectedSchedules = [];  // 선택한 일정이 저장되는 곳
- 
-document.addEventListener('click', function (event) {
-    if (event.target.classList.contains('scheduleLink')) {
-        event.preventDefault();
-        var selectedSchedule = event.target.getAttribute('data-schedule');
-        var isSelected = event.target.classList.toggle('selected');
+ // 링크 클릭 시 선택 및 해제를 토글하는 함수
+    var selectedSchedules = [];  // 선택한 일정이 저장되는 곳
+   
+  document.addEventListener('click', function (event) {
+      if (event.target.classList.contains('scheduleLink')) {
+          event.preventDefault();
+          var selectedSchedule = event.target.getAttribute('data-schedule');
+          var isSelected = event.target.classList.toggle('selected');
 
-        alert(selectedSchedule + ' 확인용');
+          alert(selectedSchedule + ' 확인용');
 
-        // 선택한 일정을 리스트에 추가 또는 제거
-        if (isSelected) {
-            selectedSchedules.push(selectedSchedule);
-        } else {
-            // 해당 값이 리스트에 존재하면 제거
-            var index = selectedSchedules.indexOf(selectedSchedule);
-            if (index !== -1) {
-                selectedSchedules.splice(index, 1);
-            }
-        }
+          // 선택한 일정을 리스트에 추가 또는 제거
+          if (isSelected) {
+              selectedSchedules.push(selectedSchedule);
+          } else {
+              // 해당 값이 리스트에 존재하면 제거
+              var index = selectedSchedules.indexOf(selectedSchedule);
+              if (index !== -1) {
+                  selectedSchedules.splice(index, 1);
+              }
+          }
 
-        // 선택한 일정들을 콘솔에 출력
-        console.log('선택한 일정들:', selectedSchedules);
-        
-    }
+          // 선택한 일정들을 콘솔에 출력
+          console.log('선택한 일정들:', selectedSchedules);
+          
+      }
+      
+   	// Ajax를 사용하여 Java 서버에 배열 전송
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "/Controller/CalenderDeleteConteController.do", true);
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      //xhr.send(JSON.stringify({ array: selectedSchedules }));
+
+  });
     
- 	// Ajax를 사용하여 Java 서버에 배열 전송
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/Controller/CalenderDeleteConteController.do", true);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    //xhr.send(JSON.stringify({ array: selectedSchedules }));
-
-});
-  
-  
-//삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
-function confirmDelete() {
-    var selectedSchedules = Array.from(document.querySelectorAll('.scheduleLink.selected')).map(function (schedule) {
-        return schedule.getAttribute('data-schedule');
-    });
-
-    if (selectedSchedules.length > 0) {
-        var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
-        if (confirmed) {
-            // 수정된 부분: 선택한 일정의 ID를 서버로 전송
-            sendSelectedSchedulesToServer(selectedSchedules);
-        }
-    } else {
-        alert("삭제할 일정을 선택해주세요.");
-    }
-}
-	 
-	
-// 선택한 일정 삭제를 서버로 전송하는 함수
-function sendSelectedSchedulesToServer(selectedSchedules) {
-    // Ajax를 사용하여 Java 서버에 배열 전송
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "../Controller/CalenderDeleteController.do", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    //xhr.send(JSON.stringify({ selectedSchedules: selectedSchedules }));
-
-    // 선택한 일정의 ID 스택을 문자열로 변환하여 서버로 전송
-    //var data = "selectedSchedules=" + encodeURIComponent(scheduleStack.join(','));
-    //xhr.send(data);
     
- // 선택한 일정의 ID를 문자열 배열로 변환
-    //const data = JSON.stringify(selectedSchedules);
- 	const data = "selectedSchedules=" + encodeURIComponent(selectedSchedules.join(','));
-    xhr.send(data);
+  //삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
+  function confirmDelete() {
+      var selectedSchedules = Array.from(document.querySelectorAll('.scheduleLink.selected')).map(function (schedule) {
+          return schedule.getAttribute('data-schedule');
+      });
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                alert("일정이 삭제되었습니다.");
-                // 페이지 리로드 또는 필요한 갱신 작업 수행
-                location.reload();
-            } else {
-                alert("일정 삭제에 실패했습니다.");
-            }
-        }
-    };
-}  
+      if (selectedSchedules.length > 0) {
+          var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
+          if (confirmed) {
+              // 수정된 부분: 선택한 일정의 ID를 서버로 전송
+              sendSelectedSchedulesToServer(selectedSchedules);
+          }
+      } else {
+          alert("삭제할 일정을 선택해주세요.");
+      }
+  }
+  	 
+  	
+  // 선택한 일정 삭제를 서버로 전송하는 함수
+  function sendSelectedSchedulesToServer(selectedSchedules) {
+      // Ajax를 사용하여 Java 서버에 배열 전송
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "../Controller/CalenderDeleteController.do", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+      //xhr.send(JSON.stringify({ selectedSchedules: selectedSchedules }));
+
+      // 선택한 일정의 ID 스택을 문자열로 변환하여 서버로 전송
+      //var data = "selectedSchedules=" + encodeURIComponent(scheduleStack.join(','));
+      //xhr.send(data);
+      
+   // 선택한 일정의 ID를 문자열 배열로 변환
+      //const data = JSON.stringify(selectedSchedules);
+   	const data = "selectedSchedules=" + encodeURIComponent(selectedSchedules.join(','));
+      xhr.send(data);
+
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                  alert("일정이 삭제되었습니다.");
+                  // 페이지 리로드 또는 필요한 갱신 작업 수행
+                  location.reload();
+              } else {
+                  alert("일정 삭제에 실패했습니다.");
+              }
+          }
+      };
+  }  
 
 
     
@@ -665,10 +705,6 @@ function sendSelectedSchedulesToServer(selectedSchedules) {
 
 body {
 	font-size: 20px;
-}
-
-tbody {
-	background : gray;
 }
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
@@ -690,8 +726,6 @@ tbody {
 		<input type="hidden" name="selectedYear" id="selectedYear" value="<%=year%>">
 		<input type="hidden" name="selectedMonth" id="selectedMonth" value="<%=month%>">
 		<input type="hidden" name="selectedDay" id="selectedDay" value="">
-		<!-- <input type="hidden" name="selectedContent" id="selectedContent" value="selectedSchedules"> -->
-		<!-- <input type="hidden" name="selectedContent" id="selectedContent" value="<c:out value="${empty row.personal_diaray_schedule ? '' : row.personal_diaray_schedule}"/>"> -->
 
 		<div class="middle-button">
 			<!-- 다른 페이지에서 불러오는 내용 -->
