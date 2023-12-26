@@ -59,7 +59,7 @@ public class CompanyController extends HttpServlet {
 		}
 		
 		/* 페이지 처리 start */
-		int totalCount = dao.ScheduleListCount(selecteddate); // 게시물 개수
+		int totalCount = dao.ScheduleListCount(selecteddate); // 게시물 개수i
 		
 		ServletContext application = getServletContext();
 		int pageSize = Integer.parseInt(application.getInitParameter("POSTS_PER_PAGE"));

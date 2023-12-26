@@ -172,10 +172,15 @@ String currentDate = sdf.format(new Date());
 </head>
 <body>
 	<div class="left_table">
-		<div class="left_Time_background">
+		<div class="left_Time_background" onclick="navigateToTest()">
 			<h3 class="left_Time_text"><%=currentDate%></h3>
 		</div>
 
+		<script>
+			function navigateToTest() {
+				window.location.href = '../TestTest/Test.jsp';
+			}
+		</script>
 		<div class="left_calender_background">
 			<a class="left_Calender_section" href="../Calender/Calender.jsp">
 				<span class="left_calender_text">캘린더</span>
@@ -195,7 +200,6 @@ String currentDate = sdf.format(new Date());
 		<div class="left_holiday_background">
 			<a class="left_holiday_section" onclick="openHoliDayWindow()">
 				<span class="left_holiday_text">휴가신청</span>
-				<!-- "../Controller/HoliDayCount.do"-->
 			</a>
 		</div>
 		<div class="left_info_background">

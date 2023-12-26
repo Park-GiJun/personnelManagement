@@ -1,8 +1,6 @@
 package Controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Calender.CalenderDAO;
 import Calender.CalenderDTO;
@@ -30,6 +29,7 @@ public class CalenderController extends HttpServlet {
 		 System.out.println("");
 		// DAO 생성
 		CalenderDAO dao = new CalenderDAO();
+		HttpSession session = request.getSession();
 		
 		// Map 생성
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -70,7 +70,13 @@ public class CalenderController extends HttpServlet {
 		String selecteddate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
 		String emp_num = (String) request.getSession().getAttribute("loginid");
 		
+		System.out.println(selectedYear + selectedMonth + selectedDay);
+		
 		System.out.println("aaaaa " + selecteddate);
+		
+		 session.setAttribute("selectedYear", selectedYear);
+	     session.setAttribute("selectedMonth", selectedMonth);
+	     session.setAttribute("selectedDay", selectedDay);
 		
 		if (searchWord != null) {
 			map.put("searchField", searchField);
@@ -109,7 +115,12 @@ public class CalenderController extends HttpServlet {
 		map.put("pageSize", pageSize);
 		map.put("pageNum", pageNum);
 		
-	
+		request.setAttribute("selectedYear", selectedYear);
+	    request.setAttribute("selectedMonth", selectedMonth);
+	    request.setAttribute("selectedDay", selectedDay);
+	    
+	    System.out.print("추가하기 기능 확인용: " + " " + selectedYear + " " + selectedMonth + " " + selectedDay);
+	    System.out.println();
 
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);
@@ -119,11 +130,6 @@ public class CalenderController extends HttpServlet {
         //request.setAttribute("selectedSchedules", Arrays.asList(selectedContent));  // 화면에 선택한 일정들을 전달
 		request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
 		
-		
-		
 	}
-	
-	
-	
 	
 }
