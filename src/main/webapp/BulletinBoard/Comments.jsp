@@ -108,6 +108,8 @@ td, th {
 	width: 100px;
 }
 
+
+
 #delete {
 	width: 75%;
 	font-size: 7px;
@@ -123,10 +125,6 @@ td, th {
 #delete {
 	font-size: 15px;
 }
-
-.input-group{    margin-bottom: 5px;
-}
-
 </style>
 <jsp:include page="../MainPage/Left.jsp" />
 <script type="text/javascript">
@@ -310,12 +308,7 @@ td, th {
 
 					</td>
 				</tr>
-			
-			<tr class="input-group mb-20">
-			<th colspan="5" style="width: 100%; height: 100%; font-size: 0px;">
-				  <input name="boardFile" type="file" class="form-control" id="inputGroupFile02" style="font-size: 10px; padding: 10px;">
-			</th>
-			</tr>
+
 
 
 				<tr class="table-dark2" align="center">

@@ -31,14 +31,11 @@
 	font-family: 'SF_HambakSnow', sans-serif;
 }
 
-
-
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
-
 
 body {
 	font-size: 16px;
@@ -50,7 +47,7 @@ body {
 	padding: 10px; /*넓이*/
 	font-size: 12px; /*글자사이즈*/
 	min-height: 400px; /* Set a minimum height for the content area */
-	height : 100%;
+	height: 100%;
 }
 
 td, th {
@@ -170,28 +167,30 @@ td, th {
 		</script>
 		<form method="post" action="../Controller/CrystalController.do"
 			onsubmit="return validateForm(this)">
-			<table align="center" border="1" height="80%" width="90%" style="font-family: 'SF_HambakSnow', sans-serif;">
+			<table align="center" border="1" width="90%"
+				style="font-family: 'SF_HambakSnow', sans-serif;">
 				<tr class="table-dark1" align="center">
-					<th width="20%" style="font-size: 20px;">번호</th>
-					<th width="20%" style="font-size: 20px;">${dto.anno_board_num}</th>
-					<th width="25%" style="font-size: 20px;" >작성일</th>
-					<th width="25%" style="font-size: 20px;">${dto.post_date}</th>
+					<th width="20%" style="font-size: 18px;">번호</th>
+					<th width="20%" style="font-size: 18px;">${dto.anno_board_num}</th>
+					<th width="25%" style="font-size: 18px;">작성일</th>
+					<th width="25%" style="font-size: 18px;">${dto.post_date}</th>
 				</tr>
 
 				<tr class="table-dark1" align="center">
 					<td width="20%" style="font-size: 20px;">제목</td>
-					<td colspan="4" style="font-size: 20px;"><input type="text" value="${dto.title}"
-						name="Freeboardtitle" style="width: 100%;"
+					<td colspan="4" style="font-size: 20px;"><input type="text"
+						value="${dto.title}" name="Freeboardtitle" style="width: 100%;"
 						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" /></td>
 				</tr>
-
-				<tr class="table-dark3" align="center" >
-					<td width="20%"  style="font-size: 20px;">내용</td>
-					<td colspan="4" style="font-size: 20px;"><input type="text" value="${dto.content}"
-						name="Freeboardcontent" style="width: 100%; height: 600px;"></td>
+				<tr class="table-dark3" align="center">
+					<td width="20%" style="font-size: 20px;">내용</td>
+					<td colspan="4" style="font-size: 20px;"><input type="text"
+						value="${dto.content}" name="Freeboardcontent"
+						style="width: 100%; height: 600px;"></td>
 				</tr>
 			</table>
-			<table border="1" width="90%" style="font-family: 'SF_HambakSnow', sans-serif;">
+			<table border="1" width="90%"
+				style="font-family: 'SF_HambakSnow', sans-serif;">
 				<tr class="table-dark1">
 					<td
 						style="text-align: left; font-size: 15px; display: flex; align-items: center;">

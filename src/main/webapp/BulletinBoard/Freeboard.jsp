@@ -39,6 +39,11 @@ body {
 	color: var(--bs-table-color);
 }
 
+td, th {
+	border: 1px solid gray; /* 테두리 스타일 지정 */
+	padding: 2px; /* 셀 안의 내용과 테두리 사이의 간격 조정 */
+}
+
 .btn-info {
 	margin-top: 0.25%;
 	width: 10%;
@@ -73,7 +78,9 @@ body {
 .table-dark3 {
 	background-color: rgb(68, 74, 83);
 	--bs-table-color: #fff;
+	--bs-table-border-color: #fff;
 	color: var(--bs-table-color);
+	border-color: var(--bs-table-border-color);
 }
 
 .form-select {
@@ -144,16 +151,16 @@ body {
 		</script>
 		<form method="post" action="../Controller/FreeboardWrite.do"
 			onsubmit="return validateForm(this)">
-			<table border="1" width="100%">
+			<table border="1" width="90%">
 				<tr>
+					<td width="20%"style="font-size: 18px;" align="center">제목</td>
 					<td><input type="text" value="제목을 입력해 주세요."
 						name="Freeboardtitle" class="form-control"
 						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
 					</td>
 				</tr>
-
 				<tr>
-
+					<td width="20%"style="font-size: 18px;" align="center">내용</td>
 					<td><input type="text" name="Freeboardcontent"
 						style="height: 590px;" class="form-control"></td>
 
