@@ -108,6 +108,9 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 	background: orange;
 }
 
+
+
+
 .scl {
 	top: 480px;
 	animation-direction: scl;
@@ -488,11 +491,17 @@ a:active, a:hover {
 .calendar table td.gray2 button {
 	color: #ccc;
 }
+
+
 </style>
 
 
 
+
 <script type="text/javascript">
+
+
+document.getElementById("calender_form").submit();
 
 function showDateAndAlert(day) {
     // 클릭한 날짜를 JavaScript 변수에 저장
@@ -509,6 +518,7 @@ function showDateAndAlert(day) {
 		// 폼 제출
 		document.forms["calender_form"].submit();
 	}
+
 
 
 
@@ -789,9 +799,8 @@ body {
 		</c:if>
 
 
-		<button class="scl" onclick="location.href='Scl_Cal.jsp';">
-			<font class="myFont">여기에 회사 일정 내용 담기</font>
-		</button>
+
+		<!-- <button class="scl" onclick="location.href='Scl_Cal.jsp';">일정이 있습니다.</button> -->
 		<!-- 1개당 1개의 일정 제목 표시 -->
 
 
@@ -850,27 +859,39 @@ body {
 					// 전 달 끝부분 일자 출력
 					for (int i = 1; i < week; i++) {
 						//out.print("<td>&nbsp;</td>");
-						out.print("<td class='gray'><button disabled>" + (preDate++) + "</button></td>");
+						out.print("<td class='gray'style='width: 100px;'><button disabled>" + (preDate++) + "</button></td>");
 					}
+					
 
 					int click_day = 0;
 					// 1일부터 말일까지 출력
 					int lastDay = cal.getActualMaximum(Calendar.DATE);
 					String cls;
+					
 					for (int i = 1; i <= lastDay; i++) {
-						cls = year == ty && month == tm && i == td ? "today" : "";
+					    cls = year == ty && month == tm && i == td ? "today" : "";
 
-						out.print("<td class='" + cls + "'><button id=\"update\" onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button></td>");
-						if (lastDay != i && (++week) % 7 == 1) {
-							out.print("</tr><tr>");
-						}
+					    out.print("<td class='" + cls + "' style='width: 100px;  position: relative;'>");
+					    out.print("<button id=\"update\" onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button>");
+
+					    // 버튼 출력 부분 수정 시작
+					    //out.print("<button class=\"scl\" style=\"font-size: 12px; position: absolute; bottom: 100%; left: 0; background-color: #1C427E;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+					    out.print("<button class=\"scl\" style=\"font-size: 12px; background-color: #1C427E;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+					    // 버튼 출력 부분 수정 끝
+
+					    out.print("</td>");
+
+					    if (lastDay != i && (++week) % 7 == 1) {
+					        out.print("</tr><tr>");
+					    }
 					}
+
 
 					// 다음 달 첫부분 일자 출력
 					int n = 1;
 					for (int i = (week - 1) % 7; i < 6; i++) {
 						// out.print("<td>&nbsp;</td>");
-						out.print("<td class='gray'><button disabled>" + (n++) + "</button></td>");
+						out.print("<td class='gray' style='width: 100px;'><button disabled>" + (n++) + "</button></td>");
 					}
 					out.print("</tr>");
 					%>

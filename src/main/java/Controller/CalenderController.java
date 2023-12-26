@@ -36,8 +36,7 @@ public class CalenderController extends HttpServlet {
 		
 		String searchField = request.getParameter("searchField");
 		String searchWord = request.getParameter("searchWord");
-		String selectedDay = (String) request.getSession().getAttribute("selectedDay");
-		session.setAttribute("selectedDay", "selectedDay");
+		String selectedDay = request.getParameter("selectedDay");
 		
 		System.out.println("confirm : " + selectedDay);
 		
@@ -66,10 +65,8 @@ public class CalenderController extends HttpServlet {
 		    // 적절한 로깅 또는 예외 처리를 수행
 		}
 			
-		String selectedYear = (String) request.getSession().getAttribute("selectedYear");
-		session.setAttribute("selectedYear", "selectedYear");
-		String selectedMonth = (String) request.getSession().getAttribute("selectedMonth");
-		session.setAttribute("selectedMonth", "selectedMonth");
+		String selectedYear = request.getParameter("selectedYear");
+		String selectedMonth = request.getParameter("selectedMonth");
 		String selecteddate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
 		String emp_num = (String) request.getSession().getAttribute("loginid");
 		
@@ -116,14 +113,24 @@ public class CalenderController extends HttpServlet {
 		
 		request.setAttribute("selecteddate", selecteddate);
 	
+		
+		String a = selectedYear;
+		String b = selectedMonth;
+		String c = selectedDay;
+		
+		System.out.println("--------------" + a + b + c);
 
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);
 		request.setAttribute("map2", map);
 		request.setAttribute("selecteddate", selecteddate);
+		request.setAttribute("a", a);
+		request.setAttribute("b", b);
+		request.setAttribute("c", c);
 		//request.setAttribute("selectedSchedules", selectedSchedules); // 리스트 값
         //request.setAttribute("selectedSchedules", Arrays.asList(selectedContent));  // 화면에 선택한 일정들을 전달
 		request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
+		request.getRequestDispatcher("../Controller/CalenderPlusController.do").forward(request, response);
 		
 		
 		

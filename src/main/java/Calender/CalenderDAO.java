@@ -124,12 +124,15 @@ public class CalenderDAO extends DBConnPool {
 	public int insertWrite(String newSchedule, String selecteddate, String emp_num) {
 	    int result = 0;
 	    
+	    System.out.println(newSchedule);
+	    System.out.println(selecteddate);
+	    System.out.println(emp_num);
 
 	    try {
-	        String query = "INSERT INTO Personal_diaray (Personal_diaray_date, Personal_diaray_schedule, emp_num) VALUES (anno_board_num.NEXTVAL, ?, ?, ?)";
+	        String query = "INSERT INTO Personal_diaray (Personal_diaray_date, Personal_diaray_schedule, emp_num) VALUES (?, ?, ?)";
 	        psmt = con.prepareStatement(query);
-	        psmt.setString(1, newSchedule);
-	        psmt.setString(2, selecteddate);
+	        psmt.setString(1, selecteddate);
+	        psmt.setString(2, newSchedule);
 	        psmt.setString(3, emp_num);
 	        result = psmt.executeUpdate();
 	       
