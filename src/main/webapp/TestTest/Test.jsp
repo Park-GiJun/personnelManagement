@@ -9,6 +9,7 @@
 	margin-left: 10%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;
+	height: 100%;
 }
 
 .top-right {
@@ -104,6 +105,16 @@
 	margin-top: 0; /* 텍스트의 상단 여백 제거 */
 	margin-bottom: 0; /* 텍스트의 하단 여백 제거 */
 }
+
+.schedule-item {
+    background-color: #f0f0f0;
+    margin-top: 2px;
+    padding: 2px;
+    font-size: 0.8em;
+    border-radius: 4px;
+    /* 추가 스타일링 */
+}
+
 </style>
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <script src="../TestTest/Test.js"></script>
@@ -160,6 +171,7 @@
 					<button id="deleteDiaryButton" onclick="deleteDiary()" class="btn btn-secondary btn-sm">일정 삭제</button>
 					<button id="sidebarToggle" class="btn btn-primary btn-sm">닫기</button>
 				</div>
+				<div id="sidebarContent"></div>
 			</div>
 		</div>
 	</div>

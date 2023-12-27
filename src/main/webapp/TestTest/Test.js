@@ -2,18 +2,21 @@ let clickedDate;
 
 let section;
 
-function generateCalendar() {
-	const today = new Date();
-	const currentMonth = today.getMonth();
-	const currentYear = today.getFullYear();
+let selectedYear;
 
-	// 다음 달의 첫째 날짜를 가져옵니다.
+let selectedMonth;
+
+let schedules = {};
+
+function generateCalendar(year, month) {
+	const today = new Date();
+	const currentYear = year || today.getFullYear();
+	const currentMonth = month !== undefined ? month : today.getMonth();
 	const nextMonthFirstDay = new Date(currentYear, currentMonth + 1, 1).getDate();
 
 	const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
 	const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-	// 다음 달의 날짜를 표시하기 시작할 카운터입니다.
 	let nextMonthDayCounter = 1;
 
 	const displayMonth = document.getElementById('displayMonth');
@@ -23,7 +26,9 @@ function generateCalendar() {
 	const calendarBody = document.getElementById('calendar').getElementsByTagName('tbody')[0];
 	calendarBody.innerHTML = '';
 
-	let date = 1;
+	let date = 1; // 현재 달의 날짜를 추적하는 변수입니다.
+	let printingDate = false; // 날짜 인쇄를 시작할지 여부를 결정하는 플래그입니다.
+
 	for (let i = 0; i < 6; i++) {
 		let row = document.createElement('tr');
 
@@ -31,60 +36,79 @@ function generateCalendar() {
 			let cell = document.createElement('td');
 			cell.classList.add('top-right');
 
-			if (i === 0 && j < firstDayOfMonth) {
-				// 첫째 주에서 1일 이전의 칸을 공란으로 설정합니다.
-				cell.appendChild(document.createTextNode(''));
-			} else if (date > daysInMonth) {
-				// 이번 달의 날짜가 끝나면 다음 달의 날짜로 채웁니다 (또는 공란으로 남겨둘 수 있습니다).
-				cell.classList.add('next-month');  // 다음 달 날짜임을 표시하는 클래스를 추가할 수 있습니다.
-				let cellText = document.createTextNode(nextMonthDayCounter);  // 다음 달 날짜
-				cell.appendChild(cellText);
-				nextMonthDayCounter++;
-			} else {
-				// 이번 달의 날짜를 설정합니다.
-				let cellText = document.createTextNode(date);
-				cell.appendChild(cellText);
-
-				if (date === today.getDate() && currentMonth === today.getMonth()) {
-					cell.classList.add('today');
-				}
-				(function(currentDate) {
-					cell.addEventListener('click', function() {
-						clickedDate = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(currentDate).padStart(2, '0')}`;
-						console.log(clickedDate);
-						var headerDate = document.getElementById('headerDate');
-						headerDate.textContent = clickedDate;
-
-						// 사이드바를 열기
-						var sidebar = document.getElementById('sidebar');
-						sidebar.style.width = '250px';  // 사이드바 너비를 설정하여 사이드바를 열습니다.
-					});
-				})(date);
-				date++;
+			if (i === 0 && j === firstDayOfMonth) {
+				printingDate = true; // 첫 번째 날짜를 인쇄하기 시작합니다.
 			}
+
+			if (!printingDate) {
+				cell.appendChild(document.createTextNode(''));
+			} else {
+				if (date > daysInMonth) {
+					printingDate = false; // 현재 달의 날짜 인쇄를 중단합니다.
+					cell.classList.add('next-month');
+					let cellText = document.createTextNode(nextMonthDayCounter);
+					cell.appendChild(cellText);
+					nextMonthDayCounter++;
+				} else {
+					let cellText = document.createTextNode(date);
+					cell.appendChild(cellText);
+
+					if (date === today.getDate() && currentMonth === today.getMonth()) {
+						cell.classList.add('today');
+					}
+
+					let formattedDate = String(date).padStart(2, '0');
+					let scheduleList = schedules[formattedDate]; // 이 날짜의 일정 목록 조회
+
+					if (scheduleList) {
+						scheduleList.forEach(schedule => {
+							let scheduleEl = document.createElement('div');
+							scheduleEl.textContent = schedule;
+							scheduleEl.classList.add('schedule-item'); // 스타일링을 위한 클래스
+							cell.appendChild(scheduleEl);
+						});
+					}
+
+					(function(currentDate) {
+						cell.addEventListener('click', function() {
+							clickedDate = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(currentDate).padStart(2, '0')}`;
+							console.log(clickedDate);
+							var headerDate = document.getElementById('headerDate');
+							headerDate.textContent = clickedDate;
+							var sidebar = document.getElementById('sidebar');
+							sidebar.style.width = '250px';
+
+							updateSidebarWithSchedules(clickedDate);
+						});
+					})(date);
+					date++;
+				}
+			}
+
 			row.appendChild(cell);
+
 		}
 		calendarBody.appendChild(row);
 	}
 }
 
+
+
 function generateSelect() {
 	const today = new Date();
 	const currentYear = today.getFullYear();
-	const currentMonth = today.getMonth() + 1; // JavaScript에서 월은 0부터 시작하므로 1을 더합니다.
+	const currentMonth = today.getMonth() + 1;
 	const selectMonth = document.getElementById('selectMonth');
 	const selectYear = document.getElementById('selectYear');
 
 	selectYear.innerHTML = '';
 	selectMonth.innerHTML = '';
 
-	// 연도 선택
 	for (let i = 0; i < 10; i++) {
 		let yearOption = document.createElement('option');
 		yearOption.value = currentYear - 5 + i;
 		yearOption.textContent = currentYear - 5 + i;
 
-		// 현재 연도가 선택되도록 설정
 		if (currentYear === currentYear - 5 + i) {
 			yearOption.selected = true;
 		}
@@ -92,13 +116,11 @@ function generateSelect() {
 		selectYear.appendChild(yearOption);
 	}
 
-	// 월 선택
 	for (let i = 1; i <= 12; i++) {
 		let monthOption = document.createElement('option');
 		monthOption.value = i;
 		monthOption.textContent = i < 10 ? '0' + i : i;
 
-		// 현재 월이 선택되도록 설정
 		if (currentMonth === i) {
 			monthOption.selected = true;
 		}
@@ -117,14 +139,59 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			sidebar.style.width = '250px';
 		}
 	});
+	document.getElementById('selectYear').addEventListener('change', updateCalendar);
+	document.getElementById('selectMonth').addEventListener('change', updateCalendar);
 });
+
+function updateCalendar() {
+	selectedYear = parseInt(document.getElementById('selectYear').value);
+	selectedMonth = parseInt(document.getElementById('selectMonth').value) - 1; // 월은 0-11로 표현됩니다.
+	schedules = {};
+	generateCalendar(selectedYear, selectedMonth);
+}
+function updateSidebarWithSchedules(date) {
+
+	// 사이드바 엘리먼트 가져오기
+	var sidebar = document.getElementById('sidebarContent');
+	// 사이드바 초기화
+	sidebar.innerHTML = '';
+	// 선택된 날짜의 일정 가져오기
+	let formattedDate = date.slice(-2); // "YYYY-MM-DD" 형식에서 DD 부분만 가져옴
+	let dailySchedules = schedules[formattedDate]; // 이 날짜의 일정 목록 조회
+
+	// 일정이 있다면 사이드바에 추가
+	if (dailySchedules) {
+		dailySchedules.forEach(schedule => {
+
+			var entryContainer = document.createElement('div');
+			entryContainer.classList.add('diary-entry-container');
+
+			var newCheckBox = document.createElement('input');
+			newCheckBox.type = 'checkbox';
+			newCheckBox.classList.add('form-check-input');
+
+			var newEntry = document.createElement('h5');
+			newEntry.textContent = schedule;
+			newEntry.classList.add('text-success', 'diary-text');
+			newCheckBox.setAttribute('data-id', schedule);
+
+			entryContainer.style.display = 'flex';
+			entryContainer.style.alignItems = 'center';
+			entryContainer.style.gap = '10px';
+
+			entryContainer.appendChild(newCheckBox);
+			entryContainer.appendChild(newEntry);
+			sidebar.appendChild(entryContainer);
+		});
+	}
+}
 
 function addDiary() {
 	var inputText = prompt(clickedDate + "의 일정을 입력해주세요.");
 
 	if (inputText) {
 
-		var sidebar = document.getElementById('sidebar');
+		var sidebar = document.getElementById('sidebarContent');
 
 		var entryContainer = document.createElement('div');
 		entryContainer.classList.add('diary-entry-container');
@@ -136,101 +203,153 @@ function addDiary() {
 		var newEntry = document.createElement('h5');
 		newEntry.textContent = inputText;
 		newEntry.classList.add('text-success', 'diary-text');
+		newCheckBox.setAttribute('data-id', inputText);
 
-		// Flexbox를 사용하여 체크박스와 텍스트를 가로로 배치합니다.
 		entryContainer.style.display = 'flex';
-		entryContainer.style.alignItems = 'center';  // 위아래로 중앙 정렬
-		entryContainer.style.gap = '10px';  // 요소 사이의 간격 설정
+		entryContainer.style.alignItems = 'center';
+		entryContainer.style.gap = '10px';
 
 		entryContainer.appendChild(newCheckBox);
 		entryContainer.appendChild(newEntry);
 		sidebar.appendChild(entryContainer);
 
 		fetch('../Controller/TestAdd.do', {
-			method: 'POST', // 데이터를 전송할 HTTP 메서드
+			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json', // 전송할 데이터의 타입 지정
+				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ date: clickedDate, text: inputText }) // 서버에 보낼 데이터
+			body: JSON.stringify({ date: clickedDate, text: inputText })
 		})
-			.then(response => response.json())  // 서버로부터 받은 응답을 JSON 형태로 변환
-			.then(data => console.log(data))    // 변환된 데이터를 콘솔에 출력
-			.catch(error => console.error('Error:', error));  // 에러 처리
+			.then(response => response.json())
+			.then(data => console.log(data))
+			.catch(error => console.error('Error:', error));
 	}
 }
 
 
 function deleteDiary() {
-	// 사이드바 내의 모든 일정 컨테이너를 가져옵니다.
 	var entries = document.getElementsByClassName('diary-entry-container');
-
-	// 일정 컨테이너 목록을 역순으로 순회합니다.
-	// 역순으로 순회하는 이유는 삭제 과정 중에 컬렉션의 인덱스가 변경되기 때문입니다.
 	for (let i = entries.length - 1; i >= 0; i--) {
 		let entry = entries[i];
 		let checkBox = entry.querySelector('input[type="checkbox"]');
-
-		// 체크박스가 선택되어 있다면 해당 일정 항목을 삭제합니다.
 		if (checkBox && checkBox.checked) {
-			sidebar.removeChild(entry);
+
+			let scheduleId = checkBox.getAttribute('data-id');
+
+			console.log(scheduleId);
+
+			fetch('../Controller/TestDelete.do', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ id: scheduleId })
+			})
+				.then(response => response.json())
+				.then(data => {
+					console.log(data);
+
+					if (data.status === 'success') {
+						sidebar.removeChild(entry);
+					}
+				})
+				.catch(error => console.error('Error:', error));
 		}
 	}
 }
 
-// 버튼을 보여주거나 숨기는 함수
 function updateButtonsVisibility() {
 	const addDiaryButton = document.getElementById('addDiaryButton');
 	const deleteDiaryButton = document.getElementById('deleteDiaryButton');
 
 	if (section === 'personal') {
-		// 'personal' 섹션일 때 버튼을 보여줍니다.
 		addDiaryButton.style.display = 'inline-block';
 		deleteDiaryButton.style.display = 'inline-block';
 	} else {
-		// 그 외의 섹션일 때 버튼을 숨깁니다.
 		addDiaryButton.style.display = 'none';
 		deleteDiaryButton.style.display = 'none';
 	}
 }
 
-// 섹션 변경 함수들을 수정하여 버튼의 가시성을 업데이트합니다.
 function company() {
 	section = 'company';
 	console.log(section);
+	getSchedule();
 	updateButtonsVisibility();
 }
 
 function team() {
 	section = 'team';
 	console.log(section);
+	getSchedule();
 	updateButtonsVisibility();
 }
 
 function personal() {
 	section = 'personal';
 	console.log(section);
+	getSchedule();
 	updateButtonsVisibility();
 }
 
 function vacation() {
 	section = 'vacation';
 	console.log(section);
+	getSchedule();
 	updateButtonsVisibility();
 }
 
 window.onload = function() {
 	generateCalendar();
 	generateSelect();
+	getSchedule();
 	updateButtonsVisibility();
 
 	const today = new Date();
 	const currentMonth = today.getMonth();
 	const currentYear = today.getFullYear();
-	const currentDate = today.getDate();  // 현재 날짜를 가져옵니다.
+	const currentDate = today.getDate();
 
-	// 기본적으로 오늘 날짜를 'clickedDate'에 설정합니다.
 	let clickedDate = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(currentDate).padStart(2, '0')}`;
 
 	console.log("기본 설정된 오늘 날짜: ", clickedDate);
+	const selectedYear = parseInt(document.getElementById('selectYear').value);
+	const selectedMonth = parseInt(document.getElementById('selectMonth').value) - 1; // 월은 0-11로 표현됩니다.
+	generateCalendar(selectedYear, selectedMonth);
 };
 
+function getSchedule() {
+	// Ensure selectedYear and selectedMonth are defined and valid
+	selectedYear = selectedYear || new Date().getFullYear();
+	selectedMonth = selectedMonth !== undefined ? selectedMonth : new Date().getMonth();
+
+	// Define the data you want to send
+	const requestData = {
+		status: section,
+		year: selectedYear,
+		month: selectedMonth
+	};
+
+	// Perform the fetch request
+	fetch('../Controller/getSchedule.do', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(requestData)
+	})
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+			return response.json();
+		})
+		.then(data => {
+			console.log(data);
+			schedules = data;  // 서버로부터 받은 일정 데이터 저장
+			generateCalendar(selectedYear, selectedMonth);
+		})
+		.catch(error => {
+			console.error('Error fetching schedule:', error);
+		});
+}

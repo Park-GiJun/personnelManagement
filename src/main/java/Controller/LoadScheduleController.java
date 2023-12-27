@@ -2,7 +2,8 @@ package Controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,14 +16,15 @@ import com.google.gson.JsonObject;
 
 import TestCal.TestDAO;
 
-@WebServlet("/Controller/TestAdd.do")
-public class TestAddController extends HttpServlet {
+@WebServlet("/Controller/getSchedule.do")
+public class LoadScheduleController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println("Test Add 실행");
+		System.out.println("get Schedule 실행");
 		// Gson 객체 생성
 		Gson gson = new Gson();
 
@@ -40,20 +42,24 @@ public class TestAddController extends HttpServlet {
 		JsonObject jsonObject = gson.fromJson(requestData, JsonObject.class);
 
 		String emp_num = (String) request.getSession().getAttribute("loginid");
-		// JSON 데이터에서 날짜와 텍스트를 추출
-		String date = jsonObject.get("date").getAsString();
-		String text = jsonObject.get("text").getAsString();
+
+		String status = jsonObject.get("status").getAsString();
+		String year = jsonObject.get("year").getAsString();
+		String month = String.valueOf(Integer.parseInt(jsonObject.get("month").getAsString()) + 1);
+
+		System.out.println("get Schedule : " + status + " " + year + " " + month);
 
 		TestDAO dao = new TestDAO();
-		int result = dao.insertSchedule(emp_num, text, date);
 
-		// 응답 설정
-		response.setContentType("application/json");
-		PrintWriter out = response.getWriter();
+		Map<String, List<String>> map = dao.loadSchedule(status, emp_num, year, month);
 
-		// 클라이언트에게 JSON 응답을 보냄
-		JsonObject jsonResponse = new JsonObject();
-		jsonResponse.addProperty("status", "success");
-		out.print(gson.toJson(jsonResponse));
+		String jsonMap = gson.toJson(map);
+		
+		System.out.println("확인용 : " + jsonMap);
+		response.setContentType("application/json; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(jsonMap);
+
 	}
+
 }

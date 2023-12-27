@@ -15,14 +15,15 @@ import com.google.gson.JsonObject;
 
 import TestCal.TestDAO;
 
-@WebServlet("/Controller/TestAdd.do")
-public class TestAddController extends HttpServlet {
+@WebServlet("/Controller/TestDelete.do")
+public class TestDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println("Test Add 실행");
+		System.out.println("Test Del 실행");
 		// Gson 객체 생성
 		Gson gson = new Gson();
 
@@ -40,12 +41,12 @@ public class TestAddController extends HttpServlet {
 		JsonObject jsonObject = gson.fromJson(requestData, JsonObject.class);
 
 		String emp_num = (String) request.getSession().getAttribute("loginid");
-		// JSON 데이터에서 날짜와 텍스트를 추출
-		String date = jsonObject.get("date").getAsString();
-		String text = jsonObject.get("text").getAsString();
+
+		String data = jsonObject.get("id").getAsString();
 
 		TestDAO dao = new TestDAO();
-		int result = dao.insertSchedule(emp_num, text, date);
+
+		dao.deleteSchdule(emp_num, data);
 
 		// 응답 설정
 		response.setContentType("application/json");
@@ -55,5 +56,7 @@ public class TestAddController extends HttpServlet {
 		JsonObject jsonResponse = new JsonObject();
 		jsonResponse.addProperty("status", "success");
 		out.print(gson.toJson(jsonResponse));
+
 	}
+
 }
