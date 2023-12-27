@@ -528,50 +528,50 @@ function showDateAndAlert(day) {
 		document.forms["calender_form"].submit();
 	}
 
-	//일정 추가하기 버튼 눌렀을 때 설정
-	// 일정 추가를 위한 고유한 식별자
-	var eventCounter = 1;
+//일정 추가하기 버튼 눌렀을 때 설정
+// 일정 추가를 위한 고유한 식별자
+var eventCounter = 1;
 
-	function confirmPlus() {
-	    var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
-	    
+function confirmPlus() {
+    var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
+    
 
-	    if (userInput !== null && userInput !== "") {
-	        // 사용자가 확인을 클릭하면 입력한 일정을 서블릿으로 전송
-	        sendNewScheduleToServer(userInput);
-	    } else if (userInput === "") {
-	        alert("일정을 입력해주세요.");
-	    } else {
-	        console.log("일정 저장을 취소하였습니다.");
-	    }
-	}
+    if (userInput !== null && userInput !== "") {
+        // 사용자가 확인을 클릭하면 입력한 일정을 서블릿으로 전송
+        sendNewScheduleToServer(userInput);
+    } else if (userInput === "") {
+        alert("일정을 입력해주세요.");
+    } else {
+        console.log("일정 저장을 취소하였습니다.");
+    }
+}
 
-	// 새로운 일정을 서버로 전송하는 함수
-	function sendNewScheduleToServer(userInput) {
-	    const xhr = new XMLHttpRequest();
-	    xhr.open("POST", "../Controller/TeamCalPlusController.do", true);
-	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-	   
+// 새로운 일정을 서버로 전송하는 함수
+function sendNewScheduleToServer(userInput) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "../Controller/TeamCalPlusController.do", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+   
 
-	    // 서버로 전송할 데이터 설정
-	    const data = "userInput=" + encodeURIComponent(userInput);
-	 
-	    xhr.send(data);
+    // 서버로 전송할 데이터 설정
+    const data = "userInput=" + encodeURIComponent(userInput);
+ 
+    xhr.send(data);
 
-	    xhr.onreadystatechange = function () {
-	        if (xhr.readyState === 4) {
-	            if (xhr.status === 200) {
-	                alert(xhr.responseText); // 서버 응답을 알림으로 표시
-	                location.reload();
-	                console.log('추가한 일정들:', userInput);
-	            } else {
-	                alert("일정 추가에 실패했습니다.");
-	                console.log('실패한 일정들:', userInput);
-	            }
-	        }
-	    };
-	    
-	}
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                alert(xhr.responseText); // 서버 응답을 알림으로 표시
+                location.reload();
+                console.log('추가한 일정들:', userInput);
+            } else {
+                alert("일정 추가에 실패했습니다.");
+                console.log('실패한 일정들:', userInput);
+            }
+        }
+    };
+    
+}
 	 
     console.log('잘 실행되는지 확인용1111111111111111111111');
 
@@ -604,7 +604,7 @@ function showDateAndAlert(day) {
       
    	// Ajax를 사용하여 Java 서버에 배열 전송
       const xhr = new XMLHttpRequest();
-      xhr.open("POST", "/Controller/TeamCalDeleteConteController.do", true);
+      xhr.open("POST", "/Controller/TeamCalDeleteController.do", true);
       xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       //xhr.send(JSON.stringify({ array: selectedSchedules }));
   });

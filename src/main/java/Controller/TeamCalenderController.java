@@ -37,7 +37,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		
 		String searchField = request.getParameter("searchField");
 		String searchWord = request.getParameter("searchWord");
-		String selectedDay = request.getParameter("selectedDay");
+		String selectedDay = request.getParameter("selectedDay");  // 월
 		String searchCategory = request.getParameter("searchCategory");
 		System.out.println("confirm : " + selectedDay);
 		
@@ -73,8 +73,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		    // 적절한 로깅 또는 예외 처리를 수행
 		}
 			
-		String selectedYear = request.getParameter("selectedYear");
-		String selectedMonth = request.getParameter("selectedMonth");
+		String selectedYear = request.getParameter("selectedYear");  // 년도
+		String selectedMonth = request.getParameter("selectedMonth");   // 월
 		String selecteddate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
 		String emp_num = (String) request.getSession().getAttribute("loginid");
 		
@@ -93,11 +93,12 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		
 		
 		String team_what = dao.TeamFind(emp_num);
-		System.out.println("팀 이름 : " + team_what);
+		String team_a = team_what;
+		System.out.println("팀 이름 : " + team_a);
 		System.out.println();
 		
 		/* 페이지 처리 start */
-		int totalCount = dao.ScheduleListCount(selecteddate, team_what); // 게시물 개수
+		int totalCount = dao.ScheduleListCount(selecteddate); // 게시물 개수
 		
 		ServletContext application = getServletContext();
 		int pageSize = Integer.parseInt(application.getInitParameter("POSTS_PER_PAGE"));
@@ -119,7 +120,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		map.put("end", end);
 		/* 페이지 처리 end */
 				
-		List<TeamCalDTO> calenderlists = dao.selectListPage(selecteddate, team_what);	
+		List<TeamCalDTO> calenderlists = dao.selectListPage(selecteddate, team_a);	
 		//List<CalenderDTO> CalenderList = dao.selectListPage(map);
 		// 페이징 이미지 전달
 		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/Calender.do");
