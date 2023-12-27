@@ -158,7 +158,7 @@ td, th {
 				            // 폼 요소를 동적으로 생성
 				            var form = document.createElement('form');
 				            form.method = 'POST';
-				            form.action = '../Controller/BoardeditController.do';
+				            form.action = 'skd
 
 				            // hidden 필드를 생성하여 데이터 추가
 				            var inputBoardNum = document.createElement('input');
@@ -325,6 +325,7 @@ td, th {
 				<tr class="table-dark2">
 					<td colspan="4" style="font-size: 15px;">댓글 리스트</td>
 				</tr>
+				
 					<c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
 
 					<tr class="table-dark4">
