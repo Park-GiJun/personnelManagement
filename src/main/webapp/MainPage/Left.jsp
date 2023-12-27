@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Date"%>
 
@@ -13,18 +14,18 @@ String currentDate = sdf.format(new Date());
 <title>Left</title>
 <style>
 @font-face {
-    font-family: 'ChungjuKimSaengTTF';
-    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-family: 'ChungjuKimSaengTTF', sans-serif;
+	font-family: 'ChungjuKimSaengTTF';
+	src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 @font-face {
-    font-family: 'intelone-mono-font-family-regular';
-    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
-    font-weight: 400;
-    font-style: normal;
+	font-family: 'intelone-mono-font-family-regular';
+	src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+	font-weight: 400;
+	font-style: normal;
 }
 
 @font-face {
@@ -32,8 +33,9 @@ String currentDate = sdf.format(new Date());
 	src: url('../Font/SF_HambakSnow.ttf') format('woff');
 	font-weight: normal;
 	font-style: normal;
-}}
+}
 
+}
 * {
 	box-sizing: border-box;
 }
@@ -55,7 +57,7 @@ String currentDate = sdf.format(new Date());
 	.left_info_background, .left_new_Id_background,
 	.left_salaryManagement_background, .left_Holiday_Approval_background,
 	.left_MeetingRoom_background, .left_MeetingRoomReservation_background,
-	.left_WorkBoard_background {
+	.left_WorkBoard_background, .left_Company_schedule_background, .left_Team_schedule_background {
 	width: 100%;
 	height: 5%;
 	background: rgb(68, 74, 83);
@@ -138,6 +140,14 @@ String currentDate = sdf.format(new Date());
 	top: 49%;
 }
 
+.left_Team_schedule_background {
+	top: 64.5%;
+}
+
+.left_Company_schedule_background {
+	top: 64.5%;
+}
+
 .left_Holiday_Approval_background {
 	top: 71.5%;
 }
@@ -163,10 +173,24 @@ String currentDate = sdf.format(new Date());
 }
 </style>
 <script>
+	//휴가 신청 창
 	function openHoliDayWindow() {
 		var detailsUrl = "../Controller/HoliDayCount.do";
 
 		window.open(detailsUrl, "_blank", "width=600, height=400");
+	}
+	// 부서 일정 추가 창
+	function open_team_schedule_Window() {
+		var detailsUrl = "../Team_Schedule/Team_Schedule.jsp";
+
+		window.open(detailsUrl, "_blank", "width=400, height=70");
+	}
+	
+	// 회사 일정 추가 창
+	function open_Company_schedule_Window() {
+		var detailsUrl = "../Company_Schedule/Company_Schedule.jsp";
+
+		window.open(detailsUrl, "_blank", "width=400, height=70");
 	}
 </script>
 </head>
@@ -193,8 +217,9 @@ String currentDate = sdf.format(new Date());
 		</div>
 
 		<div class="left_freeboard_background">
-			<a class="left_FreeboardForm_section" href="../Controller/FreeboardList.do">
-				<span class="left_freeboard_text">게시판</span>
+			<a class="left_FreeboardForm_section"
+				href="../Controller/FreeboardList.do"> <span
+				class="left_freeboard_text">게시판</span>
 			</a>
 		</div>
 		<div class="left_holiday_background">
@@ -203,25 +228,28 @@ String currentDate = sdf.format(new Date());
 			</a>
 		</div>
 		<div class="left_info_background">
-			<a class="left_info_section" href="../Controller/infoLoad.do">
-				<span class="left_info_text">내정보</span>
+			<a class="left_info_section" href="../Controller/infoLoad.do"> <span
+				class="left_info_text">내정보</span>
 			</a>
 		</div>
 		<div class="left_MeetingRoom_background">
-			<a class="left_meetingroom_section" href="../Controller/MeetingRoomLoadController.do">
-				<span class="left_meetingroom_text">회의실 예약</span>
+			<a class="left_meetingroom_section"
+				href="../Controller/MeetingRoomLoadController.do"> <span
+				class="left_meetingroom_text">회의실 예약</span>
 			</a>
 		</div>
 		<div class="left_WorkBoard_background">
-			<a class="left_WorkBoard_section" href="../Controller/WorkBoardList.do">
-				<span class="left_WorkBoard_text">전자결재</span>
+			<a class="left_WorkBoard_section"
+				href="../Controller/WorkBoardList.do"> <span
+				class="left_WorkBoard_text">전자결재</span>
 			</a>
 		</div>
 
 		<div>
+		<!-- 임원이상 로그인시 -->
 			<%
 			int inpGrade = (int) session.getAttribute("inpGrade");
-			if (inpGrade < 4) {
+			if (inpGrade < 3) {
 			%>
 			<div class="left_new_Id_background">
 				<a class="left_new_id_section" href="../Controller/NewRegistLoad.do">
@@ -230,32 +258,91 @@ String currentDate = sdf.format(new Date());
 			</div>
 
 			<div class="left_salaryManagement_background">
-				<a class="left_salaryManagement_section" href="../Controller/SalaryManagement.do">
-					<span class="left_salaryManagement_text">급여관리</span>
+				<a class="left_salaryManagement_section"
+					href="../Controller/SalaryManagement.do"> <span
+					class="left_salaryManagement_text">급여관리</span>
 				</a>
 			</div>
 			<div class="left_Holiday_Approval_background">
-				<a class="left_salaryManagement_section" href="../Controller/HolidayApprovalLoad.do">
-					<span class="left_salaryManagement_text">휴가관리</span>
+				<a class="left_salaryManagement_section"
+					href="../Controller/HolidayApprovalLoad.do"> <span
+					class="left_salaryManagement_text">휴가관리</span>
 				</a>
 			</div>
 			<div class="left_MeetingRoomReservation_background">
-				<a class="left_MeetingRoom_section" href="../Controller/MeetingRoomReservationManagement.do">
-					<span class="left_MeetingRoomReservation_text">회의실관리</span>
+				<a class="left_MeetingRoom_section"
+					href="../Controller/MeetingRoomReservationManagement.do"> <span
+					class="left_MeetingRoomReservation_text">회의실관리</span>
+				</a>
+			</div>
+			
+			<div class="left_Company_schedule_background">
+				<a class="left_salaryManagement_section" onclick="open_Company_schedule_Window()">
+					<span class="left_salaryManagement_text">회사일정추가</span>
 				</a>
 			</div>
 			<%
 			}
 			%>
 		</div>
+		
 		<div>
+		<!-- 부장이 로그인시 -->
+			<%
+			inpGrade = (int) session.getAttribute("inpGrade");
+			if (inpGrade == 3) {
+			%>
+			<div class="left_new_Id_background">
+				<a class="left_new_id_section" href="../Controller/NewRegistLoad.do">
+					<span class="left_new_Id_text">사원관리</span>
+				</a>
+			</div>
+
+			<div class="left_salaryManagement_background">
+				<a class="left_salaryManagement_section"
+					href="../Controller/SalaryManagement.do"> <span
+					class="left_salaryManagement_text">급여관리</span>
+				</a>
+			</div>
+			<div class="left_Holiday_Approval_background">
+				<a class="left_salaryManagement_section"
+					href="../Controller/HolidayApprovalLoad.do"> <span
+					class="left_salaryManagement_text">휴가관리</span>
+				</a>
+			</div>
+			<div class="left_MeetingRoomReservation_background">
+				<a class="left_MeetingRoom_section"
+					href="../Controller/MeetingRoomReservationManagement.do"> <span
+					class="left_MeetingRoomReservation_text">회의실관리</span>
+				</a>
+			</div>
+			
+			<div class="left_Team_schedule_background">
+				<a class="left_salaryManagement_section" onclick="open_team_schedule_Window()">
+					<span class="left_salaryManagement_text">부서일정추가</span>
+				</a>
+			</div>
+			<%
+			}
+			%>
+		</div>
+		
+		<div>
+		<!-- 팀장이 로그인시 -->
 			<%
 			inpGrade = (int) session.getAttribute("inpGrade");
 			if (inpGrade == 4) {
 			%>
-			<div class="left_Holiday_Approval_background">
-				<a class="left_salaryManagement_section" href="../Controller/HolidayApprovalLoad.do">
-					<span class="left_salaryManagement_text">휴가관리</span>
+			<div class="left_Holiday_Approval_background" style="top: 85.5%;">
+				<a class="left_salaryManagement_section" onclick="open_team_schedule_Window()">
+					<span class="left_salaryManagement_text">부서일정추가</span>
+				</a>
+			</div>
+
+			<div class="left_Holiday_Approval_background" style="top: 92.5%;">
+				<a class="left_salaryManagement_section"
+					href="../Controller/HolidayApprovalLoad.do"> <span
+					class="left_salaryManagement_text">휴가관리</span>
 				</a>
 			</div>
 			<%
