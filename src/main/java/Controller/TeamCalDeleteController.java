@@ -12,21 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Calender.CalenderDAO;
+import Calender.TeamCalDAO;
 
 
-@WebServlet("/Controller/CalenderDeleteController.do")
-public class CalenderDeleteController extends HttpServlet {
+@WebServlet("/Controller/TeamCalDeleteController.do")
+public class TeamCalDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		System.out.println("CalenderDeleteController.do");
+		System.out.println("TeamCalDeleteController.do");
 		 System.out.println("");
 		// DAO 생성
-		CalenderDAO dao = new CalenderDAO();
+		TeamCalDAO dao = new TeamCalDAO();
 		
 		// Map 생성
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -53,7 +52,7 @@ public class CalenderDeleteController extends HttpServlet {
 
             // 3. 클라이언트에 응답 보내기 (실제 응답 로직으로 대체)
             response.getWriter().write("선택된 일정이 성공적으로 삭제되었습니다.");
-            response.sendRedirect("../Calender/Scl.jsp");
+            response.sendRedirect("../Calender/Scl4.jsp");
         } else {
             response.getWriter().write("삭제할 일정이 선택되지 않았습니다.");
         }

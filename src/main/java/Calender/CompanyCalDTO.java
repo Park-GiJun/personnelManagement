@@ -4,6 +4,7 @@ public class CompanyCalDTO {
 
 	private String company_calender_date;
 	private String company_schedule;
+	private int com_count_date;
 	
 	public CompanyCalDTO() {
 		super();
@@ -32,6 +33,14 @@ public class CompanyCalDTO {
 	
 	public void setcompany_schedule(String company_schedule) {
 		this.company_schedule = company_schedule;
+	}
+	
+	public int getCom_count_date() {
+		return com_count_date;
+	}
+
+	public void setCom_count_date(int com_count_date) {
+		this.com_count_date = com_count_date;
 	}
 	
 	
