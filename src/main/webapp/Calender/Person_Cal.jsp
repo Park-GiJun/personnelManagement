@@ -415,7 +415,7 @@ tbody {
    
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
 	
-	<button class='next_btn' onclick="location.href='Scl2.jsp';"><</button>
+	<button class='next_btn' onclick="location.href='Scl.jsp';"><</button>
 
    <div class="calendar" style="width: 1050px; height: 300px;">
       <div class="title" >
@@ -475,7 +475,7 @@ tbody {
             for (int i = 1; i <= lastDay; i++) {
                cls = year == ty && month == tm && i == td ? "today" : "";
 				
-               out.print("<td class='" + cls + "'><button onclick=\"window.location.href='Scl2.jsp?name=" + i + "'; showDate(" + i + ");\">" + i + "</button></td>");
+               out.print("<td class='" + cls + "'><button onclick=\"window.location.href='Scl.jsp?name=" + i + "'; showDate(" + i + ");\">" + i + "</button></td>");
                //out.print("<td class='" + cls + "'><button onclick=\"alert('클릭한 날짜 : " + i + "일');\">" + i + "</button></td>");
                if (lastDay != i && (++week) % 7 == 1) {
                   out.print("</tr><tr>");
