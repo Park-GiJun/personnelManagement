@@ -818,8 +818,6 @@ body {
 					    out.print("<button id=\"update\" style='max-height: 50px;' onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button>");
 
 					    // 버튼 출력 부분 수정 시작
-					    //out.print("<button class=\"scl\" style=\"font-size: 12px; position: absolute; bottom: 100%; left: 0; background-color: #1C427E;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
-					    //out.print("<button class=\"scl\" style=\"font-size: 12px; right : 30%;  background-color: #1C427E; color: white; padding: 5px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
 					    int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
 					    out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc(" + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
 					    // 버튼 출력 부분 수정 끝

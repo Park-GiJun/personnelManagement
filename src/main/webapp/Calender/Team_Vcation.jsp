@@ -476,7 +476,7 @@ body {
             for (int i = 1; i <= lastDay; i++) {
                cls = year == ty && month == tm && i == td ? "today" : "";
 
-               out.print("<td class='" + cls + "'><button onclick=\"alert('클릭한 날짜 : " + i + "일');\">" + i + "</button></td>");
+               out.print("<td class='" + cls + "'><button onclick=\"window.location.href='Scl3.jsp?name=" + i + "'; showDate(" + i + ");\">" + i + "</button></td>");
                if (lastDay != i && (++week) % 7 == 1) {
                   out.print("</tr><tr>");
                }
