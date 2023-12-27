@@ -248,6 +248,7 @@ function deleteDiary() {
 				.then(response => response.json())
 				.then(data => {
 					console.log(data);
+					location.reload();
 
 					if (data.status === 'success') {
 						sidebar.removeChild(entry);
