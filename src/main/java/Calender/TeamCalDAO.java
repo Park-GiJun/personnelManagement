@@ -3,6 +3,7 @@ package Calender;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
@@ -13,21 +14,49 @@ public class TeamCalDAO extends DBConnPool {
 	public TeamCalDAO() {
 		super();
 	}
+	
+	
+	// 팀 알아내기
+	public String TeamFind(String emp_num) {
+		System.out.println("TeamFind");
+		
+		System.out.println("확인 : " + emp_num + " ");
+		String team = null;
+		int totalcount = 0;
+		
+		// 쿼리문 준비
+		String query = "SELECT team FROM emp WHERE emp_num = ?";
+		
+		try {
+	        psmt = con.prepareStatement(query); // 쿼리문 생성
+	        psmt.setString(1, emp_num);
+	        rs = psmt.executeQuery(); // 쿼리문 실행
+	        if (rs.next()) {
+	            team = rs.getString("team"); // team 값을 변수에 저장
+	        }
+	    } catch (Exception e) {
+	        System.out.println("팀 조회 중 예외 발생");
+	        e.printStackTrace();
+	    }
+		return team;
+		
+	}
 
+	
 	// 1
-	public int ScheduleListCount(String selecteddate, String team) {
+	public int ScheduleListCount(String selecteddate, String team_what) {
 		System.out.println("ScheduleListCount");
 		
-		System.out.println("확인 : " + selecteddate + " " + team);
+		System.out.println("확인 : " + selecteddate + " ");
 		int totalcount = 0;
 
 		// 쿼리문 준비
-		String query = "SELECT COUNT(*) AS count FROM Team_calender WHERE Team_calender_date =? AND team =?";
+		String query = "SELECT COUNT(*) AS count FROM Team_calender WHERE team=? AND Team_calender_date =?";
 
 		try {
 			psmt = con.prepareStatement(query); // 쿼리문 생성
 			psmt.setString(1, selecteddate);
-			psmt.setString(2, team);
+			psmt.setString(2, team_what);
 			rs = psmt.executeQuery(); // 쿼리문 실행
 			if (rs.next()) {
 				totalcount = rs.getInt("count");
@@ -42,18 +71,18 @@ public class TeamCalDAO extends DBConnPool {
 	}
 
 	// 2
-	public List<TeamCalDTO> selectListPage(String selecteddate, String team) {
+	public List<TeamCalDTO> selectListPage(String selecteddate, String team_what) {
 		List<TeamCalDTO> board = new Vector<TeamCalDTO>();
 		
 		System.out.println("select List Page");
 
 		// 쿼리문 준비
-		String query = "SELECT team_schedule FROM Team_calender WHERE Team_calender_date=? AND team=?";
+		String query = "SELECT team_schedule FROM Team_calender WHERE team=? AND Team_calender_date=?";
 
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, selecteddate);
-			psmt.setString(2, team);
+			psmt.setString(2, team_what);
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
@@ -72,20 +101,37 @@ public class TeamCalDAO extends DBConnPool {
 		return board;
 	}
 
-	// 3 삭제
-	public int deletePost(String team_schedule) {
-		int result = 0;
-		try {
-			String query = "DELETE FROM Team_calender WHERE team_schedule = ?";
-			psmt = con.prepareStatement(query);
-			psmt.setString(1, team_schedule);
-			result = psmt.executeUpdate();
-		} catch (Exception e) {
-			System.out.println("게시물 삭제 중 예외 발생");
-			e.printStackTrace();
-		}
-		return result;
+	// 3 삭제하기 기능
+		public int deleteCalender(List<String> selectedSchedules) {
+		    int result = 0;
+
+		    try {
+		        // PreparedStatement를 사용하여 일괄 삭제
+		        String query = "DELETE FROM Team_calender WHERE team_schedule=?";
+		        psmt = con.prepareStatement(query);
+
+		        for (String schedule : selectedSchedules) {
+		            psmt.setString(1, schedule);
+		            psmt.addBatch();
+		        }
+
+		        // 일괄 실행
+		        int[] batchResults = psmt.executeBatch();
+
+		        // 총 영향 받은 행 계산
+		        for (int batchResult : batchResults) {
+		            result += batchResult;
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        // 리소스 해제
+		        close();
+		    }
+
+		    return result;
 	}
+		
 
 	// 4 입력, 저장
 	public int insertWrite(TeamCalDTO dto) {

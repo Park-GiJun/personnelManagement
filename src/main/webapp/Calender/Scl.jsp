@@ -51,7 +51,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 <html>
 <head>
 <meta charset="UTF-8">
-<title>일정 리스트</title>
+<title>개인 일정 리스트</title>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <style type="text/css">
@@ -222,7 +222,7 @@ to {
 
 /* 개인 일정 버튼 */
 .my_btn {
-	background-color: #1C427E;
+	background-color: orange;
 	color: white;
 	border: none;
 	width: 150px;
@@ -707,7 +707,7 @@ body {
 		<p class="em" style="font-size: 120px"><%=month%></p>
 		<!-- 화면 달력의 월 표시 -->
 
-		<button class='next_btn' onclick="location.href='Calender.jsp';">></button>
+		<button class='next_btn' onclick="location.href='Person_Cal.jsp';">></button>
 
 		<div class="reverse">
 			
