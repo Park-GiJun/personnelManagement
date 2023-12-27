@@ -5,6 +5,7 @@ public class TeamVactionDTO {
 	private String Start_vacation;
 	private String end_vacation;
 	private String emp_num;
+	private String team;
 	
 	public TeamVactionDTO() {
 		super();
@@ -44,6 +45,15 @@ public class TeamVactionDTO {
 	
 	public void setemp_num(String emp_num) {
 		this.emp_num = emp_num;
+	}
+	
+	
+	public String getteam() {
+		return team;
+	}
+	
+	public void setteam(String team) {
+		this.team = team;
 	}
 	
 }
