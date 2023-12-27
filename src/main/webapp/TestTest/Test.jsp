@@ -107,14 +107,13 @@
 }
 
 .schedule-item {
-    background-color: #f0f0f0;
-    margin-top: 2px;
-    padding: 2px;
-    font-size: 0.8em;
-    border-radius: 4px;
-    /* 추가 스타일링 */
+	background-color: #f0f0f0;
+	margin-top: 2px;
+	padding: 2px;
+	font-size: 0.8em;
+	border-radius: 4px;
+	/* 추가 스타일링 */
 }
-
 </style>
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <script src="../TestTest/Test.js"></script>
@@ -131,7 +130,7 @@
 					<button class="btn btn-secondary btn-sm" onclick="company()">회사일정</button>
 					<button class="btn btn-secondary btn-sm" onclick="team()">부서일정</button>
 					<button class="btn btn-secondary btn-sm" onclick="personal()">개인일정</button>
-					<button class="btn btn-secondary btn-sm" onclick="vacation()">부서휴가자</button>
+					<!--  <button class="btn btn-secondary btn-sm" onclick="vacation()">부서휴가자</button> -->
 				</div>
 			</div>
 			<div class="col-md-4">
