@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.Calendar"%>
 <%@ page trimDirectiveWhitespaces="true"%>
-<%@ page import="Calender.CompanyCalDTO"%>
-<%@ page import="Calender.CompanyCalDAO"%>
+<%@ page import="Calender.CalenderDTO"%>
+<%@ page import="Calender.CalenderDAO"%>
 
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
@@ -51,7 +51,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 <html>
 <head>
 <meta charset="UTF-8">
-<title>일정 리스트</title>
+<title>회사 일정 리스트</title>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <style type="text/css">
@@ -108,22 +108,20 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 	background: orange;
 }
 
+
+
+
 .scl {
-	top: 480px;
-	animation-direction: scl;
-	position: absolute;
-	left: 992px;
+	top: 600px;
+	/* position: absolute; */
+	left: 800px;
 	width: 185px;
 	height: 20px;
 	background-color: #1C427E;
 	border: none;
 	color: #fff;
 	font-size: 13px;
-	/* animation-name:direction; */
-	animation-duration: 2s;
-	animation-iteration-count: 3;
-	animation-timing-function: ease-in;
-	position: relative; /* 상대적인 위치 지정 */
+	/* position: relative; /* 상대적인 위치 지정 */
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
@@ -298,7 +296,7 @@ button.my_btn4:hover {
 .middle-button {
 	text-align: center;
 	padding: 30px 30px;
-	margin-left: -170px;
+	margin-left: 200px;
 	font-family: 'Kanit', sans-serif;
 }
 
@@ -327,9 +325,9 @@ button.next_btn:hover {
 .em {
 	color: #1C427E;
 	position: absolute;
-	top: -40px;
+	top: -30px;
 	left: 250px;
-	font-size: 100x;
+	font-size: 50x;
 	border-radius: 30px;
 }
 
@@ -356,13 +354,13 @@ a:active, a:hover {
 
 .calendar {
 	width: 1500px;
-	margin: 40px auto;
+	margin: -20px auto;
 	margin-left: 250px;
 }
 
 .calendar .title {
 	position: absolute;
-	top: 120px;
+	top: 60px;
 	left: 240px;
 	width: 100%;
 	z-index: 1;
@@ -371,21 +369,21 @@ a:active, a:hover {
 /* 년도 선택 리스트 */
 .selectField {
 	border: 1px solid #999;
-	padding: 15px 50px;
+	padding: 5px 30px;
 	border-radius: 25px;
 	font-family: 'Kanit', sans-serif;
-	font-size: 20px;
-	margin-left: 330px;
-	top: 10px;
+	font-size: 18px;
+	margin-left: 150px;
+	top: 50px;
 }
 
 /* 월 선택 리스트 */
 .selectField2 {
 	border: 1px solid #999;
-	padding: 15px 50px;
+	padding: 5px 30px;
 	border-radius: 25px;
 	font-family: 'Kanit', sans-serif;
-	font-size: 20px;
+	font-size: 18px;
 	margin-left: 5px;
 }
 
@@ -403,7 +401,7 @@ a:active, a:hover {
 
 /* 요일, 날짜 칸 크기 조절 */
 .calendar table td {
-	padding: 40px 80px;
+	padding: 30px 80px;
 	text-align: left;
 	border: 1px solid #ccc;
 }
@@ -416,6 +414,7 @@ a:active, a:hover {
 .calendar table td:nth-child(5) {
 	color: white;
 }
+
 
 /* 일요일 색상 지정 */
 .calendar table td:nth-child(7n+1) {
@@ -430,6 +429,8 @@ a:active, a:hover {
 /* 전 월의 일 색상 */
 .calendar table td.gray {
 	color: #ccc;
+	 height: 30px; /* 각 날짜 셀의 높이를 최대 30px로 설정 */
+     overflow: hidden;
 }
 
 /* 날짜 버튼 스타일 지정 */
@@ -439,10 +440,12 @@ a:active, a:hover {
 	background: none;
 	font-size: 20px;
 	position: relative; /* 상대적인 위치 설정 */
-	top: -40px; /* 상단 여백 조정 */
-	left: -70px; /* 왼쪽 여백 조정 */
+	top: -30px; /* 상단 여백 조정 */
+	left: -80px; /* 왼쪽 여백 조정 */
 	font-family: 'Kanit', sans-serif;
 	cursor: pointer; /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+	/* background: red; */
+	
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
@@ -482,17 +485,30 @@ a:active, a:hover {
 /* 전월의 날짜 색상 지정 */
 .calendar table td.gray button {
 	color: #ccc;
+	position: relative; /* 상대적인 위치 설정 */
+	top: -30px; /* 상단 여백 조정 */
 }
 
 /* 다음달의 날짜 색상 지정 */
 .calendar table td.gray2 button {
 	color: #ccc;
+	position: relative; /* 상대적인 위치 설정 */
+	top: -30px; /* 상단 여백 조정 */
 }
+
+#bin {
+   position: absolute;
+   width: 185px;
+}
+
+
 </style>
 
 
 
+
 <script type="text/javascript">
+
 
 function showDateAndAlert(day) {
     // 클릭한 날짜를 JavaScript 변수에 저장
@@ -505,148 +521,142 @@ function showDateAndAlert(day) {
 
 		// 선택한 날짜를 숨은 필드에 설정
 		document.getElementById('selectedDay').value = clickedDay;
+		document.getElementById('selectedYear').value = '<%=year%>';
+		document.getElementById('selectedMonth').value = '<%=month%>';
 
 		// 폼 제출
 		document.forms["calender_form"].submit();
 	}
-
-
-
 
 	//일정 추가하기 버튼 눌렀을 때 설정
 	// 일정 추가를 위한 고유한 식별자
 	var eventCounter = 1;
 
 	function confirmPlus() {
-		// 사용자로부터 입력을 받기 위한 prompt 대화상자 사용
-		var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
+	    var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
+	    
 
-		// 사용자가 "확인"을 클릭하고 값을 입력한 경우
-		if (userInput !== null && userInput !== "") {
-			// 사용자가 "확인"을 클릭하고 값을 입력한 경우, userInput 변수에 입력된 값이 포함됩니다.
-			console.log("사용자가 이벤트를 추가하려고 합니다:", userInput);
+	    if (userInput !== null && userInput !== "") {
+	        // 사용자가 확인을 클릭하면 입력한 일정을 서블릿으로 전송
+	        sendNewScheduleToServer(userInput);
+	    } else if (userInput === "") {
+	        alert("일정을 입력해주세요.");
+	    } else {
+	        console.log("일정 저장을 취소하였습니다.");
+	    }
+	}
 
-			// 일정 추가 여부를 물어보고 결과에 따라 메시지 표시
-			var result = window.confirm("일정을 추가하시겠습니까?");
-			if (result) {
-				// 사용자가 입력을 취소하지 않은 경우 새로운 <p> 엘리먼트 생성
-				var newParagraph = document.createElement('p');
-				newParagraph.textContent = userInput;
+	// 새로운 일정을 서버로 전송하는 함수
+	function sendNewScheduleToServer(userInput) {
+	    const xhr = new XMLHttpRequest();
+	    xhr.open("POST", "../Controller/CompanyPlusController.do", true);
+	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+	   
 
-				// 고유한 ID 추가
-				newParagraph.id = 'event' + eventCounter;
-
-				// 고유한 식별자를 증가시킴
-				eventCounter++;
-
-				// <div class="reverse2" id="contentContainer">에 <p> 추가
-				document.getElementById('contentContainer').appendChild(newParagraph);
-
-				window.alert("일정이 추가되었습니다");
-			} else {
-				window.alert("취소되었습니다");
-			}
-		} else if (userInput === "") {
-			// 사용자가 "확인"을 클릭하고 값을 입력하지 않은 경우
-			alert("일정을 입력해주세요.");
-		} else {
-			// 사용자가 "취소"를 클릭하거나 대화상자를 아무 값도 입력하지 않고 닫은 경우
-			console.log("일정 저장을 취소하였습니다.");
-		}
-}
-
-	
-	
-// 삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
-function confirmDelete() {
-    //var selectedSchedules = Array.from(document.querySelectorAll('.scheduleLink.selected')).map(function (schedule) {
-        //return schedule.getAttribute('data-schedule');
-    //});
-
-    if (selectedSchedules.length > 0) {
-        var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
-        if (confirmed) {
-            // 수정된 부분: 선택한 일정의 ID를 서버로 전송
-            sendSelectedSchedulesToServer(selectedSchedules);
-        }
-    } else {
-        alert("삭제할 일정을 선택해주세요.");
-    }
-}
+	    // 서버로 전송할 데이터 설정
+	    const data = "userInput=" + encodeURIComponent(userInput);
 	 
-	
-// 선택한 일정 삭제를 서버로 전송하는 함수
-function sendSelectedSchedulesToServer() {
-    // Ajax를 사용하여 Java 서버에 배열 전송
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "../Controller/CalenderDeleteController.do", true);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	    xhr.send(data);
 
-    // 선택한 일정의 ID 스택을 문자열로 변환하여 서버로 전송
-    //var data = "selectedSchedules=" + encodeURIComponent(scheduleStack.join(','));
-    //xhr.send(data);
-    
- 	// 선택한 일정의 ID를 문자열 배열로 변환
-    const data = JSON.stringify(selectedSchedules);
-    xhr.send(data);
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                alert("일정이 삭제되었습니다.");
-                // 페이지 리로드 또는 필요한 갱신 작업 수행
-                location.reload();
-            } else {
-                alert("일정 삭제에 실패했습니다.");
-            }
-        }
-    };
-}
-	 
+	    xhr.onreadystatechange = function () {
+	        if (xhr.readyState === 4) {
+	            if (xhr.status === 200) {
+	                alert(xhr.responseText); // 서버 응답을 알림으로 표시
+	                location.reload();
+	                console.log('추가한 일정들:', userInput);
+	            } else {
+	                alert("일정 추가에 실패했습니다.");
+	                console.log('실패한 일정들:', userInput);
+	            }
+	        }
+	    };
+	    
+	}
 	 
     console.log('잘 실행되는지 확인용1111111111111111111111');
-	 
 
-  // 링크 클릭 시 선택 및 해제를 토글하는 함수
-  var selectedSchedules = [];  // 선택한 일정이 저장되는 곳
- 
-document.addEventListener('click', function (event) {
-    if (event.target.classList.contains('scheduleLink')) {
-        event.preventDefault();
-        var selectedSchedule = event.target.getAttribute('data-schedule');
-        var isSelected = event.target.classList.toggle('selected');
+ // 링크 클릭 시 선택 및 해제를 토글하는 함수
+    var selectedSchedules = [];  // 선택한 일정이 저장되는 곳
+   
+  document.addEventListener('click', function (event) {
+      if (event.target.classList.contains('scheduleLink')) {
+          event.preventDefault();
+          var selectedSchedule = event.target.getAttribute('data-schedule');
+          var isSelected = event.target.classList.toggle('selected');
 
-        alert(selectedSchedule + ' 확인용');
+          alert(selectedSchedule + ' 확인용');
 
-        // 선택한 일정을 리스트에 추가 또는 제거
-        if (isSelected) {
-            selectedSchedules.push(selectedSchedule);
-        } else {
-            // 해당 값이 리스트에 존재하면 제거
-            var index = selectedSchedules.indexOf(selectedSchedule);
-            if (index !== -1) {
-                selectedSchedules.splice(index, 1);
-            }
-        }
+          // 선택한 일정을 리스트에 추가 또는 제거
+          if (isSelected) {
+              selectedSchedules.push(selectedSchedule);
+          } else {
+              // 해당 값이 리스트에 존재하면 제거
+              var index = selectedSchedules.indexOf(selectedSchedule);
+              if (index !== -1) {
+                  selectedSchedules.splice(index, 1);
+              }
+          }
 
-        // 선택한 일정들을 콘솔에 출력
-        console.log('선택한 일정들:', selectedSchedules);
-        
-    }
+          // 선택한 일정들을 콘솔에 출력
+          console.log('선택한 일정들:', selectedSchedules);
+          
+      }
+      
+   	// Ajax를 사용하여 Java 서버에 배열 전송
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "/Controller/ComanyDeleteController.do", true);
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      //xhr.send(JSON.stringify({ array: selectedSchedules }));
+  });
     
- 	// Ajax를 사용하여 Java 서버에 배열 전송
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/Controller/CalenderDeleteConteController.do", true);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    //xhr.send(JSON.stringify({ array: selectedSchedules }));
+  //삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
+  function confirmDelete() {
+      var selectedSchedules = Array.from(document.querySelectorAll('.scheduleLink.selected')).map(function (schedule) {
+          return schedule.getAttribute('data-schedule');
+      });
 
-});
+      if (selectedSchedules.length > 0) {
+          var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
+          if (confirmed) {
+              // 수정된 부분: 선택한 일정의 ID를 서버로 전송
+              sendSelectedSchedulesToServer(selectedSchedules);
+          }
+      } else {
+          alert("삭제할 일정을 선택해주세요.");
+      }
+  }
+  	 
+  // 선택한 일정 삭제를 서버로 전송하는 함수
+  function sendSelectedSchedulesToServer(selectedSchedules) {
+      // Ajax를 사용하여 Java 서버에 배열 전송
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "../Controller/ComanyDeleteController.do", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+      //xhr.send(JSON.stringify({ selectedSchedules: selectedSchedules }));
 
+      // 선택한 일정의 ID 스택을 문자열로 변환하여 서버로 전송
+      //var data = "selectedSchedules=" + encodeURIComponent(scheduleStack.join(','));
+      //xhr.send(data);
+      
+   // 선택한 일정의 ID를 문자열 배열로 변환
+      //const data = JSON.stringify(selectedSchedules);
+   	const data = "selectedSchedules=" + encodeURIComponent(selectedSchedules.join(','));
+      xhr.send(data);
 
-    
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                  alert("일정이 삭제되었습니다.");
+                  // 페이지 리로드 또는 필요한 갱신 작업 수행
+                  location.reload();
+              } else {
+                  alert("일정 삭제에 실패했습니다.");
+              }
+          }
+      };
+  }  
+
 </script>
-
-
 
 </head>
 <style>
@@ -680,8 +690,6 @@ body {
 		<input type="hidden" name="selectedYear" id="selectedYear" value="<%=year%>">
 		<input type="hidden" name="selectedMonth" id="selectedMonth" value="<%=month%>">
 		<input type="hidden" name="selectedDay" id="selectedDay" value="">
-		<!-- <input type="hidden" name="selectedContent" id="selectedContent" value="selectedSchedules"> -->
-		<!-- <input type="hidden" name="selectedContent" id="selectedContent" value="<c:out value="${empty row.personal_diaray_schedule ? '' : row.personal_diaray_schedule}"/>"> -->
 
 		<div class="middle-button">
 			<!-- 다른 페이지에서 불러오는 내용 -->
@@ -696,23 +704,21 @@ body {
 				일정</button>
 		</div>
 
-		<p class="em" style="font-size: 200px"><%=month%></p>
+		<p class="em" style="font-size: 120px"><%=month%></p>
 		<!-- 화면 달력의 월 표시 -->
 
 		<button class='next_btn' onclick="location.href='Calender.jsp';">></button>
 
-
-
 		<div class="reverse">
 			
-			<h2 class='re_day'>${selecteddate}</h2>  <!-- 선택한 날짜(년,월,일) 나오는 부분 -->
+			<h2 class='re_day'>${selecteddate}</h2>
 		
 			<button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>
 			<button class='del_btn'  type='submit' onclick="confirmDelete();">삭제하기</button>
 
 
 			<!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
-			<div class="reverse2">
+         <div class="reverse2">
     			<table class="caltabke" width="100%">
         			<c:choose>
             			<c:when test="${empty calenderlists}">
@@ -738,19 +744,11 @@ body {
     			</table>
 			</div>
 
-		</div>
+      </div>
 		
 		<c:if test="${not empty deleteMessage}">
     		<div>${deleteMessage}</div>
 		</c:if>
-
-
-		<button class="scl" onclick="location.href='Scl_Cal.jsp';">
-			<font class="myFont">여기에 회사 일정 내용 담기</font>
-		</button>
-		<!-- 1개당 1개의 일정 제목 표시 -->
-
-
 
 		<div class="calendar" id="calendar-container" style="width: 1300px; height: 300px;">
 			<div class="title">
@@ -781,19 +779,18 @@ body {
 				</form>
 			</div>
 
-
 			<table>
 				<!-- 테이블 표 만드는 곳(달력 만드는 곳) -->
 				<thead>
-					<tr>
-						<td>일</td>
-						<td>월</td>
-						<td>화</td>
-						<td>수</td>
-						<td>목</td>
-						<td>금</td>
-						<td>토</td>
-					</tr>
+					<tr style="width:100%;">
+                  <td width="14.25%">일</td>
+                  <td width="14.25%">월</td>
+                  <td width="14.25%">화</td>
+                  <td width="14.25%">수</td>
+                  <td width="14.25%">목</td>
+                  <td width="14.25%">금</td>
+                  <td width="14.25%">토</td>
+               </tr>
 				</thead>
 				<tbody>
 					<%
@@ -806,37 +803,44 @@ body {
 					// 전 달 끝부분 일자 출력
 					for (int i = 1; i < week; i++) {
 						//out.print("<td>&nbsp;</td>");
-						out.print("<td class='gray'><button disabled>" + (preDate++) + "</button></td>");
+						out.print("<td class='gray'style='width: 100px; position: relative; top: -15px; height: 50px;'><button disabled>" + (preDate++) + "</button></td>");
 					}
-
+					
 					int click_day = 0;
 					// 1일부터 말일까지 출력
 					int lastDay = cal.getActualMaximum(Calendar.DATE);
 					String cls;
+					
 					for (int i = 1; i <= lastDay; i++) {
-						cls = year == ty && month == tm && i == td ? "today" : "";
+					    cls = year == ty && month == tm && i == td ? "today" : "";
 
-						out.print("<td class='" + cls + "'><button id=\"update\" onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button></td>");
-						if (lastDay != i && (++week) % 7 == 1) {
-							out.print("</tr><tr>");
-						}
+					    out.print("<td class='" + cls + "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
+					    //out.print("<td class='" + cls + "' style='min-width: 100px; max-width: 100px; width: 100px; min-height: 10px !important; max-height: 10px !important; height: 50px !important; position: relative;'>");
+					    out.print("<button id=\"update\" style='max-height: 50px;' onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button>");
+
+					    // 버튼 출력 부분 수정 시작
+					    int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
+					    out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc(" + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+					    // 버튼 출력 부분 수정 끝
+
+					    out.print("</td>");
+
+					    if (lastDay != i && (++week) % 7 == 1) {
+					        out.print("</tr><tr>");
+					    }
 					}
 
 					// 다음 달 첫부분 일자 출력
 					int n = 1;
 					for (int i = (week - 1) % 7; i < 6; i++) {
 						// out.print("<td>&nbsp;</td>");
-						out.print("<td class='gray'><button disabled>" + (n++) + "</button></td>");
+						out.print("<td class='gray' style='width: 100px; position: relative; top: -15px; height: 50px;'><button disabled>" + (n++) + "</button></td>");
 					}
 					out.print("</tr>");
 					%>
 				</tbody>
 			</table>
-
 		</div>
-
 	</form>
-
-
 </body>
 </html>
