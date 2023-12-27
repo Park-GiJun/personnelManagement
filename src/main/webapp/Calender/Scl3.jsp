@@ -91,7 +91,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 	font-size: 25px;
 	position: absolute;
 	color: white;
-	top: 100px;
+	top: 95px;
 	left: 10px;
 }
 
