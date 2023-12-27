@@ -146,7 +146,7 @@ button.my_btn3:hover {
 
 /* 회사 일정 버튼 */
 .my_btn4 {
-  background-color: #1C427E;
+  background-color: orange;
   color: white;
   border: none;
   
