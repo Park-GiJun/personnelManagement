@@ -75,7 +75,7 @@ a {
 	border-radius: 50px;
 	font-family: 'intelone-mono-font-family-regular', sans-serif;
 }
-</style>
+</style> 
 </head>
 <body>
 	<%
