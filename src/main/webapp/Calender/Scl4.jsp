@@ -742,31 +742,47 @@ body {
 
 			<!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
          <div class="reverse2">
-             <table class="caltabke" width="100%">
-                 <c:choose>
-                     <c:when test="${empty calenderlists}">
-                         <tr>
-                             <td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>
-                         </tr>
-                     </c:when>
-                     <c:otherwise>
-                         <c:forEach items="${calenderlists}" var="row" varStatus="loop">
-                             <tr>
-                                <td style="background-color: #1C427E;">
-                            	${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
-                           </td>
-                                 <td style="background-color: #1C427E;">
-                                     <a href="#" class="scheduleLink" data-schedule="${row.team_schedule}">
-                                         ${row.team_schedule}  <!-- db에 있는 개인 일정 출력 -->
-                                     </a>
-                                 </td>
-                             </tr>
-                         </c:forEach>
-                     </c:otherwise>
-                 </c:choose>
-             </table>
-         </div>
-      </div>
+				<table class="caltabke" width="100%">
+						
+					<c:choose>
+						<c:when test="${not empty calenderlists}">
+								<c:forEach items="${calenderlists}" var="row" varStatus="loop">
+								<tr>
+									<td style="background-color: #1C427E;">${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
+									</td>
+									<td style="background-color: #1C427E;"><a href="#"
+										class="scheduleLink"
+										data-schedule="${row.personal_diaray_schedule}">
+											${row.personal_diaray_schedule} <!-- db에 있는 개인 일정 출력 -->
+									</a></td>
+								</tr>
+							</c:forEach>
+						</c:when>
+						<c:when test="${not empty calenderlists2}">
+							<c:forEach items="${calenderlists2}" var="row" varStatus="loop">
+								<tr>
+									<td style="background-color: #1C427E;">${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
+									</td>
+									<td style="background-color: #1C427E;"><a href="#"
+										class="scheduleLink"
+										data-schedule="${row.team_schedule}">
+											${row.team_schedule} <!-- db에 있는 개인 일정 출력 -->
+									</a></td>
+								</tr>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
+					
+					
+					
+				</table>
+			</div>
+		</div>
 		
 		<c:if test="${not empty deleteMessage}">
     		<div>${deleteMessage}</div>

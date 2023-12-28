@@ -483,7 +483,7 @@ tbody {
    
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
 	
-	<button class='next_btn' onclick="location.href='Scl4.jsp';"><</button>
+	<button class='next_btn' onclick="location.href='../Controller/TeamLoadController.do';"><</button>
 	
 	<button class="scl" onclick="location.href='Scl4.jsp';">
 		<font class="myFont">여기에 부서 일정 내용 담기</font>

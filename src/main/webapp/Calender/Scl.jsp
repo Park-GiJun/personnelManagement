@@ -520,6 +520,8 @@ a:active, a:hover {
 <script type="text/javascript">
 
 
+
+
 //페이지가 로드될 때 실행되는 함수
 document.addEventListener("DOMContentLoaded", function() {
     // 현재 날짜 정보 가져오기

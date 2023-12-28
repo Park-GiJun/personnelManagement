@@ -355,21 +355,23 @@ a:active, a:hover {
 </style>
 
 <script type="text/javascript">
+
 function change() {
-   var f = document.frm;
+    var f = document.frm;
  
-   f.submit();
+    f.submit();
 }
 
 function updateCalendar() {
-	   var year = document.getElementById("yearSelect").value;
-	   var month = document.getElementById("monthSelect").value;
+    var year = document.getElementById("yearSelect").value;
+    var month = document.getElementById("monthSelect").value;
 
-	   var url = "calendar.jsp?year=" + year + "&month=" + month;
-	   window.location.href = url;
-	}
+    var url = "calendar.jsp?year=" + year + "&month=" + month;
+    window.location.href = url;
+}
 
 </script>
+
 
 
 
