@@ -2,6 +2,7 @@ package Controller;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		
 		
 		System.out.println("ComanyDeleteController.do");
-		 System.out.println("");
+		 System.out.println();
 		// DAO 생성
 		 CompanyCalDAO dao = new CompanyCalDAO();
 		
@@ -41,7 +42,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             // 2. 선택된 일정 삭제 로직 구현 (실제 삭제 로직으로 대체)
         	System.out.println("선택된 일정 목록:");
             for (String schedule : selectedSchedules) {
-            	 dao.deleteCalender(Arrays.asList(schedule));
+            	 dao.deleteCalender(Collections.singletonList(schedule));
                  System.out.println("선택한 일정 삭제: " + schedule);
             }
 

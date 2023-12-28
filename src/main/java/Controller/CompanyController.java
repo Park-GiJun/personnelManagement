@@ -26,7 +26,7 @@ public class CompanyController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("Company_Cal.do");
-		 System.out.println("");
+		 System.out.println();
 		// DAO 생성
 		 CompanyCalDAO dao = new CompanyCalDAO();
 		HttpSession session = request.getSession();

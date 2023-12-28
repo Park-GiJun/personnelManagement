@@ -16,7 +16,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import MeetingRoom.MeetingRoomDAO;
-import WebServer.WebServer;
 
 @WebServlet("/Contorller/MeetingRoomReservation.do")
 public class MeetingRoomReservationController extends HttpServlet {
@@ -54,8 +53,7 @@ public class MeetingRoomReservationController extends HttpServlet {
             dao.reservationMeetingRoom(date, meetingRoomId, emp);
             
         }
-		
-		WebServer.sendReservationNotification("회의실 예약이 있습니다.");
+
 	}
 
 }
