@@ -75,6 +75,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 
 .conti {
 	text-align: center;
+	background-color: #1C427E;
 }
 
 .re_day {
@@ -336,9 +337,15 @@ day {
 }
 
 body {
-	font-size: px;
-	font-family: 'Kanit', sans-serif;
-	/*color: white;*/
+	background-color: #272b30;
+   	font-size: px;
+  	font-family: 'Kanit', sans-serif;
+    /*color: white;*/
+}
+
+
+tbody {
+	background : gray;
 }
 
 a {
@@ -394,9 +401,9 @@ a:active, a:hover {
 }
 
 /* 요일 칸 배경 색 지정 */
-.calendar table thead tr:first-child {
-	background: #1c427e;
-	color: white;
+.calendar table thead tr:first-child{
+	background-color: rgb(68, 74, 83);
+    color: white;
 }
 
 /* 요일, 날짜 칸 크기 조절 */
@@ -435,6 +442,7 @@ a:active, a:hover {
 
 /* 날짜 버튼 스타일 지정 */
 .calendar table button {
+	color: #fff;
 	border: none;
 	padding: 0;
 	background: none;
@@ -484,21 +492,22 @@ a:active, a:hover {
 
 /* 전월의 날짜 색상 지정 */
 .calendar table td.gray button {
-	color: #ccc;
+	color: #000;
 	position: relative; /* 상대적인 위치 설정 */
-	top: -30px; /* 상단 여백 조정 */
+	top: -45px; /* 상단 여백 조정 */
 }
 
 /* 다음달의 날짜 색상 지정 */
 .calendar table td.gray2 button {
-	color: #ccc;
+	color: #000;
 	position: relative; /* 상대적인 위치 설정 */
-	top: -30px; /* 상단 여백 조정 */
+	top: -45px; /* 상단 여백 조정 */
 }
 
 #bin {
    position: absolute;
    width: 185px;
+   background: #1C427E;
 }
 
 
@@ -696,8 +705,8 @@ body {
 			<!-- <h2 class="myHeader">텍스트 입력</h2>  -->
 			<button class='my_btn' onclick="location.href='Person_Cal.jsp';">개인
 				일정</button>
-			<button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서
-				휴가</button>
+			<!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서
+				휴가</button> -->
 			<button class='my_btn3' onclick="location.href='Team_Cal.jsp';">부서
 				일정</button>
 			<button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사
@@ -711,6 +720,20 @@ body {
 
 		<div class="reverse">
 			
+			<h2 class='re_day'>
+				<%
+					String selectedDate = (String) request.getAttribute("selecteddate");
+        			if (selectedDate == null) {
+        				Calendar currentDate = Calendar.getInstance();
+        	            int currentYear = currentDate.get(Calendar.YEAR);
+        	            int currentMonth = currentDate.get(Calendar.MONTH) + 1;
+        	            int currentDay = currentDate.get(Calendar.DATE);
+        	            
+        	            out.print(currentYear + "-" + currentMonth + "-" + currentDay);
+        			}
+    			%>
+			</h2>
+				
 			<h2 class='re_day'>${selecteddate}</h2>
 		
 			<button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>
@@ -729,10 +752,10 @@ body {
                      <c:otherwise>
                          <c:forEach items="${calenderlists}" var="row" varStatus="loop">
                              <tr>
-                                <td>
+                                <td style="background-color: #1C427E;">
                             	${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
                            </td>
-                                 <td>
+                                 <td style="background-color: #1C427E;">
                                      <a href="#" class="scheduleLink" data-schedule="${row.team_schedule}">
                                          ${row.team_schedule}  <!-- db에 있는 개인 일정 출력 -->
                                      </a>
@@ -802,7 +825,7 @@ body {
 					// 전 달 끝부분 일자 출력
 					for (int i = 1; i < week; i++) {
 						//out.print("<td>&nbsp;</td>");
-						out.print("<td class='gray'style='width: 100px; position: relative; top: -15px; height: 50px;'><button disabled>" + (preDate++) + "</button></td>");
+						out.print("<td class='gray'style='width: 100px; position: relative; top: 0px; height: 50px;'><button disabled>" + (preDate++) + "</button></td>");
 					}
 					
 					int click_day = 0;
@@ -833,7 +856,7 @@ body {
 					int n = 1;
 					for (int i = (week - 1) % 7; i < 6; i++) {
 						// out.print("<td>&nbsp;</td>");
-						out.print("<td class='gray' style='width: 100px; position: relative; top: -15px; height: 50px;'><button disabled>" + (n++) + "</button></td>");
+						out.print("<td class='gray' style='width: 100px; position: relative; top: 0px; height: 50px;'><button disabled>" + (n++) + "</button></td>");
 					}
 					out.print("</tr>");
 					%>

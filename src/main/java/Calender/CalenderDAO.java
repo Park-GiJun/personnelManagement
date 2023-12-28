@@ -88,6 +88,43 @@ public class CalenderDAO extends DBConnPool {
 		System.out.println(totalcount);
 		return totalcount;
 	}
+	
+	
+	
+	public List<CalenderDTO> selectListPage2(String selecteddate2, String emp_num) {
+		List<CalenderDTO> board = new Vector<CalenderDTO>();
+		
+		System.out.println("select List Page222222");
+
+		// 쿼리문 준비
+		String query = "SELECT Personal_diaray_schedule FROM Personal_diaray WHERE Personal_diaray_date=? AND emp_num=? ORDER BY count_date";
+
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, selecteddate2);
+			psmt.setString(2, emp_num);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				CalenderDTO dto = new CalenderDTO();
+
+				dto.setPersonal_diaray_schedule(rs.getString("Personal_diaray_schedule"));
+				
+				System.out.println(dto.getPersonal_diaray_schedule());
+
+				board.add(dto);
+				System.out.println("select List Page33333333");
+			}
+		} catch (Exception e) {
+			System.out.println("게시물 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		return board;
+	}
+	
+	
+	
+	
 
 	// 2
 	public List<CalenderDTO> selectListPage(String selecteddate, String emp_num) {
