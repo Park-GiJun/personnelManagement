@@ -46,7 +46,7 @@ public class TestAddController extends HttpServlet {
 
 		TestDAO dao = new TestDAO();
 		int result = dao.insertSchedule(emp_num, text, date);
-
+		dao.close();
 		// 응답 설정
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();

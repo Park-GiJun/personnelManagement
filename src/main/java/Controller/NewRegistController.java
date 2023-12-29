@@ -141,6 +141,7 @@ public class NewRegistController extends HttpServlet {
 		map.put("totalCount", totalCount);
 		map.put("pageSize", pageSize);
 		map.put("pageNum", pageNum);
+		dao.close();
 
 		// 전달할 데이터를 request 영역애 저장후 List.jsp 로 포워드
 

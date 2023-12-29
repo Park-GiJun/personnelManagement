@@ -145,7 +145,7 @@ public class TeamVactionController extends HttpServlet {
 		//request.setAttribute("selectedSchedules", selectedSchedules); // 리스트 값
        //request.setAttribute("selectedSchedules", Arrays.asList(selectedContent));  // 화면에 선택한 일정들을 전달
 		request.getRequestDispatcher("../Calender/Scl3.jsp").forward(request, response);
-		
+		dao.close();
 	}
 
 }

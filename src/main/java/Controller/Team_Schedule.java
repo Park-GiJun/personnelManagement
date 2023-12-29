@@ -25,6 +25,7 @@ public class Team_Schedule extends HttpServlet {
 		System.out.println("Team : " + Team);
 		
 		dao.Team_Schedule(Team_schedule, content, Team);
+		dao.close();
 		
 		req.getRequestDispatcher("/Team_Schedule/Team_Schedule.jsp").forward(req, resp);
 	}

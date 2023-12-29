@@ -23,6 +23,7 @@ public class Company_Schedule extends HttpServlet {
 		System.out.println("content : " + content);
 
 		dao.Company_Schedule(Team_schedule, content);
+		dao.close();
 
 		req.getRequestDispatcher("/Company_Schedule/Company_Schedule.jsp").forward(req, resp);
 	}

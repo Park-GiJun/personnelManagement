@@ -22,6 +22,7 @@ public class MeetingRoomReservationManagement extends HttpServlet {
 		MeetingRoomDAO dao = new MeetingRoomDAO();
 
 		List<MeetingRoomDTO> list = dao.getMeetingRoomList();
+		dao.close();
 
 		request.setAttribute("MeetingRoomList", list);
 		request.getRequestDispatcher("../MeetingRoomReservationManagement/MeetingRoomReservationManagement.jsp").forward(request, response);

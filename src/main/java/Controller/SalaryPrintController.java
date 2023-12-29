@@ -27,6 +27,7 @@ public class SalaryPrintController extends HttpServlet {
 		
 		SalaryManagementDAO dao = new SalaryManagementDAO();
 		SalaryManagementDTO dto = dao.salaryPrint(userId, selectedDate);
+		dao.close();
 		
 		String chageDateSalary = new Gson().toJson(dto);
 		

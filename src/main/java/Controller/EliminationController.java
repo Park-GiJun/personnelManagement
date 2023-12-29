@@ -25,6 +25,7 @@ public class EliminationController extends HttpServlet {
 		System.out.println("게시글 삭제 댓글 컨트롤러");
 		dao.Elimination(anno_board_num);
 		System.out.println("게시글 삭제 메인 컨트롤러");
+		dao.close();
 
 		request.getSession().setAttribute("anno_board_num", anno_board_num);
 		response.sendRedirect(request.getContextPath() + "/Controller/FreeboardList.do");

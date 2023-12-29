@@ -74,7 +74,7 @@ public class CalenderPlusController extends HttpServlet {
 	            response.getWriter().write("추가할 일정이 작성되지 않았습니다.");
 	        }
 
-	   
+		 dao.close();
 		 request.setAttribute("selecteddate", selecteddate);
 		 
 	   

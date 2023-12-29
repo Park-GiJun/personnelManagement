@@ -51,6 +51,7 @@ public class MeetingRoomReservationController extends HttpServlet {
             JsonObject reservationObject = reservationElement.getAsJsonObject();
             String date = reservationObject.get("Date").getAsString();
             dao.reservationMeetingRoom(date, meetingRoomId, emp);
+            dao.close();
             
         }
 

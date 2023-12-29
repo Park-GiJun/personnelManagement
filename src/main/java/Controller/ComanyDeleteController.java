@@ -52,7 +52,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
         } else {
             response.getWriter().write("삭제할 일정이 선택되지 않았습니다.");
         }
-        
+        dao.close();
         request.setAttribute("map2", map);
         request.setAttribute("selectedSchedules", selectedSchedules);
         request.setCharacterEncoding("UTF-8");

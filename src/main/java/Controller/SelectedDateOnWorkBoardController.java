@@ -82,6 +82,7 @@ public class SelectedDateOnWorkBoardController extends HttpServlet {
 //		response.setContentType("application/json");
 //		response.setCharacterEncoding("UTF-8");
 //		response.getWriter().write(jsonString);
+		dao.close();
 		
 		request.setAttribute("workdocslist", list);
 		request.setAttribute("map", map);

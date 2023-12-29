@@ -66,7 +66,7 @@ public class CommentsController extends HttpServlet {
 		dao.commentWrite(anno_board_num, commentscontent, pass);
 		// 댓글 리스트 가져오기
 		List<CommentsDTO> Commentsdto1 = dao.selectView(anno_board_num);
-
+		dao.close();
 		request.setAttribute("Commentsdto1", Commentsdto1);
 		request.setAttribute("CommentsFormList", CommentsFormList);
 		request.setAttribute("map2", map);

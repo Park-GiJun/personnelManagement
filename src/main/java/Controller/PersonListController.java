@@ -32,6 +32,7 @@ public class PersonListController extends HttpServlet {
 
 		Gson gson = new Gson();
 		String organization = gson.toJson(org);
+		dao.close();
 
 		response.getWriter().write(organization);
 	}

@@ -83,7 +83,7 @@ public class FreeboardWriteController extends HttpServlet {
 		map.put("totalCount", totalCount);
 		map.put("pageSize", pageSize);
 		map.put("pageNum", pageNum);
-
+		dao.close();
 		// 포워딩
 		request.setAttribute("FreeboardFormList", FreeboardFormList);
 		request.setAttribute("map2", map);

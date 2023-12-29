@@ -58,6 +58,7 @@ public class CalenderDeleteController extends HttpServlet {
         } else {
             response.getWriter().write("삭제할 일정이 선택되지 않았습니다.");
         }
+        dao.close();
         
         request.setAttribute("map2", map);
         request.setAttribute("selectedSchedules", selectedSchedules);

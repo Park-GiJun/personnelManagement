@@ -1,6 +1,6 @@
 let clickedDate;
 
-let section;
+let section = 'company';
 
 let selectedYear;
 
@@ -141,6 +141,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	});
 	document.getElementById('selectYear').addEventListener('change', updateCalendar);
 	document.getElementById('selectMonth').addEventListener('change', updateCalendar);
+	company();
+	getSchedule();
 });
 
 function updateCalendar() {
