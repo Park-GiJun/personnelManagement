@@ -336,18 +336,16 @@ day {
 	font-size: 100px;
 }
 
+tbody {
+	background : gray;
+}
+
 body {
 	background-color: #272b30;
    	font-size: px;
   	font-family: 'Kanit', sans-serif;
     /*color: white;*/
 }
-
-
-tbody {
-	background : gray;
-}
-
 a {
 	color: #000;
 	text-decoration: none;
@@ -537,50 +535,50 @@ function showDateAndAlert(day) {
 		document.forms["calender_form"].submit();
 	}
 
-//일정 추가하기 버튼 눌렀을 때 설정
-// 일정 추가를 위한 고유한 식별자
-var eventCounter = 1;
+	//일정 추가하기 버튼 눌렀을 때 설정
+	// 일정 추가를 위한 고유한 식별자
+	var eventCounter = 1;
 
-function confirmPlus() {
-    var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
-    
+	function confirmPlus() {
+	    var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
+	    
 
-    if (userInput !== null && userInput !== "") {
-        // 사용자가 확인을 클릭하면 입력한 일정을 서블릿으로 전송
-        sendNewScheduleToServer(userInput);
-    } else if (userInput === "") {
-        alert("일정을 입력해주세요.");
-    } else {
-        console.log("일정 저장을 취소하였습니다.");
-    }
-}
+	    if (userInput !== null && userInput !== "") {
+	        // 사용자가 확인을 클릭하면 입력한 일정을 서블릿으로 전송
+	        sendNewScheduleToServer(userInput);
+	    } else if (userInput === "") {
+	        alert("일정을 입력해주세요.");
+	    } else {
+	        console.log("일정 저장을 취소하였습니다.");
+	    }
+	}
 
-// 새로운 일정을 서버로 전송하는 함수
-function sendNewScheduleToServer(userInput) {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "../Controller/TeamCalPlusController.do", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-   
+	// 새로운 일정을 서버로 전송하는 함수
+	function sendNewScheduleToServer(userInput) {
+		const xhr = new XMLHttpRequest();
+	    xhr.open("POST", "../Controller/TeamCalPlusController.do", true);
+	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+	   
 
-    // 서버로 전송할 데이터 설정
-    const data = "userInput=" + encodeURIComponent(userInput);
- 
-    xhr.send(data);
+	    // 서버로 전송할 데이터 설정
+	    const data = "userInput=" + encodeURIComponent(userInput);
+	 
+	    xhr.send(data);
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                alert(xhr.responseText); // 서버 응답을 알림으로 표시
-                location.reload();
-                console.log('추가한 일정들:', userInput);
-            } else {
-                alert("일정 추가에 실패했습니다.");
-                console.log('실패한 일정들:', userInput);
-            }
-        }
-    };
-    
-}
+	    xhr.onreadystatechange = function () {
+	        if (xhr.readyState === 4) {
+	            if (xhr.status === 200) {
+	                alert(xhr.responseText); // 서버 응답을 알림으로 표시
+	                location.reload();
+	                console.log('추가한 일정들:', userInput);
+	            } else {
+	                alert("일정 추가에 실패했습니다.");
+	                console.log('실패한 일정들:', userInput);
+	            }
+	        }
+	    };
+	    
+	}
 	 
     console.log('잘 실행되는지 확인용1111111111111111111111');
 
@@ -736,8 +734,8 @@ body {
 				
 			<h2 class='re_day'>${selecteddate}</h2>
 		
-			<button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>
-			<button class='del_btn'  type='submit' onclick="confirmDelete();">삭제하기</button>
+			<!-- <button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>  -->
+			<!-- <button class='del_btn'  type='submit' onclick="confirmDelete();">삭제하기</button>  -->
 
 
 			<!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
@@ -752,8 +750,8 @@ body {
 									</td>
 									<td style="background-color: #1C427E;"><a href="#"
 										class="scheduleLink"
-										data-schedule="${row.personal_diaray_schedule}">
-											${row.personal_diaray_schedule} <!-- db에 있는 개인 일정 출력 -->
+										data-schedule="${row.team_schedule}">
+											${row.team_schedule} <!-- db에 있는 개인 일정 출력 -->
 									</a></td>
 								</tr>
 							</c:forEach>
@@ -858,7 +856,7 @@ body {
 
 					    // 버튼 출력 부분 수정 시작
 					    int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
-					    out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc(" + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+					    out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc(" + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl4.jsp';\">일정이 있습니다.</button>");
 					    // 버튼 출력 부분 수정 끝
 
 					    out.print("</td>");

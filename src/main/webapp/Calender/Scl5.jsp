@@ -734,8 +734,8 @@ body {
 				
 			<h2 class='re_day'>${selecteddate}</h2>
 		
-			<button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>
-			<button class='del_btn'  type='submit' onclick="confirmDelete();">삭제하기</button>
+			<!-- <button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>  -->
+			<!-- <button class='del_btn'  type='submit' onclick="confirmDelete();">삭제하기</button>  -->
 
 
 			<!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
@@ -856,7 +856,7 @@ body {
 
 					    // 버튼 출력 부분 수정 시작
 					    int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
-					    out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc(" + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+					    out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc(" + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl5.jsp';\">일정이 있습니다.</button>");
 					    // 버튼 출력 부분 수정 끝
 
 					    out.print("</td>");
