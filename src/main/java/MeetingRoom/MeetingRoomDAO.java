@@ -166,7 +166,7 @@ public class MeetingRoomDAO extends DBConnPool {
 	public List<MeetingRoomDTO> selectList(String Sysdate) {
 		List<MeetingRoomDTO> bbs = new Vector<MeetingRoomDTO>();
 
-		String query = "SELECT e.team, e.name, m.emp_num, e.team AS emp_team, TO_CHAR(m.meetingdate, 'HH24') AS formatted_hour, m.status, m.MEETINGROOMNUM "
+		String query = "SELECT e.team, e.team_num,  e.name, m.emp_num, e.team AS emp_team, TO_CHAR(m.meetingdate, 'HH24') AS formatted_hour, m.status, m.MEETINGROOMNUM "
 				+ "FROM meetingroom m " + "JOIN emp e ON m.emp_num = e.emp_num "
 				+ "WHERE TRUNC(m.meetingdate) = TO_DATE(? , 'YYYY-MM-DD')";
 
@@ -185,6 +185,8 @@ public class MeetingRoomDAO extends DBConnPool {
 				dto.setMeetingroomNum(rs.getString("meetingroomnum"));
 				dto.setStatus(rs.getString("status"));
 				dto.setName(rs.getString("name"));
+				dto.setTeam(rs.getString("emp_team"));
+				dto.setTeam_num(rs.getString("team_num"));
 
 				bbs.add(dto);
 			}

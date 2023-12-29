@@ -57,7 +57,7 @@ td {
 }
 
 .btn-info {
-	margin-top: 0.7%;
+	margin-top: 0.5%;
 	margin-bottom: 0%;
 	font-size: 15px;
 	height: 30px;
@@ -166,10 +166,12 @@ a {
 							<option value="title">제목</option>
 						</select> <input type="text" name="searchWord" class="form-control" /> <input type="submit" class="btn-info" name="listSearch" value="검색하기" id="btn2" /></th>
 
-					<th>${ map2.paginImg }</th>
-					<th width="100" rowspan="2">
+					<th width="100" rowspan="1">
 						<button type="button" onclick="location.href='../BulletinBoard/Freeboard.jsp';" class="btn-info">글작성</button>
 					</th>
+				</tr>
+				   <tr>
+				   <td colspan ="2" align="center" class="table-dark3">${ map2.pagingImg }</td>
 				</tr>
 			</table>
 		</form>

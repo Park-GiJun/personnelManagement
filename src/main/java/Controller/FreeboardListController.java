@@ -62,12 +62,9 @@ public class FreeboardListController extends HttpServlet {
 
 		List<FreeboardFormDTO> FreeboardFormList = dao.selectListPage(map);
 
-		// 게시물 목록 받기
-		dao.close();
-
 		// 페이징 이미지 전달
 		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum,
-				"../Controller/List.do");
+				"../Controller/FreeboardList.do");
 
 		// 바로가기 영역 HTML 문자열
 		map.put("pagingImg", pagingImg);

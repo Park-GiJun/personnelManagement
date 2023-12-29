@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								test="${(row.meetingroomNum eq 'A') && (row.date == hour) && (row.status ne 'Reject')}">
 								<td style="font-size: 15px; width: 20%;">${row.empNum }</td>
 								<td style="font-size: 15px; width: 15%;">${row.name }</td>
-								<td style="font-size: 15px; width: 15%;">${row.team }</td>
+								<td style="font-size: 13px; width: 15%;">${row.team_num }</td>
 								<td style="font-size: 15px; width: 15%;">${row.status }</td>
 								<c:set var="found" value="true" />
 							</c:if>
@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								test="${(row.meetingroomNum eq 'B') && (row.date == hour) && (row.status ne 'Reject')}">
 								<td style="font-size: 15px; width: 20%;">${row.empNum }</td>
 								<td style="font-size: 15px; width: 15%;">${row.name }</td>
-								<td style="font-size: 15px; width: 15%;">${row.team }</td>
+								<td style="font-size: 13px; width: 15%;">${row.team_num }</td>
 								<td style="font-size: 15px; width: 15%;">${row.status }</td>
 								<c:set var="found" value="true" />
 							</c:if>
@@ -464,7 +464,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								test="${(row.meetingroomNum eq 'C') && (row.date == hour) && (row.status ne 'Reject')}">
 								<td style="font-size: 15px; width: 20%;">${row.empNum }</td>
 								<td style="font-size: 15px; width: 15%;">${row.name }</td>
-								<td style="font-size: 15px; width: 15%;">${row.team }</td>
+								<td style="font-size: 13px; width: 15%;">${row.team_num }</td>
 								<td style="font-size: 15px; width: 15%;">${row.status }</td>
 								<c:set var="found" value="true" />
 							</c:if>

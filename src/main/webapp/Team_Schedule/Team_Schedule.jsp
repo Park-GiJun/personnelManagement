@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 	
 <%
-// øπæ‡ ∞Àªˆ »ƒ º±≈√«— ≥Ø¬•∏¶ ∆ƒ∂ÛπÃ≈Õ∑Œ √ﬂ∞° (¡§ªÛ¿˚¿∏∑Œ ≥—æÓø¿¥¬¡ˆ »Æ¿Œ«œ¥¬ ƒ⁄µÂ)
+// ÏòàÏïΩ Í≤ÄÏÉâ ÌõÑ ÏÑ†ÌÉùÌïú ÎÇ†ÏßúÎ•º ÌååÎùºÎØ∏ÌÑ∞Î°ú Ï∂îÍ∞Ä (Ï†ïÏÉÅÏ†ÅÏúºÎ°ú ÎÑòÏñ¥Ïò§ÎäîÏßÄ ÌôïÏù∏ÌïòÎäî ÏΩîÎìú)
 String selectedDate = request.getParameter("select_date");
 %>
 <!DOCTYPE html>
@@ -101,7 +101,7 @@ function getCurrentDate() {
 		<div class="date_button">
 			<input type="date" id="Team_schedule" name="select_date" class="form-select">
 			
-			<button type="submit" class="btn-light btn-sm">¿œ¡§ √ﬂ∞°</button>
+			<button type="submit" class="btn-light btn-sm">ÏùºÏ†ï Ï∂îÍ∞Ä</button>
 		</div>
 		
 		<div class="schedule_content">

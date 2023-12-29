@@ -552,7 +552,6 @@ label[for="monthSelect"] {
 				&nbsp;&nbsp;&nbsp;&nbsp; <label for="monthSelect">월:</label> &nbsp;
 				<select id="monthSelect" size="1" name="monthSelect" class="form-select" style="color: black;"></select>
 
-				<button name="print_income" id="print-button" class="btn-info">출력하기</button>
 			</div>
 			<!-- ---------------------------------------------------------------------------------------------------------------------- -->
 			<script>

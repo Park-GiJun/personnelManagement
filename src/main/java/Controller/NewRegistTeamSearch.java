@@ -73,12 +73,12 @@ public class NewRegistTeamSearch extends HttpServlet {
 			TeamSearch.equals("인사 1팀") || TeamSearch.equals("인사 2팀") || TeamSearch.equals("인사 3팀") ||
 			TeamSearch.equals("디자인 1팀") || TeamSearch.equals("디자인 2팀") || TeamSearch.equals("디자인 3팀")) {
 			String[] Team = TeamSearch.split(" ");
-			TeamSearch = Team[0];
+			String teamName = Team[0];
 			System.out.println(TeamSearch);
 			team_num = Team[1];
 			System.out.println(team_num);
 			num = 2;
-			selectList = dao.selectdepartmentList(TeamSearch, team_num, num);
+			selectList = dao.selectdepartmentList(teamName, TeamSearch, num);
 		}
 		
 		if (TeamSearch.equals("임원")) {

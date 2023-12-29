@@ -52,11 +52,11 @@ public class ShareFormWriterController extends HttpServlet {
 		// 폼값을 DTO에 저장
 
 		ShareFormDTO dto = new ShareFormDTO();
-		dto.setTitle(mr.getParameter("sharetitle"));
+		dto.setTitle(mr.getParameter("title"));
 		dto.setPassword(mr.getParameter("sharepassword"));
 
 		// 원본 파일명과 저장된 파일 이름 설정
-		String fileName = mr.getFilesystemName("shareOfile");
+		String fileName = mr.getFilesystemName("file");
 		if (fileName != null) {
 			// 첨부파일이 있을 경우 파일명 변경
 			// 새로운 파일명 생성
@@ -76,7 +76,6 @@ public class ShareFormWriterController extends HttpServlet {
 		// DAO를 통해 DB에 게시 내용 저장
 		ShareFormDAO dao = new ShareFormDAO();
 		dao.insertFile(dto);
-		dao.close();
 
 		// 맵 생성
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -129,7 +128,11 @@ public class ShareFormWriterController extends HttpServlet {
 		// 포워딩
 		request.setAttribute("shareboardlists", shareboardlists);
 		request.setAttribute("map", map);
-		request.getRequestDispatcher("/ShareForm/ShareForm.jsp").forward(request, response);
+		// 응답 처리
+		// Java (서블릿)
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write("{\"message\":\"데이터 처리 완료\"}");
 	}
 
 }

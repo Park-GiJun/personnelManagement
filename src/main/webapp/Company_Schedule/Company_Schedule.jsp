@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     Company_schedule.value = selectedDate ? selectedDate : getCurrentDate();
 });
-//ÇöÀç³¯Â¥¸¦ °¡Á®¿À´Â ÄÚµå
+//í˜„ì¬ë‚ ì§œë¥¼ ê°€ì ¸ì˜¤ëŠ” ì½”ë“œ
 function getCurrentDate() {
     var today = new Date();
     var yyyy = today.getFullYear();
@@ -92,7 +92,7 @@ function getCurrentDate() {
 }
 
 function submit() {
-	alert("È¸»ç ÀÏÁ¤ÀÌ Ãß°¡ µÇ¾ú½À´Ï´Ù.")
+	alert("íšŒì‚¬ ì¼ì •ì´ ì¶”ê°€ ë˜ì—ˆìŠµë‹ˆë‹¤.")
 }
 
 </script>
@@ -102,7 +102,7 @@ function submit() {
 		<div class="date_button">
 			<input type="date" id="Company_schedule" name="select_date" class="form-select">
 			
-			<button type="submit" class="btn-light btn-sm" onclick="submit()">ÀÏÁ¤ Ãß°¡</button>
+			<button type="submit" class="btn-light btn-sm" onclick="submit()">ì¼ì • ì¶”ê°€</button>
 		</div>
 		
 		<div class="schedule_content">

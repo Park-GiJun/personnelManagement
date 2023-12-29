@@ -336,7 +336,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <body>
 
 	<!-- 왼쪽 페이지 목록 -->
-	<jsp:include page="../MainPage/Left.jsp" />
 	<div class="content">
 	
 		<form id="dateForm" action="../Controller/MeetingRoomLoadController.do"	method="get">

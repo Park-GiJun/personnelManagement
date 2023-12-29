@@ -127,7 +127,7 @@ body {
 		    var selectedDate = localStorage.getItem('date');
 		    var reservations = [];
 
-		    for (var hour = 9; hour < 18; hour++) {
+		    for (var hour = 9; hour < 16; hour++) {
 		        var checkbox = document.getElementById('reserveCheckbox' + hour);
 
 		        if (checkbox && checkbox.checked) {

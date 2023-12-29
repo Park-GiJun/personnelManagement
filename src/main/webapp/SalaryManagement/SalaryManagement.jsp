@@ -9,6 +9,13 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style> /* 공통 스타일 */
+/* 스크롤바를 적용할 스타일을 추가합니다. */
+.table-container {
+	width: 100%;
+    max-height: 620px; /* 필요에 따라 높이를 조절하세요. */
+    overflow-y: auto;
+}
+
 @font-face {
     font-family: 'ChungjuKimSaengTTF';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
@@ -218,6 +225,7 @@ td {
          <button class="btn-info" onclick="handleChange()">검색</button>
       </div>
       <div class="salary_table_background">
+      	<div class="table-container">
          <table border="1">
             <tr class="table-dark1">
                <td colspan="2">부서</td>
@@ -259,6 +267,7 @@ td {
                </c:otherwise>
             </c:choose>
          </table>
+      </div>
       </div>
    </div>
 </body>

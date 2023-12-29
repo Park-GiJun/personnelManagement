@@ -13,6 +13,14 @@ String Team_Search = request.getParameter("TeamSearch");
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style type="text/css">
+
+/* 스크롤바를 적용할 스타일을 추가합니다. */
+.table-container {
+	width: 100%;
+    max-height: 620px; /* 필요에 따라 높이를 조절하세요. */
+    overflow-y: auto;
+}
+
 @font-face {
     font-family: 'ChungjuKimSaengTTF';
     src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
@@ -146,7 +154,7 @@ td {
 	justify-content: space-between;
 }
 
-.table-container {
+.table-container2 {
 	width: 100%;
 }
 
@@ -231,7 +239,7 @@ body {
 
 			<!-- 신입사원 등록 양식 -->
 			<div class="middle-NewRegist-container">
-				<div class="table-container">
+				<div class="table-container2">
 					<table border="1" width="98%">
 						<tr align="center" class="table-dark1">
 							<th colspan='5' align="center" scope="row">신입사원 정보 등록</th>

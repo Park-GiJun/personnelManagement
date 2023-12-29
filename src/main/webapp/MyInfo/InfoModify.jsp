@@ -87,8 +87,7 @@ li {
 			<li><b>비밀번호 확인 : </b>&nbsp;<input type="password" id="modifiedPass2" class="form-control"></li>
 		</ul>
 	</div>
-	<button type="button" onclick="performModification()" class='btn-info'>수정
-		완료</button>
+	<button type="button" onclick="performModification()" class='btn-info'>수정 완료</button>
 
 	<script>
         function performModification() {

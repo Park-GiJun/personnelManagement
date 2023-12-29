@@ -56,6 +56,7 @@ body {
 }
 
 .btn-info {
+	margin-left: 21%;
 	margin-top:1%;
 	margin-bottom: 0.5%;
 	font-size: 17.5px;
@@ -103,7 +104,7 @@ body {
 	padding: 0.25rem 1rem;
 	font-size: 15px;
 	height: 30px;
-	--bs-table-color: #fff;
+	--bs-table-color: #000;
 	color: var(--bs-table-color);
 }
 </style>
@@ -118,6 +119,59 @@ body {
 		if (input.value === '') {
 			input.value = input.defaultValue;
 		}
+	}
+	
+	function performModification() {
+	    // 수정된 정보 가져오기
+	    var performModification = document.getElementById('title').value;
+	    var sharetitle = document.getElementById('file').value;
+	    var shareOfile = document.getElementById('sharepassword').value;
+
+	    // 서버로 수정된 정보 전송
+	    fetch('../Controller/ShareWrite.do', {
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/x-www-form-urlencoded',
+	        },
+	        body: 'performModification=' + encodeURIComponent(performModification)
+	            + '&shareOfile=' + encodeURIComponent(shareOfile)
+	            + '&sharetitle=' + encodeURIComponent(sharetitle),
+	    })
+	    .then(response => {
+	        if (response.ok) {
+	            // 성공적으로 처리된 경우 원하는 동작 수행
+	            console.log('등록이 완료되었습니다.');
+	            window.opener.location.reload(); // 부모 창 새로 고침
+	            window.close();
+	        } else {
+	            // 오류 처리
+	            response.text().then(errorMessage => {
+	                console.error('등록 중 오류가 발생했습니다.', errorMessage);
+	            });
+	        }
+	    });
+	}
+	
+	function submitForm() {
+		var formData = new FormData();
+		formData.append('title', document.getElementById('title').value);
+		formData.append('file', document.getElementById('file').files[0]); // 수정된 부분
+		formData.append('sharepassword', document.getElementById('sharepassword').value);
+
+		// JavaScript
+		fetch('../Controller/ShareWrite.do', {
+			method: 'POST',
+			body: formData
+		})
+			.then(response => response.json())
+			.then(result => {
+				alert("글작성이 완료 되었습니다.");
+				window.opener.location.reload();
+				window.close();
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			});
 	}
 </script>
 </head>
@@ -140,11 +194,10 @@ body {
 				}
 			}
 		</script>
-		<form name="shareFrame" method="post" enctype="multipart/form-data"	action="../Controller/ShareWrite.do" onsubmit="return validateForm(this)">
 			<table align="center" border="1" height="80%" width="98%" class="table-dark2">
 				<tr>
 					<td>
-						<input type="text" placeholder="제목을 입력해 주세요."	name="sharetitle" style="width: 98%; margin-left:1%;"
+						<input type="text" placeholder="제목을 입력해 주세요." id="title" name="sharetitle" style="width: 98%; margin-left:1%;"
 						class="form-control" onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)"/>
 					</td>
 				</tr>
@@ -155,13 +208,11 @@ body {
 				</tr>
 				<tr>
 					<td style="text-align: left; font-size: 15px; display: flex; align-items: center; margin-left: 1%;">
-						<input type="password" name="sharepassword" class="form-control" placeholder="Password">
-						<button	type="button" onclick="location.href='../Controller/sharelist.do';" class="btn-info">목록</button>
-						<button type="submit" class="btn-info">작성완료</button>
+						<input type="password" name="sharepassword" id="sharepassword" class="form-control" placeholder="Password">
+						<button type="button" class="btn-info" onclick="submitForm()">작성완료</button>
 					</td>
 				</tr>
 			</table>
-		</form>
 	</div>
 </body>
 </html>

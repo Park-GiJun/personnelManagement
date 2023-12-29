@@ -25,6 +25,8 @@ public class MeetingRoomReservationController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 받아온 JSON 데이터를 읽습니다.
+		MeetingRoomDAO dao = new MeetingRoomDAO();
+		
 		BufferedReader reader = request.getReader();
 		StringBuilder sb = new StringBuilder();
 		String line;
@@ -46,15 +48,11 @@ public class MeetingRoomReservationController extends HttpServlet {
 		JsonArray reservationsArray = jsonObject.getAsJsonArray("reservations");
 		
 		for (JsonElement reservationElement : reservationsArray) {
-			
-			MeetingRoomDAO dao = new MeetingRoomDAO();
             JsonObject reservationObject = reservationElement.getAsJsonObject();
             String date = reservationObject.get("Date").getAsString();
             dao.reservationMeetingRoom(date, meetingRoomId, emp);
-            dao.close();
-            
         }
-
+		dao.close();
 	}
 
 }

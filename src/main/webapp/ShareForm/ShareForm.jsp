@@ -150,15 +150,15 @@ a {
 		<!-- 하단 메뉴 -->
 		<form method="get" action="../Controller/sharelist.do">
 			<table border="1" width="90%" height="50px">
-				<tr>
-					<th style="text-align: center;">${ map.pagingImg }</th>
-				</tr>
 				<tr class="table-dark3" align="center">
 					<th style="display: flex; margin-left: 32.5%;" scope="row"><select name="searchCategory" class="form-select">
 							<option value="title">제목</option>
 						</select> <input type="text" name="searchWord" class="form-control">
 						<button type="submit" name="listSearch" value="검색하기" id="listSearch" class="btn-info" style="margin-right: 37.5%;">검색하기</button>
 						<button type="button" onclick="openShareFormWindow()" class="btn-info">글작성</button></th>
+				</tr>
+				<tr>
+					<th style="text-align: center;" class="table-dark3">${ map.pagingImg }</th>
 				</tr>
 			</table>
 		</form>

@@ -323,7 +323,7 @@ td, th {
 						<td width="5%" align="center">
 							<button type="button"
 								onclick="CommentsDeletion('${comment.pass}','${comment.turn}' )"
-								class="btn-info" id="delete">삭제</button>
+								class="btn-info" id="delete" style="width: 90%; height:95%; font-size: 10px;">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>

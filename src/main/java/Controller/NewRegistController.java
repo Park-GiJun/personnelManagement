@@ -41,7 +41,7 @@ public class NewRegistController extends HttpServlet {
 		String emp_num = req.getParameter("emp_num");
 		String emp_grade = req.getParameter("emp_grade");
 		String team = req.getParameter("team");
-		String team_num = req.getParameter("team_num");
+		String team_num = req.getParameter("team") + " " + req.getParameter("team_num");
 		
 		String NewRegistType = req.getParameter("NewRegistType");
 		String nameinfo = req.getParameter("nameinfo");
