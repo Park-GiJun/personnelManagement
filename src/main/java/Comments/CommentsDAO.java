@@ -121,10 +121,7 @@ public class CommentsDAO extends DBConnPool {
 		try {
 			con = DBConnPool.getConnection();
 
-			StringBuffer sql = new StringBuffer();
-			sql.append("select * from Comments where anno_board_num<? and Turn=? and content order by Turn ");
-
-			pstmt = con.prepareStatement(sql.toString());
+            pstmt = con.prepareStatement("select * from Comments where anno_board_num<? and Turn=? and content order by Turn ");
 			pstmt.setInt(1, anno_board_num);
 
 			rs = pstmt.executeQuery();

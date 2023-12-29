@@ -179,7 +179,7 @@ function addTableEmp(data, status) {
 
 		buttonNumber++; // 다음 버튼을 위해 번호 증가
 	}
-};
+}
 
 
 

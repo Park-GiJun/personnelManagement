@@ -19,7 +19,7 @@ public class TeamCalPlusController extends HttpServlet {
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("TeamCalPlusController.do");
-		System.out.println("");
+		System.out.println();
 		
 		TeamCalDAO dao = new TeamCalDAO();
 		HttpSession session = request.getSession();

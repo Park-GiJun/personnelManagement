@@ -146,7 +146,7 @@ button.my_btn3:hover {
 
 /* 회사 일정 버튼 */
 .my_btn4 {
-  background-color: #1C427E;
+  background-color: orange;
   color: white;
   border: none;
   
@@ -170,7 +170,7 @@ button.my_btn4:hover {
 .middle-button {
     text-align: center;
     padding: 30px 30px;
-    margin-left: 50px;
+    margin-left: -120px;
     font-family: 'Kanit', sans-serif;
 }
 
@@ -211,7 +211,7 @@ button.next_btn:hover {
 	color: #1C427E;
 	position: absolute;
   	top: -40px;
-  	left: 220px;
+  	left: 410px;
   	font-size: 100x;
   	border-radius: 30px;
 }
@@ -249,10 +249,12 @@ a:active, a:hover {
 .calendar .title{
    position: absolute;
    top: 120px;
-   left: 240px;
+   left: 420px;
    width: 100%;
    z-index: 1; 
 }
+
+
 
 /* 년도 선택 리스트 */
 .selectField {
@@ -413,6 +415,10 @@ function updateCalendar() {
    padding: 0;
 }
 
+body {
+   font-size: 20px;
+}
+
 tbody {
 	background : gray;
 }
@@ -437,7 +443,7 @@ tbody {
       <!-- 다른 페이지에서 불러오는 내용 -->
       <!-- <h2 class="myHeader">텍스트 입력</h2>  -->
       <button class='my_btn' onclick="location.href='Person_Cal.jsp';" >개인 일정</button>
-      <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서 휴가</button>
+      <!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서 휴가</button> -->
       <button class='my_btn3' onclick="location.href='Team_Cal.jsp';">부서 일정</button>
       <button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사 일정</button>
    </div>
