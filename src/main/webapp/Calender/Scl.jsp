@@ -53,6 +53,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 <title>개인 일정 리스트</title>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
 <style type="text/css">
 @import
 	url('https://fonts.googleapis.com/css2?family=Kanit:wght@700;900&display=swap')
@@ -517,19 +518,9 @@ a:active, a:hover {
 
 
 
+
 <script type="text/javascript">
 
-
-//페이지가 로드될 때 실행되는 함수
-document.addEventListener("DOMContentLoaded", function() {
-    // 현재 날짜 정보 가져오기
-    var currentYear = <%=ty%>;
-    var currentMonth = <%=tm%>;
-    var currentDay = <%=td%>;
-
-    // 서버로 데이터 전송
-    sendDataToServer(currentYear, currentMonth, currentDay);
-});
 
 // 서버로 데이터를 전송하는 함수
 function sendDataToServer(year, month, day) {
@@ -568,12 +559,10 @@ function showDateAndAlert(day) {
 
 		// 선택한 날짜를 숨은 필드에 설정
 		document.getElementById('selectedDay').value = clickedDay;
-		document.getElementById('selectedYear').value = '<%=year%>';
-		document.getElementById('selectedMonth').value = '<%=month%>';
 
 		// 폼 제출
 		document.forms["calender_form"].submit();
-	}
+}
 
 	//일정 추가하기 버튼 눌렀을 때 설정
 	// 일정 추가를 위한 고유한 식별자
@@ -727,16 +716,11 @@ body {
 <body>
 	<jsp:include page="../MainPage/Left.jsp"></jsp:include>
 
-	<form name="calender_form" id="calender_form" method="post"
-		action="../Controller/CalenderController.do">
-		<input type="hidden" name="selectedYear" id="selectedYear"
-			value="<%=year%>"> <input type="hidden" name="selectedMonth"
-			id="selectedMonth" value="<%=month%>"> <input type="hidden"
-			name="selectedDay" id="selectedDay" value=""> <input
-			type="hidden" name="currentYear" id="currentYear" value="<%=ty%>">
-		<input type="hidden" name="currentMonth" id="currentMonth"
-			value="<%=tm%>"> <input type="hidden" name="currentDay"
-			id="currentDay" value="<%=td%>">
+	<form name="calender_form" id="calender_form" method="post" action="../Controller/CalenderController.do">
+		<input type="hidden" name="selectedYear" id="selectedYear" value="<%=year%>"> 
+		<input type="hidden" name="selectedMonth" id="selectedMonth" value="<%=month%>"> 
+		<input type="hidden" name="selectedDay" id="selectedDay" value=""> 
+		
 
 		<div class="middle-button">
 			<!-- 다른 페이지에서 불러오는 내용 -->
@@ -745,10 +729,8 @@ body {
 				일정</button>
 			<!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서
 				휴가</button> -->
-			<button class='my_btn3' onclick="location.href='Team_Cal.jsp';">부서
-				일정</button>
-			<button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사
-				일정</button>
+			<button class='my_btn3' onclick="location.href='Team_Cal.jsp';">부서 일정</button>
+			<button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사 일정</button>
 		</div>
 
 		<p class="em" style="font-size: 120px"><%=month%></p>
@@ -757,25 +739,32 @@ body {
 		<button class='next_btn' onclick="location.href='Person_Cal.jsp';">></button>
 
 		<div class="reverse">
+			
+			
+			<c:choose>
+    			<c:when test="${empty selecteddate}">
+        			<h2 class='re_day'>
+						<%
+							String selectedDate = (String) request.getAttribute("selecteddate");
+							if (selectedDate == null) {
+								Calendar currentDate = Calendar.getInstance();
+								int currentYear = currentDate.get(Calendar.YEAR);
+								int currentMonth = currentDate.get(Calendar.MONTH) + 1;
+								int currentDay = currentDate.get(Calendar.DATE);
 
-			<h2 class='re_day'>
-				<%
-				String selectedDate = (String) request.getAttribute("selecteddate");
-				if (selectedDate == null) {
-					Calendar currentDate = Calendar.getInstance();
-					int currentYear = currentDate.get(Calendar.YEAR);
-					int currentMonth = currentDate.get(Calendar.MONTH) + 1;
-					int currentDay = currentDate.get(Calendar.DATE);
-
-					out.print(currentYear + "-" + currentMonth + "-" + currentDay);
-				}
-				%>
-			</h2>
-
-			<h2 class='re_day'>${selecteddate}</h2>
-
+								out.print(currentYear + "-" + currentMonth + "-" + currentDay);
+							}
+						%>
+					</h2>
+    			</c:when>
+    			<c:otherwise>
+        			<!-- ${selecteddate} 값이 null이 아닌 경우의 코드 -->
+        			<h2 class='re_day'>${selecteddate}</h2>
+    			</c:otherwise>
+			</c:choose>
+		
 			<button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>
-			<button class='del_btn' type='submit' onclick="confirmDelete();">삭제하기</button>
+			<button class='del_btn'  type='submit' onclick="confirmDelete();">삭제하기</button>
 
 
 			<!-- db에 저장된 개인 일정 내용 가져오는 공간 -->

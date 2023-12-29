@@ -71,6 +71,38 @@ public class CompanyCalDAO extends DBConnPool {
 		return totalcount;
 	}
 	
+	
+	public List<CompanyCalDTO> selectListPage2(String selecteddate2) {
+		List<CompanyCalDTO> board = new Vector<CompanyCalDTO>();
+		
+		System.out.println("select List Page222222");
+
+		// 쿼리문 준비
+		String query = "SELECT company_schedule FROM company_calender WHERE company_calender_date=? ORDER BY com_count_date";
+
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, selecteddate2);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				CompanyCalDTO dto = new CompanyCalDTO();
+
+				dto.setcompany_schedule(rs.getString("company_schedule"));
+				
+				System.out.println(dto.getcompany_schedule());
+
+				board.add(dto);
+				System.out.println("select List Page33333333");
+			}
+		} catch (Exception e) {
+			System.out.println("게시물 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		return board;
+	}
+	
+	
 
 	// 일정 내용 가져오는 쿼리
 		public List<CompanyCalDTO> selectListPage(String selecteddate) {

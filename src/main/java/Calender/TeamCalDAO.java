@@ -105,6 +105,39 @@ public class TeamCalDAO extends DBConnPool {
 		return board;
 	}
 	
+	
+	public List<TeamCalDTO> selectListPage2(String selecteddate2, String team_a) {
+		List<TeamCalDTO> board = new Vector<TeamCalDTO>();
+		
+		System.out.println("select List Page222222");
+
+		// 쿼리문 준비
+		String query = "SELECT team_schedule FROM Team_calender WHERE team=? AND Team_calender_date=? ORDER BY team_count_date";
+
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, team_a); // 순서 변경
+	        psmt.setString(2, selecteddate2); // 순서 변경
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				TeamCalDTO dto = new TeamCalDTO();
+
+				dto.setteam_schedule(rs.getString("team_schedule"));
+				
+				System.out.println(dto.getteam_schedule());
+				board.add(dto);
+				System.out.println("select List Page33333333");
+			}
+		} catch (Exception e) {
+			System.out.println("게시물 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		return board;
+	}
+	
+	
+	
 
 	// 3 삭제하기 기능
 		public int deleteCalender(List<String> selectedSchedules) {

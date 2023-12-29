@@ -734,38 +734,53 @@ body {
 				
 			<h2 class='re_day'>${selecteddate}</h2>
 		
-			<button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>
-			<button class='del_btn'  type='submit' onclick="confirmDelete();">삭제하기</button>
+			<!-- <button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>  -->
+			<!-- <button class='del_btn'  type='submit' onclick="confirmDelete();">삭제하기</button>  -->
 
 
 			<!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
          <div class="reverse2">
-    			<table class="caltabke" width="100%">
-        			<c:choose>
-            			<c:when test="${empty calenderlists}">
-                			<tr>
-                    			<td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>
-                			</tr>
-            			</c:when>
-            			<c:otherwise>
-                			<c:forEach items="${calenderlists}" var="row" varStatus="loop">
-                    			<tr>
-                    				<td style="background-color: #1C427E;">
-										${loop.index + 1} <!-- 각 일정마다 번호 출력 -->
+				<table class="caltabke" width="100%">
+						
+					<c:choose>
+						<c:when test="${not empty calenderlists}">
+								<c:forEach items="${calenderlists}" var="row" varStatus="loop">
+								<tr>
+									<td style="background-color: #1C427E;">${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
 									</td>
-                        			<td style="background-color: #1C427E;">
-                            			<a href="#" class="scheduleLink" data-schedule="${row.company_schedule}">
-                                			${row.company_schedule}  <!-- db에 있는 개인 일정 출력 -->
-                            			</a>
-                        			</td>
-                    			</tr>
-                			</c:forEach>
-            			</c:otherwise>
-        			</c:choose>
-    			</table>
+									<td style="background-color: #1C427E;"><a href="#"
+										class="scheduleLink"
+										data-schedule="${row.company_schedule}">
+											${row.company_schedule} <!-- db에 있는 개인 일정 출력 -->
+									</a></td>
+								</tr>
+							</c:forEach>
+						</c:when>
+						<c:when test="${not empty calenderlists2}">
+							<c:forEach items="${calenderlists2}" var="row" varStatus="loop">
+								<tr>
+									<td style="background-color: #1C427E;">${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
+									</td>
+									<td style="background-color: #1C427E;"><a href="#"
+										class="scheduleLink"
+										data-schedule="${row.company_schedule}">
+											${row.company_schedule} <!-- db에 있는 개인 일정 출력 -->
+									</a></td>
+								</tr>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
+					
+					
+					
+				</table>
 			</div>
-
-      </div>
+		</div>
 		
 		<c:if test="${not empty deleteMessage}">
     		<div>${deleteMessage}</div>
@@ -841,7 +856,7 @@ body {
 
 					    // 버튼 출력 부분 수정 시작
 					    int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
-					    out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc(" + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+					    out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc(" + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl5.jsp';\">일정이 있습니다.</button>");
 					    // 버튼 출력 부분 수정 끝
 
 					    out.print("</td>");

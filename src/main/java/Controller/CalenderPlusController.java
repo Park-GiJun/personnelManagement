@@ -68,6 +68,7 @@ public class CalenderPlusController extends HttpServlet {
 			 dao.insertWrite(newSchedule, selecteddate, emp_num);
 			 
 			 response.getWriter().write("일정이 성공적으로 추가되었습니다.");
+			 System.out.println("일정 추가 성공~!!!!!!!!!!");
 	         response.sendRedirect("../Calender/Scl.jsp");
 			 
 		 } else {
