@@ -54,6 +54,7 @@ public class LoadScheduleController extends HttpServlet {
 		Map<String, List<String>> map = dao.loadSchedule(status, emp_num, year, month);
 
 		String jsonMap = gson.toJson(map);
+		dao.close();
 		
 		System.out.println("확인용 : " + jsonMap);
 		response.setContentType("application/json; charset=UTF-8");

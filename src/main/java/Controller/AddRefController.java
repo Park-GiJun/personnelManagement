@@ -46,6 +46,8 @@ public class AddRefController extends HttpServlet {
 	        
 	        ReferenceDAO dao = new ReferenceDAO();
 	        dao.addRef(jsonArray, inputSmall);
+	        
+	        dao.close();
 
 	    } catch (JSONException e) {
 	        e.printStackTrace();

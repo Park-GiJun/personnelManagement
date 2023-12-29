@@ -69,7 +69,7 @@ public class WorkBoardListController extends HttpServlet {
 		map.put("totalCount", totalCount);
 		map.put("pageSize", pageSize);
 		map.put("pageNum", pageNum);
-
+		dao.close();
 		request.setAttribute("workdocslist", list);
 		request.setAttribute("map", map);
 		request.getRequestDispatcher("../WorkBoard/WorkBoardMain.jsp").forward(request, response);

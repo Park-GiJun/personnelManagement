@@ -133,7 +133,7 @@ public class CompanyController extends HttpServlet {
 	    
 	    System.out.print("추가하기 기능 확인용: " + " " + selectedYear + " " + selectedMonth + " " + selectedDay);
 	    System.out.println();
-
+	    dao.close();
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);
 		//request.setAttribute("CalenderList", CalenderList);

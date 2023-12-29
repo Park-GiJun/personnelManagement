@@ -23,6 +23,7 @@ public class DocApprovalController extends HttpServlet {
 		CodeDAO dao = new CodeDAO();
 
 		dao.updateState(code);
+		dao.close();
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

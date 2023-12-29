@@ -32,6 +32,7 @@ public class ReferenceLoadController extends HttpServlet {
 		// Gson 라이브러리 사용하여 JSON 형태로 응답
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(RefMap);
+		dao.close();
 
 		response.getWriter().write(jsonString);
 

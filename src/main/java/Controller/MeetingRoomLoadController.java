@@ -38,6 +38,7 @@ public class MeetingRoomLoadController extends HttpServlet {
             selectList = dao.selectList(selectedDate);
             
         }
+        dao.close();
         
         req.setAttribute("selectedDate", selectedDate);
 		req.setAttribute("selectList", selectList);

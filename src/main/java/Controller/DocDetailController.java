@@ -59,7 +59,7 @@ public class DocDetailController extends HttpServlet {
 				dto.setFifthMakeButton("Y");
 			}
 		}
-
+		dao.close();
 		request.setAttribute("Doc", dto);
 		request.getRequestDispatcher("../WorkBoard/DocDetail.jsp").forward(request, response);
 

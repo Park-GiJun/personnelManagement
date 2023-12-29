@@ -36,7 +36,7 @@ public class CrystalController extends HttpServlet {
 
         dao.crystalWrite(pass, content, title,anno_board_num);
 
-
+        dao.close();
         // 이 부분에서 forward를 수행하도록 수정
         request.getRequestDispatcher("/Controller/ReturnCommentsController.do").forward(request, response);
     }

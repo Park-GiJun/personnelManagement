@@ -39,6 +39,7 @@ public class BoardeditController extends HttpServlet {
 			dto.setcontent(dto.getcontent().replaceAll("\r\n", "<br/>"));
 
 		}
+		dao.close();
 		request.getSession().setAttribute("anno_board_num", anno_board_num);
 		request.setAttribute("dto", dto);
 		request.getRequestDispatcher("/BulletinBoard/Changeboard.jsp").forward(request, response);

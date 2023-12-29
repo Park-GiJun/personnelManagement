@@ -30,6 +30,7 @@ public class SalaryModifyController extends HttpServlet {
             dao.updateIncentive(empNumParam, incentiveParam, holidayParam, yearmonthParam);
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write("Update successful");
+            dao.close();
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("Error updating incentive information");

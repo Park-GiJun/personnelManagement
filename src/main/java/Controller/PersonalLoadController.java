@@ -29,7 +29,7 @@ public class PersonalLoadController extends HttpServlet {
 		
 		String emp_num = (String) request.getSession().getAttribute("loginid");
 		
-		
+		dao.close();
 
 		
 		List<CalenderDTO> calenderlists2 = dao.selectListPage2(selecteddate2, emp_num);	

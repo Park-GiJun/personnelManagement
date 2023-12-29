@@ -44,6 +44,7 @@ public class LoadDateController extends HttpServlet {
 
 		// Gson을 사용하여 Map을 JSON 형식으로 변환
 		String jsonAttendDateMap = new Gson().toJson(attendDateMap);
+		cDao.close();
 
 		// 응답으로 JSON 데이터 전송
 		response.setContentType("application/json");

@@ -102,6 +102,7 @@ public class ApprovalDocWriteController extends HttpServlet {
 
 		WorkDocsDAO dao = new WorkDocsDAO();
 		dao.writeBoard(dto, codeList);
+		dao.close();
 
 		// 응답 처리
 		// Java (서블릿)

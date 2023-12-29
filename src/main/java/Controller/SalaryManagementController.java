@@ -57,7 +57,7 @@ public class SalaryManagementController extends HttpServlet {
 		SalaryManagementDAO dao = new SalaryManagementDAO();
 		
 		List<SalaryManagementDTO> salaryEMPList = dao.selectSalaryList(selectTeam, selectTeam_num, year, month, num);
-		
+		dao.close();
 		request.setAttribute("salaryEMPList", salaryEMPList);
 		
 		System.out.println(year + " : " + month);

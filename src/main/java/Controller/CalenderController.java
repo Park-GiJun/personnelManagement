@@ -129,7 +129,7 @@ public class CalenderController extends HttpServlet {
 		request.setAttribute("selectedYear", selectedYear);
 	    request.setAttribute("selectedMonth", selectedMonth);
 	    request.setAttribute("selectedDay", selectedDay);
-
+	    dao.close();
 
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);

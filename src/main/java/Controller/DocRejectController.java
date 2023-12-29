@@ -23,6 +23,7 @@ public class DocRejectController extends HttpServlet {
 		CodeDAO dao = new CodeDAO();
 
 		dao.rejectState(code);
+		dao.close();
 
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

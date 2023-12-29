@@ -47,7 +47,7 @@ public class TestDeleteController extends HttpServlet {
 		TestDAO dao = new TestDAO();
 
 		dao.deleteSchdule(emp_num, data);
-
+		dao.close();
 		// 응답 설정
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
