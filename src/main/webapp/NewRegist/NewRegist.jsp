@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+// POST 방식으로 전달된 파라미터 받기
+String Team_Search = request.getParameter("TeamSearch");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -391,6 +395,7 @@ body {
 					<script>
 						//리스트정보 받아서 정보수정부분에 입력
 						function infosubmitForm(nameinfo, emp_numinfo) {
+							
 							// "사원 정보 수정" 테이블의 필드에 값을 채우기
 							document.forms["vacation_form"]["nameinfo"].value = nameinfo;
 							document.forms["vacation_form"]["emp_numinfo"].value = emp_numinfo;
@@ -427,9 +432,10 @@ body {
 						}
 						
 					    // 부서별 사원 검색
-					    function submitForm() {
-					        document.forms["team_form"].submit();
-					    }
+					   function submitForm() {
+						// 컨트롤러로 양식을 제출합니다.
+						document.forms["team_form"].submit();
+							}							
 					    
 					 // 비밀번호 초기화 함수
 					    function resetPassword() {

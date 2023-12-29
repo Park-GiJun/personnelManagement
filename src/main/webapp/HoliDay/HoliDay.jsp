@@ -84,6 +84,7 @@ th {
 	padding: 0rem 0rem 0rem 1rem;
 	background-position: right 1rem center;
 	height: 80%;
+	background-image: none;
 }
 
 /* 각 종류 버튼 스타일 */
@@ -192,11 +193,11 @@ document.addEventListener('DOMContentLoaded', function() {
 					
 					<tr>
 						<td style="display:flex; margin-left:12.5%;">
-							<input type="date" name="start_vacation" id="start_vacation">
+							<input type="date" name="start_vacation" id="start_vacation" class="form-select">
 							
 							<a style="margin-top:1%;">&nbsp;~&nbsp;</a>
 							
-							<input type="date" name="end_vacation" id="end_vacation">
+							<input type="date" name="end_vacation" id="end_vacation" class="form-select">
 						</td>
 					</tr>
 				</table>

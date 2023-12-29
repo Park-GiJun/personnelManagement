@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+	
+<%
+// 예약 검색 후 선택한 날짜를 파라미터로 추가 (정상적으로 넘어오는지 확인하는 코드)
+String selectedDate = request.getParameter("select_date");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,26 +63,45 @@
 	padding: 0rem 0rem 0rem 0.75rem;
 }
 
+.form-select {
+	margin-top: 2%;
+	margin-bottom: 2%;
+	height: 32.5px;
+	padding: 0rem 0rem 0rem 1rem;
+	background-position: right 0.25rem center;
+	background-image: none;
+}
+
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-	var now_utc = Date.now()
-	var timeOff = new Date().getTimezoneOffset()*60000;
-	var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+    var now_utc = Date.now()
+    var timeOff = new Date().getTimezoneOffset() * 60000;
+    var today = new Date(now_utc - timeOff).toISOString().split("T")[0];
     document.getElementById('Team_schedule').setAttribute('min', today);
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var selectedDate = urlParams.get('select_date');
+    
+    Team_schedule.value = selectedDate ? selectedDate : getCurrentDate();
 });
 
-function submit() {
-	alert("팀 일정이 추가 되었습니다.")
+function getCurrentDate() {
+    var today = new Date();
+    var yyyy = today.getFullYear();
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var dd = String(today.getDate()).padStart(2, '0');
+    var currentDate = yyyy + '-' + mm + '-' + dd;
+    return currentDate;
 }
 </script>
 </head>
 <body>
-	<form name="Team_Schedule_form" method="post" action="../Controller/Team_Schedule.do">
+	<form name="Team_Schedule_form" method="get" action="../Controller/Team_Schedule.do">
 		<div class="date_button">
-			<input type="date" id="Team_schedule" name="Team_schedule">
+			<input type="date" id="Team_schedule" name="select_date" class="form-select">
 			
-			<button type="submit" class="btn-light btn-sm" onclick="submit()">일정 추가</button>
+			<button type="submit" class="btn-light btn-sm">일정 추가</button>
 		</div>
 		
 		<div class="schedule_content">

@@ -13,17 +13,20 @@ import Schedule.ScheduleDAO;
 public class Company_Schedule extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		ScheduleDAO dao = new ScheduleDAO();
 
-		String Team_schedule = req.getParameter("Company_schedule");
+		String select_date = req.getParameter("select_date");
 		String content = req.getParameter("content");
 
-		System.out.println("Team_schedule : " + Team_schedule);
+		System.out.println("select_date : " + select_date);
 		System.out.println("content : " + content);
 
-		dao.Company_Schedule(Team_schedule, content);
-
+		dao.Company_Schedule(select_date, content);
+		dao.close();
+		
+		req.setAttribute("select_date", select_date);
 		req.getRequestDispatcher("/Company_Schedule/Company_Schedule.jsp").forward(req, resp);
 	}
 

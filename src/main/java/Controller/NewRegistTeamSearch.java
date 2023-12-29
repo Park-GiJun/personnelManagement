@@ -98,6 +98,7 @@ public class NewRegistTeamSearch extends HttpServlet {
 		map.put("pageNum", pageNum);
 
 		// 전달할 데이터를 request 영역애 저장후 List.jsp 로 포워드
+		req.setAttribute("TeamSearch", TeamSearch);
 		req.setAttribute("selectList", selectList);
 		req.setAttribute("map", map);
 		req.getRequestDispatcher("/NewRegist/NewRegist.jsp").forward(req, resp);

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-// 예약 검색 후 선택한 날짜를 파라미터로 추가
+//예약 검색 후 선택한 날짜를 파라미터로 추가 (정상적으로 넘어오는지 확인하는 코드)
 String selectedDate = request.getParameter("selectedDate");
 %>
 
@@ -198,6 +198,15 @@ body {
 	margin-right:1%;
 	padding: 0rem 0rem 0rem 1rem;"
 }
+
+.form-select {
+	margin-top: 2%;
+	margin-bottom: 2%;
+	height: 32.5px;
+	padding: 0rem 0rem 0rem 1rem;
+	background-position: right 0.25rem center;
+	background-image: none;
+}
 </style>
 
 <script>
@@ -211,18 +220,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	var urlParams = new URLSearchParams(window.location.search);
     var selectedDate = urlParams.get('selectedDate');
     
-	var datePickerInput = document.getElementById('datePickerInput');
-	var today = new Date();
-	var yyyy = today.getFullYear();
-	var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
-	var dd = String(today.getDate()).padStart(2, '0');
-	var currentDate = yyyy + '-' + mm + '-' + dd;
-	
 	datePickerInput.value = selectedDate ? selectedDate : getCurrentDate();
 });
 
 	function getCurrentDate() {
-		var datePickerInput = document.getElementById('datePickerInput');
 		var today = new Date();
 		var yyyy = today.getFullYear();
 		var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
@@ -341,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 		<form id="dateForm" action="../Controller/MeetingRoomLoadController.do"	method="get">
 			<div class="date-form">
-					<input type="date" name="selectedDate" id="datePickerInput">
+					<input type="date" name="selectedDate" id="datePickerInput" class="form-select">
 			
 				<button type="submit" class="btn-info">날짜 검색</button>
 			</div>
