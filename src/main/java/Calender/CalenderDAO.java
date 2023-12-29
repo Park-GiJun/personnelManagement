@@ -158,6 +158,39 @@ public class CalenderDAO extends DBConnPool {
 	}
 	
 	
+	// 날짜만 조회
+	public List<CalenderDTO> selectListPage3(String emp_num) {
+		List<CalenderDTO> board = new Vector<CalenderDTO>();
+		
+		System.out.println("select List Page");
+
+		// 쿼리문 준비
+		String query = "SELECT DISTINCT SUBSTR(Personal_diaray_date, -2) AS LastTwoCharacters FROM Personal_diaray WHERE emp_num=?";
+
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, emp_num);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				CalenderDTO dto = new CalenderDTO();
+
+				dto.setPersonal_diaray_date(rs.getString("LastTwoCharacters"));
+
+	            System.out.println("게시물 날짜 조회(중복x) : " + dto.getPersonal_diaray_date());
+
+	            board.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println("게시물 날짜 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		return board;
+	}
+	
+	
+	
+	
 	public CalenderDTO selectView(String Personal_diaray_schedule) {
 		CalenderDTO dto = new CalenderDTO();
 		String query = "SELECT * FROM Personal_diaray WHERE Personal_diaray_schedule=?";

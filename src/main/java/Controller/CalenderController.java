@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,6 +117,29 @@ public class CalenderController extends HttpServlet {
 		List<CalenderDTO> calenderlists = dao.selectListPage(selecteddate, emp_num);	
 		
 		
+		
+		// 년-월-일 중에서 일 값만 가져옴.  // 출력 제대로 됨, 값 제대로 가져옴
+		List<CalenderDTO> calenderlists3 = dao.selectListPage3(emp_num);
+		for (CalenderDTO dto : calenderlists3) {
+            System.out.println("Personal_diaray_date: " + dto.getPersonal_diaray_date());
+        }	
+		
+		List<Integer> daylist = new ArrayList<>();
+
+		for (CalenderDTO item : calenderlists3) {
+		    try {
+		        int day = Integer.parseInt(item.getPersonal_diaray_date());
+		        daylist.add(day);
+		    } catch (NumberFormatException e) {
+		        // Personal_diaray_date가 숫자로 변환할 수 없는 경우 처리
+		        e.printStackTrace();
+		    }
+		}
+		for (Integer value : daylist) {
+		    System.out.println("daylist 값2222222: " + value);
+		}
+		
+		
 		//List<CalenderDTO> CalenderList = dao.selectListPage(map);
 		// 페이징 이미지 전달
 		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/Calender.do");
@@ -133,6 +157,7 @@ public class CalenderController extends HttpServlet {
 
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);
+		request.setAttribute("calenderlists3", calenderlists3);
 		request.setAttribute("map2", map);
 		request.setAttribute("selecteddate", selecteddate);
 		request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
