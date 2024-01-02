@@ -159,17 +159,21 @@ public class CalenderDAO extends DBConnPool {
 	
 	
 	// 날짜만 조회
-	public List<CalenderDTO> selectListPage3(String emp_num) {
+	public List<CalenderDTO> selectListPage3(String emp_num, String selectedYear, String selectedMonth) {
 		List<CalenderDTO> board = new Vector<CalenderDTO>();
 		
 		System.out.println("select List Page");
 
 		// 쿼리문 준비
-		String query = "SELECT DISTINCT SUBSTR(Personal_diaray_date, -2) AS LastTwoCharacters FROM Personal_diaray WHERE emp_num=?";
-
+		//String query = "SELECT DISTINCT SUBSTR(Personal_diaray_date, -2) AS LastTwoCharacters FROM Personal_diaray WHERE emp_num=?";
+		String query = "SELECT DISTINCT SUBSTR(Personal_diaray_date, -2) AS LastTwoCharacters FROM Personal_diaray WHERE emp_num=? AND SUBSTR(Personal_diaray_date, 1, 4)=? AND SUBSTR(Personal_diaray_date, 6, 2)=?";
+		
+		
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, emp_num);
+			psmt.setString(2, selectedYear);
+			psmt.setString(3, selectedMonth);
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {

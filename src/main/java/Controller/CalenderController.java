@@ -134,7 +134,7 @@ public class CalenderController extends HttpServlet {
 		
 		
 		// 년-월-일 중에서 일 값만 가져옴.  // 출력 제대로 됨, 값 제대로 가져옴
-		List<CalenderDTO> calenderlists3 = dao.selectListPage3(emp_num);
+		List<CalenderDTO> calenderlists3 = dao.selectListPage3(emp_num, selectedYear, selectedMonth);
 		for (CalenderDTO dto : calenderlists3) {
             System.out.println("Personal_diaray_date: " + dto.getPersonal_diaray_date());
         }	

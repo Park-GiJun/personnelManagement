@@ -63,6 +63,7 @@ public class CalenderDeleteController extends HttpServlet {
         request.setAttribute("map2", map);
         request.setAttribute("selectedSchedules", selectedSchedules);
         request.setCharacterEncoding("UTF-8");
+        request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
         
 	}
 

@@ -448,6 +448,11 @@ a:active, a:hover {
 	overflow: hidden;
 }
 
+
+.parent-container {
+    overflow: hidden;
+}
+
 /* 날짜 버튼 스타일 지정 */
 .calendar table button {
 	color: #fff;
@@ -501,14 +506,14 @@ a:active, a:hover {
 .calendar table td.gray button {
 	color: #000;
 	position: relative; /* 상대적인 위치 설정 */
-	top: -45px; /* 상단 여백 조정 */
+	top: -30px; /* 상단 여백 조정 */
 }
 
 /* 다음달의 날짜 색상 지정 */
 .calendar table td.gray2 button {
 	color: #000;
 	position: relative; /* 상대적인 위치 설정 */
-	top: -45px; /* 상단 여백 조정 */
+	top: -30px; /* 상단 여백 조정 */
 }
 
 #bin {
@@ -523,23 +528,6 @@ a:active, a:hover {
 
 
 <script type="text/javascript">
-
-/*
-function change() {
-    var f = document.frm;
- 
-    f.submit();
-}
-
-function updateCalendar() {
-    var year = document.getElementById("yearSelect").value;
-    var month = document.getElementById("monthSelect").value;
-
-    var url = "Scl.jsp?year=" + year + "&month=" + month;
-    window.location.href = "Calender/Scl.jsp";
-}
-*/
-
 
 // 서버로 데이터를 전송하는 함수
 function sendDataToServer(year, month, day) {
