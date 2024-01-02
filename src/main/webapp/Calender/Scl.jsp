@@ -10,11 +10,9 @@
 <%@ page import="java.util.HashMap"%>
 <%@ page import="fileupload.FileUtil"%>
 <%@ page import="java.util.List"%>
-<<<<<<< HEAD
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-=======
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
+
 
 <%
 request.setCharacterEncoding("utf-8");
@@ -767,11 +765,8 @@ body {
         			<h2 class='re_day'>${selecteddate}</h2>
     			</c:otherwise>
 			</c:choose>
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
+			
+			
 			<button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>
 			<button class='del_btn'  type='submit' onclick="confirmDelete();">삭제하기</button>
 
@@ -897,7 +892,6 @@ body {
 						//out.print("<td class='" + cls + "' style='min-width: 100px; max-width: 100px; width: 100px; min-height: 10px !important; max-height: 10px !important; height: 50px !important; position: relative;'>");
 						out.print("<button id=\"update\" style='max-height: 50px;' onclick=\"showDateAndAlert(" + i + ")\">" + i
 						+ "</button>");
-<<<<<<< HEAD
 			
 						int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
 						
@@ -913,17 +907,15 @@ body {
 				    	%>
 						</c:if>
 						<% 
-=======
 
 						// 버튼 출력 부분 수정 시작
-						int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
+						int startbutton = 50; // 시작 위치값 설정 (예: 30%)
 						out.print(
 						"<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc("
-								+ buttonStartRightPercentage
+								+ startbutton
 								+ "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
 						// 버튼 출력 부분 수정 끝
 
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 						out.print("</td>");
 
 						if (lastDay != i && (++week) % 7 == 1) {
