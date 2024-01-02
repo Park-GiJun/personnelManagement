@@ -9,8 +9,9 @@ import HoliDay.HoliDayDAO;
 import HoliDay.HoliDayDTO;
 
 public class NewRegistDAO extends DBConnPool {
-	
-	public NewRegistDTO NewRegist(String name, String emp_num, String emp_grade, String team, String grade, String Team_num) {
+
+	public NewRegistDTO NewRegist(String name, String emp_num, String emp_grade, String team, String grade,
+			String Team_num) {
 		String query = "INSERT INTO emp (name, emp_num, emp_grade, team, grade, team_num) VALUES (?, ?, ?, ?, ?, ?)";
 
 		System.out.println("정보등록 쿼리 실행");
@@ -94,7 +95,14 @@ public class NewRegistDAO extends DBConnPool {
 				dto.setPhone(rs.getString("phone"));
 				dto.setTeam(rs.getString("team"));
 				dto.setWork_start_day(rs.getString("work_start_day"));
-				dto.setTeam_num(rs.getString("team_num"));
+				String teamString = rs.getString("team_num");
+				if (!teamString.equals("  ")) {
+					System.out.println("확인 " + teamString);
+					String arr[] = teamString.split(" ");
+					dto.setTeam_num(arr[1]);
+				} else {
+					dto.setTeam_num(teamString);
+				}
 
 				bbs.add(dto);
 			}
@@ -128,16 +136,18 @@ public class NewRegistDAO extends DBConnPool {
 
 	// 부서별 사원 목록 조회 쿼리
 	public List<NewRegistDTO> selectdepartmentList(String TeamSearch, String team_num, int num) {
+		System.out.println("selectdepartmentList : " + "팀명 " + TeamSearch + " 팀번호 " + team_num);
 		List<NewRegistDTO> bbs = new Vector<NewRegistDTO>();
 		String query = "";
+		System.out.println("TeamSearch " + TeamSearch);
 		if (num == 1) {
 			query = "SELECT * FROM emp WHERE team=? ORDER BY team, team_num, grade, name";
 		}
-		
+
 		if (num == 2) {
 			query = "SELECT * FROM emp WHERE team=? AND team_num=? ORDER BY team, team_num, grade, name";
 		}
-		
+
 		if (num == 3) {
 			query = "SELECT * FROM emp WHERE GRADE <= 3 ORDER BY grade, name, team";
 		}
@@ -148,7 +158,7 @@ public class NewRegistDAO extends DBConnPool {
 			if (num == 1) {
 				psmt.setString(1, TeamSearch);
 			}
-			
+
 			// 부서별 팀 조회
 			if (num == 2) {
 				psmt.setString(1, TeamSearch);
@@ -167,7 +177,14 @@ public class NewRegistDAO extends DBConnPool {
 				dto.setPhone(rs.getString("phone"));
 				dto.setTeam(rs.getString("team"));
 				dto.setWork_start_day(rs.getString("work_start_day"));
-				dto.setTeam_num(rs.getString("team_num"));
+				String teamString = rs.getString("team_num");
+				if (!teamString.equals("  ")) {
+					System.out.println("확인 " + teamString);
+					String arr[] = teamString.split(" ");
+					dto.setTeam_num(arr[1]);
+				} else {
+					dto.setTeam_num(teamString);
+				}
 
 				bbs.add(dto);
 			}
@@ -178,9 +195,10 @@ public class NewRegistDAO extends DBConnPool {
 		return bbs;
 	}
 
-	public NewRegistDTO RegistEdit(String emp_grade, String team, String grade, String team_num_Edit, String name, String emp_num) {
+	public NewRegistDTO RegistEdit(String emp_grade, String team, String grade, String team_num_Edit, String name,
+			String emp_num) {
 		String query = "UPDATE emp SET emp_grade = ?, team = ?, grade = ?, Team_num = ? WHERE name = ? AND emp_num= ?";
-		
+
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, emp_grade);

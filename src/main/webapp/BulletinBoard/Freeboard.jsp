@@ -8,6 +8,30 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+<<<<<<< 김채은
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+=======
+>>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
 /* 공통 스타일 */
 * {
 	box-sizing: border-box;
@@ -21,7 +45,7 @@ body {
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
-	margin-left: 150px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
+	margin-left: 200px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;
 	min-height: 400px; /* Set a minimum height for the content area */
@@ -136,39 +160,26 @@ body {
 			onsubmit="return validateForm(this)">
 			<table border="1" width="100%">
 				<tr>
-					<td><input type="text" value="제목을 입력해 주세요."
-						name="Freeboardtitle" class="form-control"
-						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)"/>
+					<td>
+						<input type="text" name="Freeboardtitle" class="form-control" placeholder="제목"
+							onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)"/>
 					</td>
 				</tr>
 
 				<tr>
-
-					<td><input type="text" name="Freeboardcontent"
-						style="height: 590px;" class="form-control"></td>
-
+					<td><input type="text" name="Freeboardcontent" style="height: 590px;" class="form-control" placeholder="내용"></td>
 				</tr>
 
 				<tr>
-					<td colspan="3"
-						style="text-align: left; font-size: 15px; display: flex; align-items: center;">
-						<input type="text" value="비밀번호" name="Freeboardpassword"
-						class="form-control" id="Freeboardpassword"
-						onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
+					<td colspan="3"	style="text-align: left; font-size: 15px; display: flex; align-items: center;">
+							<input type="password" placeholder="Password" name="Freeboardpassword" class="form-control" id="Freeboardpassword"
+								onfocus="clearDefaultText(this)" onblur="restoreDefaultText(this)" />
 
-						<button type="button"
-							onclick="location.href='../BulletinBoard/FreeboardForm.jsp';"
-							class="btn-info" style="margin-left: 69%;">목록</button>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3" style="text-align: right;">
+						<button type="button" onclick="location.href='../Controller/FreeboardList.do';"	class="btn-info" style="margin-left: 69%;">목록</button>
 						<button type="submit" class="btn-info">작성완료</button>
-						
 					</td>
 				</tr>
 			</table>
-
 		</form>
 	</div>
 </body>

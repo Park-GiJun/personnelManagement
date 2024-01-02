@@ -11,6 +11,31 @@
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 
 <style type="text/css">
+<<<<<<< 김채은
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+=======
+>>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
 * {
 	margin: 0;
 	padding: 0;
@@ -61,6 +86,7 @@ td {
 	padding: 0rem 0rem 0rem 1rem;
 	background-position: right 1rem center;
 	height: 80%;
+	background-image: none;
 }
 
 /* 각 종류 버튼 스타일 */
@@ -77,7 +103,7 @@ td {
 /* 휴가 신청 위치 수정 */
 .middle-button-container {
 	position: relative;
-	margin-top: -3%;
+	margin-top: -2%;
 	margin-left: 80%;
 }
 
@@ -125,6 +151,14 @@ body {
 	padding: 20px;
 	font-size: 12px;
 }
+
+#start_vacation, #end_vacation {
+	width: 40%;
+	margin-top:1%;
+	margin-bottom:1%;
+	margin-right:1%;
+	padding: 0rem 0rem 0rem 2.5rem;"
+}
 </style>
 </head>
 <body>
@@ -148,6 +182,17 @@ body {
 					<tr class="table-dark2" align="center">
 						<th colspan="9" scope="row">휴가 일정</th>
 					</tr>
+<<<<<<< 김채은
+					
+					<tr>
+						<td style="display:flex; margin-left:12.5%;">
+							<input type="date" name="start_vacation" id="start_vacation" class="form-select">
+							
+							<a style="margin-top:1%;">&nbsp;~&nbsp;</a>
+							
+							<input type="date" name="end_vacation" id="end_vacation" class="form-select">
+						</td>
+=======
 					<tr class="table-dark3" align="center">
 						<th width="5%" scope="row" align="center"><select id="start_vacation_year" name="start_vacation_year" class="form-select" style="width: 90%; align: center;">
 								<option value="">년도를 선택해주세요</option>
@@ -193,6 +238,7 @@ body {
 									<option value="<c:if test='${day lt 10}'>0</c:if>${day}">${day}</option>
 								</c:forEach>
 							</select></th>
+>>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
 					</tr>
 				</table>
 			</div>
@@ -227,7 +273,7 @@ body {
 						<c:when test="${empty holidayList}">
 							<!-- 게시물이 없을 때 -->
 							<tr class="table-dark3" align="center">
-								<td colspan="2" align="center" scope="row">신청된 휴가가 없습니다.</td>
+								<td colspan="3" align="center" scope="row">신청된 휴가가 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>

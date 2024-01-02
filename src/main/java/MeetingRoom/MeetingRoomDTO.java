@@ -6,6 +6,7 @@ public class MeetingRoomDTO {
 	private String date;
 	private String meetingroomNum;
 	private String team;
+	private String team_num;
 	private String status;
 	private String name;
 
@@ -56,6 +57,14 @@ public class MeetingRoomDTO {
 
 	public void setTeam(String team) {
 		this.team = team;
+	}
+
+	public String getTeam_num() {
+		return team_num;
+	}
+
+	public void setTeam_num(String team_num) {
+		this.team_num = team_num;
 	}
 
 }

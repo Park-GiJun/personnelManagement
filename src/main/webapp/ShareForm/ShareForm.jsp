@@ -9,6 +9,31 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+<<<<<<< 김채은
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+=======
+>>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
 /* 공통 스타일 */
 * {
 	box-sizing: border-box;
@@ -74,7 +99,21 @@ td {
 	width: 400px;
 	height: 35px;
 }
+
+a {
+    text-decoration: none;
+    color: inherit; /* 링크의 기본 색상을 상속받음 */
+ }
 </style>
+
+<script>
+	function openShareFormWindow() {
+		var detailsUrl = "../ShareForm/Write.jsp";
+
+		window.open(detailsUrl, "_blank", "width=700, height=140");
+	}
+</script>
+
 <body>
 	<jsp:include page="../MainPage/Left.jsp" />
 	<div class="content">
@@ -103,8 +142,7 @@ td {
 								<!-- 제목 --> <a>${ row.title }</a>
 							</td>
 							<td><c:if test="${ not empty row.shareofile }">
-										${ dto.ofile }
-									<a href="../Controller/ShareFormDownload.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">[다운로드]</a>
+									<a href="../Controller/ShareFormDownload.do?ofile=${ row.shareofile }&sfile=${ row.sharesfile }&idx=${ row.idx }">[다운로드]</a>
 								</c:if></td>
 						</tr>
 					</c:forEach>
@@ -119,7 +157,10 @@ td {
 							<option value="title">제목</option>
 						</select> <input type="text" name="searchWord" class="form-control">
 						<button type="submit" name="listSearch" value="검색하기" id="listSearch" class="btn-info" style="margin-right: 37.5%;">검색하기</button>
-						<button type="button" onclick="location.href='../ShareForm/Write.jsp';" class="btn-info">글작성</button></th>
+						<button type="button" onclick="openShareFormWindow()" class="btn-info">글작성</button></th>
+				</tr>
+				<tr>
+					<th style="text-align: center;" class="table-dark3">${ map.pagingImg }</th>
 				</tr>
 			</table>
 		</form>

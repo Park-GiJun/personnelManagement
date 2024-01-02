@@ -8,10 +8,40 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style type="text/css">
+<<<<<<< 김채은
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+=======
+>>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
 .content {
 	margin-left: 10%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;
+}
+
+.buttons {
+	margin-top: 0%;
+	margin-bottom: 1%;
 }
 
 .listTable {
@@ -22,7 +52,7 @@
 }
 
 .btn-info {
-	width: 5%;
+	width: 7%;
 	font-size:15px;
 	height: 20%;
 	border-radius: 25px;
@@ -157,6 +187,11 @@
 	<jsp:include page="../MainPage/Left.jsp" />
 
 	<div class="content">
+	
+		<div class="buttons">
+			<button type="button" onclick="confirmAction()" class="btn-info">승인</button>
+			<button type="button" onclick="rejectAction()" class="btn-info">거절</button>
+		</div>
 
 		<table border="1" class="listTable">
 			<tr class="table-dark1" style="font-size: 20px;" align="center">
@@ -189,10 +224,6 @@
 
 			</c:forEach>
 		</table>
-		<div class="buttons">
-			<button type="button" onclick="confirmAction()" class="btn-info">승인</button>
-			<button type="button" onclick="rejectAction()" class="btn-info">거절</button>
-		</div>
 	</div>
 
 </body>

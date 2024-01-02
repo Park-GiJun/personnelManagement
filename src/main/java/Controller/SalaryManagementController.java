@@ -45,19 +45,21 @@ public class SalaryManagementController extends HttpServlet {
 				String[] Team = selectTeam.split(" ");
 				selectTeam = Team[0];
 				System.out.println(selectTeam);
-				selectTeam_num = Team[1];
+				selectTeam_num = Team[0] + " " + Team[1];
 				System.out.println(selectTeam_num);
 				num = 2;
-		}
+			}
+			
+			if (selectTeam.equals("임원")) {
+				num = 3;
+			}
 		
-		if (selectTeam.equals("임원")) {
-			num = 3;
-		}
+		
 		
 		SalaryManagementDAO dao = new SalaryManagementDAO();
 		
 		List<SalaryManagementDTO> salaryEMPList = dao.selectSalaryList(selectTeam, selectTeam_num, year, month, num);
-		
+		dao.close();
 		request.setAttribute("salaryEMPList", salaryEMPList);
 		
 		System.out.println(year + " : " + month);

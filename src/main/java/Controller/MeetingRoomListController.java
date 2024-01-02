@@ -30,6 +30,7 @@ public class MeetingRoomListController extends HttpServlet {
 		// Convert the list to JSON using Gson
 		Gson gson = new Gson();
 		String meetingRoomLists = gson.toJson(lists);
+		dao.close();
 
 		// Set the content type and write the JSON response
 		response.setContentType("application/json");

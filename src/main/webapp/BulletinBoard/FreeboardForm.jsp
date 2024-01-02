@@ -9,6 +9,31 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+<<<<<<< 김채은
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}}
+
+=======
+>>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
 /* 공통 스타일 */
 * {
 	box-sizing: border-box;
@@ -34,7 +59,7 @@ td {
 }
 
 .btn-info {
-	margin-top: 0.7%;
+	margin-top: 0.5%;
 	margin-bottom: 0%;
 	font-size: 15px;
 	height: 30px;
@@ -85,6 +110,17 @@ td {
 	width: 400px;
 	height: 30px;
 }
+
+#btn2 {
+	width: 10%;
+	font-size: 10px;
+	background: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: inherit; /* 링크의 기본 색상을 상속받음 */
+ }
 </style>
 <body>
 	<jsp:include page="../MainPage/Left.jsp" />
@@ -128,18 +164,16 @@ td {
 			<table border="1" width="90%" height="50px">
 
 				<tr class="table-dark3" align="center">
-
-					<th style="display: flex; margin-left: 27.5%;" scope="row"><select name="searchCategory" class="form-select">
+					<th style="display: flex; margin-left: 32.5%;" scope="row"><select name="searchCategory" class="form-select">
 							<option value="title">제목</option>
-						</select> <input type="text" name="searchWord" class="form-control" /> <input type="submit" name="listSearch" value="검색하기" id="listSearch" /></th>
-				</tr>
-				<tr align="center">
+						</select> <input type="text" name="searchWord" class="form-control" /> <input type="submit" class="btn-info" name="listSearch" value="검색하기" id="btn2" /></th>
 
-					<th>${ map2.paginImg }</th>
-					<th width="100" rowspan="2">
-						<button type="button" onclick="location.href='../BulletinBoard/Freeboard.jsp';">글작성</button>
-
+					<th width="100" rowspan="1">
+						<button type="button" onclick="location.href='../BulletinBoard/Freeboard.jsp';" class="btn-info">글작성</button>
 					</th>
+				</tr>
+				   <tr>
+				   <td colspan ="2" align="center" class="table-dark3">${ map2.pagingImg }</td>
 				</tr>
 			</table>
 		</form>

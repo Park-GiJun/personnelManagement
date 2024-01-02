@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+// POST 방식으로 전달된 파라미터 받기
+String Team_Search = request.getParameter("TeamSearch");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +13,39 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style type="text/css">
+<<<<<<< 김채은
+
+/* 스크롤바를 적용할 스타일을 추가합니다. */
+.table-container {
+	width: 100%;
+    max-height: 620px; /* 필요에 따라 높이를 조절하세요. */
+    overflow-y: auto;
+}
+
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+=======
+>>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
 * {
 	margin: 0;
 	padding: 0;
@@ -71,9 +108,8 @@ td {
     display: flex; /* flex 컨테이너로 설정 */
     justify-content: space-between; /* 버튼 사이의 간격을 균등하게 조절 */
     position: relative;
-    margin-top: 2.5%;
+    margin-top: 0%;
     margin-left: 50%;
-    width: 15%;
     --bs-table-color: #fff;
 	color: var(--bs-table-color);
 }
@@ -89,7 +125,7 @@ td {
 	margin-top: 2%;
 	margin-bottom: 2%;
 	padding: 0rem 0rem 0rem 1rem;
-	background-position: right 1rem center;
+	background-position: right 0.25rem center;
 }
 
 .form-select-option {
@@ -120,7 +156,7 @@ td {
 	justify-content: space-between;
 }
 
-.table-container {
+.table-container2 {
 	width: 100%;
 }
 
@@ -160,11 +196,10 @@ body {
 	<jsp:include page="../MainPage/Left.jsp" />
 	<div class="content">
 
-		<form name="team_form" method="post"
-			action="../Controller/NewRegistTeamSearch.do" accept-charset="UTF-8">
+		<form name="team_form" method="post" action="../Controller/NewRegistTeamSearch.do" accept-charset="UTF-8">
 			<div class="form-check">
 				<label>
-					<select id="department_search" name="department_search" size="1" style="width: 130%; height: 100%;" class="form-select" onchange="submitForm()">
+					<select id="department_search" name="department_search" size="1" style="width: 160%; height: 100%;" class="form-select" onchange="submitForm()">
 							<option value="전체">선택해주세요.</option>
 							
 							<optgroup label="전체 or 임원">
@@ -194,6 +229,7 @@ body {
 							</optgroup>
 					</select>
 				</label>
+				<button type="button" class="btn-info" style="width:40%; font-size:20px; margin-left: 50%;" onclick="resetPassword()">비밀번호 초기화</button>
 			</div>
 		</form>
 
@@ -204,7 +240,7 @@ body {
 
 			<!-- 신입사원 등록 양식 -->
 			<div class="middle-NewRegist-container">
-				<div class="table-container">
+				<div class="table-container2">
 					<table border="1" width="98%">
 						<tr align="center" class="table-dark1">
 							<th colspan='5' align="center" scope="row">신입사원 정보 등록</th>
@@ -224,7 +260,7 @@ body {
 							</th>
 
 							<th align="center" width="20%">
-								<select id="emp_grade" name="emp_grade" size="1" style="width: 90%;" class="form-select">
+								<select id="emp_grade" name="emp_grade" size="1" style="width: 95%;" class="form-select">
 									<option value="">선택하세요.</option>
 									<option value="이사">이사</option>
 									<option value="부장">부장</option>
@@ -235,7 +271,7 @@ body {
 							</th>
 
 							<th align="center" width="20%">
-								<select id="team" name="team" size="1" style="width: 90%;" class="form-select">
+								<select id="team" name="team" size="1" style="width: 95%;" class="form-select">
 									<option value="">선택하세요.</option>
 									<option value="임원">임원</option>
 									<option value="인사">인사</option>
@@ -245,7 +281,7 @@ body {
 							</th>
 							
 							<th align="center" width="20%">
-								<select id="team_num" name="team_num" size="1" style="width: 90%;" class="form-select">
+								<select id="team_num" name="team_num" size="1" style="width: 95%;" class="form-select">
 									<option value="">선택하세요.</option>
 									<option value="임원">임원</option>
 									<option value="1팀">1팀</option>
@@ -257,8 +293,7 @@ body {
 					</table>
 
 					<div class="middle-button-container">
-						<button type="submit" class="btn-info" name="NewRegistType"
-							value="NewRegist" onclick="validateForm()">정보등록</button>
+						<button type="submit" class="btn-info" name="NewRegistType"	value="NewRegist" onclick="validateForm()">정보등록</button>
 					</div>
 					
 					<!-- ---------------------------------------------------------------------------------------------------------------- -->
@@ -285,7 +320,7 @@ body {
 								</th>
 
 								<th align="center" width="20%">
-									<select id="emp_grade_Edit"	name="emp_grade_Edit" size="1" style="width: 90%;" class="form-select">
+									<select id="emp_grade_Edit"	name="emp_grade_Edit" size="1" style="width: 95%;" class="form-select">
 										<option value="">선택하세요.</option>
 										<option value="이사">이사</option>
 										<option value="부장">부장</option>
@@ -296,7 +331,7 @@ body {
 								</th>
 
 								<th align="center" width="20%">
-									<select id="team_Edit"	name="team_Edit" size="1" style="width: 90%;" class="form-select">
+									<select id="team_Edit"	name="team_Edit" size="1" style="width: 95%;" class="form-select">
 										<option value="">선택하세요.</option>
 										<option value="임원">임원</option>
 										<option value="인사">인사</option>
@@ -306,7 +341,7 @@ body {
 								</th>
 								
 								<th align="center" width="20%">
-								<select id="team_num_Edit" name="team_num_Edit" size="1" style="width: 90%;" class="form-select">
+								<select id="team_num_Edit" name="team_num_Edit" size="1" style="width: 95%;" class="form-select">
 									<option value="">선택하세요.</option>
 									<option value="임원">임원</option>
 									<option value="1팀">1팀</option>
@@ -352,7 +387,7 @@ body {
 										<td align="center" scope="row" width="10%">
 											<label>
 												<input type="radio"	name="department_edit" value="info" class="form-check-input"
-													onclick="('${row.name}', '${row.emp_num}')">
+													onclick="infosubmitForm('${row.name}', '${row.emp_num}')">
 											</label>
 										</td>
 										<td width="15%">${row.name}</td>
@@ -368,7 +403,8 @@ body {
 				<!-- ---------------------------------------------------------------------------------------------------------------- -->
 					<script>
 						//리스트정보 받아서 정보수정부분에 입력
-						function (nameinfo, emp_numinfo) {
+						function infosubmitForm(nameinfo, emp_numinfo) {
+							
 							// "사원 정보 수정" 테이블의 필드에 값을 채우기
 							document.forms["vacation_form"]["nameinfo"].value = nameinfo;
 							document.forms["vacation_form"]["emp_numinfo"].value = emp_numinfo;
@@ -405,8 +441,43 @@ body {
 						}
 						
 					    // 부서별 사원 검색
-					    function submitForm() {
-					        document.forms["team_form"].submit();
+					   function submitForm() {
+						// 컨트롤러로 양식을 제출합니다.
+						document.forms["team_form"].submit();
+							}							
+					    
+					 // 비밀번호 초기화 함수
+					    function resetPassword() {
+					        // 선택된 라디오 버튼의 값 가져오기
+					        var selectedEmpNum = document.forms["vacation_form"]["emp_numinfo"].value;
+
+					        // 값이 있는지 확인
+					        if (selectedEmpNum) {
+					            // 폼 엘리먼트 생성
+					            var form = document.createElement("form");
+					            form.method = "post";
+					            form.action = "../Controller/PasswordResetController.do";
+
+					            // 선택된 사원 번호 추가
+					            var input = document.createElement("input");
+					            input.type = "hidden";
+					            input.name = "selectedEmpNum";
+					            input.value = selectedEmpNum;
+					            form.appendChild(input);
+
+					            // 폼을 문서에 추가
+					            document.body.appendChild(form);
+
+					            // 폼 제출
+					            form.submit();
+
+					            // 폼을 제거 (선택적)
+					            document.body.removeChild(form);
+					            
+					            alert("비밀번호 초기화 완료");
+					        } else {
+					            alert("사원을 선택해주세요.");
+					        }
 					    }
 					</script>
 				</div>

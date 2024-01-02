@@ -68,10 +68,12 @@ public class LoginController extends HttpServlet {
 			httpSession.setAttribute("userId", loginNum);
 			httpSession.setAttribute("userGrade", inpGrade);
 			httpSession.setAttribute("userTeam", inpTeam);
+			dao.close();
 
 		} else {
 			// 로그인 실패
 			response.sendRedirect("../Login/Login.jsp"); // 로그인 실패 시 다시 로그인 페이지로 리다이렉트
+			dao.close();
 		}
 	}
 }

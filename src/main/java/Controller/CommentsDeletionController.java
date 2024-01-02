@@ -23,8 +23,8 @@ public class CommentsDeletionController extends HttpServlet {
 		 int Trun = Integer.parseInt(request.getParameter("boardNum"));
 		 System.out.println(Trun);
 		 dao.EliminationsComments(Trun);
+		 dao.close();
 		 
-		request.getRequestDispatcher("/BulletinBoard/FreeboardForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/Controller/ReturnCommentsController.do").forward(request, response);
 	}
-
 }

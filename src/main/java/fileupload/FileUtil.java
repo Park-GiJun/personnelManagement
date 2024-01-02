@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +29,7 @@ public class FileUtil {
 	public static void download(HttpServletRequest req, HttpServletResponse resp, String directory, String sfileName,
 			String ofileName) {
 		String userHome = System.getProperty("user.home");
-		String sDirectory  = userHome + "/Uploads";
+		String sDirectory  = userHome + directory;
 
 		try {
 			// 파일을 찾아 입력 스트림 생성
@@ -38,9 +39,9 @@ public class FileUtil {
 			// 한글 파일명 깨짐 방지
 			String client = req.getHeader("User-Agent");
 			if (client.indexOf("WOW64") == -1) {
-				ofileName = new String(ofileName.getBytes("UTF-8"), "ISO-8859-1");
+				ofileName = new String(ofileName.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
 			} else {
-				ofileName = new String(ofileName.getBytes("KSC5601"), "ISO-8859-1");
+				ofileName = new String(ofileName.getBytes("KSC5601"), StandardCharsets.ISO_8859_1);
 			}
 
 			// 파일 다운로드용 응답 헤더 설정
@@ -55,7 +56,7 @@ public class FileUtil {
 			OutputStream oStream = resp.getOutputStream();
 
 			// 풀력 스트림에 파일 내용 출력
-			byte b[] = new byte[(int) file.length()];
+			byte[] b = new byte[(int) file.length()];
 			int readBuffer = 0;
 			while ((readBuffer = iStream.read(b)) > 0) {
 				oStream.write(b, 0, readBuffer);

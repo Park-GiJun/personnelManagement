@@ -47,6 +47,8 @@ public class addEMPTableController extends HttpServlet {
 		// Convert PersonalDTO to JSON using Gson
 		Gson gson = new Gson();
 		String json = gson.toJson(dto);
+		
+		dao.close();
 
 		// Set response type to JSON
 		response.setContentType("application/json");

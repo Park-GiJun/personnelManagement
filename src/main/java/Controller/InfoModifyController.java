@@ -37,6 +37,7 @@ public class InfoModifyController extends HttpServlet {
 			System.out.println("기존 비밀번호 : " + Personaldto.getPassword());
 		}
 		
+		
 		Personaldao.modifyInfo(empNum, modifiedPhone, modifiedEmail, modifiedPass);
 	}
 

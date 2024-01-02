@@ -65,6 +65,7 @@ public class NewRegistTeamSearch extends HttpServlet {
 		}
 		if (TeamSearch.equals("개발") || TeamSearch.equals("인사") || TeamSearch.equals("디자인")) {
 			// 사원 목록 받기
+			num = 1;
 			selectList = dao.selectdepartmentList(TeamSearch, team_num, num);
 		}
 		
@@ -72,12 +73,12 @@ public class NewRegistTeamSearch extends HttpServlet {
 			TeamSearch.equals("인사 1팀") || TeamSearch.equals("인사 2팀") || TeamSearch.equals("인사 3팀") ||
 			TeamSearch.equals("디자인 1팀") || TeamSearch.equals("디자인 2팀") || TeamSearch.equals("디자인 3팀")) {
 			String[] Team = TeamSearch.split(" ");
-			TeamSearch = Team[0];
+			String teamName = Team[0];
 			System.out.println(TeamSearch);
 			team_num = Team[1];
 			System.out.println(team_num);
 			num = 2;
-			selectList = dao.selectdepartmentList(TeamSearch, team_num, num);
+			selectList = dao.selectdepartmentList(teamName, TeamSearch, num);
 		}
 		
 		if (TeamSearch.equals("임원")) {
@@ -97,6 +98,7 @@ public class NewRegistTeamSearch extends HttpServlet {
 		map.put("pageNum", pageNum);
 
 		// 전달할 데이터를 request 영역애 저장후 List.jsp 로 포워드
+		req.setAttribute("TeamSearch", TeamSearch);
 		req.setAttribute("selectList", selectList);
 		req.setAttribute("map", map);
 		req.getRequestDispatcher("/NewRegist/NewRegist.jsp").forward(req, resp);

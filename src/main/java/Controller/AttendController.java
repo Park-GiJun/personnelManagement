@@ -26,7 +26,7 @@ public class AttendController extends HttpServlet {
 		String currentTime = request.getParameter("time");
 		
 		System.out.println("Attend.do // emp_num : " + emp_num + " action : " + action + " date : " + date + " currentTime : " + currentTime);
-		
+		dao.close();
 		
 		if(action.equals("arrive")) {
 			dao.updateArriveTime(emp_num, date, currentTime);

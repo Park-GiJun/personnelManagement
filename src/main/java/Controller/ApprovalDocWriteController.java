@@ -38,7 +38,7 @@ public class ApprovalDocWriteController extends HttpServlet {
 		// 1.파일 업로드 처리===
 		// 업로드 디렉터리의 물리적 경로 확인
 		String userHome = System.getProperty("user.home");
-		String saveDirecory = userHome + "/Uploads";
+		String saveDirecory = userHome + "/WorkBoard";
 
 		// 초기화 매개변수로 설정한 첨부 파일 최대 용량 확인
 		ServletContext application = getServletContext();
@@ -102,11 +102,14 @@ public class ApprovalDocWriteController extends HttpServlet {
 
 		WorkDocsDAO dao = new WorkDocsDAO();
 		dao.writeBoard(dto, codeList);
+		dao.close();
 
 		// 응답 처리
-		response.setContentType("text/html");
+		// Java (서블릿)
+		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write("데이터 처리 완료");
+		response.getWriter().write("{\"message\":\"데이터 처리 완료\"}");
+
 	}
 
 }

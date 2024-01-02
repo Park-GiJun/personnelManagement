@@ -9,9 +9,35 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+<<<<<<< 김채은
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}}
+
+=======
+>>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
 h1 {
 	--bs-table-color: #fff;
 	color: var(--bs-table-color);
+	margin-left: 5%;
 }
 
 th {
@@ -34,8 +60,9 @@ tbody {
 }
 
 .btn-info {
-	margin-top: 0.5%;
-	width: 10%;
+	margin-top: 1%;
+	margin-left: 5%;
+	width: 20%;
 	height: 50px;
 	font-size:80%;
 	border-radius: 25px;
@@ -69,7 +96,7 @@ tbody {
 <body>
 	<h1>Meeting Room Detail</h1>
 
-	<table border="1" width="30%">
+	<table border="1" style="width: 90%; margin-left: 5%;">
 		<thead>
 			<tr class="table-dark2" align="center">
 				<th width="20%">시간</th>
@@ -99,7 +126,7 @@ tbody {
 		    var selectedDate = localStorage.getItem('date');
 		    var reservations = [];
 
-		    for (var hour = 9; hour < 18; hour++) {
+		    for (var hour = 9; hour < 16; hour++) {
 		        var checkbox = document.getElementById('reserveCheckbox' + hour);
 
 		        if (checkbox && checkbox.checked) {
@@ -137,6 +164,7 @@ tbody {
 		        // 서버의 응답을 처리
 		        console.log('서버 응답:');
 		        alert("신청이 완료 되었습니다.")
+		        window.opener.location.reload(); // 부모 창 새로 고침
 		        window.close();
 		    })
 

@@ -60,7 +60,9 @@ public class ReservationCheck extends HttpServlet {
 			MeetingRoomDAO dao = new MeetingRoomDAO();
 		    System.out.println("DTO: " + dto.getDate() + " emp " + dto.getEmpNum());
 		    dao.updateReservation(dto, type);
+		    
 		}
+		
 
 		// Send a response if needed
 		response.getWriter().write("Data received successfully");

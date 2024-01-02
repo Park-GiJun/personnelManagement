@@ -28,12 +28,21 @@ public class WorkBoardListController extends HttpServlet {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		String loginId = (String) request.getSession().getAttribute("loginid");
+		
+		String searchCategory = request.getParameter("Category");
+		String searchWord = request.getParameter("searchWord");
 
-		/* 페이지 처리 start */
+		// 검색 단어가 비어있지 않을 경우
+		if (searchWord != null) {
+			map.put("Category", searchCategory);
+			map.put("searchWord", searchWord);
+		}
+
 		int totalCount = dao.WorkDocsListCount(map, loginId); // 게시물 개수
 
+		/* 페이지 처리 start */
 		ServletContext application = getServletContext();
-		int pageSize = Integer.parseInt(application.getInitParameter("POSTS_PER_PAGE"));
+		int pageSize = 22;
 		int blockSize = Integer.parseInt(application.getInitParameter("PAGES_PER_BLOCK"));
 
 		// 현재 페이지 확인
@@ -49,10 +58,9 @@ public class WorkBoardListController extends HttpServlet {
 		map.put("start", start);
 		map.put("end", end);
 
-		System.out.println("페이징 확인 : " + totalCount + " " + start + " " + end);
 		/* 페이지 처리 end */
 
-		List<WorkDocsDTO> list = dao.boardList(loginId);
+		List<WorkDocsDTO> list = dao.boardList(loginId, map);
 
 		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum,
 				"../Controller/WorkBoardList.do");
@@ -61,11 +69,10 @@ public class WorkBoardListController extends HttpServlet {
 		map.put("totalCount", totalCount);
 		map.put("pageSize", pageSize);
 		map.put("pageNum", pageNum);
-
+		dao.close();
 		request.setAttribute("workdocslist", list);
 		request.setAttribute("map", map);
 		request.getRequestDispatcher("../WorkBoard/WorkBoardMain.jsp").forward(request, response);
 
 	}
-
 }

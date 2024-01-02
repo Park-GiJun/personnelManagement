@@ -11,8 +11,37 @@
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 
 <style type="text/css">
+<<<<<<< 김채은
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}}
+
+body {
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+=======
+>>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
 .btn-info {
-	margin-top: 17.5%;
+	margin-top: 5%;
 	margin-left: 1%;
 	width: 98%;
 	font-size: 200%;
@@ -22,7 +51,7 @@
 
 .form-control {
 	margin-top: 5px;
-	width: 40%;
+	width: 45%;
 	height: 10px;
 	text-align: center;
 }
@@ -61,8 +90,7 @@ li {
 			<li><b>비밀번호 확인 : </b>&nbsp;<input type="password" id="modifiedPass2" class="form-control"></li>
 		</ul>
 	</div>
-	<button type="button" onclick="performModification()" class='btn-info'>수정
-		완료</button>
+	<button type="button" onclick="performModification()" class='btn-info'>수정 완료</button>
 
 	<script>
         function performModification() {

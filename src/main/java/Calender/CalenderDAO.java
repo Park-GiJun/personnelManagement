@@ -1,15 +1,15 @@
 package Calender;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import Comments.CommentsDTO;
 import DBcontrol.DBConnPool;
 
 
@@ -18,6 +18,49 @@ public class CalenderDAO extends DBConnPool {
 	public CalenderDAO() {
 		super();
 	}
+	
+	
+	public List<CalenderDTO> selectListPage(Map<String, Object> map) {
+		System.out.println("selectListpage");
+		List<CalenderDTO> anno_boards = new Vector<CalenderDTO>();
+
+		System.out.println("상세보기 댓글 SelectListPage 실행");
+		// 쿼리문
+		String query = "SELECT * FROM (SELECT Tb.*, ROWNUM AS rNum FROM (SELECT * FROM Personal_diaray";
+		if (map.get("searchWord") != null) {
+			// 조건 추가
+			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
+		}
+
+		query += " ORDER BY count_date DESC) Tb) WHERE rNum BETWEEN ? AND ?";
+		System.out.println("CalenderController : 51 lines --------------------------");
+		System.out.println(query);
+
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, map.get("start").toString());
+			psmt.setString(2, map.get("end").toString());
+			System.out.println("CalenderController :" + query);
+			rs = psmt.executeQuery();
+
+			// 반환된 게시물 목록을 컬렉션에 추가
+			while (rs.next()) {
+				CalenderDTO dto = new CalenderDTO();
+
+				dto.setCount_date(rs.getInt("count_date"));
+				dto.setPersonal_diaray_schedule(rs.getString("Personal_diaray_schedule"));
+				dto.setPersonal_diaray_date(rs.getString("Personal_diaray_date"));
+				dto.setemp_num(rs.getString("emp_num"));
+				anno_boards.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println("게시물 조회중 예외 발생");
+			e.printStackTrace();
+		}
+		return anno_boards;
+	}
+	
+	
 
 	// 1
 	public int ScheduleListCount(String selecteddate, String emp_num) {
@@ -45,6 +88,43 @@ public class CalenderDAO extends DBConnPool {
 		System.out.println(totalcount);
 		return totalcount;
 	}
+	
+	
+	
+	public List<CalenderDTO> selectListPage2(String selecteddate2, String emp_num) {
+		List<CalenderDTO> board = new Vector<CalenderDTO>();
+		
+		System.out.println("select List Page222222");
+
+		// 쿼리문 준비
+		String query = "SELECT Personal_diaray_schedule FROM Personal_diaray WHERE Personal_diaray_date=? AND emp_num=? ORDER BY count_date";
+
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, selecteddate2);
+			psmt.setString(2, emp_num);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				CalenderDTO dto = new CalenderDTO();
+
+				dto.setPersonal_diaray_schedule(rs.getString("Personal_diaray_schedule"));
+				
+				System.out.println(dto.getPersonal_diaray_schedule());
+
+				board.add(dto);
+				System.out.println("select List Page33333333");
+			}
+		} catch (Exception e) {
+			System.out.println("게시물 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		return board;
+	}
+	
+	
+	
+	
 
 	// 2
 	public List<CalenderDTO> selectListPage(String selecteddate, String emp_num) {
@@ -53,7 +133,7 @@ public class CalenderDAO extends DBConnPool {
 		System.out.println("select List Page");
 
 		// 쿼리문 준비
-		String query = "SELECT Personal_diaray_schedule FROM Personal_diaray WHERE Personal_diaray_date=? AND emp_num=?";
+		String query = "SELECT Personal_diaray_schedule FROM Personal_diaray WHERE Personal_diaray_date=? AND emp_num=? ORDER BY count_date";
 
 		try {
 			psmt = con.prepareStatement(query);
@@ -78,6 +158,39 @@ public class CalenderDAO extends DBConnPool {
 	}
 	
 	
+	// 날짜만 조회
+	public List<CalenderDTO> selectListPage3(String emp_num) {
+		List<CalenderDTO> board = new Vector<CalenderDTO>();
+		
+		System.out.println("select List Page");
+
+		// 쿼리문 준비
+		String query = "SELECT DISTINCT SUBSTR(Personal_diaray_date, -2) AS LastTwoCharacters FROM Personal_diaray WHERE emp_num=?";
+
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, emp_num);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				CalenderDTO dto = new CalenderDTO();
+
+				dto.setPersonal_diaray_date(rs.getString("LastTwoCharacters"));
+
+	            System.out.println("게시물 날짜 조회(중복x) : " + dto.getPersonal_diaray_date());
+
+	            board.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println("게시물 날짜 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		return board;
+	}
+	
+	
+	
+	
 	public CalenderDTO selectView(String Personal_diaray_schedule) {
 		CalenderDTO dto = new CalenderDTO();
 		String query = "SELECT * FROM Personal_diaray WHERE Personal_diaray_schedule=?";
@@ -99,25 +212,31 @@ public class CalenderDAO extends DBConnPool {
 		return dto;
 	}
 	
+
 	
-		
-
-	// 4 입력, 저장
-	public int insertWrite(CalenderDTO dto) {
+	// 추가하기
+	public int insertWrite(String newSchedule, String selecteddate, String emp_num) {
 	    int result = 0;
+	    
+	    System.out.println(newSchedule);
+	    System.out.println(selecteddate);
+	    System.out.println(emp_num);
 
-	    try  {
-	    	String query = "INSERT INTO Personal_diaray ( "
-	    			     + " Personal_diaray_schedule) "
-	    			     + " VALUES ( "
-	    			     + " seq_board_num.NEXTVAL,?)";
-	    	psmt = con.prepareStatement(query);
-	    	psmt.setString(1, dto.getPersonal_diaray_schedule());
-	    	result = psmt.executeUpdate();
-	    } catch (Exception e) {
-	    	System.out.println("게시물 입력 중 예외 발생");
-	    	e.printStackTrace();
+	    try {
+	        String query = "INSERT INTO Personal_diaray (count_date, Personal_diaray_date, Personal_diaray_schedule, emp_num) VALUES (count_date_num.nextval, ?, ?, ?)";
+	        psmt = con.prepareStatement(query);
+	        psmt.setString(1, selecteddate);
+	        psmt.setString(2, newSchedule);
+	        psmt.setString(3, emp_num);
+	        result = psmt.executeUpdate();
+	       
+	    } catch (SQLException e) {
+	        System.out.println("게시물 입력 중 예외 발생");
+	        e.printStackTrace();
+	    } finally {
+	        close(); // 리소스를 닫는 코드는 finally 블록에서 수행
 	    }
+
 	    return result;
 	}
 	
@@ -164,7 +283,7 @@ public class CalenderDAO extends DBConnPool {
 
         try {
             // 쿼리문 준비
-            String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_date = ? AND emp_num = ?";
+        	String query = "DELETE FROM Personal_diaray WHERE Personal_diaray_date = ? AND emp_num = ?";
             psmt = con.prepareStatement(query);
 
             // 파라미터 설정

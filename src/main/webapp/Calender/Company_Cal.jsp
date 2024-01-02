@@ -50,6 +50,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
     box-sizing: border-box;
 }
 
+/* 일정 나오는 곳 설정 (여기에서는 의미 없음) */
 .scl{
   top:480px;
   animation-direction:scl;
@@ -76,6 +77,8 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   background:green;
 }
 
+
+
 /* 개인 일정 버튼 */
 .my_btn {
   background-color: #1C427E;
@@ -91,7 +94,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 개인 일정 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.my_btn:hover {
   color: white;
   background: orange;
@@ -112,7 +115,7 @@ button.my_btn:hover {
   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 부서 휴가 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.my_btn2:hover {
   color: white;
   background: orange;
@@ -134,7 +137,7 @@ button.my_btn2:hover {
   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 부서 일정 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.my_btn3:hover {
   color: white;
   background: orange;
@@ -156,7 +159,7 @@ button.my_btn3:hover {
   cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 회사 일정 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.my_btn4:hover {
   color: white;
   background: orange;
@@ -167,10 +170,11 @@ button.my_btn4:hover {
 .middle-button {
     text-align: center;
     padding: 30px 30px;
-    margin-left: 50px;
+    margin-left: -120px;
     font-family: 'Kanit', sans-serif;
 }
 
+/* 일정 리스트 불러오는 버튼 설정 */
 .next_btn {
 background-color: #1C427E;
   color: white;
@@ -191,7 +195,7 @@ background-color: #1C427E;
    cursor: pointer;  /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */	
 }
 
-/* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
+/* 일정 리스트 불러오는 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
 button.next_btn:hover {
   color: white;
   background: orange;
@@ -202,15 +206,12 @@ button.next_btn:hover {
 /*   ↑ 여기까지 버튼 위치, 크기 조절   */
 
 
-
-
+/* 크게 무슨 월인지 표시 설정 */
 .em {
 	color: #1C427E;
-	
 	position: absolute;
   	top: -40px;
-  	left: 430px;
-  	
+  	left: 410px;
   	font-size: 100x;
   	border-radius: 30px;
 }
@@ -220,14 +221,10 @@ day {
 }
 
 body {
-   font-size: px;
-  font-family: 'Kanit', sans-serif;
-  background-color: #272b30
+	background-color: #272b30;
+   	font-size: px;
+  	font-family: 'Kanit', sans-serif;
     /*color: white;*/
-}
-
-tbody {
-	background : gray;
 }
 
 a {
@@ -235,6 +232,7 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+
 a:active, a:hover {
    text-decoration: underline;
    color: #F28011;
@@ -242,12 +240,16 @@ a:active, a:hover {
 
 .calendar {
    width: 700px;
-   margin: 70px auto;
+   margin: 40px auto;
 }
+
+
+
+/* 년도 월 선택 리스트 설정 */
 .calendar .title{
    position: absolute;
    top: 120px;
-   left: 240px;
+   left: 420px;
    width: 100%;
    z-index: 1; 
 }
@@ -259,9 +261,9 @@ a:active, a:hover {
    border: 1px solid #999;
    padding: 15px 50px;
    border-radius: 25px;
-  font-family: 'Kanit', sans-serif;
+   font-family: 'Kanit', sans-serif;
    font-size: 20px;
-   margin-left: 440px;
+   margin-left: 240px;
    top: 10px;
 }
 
@@ -274,6 +276,8 @@ a:active, a:hover {
    font-size: 20px;
    margin-left: 5px;
 }
+
+
 
 .calendar table {
    width: 100%;
@@ -415,6 +419,10 @@ body {
    font-size: 20px;
 }
 
+tbody {
+	background : gray;
+}
+
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
    margin-left: 400px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
@@ -435,14 +443,14 @@ body {
       <!-- 다른 페이지에서 불러오는 내용 -->
       <!-- <h2 class="myHeader">텍스트 입력</h2>  -->
       <button class='my_btn' onclick="location.href='Person_Cal.jsp';" >개인 일정</button>
-      <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서 휴가</button>
+      <!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서 휴가</button> -->
       <button class='my_btn3' onclick="location.href='Team_Cal.jsp';">부서 일정</button>
       <button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사 일정</button>
    </div>
    
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
 	
-	<button class='next_btn' onclick="location.href='Scl5.jsp';"><</button>
+	<button class='next_btn' onclick="location.href='../Controller/CompanyLoadController.do';"><</button>
 	
 	<button class="scl" onclick="location.href='Scl5.jsp';">
 		<font class="myFont">여기에 회사 일정 내용 담기</font>

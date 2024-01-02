@@ -2,6 +2,7 @@ package Controller;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class CalenderDeleteController extends HttpServlet {
 		
 		
 		System.out.println("CalenderDeleteController.do");
-		 System.out.println("");
+		 System.out.println();
 		// DAO 생성
 		CalenderDAO dao = new CalenderDAO();
 		
@@ -47,7 +48,7 @@ public class CalenderDeleteController extends HttpServlet {
             for (String schedule : selectedSchedules) {
                 // 실제 삭제 로직 여기에 구현 (예: 데이터베이스에서 삭제)
                 // 예: CalenderDAO.deleteSchedule(schedule);
-            	 dao.deleteCalender(Arrays.asList(schedule));
+            	 dao.deleteCalender(Collections.singletonList(schedule));
                  System.out.println("선택한 일정 삭제: " + schedule);
             }
 
@@ -57,12 +58,11 @@ public class CalenderDeleteController extends HttpServlet {
         } else {
             response.getWriter().write("삭제할 일정이 선택되지 않았습니다.");
         }
+        dao.close();
         
         request.setAttribute("map2", map);
         request.setAttribute("selectedSchedules", selectedSchedules);
-        //request.setAttribute("selectedSchedules", Arrays.asList(selectedSchedules));
-        //request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
-        
+        request.setCharacterEncoding("UTF-8");
         
 	}
 

@@ -15,7 +15,7 @@ public class SalaryManagementDAO extends DBConnPool {
 	public List<SalaryManagementDTO> selectSalaryList(String selectTeam, String selectTeam_NUM, String selectedYear, String selectedMonth, int num) {
 		System.out.println("selectSalaryList DAO");
 
-		System.out.println("check select team : " + selectTeam);
+		System.out.println("check select team : " + selectTeam + "---------------------" + selectTeam_NUM);
 
 		List<SalaryManagementDTO> salaryEMPList = new ArrayList<>();
 
@@ -56,7 +56,7 @@ public class SalaryManagementDAO extends DBConnPool {
 
 		}
 		query += " GROUP BY emp.Team_NUM, emp.TEAM, emp.NAME, emp.EMP_NUM, emp.EMP_GRADE, emp.grade, i.PAY, iv.yearmonth, "
-				+ "iv.INCENTIVE, iv.HOLIDAY_PAY, iv.EXTRA_WORK_PAY ORDER BY emp.grade, emp.team, emp.team_num";
+				+ "iv.INCENTIVE, iv.HOLIDAY_PAY, iv.EXTRA_WORK_PAY ORDER BY emp.team, emp.team_num, emp.grade";
 
 		System.out.println("query : " + query);
 
@@ -96,7 +96,14 @@ public class SalaryManagementDAO extends DBConnPool {
 				SalaryManagementDTO dto = new SalaryManagementDTO();
 
 				dto.setTeam(rs.getString("TEAM"));
-				dto.setTeam_num(rs.getString("TEAM_NUM"));
+				String teamString = rs.getString("team_num");
+				if (!teamString.equals("  ")) {
+					System.out.println("확인 " + teamString);
+					String arr[] = teamString.split(" ");
+					dto.setTeam_num(arr[1]);
+				} else {
+					dto.setTeam_num(teamString);
+				}
 				dto.setName(rs.getString("NAME"));
 				dto.setEmp_num(rs.getString("EMP_NUM"));
 				dto.setEmp_grade(rs.getString("EMP_GRADE"));
@@ -206,7 +213,7 @@ public class SalaryManagementDAO extends DBConnPool {
 	public void noExistDate(String emp, String date) {
 		System.out.println("noExistDate1");
 
-		String query1 = "INSERT INTO incentive (emp_num, pay, ADDITIONAL_PAY, yearmonth) VALUES (? , 0, 0, TO_DATE(? , 'YYYY-MM'))";
+		String query1 = "INSERT INTO incentive (emp_num, pay, yearmonth) VALUES (?, 0, TO_DATE(? , 'YYYY-MM'))";
 		try {
 			System.out.println("인센티브 밸류 실행");
 			psmt = con.prepareStatement(query1);

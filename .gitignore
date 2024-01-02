@@ -1,6 +1,4 @@
 /build/
-<<<<<<< HEAD
+
 /.classpath
-=======
-/.classpath
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
+/.classes

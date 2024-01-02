@@ -4,10 +4,12 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import com.google.gson.JsonElement;
 
 import DBcontrol.DBConnPool;
+import NewRegist.NewRegistDTO;
 
 public class MeetingRoomDAO extends DBConnPool {
 
@@ -160,5 +162,38 @@ public class MeetingRoomDAO extends DBConnPool {
 		}
 
 	}
+	
+	public List<MeetingRoomDTO> selectList(String Sysdate) {
+		List<MeetingRoomDTO> bbs = new Vector<MeetingRoomDTO>();
 
+		String query = "SELECT e.team, e.team_num,  e.name, m.emp_num, e.team AS emp_team, TO_CHAR(m.meetingdate, 'HH24') AS formatted_hour, m.status, m.MEETINGROOMNUM "
+				+ "FROM meetingroom m " + "JOIN emp e ON m.emp_num = e.emp_num "
+				+ "WHERE TRUNC(m.meetingdate) = TO_DATE(? , 'YYYY-MM-DD')";
+
+		try {
+			// 쿼리 실행
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, Sysdate);
+
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				MeetingRoomDTO dto = new MeetingRoomDTO();
+
+				dto.setEmpNum(rs.getString("emp_num"));
+				dto.setTeam(rs.getString("emp_team"));
+				dto.setDate(rs.getString("formatted_hour"));
+				dto.setMeetingroomNum(rs.getString("meetingroomnum"));
+				dto.setStatus(rs.getString("status"));
+				dto.setName(rs.getString("name"));
+				dto.setTeam(rs.getString("emp_team"));
+				dto.setTeam_num(rs.getString("team_num"));
+
+				bbs.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println("사원 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		return bbs;
+	}
 }

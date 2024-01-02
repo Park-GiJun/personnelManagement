@@ -264,6 +264,31 @@ function getCurrentTime() {
 </script>
 </head>
 <style>
+<<<<<<< 김채은
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+=======
+>>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
 /* 공통 스타일 */
 * {
 	box-sizing: border-box;
@@ -307,7 +332,7 @@ function getCurrentTime() {
 
 .info_profile_texts {
 	display: flex;
-	width: 150%;
+	width: 200%;
 	font-size: 20px;
 	display: inline-block;
 	margin-left: 105%;
@@ -315,13 +340,12 @@ function getCurrentTime() {
 
 .info_income {
 	background-color: gray;
-	margin-top: 20px;
 	padding: 20;;
 	width: 600px;
 	height: 500px;
 	/* 높이를 자동으로 조정하도록 수정 */
 	position: relative;
-	top: 80px;
+	top: 25px;
 	left: 50px;
 	/* 여백 추가 */
 	--bs-table-color: #000;
@@ -530,7 +554,6 @@ label[for="monthSelect"] {
 				&nbsp;&nbsp;&nbsp;&nbsp; <label for="monthSelect">월:</label> &nbsp;
 				<select id="monthSelect" size="1" name="monthSelect" class="form-select" style="color: black;"></select>
 
-				<button name="print_income" id="print-button" class="btn-info">출력하기</button>
 			</div>
 			<!-- ---------------------------------------------------------------------------------------------------------------------- -->
 			<script>

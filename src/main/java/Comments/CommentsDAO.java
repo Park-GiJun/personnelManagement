@@ -20,7 +20,7 @@ public class CommentsDAO extends DBConnPool {
 
 		System.out.println("상세보기 댓글 SelectListPage 실행");
 		// 쿼리문
-		String query = "SELECT * FROM (SELECT Tb.*, ROWNUM AS rNum FROM (SELECT * FROM 채ㅡㅡ둣ㄴ";
+		String query = "SELECT * FROM (SELECT Tb.*, ROWNUM AS rNum FROM (SELECT * FROM Comments";
 		if (map.get("searchWord") != null) {
 			// 조건 추가
 			query += " WHERE " + map.get("searchCategory") + " LIKE '%" + map.get("searchWord") + "%'";
@@ -121,10 +121,7 @@ public class CommentsDAO extends DBConnPool {
 		try {
 			con = DBConnPool.getConnection();
 
-			StringBuffer sql = new StringBuffer();
-			sql.append("select * from Comments where anno_board_num<? and Turn=? and content order by Turn ");
-
-			pstmt = con.prepareStatement(sql.toString());
+            pstmt = con.prepareStatement("select * from Comments where anno_board_num<? and Turn=? and content order by Turn ");
 			pstmt.setInt(1, anno_board_num);
 
 			rs = pstmt.executeQuery();

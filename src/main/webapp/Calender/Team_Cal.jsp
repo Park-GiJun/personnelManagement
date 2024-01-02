@@ -125,7 +125,7 @@ button.my_btn2:hover {
 
 /* 부서 일정 버튼 */
 .my_btn3 {
-  background-color: #1C427E;
+  background-color: orange;
   color: white;
   border: none;
   
@@ -171,7 +171,7 @@ button.my_btn4:hover {
 .middle-button {
     text-align: center;
     padding: 30px 30px;
-    margin-left: 50px;
+    margin-left: -120px;
     font-family: 'Kanit', sans-serif;
 }
 
@@ -210,13 +210,15 @@ button.next_btn:hover {
 /* 크게 무슨 월인지 표시 설정 */
 .em {
 	color: #1C427E;
-	
 	position: absolute;
   	top: -40px;
-  	left: 430px;
-  	
+  	left: 410px;
   	font-size: 100x;
   	border-radius: 30px;
+}
+
+tbody {
+	background : gray;
 }
 
 day {
@@ -224,9 +226,9 @@ day {
 }
 
 body {
-   font-size: px;
-  font-family: 'Kanit', sans-serif;
-  background-color: #272b30;
+	background-color: #272b30;
+   	font-size: px;
+  	font-family: 'Kanit', sans-serif;
     /*color: white;*/
 }
 
@@ -252,7 +254,7 @@ a:active, a:hover {
 .calendar .title{
    position: absolute;
    top: 120px;
-   left: 240px;
+   left: 420px;
    width: 100%;
    z-index: 1; 
 }
@@ -264,7 +266,7 @@ a:active, a:hover {
    border-radius: 25px;
   font-family: 'Kanit', sans-serif;
    font-size: 20px;
-   margin-left: 440px;
+   margin-left: 240px;
    top: 10px;
 }
 
@@ -474,14 +476,14 @@ tbody {
       <!-- 다른 페이지에서 불러오는 내용 -->
       <!-- <h2 class="myHeader">텍스트 입력</h2>  -->
       <button class='my_btn' onclick="location.href='Person_Cal.jsp';" >개인 일정</button>
-      <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서 휴가</button>
+      <!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서 휴가</button> -->
       <button class='my_btn3' onclick="location.href='Team_Cal.jsp';">부서 일정</button>
       <button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사 일정</button>
    </div>
    
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
 	
-	<button class='next_btn' onclick="location.href='Scl4.jsp';"><</button>
+	<button class='next_btn' onclick="location.href='../Controller/TeamLoadController.do';"><</button>
 	
 	<button class="scl" onclick="location.href='Scl4.jsp';">
 		<font class="myFont">여기에 부서 일정 내용 담기</font>

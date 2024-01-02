@@ -2,6 +2,7 @@ package Calender;
 
 public class CalenderDTO {
 
+	private int count_date;
 	private String Personal_diaray_schedule;
 	private String Personal_diaray_date;
 	private String emp_num;
@@ -46,4 +47,14 @@ public class CalenderDTO {
 		this.emp_num = emp_num;
 	}
 	
+
+	public int getCount_date() {
+		return count_date;
+	}
+
+	public void setCount_date(int count_date) {
+		this.count_date = count_date;
+	}
+	
+	//마우스 오른쪽 클릭 - 소스 - 겟셋 클릭
 }

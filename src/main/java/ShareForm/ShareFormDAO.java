@@ -82,9 +82,13 @@ public class ShareFormDAO extends DBConnPool {
 	public int insertFile(ShareFormDTO dto) {
 
 		int result = 0;
+		System.out.println("제목 :" + dto.getTitle());
+		System.out.println("파일 :" + dto.getSharesfile());
+		System.out.println("파일 :" + dto.getSharesfile());
+		System.out.println("비밀번호 :" + dto.getPassword());
 		try {
 
-			String query = "INSERT INTO board (board_num, title, ofile, sfile, password) VALUES (BOARD_NUM.NEXTVAL, ?, ?, ?, ?)";
+			String query = "INSERT INTO board (board_num, title, ofile, sfile, pass) VALUES (BOARD_NUM.NEXTVAL, ?, ?, ?, ?)";
 
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, dto.getTitle());

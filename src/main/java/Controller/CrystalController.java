@@ -20,15 +20,7 @@ public class CrystalController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	request.setCharacterEncoding("UTF-8");
-    	commonLogic(request, response);
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	request.setCharacterEncoding("UTF-8");
-    	commonLogic(request, response);
-    }
-
-    private void commonLogic(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
         System.out.println("수정 완료 컨트롤러");
     	
        
@@ -44,8 +36,8 @@ public class CrystalController extends HttpServlet {
 
         dao.crystalWrite(pass, content, title,anno_board_num);
 
-
+        dao.close();
         // 이 부분에서 forward를 수행하도록 수정
-        request.getRequestDispatcher("/BulletinBoard/Comments.jsp").forward(request, response);
+        request.getRequestDispatcher("/Controller/ReturnCommentsController.do").forward(request, response);
     }
 }
