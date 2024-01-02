@@ -49,7 +49,7 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 <html>
 <head>
 <meta charset="UTF-8">
-<title>일정 리스트</title>
+<title>개인 일정 리스트</title>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <style type="text/css">
@@ -105,6 +105,9 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 	color: white;
 	background: orange;
 }
+
+
+
 
 .scl {
 	top: 600px;
@@ -217,7 +220,7 @@ to {
 
 /* 개인 일정 버튼 */
 .my_btn {
-	background-color: #1C427E;
+	background-color: orange;
 	color: white;
 	border: none;
 	width: 150px;
@@ -291,7 +294,7 @@ button.my_btn4:hover {
 .middle-button {
 	text-align: center;
 	padding: 30px 30px;
-	margin-left: -170px;
+	margin-left: 200px;
 	font-family: 'Kanit', sans-serif;
 }
 
@@ -320,9 +323,9 @@ button.next_btn:hover {
 .em {
 	color: #1C427E;
 	position: absolute;
-	top: -40px;
+	top: -30px;
 	left: 250px;
-	font-size: 100x;
+	font-size: 50x;
 	border-radius: 30px;
 }
 
@@ -349,13 +352,13 @@ a:active, a:hover {
 
 .calendar {
 	width: 1500px;
-	margin: 40px auto;
+	margin: -20px auto;
 	margin-left: 250px;
 }
 
 .calendar .title {
 	position: absolute;
-	top: 120px;
+	top: 60px;
 	left: 240px;
 	width: 100%;
 	z-index: 1;
@@ -364,21 +367,21 @@ a:active, a:hover {
 /* 년도 선택 리스트 */
 .selectField {
 	border: 1px solid #999;
-	padding: 15px 50px;
+	padding: 5px 30px;
 	border-radius: 25px;
 	font-family: 'Kanit', sans-serif;
-	font-size: 20px;
-	margin-left: 330px;
-	top: 10px;
+	font-size: 18px;
+	margin-left: 150px;
+	top: 50px;
 }
 
 /* 월 선택 리스트 */
 .selectField2 {
 	border: 1px solid #999;
-	padding: 15px 50px;
+	padding: 5px 30px;
 	border-radius: 25px;
 	font-family: 'Kanit', sans-serif;
-	font-size: 20px;
+	font-size: 18px;
 	margin-left: 5px;
 }
 
@@ -396,7 +399,7 @@ a:active, a:hover {
 
 /* 요일, 날짜 칸 크기 조절 */
 .calendar table td {
-	padding: 40px 80px;
+	padding: 30px 80px;
 	text-align: left;
 	border: 1px solid #ccc;
 }
@@ -409,6 +412,7 @@ a:active, a:hover {
 .calendar table td:nth-child(5) {
 	color: white;
 }
+
 
 /* 일요일 색상 지정 */
 .calendar table td:nth-child(7n+1) {
@@ -423,6 +427,8 @@ a:active, a:hover {
 /* 전 월의 일 색상 */
 .calendar table td.gray {
 	color: #ccc;
+	 height: 30px; /* 각 날짜 셀의 높이를 최대 30px로 설정 */
+     overflow: hidden;
 }
 
 /* 날짜 버튼 스타일 지정 */
@@ -431,12 +437,21 @@ a:active, a:hover {
 	background: none;
 	font-size: 20px;
 	position: relative; /* 상대적인 위치 설정 */
+<<<<<<< HEAD
 	top: -40px; /* 상단 여백 조정 */
+=======
+	top: -30px; /* 상단 여백 조정 */
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 	left: -80px; /* 왼쪽 여백 조정 */
 	font-family: 'Kanit', sans-serif;
 	cursor: pointer; /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 생성 */
+<<<<<<< HEAD
 	padding: 0px;
 	/* background: red; */
+=======
+	/* background: red; */
+	
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 /* 버튼에 마우스를 올리면 알려주는 마우스 포인터 설정 */
@@ -477,20 +492,35 @@ a:active, a:hover {
 .calendar table td.gray button {
 	color: #ccc;
 	position: relative; /* 상대적인 위치 설정 */
+<<<<<<< HEAD
 	top: -40px; /* 상단 여백 조정 */
+=======
+	top: -30px; /* 상단 여백 조정 */
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 /* 다음달의 날짜 색상 지정 */
 .calendar table td.gray2 button {
 	color: #ccc;
 	position: relative; /* 상대적인 위치 설정 */
+<<<<<<< HEAD
 	top: -40px; /* 상단 여백 조정 */
 }
 
 #bin {
 	position: relative;
 	width: 180px;
+=======
+	top: -30px; /* 상단 여백 조정 */
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
+
+#bin {
+   position: absolute;
+   width: 185px;
+}
+
+
 </style>
 
 
@@ -512,14 +542,22 @@ function showDateAndAlert(day) {
 
 		// 선택한 날짜를 숨은 필드에 설정
 		document.getElementById('selectedDay').value = clickedDay;
+		document.getElementById('selectedYear').value = '<%=year%>';
+		document.getElementById('selectedMonth').value = '<%=month%>';
 
 		// 폼 제출
 		document.forms["calender_form"].submit();
 	}
 
+<<<<<<< HEAD
+=======
+	//일정 추가하기 버튼 눌렀을 때 설정
+	// 일정 추가를 위한 고유한 식별자
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 	var eventCounter = 1;
 
 	function confirmPlus() {
+<<<<<<< HEAD
 		var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
 
 		if (userInput !== null && userInput !== "") {
@@ -530,6 +568,19 @@ function showDateAndAlert(day) {
 		} else {
 			console.log("일정 저장을 취소하였습니다.");
 		}
+=======
+	    var userInput = prompt("추가하고자 하시는 일정을 작성해주세요 :)", "");
+	    
+
+	    if (userInput !== null && userInput !== "") {
+	        // 사용자가 확인을 클릭하면 입력한 일정을 서블릿으로 전송
+	        sendNewScheduleToServer(userInput);
+	    } else if (userInput === "") {
+	        alert("일정을 입력해주세요.");
+	    } else {
+	        console.log("일정 저장을 취소하였습니다.");
+	    }
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 	}
 
 	// 새로운 일정을 서버로 전송하는 함수
@@ -539,10 +590,18 @@ function showDateAndAlert(day) {
 		xhr.setRequestHeader("Content-Type",
 				"application/x-www-form-urlencoded; charset=UTF-8");
 
+<<<<<<< HEAD
 		// 서버로 전송할 데이터 설정
 		const data = "userInput=" + encodeURIComponent(userInput);
 		xhr.send(data);
+=======
+	    // 서버로 전송할 데이터 설정
+	    const data = "userInput=" + encodeURIComponent(userInput);
+	 
+	    xhr.send(data);
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 
+<<<<<<< HEAD
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4) {
 				if (xhr.status === 200) {
@@ -557,7 +616,27 @@ function showDateAndAlert(day) {
 			}
 		};
 
+=======
+	    xhr.onreadystatechange = function () {
+	        if (xhr.readyState === 4) {
+	            if (xhr.status === 200) {
+	                alert(xhr.responseText); // 서버 응답을 알림으로 표시
+	                location.reload();
+	                console.log('추가한 일정들:', userInput);
+	            } else {
+	                alert("일정 추가에 실패했습니다.");
+	                console.log('실패한 일정들:', userInput);
+	            }
+	        }
+	    };
+	    
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 	}
+<<<<<<< HEAD
+=======
+	 
+    console.log('잘 실행되는지 확인용1111111111111111111111');
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 
 	console.log('잘 실행되는지 확인용1111111111111111111111');
 
@@ -570,6 +649,7 @@ function showDateAndAlert(day) {
 			var selectedSchedule = event.target.getAttribute('data-schedule');
 			var isSelected = event.target.classList.toggle('selected');
 
+<<<<<<< HEAD
 			alert(selectedSchedule + ' 확인용');
 
 			// 선택한 일정을 리스트에 추가 또는 제거
@@ -582,9 +662,49 @@ function showDateAndAlert(day) {
 					selectedSchedules.splice(index, 1);
 				}
 			}
+=======
+          // 선택한 일정들을 콘솔에 출력
+          console.log('선택한 일정들:', selectedSchedules);
+          
+      }
+      
+   	// Ajax를 사용하여 Java 서버에 배열 전송
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "/Controller/CalenderDeleteConteController.do", true);
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      //xhr.send(JSON.stringify({ array: selectedSchedules }));
+  });
+    
+  //삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
+  function confirmDelete() {
+      var selectedSchedules = Array.from(document.querySelectorAll('.scheduleLink.selected')).map(function (schedule) {
+          return schedule.getAttribute('data-schedule');
+      });
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 
+<<<<<<< HEAD
 			// 선택한 일정들을 콘솔에 출력
 			console.log('선택한 일정들:', selectedSchedules);
+=======
+      if (selectedSchedules.length > 0) {
+          var confirmed = confirm("선택한 일정을 삭제하시겠습니까?");
+          if (confirmed) {
+              // 수정된 부분: 선택한 일정의 ID를 서버로 전송
+              sendSelectedSchedulesToServer(selectedSchedules);
+          }
+      } else {
+          alert("삭제할 일정을 선택해주세요.");
+      }
+  }
+  	 
+  // 선택한 일정 삭제를 서버로 전송하는 함수
+  function sendSelectedSchedulesToServer(selectedSchedules) {
+      // Ajax를 사용하여 Java 서버에 배열 전송
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "../Controller/CalenderDeleteController.do", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+      //xhr.send(JSON.stringify({ selectedSchedules: selectedSchedules }));
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 
 		}
 
@@ -594,6 +714,7 @@ function showDateAndAlert(day) {
 		xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		//xhr.send(JSON.stringify({ array: selectedSchedules }));
 
+<<<<<<< HEAD
 	});
 
 	//삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
@@ -638,9 +759,9 @@ function showDateAndAlert(day) {
 			}
 		};
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 </script>
-
-
 
 </head>
 <style>
@@ -686,54 +807,51 @@ body {
 				일정</button>
 		</div>
 
-		<p class="em" style="font-size: 200px"><%=month%></p>
+		<p class="em" style="font-size: 120px"><%=month%></p>
 		<!-- 화면 달력의 월 표시 -->
 
-		<button class='next_btn' onclick="location.href='Calender.jsp';">></button>
-
-
+		<button class='next_btn' onclick="location.href='Person_Cal.jsp';">></button>
 
 		<div class="reverse">
 
 			<h2 class='re_day'>${selecteddate}</h2>
 
 			<button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>
-			<button class='del_btn' type='submit' onclick="confirmDelete();">삭제하기</button>
 
-
-			<!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
-			<div class="reverse2">
-				<table class="caltabke" width="100%">
-					<c:choose>
-						<c:when test="${empty calenderlists}">
-							<tr>
-								<td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${CalenderList}" var="row" varStatus="loop">
-								<tr>
-									<td>${ map2.totalCount +(((map2.pageNum-1) * map2.pageSize) + loop.index) }
-										<!-- 각 일정마다 번호 출력 -->
-									</td>
-									<td><a href="#" class="scheduleLink"
-										data-schedule="${row.personal_diaray_schedule}">
-											${row.personal_diaray_schedule} <!-- db에 있는 개인 일정 출력 -->
-									</a></td>
-								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</table>
-			</div>
-
-		</div>
+         <div class="reverse2">
+             <table class="caltabke" width="100%">
+                 <c:choose>
+                     <c:when test="${empty calenderlists}">
+                         <tr>
+                             <td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>
+                         </tr>
+                     </c:when>
+                     <c:otherwise>
+                         <c:forEach items="${calenderlists}" var="row" varStatus="loop">
+                             <tr>
+                                <td>
+                            	${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
+                           </td>
+                                 <td>
+                                     <a href="#" class="scheduleLink" data-schedule="${row.personal_diaray_schedule}">
+                                         ${row.personal_diaray_schedule}  <!-- db에 있는 개인 일정 출력 -->
+                                     </a>
+                                 </td>
+                             </tr>
+                         </c:forEach>
+                     </c:otherwise>
+                 </c:choose>
+             </table>
+         </div>
+      </div>
+		
 
 		<c:if test="${not empty deleteMessage}">
 			<div>${deleteMessage}</div>
 		</c:if>
 		<div class="calendar" id="calendar-container"
 			style="width: 1300px; height: 300px;">
+
 			<div class="title">
 				<!-- 년도 월 선택 리스트 만드는 위치 -->
 				<form name="frm" method="post">
@@ -762,19 +880,18 @@ body {
 				</form>
 			</div>
 
-
 			<table>
 				<!-- 테이블 표 만드는 곳(달력 만드는 곳) -->
 				<thead>
-					<tr>
-						<td>일</td>
-						<td>월</td>
-						<td>화</td>
-						<td>수</td>
-						<td>목</td>
-						<td>금</td>
-						<td>토</td>
-					</tr>
+					<tr style="width:100%;">
+                  <td width="14.25%">일</td>
+                  <td width="14.25%">월</td>
+                  <td width="14.25%">화</td>
+                  <td width="14.25%">수</td>
+                  <td width="14.25%">목</td>
+                  <td width="14.25%">금</td>
+                  <td width="14.25%">토</td>
+               </tr>
 				</thead>
 				<tbody>
 					<%
@@ -787,17 +904,18 @@ body {
 					// 전 달 끝부분 일자 출력
 					for (int i = 1; i < week; i++) {
 						//out.print("<td>&nbsp;</td>");
+
 						out.print("<td class='gray'style='width: 100px; position: relative; top: -15px;'><button disabled>" + (preDate++)
 						+ "</button></td>");
 					}
-
+					
 					int click_day = 0;
 					// 1일부터 말일까지 출력
 					int lastDay = cal.getActualMaximum(Calendar.DATE);
 					String cls;
 
 					for (int i = 1; i <= lastDay; i++) {
-						cls = year == ty && month == tm && i == td ? "today" : "";
+					    cls = year == ty && month == tm && i == td ? "today" : "";
 
 						out.print("<td class='" + cls
 						+ "' style='min-width: 110px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
@@ -814,24 +932,22 @@ body {
 							out.print("</tr> <tr>");
 
 						}
-					}
+
 
 					// 다음 달 첫부분 일자 출력
 					int n = 1;
 					for (int i = (week - 1) % 7; i < 6; i++) {
 						// out.print("<td>&nbsp;</td>");
+
 						out.print("<td class='gray' style='width: 100px; position: relative; top: -15px;'><button disabled>" + (n++)
 						+ "</button></td>");
+
 					}
 					out.print("</tr>");
 					%>
 				</tbody>
 			</table>
-
 		</div>
-
 	</form>
-
-
 </body>
 </html>

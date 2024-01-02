@@ -13,10 +13,24 @@
 <style type="text/css">
 @font-face {
     font-family: 'ChungjuKimSaengTTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
 * {
@@ -135,6 +149,14 @@ body {
 	padding: 20px;
 	font-size: 12px;
 }
+
+#start_vacation, #end_vacation {
+	width: 40%;
+	margin-top:1%;
+	margin-bottom:1%;
+	margin-right:1%;
+	padding: 0rem 0rem 0rem 2.5rem;"
+}
 </style>
 
 <script>
@@ -170,9 +192,11 @@ document.addEventListener('DOMContentLoaded', function() {
 					
 					<tr>
 						<td style="display:flex; margin-left:12.5%;">
-							<input type="date" style="width: 40%; margin-top:1%; margin-bottom:1%; margin-left:1%;" name="start_vacation" id="start_vacation">
+							<input type="date" name="start_vacation" id="start_vacation">
+							
 							<a style="margin-top:1%;">&nbsp;~&nbsp;</a>
-							<input type="date" style="width: 40%; margin-top:1%; margin-bottom:1%; margin-right:1%;" name="end_vacation" id="end_vacation">
+							
+							<input type="date" name="end_vacation" id="end_vacation">
 						</td>
 					</tr>
 				</table>
@@ -208,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						<c:when test="${empty holidayList}">
 							<!-- 게시물이 없을 때 -->
 							<tr class="table-dark3" align="center">
-								<td colspan="2" align="center" scope="row">신청된 휴가가 없습니다.</td>
+								<td colspan="3" align="center" scope="row">신청된 휴가가 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>

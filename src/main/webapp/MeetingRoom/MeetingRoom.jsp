@@ -18,11 +18,25 @@ String selectedDate = request.getParameter("selectedDate");
 <style type="text/css">
 @font-face {
     font-family: 'ChungjuKimSaengTTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}}
 
 * {
 	margin: 0;
@@ -75,7 +89,6 @@ h1 {
 	font-size: 15px;
 	height: 45px;
 	border-radius: 25px;
-	width: 7.5%;
 }
 
 body {
@@ -175,6 +188,15 @@ body {
 	border: none;
 	background-color: transparent;
 	cursor: pointer;
+}
+
+#datePickerInput{
+	font-size: 20px;
+	width: 13%;
+	margin-top:0.45%;
+	margin-bottom:1%;
+	margin-right:1%;
+	padding: 0rem 0rem 0rem 1rem;"
 }
 </style>
 
@@ -319,9 +341,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 		<form id="dateForm" action="../Controller/MeetingRoomLoadController.do"	method="get">
 			<div class="date-form">
-				<div class="datePicker">
-					<input type="date" id="datePickerInput" name="selectedDate" readonly onclick="showDatePicker()">
-				</div>
+					<input type="date" name="selectedDate" id="datePickerInput">
 			
 				<button type="submit" class="btn-info">날짜 검색</button>
 			</div>
@@ -358,15 +378,15 @@ document.addEventListener('DOMContentLoaded', function() {
 				</tr>
 				<c:forEach begin="9" end="17" var="hour">
 					<tr class="table-dark3" align="center">
-						<td width="20%">${hour}:00~${hour + 1}:00</td>
+						<td style="font-size: 15px; width: 20%;">${hour}:00~${hour + 1}:00</td>
 						<c:set var="found" value="false" />
 						<c:forEach items="${selectList}" var="row" varStatus="loop">
 							<c:if
 								test="${(row.meetingroomNum eq 'A') && (row.date == hour) && (row.status ne 'Reject')}">
-								<td width="20%">${row.empNum }</td>
-								<td width="15%">${row.name }</td>
-								<td width="15%">${row.team }</td>
-								<td width="15%">${row.status }</td>
+								<td style="font-size: 15px; width: 20%;">${row.empNum }</td>
+								<td style="font-size: 15px; width: 15%;">${row.name }</td>
+								<td style="font-size: 15px; width: 15%;">${row.team }</td>
+								<td style="font-size: 15px; width: 15%;">${row.status }</td>
 								<c:set var="found" value="true" />
 							</c:if>
 						</c:forEach>
@@ -397,15 +417,15 @@ document.addEventListener('DOMContentLoaded', function() {
 				</tr>
 				<c:forEach begin="9" end="17" var="hour">
 					<tr class="table-dark3" align="center">
-						<td width="20%">${hour}:00~${hour + 1}:00</td>
+						<td style="font-size: 15px; width: 20%;">${hour}:00~${hour + 1}:00</td>
 						<c:set var="found" value="false" />
 						<c:forEach items="${selectList}" var="row" varStatus="loop">
 							<c:if
 								test="${(row.meetingroomNum eq 'B') && (row.date == hour) && (row.status ne 'Reject')}">
-								<td width="20%">${row.empNum }</td>
-								<td width="15%">${row.name }</td>
-								<td width="15%">${row.team }</td>
-								<td width="15%">${row.status }</td>
+								<td style="font-size: 15px; width: 20%;">${row.empNum }</td>
+								<td style="font-size: 15px; width: 15%;">${row.name }</td>
+								<td style="font-size: 15px; width: 15%;">${row.team }</td>
+								<td style="font-size: 15px; width: 15%;">${row.status }</td>
 								<c:set var="found" value="true" />
 							</c:if>
 						</c:forEach>
@@ -436,15 +456,15 @@ document.addEventListener('DOMContentLoaded', function() {
 				</tr>
 				<c:forEach begin="9" end="17" var="hour">
 					<tr class="table-dark3" align="center">
-						<td width="20%">${hour}:00~${hour + 1}:00</td>
+						<td style="font-size: 15px; width: 20%;">${hour}:00~${hour + 1}:00</td>
 						<c:set var="found" value="false" />
 						<c:forEach items="${selectList}" var="row" varStatus="loop">
 							<c:if
 								test="${(row.meetingroomNum eq 'C') && (row.date == hour) && (row.status ne 'Reject')}">
-								<td width="20%">${row.empNum }</td>
-								<td width="15%">${row.name }</td>
-								<td width="15%">${row.team }</td>
-								<td width="15%">${row.status }</td>
+								<td style="font-size: 15px; width: 20%;">${row.empNum }</td>
+								<td style="font-size: 15px; width: 15%;">${row.name }</td>
+								<td style="font-size: 15px; width: 15%;">${row.team }</td>
+								<td style="font-size: 15px; width: 15%;">${row.status }</td>
 								<c:set var="found" value="true" />
 							</c:if>
 						</c:forEach>

@@ -17,7 +17,7 @@
 	font-weight: normal;
 	font-style: normal;
 	font-family: 'ChungjuKimSaengTTF', sans-serif;
-}
+
 
 @font-face {
 	font-family: 'SF_HambakSnow';
@@ -28,6 +28,13 @@
 	font-style: normal;
 	font-family: 'SF_HambakSnow', sans-serif;
 }
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}}
 
 /* 공통 스타일 */
 * {

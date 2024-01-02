@@ -5,6 +5,7 @@ public class TeamCalDTO {
 	private String Team_calender_date;
 	private String team;
 	private String team_schedule;
+	private String com_count_date;
 	
 	public TeamCalDTO() {
 		super();
@@ -44,6 +45,15 @@ public class TeamCalDTO {
 	
 	public void setteam_schedule(String team_schedule) {
 		this.team_schedule = team_schedule;
+	}
+	
+	
+	public String getcom_count_date() {
+		return com_count_date;
+	}
+	
+	public void setcom_count_date(String com_count_date) {
+		this.com_count_date = com_count_date;
 	}
 	
 }

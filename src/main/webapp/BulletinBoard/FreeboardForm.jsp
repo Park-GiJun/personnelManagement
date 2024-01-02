@@ -12,22 +12,26 @@
 <style>
 @font-face {
 	font-family: 'ChungjuKimSaengTTF';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2')
-		format('woff2');
+	src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
 	font-weight: normal;
 	font-style: normal;
 	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 @font-face {
+	font-family: 'intelone-mono-font-family-regular';
+	src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
 	font-family: 'SF_HambakSnow';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff')
-		format('woff');
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
 	font-weight: normal;
 	font-style: normal;
-	font-family: 'SF_HambakSnow', sans-serif;
+}
+
 }
 
 /* 공통 스타일 */
@@ -162,7 +166,6 @@ a {
 		<!-- 하단 메뉴 -->
 		<form method="get" action="../Controller/FreeboardList.do">
 			<table border="1" width="90%" height="50px">
-
 				<tr class="table-dark3" align="center">
 					<th style="display: flex; margin-left: 32.5%;" scope="row"><select
 						name="searchCategory" class="form-select">
@@ -178,6 +181,8 @@ a {
 							class="btn-info">글작성</button></th>
 
 				</tr>
+				<tr><td colspan ="1" align="center">${ map2.pagingImg }</td></tr>
+
 			</table>
 		</form>
 	</div>

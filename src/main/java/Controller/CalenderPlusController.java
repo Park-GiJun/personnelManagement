@@ -15,6 +15,7 @@ import Calender.CalenderDAO;
 @WebServlet("/Controller/CalenderPlusController.do")
 public class CalenderPlusController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -50,9 +51,10 @@ public class CalenderPlusController extends HttpServlet {
 		}
 			
 	    
-        String selectedYear = (String) session.getAttribute("selectedYear");
+	    String selectedYear = (String) session.getAttribute("selectedYear");
         String selectedMonth = (String) session.getAttribute("selectedMonth");
-        String selecteddate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
+
+	    String selecteddate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
 	    
 	    // selecteddate와 emp_num을 HttpServletRequest에서 가져와서 사용
 	    //String selecteddate = (String) request.getSession().getAttribute("selecteddate");
@@ -73,7 +75,7 @@ public class CalenderPlusController extends HttpServlet {
 	        }
 
 	   
-		 request.setAttribute("selecteddate", selecteddate);   
+		 request.setAttribute("selecteddate", selecteddate);
 		 
 	   
 	    

@@ -10,7 +10,7 @@
 <style>
 @font-face {
     font-family: 'ChungjuKimSaengTTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-family: 'ChungjuKimSaengTTF', sans-serif;
@@ -18,7 +18,7 @@
 
 @font-face {
     font-family: 'intelone-mono-font-family-regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/intelone-mono-font-family-regular.woff2') format('woff2');
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
     font-weight: 400;
     font-style: normal;
 }
@@ -75,7 +75,7 @@ a {
 	border-radius: 50px;
 	font-family: 'intelone-mono-font-family-regular', sans-serif;
 }
-</style>
+</style> 
 </head>
 <body>
 	<%
@@ -99,7 +99,6 @@ a {
 
 		<button type="submit" class="btn-light"	value="로그인">Login</button>
 		
-		<a href="../PasswordSearch/PasswordSearch.jsp">Forgot Password?</a>
 	</form>
 	<%
 	}
