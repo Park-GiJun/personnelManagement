@@ -9,6 +9,7 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
+<<<<<<< HEAD
 <<<<<<< 김채은
 @font-face {
     font-family: 'ChungjuKimSaengTTF';
@@ -34,6 +35,30 @@
 
 =======
 >>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
+=======
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 /* 공통 스타일 */
 * {
 	box-sizing: border-box;
@@ -43,6 +68,7 @@
 
 body {
 	font-size: 16px;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 td {
@@ -120,7 +146,7 @@ a {
 		<!-- 다른 페이지에서 불러오는 내용 -->
 		<!-- 목록테이블 -->
 		<table border="1" width="90%">
-			<tr class="table-dark1" align="center">
+			<tr class="table-dark1" align="center" style="font-family: 'SF_HambakSnow', sans-serif;">
 				<th width="10%" scope="row">번호</th>
 				<th width="*">제목</th>
 				<th width="10%">첨부파일</th>

@@ -1,7 +1,10 @@
 package Controller;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -117,6 +120,7 @@ public class CalenderController extends HttpServlet {
 		List<CalenderDTO> calenderlists = dao.selectListPage(selecteddate, emp_num);	
 		
 		
+<<<<<<< HEAD
 		
 		// 년-월-일 중에서 일 값만 가져옴.  // 출력 제대로 됨, 값 제대로 가져옴
 		List<CalenderDTO> calenderlists3 = dao.selectListPage3(emp_num);
@@ -140,6 +144,8 @@ public class CalenderController extends HttpServlet {
 		}
 		
 		
+=======
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 		//List<CalenderDTO> CalenderList = dao.selectListPage(map);
 		// 페이징 이미지 전달
 		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/Calender.do");

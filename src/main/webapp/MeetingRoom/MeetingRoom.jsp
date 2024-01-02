@@ -16,6 +16,7 @@ String selectedDate = request.getParameter("selectedDate");
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 
 <style type="text/css">
+<<<<<<< HEAD
 <<<<<<< 김채은
 @font-face {
     font-family: 'ChungjuKimSaengTTF';
@@ -41,6 +42,30 @@ String selectedDate = request.getParameter("selectedDate");
 
 =======
 >>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
+=======
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}}
+
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 * {
 	margin: 0;
 	padding: 0;
@@ -96,6 +121,7 @@ h1 {
 
 body {
 	font-size: 16px;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */

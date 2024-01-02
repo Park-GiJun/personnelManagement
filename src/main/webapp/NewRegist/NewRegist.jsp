@@ -13,6 +13,7 @@ String Team_Search = request.getParameter("TeamSearch");
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style type="text/css">
+<<<<<<< HEAD
 <<<<<<< 김채은
 
 /* 스크롤바를 적용할 스타일을 추가합니다. */
@@ -46,6 +47,38 @@ String Team_Search = request.getParameter("TeamSearch");
 
 =======
 >>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
+=======
+
+/* 스크롤바를 적용할 스타일을 추가합니다. */
+.table-container {
+	width: 100%;
+    max-height: 620px; /* 필요에 따라 높이를 조절하세요. */
+    overflow-y: auto;
+}
+
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 * {
 	margin: 0;
 	padding: 0;
@@ -92,6 +125,7 @@ td {
 }
 
 .table-dark3 {
+	font-size: 20px;
 	background-color: rgb(68, 74, 83);
 	--bs-table-color: #fff;
 	color: var(--bs-table-color);
@@ -184,6 +218,7 @@ body {
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 	margin-left: 10%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;

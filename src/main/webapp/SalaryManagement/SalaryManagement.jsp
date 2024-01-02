@@ -9,6 +9,7 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style> /* 공통 스타일 */
+<<<<<<< HEAD
 <<<<<<< 김채은
 /* 스크롤바를 적용할 스타일을 추가합니다. */
 .table-container {
@@ -27,6 +28,23 @@
 
 =======
 >>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
+=======
+/* 스크롤바를 적용할 스타일을 추가합니다. */
+.table-container {
+	width: 100%;
+    max-height: 620px; /* 필요에 따라 높이를 조절하세요. */
+    overflow-y: auto;
+}
+
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 * {
    box-sizing: border-box;
    margin: 0;
@@ -92,6 +110,7 @@ td {
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
+<<<<<<< HEAD
 <<<<<<< 김채은
    margin-left: 5%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
    padding: 20px;
@@ -102,6 +121,12 @@ td {
 	padding: 20px;
 	font-size: 12px;
 >>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
+=======
+   margin-left: 5%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
+   padding: 20px;
+   font-size: 12px;
+   font-family: 'ChungjuKimSaengTTF', sans-serif;
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 .none {

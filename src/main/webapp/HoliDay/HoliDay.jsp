@@ -11,6 +11,7 @@
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 
 <style type="text/css">
+<<<<<<< HEAD
 <<<<<<< 김채은
 @font-face {
     font-family: 'ChungjuKimSaengTTF';
@@ -36,21 +37,46 @@
 
 =======
 >>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
+=======
+@font-face {
+    font-family: 'ChungjuKimSaengTTF';
+    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'ChungjuKimSaengTTF', sans-serif;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF_HambakSnow';
+	src: url('../Font/SF_HambakSnow.ttf') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 
-td {
+th {
 	border: 1px solid gray; /* 테두리 스타일 지정 */
 	padding: 1px; /* 셀 안의 내용과 테두리 사이의 간격 조정 */
 }
 
 .btn-info {
-	width: 98%;
-	font-size: 200%;
-	height: 200%;
+	margin-left: 25%;
+	width: 20%;
+	font-size: 80%;
+	height: 100%;
 	border-radius: 25px;
 }
 
@@ -109,6 +135,7 @@ td {
 
 /* 사용가능한 휴가 text 위치 수정 */
 .middle-text-container {
+	display: flex;
 	position: relative;
 	margin-top: 0%;
 	margin-left: 0%;
@@ -143,11 +170,11 @@ td {
 
 body {
 	font-size: 16px;
+	font-family: 'ChungjuKimSaengTTF', sans-serif;
 }
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
-	margin-left: 10%; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;
 	font-size: 12px;
 }
@@ -160,19 +187,28 @@ body {
 	padding: 0rem 0rem 0rem 2.5rem;"
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	var now_utc = Date.now()
+	var timeOff = new Date().getTimezoneOffset()*60000;
+	var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+    document.getElementById('start_vacation').setAttribute('min', today);
+    document.getElementById('end_vacation').setAttribute('min', today);
+});
+
+</script>
 </head>
 <body>
 	<!--  왼쪽 페이지 목록  -->
-	<jsp:include page="../MainPage/Left.jsp" />
 	<div class="content">
 		<!-- 다른 페이지에서 불러오는 내용 -->
 		<form name="vacation_form" method="post" action="../Controller/HolidayApplicationController.do">
 
 			<!-- 휴가 신청 버튼 -->
 			<div class="middle-text-container">
-				<a>사용가능 휴가 : ${userholidaycount.annual }일</a>
-			</div>
-			<div class="middle-button-container">
+				<a style="width: 55%;">사용가능 휴가 : ${userholidaycount.annual }일</a>
+				
 				<button type="submit" class='btn-info'>휴가 신청</button>
 			</div>
 
@@ -182,6 +218,7 @@ body {
 					<tr class="table-dark2" align="center">
 						<th colspan="9" scope="row">휴가 일정</th>
 					</tr>
+<<<<<<< HEAD
 <<<<<<< 김채은
 					
 					<tr>
@@ -239,6 +276,17 @@ body {
 								</c:forEach>
 							</select></th>
 >>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
+=======
+					
+					<tr>
+						<td style="display:flex; margin-left:12.5%;">
+							<input type="date" name="start_vacation" id="start_vacation" class="form-select">
+							
+							<a style="margin-top:1%;">&nbsp;~&nbsp;</a>
+							
+							<input type="date" name="end_vacation" id="end_vacation" class="form-select">
+						</td>
+>>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 					</tr>
 				</table>
 			</div>
