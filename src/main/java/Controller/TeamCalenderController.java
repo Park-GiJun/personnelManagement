@@ -72,11 +72,36 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		    // selectedDay가 null이거나 비어있는 경우 처리
 		    // 적절한 로깅 또는 예외 처리를 수행
 		}
+		
+		
 			
 		String selectedYear = request.getParameter("selectedYear");  // 년도
 		String selectedMonth = request.getParameter("selectedMonth");   // 월
+		
+		
+		if (selectedMonth != null && !selectedMonth.isEmpty()) {
+		    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도
+		    int dayValue;
+		    try {
+		        dayValue = Integer.parseInt(selectedMonth);
+
+		        // 변환된 값이 10보다 작으면 앞에 0을 붙여서 문자열로 만듦
+		        if (dayValue < 10) {
+		        	selectedMonth = "0" + dayValue;
+		        }
+		    } catch (NumberFormatException e) {
+		    	
+		    }
+		} else {
+		    // selectedDay가 null이거나 비어있는 경우 처리
+		    // 적절한 로깅 또는 예외 처리를 수행
+		}
+		
+		
 		String selecteddate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
 		String emp_num = (String) request.getSession().getAttribute("loginid");
+		
+		
 		
 		System.out.println(selectedYear + selectedMonth + selectedDay);
 		
@@ -101,8 +126,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		int totalCount = dao.ScheduleListCount(selecteddate); // 게시물 개수
 		
 		ServletContext application = getServletContext();
-		int pageSize = Integer.parseInt(application.getInitParameter("POSTS_PER_PAGE"));
-		int blockSize = Integer.parseInt(application.getInitParameter("PAGES_PER_BLOCK"));
+		//int pageSize = Integer.parseInt(application.getInitParameter("POSTS_PER_PAGE"));
+		//int blockSize = Integer.parseInt(application.getInitParameter("PAGES_PER_BLOCK"));
 		
 		// 현재 페이지 확인
 		int pageNum = 1; // 기본값
@@ -114,21 +139,21 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		
 		
 		// 목록에 출력할 게시물 범위 계산
-		int start = (pageNum + 1) * pageSize + 1; // 첫 게시물 번호
-		int end = pageNum * pageSize;
-		map.put("start", start);
-		map.put("end", end);
+		//int start = (pageNum + 1) * pageSize + 1; // 첫 게시물 번호
+		//int end = pageNum * pageSize;
+		//map.put("start", start);
+		//map.put("end", end);
 		/* 페이지 처리 end */
 				
 		List<TeamCalDTO> calenderlists = dao.selectListPage(selecteddate, team_a);	
 		//List<CalenderDTO> CalenderList = dao.selectListPage(map);
 		// 페이징 이미지 전달
-		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/Calender.do");
+		//String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/Calender.do");
 		
 		// 바로가기 영역 HTML 문자열
-		map.put("pagingImg", pagingImg);
+		//map.put("pagingImg", pagingImg);
 		map.put("totalCount", totalCount);
-		map.put("pageSize", pageSize);
+		//map.put("pageSize", pageSize);
 		map.put("pageNum", pageNum);
 		
 		request.setAttribute("selectedYear", selectedYear);

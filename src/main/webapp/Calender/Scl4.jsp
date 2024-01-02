@@ -701,13 +701,13 @@ body {
 		<div class="middle-button">
 			<!-- 다른 페이지에서 불러오는 내용 -->
 			<!-- <h2 class="myHeader">텍스트 입력</h2>  -->
-			<button class='my_btn' onclick="location.href='Person_Cal.jsp';">개인
+			<button class='my_btn' type="button" onclick="location.href='Person_Cal.jsp';">개인
 				일정</button>
 			<!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서
 				휴가</button> -->
-			<button class='my_btn3' onclick="location.href='Team_Cal.jsp';">부서
+			<button class='my_btn3' type="button" onclick="location.href='Team_Cal.jsp';">부서
 				일정</button>
-			<button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사
+			<button class='my_btn4' type="button" onclick="location.href='Company_Cal.jsp';">회사
 				일정</button>
 		</div>
 

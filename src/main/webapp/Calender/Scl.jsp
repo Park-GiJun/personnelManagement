@@ -524,6 +524,22 @@ a:active, a:hover {
 
 <script type="text/javascript">
 
+/*
+function change() {
+    var f = document.frm;
+ 
+    f.submit();
+}
+
+function updateCalendar() {
+    var year = document.getElementById("yearSelect").value;
+    var month = document.getElementById("monthSelect").value;
+
+    var url = "Scl.jsp?year=" + year + "&month=" + month;
+    window.location.href = "Calender/Scl.jsp";
+}
+*/
+
 
 // 서버로 데이터를 전송하는 함수
 function sendDataToServer(year, month, day) {
@@ -689,6 +705,8 @@ function showDateAndAlert(day) {
 			}
 		};
 	}
+	
+	
 </script>
 
 </head>
@@ -728,12 +746,13 @@ body {
 		<div class="middle-button">
 			<!-- 다른 페이지에서 불러오는 내용 -->
 			<!-- <h2 class="myHeader">텍스트 입력</h2>  -->
-			<button class='my_btn' onclick="location.href='Person_Cal.jsp';">개인
+			<button class='my_btn' type="button" onclick="location.href='Person_Cal.jsp';">개인
 				일정</button>
 			<!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서
 				휴가</button> -->
-			<button class='my_btn3' onclick="location.href='Team_Cal.jsp';">부서 일정</button>
-			<button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사 일정</button>
+			<button class='my_btn3' type="button" onclick="location.href='Team_Cal.jsp';">부서 일정</button>
+			<button class='my_btn4' type="button" onclick="location.href='Company_Cal.jsp';">회사 일정</button>
+			
 		</div>
 
 		<p class="em" style="font-size: 120px"><%=month%></p>
@@ -883,6 +902,10 @@ body {
 					// 1일부터 말일까지 출력
 					int lastDay = cal.getActualMaximum(Calendar.DATE);
 					String cls;
+					
+					// CalenderController에서 전달된 daylist를 받아옴
+			        List<Integer> daylist = (List<Integer>) request.getAttribute("daylist");
+					
 
 					for (int i = 1; i <= lastDay; i++) {
 						cls = year == ty && month == tm && i == td ? "today" : "";
@@ -895,11 +918,10 @@ body {
 			
 						int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
 						
-						
 						%>
 						<c:if test="${not empty calenderlists}"> <!-- 값이 비어있지 않을 경우 밑에 코드 실행 -->
 						<% 
-						if(i == 1) {
+						if(daylist.contains(i)) {
 							out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc("
 					                + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
 						} 
@@ -909,11 +931,11 @@ body {
 						<% 
 
 						// 버튼 출력 부분 수정 시작
-						int startbutton = 50; // 시작 위치값 설정 (예: 30%)
-						out.print(
-						"<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc("
-								+ startbutton
-								+ "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+						//int startbutton = 50; // 시작 위치값 설정 (예: 30%)
+						//out.print(
+						//"<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc("
+								//+ startbutton
+								//+ "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
 						// 버튼 출력 부분 수정 끝
 
 						out.print("</td>");

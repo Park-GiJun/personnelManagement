@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +56,21 @@ public class CalenderController extends HttpServlet {
 
 		
 		// 년-월-일 에서 1~9일은 앞에 0을 붙여주는 코드
+		if (selectedMonth != null && !selectedMonth.isEmpty()) {
+		    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도
+		    int dayValue;
+		    try {
+		        dayValue = Integer.parseInt(selectedMonth);
+
+		        // 변환된 값이 10보다 작으면 앞에 0을 붙여서 문자열로 만듦
+		        if (dayValue < 10) {
+		        	selectedMonth = "0" + dayValue;
+		        }
+		    } catch (NumberFormatException e) {
+		    	
+		    }
+		}
+		
 		if (selectedDay != null && !selectedDay.isEmpty()) {
 		    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도
 		    int dayValue;
@@ -94,8 +110,8 @@ public class CalenderController extends HttpServlet {
 		int totalCount = dao.ScheduleListCount(selecteddate, emp_num); // 게시물 개수
 		
 		ServletContext application = getServletContext();
-		int pageSize = Integer.parseInt(application.getInitParameter("POSTS_PER_PAGE"));
-		int blockSize = Integer.parseInt(application.getInitParameter("PAGES_PER_BLOCK"));
+		//int pageSize = Integer.parseInt(application.getInitParameter("POSTS_PER_PAGE"));
+		//int blockSize = Integer.parseInt(application.getInitParameter("PAGES_PER_BLOCK"));
 		
 		// 현재 페이지 확인
 		int pageNum = 1; // 기본값
@@ -107,32 +123,69 @@ public class CalenderController extends HttpServlet {
 		
 		
 		// 목록에 출력할 게시물 범위 계산
-		int start = (pageNum + 1) * pageSize + 1; // 첫 게시물 번호
-		int end = pageNum * pageSize;
-		map.put("start", start);
-		map.put("end", end);
+		//int start = (pageNum + 1) * pageSize + 1; // 첫 게시물 번호
+		//int end = pageNum * pageSize;
+		//map.put("start", start);
+		//map.put("end", end);
 		/* 페이지 처리 end */
 				
 		List<CalenderDTO> calenderlists = dao.selectListPage(selecteddate, emp_num);	
 		
 		
+		
+		// 년-월-일 중에서 일 값만 가져옴.  // 출력 제대로 됨, 값 제대로 가져옴
+		List<CalenderDTO> calenderlists3 = dao.selectListPage3(emp_num);
+		for (CalenderDTO dto : calenderlists3) {
+            System.out.println("Personal_diaray_date: " + dto.getPersonal_diaray_date());
+        }	
+		
+		List<Integer> daylist = new ArrayList<>();
+
+		for (CalenderDTO item : calenderlists3) {
+		    try {
+		        int day = Integer.parseInt(item.getPersonal_diaray_date());
+		        daylist.add(day);
+		    } catch (NumberFormatException e) {
+		        // Personal_diaray_date가 숫자로 변환할 수 없는 경우 처리
+		        e.printStackTrace();
+		    }
+		}
+		for (Integer value : daylist) {
+		    System.out.println("daylist 값2222222: " + value);
+		}
+		
+		request.setAttribute("daylist", daylist);
+		
+		/*
+		ArrayList<String> myList = new ArrayList<>();
+		for (CalenderDTO calenderDTO : calenderlists3) {
+		    // 예시: CalenderDTO에서 getTitle() 메서드로 데이터를 가져온다고 가정
+		    String title = calenderDTO.getPersonal_diaray_date();
+		    System.out.println("title : " + title);
+		    myList.add(title);
+		}
+		
+		request.setAttribute("myList", myList);
+		*/
+		
 		//List<CalenderDTO> CalenderList = dao.selectListPage(map);
 		// 페이징 이미지 전달
-		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/Calender.do");
+		//String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/Calender.do");
 		
 		// 바로가기 영역 HTML 문자열
-		map.put("pagingImg", pagingImg);
+		//map.put("pagingImg", pagingImg);
 		map.put("totalCount", totalCount);
-		map.put("pageSize", pageSize);
+		//map.put("pageSize", pageSize);
 		map.put("pageNum", pageNum);
 		
 		request.setAttribute("selectedYear", selectedYear);
 	    request.setAttribute("selectedMonth", selectedMonth);
 	    request.setAttribute("selectedDay", selectedDay);
-	    dao.close();
+
 
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);
+		request.setAttribute("calenderlists3", calenderlists3);
 		request.setAttribute("map2", map);
 		request.setAttribute("selecteddate", selecteddate);
 		request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
