@@ -13,8 +13,6 @@ String Team_Search = request.getParameter("TeamSearch");
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style type="text/css">
-<<<<<<< HEAD
-<<<<<<< 김채은
 
 /* 스크롤바를 적용할 스타일을 추가합니다. */
 .table-container {
@@ -45,40 +43,6 @@ String Team_Search = request.getParameter("TeamSearch");
 	font-style: normal;
 }
 
-=======
->>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
-=======
-
-/* 스크롤바를 적용할 스타일을 추가합니다. */
-.table-container {
-	width: 100%;
-    max-height: 620px; /* 필요에 따라 높이를 조절하세요. */
-    overflow-y: auto;
-}
-
-@font-face {
-    font-family: 'ChungjuKimSaengTTF';
-    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-family: 'ChungjuKimSaengTTF', sans-serif;
-}
-
-@font-face {
-    font-family: 'intelone-mono-font-family-regular';
-    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-	font-family: 'SF_HambakSnow';
-	src: url('../Font/SF_HambakSnow.ttf') format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 * {
 	margin: 0;
 	padding: 0;

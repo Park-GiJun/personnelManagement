@@ -9,8 +9,6 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/bootstrap.rtl.css" rel="stylesheet" type="text/css">
 <style>
-<<<<<<< HEAD
-<<<<<<< 김채은
 @font-face {
     font-family: 'ChungjuKimSaengTTF';
     src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
@@ -33,32 +31,6 @@
 	font-style: normal;
 }}
 
-=======
->>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
-=======
-@font-face {
-    font-family: 'ChungjuKimSaengTTF';
-    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-family: 'ChungjuKimSaengTTF', sans-serif;
-}
-
-@font-face {
-    font-family: 'intelone-mono-font-family-regular';
-    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-	font-family: 'SF_HambakSnow';
-	src: url('../Font/SF_HambakSnow.ttf') format('woff');
-	font-weight: normal;
-	font-style: normal;
-}}
-
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 /* 공통 스타일 */
 * {
 	box-sizing: border-box;
@@ -323,19 +295,8 @@ td, th {
 					<th width="20%">번호</th>
 					<th width="20%">${dto.anno_board_num}</th>
 					<th width="25%">작성일</th>
-<<<<<<< HEAD
-<<<<<<< 김채은
 					<th width="25%">${dto.post_date}</th>
 					<td style="text-align: left; font-size: 18px; display: flex; align-items: center;">
-=======
-					<th width="25%">${dto.post_date}</th>
-
-					<td style="text-align: left; font-size: 15px; display: flex; align-items: center;">
->>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
-=======
-					<th width="25%">${dto.post_date}</th>
-					<td style="text-align: left; font-size: 18px; display: flex; align-items: center;">
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 						<button type="button" onclick="promptModification()" width="10%" id="btn2" class="btn-info">수정</button>
 						<button type="button" onclick="promptDeletion()" width="10%" id="btn2" class="btn-info">삭제</button>
 
@@ -357,18 +318,8 @@ td, th {
 
 				<c:forEach var="comment" items="${Commentsdto1}" varStatus="loop">
 					<tr class="table-dark4">
-<<<<<<< HEAD
-<<<<<<< 김채은
 						<td width="5%" align="center">${ map2.totalCount +(((map2.pageNum-1) * map2.pageSize) + loop.index+1) }</td>
 						<td width="90%" style="font-size: 18px; font-family: 'SF_HambakSnow', sans-serif;">${comment.content}</td>
-=======
-						<td width="5%" align="center">${ map2.totalCount +(((map2.pageNum-1) * map2.pageSize) + loop.index) }</td>
-						<td width="90%">${comment.content}</td>
->>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
-=======
-						<td width="5%" align="center">${ map2.totalCount +(((map2.pageNum-1) * map2.pageSize) + loop.index+1) }</td>
-						<td width="90%" style="font-size: 18px; font-family: 'SF_HambakSnow', sans-serif;">${comment.content}</td>
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 						<td width="5%" align="center">
 							<button type="button"
 								onclick="CommentsDeletion('${comment.pass}','${comment.turn}' )"

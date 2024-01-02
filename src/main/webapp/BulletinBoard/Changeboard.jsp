@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
-<<<<<<< 김채은
 
 <meta charset="UTF-8">
 <title>Changeboard</title>
@@ -30,59 +28,6 @@
 	font-weight: normal;
 	font-style: normal;
 }
-=======
-    <meta charset="UTF-8">
-    <title>Changeboard</title>
-    <style>
-        /* 공통 스타일 */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
->>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
-=======
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
-
-<<<<<<< HEAD
-/* 공통 스타일 */
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-=======
-<meta charset="UTF-8">
-<title>Changeboard</title>
-<style>
-@font-face {
-    font-family: 'ChungjuKimSaengTTF';
-    src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-family: 'ChungjuKimSaengTTF', sans-serif;
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
-}
-
-<<<<<<< HEAD
-body {
-	font-size: 16px;
-=======
-@font-face {
-    font-family: 'intelone-mono-font-family-regular';
-    src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
-    font-weight: 400;
-    font-style: normal;
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
-}
-
-<<<<<<< HEAD
-=======
-@font-face {
-	font-family: 'SF_HambakSnow';
-	src: url('../Font/SF_HambakSnow.ttf') format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
 
 /* 공통 스타일 */
 * {
@@ -95,7 +40,6 @@ body {
 	font-size: 16px;
 }
 
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
 .content {
 	margin-left: 200px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */

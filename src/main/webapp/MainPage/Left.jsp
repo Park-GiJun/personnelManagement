@@ -12,8 +12,6 @@ String currentDate = sdf.format(new Date());
 <meta charset="UTF-8">
 <title>Left</title>
 <style>
-<<<<<<< HEAD
-<<<<<<< 김채은
 @font-face {
 	font-family: 'ChungjuKimSaengTTF';
 	src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
@@ -37,33 +35,6 @@ String currentDate = sdf.format(new Date());
 }
 
 }
-=======
->>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
-=======
-@font-face {
-	font-family: 'ChungjuKimSaengTTF';
-	src: url('../Font/ChungjuKimSaeng.ttf') format('woff2');
-	font-weight: normal;
-	font-style: normal;
-	font-family: 'ChungjuKimSaengTTF', sans-serif;
-}
-
-@font-face {
-	font-family: 'intelone-mono-font-family-regular';
-	src: url('../Font/IntelOneMono-Regular.ttf') format('woff2');
-	font-weight: 400;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'SF_HambakSnow';
-	src: url('../Font/SF_HambakSnow.ttf') format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-}
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 * {
 	box-sizing: border-box;
 }
@@ -136,33 +107,11 @@ String currentDate = sdf.format(new Date());
 	text-align: center;
 }
 
-<<<<<<< HEAD
-.left_Time_text {
-	width: 100%;
-	color: #6fc8e2;
-	position: absolute;
-	top: 10%;
-	left: 0;
-	font-family: Inter;
-	font-weight: Regular;
-	font-size: 18px;
-	opacity: 1;
-	text-align: center;
-=======
-/* 각 섹션 간격 조정 */
-.left_Time_background {
-	top: 0%;
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
-}
-
-<<<<<<< HEAD
 /* 각 섹션 간격 조정 */
 .left_Time_background {
 	top: 0%;
 }
 
-=======
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 .left_calender_background {
 	top: 7%;
 }
@@ -200,35 +149,19 @@ String currentDate = sdf.format(new Date());
 }
 
 .left_Holiday_Approval_background {
-<<<<<<< HEAD
-	top: 74%
-=======
 	top: 71.5%;
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 .left_salaryManagement_background {
-<<<<<<< HEAD
-	top: 81%;
-=======
 	top: 78.5%;
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 .left_new_Id_background {
-<<<<<<< HEAD
-	top: 88%;
-=======
 	top: 85.5%;
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 .left_MeetingRoomReservation_background {
-<<<<<<< HEAD
-	top: 95%;
-=======
 	top: 92.5%;
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 }
 
 /* 섹션에 커서 포인터 스타일 적용 */
@@ -240,8 +173,6 @@ String currentDate = sdf.format(new Date());
 }
 </style>
 <script>
-<<<<<<< HEAD
-<<<<<<< 김채은
 	//휴가 신청 창
 	function openHoliDayWindow() {
 		var detailsUrl = "../Controller/HoliDayCount.do";
@@ -261,30 +192,6 @@ String currentDate = sdf.format(new Date());
 
 		window.open(detailsUrl, "_blank", "width=400, height=70");
 	}
-=======
-	
->>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
-=======
-	//휴가 신청 창
-	function openHoliDayWindow() {
-		var detailsUrl = "../Controller/HoliDayCount.do";
-
-		window.open(detailsUrl, "_blank", "width=600, height=400");
-	}
-	// 부서 일정 추가 창
-	function open_team_schedule_Window() {
-		var detailsUrl = "../Team_Schedule/Team_Schedule.jsp";
-
-		window.open(detailsUrl, "_blank", "width=400, height=70");
-	}
-
-	// 회사 일정 추가 창
-	function open_Company_schedule_Window() {
-		var detailsUrl = "../Company_Schedule/Company_Schedule.jsp";
-
-		window.open(detailsUrl, "_blank", "width=400, height=70");
-	}
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 </script>
 </head>
 <body>
@@ -315,17 +222,8 @@ String currentDate = sdf.format(new Date());
 			</a>
 		</div>
 		<div class="left_holiday_background">
-<<<<<<< HEAD
-<<<<<<< 김채은
 			<a class="left_holiday_section" onclick="openHoliDayWindow()">
 				<span class="left_holiday_text">휴가신청</span>
-=======
-			<a class="left_holiday_section" href="../Controller/HoliDayCount.do"> <span class="left_holiday_text">휴가신청</span>
->>>>>>> 492c5fd 2023-12-21 11:27 휴가신청 페이지 팝업화 및 일정 달력으로 선택 / 폰트 변경 및 UI 개선
-=======
-			<a class="left_holiday_section" onclick="openHoliDayWindow()">
-				<span class="left_holiday_text">휴가신청</span>
->>>>>>> branch 'master' of https://github.com/Park-GiJun/personnelManagement.git
 			</a>
 		</div>
 		<div class="left_info_background">
