@@ -2,6 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@page import="java.util.Calendar"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ page import="java.util.List" %>
 
 <%
 request.setCharacterEncoding("utf-8");
@@ -15,6 +16,7 @@ int td = cal.get(Calendar.DATE);
 
 int year = cal.get(Calendar.YEAR);
 int month = cal.get(Calendar.MONTH) + 1;
+int day = cal.get(Calendar.DATE);
 
 // 파라미터 받기
 String sy = request.getParameter("year");
@@ -372,9 +374,6 @@ function updateCalendar() {
 
 </script>
 
-
-
-
 </head>
 <style>
 /* 공통 스타일 */
@@ -407,21 +406,62 @@ tbody {
 <body>
    <jsp:include page="../MainPage/Left.jsp"></jsp:include>
 
+	<form name="calender_form" id="calender_form" method="post" action="../Controller/CalenderController.do">
+		<input type="hidden" name="selectedYear" id="selectedYear" value="<%=year%>"> 
+		<input type="hidden" name="selectedMonth" id="selectedMonth" value="<%=month%>"> 
+		<input type="hidden" name="selectedDay" id="selectedDay" value="<%=day%>"> 
 
    <div class="middle-button">
       <!-- 다른 페이지에서 불러오는 내용 -->
       <!-- <h2 class="myHeader">텍스트 입력</h2>  -->
-      <button class='my_btn' onclick="location.href='Person_Cal.jsp';" >개인 일정</button>
-      <!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서 휴가</button> -->
-      <button class='my_btn3' onclick="location.href='Team_Cal.jsp';">부서 일정</button>
-      <button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사 일정</button>
+      <button class='my_btn' type="button" onclick="location.href='../Calender/Person_Cal.jsp';">개인 일정</button>
+			<!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서
+				휴가</button> -->
+			<button class='my_btn3' type="button" onclick="location.href='../Calender/Team_Cal.jsp';">부서 일정</button>
+			<button class='my_btn4' type="button" onclick="location.href='../Calender/Company_Cal.jsp';">회사 일정</button>
    </div>
    
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
 	
 	<button class='next_btn' onclick="location.href='../Controller/PersonalLoadController.do';"><</button>
-
-   <div class="calendar" style="width: 1050px; height: 300px;">
+	
+	<div class="reverse2">			
+			<c:choose>
+				<c:when test="${not empty calenderlists}">
+						<c:forEach items="${calenderlists}" var="row" varStatus="loop">
+						<tr>
+							<td style="background-color: #1C427E;">${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
+							</td>
+							<td style="background-color: #1C427E;"><a href="#"
+								class="scheduleLink"
+								data-schedule="${row.personal_diaray_schedule}">
+									${row.personal_diaray_schedule} <!-- db에 있는 개인 일정 출력 -->
+							</a></td>
+						</tr>
+					</c:forEach>
+				</c:when>
+				<c:when test="${not empty calenderlists4}">
+					<c:forEach items="${calenderlists4}" var="row" varStatus="loop">
+						<tr>
+							<td style="background-color: #1C427E;">${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
+							</td>
+							<td style="background-color: #1C427E;"><a href="#"
+								class="scheduleLink"
+								data-schedule="${row.personal_diaray_schedule}">
+									${row.personal_diaray_schedule} <!-- db에 있는 개인 일정 출력 -->
+							</a></td>
+						</tr>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<tr>
+						<!-- <td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>  -->
+					</tr>
+				</c:otherwise>
+			</c:choose>	
+	</div>
+		
+   <div class="calendar" style="width: 1050px; margin-top: 40px; height: 300px;">
       <div class="title" >
          <form name="frm" method="post" >
             <select id="yearSelect" name="year" class="selectField" onchange="change()"  >
@@ -445,7 +485,6 @@ tbody {
             </select>
          </form>
       </div>
-
 	
       <table> <!-- 테이블 표 만드는 곳(달력 만드는 곳) -->
          <thead>
@@ -476,11 +515,37 @@ tbody {
             // 1일부터 말일까지 출력
             int lastDay = cal.getActualMaximum(Calendar.DATE);
             String cls;
+            
+         	// CalenderController에서 전달된 daylist를 받아옴
+	        List<Integer> daylist = (List<Integer>) request.getAttribute("daylist");
+            
             for (int i = 1; i <= lastDay; i++) {
                cls = year == ty && month == tm && i == td ? "today" : "";
 				
-               out.print("<td class='" + cls + "'><button onclick=\"window.location.href='Scl.jsp?name=" + i + "'; showDate(" + i + ");\">" + i + "</button></td>");
+               out.print("<td class='" + cls
+						+ "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
                //out.print("<td class='" + cls + "'><button onclick=\"alert('클릭한 날짜 : " + i + "일');\">" + i + "</button></td>");
+               out.print("<button id=\"update\" style='max-height: 50px; min-height: 50px;'>" + i + "</button>");
+               
+               
+               int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
+						
+						%>	
+						<c:if test="${not empty calenderlists}"> <!-- 값이 비어있지 않을 경우 밑에 코드 실행 -->
+						
+						<% 
+						if (daylist != null) {
+							if(daylist.contains(i)) {
+								out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; max-height: 20px; position: relative; bottom: 100%; right: calc("
+					                	+ buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+							} 
+						} 
+				    	%>
+						</c:if>
+						<% 
+
+						out.print("</td>");
+               
                if (lastDay != i && (++week) % 7 == 1) {
                   out.print("</tr><tr>");
                }
@@ -496,17 +561,7 @@ tbody {
             %>
          </tbody>
       </table>
-    
-     
-     
-
-		
-     
-     
-
    </div>
    
-
-
 </body>
 </html>

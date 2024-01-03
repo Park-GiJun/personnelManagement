@@ -2,6 +2,7 @@ package Controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -69,15 +70,17 @@ public class CalenderPlusController extends HttpServlet {
 			 
 			 response.getWriter().write("일정이 성공적으로 추가되었습니다.");
 			 System.out.println("일정 추가 성공~!!!!!!!!!!");
-	         response.sendRedirect("../Calender/Scl.jsp");
+	         //response.sendRedirect("../Calender/Scl.jsp");
 			 
 		 } else {
 	            response.getWriter().write("추가할 일정이 작성되지 않았습니다.");
 	        }
 
-		 dao.close();
+		 //dao.close();
 		 request.setAttribute("selecteddate", selecteddate);
 		 
+		 RequestDispatcher dispatcher = request.getRequestDispatcher("../Calender/Scl.jsp");
+	     dispatcher.forward(request, response);
 	   
 	    
 	    }

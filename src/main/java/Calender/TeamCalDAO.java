@@ -42,6 +42,70 @@ public class TeamCalDAO extends DBConnPool {
 		
 	}
 
+	public List<TeamCalDTO> selectListPage4(String selecteddate, String team_a) {
+		List<TeamCalDTO> board = new Vector<TeamCalDTO>();
+		
+		System.out.println("select List Page");
+
+		// 쿼리문 준비
+		String query = "SELECT team_schedule FROM Team_calender WHERE team=? AND Team_calender_date=? ORDER BY team_count_date";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, team_a);
+	        psmt.setString(2, selecteddate); 
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				TeamCalDTO dto = new TeamCalDTO();
+
+				dto.setteam_schedule(rs.getString("team_schedule"));
+				
+				System.out.println(dto.getteam_schedule());
+
+				board.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println("게시물 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		return board;
+	}
+	
+	// 날짜만 조회
+		public List<TeamCalDTO> selectListPage3(String team_a, String selectedYear, String selectedMonth) {
+			List<TeamCalDTO> board = new Vector<TeamCalDTO>();
+			
+			System.out.println("select List Page");
+
+			// 쿼리문 준비
+			//String query = "SELECT DISTINCT SUBSTR(Personal_diaray_date, -2) AS LastTwoCharacters FROM Personal_diaray WHERE emp_num=?";
+			String query = "SELECT DISTINCT SUBSTR(Team_calender_date, -2) AS LastTwoCharacters FROM Team_calender WHERE team=? AND SUBSTR(Team_calender_date, 1, 4)=? AND SUBSTR(Team_calender_date, 6, 2)=?";
+			
+			
+			try {
+				psmt = con.prepareStatement(query);
+				psmt.setString(1, team_a);
+				psmt.setString(2, selectedYear);
+				psmt.setString(3, selectedMonth);
+				rs = psmt.executeQuery();
+
+				while (rs.next()) {
+					TeamCalDTO dto = new TeamCalDTO();
+
+					dto.setTeam_calender_date(rs.getString("LastTwoCharacters"));
+
+		            System.out.println("게시물 날짜 조회(중복x) : " + dto.getTeam_calender_date());
+
+		            board.add(dto);
+				}
+			} catch (Exception e) {
+				System.out.println("게시물 날짜 조회 중 예외 발생");
+				e.printStackTrace();
+			}
+			return board;
+		}
+	
 	
 	
 	

@@ -1,10 +1,13 @@
 package Controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Calender.CompanyCalDTO;
 import Calender.TeamCalDAO;
 import Calender.TeamCalDTO;
 import utils.BoardPage;
@@ -34,6 +38,9 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		
 		// Map 생성
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		LocalDate now = LocalDate.now();
+		String selecteddate2 = now.toString();
 		
 		String searchField = request.getParameter("searchField");
 		String searchWord = request.getParameter("searchWord");
@@ -162,15 +169,47 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	    
 	    System.out.print("추가하기 기능 확인용: " + " " + selectedYear + " " + selectedMonth + " " + selectedDay);
 	    System.out.println();
+	    
+	 // 년-월-일 중에서 일 값만 가져옴.  // 출력 제대로 됨, 값 제대로 가져옴
+ 		List<TeamCalDTO> calenderlists3 = dao.selectListPage3(team_a, selectedYear, selectedMonth);
+ 		for (TeamCalDTO dto : calenderlists3) {
+             System.out.println("Team_calender_date: " + dto.getTeam_calender_date());
+         }	
+ 		
+ 		List<Integer> daylist = new ArrayList<>();
+
+ 		for (TeamCalDTO item : calenderlists3) {
+ 		    try {
+ 		        int day = Integer.parseInt(item.getTeam_calender_date());
+ 		        daylist.add(day);
+ 		    } catch (NumberFormatException e) {
+ 		        // Personal_diaray_date가 숫자로 변환할 수 없는 경우 처리
+ 		        e.printStackTrace();
+ 		    }
+ 		}
+ 		for (Integer value : daylist) {
+ 		    System.out.println("daylist 값2222222: " + value);
+ 		}
+ 		
+ 		request.setAttribute("daylist", daylist);
+ 		
+ 		
+ 		List<TeamCalDTO> calenderlists4 = dao.selectListPage4(selecteddate, team_a);
+	    
+	    
 	    dao.close();
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);
 		//request.setAttribute("CalenderList", CalenderList);
 		request.setAttribute("map2", map);
 		request.setAttribute("selecteddate", selecteddate);
+		request.setAttribute("calenderlists3", calenderlists3);
+		request.setAttribute("calenderlists4", calenderlists4);
 		//request.setAttribute("selectedSchedules", selectedSchedules); // 리스트 값
         //request.setAttribute("selectedSchedules", Arrays.asList(selectedContent));  // 화면에 선택한 일정들을 전달
-		request.getRequestDispatcher("../Calender/Scl4.jsp").forward(request, response);
+		//request.getRequestDispatcher("../Calender/Scl4.jsp").forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("../Calender/Scl4.jsp");
+		dispatcher.forward(request, response);
 		
 	}	
 	

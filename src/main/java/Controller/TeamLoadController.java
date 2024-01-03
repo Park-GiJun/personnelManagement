@@ -37,6 +37,8 @@ public class TeamLoadController extends HttpServlet {
 
 		
 		List<TeamCalDTO> calenderlists2 = dao.selectListPage2(selecteddate2, team_a);	
+		
+		dao.close();
 
 		request.setAttribute("calenderlists2", calenderlists2);
 		request.getRequestDispatcher("../Calender/Scl4.jsp").forward(request, response);

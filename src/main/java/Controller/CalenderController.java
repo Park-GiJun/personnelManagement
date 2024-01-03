@@ -1,11 +1,13 @@
 package Controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +18,6 @@ import javax.servlet.http.HttpSession;
 
 import Calender.CalenderDAO;
 import Calender.CalenderDTO;
-import utils.BoardPage;
 
 
 @WebServlet("/Controller/CalenderController.do")
@@ -39,6 +40,8 @@ public class CalenderController extends HttpServlet {
 		String searchWord = request.getParameter("searchWord");
 		String searchCategory = request.getParameter("searchCategory");
 		
+		LocalDate now = LocalDate.now();
+		String selecteddate2 = now.toString();
 		
 		
 		String selectedDay = request.getParameter("selectedDay");
@@ -156,6 +159,10 @@ public class CalenderController extends HttpServlet {
 		
 		request.setAttribute("daylist", daylist);
 		
+		
+		List<CalenderDTO> calenderlists4 = dao.selectListPage4(selecteddate2, emp_num);
+		
+		
 		/*
 		ArrayList<String> myList = new ArrayList<>();
 		for (CalenderDTO calenderDTO : calenderlists3) {
@@ -172,6 +179,8 @@ public class CalenderController extends HttpServlet {
 		// 페이징 이미지 전달
 		//String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/Calender.do");
 		
+		
+		
 		// 바로가기 영역 HTML 문자열
 		//map.put("pagingImg", pagingImg);
 		map.put("totalCount", totalCount);
@@ -186,9 +195,16 @@ public class CalenderController extends HttpServlet {
 		// 포워딩
 		request.setAttribute("calenderlists", calenderlists);
 		request.setAttribute("calenderlists3", calenderlists3);
+		request.setAttribute("calenderlists4", calenderlists4);
 		request.setAttribute("map2", map);
 		request.setAttribute("selecteddate", selecteddate);
-		request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
+		//request.getRequestDispatcher("../Calender/Scl.jsp").forward(request, response);
+		//request.getRequestDispatcher("../Calender/Person_Cal.jsp").forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("../Calender/Scl.jsp");
+		dispatcher.forward(request, response);
+		
+		//RequestDispatcher dispatcher2 = request.getRequestDispatcher("../Calender/Person_Cal.jsp");
+		//dispatcher2.forward(request, response);
 		
 	}
 	

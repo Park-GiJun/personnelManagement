@@ -9,6 +9,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="fileupload.FileUtil" %>
+<%@ page import="java.util.List"%>
 
 <%
 request.setCharacterEncoding("utf-8");
@@ -492,14 +493,14 @@ a:active, a:hover {
 .calendar table td.gray button {
 	color: #000;
 	position: relative; /* 상대적인 위치 설정 */
-	top: -45px; /* 상단 여백 조정 */
+	top: -30px; /* 상단 여백 조정 */
 }
 
 /* 다음달의 날짜 색상 지정 */
 .calendar table td.gray2 button {
 	color: #000;
 	position: relative; /* 상대적인 위치 설정 */
-	top: -45px; /* 상단 여백 조정 */
+	top: -30px; /* 상단 여백 조정 */
 }
 
 #bin {
@@ -723,9 +724,49 @@ body {
 					String selectedDate = (String) request.getAttribute("selecteddate");
         			if (selectedDate == null) {
         				Calendar currentDate = Calendar.getInstance();
-        	            int currentYear = currentDate.get(Calendar.YEAR);
-        	            int currentMonth = currentDate.get(Calendar.MONTH) + 1;
-        	            int currentDay = currentDate.get(Calendar.DATE);
+        				int currentYear2 = currentDate.get(Calendar.YEAR);
+        	            int currentMonth2 = currentDate.get(Calendar.MONTH) + 1;
+        	            int currentDay2 = currentDate.get(Calendar.DATE);
+        	            
+        	            String currentYear = Integer.toString(currentYear2);
+						String currentMonth = Integer.toString(currentMonth2);
+						String currentDay = Integer.toString(currentDay2);
+						
+						System.out.println("확인용 111111 " + currentYear + " " + currentMonth + " " + currentDay);
+						
+						// 월 앞에 0 붙여주기
+						if (currentMonth != null && !currentMonth.isEmpty()) {
+						    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도
+						    int dayValue;
+						    try {
+						        dayValue = Integer.parseInt(currentMonth);
+
+						        // 변환된 값이 10보다 작으면 앞에 0을 붙여서 문자열로 만듦
+						        if (dayValue < 10) {
+						        	currentMonth = "0" + dayValue;
+						        }
+						    } catch (NumberFormatException e) {
+						    	
+						    }
+						}
+						
+						// 일 앞에 0 붙여주기
+						if (currentDay != null && !currentDay.isEmpty()) {
+						    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도
+						    int dayValue;
+						    try {
+						        dayValue = Integer.parseInt(currentDay);
+
+						        // 변환된 값이 10보다 작으면 앞에 0을 붙여서 문자열로 만듦
+						        if (dayValue < 10) {
+						        	currentDay = "0" + dayValue;
+						        }
+						    } catch (NumberFormatException e) {
+						    	
+						    }
+						}
+						
+						System.out.println("확인용 222222 " + currentYear + " " + currentMonth + " " + currentDay);
         	            
         	            out.print(currentYear + "-" + currentMonth + "-" + currentDay);
         			}
@@ -847,6 +888,9 @@ body {
 					int lastDay = cal.getActualMaximum(Calendar.DATE);
 					String cls;
 					
+					List<Integer> daylist = (List<Integer>) request.getAttribute("daylist");
+					
+					
 					for (int i = 1; i <= lastDay; i++) {
 					    cls = year == ty && month == tm && i == td ? "today" : "";
 
@@ -854,12 +898,21 @@ body {
 					    //out.print("<td class='" + cls + "' style='min-width: 100px; max-width: 100px; width: 100px; min-height: 10px !important; max-height: 10px !important; height: 50px !important; position: relative;'>");
 					    out.print("<button id=\"update\" style='max-height: 50px;' onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button>");
 
-					    // 버튼 출력 부분 수정 시작
-					    int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
-					    out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc(" + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl4.jsp';\">일정이 있습니다.</button>");
-					    // 버튼 출력 부분 수정 끝
+						int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
+						
+						%>
+						<c:if test="${not empty calenderlists}"> <!-- 값이 비어있지 않을 경우 밑에 코드 실행 -->
+						<% 
+						if(daylist.contains(i)) {
+							out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; max-height: 20px; position: relative; bottom: 100%; right: calc("
+					                + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+						} 
+				      
+				    	%>
+						</c:if>
+						<% 
 
-					    out.print("</td>");
+						out.print("</td>");
 
 					    if (lastDay != i && (++week) % 7 == 1) {
 					        out.print("</tr><tr>");

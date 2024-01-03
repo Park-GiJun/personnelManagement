@@ -33,6 +33,8 @@ public class CompanyLoadController extends HttpServlet {
 
 		
 		List<CompanyCalDTO> calenderlists2 = dao.selectListPage2(selecteddate2);	
+		
+		dao.close();
 
 		request.setAttribute("calenderlists2", calenderlists2);
 		request.getRequestDispatcher("../Calender/Scl5.jsp").forward(request, response);

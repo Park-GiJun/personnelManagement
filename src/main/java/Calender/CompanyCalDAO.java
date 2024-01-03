@@ -44,6 +44,71 @@ public class CompanyCalDAO extends DBConnPool {
 			return totalcount;
 		}
 */
+	
+	// 화면 페이지 첫 번째
+		public List<CompanyCalDTO> selectListPage4(String selecteddate, String emp_num) {
+			List<CompanyCalDTO> board = new Vector<CompanyCalDTO>();
+			
+			System.out.println("select List Page");
+
+			// 쿼리문 준비
+			String query = "SELECT company_schedule FROM company_calender WHERE company_calender_date=? ORDER BY com_count_date";
+
+			try {
+				psmt = con.prepareStatement(query);
+				psmt.setString(1, selecteddate);
+				rs = psmt.executeQuery();
+
+				while (rs.next()) {
+					CompanyCalDTO dto = new CompanyCalDTO();
+
+					dto.setcompany_schedule(rs.getString("company_schedule"));
+					
+					System.out.println(dto.getcompany_schedule());
+
+					board.add(dto);
+				}
+			} catch (Exception e) {
+				System.out.println("게시물 조회 중 예외 발생");
+				e.printStackTrace();
+			}
+			return board;
+		}
+	
+		// 날짜만 조회
+		public List<CompanyCalDTO> selectListPage3(String selectedYear, String selectedMonth) {
+			List<CompanyCalDTO> board = new Vector<CompanyCalDTO>();
+			
+			System.out.println("select List Page");
+
+			// 쿼리문 준비
+			//String query = "SELECT DISTINCT SUBSTR(Personal_diaray_date, -2) AS LastTwoCharacters FROM Personal_diaray WHERE emp_num=?";
+			String query = "SELECT DISTINCT SUBSTR(company_calender_date, -2) AS LastTwoCharacters FROM company_calender WHERE SUBSTR(company_calender_date, 1, 4)=? AND SUBSTR(company_calender_date, 6, 2)=?";
+			
+			
+			try {
+				psmt = con.prepareStatement(query);
+				psmt.setString(1, selectedYear);
+				psmt.setString(2, selectedMonth);
+				rs = psmt.executeQuery();
+
+				while (rs.next()) {
+					CompanyCalDTO dto = new CompanyCalDTO();
+
+					dto.setcompany_calender_date(rs.getString("LastTwoCharacters"));
+
+		            System.out.println("게시물 날짜 조회(중복x) : " + dto.getcompany_calender_date());
+
+		            board.add(dto);
+				}
+			} catch (Exception e) {
+				System.out.println("게시물 날짜 조회 중 예외 발생");
+				e.printStackTrace();
+			}
+			return board;
+		}	
+	
+	
 		
 	// 게시물 조회하는 쿼리
 	public int ScheduleListCount(String selecteddate) {

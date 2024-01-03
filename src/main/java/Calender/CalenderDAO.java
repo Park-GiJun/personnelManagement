@@ -124,6 +124,39 @@ public class CalenderDAO extends DBConnPool {
 	
 	
 	
+	// 화면 페이지 첫 번째
+	public List<CalenderDTO> selectListPage4(String selecteddate, String emp_num) {
+		List<CalenderDTO> board = new Vector<CalenderDTO>();
+		
+		System.out.println("select List Page");
+
+		// 쿼리문 준비
+		String query = "SELECT Personal_diaray_schedule FROM Personal_diaray WHERE Personal_diaray_date=? AND emp_num=? ORDER BY count_date";
+
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, selecteddate);
+			psmt.setString(2, emp_num);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				CalenderDTO dto = new CalenderDTO();
+
+				dto.setPersonal_diaray_schedule(rs.getString("Personal_diaray_schedule"));
+				
+				System.out.println(dto.getPersonal_diaray_schedule());
+
+				board.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println("게시물 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		return board;
+	}
+	
+	
+	
 	
 
 	// 2
@@ -245,8 +278,7 @@ public class CalenderDAO extends DBConnPool {
 	}
 	
 	
-	
-	
+
 	// 3 삭제하기 기능
 	public int deleteCalender(List<String> selectedSchedules) {
 	    int result = 0;
@@ -267,9 +299,11 @@ public class CalenderDAO extends DBConnPool {
 	        // 총 영향 받은 행 계산
 	        for (int batchResult : batchResults) {
 	            result += batchResult;
+	            System.out.println("result 값 확인용 ===== " + result);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
+	        //throw new RuntimeException("일괄 삭제 중 예외 발생", e);
 	    } finally {
 	        // 리소스 해제
 	        close();
@@ -277,9 +311,7 @@ public class CalenderDAO extends DBConnPool {
 
 	    return result;
 }	
-    
 
-      
 	
     public int deleteCalenderByDate(String selecteddate, String emp_num) {
     	

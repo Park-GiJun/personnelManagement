@@ -734,8 +734,7 @@ body {
 		<div class="middle-button">
 			<!-- 다른 페이지에서 불러오는 내용 -->
 			<!-- <h2 class="myHeader">텍스트 입력</h2>  -->
-			<button class='my_btn' type="button" onclick="location.href='../Calender/Person_Cal.jsp';">개인
-				일정</button>
+			<button class='my_btn' type="button" onclick="location.href='../Calender/Person_Cal.jsp';">개인 일정</button>
 			<!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서
 				휴가</button> -->
 			<button class='my_btn3' type="button" onclick="location.href='../Calender/Team_Cal.jsp';">부서 일정</button>
@@ -758,9 +757,49 @@ body {
 							String selectedDate = (String) request.getAttribute("selecteddate");
 							if (selectedDate == null) {
 								Calendar currentDate = Calendar.getInstance();
-								int currentYear = currentDate.get(Calendar.YEAR);
-								int currentMonth = currentDate.get(Calendar.MONTH) + 1;
-								int currentDay = currentDate.get(Calendar.DATE);
+								int currentYear2 = currentDate.get(Calendar.YEAR);
+								int currentMonth2 = currentDate.get(Calendar.MONTH) + 1;
+								int currentDay2 = currentDate.get(Calendar.DATE);
+								
+								String currentYear = Integer.toString(currentYear2);
+								String currentMonth = Integer.toString(currentMonth2);
+								String currentDay = Integer.toString(currentDay2);
+								
+								System.out.println("확인용 111111 " + currentYear + " " + currentMonth + " " + currentDay);
+								
+								// 월 앞에 0 붙여주기
+								if (currentMonth != null && !currentMonth.isEmpty()) {
+								    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도
+								    int dayValue;
+								    try {
+								        dayValue = Integer.parseInt(currentMonth);
+
+								        // 변환된 값이 10보다 작으면 앞에 0을 붙여서 문자열로 만듦
+								        if (dayValue < 10) {
+								        	currentMonth = "0" + dayValue;
+								        }
+								    } catch (NumberFormatException e) {
+								    	
+								    }
+								}
+								
+								// 일 앞에 0 붙여주기
+								if (currentDay != null && !currentDay.isEmpty()) {
+								    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도
+								    int dayValue;
+								    try {
+								        dayValue = Integer.parseInt(currentDay);
+
+								        // 변환된 값이 10보다 작으면 앞에 0을 붙여서 문자열로 만듦
+								        if (dayValue < 10) {
+								        	currentDay = "0" + dayValue;
+								        }
+								    } catch (NumberFormatException e) {
+								    	
+								    }
+								}
+								
+								System.out.println("확인용 222222 " + currentYear + " " + currentMonth + " " + currentDay);
 
 								out.print(currentYear + "-" + currentMonth + "-" + currentDay);
 							}
@@ -910,21 +949,13 @@ body {
 						<c:if test="${not empty calenderlists}"> <!-- 값이 비어있지 않을 경우 밑에 코드 실행 -->
 						<% 
 						if(daylist.contains(i)) {
-							out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; max-height: 50px; position: relative; bottom: 100%; right: calc("
+							out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; max-height: 20px; position: relative; bottom: 100%; right: calc("
 					                + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
 						} 
 				      
 				    	%>
 						</c:if>
 						<% 
-
-						// 버튼 출력 부분 수정 시작
-						//int startbutton = 50; // 시작 위치값 설정 (예: 30%)
-						//out.print(
-						//"<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc("
-								//+ startbutton
-								//+ "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
-						// 버튼 출력 부분 수정 끝
 
 						out.print("</td>");
 

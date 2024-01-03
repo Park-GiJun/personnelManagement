@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,7 +54,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 
             // 3. 클라이언트에 응답 보내기 (실제 응답 로직으로 대체)
             response.getWriter().write("선택된 일정이 성공적으로 삭제되었습니다.");
-            response.sendRedirect("../Calender/Scl4.jsp");
+            //response.sendRedirect("../Calender/Scl4.jsp");
         } else {
             response.getWriter().write("삭제할 일정이 선택되지 않았습니다.");
         }
@@ -61,6 +62,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
         request.setAttribute("map2", map);
         request.setAttribute("selectedSchedules", selectedSchedules);
         request.setCharacterEncoding("UTF-8");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("../Calender/Scl4.jsp");
+        dispatcher.forward(request, response);
         
 	}
 

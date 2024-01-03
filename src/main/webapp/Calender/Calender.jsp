@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%@page import="java.util.Calendar"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ page import="java.util.List" %>
 
 <%
 request.setCharacterEncoding("utf-8");
@@ -508,6 +509,42 @@ tbody {
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
 	
 	<!-- <button class='next_btn' onclick="location.href='Scl.jsp';"><</button> -->
+	
+	<div class="reverse2">			
+					<c:choose>
+						<c:when test="${not empty calenderlists}">
+								<c:forEach items="${calenderlists}" var="row" varStatus="loop">
+								<tr>
+									<td style="background-color: #1C427E;">${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
+									</td>
+									<td style="background-color: #1C427E;"><a href="#"
+										class="scheduleLink"
+										data-schedule="${row.personal_diaray_schedule}">
+											${row.personal_diaray_schedule} <!-- db에 있는 개인 일정 출력 -->
+									</a></td>
+								</tr>
+							</c:forEach>
+						</c:when>
+						<c:when test="${not empty calenderlists4}">
+							<c:forEach items="${calenderlists4}" var="row" varStatus="loop">
+								<tr>
+									<td style="background-color: #1C427E;">${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
+									</td>
+									<td style="background-color: #1C427E;"><a href="#"
+										class="scheduleLink"
+										data-schedule="${row.personal_diaray_schedule}">
+											${row.personal_diaray_schedule} <!-- db에 있는 개인 일정 출력 -->
+									</a></td>
+								</tr>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<!-- <td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>  -->
+							</tr>
+						</c:otherwise>
+					</c:choose>	
+			</div>
 
    <div class="calendar" style="width: 1050px; height: 300px;">
       <div class="title" >
@@ -565,15 +602,40 @@ tbody {
             // 1일부터 말일까지 출력
             int lastDay = cal.getActualMaximum(Calendar.DATE);
             String cls;
+            
+         	// CalenderController에서 전달된 daylist를 받아옴
+	        List<Integer> daylist = (List<Integer>) request.getAttribute("daylist");
+            
             for (int i = 1; i <= lastDay; i++) {
                cls = year == ty && month == tm && i == td ? "today" : "";
                
-               // 각 날짜가 button 타입으로 이루어져 있고, 클릭하면 해당 페이지로 이동함.
-               out.print("<td class='" + cls + "'><button onclick=\"window.location.href='Scl.jsp?name=" + i + "'; showDate(" + i + ");\">" + i + "</button></td>");
-               if (lastDay != i && (++week) % 7 == 1) {
-                  out.print("</tr><tr>");
-               }
-            }
+               out.print("<td class='" + cls
+						+ "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
+              //out.print("<td class='" + cls + "'><button onclick=\"alert('클릭한 날짜 : " + i + "일');\">" + i + "</button></td>");
+              out.print("<button id=\"update\" style='max-height: 50px; min-height: 50px;'>" + i + "</button>");
+              
+              
+              int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
+						
+						%>
+						<c:if test="${not empty calenderlists}"> <!-- 값이 비어있지 않을 경우 밑에 코드 실행 -->
+						<% 
+						if (daylist != null) {
+							if(daylist.contains(i)) {
+								out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; max-height: 20px; position: relative; bottom: 100%; right: calc("
+					                	+ buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+							} 
+						} 
+				    	%>
+						</c:if>
+						<% 
+
+						out.print("</td>");
+              
+              if (lastDay != i && (++week) % 7 == 1) {
+                 out.print("</tr><tr>");
+              }
+           }
 
             // 마지막 주 마지막 일자 다음 처리..
             int n = 1;
