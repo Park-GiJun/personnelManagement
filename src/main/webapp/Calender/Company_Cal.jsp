@@ -390,18 +390,18 @@ a:active, a:hover {
 </style>
 
 <script type="text/javascript">
+
 function change() {
-   var f = document.frm;
- 
-   f.submit();
-}
+	   var f = document.frm;
+	   f.submit();
+	}
 
-function updateCalendar() {
-	   var year = document.getElementById("yearSelect").value;
-	   var month = document.getElementById("monthSelect").value;
+	function updateCalendar() {
+		   var year = document.getElementById("yearSelect").value;
+		   var month = document.getElementById("monthSelect").value;
 
-	   var url = "calendar.jsp?year=" + year + "&month=" + month;
-	   window.location.href = url;
+		   var url = "calendar.jsp?year=" + year + "&month=" + month;
+		   window.location.href = url;
 	}
 
 </script>
@@ -448,10 +448,11 @@ tbody {
    <div class="middle-button">
       <!-- 다른 페이지에서 불러오는 내용 -->
       <!-- <h2 class="myHeader">텍스트 입력</h2>  -->
-      <button class='my_btn' onclick="location.href='Person_Cal.jsp';" >개인 일정</button>
-      <!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서 휴가</button> -->
-      <button class='my_btn3' onclick="location.href='Team_Cal.jsp';">부서 일정</button>
-      <button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사 일정</button>
+      <button class='my_btn' type="button" onclick="location.href='../Calender/Person_Cal.jsp';">개인 일정</button>
+			<!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서
+				휴가</button> -->
+			<button class='my_btn3' type="button" onclick="location.href='../Calender/Team_Cal.jsp';">부서 일정</button>
+			<button class='my_btn4' type="button" onclick="location.href='../Calender/Company_Cal.jsp';">회사 일정</button>
    </div>
    
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
@@ -494,7 +495,7 @@ tbody {
 					</c:choose>
 		</div>
 
-   <div class="calendar" style="width: 1050px; height: 300px;">
+   <div class="calendar" style="width: 1050px; margin-top: 40px; height: 300px;">
       <div class="title" >
          <form name="frm" method="post" >
             <select id="yearSelect" name="year" class="selectField" onchange="change()"  >
@@ -558,7 +559,7 @@ tbody {
                out.print("<td class='" + cls
 						+ "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
               //out.print("<td class='" + cls + "'><button onclick=\"alert('클릭한 날짜 : " + i + "일');\">" + i + "</button></td>");
-              out.print("<button id=\"update\" style='max-height: 50px; min-height: 50px;'>" + i + "</button>");
+              out.print("<button id=\"update\" style='max-height: 50px; min-height: 50px;' disabled>" + i + "</button>");
               
               
               int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)

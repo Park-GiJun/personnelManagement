@@ -359,18 +359,17 @@ a:active, a:hover {
 <script type="text/javascript">
 
 function change() {
-    var f = document.frm;
- 
-    f.submit();
-}
+	   var f = document.frm;
+	   f.submit();
+	}
 
-function updateCalendar() {
-    var year = document.getElementById("yearSelect").value;
-    var month = document.getElementById("monthSelect").value;
+	function updateCalendar() {
+		   var year = document.getElementById("yearSelect").value;
+		   var month = document.getElementById("monthSelect").value;
 
-    var url = "calendar.jsp?year=" + year + "&month=" + month;
-    window.location.href = url;
-}
+		   var url = "calendar.jsp?year=" + year + "&month=" + month;
+		   window.location.href = url;
+	}
 
 </script>
 
@@ -525,7 +524,7 @@ tbody {
                out.print("<td class='" + cls
 						+ "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
                //out.print("<td class='" + cls + "'><button onclick=\"alert('클릭한 날짜 : " + i + "일');\">" + i + "</button></td>");
-               out.print("<button id=\"update\" style='max-height: 50px; min-height: 50px;'>" + i + "</button>");
+               out.print("<button id=\"update\" style='max-height: 50px; min-height: 50px;' disabled>" + i + "</button>");
                
                
                int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)

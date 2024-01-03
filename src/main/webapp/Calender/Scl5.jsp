@@ -663,6 +663,14 @@ function showDateAndAlert(day) {
           }
       };
   }  
+  
+  function change() {
+	    var year = document.getElementById("yearSelect").value;
+	    var month = document.getElementById("monthSelect").value;
+
+	    var url = "../Calender/Scl5.jsp?year=" + year + "&month=" + month;
+	    window.location.href = url;
+	}
 
 </script>
 
@@ -830,30 +838,18 @@ body {
 		<div class="calendar" id="calendar-container" style="width: 1300px; height: 300px;">
 			<div class="title">
 				<!-- 년도 월 선택 리스트 만드는 위치 -->
-				<form name="frm" method="post">
-					<select id="yearSelect" name="year" class="selectField"
-						onchange="change()">
-						<%
-						for (int i = year - 50; i <= year + 50; i++) {
-						%>
-						<option value="<%=i%>" <%=year == i ? "selected='selected'" : ""%>><%=i%>년
-						</option>
-						<%
-						}
-						%>
-					</select> <select id="monthSelect" name="month" class="selectField2"
-						onchange="change()">
-						<%
-						for (int i = 1; i <= 12; i++) {
-						%>
-						<option value="<%=i%>"
-							<%=month == i ? "selected='selected'" : ""%>><%=i%>월
-						</option>
-						<%
-						}
-						%>
-					</select>
-				</form>
+				<div id="formContainer">
+    				<select id="yearSelect" name="year" class="selectField" onchange="change()">
+        				<% for (int i = year - 50; i <= year + 50; i++) { %>
+            				<option value="<%=i%>" <%=year == i ? "selected='selected'" : ""%>><%=i%>년</option>
+        				<% } %>
+    				</select>
+    				<select id="monthSelect" name="month" class="selectField2" onchange="change()">
+        				<% for (int i = 1; i <= 12; i++) { %>
+            				<option value="<%=i%>" <%=month == i ? "selected='selected'" : ""%>><%=i%>월</option>
+        				<% } %>
+    				</select>
+				</div>
 			</div>
 
 			<table>
