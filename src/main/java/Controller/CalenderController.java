@@ -1,10 +1,7 @@
 package Controller;
 
 import java.io.IOException;
-<<<<<<< HEAD
 import java.time.LocalDate;
-=======
->>>>>>> refs/remotes/origin/김채은
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
