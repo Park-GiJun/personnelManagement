@@ -487,7 +487,7 @@ tbody {
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<!-- <td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>  -->
+								<!-- <td class="conti" align="center">등록된 일정이 없습니다. *^^*</td>  -->
 							</tr>
 						</c:otherwise>
 					</c:choose>
