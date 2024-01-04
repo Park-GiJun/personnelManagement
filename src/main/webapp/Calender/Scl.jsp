@@ -606,7 +606,8 @@ function showDateAndAlert(day) {
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4) {
 				if (xhr.status === 200) {
-					alert(xhr.responseText); // 서버 응답을 알림으로 표시
+					//alert(xhr.responseText); // 서버 응답을 알림으로 표시
+					alert("일정이 추가되었습니다.");
 					location.reload();
 					console.log('추가한 일정들:', userInput);
 				} else {
@@ -700,6 +701,8 @@ function showDateAndAlert(day) {
 		};
 	}
 	
+	
+	// 년도, 월 리스트 클릭하면 달력 변환
 	function change() {
 	    var year = document.getElementById("yearSelect").value;
 	    var month = document.getElementById("monthSelect").value;

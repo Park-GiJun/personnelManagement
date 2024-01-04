@@ -212,7 +212,7 @@ a:active, a:hover {
 
 .calendar {
    width: 700px;
-   margin: 70px auto;
+   margin: 40px auto;
 }
 
 
