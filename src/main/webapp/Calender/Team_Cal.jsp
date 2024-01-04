@@ -553,7 +553,7 @@ tbody {
              out.print("<button id=\"update\" style='max-height: 50px; min-height: 50px;' disabled>" + i + "</button>");
              
              
-             int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
+             int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%).
 						
 						%>	
 						<c:if test="${not empty calenderlists4}"> <!-- 값이 비어있지 않을 경우 밑에 코드 실행 -->

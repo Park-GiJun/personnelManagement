@@ -524,7 +524,7 @@ tbody {
          </thead>
          <tbody>
             <%
-            // 1일 앞 달
+            // 1일 앞 달.
             Calendar preCal = (Calendar) cal.clone();
             preCal.add(Calendar.DATE, -(week - 1));
             int preDate = preCal.get(Calendar.DATE);

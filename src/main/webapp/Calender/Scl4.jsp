@@ -894,7 +894,7 @@ body {
 					    //out.print("<td class='" + cls + "' style='min-width: 100px; max-width: 100px; width: 100px; min-height: 10px !important; max-height: 10px !important; height: 50px !important; position: relative;'>");
 					    out.print("<button id=\"update\" style='max-height: 50px;' onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button>");
 
-						int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
+						int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%).
 						
 						if (daylist != null && daylist.contains(i)) {
         					out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; max-height: 20px; position: relative; bottom: 100%; right: calc("

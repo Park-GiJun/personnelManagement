@@ -238,7 +238,7 @@ a:active, a:hover {
    top: 10px;
 }
 
-/* 월 선택 리스트 */
+/* 월 선택 리스트 .*/
 .selectField2 {
    border: 1px solid #999;
    padding: 15px 50px;
