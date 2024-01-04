@@ -47,7 +47,7 @@ public class TeamCalDAO extends DBConnPool {
 		
 		System.out.println("select List Page");
 
-		// 쿼리문 준비
+		// 쿼리문 준비..
 		String query = "SELECT team_schedule FROM Team_calender WHERE team=? AND Team_calender_date=? ORDER BY team_count_date";
 		
 		try {
