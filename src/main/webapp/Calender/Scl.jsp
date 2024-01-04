@@ -780,7 +780,7 @@ body {
 								String currentMonth = Integer.toString(currentMonth2);
 								String currentDay = Integer.toString(currentDay2);
 								
-								System.out.println("확인용 111111 " + currentYear + " " + currentMonth + " " + currentDay);
+								System.out.println("확인용 ---- " + currentYear + " " + currentMonth + " " + currentDay);
 								
 								// 월 앞에 0 붙여주기
 								if (currentMonth != null && !currentMonth.isEmpty()) {
