@@ -726,7 +726,7 @@ body {
 
 /* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한. */
 .content {
-	margin-left: 400px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
+	margin-left: 400px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절.. */
 	padding: 20px;
 }
 
