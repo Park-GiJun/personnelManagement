@@ -191,7 +191,7 @@ public class CalenderDAO extends DBConnPool {
 	}
 	
 	
-	// 날짜만 조회
+	// 날짜만 조회.
 	public List<CalenderDTO> selectListPage3(String emp_num, String selectedYear, String selectedMonth) {
 		List<CalenderDTO> board = new Vector<CalenderDTO>();
 		
