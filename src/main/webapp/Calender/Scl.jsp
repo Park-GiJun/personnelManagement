@@ -9,10 +9,16 @@
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.HashMap"%>
 <%@ page import="fileupload.FileUtil"%>
+<<<<<<< HEAD
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 
+=======
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+>>>>>>> refs/remotes/origin/김채은
 
 <%
 request.setCharacterEncoding("utf-8");
@@ -829,8 +835,12 @@ body {
         			<h2 class='re_day'>${selecteddate}</h2>
     			</c:otherwise>
 			</c:choose>
+<<<<<<< HEAD
 			
 			
+=======
+
+>>>>>>> refs/remotes/origin/김채은
 			<button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>
 			<button class='del_btn'  type='submit' onclick="confirmDelete();">삭제하기</button>
 
@@ -942,18 +952,27 @@ body {
 			        for (int i = 1; i <= lastDay; i++) {
 			            cls = year == ty && month == tm && i == td ? "today" : "";
 
-			            out.print("<td class='" + cls + "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
-			            out.print("<button id=\"update\" style='max-height: 50px;' onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button>");
-
-			            int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
-
-			            if (daylist != null && daylist.contains(i)) {
-        					out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; max-height: 20px; position: relative; bottom: 100%; right: calc("
-            					+ buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
-    					}
-			            
-			            out.print("</td>");
-
+						out.print("<td class='" + cls
+						+ "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
+						//out.print("<td class='" + cls + "' style='min-width: 100px; max-width: 100px; width: 100px; min-height: 10px !important; max-height: 10px !important; height: 50px !important; position: relative;'>");
+						out.print("<button id=\"update\" style='max-height: 50px;' onclick=\"showDateAndAlert(" + i + ")\">" + i
+						+ "</button>");
+			
+						int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
+						
+						
+						%>
+						<c:if test="${not empty calenderlists}"> <!-- 값이 비어있지 않을 경우 밑에 코드 실행 -->
+						<% 
+						if(i == 1) {
+							out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; position: relative; bottom: 100%; right: calc("
+					                + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+						} 
+				      
+				    	%>
+						</c:if>
+						<% 
+						out.print("</td>");
 			            if (lastDay != i && (++week) % 7 == 1) {
 			                out.print("</tr><tr>");
 			            }
