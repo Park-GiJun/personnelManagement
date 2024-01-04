@@ -755,9 +755,10 @@ body {
 			<button class='my_btn4' type="button" onclick="location.href='../Calender/Company_Cal.jsp';">회사 일정</button>
 			
 		</div>
-
-		<p class="em" style="font-size: 120px"><%=month%></p>
+		
 		<!-- 화면 달력의 월 표시 -->
+		<p class="em" style="font-size: 120px"><%=month%></p>
+		
 
 		<button class='next_btn' onclick="location.href='Person_Cal.jsp';">></button>
 
