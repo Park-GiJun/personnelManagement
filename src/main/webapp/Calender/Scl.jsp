@@ -782,7 +782,7 @@ body {
 								
 								System.out.println("확인용 --- " + currentYear + " " + currentMonth + " " + currentDay);
 								
-								// 월 앞에 0 붙여주기
+								// 월 앞에 0 붙여주기.
 								if (currentMonth != null && !currentMonth.isEmpty()) {
 								    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도
 								    int dayValue;
