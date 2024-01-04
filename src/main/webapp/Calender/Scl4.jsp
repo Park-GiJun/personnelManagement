@@ -908,7 +908,7 @@ body {
 					    }
 					}
 
-					// 다음 달 첫부분 일자 출력
+					// 다음 달 첫부분 일자 출력...
 					int n = 1;
 					for (int i = (week - 1) % 7; i < 6; i++) {
 						// out.print("<td>&nbsp;</td>");
