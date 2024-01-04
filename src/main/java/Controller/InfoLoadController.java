@@ -62,7 +62,9 @@ public class InfoLoadController extends HttpServlet {
 		cDao.updateSalary(cDTO);
 		
 		SalaryManagementDAO dao = new SalaryManagementDAO();
+		dao.noExistDate(userId, formattedDate);
 		SalaryManagementDTO dto = dao.salaryPrint(userId, formattedDate);
+		
 
 		AttendanceDAO attenddao = new AttendanceDAO();
 		Map<String, Map<String, String>> attendDateMap = attenddao.loadDateAttendance(userId, currentDate);

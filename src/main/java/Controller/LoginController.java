@@ -62,7 +62,7 @@ public class LoginController extends HttpServlet {
 			request.getSession().setAttribute("currentDate", formattedDate);
 			request.getSession().setAttribute("inpteam", inpTeam);
 			request.getSession().setAttribute("inpteam_num", inpTeam_num);
-			response.sendRedirect("../Calender/Calender.jsp");
+			response.sendRedirect("../TestTest/Test.jsp");
 			
 			HttpSession httpSession = request.getSession();
 			httpSession.setAttribute("userId", loginNum);

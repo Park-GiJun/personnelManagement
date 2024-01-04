@@ -212,8 +212,15 @@ public class SalaryManagementDAO extends DBConnPool {
 
 	public void noExistDate(String emp, String date) {
 		System.out.println("noExistDate1");
+		
+		System.out.println("확인용 : " + emp + " " + date);
 
-		String query1 = "INSERT INTO incentive (emp_num, pay, yearmonth) VALUES (?, 0, TO_DATE(? , 'YYYY-MM'))";
+		
+		String query1 = "MERGE INTO incentive trg USING (SELECT ? AS emp_num, 0 AS pay, TO_DATE(?, 'YYYY-MM') AS yearmonth FROM dual) src ON (trg.emp_num = src.emp_num AND trg.yearmonth = src.yearmonth) WHEN NOT MATCHED THEN INSERT (emp_num, pay, yearmonth) VALUES (src.emp_num, src.pay, src.yearmonth)";
+
+		String query2 = "MERGE INTO incentive_value trg USING (SELECT ? AS emp_num, TO_DATE(?, 'YYYY-MM') AS incentive_value_date, 0 AS holiday_pay, 0 AS incentive, 0 AS extra_work_pay, TO_DATE(?, 'YYYY-MM') AS yearmonth FROM dual) src ON (trg.emp_num = src.emp_num AND trg.yearmonth = src.yearmonth) WHEN NOT MATCHED THEN INSERT (emp_num, incentive_value_date, holiday_pay, incentive, extra_work_pay, yearmonth) VALUES (src.emp_num, src.incentive_value_date, src.holiday_pay, src.incentive, src.extra_work_pay, src.yearmonth)";
+
+		
 		try {
 			System.out.println("인센티브 밸류 실행");
 			psmt = con.prepareStatement(query1);
@@ -225,7 +232,7 @@ public class SalaryManagementDAO extends DBConnPool {
 			e2.printStackTrace();
 		}
 
-		String query2 = "INSERT INTO incentive_value (emp_num, incentive_value_date, holiday_pay, incentive, extra_work_pay, yearmonth) VALUES (? , TO_DATE(? , 'YYYY-MM'), 0, 0, 0, TO_DATE(? , 'YYYY-MM'))";
+		
 		try {
 			System.out.println("인센티브 실행");
 			psmt = con.prepareStatement(query2);

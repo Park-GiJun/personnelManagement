@@ -202,11 +202,11 @@ String currentDate = sdf.format(new Date());
 
 		<script>
 			function navigateToTest() {
-				window.location.href = '../TestTest/Test.jsp';
+				window.location.href = '../Calender/Calender.jsp';
 			}
 		</script>
 		<div class="left_calender_background">
-			<a class="left_Calender_section" href="../Calender/Calender.jsp">
+			<a class="left_Calender_section" href="../TestTest/Test.jsp">
 				<span class="left_calender_text">캘린더</span>
 			</a>
 		</div>
