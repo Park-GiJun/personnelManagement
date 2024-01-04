@@ -32,7 +32,7 @@ public class TeamCalDAO extends DBConnPool {
 	        psmt.setString(1, emp_num);
 	        rs = psmt.executeQuery(); // 쿼리문 실행
 	        if (rs.next()) {
-	            team = rs.getString("team"); // team 값을 변수에 저장..
+	            team = rs.getString("team"); // team 값을 변수에 저장.....
 	        }
 	    } catch (Exception e) {
 	        System.out.println("팀 조회 중 예외 발생");
