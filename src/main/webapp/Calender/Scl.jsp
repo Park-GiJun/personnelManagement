@@ -713,7 +713,7 @@ function showDateAndAlert(day) {
 
 </head>
 <style>
-/* 공통 스타일 */
+/* 공통 스타일/ */
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -724,7 +724,7 @@ body {
 	font-size: 20px;
 }
 
-/* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한 */
+/* Left.jsp에서 사용한 스타일과 겹치지 않도록 스코프 제한. */
 .content {
 	margin-left: 400px; /* Left.jsp에서 사용한 .left_table의 너비와 동일하게 조절 */
 	padding: 20px;

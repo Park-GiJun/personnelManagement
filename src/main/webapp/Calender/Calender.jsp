@@ -506,7 +506,7 @@ tbody {
       <button class='my_btn4' onclick="location.href='Company_Cal.jsp';">회사 일정</button>
    </div>
    
-	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
+	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시. -->
 	
 	<!-- <button class='next_btn' onclick="location.href='Scl.jsp';"><</button> -->
 	
