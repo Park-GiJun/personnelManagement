@@ -394,49 +394,12 @@ a:active, a:hover {
 
 <script type="text/javascript">
 
-
 function change() {
-	   var f = document.frm;
-	   f.submit();
-	}
+    var year = document.getElementById("yearSelect").value;
+    var month = document.getElementById("monthSelect").value;
 
-	function updateCalendar() {
-		   var year = document.getElementById("yearSelect").value;
-		   var month = document.getElementById("monthSelect").value;
-
-		   var url = "calendar.jsp?year=" + year + "&month=" + month;
-		   window.location.href = url;
-	}
-	
-function showDateAndAlert(day) {  
-    // 클릭한 날짜를 JavaScript 변수에 저장
-    var clickedDay = day;
-    // 클릭한 날짜를 해당 <h2> 요소에 표시
-    document.querySelector('.re_day').innerText = "<%= year %>년 <%= month %>월 " + clickedDay + "일";
-
-    // 클릭한 날짜를 alert 창에도 표시
-    alert('클릭한 날짜: ' + clickedDay + '일');
-    
-    
-    
- 	// year2와 month2를 생성하여 Scl4.jsp로 이동
-    //var year2 = <%= year %>; 
-	//var month2 = <%= month %>; 
-	
-	//console.log('year:', year);
-    //console.log('month:', month);
-
-    // URL 파라미터를 추가하여 페이지 이동
-    window.location.href = 'Scl4.jsp?year=' + year2 + '&month=' + month2;
-
-    // 여기에서 필요한 작업 수행 가능
-    // 예를 들어, 다른 요소에도 표시하려면
-    document.querySelector('.content1').innerText = "1. 일정1";
-    document.querySelector('.content2').innerText = "2. 일정2";
-    document.querySelector('.content3').innerText = "3. 일정3";
-    
-    // 원하는 작업 수행 가능
-    // 예를 들어, 다른 페이지로 이동하려면 window.location.href = '다른페이지.jsp';
+    var url = "../Calender/Team_Cal.jsp?year=" + year + "&month=" + month;
+    window.location.href = url;
 }	
 
 </script>
@@ -530,30 +493,22 @@ tbody {
 					</c:choose>
 		</div>
 
-   <div class="calendar" style="width: 1050px; margin-top: 40px; height: 300px;">
-      <div class="title" >
-         <form name="frm" method="post" >
-            <select id="yearSelect" name="year" class="selectField" onchange="change()" >
-               <%
-               for (int i = year - 50; i <= year + 50; i++) {
-               %>
-               <option value="<%=i%>" <%=year == i ? "selected='selected'" : ""%>><%=i%>년
-               </option>
-               <%
-               }
-               %>
-            </select> <select id="monthSelect" name="month" class="selectField2" onchange="change()">
-               <%
-               for (int i = 1; i <= 12; i++) {
-               %>
-               <option value="<%=i%>" <%=month == i ? "selected='selected'" : ""%>><%=i%>월
-               </option>
-               <%
-               }
-               %>
-            </select>
-         </form>
-      </div>
+   <div class="calendar" id="calendar-container" style="width: 1300px; height: 300px;">
+			<div class="title">
+				<!-- 년도 월 선택 리스트 만드는 위치 -->
+				<div id="formContainer">
+    				<select id="yearSelect" name="year" class="selectField" onchange="change()">
+        				<% for (int i = year - 50; i <= year + 50; i++) { %>
+            				<option value="<%=i%>" <%=year == i ? "selected='selected'" : ""%>><%=i%>년</option>
+        				<% } %>
+    				</select>
+    				<select id="monthSelect" name="month" class="selectField2" onchange="change()">
+        				<% for (int i = 1; i <= 12; i++) { %>
+            				<option value="<%=i%>" <%=month == i ? "selected='selected'" : ""%>><%=i%>월</option>
+        				<% } %>
+    				</select>
+				</div>
+			</div>
 
 	
       <table> <!-- 테이블 표 만드는 곳(달력 만드는 곳) -->
@@ -601,7 +556,7 @@ tbody {
              int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
 						
 						%>	
-						<c:if test="${not empty calenderlists}"> <!-- 값이 비어있지 않을 경우 밑에 코드 실행 -->
+						<c:if test="${not empty calenderlists4}"> <!-- 값이 비어있지 않을 경우 밑에 코드 실행 -->
 						
 						<% 
 						if (daylist != null) {

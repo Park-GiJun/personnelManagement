@@ -391,19 +391,16 @@ a:active, a:hover {
 
 <script type="text/javascript">
 
-function change() {
-	   var f = document.frm;
-	   f.submit();
-	}
 
-	function updateCalendar() {
-		   var year = document.getElementById("yearSelect").value;
-		   var month = document.getElementById("monthSelect").value;
+	function change() {
+	    var year = document.getElementById("yearSelect").value;
+	    var month = document.getElementById("monthSelect").value;
 
-		   var url = "calendar.jsp?year=" + year + "&month=" + month;
-		   window.location.href = url;
-	}
-
+	    var url = "../Calender/Company_Cal.jsp?year=" + year + "&month=" + month;
+	    window.location.href = url;
+	}		
+	
+	
 </script>
 
 
@@ -474,8 +471,8 @@ tbody {
 								</tr>
 							</c:forEach>
 						</c:when>
-						<c:when test="${not empty calenderlists2}">
-							<c:forEach items="${calenderlists2}" var="row" varStatus="loop">
+						<c:when test="${not empty calenderlists4}">
+							<c:forEach items="${calenderlists4}" var="row" varStatus="loop">
 								<tr>
 									<td style="background-color: #1C427E;">${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
 									</td>
@@ -495,30 +492,22 @@ tbody {
 					</c:choose>
 		</div>
 
-   <div class="calendar" style="width: 1050px; margin-top: 40px; height: 300px;">
-      <div class="title" >
-         <form name="frm" method="post" >
-            <select id="yearSelect" name="year" class="selectField" onchange="change()"  >
-               <%
-               for (int i = year - 50; i <= year + 50; i++) {
-               %>
-               <option value="<%=i%>" <%=year == i ? "selected='selected'" : ""%>><%=i%>년
-               </option>
-               <%
-               }
-               %>
-            </select> <select id="monthSelect" name="month" class="selectField2" onchange="change()">
-               <%
-               for (int i = 1; i <= 12; i++) {
-               %>
-               <option value="<%=i%>" <%=month == i ? "selected='selected'" : ""%>><%=i%>월
-               </option>
-               <%
-               }
-               %>
-            </select>
-         </form>
-      </div>
+   <div class="calendar" id="calendar-container" style="width: 1300px; height: 300px;">
+			<div class="title">
+				<!-- 년도 월 선택 리스트 만드는 위치 -->
+				<div id="formContainer">
+    				<select id="yearSelect" name="year" class="selectField" onchange="change()">
+        				<% for (int i = year - 50; i <= year + 50; i++) { %>
+            				<option value="<%=i%>" <%=year == i ? "selected='selected'" : ""%>><%=i%>년</option>
+        				<% } %>
+    				</select>
+    				<select id="monthSelect" name="month" class="selectField2" onchange="change()">
+        				<% for (int i = 1; i <= 12; i++) { %>
+            				<option value="<%=i%>" <%=month == i ? "selected='selected'" : ""%>><%=i%>월</option>
+        				<% } %>
+    				</select>
+				</div>
+			</div>
 
 	
       <table> <!-- 테이블 표 만드는 곳(달력 만드는 곳) -->

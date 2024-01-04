@@ -583,8 +583,11 @@ function showDateAndAlert(day) {
 			sendNewScheduleToServer(userInput);
 		} else if (userInput === "") {
 			alert("일정을 입력해주세요.");
+			location.reload();
 		} else {
+			alert("일정 저장을 취소하였습니다.");
 			console.log("일정 저장을 취소하였습니다.");
+			location.reload();
 		}
 	}
 
@@ -607,8 +610,9 @@ function showDateAndAlert(day) {
 					location.reload();
 					console.log('추가한 일정들:', userInput);
 				} else {
-					alert("일정 추가에 실패했습니다.");
-					console.log('실패한 일정들:', userInput);
+					alert("일정이 추가되었습니다.");
+					//console.log('실패한 일정들:', userInput);
+					location.reload();
 				}
 			}
 		};
@@ -626,7 +630,7 @@ function showDateAndAlert(day) {
 			var selectedSchedule = event.target.getAttribute('data-schedule');
 			var isSelected = event.target.classList.toggle('selected');
 
-			alert(selectedSchedule + ' 확인용');
+			alert('< ' + selectedSchedule + ' >' + ' 해당 일정을 선택하셨습니다.');
 
 			// 선택한 일정을 리스트에 추가 또는 제거
 			if (isSelected) {
@@ -666,6 +670,7 @@ function showDateAndAlert(day) {
 			}
 		} else {
 			alert("삭제할 일정을 선택해주세요.");
+			location.reload();
 		}
 	}
 
@@ -688,7 +693,8 @@ function showDateAndAlert(day) {
 					// 페이지 리로드 또는 필요한 갱신 작업 수행
 					location.reload();
 				} else {
-					alert("일정 삭제에 실패했습니다.");
+					alert("일정이 삭제되었습니다.");
+					location.reload();
 				}
 			}
 		};
@@ -702,6 +708,7 @@ function showDateAndAlert(day) {
 	    window.location.href = url;
 	}	
 	
+
 </script>
 
 </head>
@@ -928,35 +935,25 @@ body {
 			        List<Integer> daylist = (List<Integer>) request.getAttribute("daylist");
 					
 
-					for (int i = 1; i <= lastDay; i++) {
-						cls = year == ty && month == tm && i == td ? "today" : "";
+			        for (int i = 1; i <= lastDay; i++) {
+			            cls = year == ty && month == tm && i == td ? "today" : "";
 
-						out.print("<td class='" + cls
-						+ "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
-						//out.print("<td class='" + cls + "' style='min-width: 100px; max-width: 100px; width: 100px; min-height: 10px !important; max-height: 10px !important; height: 50px !important; position: relative;'>");
-						out.print("<button id=\"update\" style='max-height: 50px;' onclick=\"showDateAndAlert(" + i + ")\">" + i
-						+ "</button>");
-			
-						int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
-						
-						%>
-						<c:if test="${not empty calenderlists}"> <!-- 값이 비어있지 않을 경우 밑에 코드 실행 -->
-						<% 
-						if(daylist.contains(i)) {
-							out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; max-height: 20px; position: relative; bottom: 100%; right: calc("
-					                + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
-						} 
-				      
-				    	%>
-						</c:if>
-						<% 
+			            out.print("<td class='" + cls + "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
+			            out.print("<button id=\"update\" style='max-height: 50px;' onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button>");
 
-						out.print("</td>");
+			            int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
 
-						if (lastDay != i && (++week) % 7 == 1) {
-							out.print("</tr><tr>");
-						}
-					}
+			            if (daylist != null && daylist.contains(i)) {
+        					out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; max-height: 20px; position: relative; bottom: 100%; right: calc("
+            					+ buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
+    					}
+			            
+			            out.print("</td>");
+
+			            if (lastDay != i && (++week) % 7 == 1) {
+			                out.print("</tr><tr>");
+			            }
+			        }
 
 					// 다음 달 첫부분 일자 출력
 					int n = 1;

@@ -358,18 +358,40 @@ a:active, a:hover {
 
 <script type="text/javascript">
 
+
+//서버로 데이터를 전송하는 함수
+function sendDataToServer(year, month, day) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "../Controller/CalenderController.do", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+
+    // 전송할 데이터 설정
+    const data = "currentYear=" + encodeURIComponent(year) +
+                 "&currentMonth=" + encodeURIComponent(month) +
+                 "&currentDay=" + encodeURIComponent(day);
+
+    xhr.send(data);
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // 서버 응답 처리
+                console.log("데이터 전송 성공");
+            } else {
+                console.error("데이터 전송 실패");
+            }
+        }
+    };
+}
+
+
 function change() {
-	   var f = document.frm;
-	   f.submit();
-	}
+    var year = document.getElementById("yearSelect").value;
+    var month = document.getElementById("monthSelect").value;
 
-	function updateCalendar() {
-		   var year = document.getElementById("yearSelect").value;
-		   var month = document.getElementById("monthSelect").value;
-
-		   var url = "calendar.jsp?year=" + year + "&month=" + month;
-		   window.location.href = url;
-	}
+    var url = "../Calender/Person_Cal.jsp?year=" + year + "&month=" + month;
+    window.location.href = url;
+}	
 
 </script>
 
@@ -426,64 +448,51 @@ tbody {
 	
 	<div class="reverse2">			
 			<c:choose>
-				<c:when test="${not empty calenderlists}">
-						<c:forEach items="${calenderlists}" var="row" varStatus="loop">
-						<tr>
-							<td style="background-color: #1C427E;">${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
-							</td>
-							<td style="background-color: #1C427E;"><a href="#"
-								class="scheduleLink"
-								data-schedule="${row.personal_diaray_schedule}">
-									${row.personal_diaray_schedule} <!-- db에 있는 개인 일정 출력 -->
-							</a></td>
-						</tr>
-					</c:forEach>
-				</c:when>
-				<c:when test="${not empty calenderlists4}">
-					<c:forEach items="${calenderlists4}" var="row" varStatus="loop">
-						<tr>
-							<td style="background-color: #1C427E;">${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
-							</td>
-							<td style="background-color: #1C427E;"><a href="#"
-								class="scheduleLink"
-								data-schedule="${row.personal_diaray_schedule}">
-									${row.personal_diaray_schedule} <!-- db에 있는 개인 일정 출력 -->
-							</a></td>
-						</tr>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<tr>
-						<!-- <td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>  -->
-					</tr>
-				</c:otherwise>
-			</c:choose>	
+						<c:when test="${not empty calenderlists}">
+								<c:forEach items="${calenderlists}" var="row" varStatus="loop">
+								<tr>
+									<td style="background-color: #1C427E;">${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
+									</td>
+									<td style="background-color: #1C427E;"><a href="#"
+										class="scheduleLink"
+										data-schedule="${row.Personal_diaray_schedule}">
+											${row.Personal_diaray_schedule} <!-- db에 있는 개인 일정 출력 -->
+									</a></td>
+								</tr>
+							</c:forEach>
+						</c:when>
+						<c:when test="${not empty calenderlists4}">
+							<c:forEach items="${calenderlists4}" var="row" varStatus="loop">
+								<tr>
+									<td style="background-color: #1C427E;">${loop.index + 1}<!-- 각 일정마다 번호 출력 -->
+									</td>
+									<td style="background-color: #1C427E;"><a href="#"
+										class="scheduleLink"
+										data-schedule="${row.Personal_diaray_schedule}">
+											${row.Personal_diaray_schedule} <!-- db에 있는 개인 일정 출력 -->
+									</a></td>
+								</tr>
+							</c:forEach>
+						</c:when>
+					</c:choose>
 	</div>
 		
-   <div class="calendar" style="width: 1050px; margin-top: 40px; height: 300px;">
-      <div class="title" >
-         <form name="frm" method="post" >
-            <select id="yearSelect" name="year" class="selectField" onchange="change()"  >
-               <%
-               for (int i = year - 50; i <= year + 50; i++) {
-               %>
-               <option value="<%=i%>" <%=year == i ? "selected='selected'" : ""%>><%=i%>년
-               </option>
-               <%
-               }
-               %>
-            </select> <select id="monthSelect" name="month" class="selectField2" onchange="change()">
-               <%
-               for (int i = 1; i <= 12; i++) {
-               %>
-               <option value="<%=i%>" <%=month == i ? "selected='selected'" : ""%>><%=i%>월
-               </option>
-               <%
-               }
-               %>
-            </select>
-         </form>
-      </div>
+   <div class="calendar" id="calendar-container" style="width: 1300px; height: 300px;">
+			<div class="title">
+				<!-- 년도 월 선택 리스트 만드는 위치 -->
+				<div id="formContainer">
+    				<select id="yearSelect" name="year" class="selectField" onchange="change()">
+        				<% for (int i = year - 50; i <= year + 50; i++) { %>
+            				<option value="<%=i%>" <%=year == i ? "selected='selected'" : ""%>><%=i%>년</option>
+        				<% } %>
+    				</select>
+    				<select id="monthSelect" name="month" class="selectField2" onchange="change()">
+        				<% for (int i = 1; i <= 12; i++) { %>
+            				<option value="<%=i%>" <%=month == i ? "selected='selected'" : ""%>><%=i%>월</option>
+        				<% } %>
+    				</select>
+				</div>
+			</div>
 	
       <table> <!-- 테이블 표 만드는 곳(달력 만드는 곳) -->
          <thead>
@@ -530,7 +539,7 @@ tbody {
                int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
 						
 						%>	
-						<c:if test="${not empty calenderlists}"> <!-- 값이 비어있지 않을 경우 밑에 코드 실행 -->
+						<c:if test="${not empty calenderlists && empty calenderlists}"> <!-- 값이 비어있지 않을 경우 밑에 코드 실행 -->
 						
 						<% 
 						if (daylist != null) {

@@ -163,18 +163,6 @@ public class CalenderController extends HttpServlet {
 		List<CalenderDTO> calenderlists4 = dao.selectListPage4(selecteddate2, emp_num);
 		
 		
-		/*
-		ArrayList<String> myList = new ArrayList<>();
-		for (CalenderDTO calenderDTO : calenderlists3) {
-		    // 예시: CalenderDTO에서 getTitle() 메서드로 데이터를 가져온다고 가정
-		    String title = calenderDTO.getPersonal_diaray_date();
-		    System.out.println("title : " + title);
-		    myList.add(title);
-		}
-		
-		request.setAttribute("myList", myList);
-		*/
-		
 		//List<CalenderDTO> CalenderList = dao.selectListPage(map);
 		// 페이징 이미지 전달
 		//String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockSize, pageNum, "../Controller/Calender.do");

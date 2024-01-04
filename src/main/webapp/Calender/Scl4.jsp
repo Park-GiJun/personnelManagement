@@ -896,17 +896,10 @@ body {
 
 						int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
 						
-						%>
-						<c:if test="${not empty calenderlists}"> <!-- 값이 비어있지 않을 경우 밑에 코드 실행 -->
-						<% 
-						if(daylist.contains(i)) {
-							out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; max-height: 20px; position: relative; bottom: 100%; right: calc("
-					                + buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl_Cal.jsp';\">일정이 있습니다.</button>");
-						} 
-				      
-				    	%>
-						</c:if>
-						<% 
+						if (daylist != null && daylist.contains(i)) {
+        					out.print("<button disabled class=\"scl\" id=\"bin\" style=\"font-size: 12px; max-height: 20px; position: relative; bottom: 100%; right: calc("
+            					+ buttonStartRightPercentage + "% + 10px); background-color: #1C427E; color: white; max-height: 20px;\" onclick=\"location.href='Scl4_Cal.jsp';\">일정이 있습니다.</button>");
+    					}
 
 						out.print("</td>");
 
