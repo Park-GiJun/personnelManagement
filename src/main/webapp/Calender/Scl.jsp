@@ -529,37 +529,38 @@ a:active, a:hover {
 
 <script type="text/javascript">
 
-// 서버로 데이터를 전송하는 함수
-function sendDataToServer(year, month, day) {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "../Controller/CalenderController.do", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 
-    // 전송할 데이터 설정
-    const data = "currentYear=" + encodeURIComponent(year) +
-                 "&currentMonth=" + encodeURIComponent(month) +
-                 "&currentDay=" + encodeURIComponent(day);
+	// 서버로 데이터를 전송하는 함수
+	function sendDataToServer(year, month, day) {
+    	const xhr = new XMLHttpRequest();
+    	xhr.open("POST", "../Controller/CalenderController.do", true);
+    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 
-    xhr.send(data);
+    	// 전송할 데이터 설정
+    	const data = "currentYear=" + encodeURIComponent(year) +
+                 	"&currentMonth=" + encodeURIComponent(month) +
+                 	"&currentDay=" + encodeURIComponent(day);
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                // 서버 응답 처리
-                console.log("데이터 전송 성공");
-            } else {
-                console.error("데이터 전송 실패");
-            }
-        }
-    };
-}
+    	xhr.send(data);
+
+    	xhr.onreadystatechange = function () {
+        	if (xhr.readyState === 4) {
+            	if (xhr.status === 200) {
+                	// 서버 응답 처리
+                	console.log("데이터 전송 성공");
+            	} else {
+                	console.error("데이터 전송 실패");
+            	}
+        	}
+    	};
+	}
 
 
-function showDateAndAlert(day) {
-    // 클릭한 날짜를 JavaScript 변수에 저장
-    var clickedDay = day;
-    // 클릭한 날짜를 해당 <h2> 요소에 표시
-    document.querySelector('.re_day').innerText = "<%=year%>년 <%=month%>월 " + clickedDay + "일";
+	function showDateAndAlert(day) {
+    	// 클릭한 날짜를 JavaScript 변수에 저장
+    	var clickedDay = day;
+    	// 클릭한 날짜를 해당 <h2> 요소에 표시
+    	document.querySelector('.re_day').innerText = "<%=year%>년 <%=month%>월 " + clickedDay + "일";
 
 		// 클릭한 날짜를 alert 창에도 표시
 		alert('클릭한 날짜: ' + clickedDay + '일');
@@ -569,7 +570,8 @@ function showDateAndAlert(day) {
 
 		// 폼 제출
 		document.forms["calender_form"].submit();
-}
+	}
+
 
 	//일정 추가하기 버튼 눌렀을 때 설정
 	// 일정 추가를 위한 고유한 식별자
@@ -591,6 +593,7 @@ function showDateAndAlert(day) {
 		}
 	}
 
+	
 	// 새로운 일정을 서버로 전송하는 함수
 	function sendNewScheduleToServer(userInput) {
 		const xhr = new XMLHttpRequest();
@@ -620,7 +623,6 @@ function showDateAndAlert(day) {
 
 	}
 
-	console.log('잘 실행되는지 확인용1111111111111111111111');
 
 	// 링크 클릭 시 선택 및 해제를 토글하는 함수
 	var selectedSchedules = []; // 선택한 일정이 저장되는 곳
@@ -655,6 +657,7 @@ function showDateAndAlert(day) {
 		xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	});
 
+	
 	//삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
 	function confirmDelete() {
 		var selectedSchedules = Array.from(
@@ -675,6 +678,7 @@ function showDateAndAlert(day) {
 		}
 	}
 
+	
 	// 선택한 일정 삭제를 서버로 전송하는 함수
 	function sendSelectedSchedulesToServer(selectedSchedules) {
 		// Ajax를 사용하여 Java 서버에 배열 전송
@@ -701,6 +705,8 @@ function showDateAndAlert(day) {
 		};
 	}
 	
+	
+	// 선택한 년도, 월로 변환
 	function change() {
 	    var year = document.getElementById("yearSelect").value;
 	    var month = document.getElementById("monthSelect").value;
@@ -714,6 +720,7 @@ function showDateAndAlert(day) {
 
 </head>
 <style>
+
 /* 공통 스타일/ */
 * {
 	box-sizing: border-box;
@@ -736,7 +743,9 @@ body {
 	color: blue;
 	font-size: 24px;
 }
+
 </style>
+
 <body>
 	<jsp:include page="../MainPage/Left.jsp"></jsp:include>
 
@@ -750,22 +759,17 @@ body {
 			<!-- 다른 페이지에서 불러오는 내용 -->
 			<!-- <h2 class="myHeader">텍스트 입력</h2>  -->
 			<button class='my_btn' type="button" onclick="location.href='../Calender/Person_Cal.jsp';">개인 일정</button>
-			<!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서
-				휴가</button> -->
+			<!-- <button class='my_btn2' type="button" onclick="location.href='../Calender/Team_Vcation.jsp';">부서 휴가</button> -->
 			<button class='my_btn3' type="button" onclick="location.href='../Calender/Team_Cal.jsp';">부서 일정</button>
-			<button class='my_btn4' type="button" onclick="location.href='../Calender/Company_Cal.jsp';">회사 일정</button>
-			
+			<button class='my_btn4' type="button" onclick="location.href='../Calender/Company_Cal.jsp';">회사 일정</button>	
 		</div>
 		
 		<!-- 화면 달력의 월 표시 -->
 		<p class="em" style="font-size: 120px"><%=month%></p>
-		
 
-		<button class='next_btn' onclick="location.href='Person_Cal.jsp';">></button>
+		<button class='next_btn' type="button" onclick="location.href='../Calender/Person_Cal.jsp';">></button>
 
-		<div class="reverse">
-			
-			
+		<div class="reverse">	
 			<c:choose>
     			<c:when test="${empty selecteddate}">
         			<h2 class='re_day'>
@@ -827,16 +831,13 @@ body {
         			<h2 class='re_day'>${selecteddate}</h2>
     			</c:otherwise>
 			</c:choose>
-			
-			
+					
 			<button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>
 			<button class='del_btn'  type='submit' onclick="confirmDelete();">삭제하기</button>
 
-
 			<!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
 			<div class="reverse2">
-				<table class="caltabke" width="100%">
-						
+				<table class="caltabke" width="100%">					
 					<c:choose>
 						<c:when test="${not empty calenderlists}">
 								<c:forEach items="${calenderlists}" var="row" varStatus="loop">
@@ -869,10 +870,7 @@ body {
 								<td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>
 							</tr>
 						</c:otherwise>
-					</c:choose>
-					
-					
-					
+					</c:choose>					
 				</table>
 			</div>
 		</div>
@@ -911,9 +909,7 @@ body {
 						<td width="14.25%">토</td>
 					</tr>
 				</thead>
-				<tbody>
-				
-				
+				<tbody>			
 					<%
 					// 1일 앞 달
 					Calendar preCal = (Calendar) cal.clone();
@@ -935,7 +931,6 @@ body {
 					
 					// CalenderController에서 전달된 daylist를 받아옴
 			        List<Integer> daylist = (List<Integer>) request.getAttribute("daylist");
-					
 
 			        for (int i = 1; i <= lastDay; i++) {
 			            cls = year == ty && month == tm && i == td ? "today" : "";

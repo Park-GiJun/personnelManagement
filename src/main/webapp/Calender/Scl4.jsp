@@ -723,7 +723,7 @@ body {
 		<p class="em" style="font-size: 120px"><%=month%></p>
 		<!-- 화면 달력의 월 표시 -->
 
-		<button class='next_btn' onclick="location.href='TeamCal.jsp';">></button>
+		<button class='next_btn' type="button" onclick="location.href='../Calender/Team_Cal.jsp';">></button>
 
 		<div class="reverse">
 			
