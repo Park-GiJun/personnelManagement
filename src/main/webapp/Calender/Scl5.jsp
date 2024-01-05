@@ -19,8 +19,6 @@ String cl_year = request.getParameter("year2");
 String cl_month = request.getParameter("month2");
 Calendar cal = Calendar.getInstance();
 
-
-
 // 시스템 오늘날짜.
 int ty = cal.get(Calendar.YEAR);
 int tm = cal.get(Calendar.MONTH) + 1;
@@ -109,9 +107,6 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1(일)~7(토)
 	color: white;
 	background: orange;
 }
-
-
-
 
 .scl {
 	top: 600px;

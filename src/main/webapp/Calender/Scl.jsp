@@ -700,8 +700,7 @@ a:active, a:hover {
 			}
 		};
 	}
-	
-	
+		
 	// 선택한 년도, 월로 변환
 	function change() {
 	    var year = document.getElementById("yearSelect").value;
