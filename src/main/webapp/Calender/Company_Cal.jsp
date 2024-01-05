@@ -385,12 +385,9 @@ a:active, a:hover {
    color: #000;
 }
 
-
-
 </style>
 
 <script type="text/javascript">
-
 
 	function change() {
 	    var year = document.getElementById("yearSelect").value;
@@ -400,12 +397,10 @@ a:active, a:hover {
 	    window.location.href = url;
 	}		
 	
-	
 </script>
 
-
-
 </head>
+
 <style>
 /* 공통 스타일 */
 * {
@@ -433,7 +428,9 @@ tbody {
    color: blue;
    font-size: 24px;
 }
+
 </style>
+
 <body>
    <jsp:include page="../MainPage/Left.jsp"></jsp:include>
 
@@ -446,10 +443,9 @@ tbody {
       <!-- 다른 페이지에서 불러오는 내용 -->
       <!-- <h2 class="myHeader">텍스트 입력</h2>  -->
       <button class='my_btn' type="button" onclick="location.href='../Calender/Person_Cal.jsp';">개인 일정</button>
-			<!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서
-				휴가</button> -->
-			<button class='my_btn3' type="button" onclick="location.href='../Calender/Team_Cal.jsp';">부서 일정</button>
-			<button class='my_btn4' type="button" onclick="location.href='../Calender/Company_Cal.jsp';">회사 일정</button>
+	  <!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서 휴가</button> -->
+	  <button class='my_btn3' type="button" onclick="location.href='../Calender/Team_Cal.jsp';">부서 일정</button>
+	  <button class='my_btn4' type="button" onclick="location.href='../Calender/Company_Cal.jsp';">회사 일정</button>
    </div>
    
 	<p class="em" style="font-size: 200px"><%= month %></p> <!-- 화면 달력의 월 표시 -->
@@ -508,7 +504,6 @@ tbody {
     				</select>
 				</div>
 			</div>
-
 	
       <table> <!-- 테이블 표 만드는 곳(달력 만드는 곳) -->
          <thead>
@@ -547,7 +542,6 @@ tbody {
 
                out.print("<td class='" + cls
 						+ "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
-              //out.print("<td class='" + cls + "'><button onclick=\"alert('클릭한 날짜 : " + i + "일');\">" + i + "</button></td>");
               out.print("<button id=\"update\" style='max-height: 50px; min-height: 50px;' disabled>" + i + "</button>");
               
               
@@ -584,17 +578,6 @@ tbody {
             %>
          </tbody>
       </table>
-    
-     
-     
-
-		
-     
-     
-
    </div>
-   
-
-
 </body>
 </html>

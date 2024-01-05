@@ -388,8 +388,6 @@ a:active, a:hover {
    color: #000;
 }
 
-
-
 </style>
 
 <script type="text/javascript">
@@ -404,9 +402,8 @@ function change() {
 
 </script>
 
-
-
 </head>
+
 <style>
 /* 공통 스타일 */
 * {
@@ -435,6 +432,7 @@ tbody {
    font-size: 24px;
 }
 </style>
+
 <body>
    <jsp:include page="../MainPage/Left.jsp"></jsp:include>
 
@@ -509,7 +507,6 @@ tbody {
     				</select>
 				</div>
 			</div>
-
 	
       <table> <!-- 테이블 표 만드는 곳(달력 만드는 곳) -->
          <thead>
@@ -536,7 +533,6 @@ tbody {
                //out.print("<td>&nbsp;</td>");
                out.print("<td class='gray'><button disabled>" + (preDate++) + "</button></td>");
             }
-
             
             // 1일부터 말일까지 출력
             int lastDay = cal.getActualMaximum(Calendar.DATE);
@@ -548,13 +544,12 @@ tbody {
                cls = year == ty && month == tm && i == td ? "today" : "";
                										
                out.print("<td class='" + cls
-						+ "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
-             //out.print("<td class='" + cls + "'><button onclick=\"alert('클릭한 날짜 : " + i + "일');\">" + i + "</button></td>");
-             out.print("<button id=\"update\" style='max-height: 50px; min-height: 50px;' disabled>" + i + "</button>");
+						+ "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");             
+               out.print("<button id=\"update\" style='max-height: 50px; min-height: 50px;' disabled>" + i + "</button>");
              
              
-             int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%).
-						
+               int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%).
+               
 						%>	
 						<c:if test="${not empty calenderlists4}"> <!-- 값이 비어있지 않을 경우 밑에 코드 실행 -->
 						
@@ -587,7 +582,6 @@ tbody {
            
          </tbody>
       </table>
-
    </div>
 </body>
 </html>

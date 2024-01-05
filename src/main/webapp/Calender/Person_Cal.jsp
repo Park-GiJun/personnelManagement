@@ -352,12 +352,9 @@ a:active, a:hover {
    color: #000;
 }
 
-
-
 </style>
 
 <script type="text/javascript">
-
 
 //서버로 데이터를 전송하는 함수
 function sendDataToServer(year, month, day) {
@@ -396,6 +393,7 @@ function change() {
 </script>
 
 </head>
+
 <style>
 /* 공통 스타일 */
 * {
@@ -424,6 +422,7 @@ tbody {
    font-size: 24px;
 }
 </style>
+
 <body>
    <jsp:include page="../MainPage/Left.jsp"></jsp:include>
 
@@ -532,9 +531,7 @@ tbody {
 				
                out.print("<td class='" + cls
 						+ "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
-               //out.print("<td class='" + cls + "'><button onclick=\"alert('클릭한 날짜 : " + i + "일');\">" + i + "</button></td>");
-               out.print("<button id=\"update\" style='max-height: 50px; min-height: 50px;' disabled>" + i + "</button>");
-               
+               out.print("<button id=\"update\" style='max-height: 50px; min-height: 50px;' disabled>" + i + "</button>");        
                
                int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%)
 						
@@ -570,6 +567,5 @@ tbody {
          </tbody>
       </table>
    </div>
-   
 </body>
 </html>

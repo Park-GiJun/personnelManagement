@@ -523,10 +523,6 @@ a:active, a:hover {
 }
 </style>
 
-
-
-
-
 <script type="text/javascript">
 
 
@@ -713,12 +709,12 @@ a:active, a:hover {
 
 	    var url = "../Calender/Scl.jsp?year=" + year + "&month=" + month;
 	    window.location.href = url;
-	}	
-	
+	}		
 
 </script>
 
 </head>
+
 <style>
 
 /* 공통 스타일/ */
@@ -752,8 +748,7 @@ body {
 	<form name="calender_form" id="calender_form" method="post" action="../Controller/CalenderController.do">
 		<input type="hidden" name="selectedYear" id="selectedYear" value="<%=year%>"> 
 		<input type="hidden" name="selectedMonth" id="selectedMonth" value="<%=month%>"> 
-		<input type="hidden" name="selectedDay" id="selectedDay" value=""> 
-		
+		<input type="hidden" name="selectedDay" id="selectedDay" value=""> 	
 
 		<div class="middle-button">
 			<!-- 다른 페이지에서 불러오는 내용 -->
@@ -820,7 +815,6 @@ body {
 								}
 								
 								System.out.println("확인용 222222 " + currentYear + " " + currentMonth + " " + currentDay);
-
 								out.print(currentYear + "-" + currentMonth + "-" + currentDay);
 							}
 						%>

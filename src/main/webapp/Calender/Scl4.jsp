@@ -512,9 +512,6 @@ a:active, a:hover {
 
 </style>
 
-
-
-
 <script type="text/javascript">
 
 
@@ -535,6 +532,7 @@ function showDateAndAlert(day) {
 		// 폼 제출
 		document.forms["calender_form"].submit();
 	}
+
 
 	//일정 추가하기 버튼 눌렀을 때 설정
 	// 일정 추가를 위한 고유한 식별자
@@ -559,7 +557,6 @@ function showDateAndAlert(day) {
 		const xhr = new XMLHttpRequest();
 	    xhr.open("POST", "../Controller/TeamCalPlusController.do", true);
 	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-	   
 
 	    // 서버로 전송할 데이터 설정
 	    const data = "userInput=" + encodeURIComponent(userInput);
@@ -580,11 +577,10 @@ function showDateAndAlert(day) {
 	    };
 	    
 	}
-	 
-    console.log('잘 실행되는지 확인용1111111111111111111111');
 
- // 링크 클릭 시 선택 및 해제를 토글하는 함수
-    var selectedSchedules = [];  // 선택한 일정이 저장되는 곳
+    
+  // 링크 클릭 시 선택 및 해제를 토글하는 함수
+  var selectedSchedules = [];  // 선택한 일정이 저장되는 곳
    
   document.addEventListener('click', function (event) {
       if (event.target.classList.contains('scheduleLink')) {
@@ -610,12 +606,12 @@ function showDateAndAlert(day) {
           
       }
       
-   	// Ajax를 사용하여 Java 서버에 배열 전송
+   	  // Ajax를 사용하여 Java 서버에 배열 전송
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "/Controller/TeamCalDeleteController.do", true);
       xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-      //xhr.send(JSON.stringify({ array: selectedSchedules }));
   });
+    
     
   //삭제하기 버튼 클릭 시 선택한 일정을 서버로 전송하는 함수
   function confirmDelete() {
@@ -633,6 +629,7 @@ function showDateAndAlert(day) {
           alert("삭제할 일정을 선택해주세요.");
       }
   }
+  
   	 
   // 선택한 일정 삭제를 서버로 전송하는 함수
   function sendSelectedSchedulesToServer(selectedSchedules) {
@@ -640,15 +637,9 @@ function showDateAndAlert(day) {
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "../Controller/TeamCalDeleteController.do", true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-      //xhr.send(JSON.stringify({ selectedSchedules: selectedSchedules }));
-
-      // 선택한 일정의 ID 스택을 문자열로 변환하여 서버로 전송
-      //var data = "selectedSchedules=" + encodeURIComponent(scheduleStack.join(','));
-      //xhr.send(data);
       
-   // 선택한 일정의 ID를 문자열 배열로 변환
-      //const data = JSON.stringify(selectedSchedules);
-   	const data = "selectedSchedules=" + encodeURIComponent(selectedSchedules.join(','));
+   	  // 선택한 일정의 ID를 문자열 배열로 변환
+   	  const data = "selectedSchedules=" + encodeURIComponent(selectedSchedules.join(','));
       xhr.send(data);
 
       xhr.onreadystatechange = function () {
@@ -664,6 +655,8 @@ function showDateAndAlert(day) {
       };
   }  
 
+  
+  // 선택한 년도, 월로 변환
   function change() {
 	    var year = document.getElementById("yearSelect").value;
 	    var month = document.getElementById("monthSelect").value;
@@ -675,6 +668,7 @@ function showDateAndAlert(day) {
 </script>
 
 </head>
+
 <style>
 /* 공통 스타일 */
 * {
@@ -699,6 +693,7 @@ body {
 	font-size: 24px;
 }
 </style>
+
 <body>
 	<jsp:include page="../MainPage/Left.jsp"></jsp:include>
 
@@ -708,16 +703,10 @@ body {
 		<input type="hidden" name="selectedDay" id="selectedDay" value="">
 
 		<div class="middle-button">
-			<!-- 다른 페이지에서 불러오는 내용 -->
-			<!-- <h2 class="myHeader">텍스트 입력</h2>  -->
-			<button class='my_btn' type="button" onclick="location.href='../Calender/Person_Cal.jsp';">개인
-				일정</button>
-			<!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서
-				휴가</button> -->
-			<button class='my_btn3' type="button" onclick="location.href='../Calender/Team_Cal.jsp';">부서
-				일정</button>
-			<button class='my_btn4' type="button" onclick="location.href='../Calender/Company_Cal.jsp';">회사
-				일정</button>
+			<button class='my_btn' type="button" onclick="location.href='../Calender/Person_Cal.jsp';">개인 일정</button>
+			<!-- <button class='my_btn2' onclick="location.href='Team_Vcation.jsp';">부서 휴가</button> -->
+			<button class='my_btn3' type="button" onclick="location.href='../Calender/Team_Cal.jsp';">부서 일정</button>
+			<button class='my_btn4' type="button" onclick="location.href='../Calender/Company_Cal.jsp';">회사 일정</button>
 		</div>
 
 		<p class="em" style="font-size: 120px"><%=month%></p>
@@ -786,11 +775,9 @@ body {
 			<!-- <button class='plus_btn' type='submit' onclick="confirmPlus();">추가하기</button>  -->
 			<!-- <button class='del_btn'  type='submit' onclick="confirmDelete();">삭제하기</button>  -->
 
-
 			<!-- db에 저장된 개인 일정 내용 가져오는 공간 -->
          <div class="reverse2">
-				<table class="caltabke" width="100%">
-						
+				<table class="caltabke" width="100%">				
 					<c:choose>
 						<c:when test="${not empty calenderlists}">
 								<c:forEach items="${calenderlists}" var="row" varStatus="loop">
@@ -823,10 +810,7 @@ body {
 								<td class="conti" align="center">등록된 일정이 없습니다 *^^*</td>
 							</tr>
 						</c:otherwise>
-					</c:choose>
-					
-					
-					
+					</c:choose>	
 				</table>
 			</div>
 		</div>
@@ -856,14 +840,14 @@ body {
 				<!-- 테이블 표 만드는 곳(달력 만드는 곳) -->
 				<thead>
 					<tr style="width:100%;">
-                  <td width="14.25%">일</td>
-                  <td width="14.25%">월</td>
-                  <td width="14.25%">화</td>
-                  <td width="14.25%">수</td>
-                  <td width="14.25%">목</td>
-                  <td width="14.25%">금</td>
-                  <td width="14.25%">토</td>
-               </tr>
+                  		<td width="14.25%">일</td>
+                  		<td width="14.25%">월</td>
+                  		<td width="14.25%">화</td>
+                  		<td width="14.25%">수</td>
+                  		<td width="14.25%">목</td>
+                  		<td width="14.25%">금</td>
+                  		<td width="14.25%">토</td>
+               		</tr>
 				</thead>
 				<tbody>
 					<%
@@ -875,7 +859,6 @@ body {
 					out.print("<tr>");
 					// 전 달 끝부분 일자 출력
 					for (int i = 1; i < week; i++) {
-						//out.print("<td>&nbsp;</td>");
 						out.print("<td class='gray'style='width: 100px; position: relative; top: 0px; height: 50px;'><button disabled>" + (preDate++) + "</button></td>");
 					}
 					
@@ -884,14 +867,12 @@ body {
 					int lastDay = cal.getActualMaximum(Calendar.DATE);
 					String cls;
 					
-					List<Integer> daylist = (List<Integer>) request.getAttribute("daylist");
-					
+					List<Integer> daylist = (List<Integer>) request.getAttribute("daylist");				
 					
 					for (int i = 1; i <= lastDay; i++) {
 					    cls = year == ty && month == tm && i == td ? "today" : "";
 
-					    out.print("<td class='" + cls + "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");
-					    //out.print("<td class='" + cls + "' style='min-width: 100px; max-width: 100px; width: 100px; min-height: 10px !important; max-height: 10px !important; height: 50px !important; position: relative;'>");
+					    out.print("<td class='" + cls + "' style='min-width: 100px; max-width: 100px; width: 100px; height: 50px; position: relative;'>");		
 					    out.print("<button id=\"update\" style='max-height: 50px;' onclick=\"showDateAndAlert(" + i + ")\">" + i + "</button>");
 
 						int buttonStartRightPercentage = 50; // 시작 위치값 설정 (예: 30%).
@@ -911,7 +892,6 @@ body {
 					// 다음 달 첫부분 일자 출력...
 					int n = 1;
 					for (int i = (week - 1) % 7; i < 6; i++) {
-						// out.print("<td>&nbsp;</td>");
 						out.print("<td class='gray' style='width: 100px; position: relative; top: 0px; height: 50px;'><button disabled>" + (n++) + "</button></td>");
 					}
 					out.print("</tr>");
