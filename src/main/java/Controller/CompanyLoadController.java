@@ -31,7 +31,7 @@ public class CompanyLoadController extends HttpServlet {
 		
 		
 
-		
+		//.
 		List<CompanyCalDTO> calenderlists2 = dao.selectListPage2(selecteddate2);	
 		
 		dao.close();

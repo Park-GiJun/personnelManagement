@@ -375,7 +375,7 @@ function sendDataToServer(year, month, day) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                // 서버 응답 처리
+                // 서버 응답 처리.
                 console.log("데이터 전송 성공");
             } else {
                 console.error("데이터 전송 실패");

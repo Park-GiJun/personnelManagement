@@ -33,7 +33,7 @@ public class CompanyController extends HttpServlet {
 		 CompanyCalDAO dao = new CompanyCalDAO();
 		HttpSession session = request.getSession();
 		
-		// Map 생성
+		// Map 생성.
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		LocalDate now = LocalDate.now();

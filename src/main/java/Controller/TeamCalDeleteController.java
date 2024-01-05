@@ -35,7 +35,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		
 		
 		
-		// 1. 요청 매개변수에서 선택된 일정 가져오기
+		// 1. 요청 매개변수에서 선택된 일정 가져오기.
         String[] selectedSchedules = request.getParameterValues("selectedSchedules"); // 값이 안 들어옴
         
         System.out.println("selectedSchedules 값 확인: " + Arrays.toString(selectedSchedules));

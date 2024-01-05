@@ -21,7 +21,7 @@ Calendar cal = Calendar.getInstance();
 
 
 
-// 시스템 오늘날짜
+// 시스템 오늘날짜.
 int ty = cal.get(Calendar.YEAR);
 int tm = cal.get(Calendar.MONTH) + 1;
 int td = cal.get(Calendar.DATE);

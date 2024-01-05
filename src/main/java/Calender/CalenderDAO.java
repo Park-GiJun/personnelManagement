@@ -124,7 +124,7 @@ public class CalenderDAO extends DBConnPool {
 	
 	
 	
-	// 화면 페이지 첫 번째
+	// 화면 페이지 첫 번째.
 	public List<CalenderDTO> selectListPage4(String selecteddate, String emp_num) {
 		List<CalenderDTO> board = new Vector<CalenderDTO>();
 		

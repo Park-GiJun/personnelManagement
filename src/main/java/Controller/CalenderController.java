@@ -33,7 +33,7 @@ public class CalenderController extends HttpServlet {
 		CalenderDAO dao = new CalenderDAO();
 		HttpSession session = request.getSession();
 		
-		// Map 생성
+		// Map 생성.
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		String searchField = request.getParameter("searchField");

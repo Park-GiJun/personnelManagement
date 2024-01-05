@@ -32,7 +32,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	    
 	    String selectedDay = (String) session.getAttribute("selectedDay");
 	    if (selectedDay != null && !selectedDay.isEmpty()) {
-		    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도
+		    // selectedDay가 null이 아니고 비어있지 않은 경우에만 변환 시도.
 		    int dayValue;
 		    try {
 		        dayValue = Integer.parseInt(selectedDay);

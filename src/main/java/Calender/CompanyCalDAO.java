@@ -24,7 +24,7 @@ public class CompanyCalDAO extends DBConnPool {
 			System.out.println("확인 : " + selecteddate + " " + emp_num);
 			int totalcount = 0;
 
-			// 쿼리문 준비
+			// 쿼리문 준비.
 			String query = "SELECT COUNT(*) AS count FROM company_calender WHERE company_calender_date =? AND emp_num =?";
 
 			try {

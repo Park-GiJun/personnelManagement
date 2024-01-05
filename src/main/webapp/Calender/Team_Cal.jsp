@@ -23,7 +23,7 @@ int day = cal.get(Calendar.DATE);
 String sy = request.getParameter("year");
 String sm = request.getParameter("month");
 
-if (sy != null) { // 넘어온 파라미터가 있으면
+if (sy != null) { // 넘어온 파라미터가 있으면.
    year = Integer.parseInt(sy);
 }
 if (sm != null) {

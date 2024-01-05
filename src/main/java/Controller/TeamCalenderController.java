@@ -36,7 +36,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		TeamCalDAO dao = new TeamCalDAO();
 		HttpSession session = request.getSession();
 		
-		// Map 생성
+		// Map 생성.
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		LocalDate now = LocalDate.now();

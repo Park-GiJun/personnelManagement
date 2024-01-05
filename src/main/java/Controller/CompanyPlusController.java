@@ -25,7 +25,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		HttpSession session = request.getSession();
 		
 		
-	    // 클라이언트로부터 전송된 일정 파라미터를 받아옵니다.
+	    // 클라이언트로부터 전송된 일정 파라미터를 받아옵니다..
 	    String newSchedule = request.getParameter("userInput");
 	        
 	    System.out.println("추가한 일정 값 확인: " + newSchedule);

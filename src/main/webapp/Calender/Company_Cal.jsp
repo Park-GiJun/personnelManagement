@@ -18,7 +18,7 @@ int year = cal.get(Calendar.YEAR);
 int month = cal.get(Calendar.MONTH) + 1;
 int day = cal.get(Calendar.DATE);
 
-// 파라미터 받기
+// 파라미터 받기.
 String sy = request.getParameter("year");
 String sm = request.getParameter("month");
 

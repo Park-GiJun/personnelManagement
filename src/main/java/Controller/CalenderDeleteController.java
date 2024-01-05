@@ -30,7 +30,7 @@ public class CalenderDeleteController extends HttpServlet {
 		// DAO 생성
 		CalenderDAO dao = new CalenderDAO();
 		
-		// Map 생성
+		// Map 생성.
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		

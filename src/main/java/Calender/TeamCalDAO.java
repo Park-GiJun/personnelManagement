@@ -24,7 +24,7 @@ public class TeamCalDAO extends DBConnPool {
 		String team = null;
 		int totalcount = 0;
 		
-		// 쿼리문 준비
+		// 쿼리문 준비.
 		String query = "SELECT team FROM emp WHERE emp_num = ?";
 		
 		try {
