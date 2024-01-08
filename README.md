@@ -1,4 +1,9 @@
 <div style="display:flex; flex-direction:column; align-items:flex-start;">
+    <!-- OS -->
+    <p><strong>OS</strong></p>
+    <div>
+        <img src="https://img.shields.io/badge/windows10-0078D6?style=for-the-badge&logo=windows10&logoColor=white"> 
+    </div>
     <!-- IDE -->
     <p><strong>IDE</strong></p>
     <div>
