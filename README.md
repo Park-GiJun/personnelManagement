@@ -35,4 +35,5 @@
 </div>
 ppt 
 
-https://docs.google.com/presentation/d/1IBtSeFO5kHiiIzET_6hH7ABnC3BOyNxYQS6GGti-BFM/edit?usp=sharing
+[인사관리 웹페이지.pptx](https://github.com/Park-GiJun/personnelManagement/files/13984807/PersonnalMangement_PPT.pptx)
+
